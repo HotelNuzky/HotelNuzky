@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Check-out Kiosk</title>
+    <style>
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { 
+            margin: 0; 
+            background: linear-gradient(135deg, #1f2228, #2d323b); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            color: #ffffff;
+            user-select: none;
+        }
+        .container {
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .header-title {
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a0aab8;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* 3D Tlačítko na první stránce */
+        .btn-3d {
+            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            border: none;
+            padding: 35px 20px;
+            font-size: 38px;
+            font-weight: bold;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 12px 0 #0f4012, 0 15px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.1s ease;
+            letter-spacing: 1.5px;
+            border-top: 2px solid #4caf50;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .btn-3d:active {
+            box-shadow: 0 4px 0 #0f4012, 0 6px 10px rgba(0, 0, 0, 0.5);
+            transform: translateY(8px);
+        }
+
+        /* Formulářová karta */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .instructions {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .lang-text {
+            margin: 6px 0;
+            font-size: 18px;
+            color: #e0e6ed;
+            line-height: 1.4;
+        }
+
+        .lang-text strong {
+            color: #4caf50;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 14px;
+            color: #a0aab8;
+            margin-bottom: 6px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            font-size: 22px;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #4caf50;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Tlačítka dole ve formuláři */
+        .button-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .btn-form-submit {
+            flex: 2;
+            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            border: none;
+            padding: 22px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #0f4012, 0 8px 15px rgba(0,0,0,0.3);
+            border-top: 1px solid #4caf50;
+            transition: all 0.1s ease;
+        }
+
+        .btn-form-submit:active {
+            box-shadow: 0 2px 0 #0f4012, 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(4px);
+        }
+
+        .btn-form-cancel {
+            flex: 1;
+            background: linear-gradient(180deg, #5a6268 0%, #343a40 100%);
+            color: #e0e0e0;
+            border: none;
+            padding: 22px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #212529, 0 8px 15px rgba(0,0,0,0.3);
+            border-top: 1px solid #6c757d;
+            transition: all 0.1s ease;
+        }
+
+        .btn-form-cancel:active {
+            box-shadow: 0 2px 0 #212529, 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(4px);
+        }
+
+        /* Obrazovka poděkování */
+        .thanks-box {
+            padding: 40px 20px;
+        }
+
+        .thanks-icon {
+            font-size: 64px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .thanks-msg {
+            font-size: 20px;
+            color: #c0caf0;
+            margin: 12px 0;
+            line-height: 1.4;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- OBRAZOVKA 1: Úvodní tlačítko -->
+        <div id="screen-1">
+            <div class="header-title">Check-out Kiosk</div>
+            <button class="btn-3d" onclick="goToForm()">CHECK-OUT</button>
+        </div>
+
+        <!-- OBRAZOVKA 2: Formulář -->
+        <div id="screen-2" class="card hidden">
+            <div class="instructions">
+                <div class="lang-text"><strong>EN:</strong> Please enter your room number and name below.</div>
+                <div class="lang-text"><strong>DE:</strong> Bitte geben Sie unten Ihre Zimmernummer und Ihren Namen ein.</div>
+                <div class="lang-text"><strong>CS:</strong> Prosíme, zadejte níže číslo pokoje a vaše jméno.</div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Room / Zimmer / Pokoj</label>
+                <input type="text" id="roomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Name / Name / Jméno</label>
+                <input type="text" id="nameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()">CANCEL</button>
+                <button class="btn-form-submit" onclick="submitCheckout()">CHECK-OUT</button>
+            </div>
+        </div>
+
+        <!-- OBRAZOVKA 3: Potvrzení -->
+        <div id="screen-3" class="card hidden thanks-box">
+            <div class="thanks-icon">✓</div>
+            
+            <div class="thanks-msg">
+                <strong>EN:</strong> Thank you! Have a safe journey home.
+            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
+            <div class="thanks-msg">
+                <strong>DE:</strong> Vielen Dank! Wir wünschen Ihnen eine gute Heimreise.
+            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
+            <div class="thanks-msg">
+                <strong>CS:</strong> Děkujeme! Přejeme vám šťastnou cestu domů.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Nastavený unikátní kanál pro příjem notifikací
+        const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
+
+        function goToForm() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-2').classList.remove('hidden');
+        }
+
+        function resetToStart() {
+            document.getElementById('roomInput').value = '';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.add('hidden');
+            document.getElementById('screen-1').classList.remove('hidden');
+        }
+
+        function submitCheckout() {
+            const room = document.getElementById('roomInput').value.trim();
+            const name = document.getElementById('nameInput').value.trim();
+
+            if (!room || !name) {
+                alert('EN: Please fill in both fields.\nDE: Bitte füllen Sie beide Felder aus.\nCS: Prosíme vyplňte obě pole.');
+                return;
+            }
+
+            // Odeslání notifikace na vzdálenou recepci
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                body: `Check-out: Pokoj ${room} – ${name}`,
+                headers: { 'Title': 'Nové odhlášení z pokoje' }
+            }).catch(err => console.error(err));
+
+            // Zobrazení děkovné obrazovky
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.remove('hidden');
+
+            // Návrat na úvodní obrazovku za 5 sekund
+            setTimeout(resetToStart, 5000);
+        }
+    </script>
+</body>
+</html>
