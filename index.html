@@ -234,7 +234,6 @@
     </div>
 
     <script>
-        // Nastavený unikátní kanál pro příjem notifikací
         const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
 
         function goToForm() {
@@ -259,12 +258,15 @@
                 return;
             }
 
-            // Odeslání notifikace na vzdálenou recepci
+            // Odeslání zprávy přes spolehlivější metodu bez CORS blokování
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST',
-                body: `Check-out: Pokoj ${room} – ${name}`,
-                headers: { 'Title': 'Nové odhlášení z pokoje' }
-            }).catch(err => console.error(err));
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: `Check-out: Pokoj ${room} - ${name}`
+            });
 
             // Zobrazení děkovné obrazovky
             document.getElementById('screen-2').classList.add('hidden');
