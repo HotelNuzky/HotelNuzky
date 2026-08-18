@@ -263,3 +263,270 @@
                     <span style="font-size: 22px;" id="btn-label-service">SERVICE / HELP</span>
                 </button>
                 <button class="btn-main btn-blue" onclick="alert('Parkování se zatím neřeší.')">
+                     <!-- OBRAZOVKA 2: Formulář -->
+        <div id="screen-2" class="card hidden">
+            <div class="input-group">
+                <label class="input-label" id="lbl-room">Room / Pokoj</label>
+                <input type="text" id="roomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <!-- Pole pro Check-out (Jméno) -->
+            <div class="input-group" id="group-name">
+                <label class="input-label" id="lbl-name">Name / Jméno</label>
+                <input type="text" id="nameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <!-- Pole pro Opravy / Otázky (Popis problému) -->
+            <div class="input-group hidden" id="group-desc">
+                <label class="input-label" id="lbl-desc">Description / Popis problému</label>
+                <textarea id="descInput" placeholder="..."></textarea>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" id="btn-cancel" onclick="resetToStart()">CANCEL</button>
+                <button class="btn-form-submit" id="submitBtn" onclick="submitForm()">SEND</button>
+            </div>
+        </div>
+
+        <!-- OBRAZOVKA 3: Potvrzení -->
+        <div id="screen-3" class="card hidden thanks-box">
+            <div class="thanks-icon" id="status-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            <div class="thanks-msg" id="thanks-text">Thank you!</div>
+        </div>
+
+    </div>
+
+    <script>
+        const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
+        let currentLang = 'en';
+        let currentMode = ''; 
+        let idleTimer;
+
+        // Jazykové mutace textů
+        const translations = {
+            en: {
+                title: "Kiosk",
+                serviceBtn: "SERVICE / HELP",
+                room: "Room number",
+                name: "Your Name",
+                desc: "Describe your issue or question",
+                cancel: "CANCEL",
+                submit: "SEND",
+                wait: "WAIT...",
+                fillAll: "Please fill in all fields.",
+                errSend: "Transmission error. Please try again.",
+                thanksCheckout: "Thank you! Have a safe journey home.",
+                thanksService: "Thank you! We will attend to your request during business hours (8:00 - 16:00)."
+            },
+            cs: {
+                title: "Kiosk",
+                serviceBtn: "OPRAVA / DOTAZ",
+                room: "Číslo pokoje",
+                name: "Vaše jméno",
+                desc: "Popište váš problém nebo dotaz",
+                cancel: "ZRUŠIT",
+                submit: "ODESLAT",
+                wait: "ČEKEJTE...",
+                fillAll: "Prosím vyplňte všechna pole.",
+                errSend: "Chyba odesílání. Zkuste to znovu.",
+                thanksCheckout: "Děkujeme! Přejeme vám šťastnou cestu domů.",
+                thanksService: "Děkujeme! Vašemu požadavku se budeme věnovat v pracovní době (8:00 - 16:00)."
+            },
+            de: {
+                title: "Kiosk",
+                serviceBtn: "REPARATUR / FRAGE",
+                room: "Zimmernummer",
+                name: "Ihr Name",
+                desc: "Beschreibung des Problems / Frage",
+                cancel: "ABBRECHEN",
+                submit: "SENDEN",
+                wait: "WARTEN...",
+                fillAll: "Bitte füllen Sie alle Felder aus.",
+                errSend: "Fehler beim Senden. Versuchen Sie es erneut.",
+                thanksCheckout: "Vielen Dank! Wir wünschen Ihnen eine gute Heimreise.",
+                thanksService: "Vielen Dank! Wir werden uns um Ihr Anliegen während der Arbeitszeit (8:00 - 16:00) kümmern."
+            },
+            pl: {
+                title: "Kiosk",
+                serviceBtn: "NAPRAWA / PYTANIE",
+                room: "Numer pokoju",
+                name: "Twoje imię",
+                desc: "Opisz swój problem lub pytanie",
+                cancel: "ANULUJ",
+                submit: "WYŚLIJ",
+                wait: "CZEKAJ...",
+                fillAll: "Proszę wypełnić wszystkie pola.",
+                errSend: "Błąd wysyłania. Spróbuj ponownie.",
+                thanksCheckout: "Dziękujemy! Życzymy bezpiecznej podróży do domu.",
+                thanksService: "Dziękujemy! Rozpatrzymy Twoją prośbę w godzinach pracy (8:00 - 16:00)."
+            },
+            it: {
+                title: "Chiosco",
+                serviceBtn: "RIPARAZIONE / DOMANDA",
+                room: "Numero di stanza",
+                name: "Il tuo nome",
+                desc: "Descrivi il tuo problema o domanda",
+                cancel: "ANNULLA",
+                submit: "INVIA",
+                wait: "ATTENDERE...",
+                fillAll: "Si prega di compilare tutti i campi.",
+                errSend: "Errore di invio. Riprova.",
+                thanksCheckout: "Grazie! Vi auguriamo un buon viaggio di ritorno.",
+                thanksService: "Grazie! Ci occuperemo della tua richiesta durante l'orario di lavoro (8:00 - 16:00)."
+            },
+            fr: {
+                title: "Kiosque",
+                serviceBtn: "RÉPARATION / QUESTION",
+                room: "Numéro de chambre",
+                name: "Votre nom",
+                desc: "Décrivez votre problème ou question",
+                cancel: "ANNULER",
+                submit: "ENVOYER",
+                wait: "ATTENDEZ...",
+                fillAll: "Veuillez remplir tous les champs.",
+                errSend: "Erreur d'envoi. Veuillez réessayer.",
+                thanksCheckout: "Merci! Bon retour chez vous.",
+                thanksService: "Merci! Nous traiterons votre demande pendant les heures de bureau (8:00 - 16:00)."
+            },
+            uk: {
+                title: "Кіоск",
+                serviceBtn: "РЕМОНТ / ПИТАННЯ",
+                room: "Номер кімнати",
+                name: "Ваше ім'я",
+                desc: "Опишіть вашу проблему або питання",
+                cancel: "СКАСУВАТИ",
+                submit: "ВІДПРАВИТИ",
+                wait: "ЗАЧЕКАЙТЕ...",
+                fillAll: "Будь ласка, заповніть усі поля.",
+                errSend: "Помилка відправки. Спробуйте ще раз.",
+                thanksCheckout: "Дякуємо! Бажаємо щасливої дороги додому.",
+                thanksService: "Дякуємо! Ми розглянемо ваше звернення в робочий час (з 8:00 до 16:00)."
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-flag').forEach(f => f.classList.remove('active'));
+            document.getElementById(`flag-${lang}`).classList.add('active');
+
+            const t = translations[lang];
+            document.getElementById('main-title').innerText = t.title;
+            document.getElementById('btn-label-service').innerText = t.serviceBtn;
+            document.getElementById('lbl-room').innerText = t.room;
+            document.getElementById('lbl-name').innerText = t.name;
+            document.getElementById('lbl-desc').innerText = t.desc;
+            document.getElementById('btn-cancel').innerText = t.cancel;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            if (!submitBtn.disabled) { submitBtn.innerText = t.submit; }
+            resetIdleTimer();
+        }
+
+        function resetIdleTimer() {
+            clearTimeout(idleTimer);
+            if (!document.getElementById('screen-2').classList.contains('hidden')) {
+                idleTimer = setTimeout(() => { resetToStart(); }, 60000); 
+            }
+        }
+
+        window.onload = () => {
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(el => {
+                el.addEventListener('input', resetIdleTimer);
+                el.addEventListener('keydown', resetIdleTimer);
+            });
+            setLanguage('en'); 
+        };
+
+        function goToForm(mode) {
+            currentMode = mode;
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-2').classList.remove('hidden');
+            document.getElementById('roomInput').value = '';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('descInput').value = '';
+
+            if (mode === 'checkout') {
+                document.getElementById('group-name').classList.remove('hidden');
+                document.getElementById('group-desc').classList.add('hidden');
+            } else if (mode === 'service') {
+                document.getElementById('group-name').classList.add('hidden');
+                document.getElementById('group-desc').classList.remove('hidden');
+            }
+            document.getElementById('roomInput').focus();
+            setLanguage(currentLang); 
+            resetIdleTimer();
+        }
+
+        function resetToStart() {
+            clearTimeout(idleTimer);
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.add('hidden');
+            document.getElementById('screen-1').classList.remove('hidden');
+        }
+
+        function submitForm() {
+            const room = document.getElementById('roomInput').value.trim();
+            const name = document.getElementById('nameInput').value.trim();
+            const desc = document.getElementById('descInput').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const t = translations[currentLang];
+
+            if (!room || (currentMode === 'checkout' && !name) || (currentMode === 'service' && !desc)) {
+                alert(t.fillAll);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = t.wait;
+            clearTimeout(idleTimer);
+            let ntfyHeaders = { 'Priority': 'high' };
+            let message = `Pokoj: ${room}\nJazyk kiosku: ${currentLang.toUpperCase()}\n`;
+
+            if (currentMode === 'checkout') {
+                ntfyHeaders['Title'] = `🔴 CHECK-OUT: Pokoj ${room}`;
+                ntfyHeaders['Tags'] = 'door,red_circle';
+                message += `Jméno: ${name}`;
+            } else if (currentMode === 'service') {
+                ntfyHeaders['Title'] = `🟡 OPRAVA / DOTAZ: Pokoj ${room}`;
+                ntfyHeaders['Tags'] = 'wrench,yellow_circle';
+                message += `Popis: ${desc}`;
+            }
+
+            fetch(`https://ntfy.sh{NTFY_TOPIC}`, {
+                method: 'POST',
+                body: message,
+                headers: ntfyHeaders
+            })
+            .then(response => {
+                if (response.ok) { showSuccess(); } else { throw new Error(); }
+            })
+            .catch(() => {
+                alert(t.errSend);
+                submitBtn.disabled = false;
+                submitBtn.innerText = t.submit;
+                resetIdleTimer();
+            });
+        }
+
+        function showSuccess() {
+            const t = translations[currentLang];
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.remove('hidden');
+            
+            const iconSvg = document.getElementById('status-icon').querySelector('svg');
+            if (currentMode === 'checkout') {
+                iconSvg.style.fill = '#ef5350'; 
+                document.getElementById('thanks-text').innerText = t.thanksCheckout;
+            } else {
+                iconSvg.style.fill = '#fbc02d'; 
+                document.getElementById('thanks-text').innerText = t.thanksService;
+            }
+            setTimeout(() => { resetToStart(); }, 10000);
+        }
+    </script>
+</body>
+</html>
