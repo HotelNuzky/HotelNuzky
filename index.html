@@ -1,1 +1,24 @@
-file:///Users/lukas/Downloads/index.html
+        <!-- OBRAZOVKA 2: Formulář -->
+        <div id="screen-2" class="card hidden">
+            <div class="input-group">
+                <label class="input-label" id="lbl-room">Room / Pokoj</label>
+                <input type="text" id="roomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <!-- Pole pro Check-out (Jméno) -->
+            <div class="input-group" id="group-name">
+                <label class="input-label" id="lbl-name">Name / Jméno</label>
+                <input type="text" id="nameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <!-- Pole pro Opravy / Otázky (Popis problému) -->
+            <div class="input-group hidden" id="group-desc">
+                <label class="input-label" id="lbl-desc">Description / Popis problému</label>
+                <textarea id="descInput" placeholder="..."></textarea>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" id="btn-cancel" onclick="resetToStart()">CANCEL</button>
+                <button class="btn-form-submit" id="submitBtn" onclick="submitForm()">SEND</button>
+            </div>
+        </div>
