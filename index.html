@@ -9,28 +9,75 @@
     <meta name="apple-mobile-web-app-title" content="Kiosk">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <title>Kiosk</title>
+    <title>Kiosk - Samoobslužný Terminál / Self-Service Terminal</title>
     <style>
-        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        /* BASE & RESET STYLES */
+        * { 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-gradient-start: #1f2228;
+            --bg-gradient-end: #2d323b;
+            --text-main: #ffffff;
+            --text-sub: #a0aab8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --item-bg: rgba(0, 0, 0, 0.2);
+            --input-bg: rgba(0, 0, 0, 0.3);
+            
+            /* Action Colors */
+            --green-main: #2e7d32;
+            --green-dark: #1b5e20;
+            --green-light: #4caf50;
+            --green-border: #81c784;
+            --green-shadow: #0f4012;
+
+            --red-main: #c62828;
+            --red-dark: #8e0000;
+            --red-light: #ef5350;
+            --red-shadow: #5f0000;
+
+            --orange-main: #f57f17;
+            --orange-dark: #bc5100;
+            --orange-light: #ffeb3b;
+            --orange-shadow: #7f2d00;
+
+            --blue-main: #1565c0;
+            --blue-dark: #003c8f;
+            --blue-light: #42a5f5;
+            --blue-shadow: #001959;
+
+            --gray-main: #5a6268;
+            --gray-dark: #343a40;
+            --gray-light: #6c757d;
+            --gray-shadow: #212529;
+        }
+
         body { 
             margin: 0; 
-            background: linear-gradient(135deg, #1f2228, #2d323b); 
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end)); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             min-height: 100vh; 
-            color: #ffffff;
+            color: var(--text-main);
             user-select: none;
             overflow-x: hidden;
             padding: 20px 0;
         }
+
         .container {
             width: 95%;
             max-width: 960px;
             text-align: center;
             padding: 15px;
+            margin: auto;
         }
         
+        /* LANGUAGE BAR */
         .language-bar {
             display: flex;
             justify-content: center;
@@ -38,36 +85,41 @@
             gap: 8px;
             margin-bottom: 20px;
             background: rgba(0, 0, 0, 0.25);
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .flag-btn {
             font-size: 28px;
             cursor: pointer;
             filter: grayscale(50%);
-            transition: transform 0.2s, filter 0.2s;
+            transition: transform 0.2s ease, filter 0.2s ease, background 0.2s ease;
             line-height: 1;
-            padding: 4px 6px;
-            border-radius: 8px;
+            padding: 6px 8px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
         .flag-btn:hover, .flag-btn.active {
             filter: grayscale(0%);
-            transform: scale(1.2);
+            transform: scale(1.25);
             background: rgba(255, 255, 255, 0.15);
         }
 
+        /* HEADER */
         .header-title {
             font-size: 28px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #a0aab8;
+            color: var(--text-sub);
             margin-bottom: 25px;
             font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
+        /* MAIN GRID & BUTTONS */
         .kiosk-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -75,7 +127,7 @@
         }
 
         .btn-kiosk {
-            color: white;
+            color: var(--text-main);
             border: none;
             padding: 22px 15px;
             border-radius: 20px;
@@ -88,6 +140,7 @@
             gap: 10px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
             min-height: 170px;
+            outline: none;
         }
 
         .btn-kiosk:active {
@@ -97,7 +150,7 @@
         .btn-svg-icon {
             width: 68px;
             height: 68px;
-            fill: #ffffff;
+            fill: var(--text-main);
             margin-bottom: 2px;
             filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
         }
@@ -116,49 +169,57 @@
         }
 
         .btn-checkin {
-            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
-            border-top: 2px solid #4caf50;
-            box-shadow: 0 8px 0 #0f4012, 0 10px 18px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            border-top: 2px solid var(--green-light);
+            box-shadow: 0 8px 0 var(--green-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
-        .btn-checkin:active { box-shadow: 0 2px 0 #0f4012, 0 4px 8px rgba(0, 0, 0, 0.5); }
+        .btn-checkin:active { box-shadow: 0 2px 0 var(--green-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
 
         .btn-checkout {
-            background: linear-gradient(180deg, #c62828 0%, #8e0000 100%);
-            border-top: 2px solid #ef5350;
-            box-shadow: 0 8px 0 #5f0000, 0 10px 18px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, var(--red-main) 0%, var(--red-dark) 100%);
+            border-top: 2px solid var(--red-light);
+            box-shadow: 0 8px 0 var(--red-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
-        .btn-checkout:active { box-shadow: 0 2px 0 #5f0000, 0 4px 8px rgba(0, 0, 0, 0.5); }
+        .btn-checkout:active { box-shadow: 0 2px 0 var(--red-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
 
         .btn-service {
-            background: linear-gradient(180deg, #f57f17 0%, #bc5100 100%);
-            border-top: 2px solid #ffeb3b;
-            box-shadow: 0 8px 0 #7f2d00, 0 10px 18px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, var(--orange-main) 0%, var(--orange-dark) 100%);
+            border-top: 2px solid var(--orange-light);
+            box-shadow: 0 8px 0 var(--orange-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
-        .btn-service:active { box-shadow: 0 2px 0 #7f2d00, 0 4px 8px rgba(0, 0, 0, 0.5); }
+        .btn-service:active { box-shadow: 0 2px 0 var(--orange-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
 
         .btn-parking {
-            background: linear-gradient(180deg, #1565c0 0%, #003c8f 100%);
-            border-top: 2px solid #42a5f5;
-            box-shadow: 0 8px 0 #001959, 0 10px 18px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+            border-top: 2px solid var(--blue-light);
+            box-shadow: 0 8px 0 var(--blue-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
-        .btn-parking:active { box-shadow: 0 2px 0 #001959, 0 4px 8px rgba(0, 0, 0, 0.5); }
+        .btn-parking:active { box-shadow: 0 2px 0 var(--blue-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
 
+        /* CARDS & CONTAINERS */
         .card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
             padding: 30px;
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             max-width: 750px;
             margin: 0 auto;
             text-align: left;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card-title-welcome {
             font-size: 26px;
             font-weight: bold;
-            color: #4caf50;
+            color: var(--green-light);
             text-align: center;
             margin-bottom: 8px;
         }
@@ -171,6 +232,7 @@
             line-height: 1.4;
         }
 
+        /* INFO LIST & ITEMS */
         .info-list {
             display: flex;
             flex-direction: column;
@@ -179,10 +241,10 @@
         }
 
         .info-item {
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--item-bg);
             padding: 14px 18px;
             border-radius: 12px;
-            border-left: 4px solid #4caf50;
+            border-left: 4px solid var(--green-light);
             line-height: 1.5;
             font-size: 15px;
             color: #e0e6ed;
@@ -190,13 +252,13 @@
 
         .info-item-highlight {
             background: rgba(76, 175, 80, 0.12);
-            border: 2px solid #81c784;
-            border-left: 6px solid #4caf50;
+            border: 2px solid var(--green-border);
+            border-left: 6px solid var(--green-light);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .info-item strong {
-            color: #ffffff;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -207,10 +269,11 @@
         .info-item-icon {
             width: 22px;
             height: 22px;
-            fill: #4caf50;
+            fill: var(--green-light);
             flex-shrink: 0;
         }
 
+        /* WIFI BOX */
         .wifi-box {
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(27, 94, 32, 0.25));
             border: 1px solid rgba(76, 175, 80, 0.4);
@@ -223,7 +286,7 @@
         .wifi-title {
             font-size: 18px;
             font-weight: bold;
-            color: #81c784;
+            color: var(--green-border);
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -237,14 +300,14 @@
         }
 
         .wifi-detail-item span {
-            color: #a0aab8;
+            color: var(--text-sub);
             font-size: 13px;
             display: block;
             text-transform: uppercase;
         }
 
         .wifi-detail-item strong {
-            color: #ffffff;
+            color: var(--text-main);
             font-size: 18px;
             letter-spacing: 0.5px;
         }
@@ -253,10 +316,11 @@
             text-align: center;
             font-size: 17px;
             font-weight: 600;
-            color: #81c784;
+            color: var(--green-border);
             margin-bottom: 20px;
         }
 
+        /* INSTRUCTIONS & SPECIAL BOXES */
         .instructions {
             margin-bottom: 20px;
             text-align: center;
@@ -268,7 +332,7 @@
         .luggage-box {
             background: rgba(239, 83, 80, 0.12);
             border: 1px solid rgba(239, 83, 80, 0.35);
-            border-left: 5px solid #ef5350;
+            border-left: 5px solid var(--red-light);
             border-radius: 14px;
             padding: 18px;
             margin-bottom: 25px;
@@ -288,12 +352,12 @@
         .luggage-header svg {
             width: 34px;
             height: 34px;
-            fill: #ef5350;
+            fill: var(--red-light);
             flex-shrink: 0;
         }
 
         .luggage-header strong {
-            color: #ef5350;
+            color: var(--red-light);
             font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -315,10 +379,11 @@
         .info-stand-box svg {
             width: 22px;
             height: 22px;
-            fill: #81c784;
+            fill: var(--green-border);
             flex-shrink: 0;
         }
 
+        /* FORM INPUTS & LABELS */
         .input-group {
             margin-bottom: 16px;
             text-align: left;
@@ -326,7 +391,7 @@
 
         .input-label {
             font-size: 13px;
-            color: #a0aab8;
+            color: var(--text-sub);
             margin-bottom: 6px;
             display: block;
             text-transform: uppercase;
@@ -336,13 +401,13 @@
         input, textarea {
             width: 100%;
             padding: 16px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--input-bg);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             font-size: 20px;
-            color: #ffffff;
+            color: var(--text-main);
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, background 0.2s;
         }
 
         textarea {
@@ -351,10 +416,11 @@
         }
 
         input:focus, textarea:focus {
-            border-color: #4caf50;
+            border-color: var(--green-light);
             background: rgba(0, 0, 0, 0.4);
         }
 
+        /* FORM BUTTONS */
         .button-row {
             display: flex;
             gap: 15px;
@@ -363,28 +429,28 @@
 
         .btn-form-submit {
             flex: 2;
-            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
-            color: white;
+            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            color: var(--text-main);
             border: none;
             padding: 18px;
             font-size: 20px;
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 5px 0 #0f4012, 0 6px 12px rgba(0,0,0,0.3);
-            border-top: 1px solid #4caf50;
+            box-shadow: 0 5px 0 var(--green-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--green-light);
             transition: all 0.1s ease;
             text-align: center;
         }
 
         .btn-form-submit:active {
-            box-shadow: 0 2px 0 #0f4012, 0 3px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 0 var(--green-shadow), 0 3px 6px rgba(0,0,0,0.3);
             transform: translateY(3px);
         }
 
         .btn-form-cancel {
             flex: 1;
-            background: linear-gradient(180deg, #5a6268 0%, #343a40 100%);
+            background: linear-gradient(180deg, var(--gray-main) 0%, var(--gray-dark) 100%);
             color: #e0e0e0;
             border: none;
             padding: 18px;
@@ -392,17 +458,18 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 5px 0 #212529, 0 6px 12px rgba(0,0,0,0.3);
-            border-top: 1px solid #6c757d;
+            box-shadow: 0 5px 0 var(--gray-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--gray-light);
             transition: all 0.1s ease;
             text-align: center;
         }
 
         .btn-form-cancel:active {
-            box-shadow: 0 2px 0 #212529, 0 3px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 0 var(--gray-shadow), 0 3px 6px rgba(0,0,0,0.3);
             transform: translateY(3px);
         }
 
+        /* THANKS BOX */
         .thanks-box {
             padding: 30px 20px;
             text-align: center;
@@ -410,7 +477,7 @@
 
         .thanks-icon {
             font-size: 60px;
-            color: #4caf50;
+            color: var(--green-light);
             margin-bottom: 15px;
         }
 
@@ -423,18 +490,39 @@
 
         .hidden { display: none !important; }
 
-        /* RTL Podpora pro Hebrejštinu */
+        /* RTL SUPPORT FOR HEBREW */
         [dir="rtl"] .card { text-align: right; }
-        [dir="rtl"] .info-item { border-left: none; border-right: 4px solid #4caf50; }
-        [dir="rtl"] .info-item-highlight { border-left: none; border-right: 6px solid #4caf50; }
-        [dir="rtl"] .luggage-box { border-left: none; border-right: 5px solid #ef5350; }
+        [dir="rtl"] .info-item { border-left: none; border-right: 4px solid var(--green-light); }
+        [dir="rtl"] .info-item-highlight { border-left: none; border-right: 6px solid var(--green-light); }
+        [dir="rtl"] .luggage-box { border-left: none; border-right: 5px solid var(--red-light); }
         [dir="rtl"] .input-group { text-align: right; }
+
+        /* RESPONSIVE DESIGN ADJUSTMENTS */
+        @media (max-width: 600px) {
+            .kiosk-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-kiosk {
+                min-height: 140px;
+            }
+            .wifi-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .button-row {
+                flex-direction: column-reverse;
+            }
+            .btn-form-cancel, .btn-form-submit {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
+        <!-- LANGUAGE SELECTION BAR -->
         <div class="language-bar">
             <span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
             <span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
@@ -452,12 +540,13 @@
             <span class="flag-btn" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
         </div>
 
+        <!-- SCREEN 1: MAIN MENU -->
         <div id="screen-1">
             <div class="header-title" id="main-title">Kiosk</div>
 
             <div class="kiosk-grid">
                 
-                <!-- Check-in -->
+                <!-- Check-in Button -->
                 <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
@@ -466,7 +555,7 @@
                     <span class="btn-title" id="btn-checkin-text">Check-in</span>
                 </button>
 
-                <!-- Check-out -->
+                <!-- Check-out Button -->
                 <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
@@ -475,7 +564,7 @@
                     <span class="btn-title" id="btn-checkout-text">Check-out</span>
                 </button>
 
-                <!-- Oprava / Pomoc -->
+                <!-- Service / Help Button -->
                 <button class="btn-kiosk btn-service" onclick="openServiceForm()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"/>
@@ -484,7 +573,7 @@
                     <span class="btn-subtitle">8:00 – 16:00</span>
                 </button>
 
-                <!-- Parkování -->
+                <!-- Parking Button -->
                 <button class="btn-kiosk btn-parking" onclick="openParkingInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
@@ -696,13 +785,18 @@
 
     </div>
 
+    <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
     <script>
+        // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
         const WIFI_NET = "Nuzky";
         const WIFI_PASS = "Hotel2017";
+        const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
 
         let currentLang = 'cs';
+        let autoResetTimer = null;
 
+        // INTERNATIONALIZATION DATA (14 LANGUAGES FULLY SUPPORTED)
         const i18n = {
             cs: {
                 title: "Kiosk",
@@ -713,7 +807,7 @@
                 coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
                 coLuggageTitle: "Úschova zavazadel",
                 coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
-                srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tyto hodiny volejte nouzový kontakt.",
+                srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
                 roomLabel: "Číslo pokoje",
                 nameLabel: "Jméno a příjmení",
                 issueLabel: "Popis závady / požadavek",
@@ -1046,7 +1140,7 @@
                 ciQ2Title: "Nie otrzymałeś kodu?",
                 ciQ2Text: "Jeśli rezerwacja była składana przez portal zewnętrzny, możemy nie mieć Twoich bezpośrednich danych. W godzinach 8:00–16:00 skorzystaj z telefonu obok kiosku, poza tymi godzinami zadzwoń pod numer alarmowy.",
                 ciQ3Title: "Bagaż",
-                ciQ3Text: "Jeśli Twój pokój nie jest jeszcze gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
+                ciQ3Text: "Jeśli Twój pokój nie jest ještě gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
                 ciQ4Title: "Parking",
                 ciQ4Text: "Ze względu na lokalizację w historycznym centrum nie posiadamy własnego parkingu. Pełne informacje o parkingach w okolicy znajdziesz pod przyciskiem „Parking” na ekranie głównym.",
                 ciQ5Title: "Architektura",
@@ -1308,10 +1402,10 @@
                 ciQ3Title: "Φύλαξη αποσκευών",
                 ciQ3Text: "Εάν το δωμάτιό σας δεν είναι ακόμα έτοιμο, το προσωπικό μας θα φυλάξει ευχαρίστως τις αποσκευές σας. Ωστόσο, ως ιστορικό κτίριο, ο χώρος μας είναι περιορισμένος και δεν φέρουμε νομική ευθύνη.",
                 ciQ4Title: "Χώρος στάθμευσης",
-                ciQ4Text: "Λόγω της τοποθεσίας μας στο ιστορικό κέντρο, δεν διαθέτουμε ιδιωτικό χώρο στάθμευσης. Βρείτε όλες τις συμβουλές στάθμευσης πατώντας το κουμπί «Χώρος στάθμευσης» στην αρχική οθόνη.",
+                ciQ4Text: "Λόγω της τοποθεσίας μας στο ιστορικό κέντρο, δεν διαθέτουμε ιδιωτικό χώρο στάθμευσης. Βρείτε όλες τις συμβουλές στάθμευσης στο κουμπί «Χώρος στάθμευσης» στην αρχική οθόνη.",
                 ciQ5Title: "Αρχιτεκτονική",
-                ciQ5Text: "Το κτίριό μας είναι ένα μοναδικό ιστορικό ακίνητο και δυστυχώς δεν διαθέτει ασανσέρ. Εάν χρειάζεστε βοήθεια, είμαστε στη διάθεσή σας.",
-                ciInfoStandText: "Θα βρείτε περισσότερες χρήσιμες πληροφορίες στο stand πληροφοριών στο δωμάτιό σας.",
+                ciQ5Text: "Το κτίριό μας είναι διατηρητέο ιστορικό μνημείο και δυστυχώς δεν διαθέτει ασανσέρ. Εάν χρειάζεστε βοήθεια, είμαστε στη διάθεσή σας.",
+                ciInfoStandText: "Θα βρείτε περισσότερες χρήσιμες πληροφορίες στη συσκευή πληροφοριών στο δωμάτιό σας.",
                 ciWifiTitle: "📶 Σύνδεση Wi-Fi",
                 ciWifiNetLabel: "Όνομα δικτύου / SSID",
                 ciWifiPassLabel: "Κωδικός πρόσβασης",
@@ -1319,14 +1413,14 @@
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
                 pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης.",
-                pkOpt1Title: "Μπλε Ζώνες Κοντά στο Ξενοδοχείο",
-                pkOpt1Text: "Η στάθμευση στους δρόμους της Malá Strana υπόκειται σε δημοτικές ζώνες. Η πληρωμή γίνεται μόνο ηλεκτρονικά μέσω εφαρμογής MPLA / Εικονικό Παρκόμετρο. Η διαθεσιμότητα είναι περιορισμένη.",
+                pkOpt1Title: "Μπλε Ζώνες Κοντά",
+                pkOpt1Text: "Η στάθμευση στους δρόμους της Μικρής Πόλης υπόκειται σε δημοτικές ζώνες. Η πληρωμή είναι δυνατή μόνο ηλεκτρονικά μέσω της εφαρμογής MPLA / Εικονικό Παρκόμετρο. Η διαθεσιμότητα είναι περιορισμένη.",
                 pkOpt2Title: "Υπόγειο Γκαράζ Rudolfinum",
-                pkOpt2Text: "Το πλησιέστερο στεγασμένο γκαράζ βρίσκεται στο Alšovo nábřeží κοντά στο Rudolfinum (περίπου 10 λεπτά με τα πόδια عبر τη Γέφυρα του Καρόλου ή 1 στάση τραμ). 24/7 φυλασσόμενο.",
+                pkOpt2Text: "Το πλησιέστερο στεγασμένο γκαράζ βρίσκεται στο Alšovo nábřeží κοντά στο Rudolfinum (περίπου 10 λεπτά με τα πόδια μέσω της Γέφυρας του Καρόλου ή 1 στάση με το τραμ). Φυλασσόμενο 24/7.",
                 pkOpt3Title: "Γκαράζ Εμπορικού Κέντρου Nový Smíchov",
-                pkOpt3Text: "Διαθέσιμος χώρος στάθμευσης στο εμπορικό κέντρο στο Anděl. Απευθείας σύνδεση με τραμ (αρ. 12, 15 ή 20) προς το Malostranské náměstí.",
-                pkOpt4Title: "Χώροι Στάθμευσης P+R στα Π his Περίχωρα",
-                pkOpt4Text: "Οικονομική επιλογή σε χώρους στάθμευσης P+R κοντά σε σταθμούς του μετρό (π.χ. Zličín, Černý Most, Nádraží Holešovice). Από εκεί μετακινείστε εύκολα με μετρό ή τραμ."
+                pkOpt3Text: "Διαθέσιμος χώρος στάθμευσης στο εμπορικό κέντρο στο Anděl. Απευθείας σύνδεση με το τραμ (αρ. 12, 15 ή 20) προς το Malostranské náměstí.",
+                pkOpt4Title: "Σταθμοί P+R στα Προάστιa",
+                pkOpt4Text: "Οικονομική επιλογή σε χώρους στάθμευσης κοντά σε σταθμούς του μετρό (π.χ. Zličín, Černý Most, Nádraží Holešovice). Από εκεί μπορείτε εύκολα να φτάσετε με το μετρό ή το τραμ."
             },
             tr: {
                 title: "Kiosk",
@@ -1334,36 +1428,36 @@
                 checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
-                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
+                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını giriniz.",
                 coLuggageTitle: "Bagaj Muhafazası",
-                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeline danışın. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otel sorumluluk kabul etmemektedir. Alternatif olarak Ana Tren İstasyonu'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvayla ulaşabilirsiniz – \"Hlavní nádraží\" durağında inin.",
-                srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa, kioskun yanındaki sabit telefonu kullanın – 8:00 - 16:00 saatleri arasında uzaktaki resepsiyona bağlanır, bu saatler dışında acil durum irtibatı mevcuttur.",
+                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeli ile iletişime geçiniz. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otelimiz muhafaza edilen eşyalardan sorumlu tutulamaz. Alternatif olarak Ana Tren Garı'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvayla ulaşabilirsiniz – „Hlavní nádraží“ durağında ininiz.",
+                srvInstructions: "Lütfen aşağıdaki formu doldurunuz, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa lütfen kiosk yanındaki sabit telefonu kullanınız – 08:00 - 16:00 saatleri arasında sizi resepsiyona bağlar, bu saatler dışında acil durum hattı mevcuttur.",
                 roomLabel: "Oda numarası",
-                nameLabel: "Ad Soyad",
-                issueLabel: "Sorunun tanımı / Talep",
+                nameLabel: "Adı Soyadı",
+                issueLabel: "Sorun açıklaması / Talep",
                 cancel: "İPTAL",
                 submit: "ONAYLA",
                 back: "ANA EKRANA DÖN",
-                fillAll: "Lütfen tüm alanları doldurun.",
+                fillAll: "Lütfen tüm alanları doldurunuz.",
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
 
-                ciWelcomeTitle: "Otelimize hoş geldiniz!",
-                ciWelcomeSubtitle: "Self-servis kioskumuz sayesinde 24/7 kolayca check-in yapabilirsiniz.",
-                ciRegTitle: "Kayıt Formu",
-                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Yasal zorunluluk gereği sizi Yabancılar Polisi'ne kaydedebilmemiz için lütfen formu doldurup restoran personeline teslim edin. Teşekkür ederiz.",
+                ciWelcomeTitle: "Otelimize Hoş Geldiniz!",
+                ciWelcomeSubtitle: "Self-servis kioskumuz sayesinde 7/24 rahatça giriş yapabilirsiniz.",
+                ciRegTitle: "Kayıt",
+                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Yasal zorunluluk gereği Yabancılar Polisine bildirim yapabilmemiz için lütfen formu doldurunuz. Doldurulan formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olur olmaz, kapı erişim kodunuzu SMS, e-posta veya rezervasyon platformu mesajı ile göndereceğiz — en geç resmi check-in saati olan 15:00'e kadar.",
+                ciQ1Text: "Odanız hazır olur olmaz, kapı erişim kodunuzu SMS, e-posta veya rezervasyon platformu mesajı ile göndereceğiz — en geç resmi check-in saati olan 15:00'te.",
                 ciBfTitle: "Kahvaltı",
-                ciBfText: "Kahvaltı, restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak servis edilir.",
+                ciBfText: "Kahvaltı, restoranın giriş katında 08:00 - 10:00 saatleri arasında açık büfe olarak servis edilmektedir.",
                 ciQ2Title: "Kodunuz ulaşmadı mı?",
-                ciQ2Text: "Üçüncü taraf bir platform üzerinden rezervasyon yaptıysanız, doğrudan iletişim bilgileriniz bulunmayabilir. 8:00 - 16:00 saatleri arasında kioskun yanındaki telefonu kullanabilirsiniz. Bu saatler dışında acil durum numarasını arayın.",
-                ciQ3Title: "Bagaj Muhafazası",
-                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı memnuniyetle saklayacaktır. Ancak tarihi bir bina olduğundan alanımız sınırlıdır ve yasal sorumluluk kabul edilemez.",
+                ciQ2Text: "Üçüncü taraf acenteler üzerinden rezervasyon yaptıysanız doğrudan iletişim bilgileriniz bizde olmayabilir. 08:00 - 16:00 saatleri arasında kiosk yanındaki sabit telefonu kullanabilirsiniz. Bu saatler dışında acil hattı arayınız.",
+                ciQ3Title: "Bagaj",
+                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı memnuniyetle muhafaza edecektir. Ancak tarihi bina olması sebebiyle alanımız kısıtlıdır ve yasal sorumluluk kabul edilememektedir.",
                 ciQ4Title: "Otopark",
-                ciQ4Text: "Tarihi şehir merkezinde yer aldığımızdan özel otoparkımız bulunmamaktadır. Yakındaki otopark önerilerini ana ekrandaki \"Otopark\" butonunda bulabilirsiniz.",
+                ciQ4Text: "Tarihi şehir merkezindeki konumumuz nedeniyle özel otoparkımız bulunmamaktadır. Çevredeki otopark seçeneklerini ana ekrandaki „Otopark“ butonundan inceleyebilirsiniz.",
                 ciQ5Title: "Mimari",
-                ciQ5Text: "Binamız tarihi bir yapı olup ne yazık ki asansör bulunmamaktadır. Yardıma ihtiyacınız olursa size yardımcı olmaktan mutluluk duyarız.",
-                ciInfoStandText: "Daha fazla yararlı bilgiye odanızdaki bilgilendirme standından ulaşabilirsiniz.",
+                ciQ5Text: "Binamız tarihi bir yapı olup ne yazık ki asansör bulunmamaktadır. Yardım ihtiyacınız olursa sizlere destek olmaktan mutluluk duyarız.",
+                ciInfoStandText: "Diğer faydalı bilgileri odanızdaki bilgi standında bulabilirsiniz.",
                 ciWifiTitle: "📶 Wi-Fi Bağlantısı",
                 ciWifiNetLabel: "Ağ Adı / SSID",
                 ciWifiPassLabel: "Şifre / Password",
@@ -1371,14 +1465,14 @@
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
                 pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır.",
-                pkOpt1Title: "Yakındaki Mavi Bölgeler",
-                pkOpt1Text: "Malá Strana sokaklarındaki park yerleri belediye bölgelerine tabidir. Ödeme yalnızca MPLA uygulaması / Sanal Park Metresi üzerinden online yapılabilir. Yer genellikle sınırlıdır.",
-                pkOpt2Title: "Rudolfinum Kapalı Otoparkı",
-                pkOpt2Text: "En yakın kapalı otopark Rudolfinum yanındaki Alšovo nábřeží üzerinde yer almaktadır (Karl Köprüsü üzerinden yürüyerek yaklaşık 10 dakika veya 1 tramvay durağı). 24 saat korumalıdır.",
+                pkOpt1Title: "Yakındaki Mavi Bölge Park Alanları",
+                pkOpt1Text: "Malá Strana sokaklarındaki park yerleri belediye bölgelerine tabidir. Ödeme yalnızca MPLA uygulaması / Sanal Park Metresi üzerinden online yapılabilir. Doluluk oranı genelde yüksektir.",
+                pkOpt2Title: "Rudolfinum Yeraltı Otoparkı",
+                pkOpt2Text: "En yakın kapalı otopark Rudolfinum yanındaki Alšovo nábřeží üzerinde yer almaktadır (Karl Köprüsü üzerinden yürüyerek yaklaşık 10 dakika veya 1 tramvay durağı). 7/24 güvenliklidir.",
                 pkOpt3Title: "OC Nový Smíchov Otoparkı",
-                pkOpt3Text: "Anděl'deki alışveriş merkezinde mevcut otopark. Malostranské náměstí'ye 12, 15 veya 20 numaralı tramvaylarla doğrudan ulaşım.",
+                pkOpt3Text: "Anděl'deki alışveriş merkezinde mevcut otopark. Malostranské náměstí'ye 12, 15 veya 20 numaralı tramvaylarla doğrudan ulaşım imkanı.",
                 pkOpt4Title: "Şehir Dışındaki P+R Otoparkları",
-                pkOpt4Text: "Metro istasyonlarının (örn. Zličín, Černý Most, Nádraží Holešovice) yakınındaki P+R otoparklarında ekonomik seçenek. Buradan metro veya tramvayla kolayca ulaşabilirsiniz."
+                pkOpt4Text: "Metro istasyonlarının yakınındaki aktarma otoparklarında ekonomik seçenek (örneğin Zličín, Černý Most, Nádraží Holešovice). Buradan metro veya tramvayla kolayca ulaşabilirsiniz."
             },
             he: {
                 title: "קיוסק",
@@ -1387,9 +1481,9 @@
                 service: "תיקון / עזרה",
                 parking: "חנייה",
                 coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום.",
-                coLuggageTitle: "אחסון מזוודות",
-                coLuggageText: "אם ברצונך לאחסן את המזוודות שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של הבניין, שטח האחסון מוגבל והמלון אינו נושא באחריות. לחלופין, ניתן להשתמש בשירות שמירת החפצים בתשלום בתחנה המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית 15 מ-Malostranské náměstí - לרדת בתחנת \"Hlavní nádraží\".",
-                srvInstructions: "אנא מלא את הטופס להלן ונטפל בפנייתך בהקדם האפשרי. אם הנושא דחוף, אנא השתמש בטלפון הקווי ליד הקיוסק - בין השעות 8:00 ל-16:00 הוא מתחבר לקבלה, מחוץ לשעות אלה זמין איש קשר לחירום.",
+                coLuggageTitle: "אחסון מטען",
+                coLuggageText: "אם ברצונך לאחסן את המטען שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של הבניין, שטח האחסון שלנו מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, תוכל להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - רד בתחנת „Hlavní nádraží”.",
+                srvInstructions: "אנא מלא את הטופס שמתווסף מטה ואנו נטפל בבקשתך בהקדם האפשרי. אם הנושא דחוף, אנא השתמש בטלפון הקווי ליד הקיוסק – בין השעות 8:00 ל-16:00 הוא מחבר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
                 issueLabel: "תיאור הבעיה / בקשה",
@@ -1402,168 +1496,200 @@
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
                 ciWelcomeSubtitle: "בזכות קיוסק השירות העצמי שלנו, תוכלו לבצע צ'ק-אין בנוחות 24/7.",
                 ciRegTitle: "הרשמה",
-                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה כנדרש בחוק. פשוט מסרו את הטופס המלא לצוות המסעדה. תודה.",
-                ciQ1Title: "מתי ואיך תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר שלכם יהיה מוכן, נשלח את קוד הכניסה ב-SMS, במייל או בצ'אט הפלטפורמה דרכה הזמנתם — ולא יאוחר השעה 15:00, מועד הצ'ק-אין הרשמי.",
+                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת הזרים כחוק. פשוט מסרו את הטופס המלא לצוות המסעדה. תודה.",
+                ciQ1Title: "מתי וכיצד תקבלו את הקוד?",
+                ciQ1Text: "ברגע שהחדר שלכם יהיה מוכן, נשלח את קוד הכניסה לכל הדלתות ב-SMS, במייל או בצ'אט הפלטפורמה – ולא יאוחר מהשעה 15:00, מועד הצ'ק-אין הרשמי.",
                 ciBfTitle: "ארוחת בוקר",
-                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומת הקרקע של המסעדה בין השעות 8:00 ל-10:00.",
-                ciQ2Title: "לא קיבלתם את הקוד?",
-                ciQ2Text: "אם הזמנתם דרך צד שלישי, ייתכן שאין לנו את פרטי ההתקשרות הישירים שלכם. בין 8:00 ל-16:00 השתמשו בטלפון ליד הקיוסק. מחוץ לשעות אלה התקשרו למספר החירום.",
-                ciQ3Title: "אחסון מזוודות",
-                ciQ3Text: "אם החדר שלכם עדיין לא מוכן, צוות המסעדה ישמח לשמור על המזוודות שלכם. עם זאת, מכיוון שמדובר במבנה היסטורי, המקום מוגבל ואיננו יכולים לקחת אחריות משפטית.",
+                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומה הראשונה של המסעדה בין השעות 8:00 ל-10:00.",
+                ciQ2Title: "הקוד לא הגיע?",
+                ciQ2Text: "אם הזמנתם דרך צד שלישי, ייתכן שאין לנו את פרטי ההתקשרות הישירים שלכם. בין השעות 8:00 ל-16:00 אנא השתמשו בטלפון הקווי ליד הקיוסק. מחוץ לשעות אלה התקשרו למספר החירום.",
+                ciQ3Title: "מטען",
+                ciQ3Text: "אם החדר שלכם עדיין אינו מוכן, צוות המסעדה ישמח לשמור על המטען שלכם. אך מכיוון מדובר במבנה היסטורי, השטח מוגבל ואיננו יכולים לקחת אחריות משפטית.",
                 ciQ4Title: "חנייה",
-                ciQ4Text: "בשל מיקומנו במרכז ההיסטורי, אין לנו חנייה פרטית. תוכלו למצוא טיפים מלאים לחנייה באזור תחת הלחצן \"חנייה\" במסך הראשי.",
+                ciQ4Text: "בשל המיקום במרכז ההיסטורי, אין לנו חנייה פרטית. תוכלו למצוא טיפים מלאים לחנייה באזור תחת הלחצן \"חנייה\" במסך הראשי.",
                 ciQ5Title: "ארכיטקטורה",
-                ciQ5Text: "הבניין שלנו הוא מבנה היסטורי ייחודי ולמרבה הצער אין בו מעלית. אם אתם זקוקים לעזרה, אנחנו כאן בשבילכם.",
-                ciInfoStandText: "תוכלו למצוא מידע שימושי נוסף על מעמד המידע בחדרכם.",
+                ciQ5Text: "הבניין שלנו הוא מבנה היסטורי ייחודי ולמרבה הצער אין בו מעלית. אם אתם זקוקים לעזרה, אנו כאן לשירותכם.",
+                ciInfoStandText: "מידע שימושי נוסף וטיפים תוכלו למצוא בחדרכם על מעמד המידע.",
                 ciWifiTitle: "📶 חיבור אינטרנט Wi-Fi",
                 ciWifiNetLabel: "שם רשת / SSID",
                 ciWifiPassLabel: "סיסמה / Password",
-                ciWishText: "מאחלים לכם שהות נפלאה ונעימה!",
+                ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
 
                 pkWelcomeTitle: "אפשרויות חנייה",
-                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חנייה פרטית משלו.",
+                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין מגרש חנייה משלו.",
                 pkOpt1Title: "אזורים כחולים בסביבה",
-                pkOpt1Text: "החנייה ברחובות מאלה סטראנה כפופה לאזורים עירוניים. התשלום אפשרי רק אונליין דרך אפליקציית MPLA / מדחן וירטואלי. התפוסה בדרך כלל גבוהה.",
-                pkOpt2Title: "חניון תת-קרקעי רודולפינום",
-                pkOpt2Text: "החניון המקורה הקרוב ביותר ממוקם ב-Alšovo nábřeží ליד רודולפינום (כ-10 דקות הליכה מעבר לגשר קארל או תחנת חשמלית אחת). חניון שמור 24/7.",
-                pkOpt3Title: "חניון קניון נובי סמיחוב",
-                pkOpt3Text: "חנייה זמינה במרכז הקניות באנדל. קישור ישיר בחשמלית (מספר 12, 15 או 20) ל-Malostranské náměstí.",
+                pkOpt1Text: "חנייה ברחובות העיר העתיקה כפופה לאזורים עירוניים. התשלום אפשרי רק אונליין דרך אפליקציית MPLA / מדחן וירטואלי. התפוסה בדרך כלל גבוהה.",
+                pkOpt2Title: "חניון תת קרקעי רודולפינום",
+                pkOpt2Text: "החניון המקורה הקרוב ביותר ממוקם ב-Alšovo nábřeží ליד רודולפינום (כ-10 דקות הליכה מעבר לגשר צ'ארלס או תחנת חשמלית אחת). חניון שמור 24/7.",
+                pkOpt3Title: "חניון קניון Nový Smíchov",
+                pkOpt3Text: "חנייה זמינה במרכז הקניות באנדל. חיבור ישיר בחשמלית (מספר 12, 15 או 20) ל-Malostranské náměstí.",
                 pkOpt4Title: "חניוני P+R בפאתי העיר",
-                pkOpt4Text: "אפשרות חסכונית בחניוני חנה וסע ליד תחנות מטרו (כגון Zličín, Černý Most, Nádraží Holešovice). משם ניתן להגיע בקלות במטרו או בחשמלית."
+                pkOpt4Text: "אפשרות כלכלית בחניוני מעבר ליד תחנות מטרו (למשל Zličín, Černý Most, Nádraží Holešovice). משם תוכלו להגיע בקלות במטרו או בחשמלית."
             }
         };
 
-        function setLanguage(lang, e) {
-            currentLang = lang;
-            const t = i18n[lang];
-
-            // RTL nastavení pro Hebrejštinu
-            if (lang === 'he') {
-                document.body.setAttribute('dir', 'rtl');
-            } else {
-                document.body.removeAttribute('dir');
-            }
-
-            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
-            if(e && e.target) e.target.classList.add('active');
-
-            document.getElementById('main-title').innerText = t.title;
-            document.getElementById('btn-checkin-text').innerText = t.checkin;
-            document.getElementById('btn-checkout-text').innerText = t.checkout;
-            document.getElementById('btn-service-text').innerText = t.service;
-            document.getElementById('btn-parking-text').innerText = t.parking;
-
-            document.getElementById('co-instructions').innerText = t.coInstructions;
-            document.getElementById('co-luggage-title').innerText = t.coLuggageTitle;
-            document.getElementById('co-luggage-text').innerText = t.coLuggageText;
-
-            document.getElementById('srv-instructions').innerText = t.srvInstructions;
-            document.getElementById('label-co-room').innerText = t.roomLabel;
-            document.getElementById('label-co-name').innerText = t.nameLabel;
-
-            document.getElementById('label-srv-room').innerText = t.roomLabel;
-            document.getElementById('label-srv-issue').innerText = t.issueLabel;
-            document.getElementById('label-srv-name').innerText = t.nameLabel;
-
-            document.getElementById('btn-cancel-1').innerText = t.cancel;
-            document.getElementById('btn-submit-1').innerText = t.submit;
-            document.getElementById('btn-cancel-2').innerText = t.cancel;
-            document.getElementById('btn-submit-2').innerText = t.submit;
-
-            document.getElementById('thanks-message').innerText = t.thanks;
-
-            document.getElementById('ci-welcome-title').innerText = t.ciWelcomeTitle;
-            document.getElementById('ci-welcome-subtitle').innerText = t.ciWelcomeSubtitle;
-            document.getElementById('ci-reg-title').innerText = t.ciRegTitle;
-            document.getElementById('ci-reg-text').innerText = t.ciRegText;
-            document.getElementById('ci-q1-title').innerText = t.ciQ1Title;
-            document.getElementById('ci-q1-text').innerText = t.ciQ1Text;
-            document.getElementById('ci-bf-title').innerText = t.ciBfTitle;
-            document.getElementById('ci-bf-text').innerText = t.ciBfText;
-            document.getElementById('ci-q2-title').innerText = t.ciQ2Title;
-            document.getElementById('ci-q2-text').innerText = t.ciQ2Text;
-            document.getElementById('ci-q3-title').innerText = t.ciQ3Title;
-            document.getElementById('ci-q3-text').innerText = t.ciQ3Text;
-            document.getElementById('ci-q4-title').innerText = t.ciQ4Title;
-            document.getElementById('ci-q4-text').innerText = t.ciQ4Text;
-            document.getElementById('ci-q5-title').innerText = t.ciQ5Title;
-            document.getElementById('ci-q5-text').innerText = t.ciQ5Text;
-            document.getElementById('ci-info-stand-text').innerText = t.ciInfoStandText;
-            document.getElementById('ci-wifi-title').innerText = t.ciWifiTitle;
-            document.getElementById('ci-wifi-net-label').innerText = t.ciWifiNetLabel;
-            document.getElementById('ci-wifi-pass-label').innerText = t.ciWifiPassLabel;
-            document.getElementById('ci-wish-text').innerText = t.ciWishText;
-            document.getElementById('btn-back-ci').innerText = t.back;
-
-            document.getElementById('ci-wifi-net-val').innerText = WIFI_NET;
-            document.getElementById('ci-wifi-pass-val').innerText = WIFI_PASS;
-
-            document.getElementById('pk-welcome-title').innerText = t.pkWelcomeTitle;
-            document.getElementById('pk-welcome-subtitle').innerText = t.pkWelcomeSubtitle;
-            document.getElementById('pk-opt1-title').innerText = t.pkOpt1Title;
-            document.getElementById('pk-opt1-text').innerText = t.pkOpt1Text;
-            document.getElementById('pk-opt2-title').innerText = t.pkOpt2Title;
-            document.getElementById('pk-opt2-text').innerText = t.pkOpt2Text;
-            document.getElementById('pk-opt3-title').innerText = t.pkOpt3Title;
-            document.getElementById('pk-opt3-text').innerText = t.pkOpt3Text;
-            document.getElementById('pk-opt4-title').innerText = t.pkOpt4Title;
-            document.getElementById('pk-opt4-text').innerText = t.pkOpt4Text;
-            document.getElementById('btn-back-pk').innerText = t.back;
+        // NAVIGATION & SCREEN SWITCHING LOGIC
+        function hideAllScreens() {
+            const screens = ['screen-1', 'screen-checkin', 'screen-checkout', 'screen-service', 'screen-parking', 'screen-thanks'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
         }
 
-        function openCheckinInfo() {
-            document.getElementById('screen-1').classList.add('hidden');
-            document.getElementById('screen-checkin').classList.remove('hidden');
-        }
-
-        function openCheckoutForm() {
-            document.getElementById('screen-1').classList.add('hidden');
-            document.getElementById('screen-checkout').classList.remove('hidden');
-        }
-
-        function openServiceForm() {
-            document.getElementById('screen-1').classList.add('hidden');
-            document.getElementById('screen-service').classList.remove('hidden');
-        }
-
-        function openParkingInfo() {
-            document.getElementById('screen-1').classList.add('hidden');
-            document.getElementById('screen-parking').classList.remove('hidden');
+        function resetAutoResetTimer() {
+            if (autoResetTimer) clearTimeout(autoResetTimer);
+            autoResetTimer = setTimeout(() => {
+                resetToStart();
+            }, AUTO_RESET_TIMEOUT);
         }
 
         function resetToStart() {
-            document.getElementById('coRoomInput').value = '';
-            document.getElementById('coNameInput').value = '';
-            document.getElementById('srvRoomInput').value = '';
-            document.getElementById('srvIssueInput').value = '';
-            document.getElementById('srvNameInput').value = '';
+            if (autoResetTimer) clearTimeout(autoResetTimer);
+            hideAllScreens();
+            
+            // Clear Inputs
+            const inputs = ['coRoomInput', 'coNameInput', 'srvRoomInput', 'srvIssueInput', 'srvNameInput'];
+            inputs.forEach(id => {
+                const inputEl = document.getElementById(id);
+                if (inputEl) inputEl.value = '';
+            });
 
-            document.getElementById('screen-checkin').classList.add('hidden');
-            document.getElementById('screen-checkout').classList.add('hidden');
-            document.getElementById('screen-service').classList.add('hidden');
-            document.getElementById('screen-parking').classList.add('hidden');
-            document.getElementById('screen-thanks').classList.add('hidden');
             document.getElementById('screen-1').classList.remove('hidden');
         }
 
+        function openCheckinInfo() {
+            hideAllScreens();
+            document.getElementById('screen-checkin').classList.remove('hidden');
+            resetAutoResetTimer();
+        }
+
+        function openCheckoutForm() {
+            hideAllScreens();
+            document.getElementById('screen-checkout').classList.remove('hidden');
+            resetAutoResetTimer();
+        }
+
+        function openServiceForm() {
+            hideAllScreens();
+            document.getElementById('screen-service').classList.remove('hidden');
+            resetAutoResetTimer();
+        }
+
+        function openParkingInfo() {
+            hideAllScreens();
+            document.getElementById('screen-parking').classList.remove('hidden');
+            resetAutoResetTimer();
+        }
+
+        // LANGUAGE CHANGING LOGIC
+        function setLanguage(lang, event) {
+            if (!i18n[lang]) return;
+            currentLang = lang;
+
+            // Handle Active Class on Flags
+            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            // Handle RTL/LTR
+            if (lang === 'he') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            const dict = i18n[lang];
+
+            // Main Menu
+            setText('main-title', dict.title);
+            setText('btn-checkin-text', dict.checkin);
+            setText('btn-checkout-text', dict.checkout);
+            setText('btn-service-text', dict.service);
+            setText('btn-parking-text', dict.parking);
+
+            // Check-in Info
+            setText('ci-welcome-title', dict.ciWelcomeTitle);
+            setText('ci-welcome-subtitle', dict.ciWelcomeSubtitle);
+            setText('ci-q1-title', dict.ciQ1Title);
+            setText('ci-q1-text', dict.ciQ1Text);
+            setText('ci-bf-title', dict.ciBfTitle);
+            setText('ci-bf-text', dict.ciBfText);
+            setText('ci-q2-title', dict.ciQ2Title);
+            setText('ci-q2-text', dict.ciQ2Text);
+            setText('ci-reg-title', dict.ciRegTitle);
+            setText('ci-reg-text', dict.ciRegText);
+            setText('ci-q3-title', dict.ciQ3Title);
+            setText('ci-q3-text', dict.ciQ3Text);
+            setText('ci-q4-title', dict.ciQ4Title);
+            setText('ci-q4-text', dict.ciQ4Text);
+            setText('ci-q5-title', dict.ciQ5Title);
+            setText('ci-q5-text', dict.ciQ5Text);
+            setText('ci-info-stand-text', dict.ciInfoStandText);
+            setText('ci-wifi-title', dict.ciWifiTitle);
+            setText('ci-wifi-net-label', dict.ciWifiNetLabel);
+            setText('ci-wifi-pass-label', dict.ciWifiPassLabel);
+            setText('ci-wish-text', dict.ciWishText);
+            setText('btn-back-ci', dict.back);
+
+            // Checkout Form
+            setText('co-instructions', dict.coInstructions);
+            setText('co-luggage-title', dict.coLuggageTitle);
+            setText('co-luggage-text', dict.coLuggageText);
+            setText('label-co-room', dict.roomLabel);
+            setText('label-co-name', dict.nameLabel);
+            setText('btn-cancel-1', dict.cancel);
+            setText('btn-submit-1', dict.submit);
+
+            // Service Form
+            setText('srv-instructions', dict.srvInstructions);
+            setText('label-srv-room', dict.roomLabel);
+            setText('label-srv-issue', dict.issueLabel);
+            setText('label-srv-name', dict.nameLabel);
+            setText('btn-cancel-2', dict.cancel);
+            setText('btn-submit-2', dict.submit);
+
+            // Parking Info
+            setText('pk-welcome-title', dict.pkWelcomeTitle);
+            setText('pk-welcome-subtitle', dict.pkWelcomeSubtitle);
+            setText('pk-opt1-title', dict.pkOpt1Title);
+            setText('pk-opt1-text', dict.pkOpt1Text);
+            setText('pk-opt2-title', dict.pkOpt2Title);
+            setText('pk-opt2-text', dict.pkOpt2Text);
+            setText('pk-opt3-title', dict.pkOpt3Title);
+            setText('pk-opt3-text', dict.pkOpt3Text);
+            setText('pk-opt4-title', dict.pkOpt4Title);
+            setText('pk-opt4-text', dict.pkOpt4Text);
+            setText('btn-back-pk', dict.back);
+
+            // Thanks Message
+            setText('thanks-message', dict.thanks);
+
+            resetAutoResetTimer();
+        }
+
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el && text) {
+                el.innerText = text;
+            }
+        }
+
+        // FORM SUBMISSION & NTFY NOTIFICATIONS
         function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
 
             if (!room || !name) {
-                alert(i18n[currentLang].fillAll);
+                alert(i18n[currentLang].fillAll || "Prosím vyplňte všechna pole.");
                 return;
             }
 
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain' },
-                body: `🔴 Check-out: Pokoj ${room} - ${name}`
-            });
+            const payloadMessage = `🚪 CHECK-OUT KOISK\nPokoj: ${room}\nJméno: ${name}\nJazyk: ${currentLang.toUpperCase()}`;
 
-            showThanks();
+            sendNtfyNotification("Check-out Request", payloadMessage);
+            showThanksScreen();
         }
 
         function submitService() {
@@ -1572,30 +1698,50 @@
             const name = document.getElementById('srvNameInput').value.trim();
 
             if (!room || !issue || !name) {
-                alert(i18n[currentLang].fillAll);
+                alert(i18n[currentLang].fillAll || "Prosím vyplňte všechna pole.");
                 return;
             }
 
+            const payloadMessage = `🔧 OPRAVA / POMOC KOISK\nPokoj: ${room}\nJméno: ${name}\nPožadavek: ${issue}\nJazyk: ${currentLang.toUpperCase()}`;
+
+            sendNtfyNotification("Service Request", payloadMessage);
+            showThanksScreen();
+        }
+
+        function sendNtfyNotification(title, message) {
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain' },
-                body: `🟡 Oprava/Pomoc: Pokoj ${room} - Popis: ${issue} - ${name}`
-            });
-
-            showThanks();
+                headers: {
+                    'Title': title,
+                    'Priority': 'high',
+                    'Tags': 'bell,hotel,kiosk'
+                },
+                body: message
+            }).catch(err => console.error("NTFY Push Error: ", err));
         }
 
-        function showThanks() {
-            document.getElementById('screen-checkout').classList.add('hidden');
-            document.getElementById('screen-service').classList.add('hidden');
-            document.getElementById('screen-parking').classList.add('hidden');
+        function showThanksScreen() {
+            hideAllScreens();
             document.getElementById('screen-thanks').classList.remove('hidden');
-
-            setTimeout(resetToStart, 4000);
+            setTimeout(() => {
+                resetToStart();
+            }, 4000);
         }
 
-        setLanguage('cs', null);
+        // USER ACTIVITY RESET MONITORING
+        ['click', 'touchstart', 'mousemove', 'keypress'].forEach(evt => {
+            window.addEventListener(evt, () => {
+                const mainScreenActive = !document.getElementById('screen-1').classList.contains('hidden');
+                if (!mainScreenActive) {
+                    resetAutoResetTimer();
+                }
+            }, { passive: true });
+        });
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage('cs', null);
+        });
     </script>
 </body>
 </html>
