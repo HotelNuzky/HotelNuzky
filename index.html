@@ -448,7 +448,7 @@
                 <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-                        <path d="M3 10.5h5V7.5l4.5 4.5-4.5 4.5v-3H3z"/>
+                        <path d="M3 10.5h5V7.5l4.5 4.5-4.5 4.5v-3H3z" transform="translate(1.5, 0)"/>
                     </svg>
                     <span class="btn-title" id="btn-checkin-text">Check-in</span>
                 </button>
@@ -489,15 +489,6 @@
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
 
             <div class="info-list">
-                <!-- Zvýrazněná položka Registrace -->
-                <div class="info-item info-item-highlight">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                        <span id="ci-reg-title">Registrace</span>
-                    </strong>
-                    <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
-                </div>
-
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
@@ -520,6 +511,15 @@
                         <span id="ci-q2-title">Kód vám nedorazil?</span>
                     </strong>
                     <span id="ci-q2-text">Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.</span>
+                </div>
+
+                <!-- Zvýrazněná položka Registrace přesunutá sem -->
+                <div class="info-item info-item-highlight">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span id="ci-reg-title">Registrace</span>
+                    </strong>
+                    <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
                 </div>
 
                 <div class="info-item">
