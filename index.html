@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Nastavení pro skrytí lišty Safari (Web App mode) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kiosk">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <title>Kiosk</title>
     <style>
         * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -61,7 +68,7 @@
             font-weight: 600;
         }
 
-        /* Mřížka 2x2 pro tlačítka - optimalizováno pro iPad na šířku */
+        /* Mřížka 2x2 pro iPad na šířku */
         .kiosk-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -270,13 +277,13 @@
         
         <!-- Jazyková lišta -->
         <div class="language-bar">
-            <span class="flag-btn active" onclick="setLanguage('cs')" title="Čeština">🇨🇿</span>
-            <span class="flag-btn" onclick="setLanguage('en')" title="English">🇬🇧</span>
-            <span class="flag-btn" onclick="setLanguage('de')" title="Deutsch">🇩🇪</span>
-            <span class="flag-btn" onclick="setLanguage('it')" title="Italiano">🇮🇹</span>
-            <span class="flag-btn" onclick="setLanguage('fr')" title="Français">🇫🇷</span>
-            <span class="flag-btn" onclick="setLanguage('pl')" title="Polski">🇵🇱</span>
-            <span class="flag-btn" onclick="setLanguage('ua')" title="Українська">🇺🇦</span>
+            <span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+            <span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+            <span class="flag-btn" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+            <span class="flag-btn" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+            <span class="flag-btn" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+            <span class="flag-btn" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+            <span class="flag-btn" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
         </div>
 
         <!-- OBRAZOVKA 1: Úvodní rozcestník (2x2) -->
@@ -362,7 +369,7 @@
         <div id="screen-thanks" class="card hidden thanks-box">
             <div class="thanks-icon">✓</div>
             <div class="thanks-msg" id="thanks-message">
-                Děkujeme! Vaše požiadavka byla úspěšně odeslána.
+                Děkujeme! Vaše požadavka byla úspěšně odeslána.
             </div>
         </div>
 
@@ -372,7 +379,6 @@
         const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
         let currentLang = 'cs';
 
-        // Překlady rozhraní
         const i18n = {
             cs: {
                 title: "Kiosk",
@@ -481,22 +487,19 @@
             }
         };
 
-        function setLanguage(lang) {
+        function setLanguage(lang, e) {
             currentLang = lang;
             const t = i18n[lang];
 
-            // Aktualizace aktivní vlajky
             document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if(e && e.target) e.target.classList.add('active');
 
-            // Překlady prvků na hlavní stránce
             document.getElementById('main-title').innerText = t.title;
             document.getElementById('btn-checkin-text').innerText = t.checkin;
             document.getElementById('btn-checkout-text').innerText = t.checkout;
             document.getElementById('btn-service-text').innerText = t.service;
             document.getElementById('btn-parking-text').innerText = t.parking;
 
-            // Překlady formulářů
             document.getElementById('co-instructions').innerText = t.coInstructions;
             document.getElementById('label-co-room').innerText = t.roomLabel;
             document.getElementById('label-co-name').innerText = t.nameLabel;
@@ -505,13 +508,11 @@
             document.getElementById('label-srv-issue').innerText = t.issueLabel;
             document.getElementById('label-srv-name').innerText = t.nameLabel;
 
-            // Tlačítka
             document.getElementById('btn-cancel-1').innerText = t.cancel;
             document.getElementById('btn-submit-1').innerText = t.submit;
             document.getElementById('btn-cancel-2').innerText = t.cancel;
             document.getElementById('btn-submit-2').innerText = t.submit;
 
-            // Potvrzení
             document.getElementById('thanks-message').innerText = t.thanks;
         }
 
@@ -547,7 +548,6 @@
                 return;
             }
 
-            // Odeslání zprávy přes ntfy (Červený symbol pro Check-out)
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -568,7 +568,6 @@
                 return;
             }
 
-            // Odeslání zprávy přes ntfy (Žlutý symbol pro Oprava/Pomoc)
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST',
                 mode: 'no-cors',
