@@ -21,7 +21,8 @@
             min-height: 100vh; 
             color: #ffffff;
             user-select: none;
-            overflow: hidden;
+            overflow-x: hidden;
+            padding: 20px 0;
         }
         .container {
             width: 95%;
@@ -147,8 +148,95 @@
             padding: 30px;
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            max-width: 650px;
+            max-width: 750px;
             margin: 0 auto;
+            text-align: left;
+        }
+
+        .card-title-welcome {
+            font-size: 26px;
+            font-weight: bold;
+            color: #4caf50;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle-welcome {
+            font-size: 16px;
+            color: #b0bec5;
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 4px solid #4caf50;
+            line-height: 1.5;
+            font-size: 15px;
+            color: #e0e6ed;
+        }
+
+        .info-item strong {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 16px;
+        }
+
+        .wifi-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(27, 94, 32, 0.25));
+            border: 1px solid rgba(76, 175, 80, 0.4);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .wifi-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #81c784;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wifi-details {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 16px;
+        }
+
+        .wifi-detail-item span {
+            color: #a0aab8;
+            font-size: 13px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .wifi-detail-item strong {
+            color: #ffffff;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .wish-text {
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+            color: #81c784;
+            margin-bottom: 20px;
         }
 
         .instructions {
@@ -157,6 +245,25 @@
             font-size: 16px;
             color: #e0e6ed;
             line-height: 1.5;
+        }
+
+        .luggage-box {
+            background: rgba(239, 83, 80, 0.1);
+            border: 1px solid rgba(239, 83, 80, 0.3);
+            border-left: 4px solid #ef5350;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #e0e6ed;
+            line-height: 1.5;
+        }
+
+        .luggage-box strong {
+            color: #ef5350;
+            font-size: 15px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         .input-group {
@@ -214,6 +321,7 @@
             box-shadow: 0 5px 0 #0f4012, 0 6px 12px rgba(0,0,0,0.3);
             border-top: 1px solid #4caf50;
             transition: all 0.1s ease;
+            text-align: center;
         }
 
         .btn-form-submit:active {
@@ -234,6 +342,7 @@
             box-shadow: 0 5px 0 #212529, 0 6px 12px rgba(0,0,0,0.3);
             border-top: 1px solid #6c757d;
             transition: all 0.1s ease;
+            text-align: center;
         }
 
         .btn-form-cancel:active {
@@ -243,6 +352,7 @@
 
         .thanks-box {
             padding: 30px 20px;
+            text-align: center;
         }
 
         .thanks-icon {
@@ -282,7 +392,7 @@
             <div class="kiosk-grid">
                 
                 <!-- Check-in -->
-                <button class="btn-kiosk btn-checkin">
+                <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H11v2h8v14h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
                         <path d="M10.5 11H1.5v2h9v3l3.5-4-3.5-4v3z"/>
@@ -320,9 +430,68 @@
             </div>
         </div>
 
+        <!-- SCREEN CHECK-IN INFO -->
+        <div id="screen-checkin" class="card hidden">
+            <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
+            <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <strong id="ci-q1-title">🔑 Kdy a jak dostanete kód?</strong>
+                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong id="ci-q2-title">❓ Kód vám nedorazil?</strong>
+                    <span id="ci-q2-text">Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong id="ci-q3-title">🧳 Zavazadla</strong>
+                    <span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong id="ci-q4-title">🅿️ Parkování</strong>
+                    <span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong id="ci-q5-title">🏛️ Architektura</strong>
+                    <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
+                </div>
+            </div>
+
+            <div class="wifi-box">
+                <div class="wifi-title" id="ci-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-net-label">Název / SSID</span>
+                        <strong id="ci-wifi-net-val">Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-pass-label">Heslo / Password</span>
+                        <strong id="ci-wifi-pass-val">Hotel2017</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wish-text" id="ci-wish-text">Přejeme vám nádherný a ničím nerušený pobyt!</div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-back-ci" style="flex:1;">ZPĚT / BACK</button>
+            </div>
+        </div>
+
+        <!-- SCREEN CHECKOUT FORM -->
         <div id="screen-checkout" class="card hidden">
             <div class="instructions" id="co-instructions">
                 Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.
+            </div>
+
+            <div class="luggage-box">
+                <strong id="co-luggage-title">🧳 Úschova zavazadel</strong>
+                <span id="co-luggage-text">Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.</span>
             </div>
 
             <div class="input-group">
@@ -341,6 +510,7 @@
             </div>
         </div>
 
+        <!-- SCREEN SERVICE FORM -->
         <div id="screen-service" class="card hidden">
             <div class="instructions" id="srv-instructions">
                 Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
@@ -367,6 +537,7 @@
             </div>
         </div>
 
+        <!-- SCREEN THANKS -->
         <div id="screen-thanks" class="card hidden thanks-box">
             <div class="thanks-icon">✓</div>
             <div class="thanks-msg" id="thanks-message">
@@ -378,6 +549,9 @@
 
     <script>
         const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
+        const WIFI_NET = "Nuzky";
+        const WIFI_PASS = "Hotel2017";
+
         let currentLang = 'cs';
 
         const i18n = {
@@ -388,14 +562,34 @@
                 service: "Oprava / Pomoc",
                 parking: "Parkování",
                 coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
+                coLuggageTitle: "🧳 Úschova zavazadel",
+                coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
                 srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
                 roomLabel: "Číslo pokoje",
                 nameLabel: "Jméno a příjmení",
                 issueLabel: "Popis závady / požadavek",
                 cancel: "ZRUŠIT",
                 submit: "POTVRDIT",
+                back: "ZPĚT NA HLAVNÍ OBRAZOVKU",
                 fillAll: "Prosím vyplňte všechna pole.",
-                thanks: "Děkujeme! Vaše požadavka byla úspěšně odeslána."
+                thanks: "Děkujeme! Vaše požadavka byla úspěšně odeslána.",
+                
+                ciWelcomeTitle: "Vítejte v našem hotelu!",
+                ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
+                ciQ1Title: "🔑 Kdy a jak dostanete kód?",
+                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
+                ciQ2Title: "❓ Kód vám nedorazil?",
+                ciQ2Text: "Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.",
+                ciQ3Title: "🧳 Zavazadla",
+                ciQ3Text: "Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.",
+                ciQ4Title: "🅿️ Parkování",
+                ciQ4Text: "Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku.",
+                ciQ5Title: "🏛️ Architektura",
+                ciQ5Text: "Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.",
+                ciWifiTitle: "📶 Wi-Fi Připojení",
+                ciWifiNetLabel: "Název / SSID",
+                ciWifiPassLabel: "Heslo / Password",
+                ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!"
             },
             en: {
                 title: "Kiosk",
@@ -404,14 +598,34 @@
                 service: "Repair / Help",
                 parking: "Parking",
                 coInstructions: "Please enter your room number and the registered guest's name.",
+                coLuggageTitle: "🧳 Luggage Storage",
+                coLuggageText: "If you wish to store your luggage, please ask our restaurant staff. Due to the historical nature of the building, our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station (Hlavní nádraží). You can get there by tram No. 15 from Malostranské náměstí – get off at the stop \"Hlavní nádraží\".",
                 srvInstructions: "Please fill out the form below and we will attend to your request as soon as possible. If the matter is urgent, please use the landline next to the kiosk – from 8:00 AM to 4:00 PM it connects to remote reception, outside these hours an emergency contact is available.",
                 roomLabel: "Room number",
                 nameLabel: "Full Name",
                 issueLabel: "Issue description / Request",
                 cancel: "CANCEL",
                 submit: "SUBMIT",
+                back: "BACK TO MAIN SCREEN",
                 fillAll: "Please fill in all fields.",
-                thanks: "Thank you! Your request has been sent successfully."
+                thanks: "Thank you! Your request has been sent successfully.",
+
+                ciWelcomeTitle: "Welcome to our hotel!",
+                ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
+                ciQ1Title: "🔑 When and how will you receive your code?",
+                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
+                ciQ2Title: "❓ Haven't received your code?",
+                ciQ2Text: "If you booked via a third-party platform, we might not have your direct contact details. Between 8:00 AM and 4:00 PM, please use the landline phone next to this kiosk. Outside these hours, please call the emergency contact.",
+                ciQ3Title: "🧳 Luggage Storage",
+                ciQ3Text: "If your room is not ready yet, our restaurant staff will gladly store your luggage. However, as this is a historic building, our storage space is limited and we cannot accept legal liability for stored items.",
+                ciQ4Title: "🅿️ Parking",
+                ciQ4Text: "Due to our location in the historic city center, we do not have private parking. You can find complete local parking tips under the \"Parking\" button on the main screen.",
+                ciQ5Title: "🏛️ Architecture",
+                ciQ5Text: "Our building is a unique historic property and unfortunately does not have an elevator. If you need any assistance with your luggage, we are here to help.",
+                ciWifiTitle: "📶 Wi-Fi Connection",
+                ciWifiNetLabel: "Network Name / SSID",
+                ciWifiPassLabel: "Password",
+                ciWishText: "We wish you a wonderful and pleasant stay!"
             },
             de: {
                 title: "Kiosk",
@@ -420,14 +634,34 @@
                 service: "Reparatur / Hilfe",
                 parking: "Parken",
                 coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein.",
+                coLuggageTitle: "🧳 Gepäckaufbewahrung",
+                coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten, wenden Sie sich bitte an das Restaurantpersonal. Aufgrund des historischen Charakters des Gebäudes sind unsere Aufbewahrungskapazitäten begrenzt und das Hotel übernimmt keine Haftung. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen. Sie erreichen diesen mit der Straßenbahn Linie 15 ab Malostranské náměstí – steigen Sie an der Haltestelle „Hlavní nádraží“ aus.",
                 srvInstructions: "Bitte füllen Sie das folgende Formular aus, wir werden uns so schnell wie möglich um Ihr Anliegen kümmern. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk – von 8:00 bis 16:00 Uhr werden Sie mit der entfernten Rezeption verbunden, außerhalb dieser Zeiten steht ein Notfallkontakt zur Verfügung.",
                 roomLabel: "Zimmernummer",
                 nameLabel: "Vollständiger Name",
                 issueLabel: "Problembeschreibung / Anfrage",
                 cancel: "ABBRECHEN",
                 submit: "BESTÄTIGEN",
+                back: "ZURÜCK ZUR HAUPTSEITE",
                 fillAll: "Bitte füllen Sie alle Felder aus.",
-                thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet."
+                thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
+
+                ciWelcomeTitle: "Willkommen in unserem Hotel!",
+                ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
+                ciQ1Title: "🔑 Wann und wie erhalten Sie Ihren Zugangscode?",
+                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
+                ciQ2Title: "❓ Sie haben keinen Code erhalten?",
+                ciQ2Text: "Wenn Sie über einen Drittanbieter gebucht haben, liegen uns eventuell keine direkten Kontaktdaten vor. Von 8:00 bis 16:00 Uhr nutzen Sie bitte das Festnetztelefon neben dem Kiosk, außerhalb dieser Zeiten rufen Sie bitte den Notfallkontakt an.",
+                ciQ3Title: "🧳 Gepäckaufbewahrung",
+                ciQ3Text: "Falls Ihr Zimmer noch nicht bereit ist, bewahrt unser Restaurantpersonal Ihr Gepäck gerne auf. Da es sich um ein historisches Gebäude handelt, sind unsere Kapazitäten begrenzt und wir übernehmen keine rechtliche Haftung.",
+                ciQ4Title: "🅿️ Parken",
+                ciQ4Text: "Aufgrund der Lage im historischen Zentrum verfügen wir über keine eigenen Parkplätze. Ausführliche Parktipps in der Umgebung finden Sie unter der Schaltfläche „Parken“ auf dem Hauptbildschirm.",
+                ciQ5Title: "🏛️ Architektur",
+                ciQ5Text: "Unser Gebäude ist ein historisches Unikat und verfügt daher leider über keinen Aufzug. Wenn Sie Hilfe benötigen, sind wir gerne für Sie da.",
+                ciWifiTitle: "📶 Wi-Fi Verbindung",
+                ciWifiNetLabel: "Netzwerkname / SSID",
+                ciWifiPassLabel: "Passwort",
+                ciWishText: "Wir wünschen Ihnen einen wunderschönen und ungestörten Aufenthalt!"
             },
             it: {
                 title: "Kiosk",
@@ -436,14 +670,34 @@
                 service: "Riparazione / Aiuto",
                 parking: "Parcheggio",
                 coInstructions: "Si prega di inserire il numero di camera e il nome dell'ospite registrato.",
+                coLuggageTitle: "🧳 Deposito Bagagli",
+                coLuggageText: "Se desideri depositare i tuoi bagagli, rivolgiti al personale del ristorante dell'hotel. A causa della natura storica dell'edificio, i nostri spazi sono limitati e l'hotel non si assume responsabilità per i bagagli custoditi. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale (Hlavní nádraží). Puoi raggiungerla con il tram n. 15 da Malostranské náměstí – scendi alla fermata \"Hlavní nádraží\".",
                 srvInstructions: "Compila il modulo sottostante e ci occuperemo della tua richiesta il prima possibile. Se la questione è urgente, utiliza il telefono fisso accanto al kiosk – dalle 8:00 alle 16:00 ti collegherà con la reception remota, al di fuori di questo orario è disponibile un contatto di emergenza.",
                 roomLabel: "Numero di camera",
                 nameLabel: "Nome e cognome",
                 issueLabel: "Descrizione del problema / Richiesta",
                 cancel: "ANNULLA",
                 submit: "INVIA",
+                back: "TORNA ALLA SCHERMATA PRINCIPALE",
                 fillAll: "Si prega di compilare tutti i campi.",
-                thanks: "Grazie! La tua richiesta è stata inviata con successo."
+                thanks: "Grazie! La tua richiesta è stata inviata con successo.",
+
+                ciWelcomeTitle: "Benvenuti nel nostro hotel!",
+                ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
+                ciQ1Title: "🔑 Quando e come riceverai il codice?",
+                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
+                ciQ2Title: "❓ Non hai ricevuto il codice?",
+                ciQ2Text: "Se hai prenotato tramite terzi, potremmo non avere i tuoi contatti diretti. Dalle 8:00 alle 16:00 utilizza il telefono fisso accanto al chiosco, al di fuori di questi orari chiama il contatto di emergenza.",
+                ciQ3Title: "🧳 Deposito bagagli",
+                ciQ3Text: "Se la tua camera non è ancora pronta, il personale del nostro ristorante sarà lieto di custodire i tuoi bagagli. Trattandosi di un edificio storico, i nostri spazi sono limitati e non possiamo assumerne la responsabilità legale.",
+                ciQ4Title: "🅿️ Parcheggio",
+                ciQ4Text: "Situati nel centro storico, non disponiamo di un parcheggio privato. Trovi i consigli completi per il parcheggio premendo il pulsante \"Parcheggio\" nella schermata principale.",
+                ciQ5Title: "🏛️ Architettura",
+                ciQ5Text: "Il nostro edificio è una struttura storica tutelata e purtroppo non dispone di ascensore. Se hai bisogno di aiuto, siamo a tua disposizione.",
+                ciWifiTitle: "📶 Connessione Wi-Fi",
+                ciWifiNetLabel: "Nome rete / SSID",
+                ciWifiPassLabel: "Password",
+                ciWishText: "Ti auguriamo un soggiorno splendido e sereno!"
             },
             es: {
                 title: "Quiosco",
@@ -452,14 +706,34 @@
                 service: "Reparación / Ayuda",
                 parking: "Aparcamiento",
                 coInstructions: "Por favor, introduzca su número de habitación y el nombre del huésped registrado.",
+                coLuggageTitle: "🧳 Consigna de Equipaje",
+                coLuggageText: "Si desea guardar su equipaje, por favor consulte con el personal del restaurante. Debido al carácter histórico del edificio, nuestro espacio de almacenamiento es limitado y el hotel no se hace responsable del equipaje guardado. Alternativamente, puede utilizar la consigna de pago en la Estación Central (Hlavní nádraží). Puede llegar tomando el tranvía número 15 desde Malostranské náměstí – bájese en la parada \"Hlavní nádraží\".",
                 srvInstructions: "Rellene el siguiente formulario y atenderemos su solicitud lo antes posible. Si el asunto es urgente, utilice el teléfono fijo junto al quiosco; de 8:00 a 16:00 le conectará con la recepción remota, fuera de este horario hay un contacto de emergencia disponible.",
                 roomLabel: "Número de habitación",
                 nameLabel: "Nombre completo",
                 issueLabel: "Descripción del problema / Solicitud",
                 cancel: "CANCELAR",
                 submit: "ENVIAR",
+                back: "VOLVER A LA PANTALLA PRINCIPAL",
                 fillAll: "Por favor, rellene todos los campos.",
-                thanks: "¡Gracias! Su solicitud ha sido enviada con éxito."
+                thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
+
+                ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
+                ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
+                ciQ1Title: "🔑 ¿Cuándo y cómo recibirá el código?",
+                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
+                ciQ2Title: "❓ ¿No ha recibido su código?",
+                ciQ2Text: "Si reservó a través de terceros, es posible que no tengamos sus datos de contacto directos. De 8:00 a 16:00, utilice el teléfono fijo junto al quiosco. Fuera de este horario, llame al contacto de emergencia.",
+                ciQ3Title: "🧳 Equipaje",
+                ciQ3Text: "Si su habitación aún no está lista, el personal del restaurante guardará su equipaje con gusto. Al ser un edificio histórico, el espacio es limitado y no asumimos responsabilidad legal sobre el mismo.",
+                ciQ4Title: "🅿️ Aparcamiento",
+                ciQ4Text: "Al estar en el centro histórico, no disponemos de aparcamiento propio. Encontrará toda la información y opciones cercanas pulsando el botón \"Aparcamiento\" en la pantalla principal.",
+                ciQ5Title: "🏛️ Arquitectura",
+                ciQ5Text: "Nuestro edificio es un inmueble histórico único y lamentablemente no dispone de ascensor. Si necesita ayuda, estamos a su disposición.",
+                ciWifiTitle: "📶 Conexión Wi-Fi",
+                ciWifiNetLabel: "Nombre de red / SSID",
+                ciWifiPassLabel: "Contraseña / Password",
+                ciWishText: "¡Le deseamos una estancia maravillosa y placentera!"
             },
             fr: {
                 title: "Kiosk",
@@ -468,14 +742,34 @@
                 service: "Réparation / Aide",
                 parking: "Parking",
                 coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré.",
+                coLuggageTitle: "🧳 Bagagerie",
+                coLuggageText: "Si vous souhaitez déposer vos bagages, veuillez vous adresser au personnel du restaurant. En raison du caractère historique du bâtiment, notre espace de stockage est limité et l'hôtel décline toute responsabilité. Vous pouvez également utiliser la consigne payante de la gare centrale (Hlavní nádraží). Vous pouvez vous y rendre en prenant le tramway n° 15 depuis Malostranské náměstí – descendez à l'arrêt \"Hlavní nádraží\".",
                 srvInstructions: "Veuillez remplir le formulaire ci-dessous et nous traiterons votre demande dans les plus brefs délais. Si l'affaire est urgente, veuillez utiliser le téléphone fixe à côté du kiosque – de 8h00 à 16h00, il vous mettra en relation avec la réception à distance, en dehors de ces heures, un contact d'urgence est disponible.",
                 roomLabel: "Numéro de chambre",
                 nameLabel: "Nom complet",
                 issueLabel: "Description du problème / Demande",
                 cancel: "ANNULER",
                 submit: "VALIDER",
+                back: "RETOURNER À L'ACCUEIL",
                 fillAll: "Veuillez remplir tous les champs.",
-                thanks: "Merci ! Votre demande a été envoyée avec succès."
+                thanks: "Merci ! Votre demande a été envoyée avec succès.",
+
+                ciWelcomeTitle: "Bienvenue dans notre hôtel !",
+                ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
+                ciQ1Title: "🔑 Quand et comment recevrez-vous votre code ?",
+                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
+                ciQ2Title: "❓ Vous n'avez pas reçu votre code ?",
+                ciQ2Text: "Si vous avez réservé via un intermédiaire, nous n'avons peut-être pas vos coordonnées directes. Entre 8h00 et 16h00, utilisez le téléphone fixe à côté de la borne. En dehors de ces heures, appelez le numéro d'urgence.",
+                ciQ3Title: "🧳 Bagagerie",
+                ciQ3Text: "Si votre chambre n'est pas encore prête, le personnel du restaurant gardera vos bagages avec plaisir. S'agissant d'un bâtiment historique, nos espaces sont restreints et nous ne pouvons en assumer la responsabilité juridique.",
+                ciQ4Title: "🅿️ Parking",
+                ciQ4Text: "Situés dans le centre historique, nous ne possédons pas de parking privé. Retrouvez tous nos conseils de stationnement via le bouton \"Parking\" sur l'écran d'accueil.",
+                ciQ5Title: "🏛️ Architecture",
+                ciQ5Text: "Notre bâtiment est un monument historique classé et ne dispose malheureusement pas d'ascenseur. Si vous avez besoin d'aide, notre équipe est à votre service.",
+                ciWifiTitle: "📶 Connexion Wi-Fi",
+                ciWifiNetLabel: "Nom du réseau / SSID",
+                ciWifiPassLabel: "Mot de passe",
+                ciWishText: "Nous vous souhaitons un d'un séjour agréable et paisible !"
             },
             pl: {
                 title: "Kiosk",
@@ -484,14 +778,34 @@
                 service: "Naprawa / Pomoc",
                 parking: "Parking",
                 coInstructions: "Wpisz numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa.",
+                coLuggageTitle: "🧳 Przechowalnia Bagażu",
+                coLuggageText: "Jeśli chcesz zostawić bagaż, skontaktuj się z obsługą restauracji hotelowej. Ze względu na zabytkowy charakter budynku nasza przestrzeń magazynowa jest ograniczona i hotel nie ponosi odpowiedzialności za pozostawiony bagaż. Alternatywnie możesz skorzystać z płatnej przechowalni bagażu na Dworcu Głównym (Hlavní nádraží). Dojedziesz tam tramwajem nr 15 z Malostranské náměstí – wysiądź na przystanku „Hlavní nádraží”.",
                 srvInstructions: "Wypełnij poniższy formularz, a zajmiemy się Twoim zgłoszeniem najszybciej jak to możliwe. Jeśli sprawa jest pilna, skorzystaj z telefonu stacjonarnego obok kiosku – w godzinach 8:00–16:00 połączy Cię z zdalną recepcją, poza tymi godzinami dostępny jest kontakt alarmowy.",
                 roomLabel: "Numer pokoju",
                 nameLabel: "Imię i nazwisko",
                 issueLabel: "Opis usterki / Prośba",
                 cancel: "ANULUJ",
                 submit: "POTWIERDŹ",
+                back: "POWRÓT DO EKRANU GŁÓWNEGO",
                 fillAll: "Proszę wypełnić wszystkie pola.",
-                thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie."
+                thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
+
+                ciWelcomeTitle: "Witamy w naszym hotelu!",
+                ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
+                ciQ1Title: "🔑 Kiedy i jak otrzymasz kod?",
+                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
+                ciQ2Title: "❓ Nie otrzymałeś kodu?",
+                ciQ2Text: "Jeśli rezerwacja była składana przez portal zewnętrzny, możemy nie mieć Twoich bezpośrednich danych. W godzinach 8:00–16:00 skorzystaj z telefonu obok kiosku, poza tymi godzinami zadzwoń pod numer alarmowy.",
+                ciQ3Title: "🧳 Bagaż",
+                ciQ3Text: "Jeśli Twój pokój nie jest jeszcze gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
+                ciQ4Title: "🅿️ Parking",
+                ciQ4Text: "Ze względu na lokalizację w historycznym centrum nie posiadamy własnego parkingu. Pełne informacje o parkingach w okolicy znajdziesz pod przyciskiem „Parking” na ekranie głównym.",
+                ciQ5Title: "🏛️ Architektura",
+                ciQ5Text: "Nasz budynek to unikalny obiekt zabytkowy i niestety nie posiada windy. Jeśli potrzebujesz pomocy, chętnie służymy pomocą.",
+                ciWifiTitle: "📶 Połączenie Wi-Fi",
+                ciWifiNetLabel: "Nazwa sieci / SSID",
+                ciWifiPassLabel: "Hasło / Password",
+                ciWishText: "Życzymy wspaniałego i udanego pobytu!"
             },
             ua: {
                 title: "Кіоск",
@@ -500,14 +814,34 @@
                 service: "Ремонт / Допомога",
                 parking: "Паркування",
                 coInstructions: "Будь ласка, введіть номер кімнати та ім'я зареєстрованого гостя.",
+                coLuggageTitle: "🧳 Камера Зберігання Багажу",
+                coLuggageText: "Якщо ви бажаєте залишити свій багаж, будь ласка, зверніться до персоналу ресторану готелю. З огляду на історичний характер будівлі, наші приміщення для зберігання обмежені, і готель не несе відповідальності за залишені речі. Також ви можете скористатися платною камерою зберігання на Головному залізничному вокзалі (Hlavní nádraží). Туди можна дістатися трамваєм № 15 від Malostranské náměstí – виходьте на зупинці «Hlavní nádraží».",
                 srvInstructions: "Будь ласка, заповніть форму нижче, і ми розглянемо ваш запит якомога швидше. Якщо справа термінова, скористайтеся стаціонарним телефоном поруч із кіоском – з 8:00 до 16:00 він з'єднає вас із віддаленою рецепцією, в інший час доступний аварійний контакт.",
                 roomLabel: "Номер кімнати",
                 nameLabel: "Ім'я та прізвище",
                 issueLabel: "Опис проблеми / Запит",
                 cancel: "СКАСУВАТИ",
                 submit: "ПІДТВЕРДИТИ",
+                back: "ПОВЕРНУТИСЯ НА ГОЛОВНУ",
                 fillAll: "Будь ласка, заповніть усі поля.",
-                thanks: "Дякуємо! Ваш запит успішно надіслано."
+                thanks: "Дякуємо! Ваш запит успішно надіслано.",
+
+                ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
+                ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
+                ciQ1Title: "🔑 Коли та як ви отримаєте код?",
+                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
+                ciQ2Title: "❓ Код не надійшов?",
+                ciQ2Text: "Якщо ви бронювали через сторонні сервіси, у нас може не бути ваших прямих контактів. З 8:00 до 16:00 скористайтеся телефоном біля терміналу. В інший час телефонуйте за аварійним номером.",
+                ciQ3Title: "🧳 Багаж",
+                ciQ3Text: "Якщо ваш номер ще не готовий, персонал нашого ресторану із задоволенням прийме ваш багаж. Оскільки будівля є історичною, місце обмежене, і ми не несемо юридичної відповідальності за речі.",
+                ciQ4Title: "🅿️ Паркування",
+                ciQ4Text: "У зв'язку з розташуванням в історичному центрі ми не маємо власного паркінгу. Поради щодо паркування поблизу шукайте за кнопкою «Паркування» на головному екрані.",
+                ciQ5Title: "🏛️ Архітектура",
+                ciQ5Text: "Наша будівля є унікальною історичною пам'яткою, тому, на жаль, ліфт відсутній. Якщо вам потрібна допомога, ми завжди поруч.",
+                ciWifiTitle: "📶 Підключення Wi-Fi",
+                ciWifiNetLabel: "Назва мережі / SSID",
+                ciWifiPassLabel: "Пароль / Password",
+                ciWishText: "Бажаємо вам чудового та приємного відпочинку!"
             }
         };
 
@@ -518,13 +852,18 @@
             document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
             if(e && e.target) e.target.classList.add('active');
 
+            // Main elements
             document.getElementById('main-title').innerText = t.title;
             document.getElementById('btn-checkin-text').innerText = t.checkin;
             document.getElementById('btn-checkout-text').innerText = t.checkout;
             document.getElementById('btn-service-text').innerText = t.service;
             document.getElementById('btn-parking-text').innerText = t.parking;
 
+            // Form instructions & labels
             document.getElementById('co-instructions').innerText = t.coInstructions;
+            document.getElementById('co-luggage-title').innerText = t.coLuggageTitle;
+            document.getElementById('co-luggage-text').innerText = t.coLuggageText;
+
             document.getElementById('srv-instructions').innerText = t.srvInstructions;
             document.getElementById('label-co-room').innerText = t.roomLabel;
             document.getElementById('label-co-name').innerText = t.nameLabel;
@@ -539,6 +878,34 @@
             document.getElementById('btn-submit-2').innerText = t.submit;
 
             document.getElementById('thanks-message').innerText = t.thanks;
+
+            // Check-in Screen Texts
+            document.getElementById('ci-welcome-title').innerText = t.ciWelcomeTitle;
+            document.getElementById('ci-welcome-subtitle').innerText = t.ciWelcomeSubtitle;
+            document.getElementById('ci-q1-title').innerText = t.ciQ1Title;
+            document.getElementById('ci-q1-text').innerText = t.ciQ1Text;
+            document.getElementById('ci-q2-title').innerText = t.ciQ2Title;
+            document.getElementById('ci-q2-text').innerText = t.ciQ2Text;
+            document.getElementById('ci-q3-title').innerText = t.ciQ3Title;
+            document.getElementById('ci-q3-text').innerText = t.ciQ3Text;
+            document.getElementById('ci-q4-title').innerText = t.ciQ4Title;
+            document.getElementById('ci-q4-text').innerText = t.ciQ4Text;
+            document.getElementById('ci-q5-title').innerText = t.ciQ5Title;
+            document.getElementById('ci-q5-text').innerText = t.ciQ5Text;
+            document.getElementById('ci-wifi-title').innerText = t.ciWifiTitle;
+            document.getElementById('ci-wifi-net-label').innerText = t.ciWifiNetLabel;
+            document.getElementById('ci-wifi-pass-label').innerText = t.ciWifiPassLabel;
+            document.getElementById('ci-wish-text').innerText = t.ciWishText;
+            document.getElementById('btn-back-ci').innerText = t.back;
+
+            // Dynamic Wi-Fi injects
+            document.getElementById('ci-wifi-net-val').innerText = WIFI_NET;
+            document.getElementById('ci-wifi-pass-val').innerText = WIFI_PASS;
+        }
+
+        function openCheckinInfo() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-checkin').classList.remove('hidden');
         }
 
         function openCheckoutForm() {
@@ -558,6 +925,7 @@
             document.getElementById('srvIssueInput').value = '';
             document.getElementById('srvNameInput').value = '';
 
+            document.getElementById('screen-checkin').classList.add('hidden');
             document.getElementById('screen-checkout').classList.add('hidden');
             document.getElementById('screen-service').classList.add('hidden');
             document.getElementById('screen-thanks').classList.add('hidden');
@@ -610,6 +978,9 @@
 
             setTimeout(resetToStart, 4000);
         }
+
+        // Init setup
+        setLanguage('cs', null);
     </script>
 </body>
 </html>
