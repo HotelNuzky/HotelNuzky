@@ -281,18 +281,18 @@
 
             <div class="kiosk-grid">
                 
-                <!-- Check-in (Šipka zleva směřuje dovnitř rámu dveří) -->
+                <!-- Check-in (Přesné zrcadlo Check-outu: Šipka směřuje zleva do dveří vpravo) -->
                 <button class="btn-kiosk btn-checkin">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <!-- Rám dveří (vpravo) -->
-                        <path d="M19 3H10v2h7v14h-7v2h9V3z"/>
-                        <!-- Šipka směřující doprava do dveří -->
-                        <path d="M2 11h10V8l6 4-6 4v-3H2z"/>
+                        <path d="M19 3h-9v2h7v14h-7v2h9V3z"/>
+                        <!-- Šipka zrcadlená, směřující doprava do dveří -->
+                        <path d="M13 11H6V8l-5 4 5 4v-3h7z"/>
                     </svg>
                     <span class="btn-title" id="btn-checkin-text">Check-in</span>
                 </button>
 
-                <!-- Check-out (Šipka vychází z rámu dveří doprava) -->
+                <!-- Check-out (Původní netknutá ikona: Šipka vychází ze dveří vlevo doprava) -->
                 <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <!-- Rám dveří (vlevo) -->
@@ -483,7 +483,7 @@
                 issueLabel: "Opis usterki / Prośba",
                 cancel: "ANULUJ",
                 submit: "POTWIERDŹ",
-                fillAll: "Proszę wypełnić wszystkie pola.",
+                fillAll: "Proszę wypełnić všechny pola.",
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie."
             },
             ua: {
