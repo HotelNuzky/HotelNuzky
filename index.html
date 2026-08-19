@@ -35,6 +35,595 @@
         .language-bar {
             display: flex;
             justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flag-btn {
+            font-size: 30px;
+            cursor: pointer;
+            filter: grayscale(50%);
+            transition: transform 0.2s, filter 0.2s;
+            line-height: 1;
+            padding: 4px 6px;
+            border-radius: 8px;
+        }
+
+        .flag-btn:hover, .flag-btn.active {
+            filter: grayscale(0%);
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .header-title {
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a0aab8;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Mřížka 2x2 pro iPad na šířku */
+        .kiosk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Základní styl 3D tlačítka */
+        .btn-kiosk {
+            color: white;
+            border: none;
+            padding: 22px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            min-height: 160px;
+        }
+
+        .btn-kiosk:active {
+            transform: translateY(6px);
+        }
+
+        /* Styling pro SVG ikony */
+        .btn-svg-icon {
+            width: 52px;
+            height: 52px;
+            fill: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .btn-title {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-subtitle {
+            font-size: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* 1. CHECK-IN (Zelené) */
+        .btn-checkin {
+            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
+            border-top: 2px solid #4caf50;
+            box-shadow: 0 8px 0 #0f4012, 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-checkin:active { box-shadow: 0 2px 0 #0f4012, 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* 2. CHECK-OUT (Červené) */
+        .btn-checkout {
+            background: linear-gradient(180deg, #c62828 0%, #8e0000 100%);
+            border-top: 2px solid #ef5350;
+            box-shadow: 0 8px 0 #5f0000, 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-checkout:active { box-shadow: 0 2px 0 #5f0000, 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* 3. OPRAVA / POMOC (Žluté) */
+        .btn-service {
+            background: linear-gradient(180deg, #f57f17 0%, #bc5100 100%);
+            border-top: 2px solid #ffeb3b;
+            box-shadow: 0 8px 0 #7f2d00, 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-service:active { box-shadow: 0 2px 0 #7f2d00, 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* 4. PARKOVÁNÍ (Modré) */
+        .btn-parking {
+            background: linear-gradient(180deg, #1565c0 0%, #003c8f 100%);
+            border-top: 2px solid #42a5f5;
+            box-shadow: 0 8px 0 #001959, 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-parking:active { box-shadow: 0 2px 0 #001959, 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* Formulářové karty */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .instructions {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #e0e6ed;
+            line-height: 1.4;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 13px;
+            color: #a0aab8;
+            margin-bottom: 6px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            font-size: 20px;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4caf50;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Tlačítka dole ve formuláři */
+        .button-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-form-submit {
+            flex: 2;
+            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #0f4012, 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid #4caf50;
+            transition: all 0.1s ease;
+        }
+
+        .btn-form-submit:active {
+            box-shadow: 0 2px 0 #0f4012, 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(3px);
+        }
+
+        .btn-form-cancel {
+            flex: 1;
+            background: linear-gradient(180deg, #5a6268 0%, #343a40 100%);
+            color: #e0e0e0;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #212529, 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid #6c757d;
+            transition: all 0.1s ease;
+        }
+
+        .btn-form-cancel:active {
+            box-shadow: 0 2px 0 #212529, 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(3px);
+        }
+
+        /* Obrazovka poděkování */
+        .thanks-box {
+            padding: 30px 20px;
+        }
+
+        .thanks-icon {
+            font-size: 60px;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+
+        .thanks-msg {
+            font-size: 22px;
+            color: #e0e6ed;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Jazyková lišta -->
+        <div class="language-bar">
+            <span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+            <span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+            <span class="flag-btn" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+            <span class="flag-btn" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+            <span class="flag-btn" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
+            <span class="flag-btn" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+            <span class="flag-btn" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+            <span class="flag-btn" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
+        </div>
+
+        <!-- OBRAZOVKA 1: Úvodní rozcestník (2x2) -->
+        <div id="screen-1">
+            <div class="header-title" id="main-title">Kiosk</div>
+
+            <div class="kiosk-grid">
+                
+                <!-- Check-in (Vstup do dveří) -->
+                <button class="btn-kiosk btn-checkin">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <!-- Dveře -->
+                        <path d="M13 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h-2v2H5V5h8v2h2V5c0-1.1-.9-2-2-2z"/>
+                        <!-- Šipka dovnitř -->
+                        <path d="M10.5 13H18v3l5-4-5-4v3h-7.5z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-checkin-text">Check-in</span>
+                </button>
+
+                <!-- Check-out (Výstup ze dveří) -->
+                <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <!-- Dveře -->
+                        <path d="M11 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2H9v2H3V5h6v2h2V5c0-1.1-.9-2-2-2z"/>
+                        <!-- Šipka ven -->
+                        <path d="M8 11h7.5V8l5 4-5 4v-3H8z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-checkout-text">Check-out</span>
+                </button>
+
+                <!-- Oprava / Pomoc (Klíč) -->
+                <button class="btn-kiosk btn-service" onclick="openServiceForm()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-service-text">Oprava / Pomoc</span>
+                    <span class="btn-subtitle">8:00 – 16:00</span>
+                </button>
+
+                <!-- Parkování (Čistá ikonka P) -->
+                <button class="btn-kiosk btn-parking">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <!-- Rámeček -->
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                        <!-- Písmeno P -->
+                        <path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-parking-text">Parkování</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- OBRAZOVKA 2: Formulář Check-out -->
+        <div id="screen-checkout" class="card hidden">
+            <div class="instructions" id="co-instructions">
+                Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-co-room">Číslo pokoje</label>
+                <input type="text" id="coRoomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-co-name">Jméno a příjmení</label>
+                <input type="text" id="coNameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-1">ZRUŠIT</button>
+                <button class="btn-form-submit" onclick="submitCheckout()" id="btn-submit-1">POTVRDIT</button>
+            </div>
+        </div>
+
+        <!-- OBRAZOVKA 3: Formulář Oprava / Pomoc -->
+        <div id="screen-service" class="card hidden">
+            <div class="input-group">
+                <label class="input-label" id="label-srv-room">Číslo pokoje</label>
+                <input type="text" id="srvRoomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
+                <textarea id="srvIssueInput" placeholder="..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
+                <input type="text" id="srvNameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-2">ZRUŠIT</button>
+                <button class="btn-form-submit" onclick="submitService()" id="btn-submit-2">POTVRDIT</button>
+            </div>
+        </div>
+
+        <!-- OBRAZOVKA 4: Potvrzení -->
+        <div id="screen-thanks" class="card hidden thanks-box">
+            <div class="thanks-icon">✓</div>
+            <div class="thanks-msg" id="thanks-message">
+                Děkujeme! Vaše požadavka byla úspěšně odeslána.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
+        let currentLang = 'cs';
+
+        const i18n = {
+            cs: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Oprava / Pomoc",
+                parking: "Parkování",
+                coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
+                roomLabel: "Číslo pokoje",
+                nameLabel: "Jméno a příjmení",
+                issueLabel: "Popis závady / požadavek",
+                cancel: "ZRUŠIT",
+                submit: "POTVRDIT",
+                fillAll: "Prosím vyplňte všechna pole.",
+                thanks: "Děkujeme! Vaše požadavka byla úspěšně odeslána."
+            },
+            en: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Repair / Help",
+                parking: "Parking",
+                coInstructions: "Please enter your room number and the registered guest's name.",
+                roomLabel: "Room number",
+                nameLabel: "Full Name",
+                issueLabel: "Issue description / Request",
+                cancel: "CANCEL",
+                submit: "SUBMIT",
+                fillAll: "Please fill in all fields.",
+                thanks: "Thank you! Your request has been sent successfully."
+            },
+            de: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Reparatur / Hilfe",
+                parking: "Parken",
+                coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein.",
+                roomLabel: "Zimmernummer",
+                nameLabel: "Vollständiger Name",
+                issueLabel: "Problembeschreibung / Anfrage",
+                cancel: "ABBRECHEN",
+                submit: "BESTÄTIGEN",
+                fillAll: "Bitte füllen Sie alle Felder aus.",
+                thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet."
+            },
+            it: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Riparazione / Aiuto",
+                parking: "Parcheggio",
+                coInstructions: "Si prega di inserire il numero di camera e il nome dell'ospite registrato.",
+                roomLabel: "Numero di camera",
+                nameLabel: "Nome e cognome",
+                issueLabel: "Descrizione del problema / Richiesta",
+                cancel: "ANNULLA",
+                submit: "INVIA",
+                fillAll: "Si prega di compilare tutti i campi.",
+                thanks: "Grazie! La tua richiesta è stata inviata con successo."
+            },
+            es: {
+                title: "Quiosco",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Reparación / Ayuda",
+                parking: "Aparcamiento",
+                coInstructions: "Por favor, introduzca su número de habitación y el nombre del huésped registrado.",
+                roomLabel: "Número de habitación",
+                nameLabel: "Nombre completo",
+                issueLabel: "Descripción del problema / Solicitud",
+                cancel: "CANCELAR",
+                submit: "ENVIAR",
+                fillAll: "Por favor, rellene todos los campos.",
+                thanks: "¡Gracias! Su solicitud ha sido enviada con éxito."
+            },
+            fr: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Réparation / Aide",
+                parking: "Parking",
+                coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré.",
+                roomLabel: "Numéro de chambre",
+                nameLabel: "Nom complet",
+                issueLabel: "Description du problème / Demande",
+                cancel: "ANNULER",
+                submit: "VALIDER",
+                fillAll: "Veuillez remplir tous les champs.",
+                thanks: "Merci ! Votre demande a été envoyée avec succès."
+            },
+            pl: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Naprawa / Pomoc",
+                parking: "Parking",
+                coInstructions: "Wpisz numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa.",
+                roomLabel: "Numer pokoju",
+                nameLabel: "Imię i nazwisko",
+                issueLabel: "Opis usterki / Prośba",
+                cancel: "ANULUJ",
+                submit: "POTWIERDŹ",
+                fillAll: "Proszę wypełnić wszystkie pola.",
+                thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie."
+            },
+            ua: {
+                title: "Кіоск",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Ремонт / Допомога",
+                parking: "Паркування",
+                coInstructions: "Будь ласка, введіть номер кімнати та ім'я зареєстрованого гостя.",
+                roomLabel: "Номер кімнати",
+                nameLabel: "Ім'я та прізвище",
+                issueLabel: "Опис проблеми / Запит",
+                cancel: "СКАСУВАТИ",
+                submit: "ПІДТВЕРДИТИ",
+                fillAll: "Будь ласка, заповніть усі поля.",
+                thanks: "Дякуємо! Ваш запит успішно надіслано."
+            }
+        };
+
+        function setLanguage(lang, e) {
+            currentLang = lang;
+            const t = i18n[lang];
+
+            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
+            if(e && e.target) e.target.classList.add('active');
+
+            document.getElementById('main-title').innerText = t.title;
+            document.getElementById('btn-checkin-text').innerText = t.checkin;
+            document.getElementById('btn-checkout-text').innerText = t.checkout;
+            document.getElementById('btn-service-text').innerText = t.service;
+            document.getElementById('btn-parking-text').innerText = t.parking;
+
+            document.getElementById('co-instructions').innerText = t.coInstructions;
+            document.getElementById('label-co-room').innerText = t.roomLabel;
+            document.getElementById('label-co-name').innerText = t.nameLabel;
+
+            document.getElementById('label-srv-room').innerText = t.roomLabel;
+            document.getElementById('label-srv-issue').innerText = t.issueLabel;
+            document.getElementById('label-srv-name').innerText = t.nameLabel;
+
+            document.getElementById('btn-cancel-1').innerText = t.cancel;
+            document.getElementById('btn-submit-1').innerText = t.submit;
+            document.getElementById('btn-cancel-2').innerText = t.cancel;
+            document.getElementById('btn-submit-2').innerText = t.submit;
+
+            document.getElementById('thanks-message').innerText = t.thanks;
+        }
+
+        function openCheckoutForm() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-checkout').classList.remove('hidden');
+        }
+
+        function openServiceForm() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-service').classList.remove('hidden');
+        }
+
+        function resetToStart() {
+            document.getElementById('coRoomInput').value = '';
+            document.getElementById('coNameInput').value = '';
+            document.getElementById('srvRoomInput').value = '';
+            document.getElementById('srvIssueInput').value = '';
+            document.getElementById('srvNameInput').value = '';
+
+            document.getElementById('screen-checkout').classList.add('hidden');
+            document.getElementById('screen-service').classList.add('hidden');
+            document.getElementById('screen-thanks').classList.add('hidden');
+            document.getElementById('screen-1').classList.remove('hidden');
+        }
+
+        function submitCheckout() {
+            const room = document.getElementById('coRoomInput').value.trim();
+            const name = document.getElementById('coNameInput').value.trim();
+
+            if (!room || !name) {
+                alert(i18n[currentLang].fillAll);
+                return;
+            }
+
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: `🔴 Check-out: Pokoj ${room} - ${name}`
+            });
+
+            showThanks();
+        }
+
+        function submitService() {
+            const room = document.getElementById('srvRoomInput').value.trim();
+            const issue = document.getElementById('srvIssueInput').value.trim();
+            const name = document.getElementById('srvNameInput').value.trim();
+
+            if (!room || !issue || !name) {
+                alert(i18n[currentLang].fillAll);
+                return;
+            }
+
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: `🟡 Oprava/Pomoc: Pokoj ${room} - Popis: ${issue} - ${name}`
+            });
+
+            showThanks();
+        }
+
+        function showThanks() {
+            document.getElementById('screen-checkout').classList.add('hidden');
+            document.getElementById('screen-service').classList.add('hidden');
+            document.getElementById('screen-thanks').classList.remove('hidden');
+
+            setTimeout(resetToStart, 4000);
+        }
+    </script>
+</body>
+</html>
+            justify-content: center;
             gap: 15px;
             margin-bottom: 20px;
             background: rgba(0, 0, 0, 0.25);
