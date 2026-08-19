@@ -2,70 +2,157 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosk - Check-in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hotel Kiosk - Check-in / Check-out</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #0f172a;
+            color: #f8fafc;
             min-height: 100vh;
-        }
-
-        /* Hlavní tlačítko Check-in */
-        .btn-checkin {
-            display: inline-flex;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            padding: 20px 40px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffffff;
-            background: linear-gradient(135deg, #28a745, #218838);
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
-            transition: all 0.2s ease;
+            align-items: center;
+            padding: 20px;
             user-select: none;
         }
 
-        .btn-checkin:active {
-            transform: scale(0.97);
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
         }
 
-        /* Šipka u tlačítka posunutá o 0.5 cm doprava */
-        .btn-checkin .arrow {
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #94a3b8;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 32px;
+            font-size: 24px;
+            font-weight: 600;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-action:active {
+            transform: scale(0.97);
+        }
+
+        /* --- TLAČÍTKO CHECK-IN --- */
+        .btn-checkin {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+        }
+
+        /* Posun šipky u Check-inu o 0.5 cm doprava */
+        .btn-checkin .arrow-icon {
             margin-left: 0.5cm;
             display: inline-block;
-            transition: transform 0.2s ease;
+            font-size: 26px;
+            line-height: 1;
         }
 
-        .btn-checkin:hover .arrow {
-            transform: translateX(4px);
+        /* --- TLAČÍTKO CHECK-OUT --- */
+        .btn-checkout {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+        }
+
+        .btn-checkout .arrow-icon {
+            margin-left: 12px;
+            display: inline-block;
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        /* --- OSTATNÍ TLAČÍTKA --- */
+        .btn-secondary {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-checkin" onclick="handleCheckin()">
-        <span>Check-in</span>
-        <span class="arrow">➔</span>
-    </button>
+    <div class="container">
+        <div class="header">
+            <h1>Vítejte v hotelu</h1>
+            <p>Vyberte požadovanou službu</p>
+        </div>
+
+        <div class="buttons-grid">
+            <!-- Check-in tlačítko se posunutou šipkou o 0.5 cm -->
+            <button class="btn-action btn-checkin" onclick="sendNotification('Check-in požadavek')">
+                <span>Check-in</span>
+                <span class="arrow-icon">➔</span>
+            </button>
+
+            <!-- Check-out tlačítko -->
+            <button class="btn-action btn-checkout" onclick="sendNotification('Check-out požadavek')">
+                <span>Check-out</span>
+                <span class="arrow-icon">➔</span>
+            </button>
+        </div>
+    </div>
 
     <script>
-        function handleCheckin() {
-            // Zde navazuje tvoje logika (otvírání formuláře / ntfy.sh)
-            console.log("Check-in stisknut");
+        const NTFY_TOPIC = "uzlateho-nuzek-checkout-2026";
+
+        function sendNotification(message) {
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                body: message,
+                headers: {
+                    'Title': 'Kiosk Recepce',
+                    'Tags': 'bell,hotel'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Požadavek byl úspěšně odeslán na recepci.");
+                } else {
+                    alert("Chyba při odesílání požadavku.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Nepodařilo se spojit se serverem.");
+            });
         }
     </script>
 
