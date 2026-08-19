@@ -93,7 +93,6 @@
             transform: translateY(6px);
         }
 
-        /* Zvětšené a esteticky upravené ikony */
         .btn-svg-icon {
             width: 68px;
             height: 68px;
@@ -190,9 +189,19 @@
 
         .info-item strong {
             color: #ffffff;
-            display: block;
-            margin-bottom: 3px;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            font-size: 17px;
+        }
+
+        /* Minimalistické SVG ikony v info kartičkách */
+        .info-item-icon {
+            width: 22px;
+            height: 22px;
+            fill: #4caf50;
+            flex-shrink: 0;
         }
 
         .wifi-box {
@@ -249,7 +258,6 @@
             line-height: 1.5;
         }
 
-        /* Vylepšený luggage-box s větší ikony a vizuální estetikou */
         .luggage-box {
             background: rgba(239, 83, 80, 0.12);
             border: 1px solid rgba(239, 83, 80, 0.35);
@@ -266,20 +274,21 @@
         .luggage-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 8px;
         }
 
+        /* Zvětšená ikona kufru (34px) */
         .luggage-header svg {
-            width: 24px;
-            height: 24px;
+            width: 34px;
+            height: 34px;
             fill: #ef5350;
             flex-shrink: 0;
         }
 
         .luggage-header strong {
             color: #ef5350;
-            font-size: 16px;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -429,20 +438,20 @@
 
             <div class="kiosk-grid">
                 
-                <!-- Check-in: Šipka směřuje DOVNITŘ (doleva do otevřených dveří) -->
+                <!-- Check-in -->
                 <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-                        <path d="M10.5 11H1.5v2h9v3l4-4-4-4v3z"/>
+                        <path d="M2.5 12l4.5-4.5V10.5H12v3H7v3z"/>
                     </svg>
                     <span class="btn-title" id="btn-checkin-text">Check-in</span>
                 </button>
 
-                <!-- Check-out: Otočené dveře vlevo, šipka směřuje VEN (doprava) -->
+                <!-- Check-out -->
                 <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
-                        <path d="M13.5 11h9v2h-9v3l-4-4 4-4v3z" transform="rotate(180 18 12)"/>
+                        <path d="M12 10.5H17V7.5l4.5 4.5-4.5 4.5v-3H12z"/>
                     </svg>
                     <span class="btn-title" id="btn-checkout-text">Check-out</span>
                 </button>
@@ -474,33 +483,57 @@
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
 
             <div class="info-list">
+                <!-- Kód -->
                 <div class="info-item">
-                    <strong id="ci-q1-title">🔑 Kdy a jak dostanete kód?</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span id="ci-q1-title">Kdy a jak dostanete kód?</span>
+                    </strong>
                     <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
                 </div>
 
+                <!-- Snídaně -->
                 <div class="info-item">
-                    <strong id="ci-bf-title">☕ Snídaně</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 19h20v2H2v-2z"/></svg>
+                        <span id="ci-bf-title">Snídaně</span>
+                    </strong>
                     <span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
                 </div>
 
+                <!-- Pomoc / Nedorazil kód -->
                 <div class="info-item">
-                    <strong id="ci-q2-title">❓ Kód vám nedorazil?</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        <span id="ci-q2-title">Kód vám nedorazil?</span>
+                    </strong>
                     <span id="ci-q2-text">Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.</span>
                 </div>
 
+                <!-- Zavazadla -->
                 <div class="info-item">
-                    <strong id="ci-q3-title">🧳 Zavazadla</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
+                        <span id="ci-q3-title">Zavazadla</span>
+                    </strong>
                     <span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
                 </div>
 
+                <!-- Parkování -->
                 <div class="info-item">
-                    <strong id="ci-q4-title">🅿️ Parkování</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                        <span id="ci-q4-title">Parkování</span>
+                    </strong>
                     <span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku.</span>
                 </div>
 
+                <!-- Architektura -->
                 <div class="info-item">
-                    <strong id="ci-q5-title">🏛️ Architektura</strong>
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                        <span id="ci-q5-title">Architektura</span>
+                    </strong>
                     <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
                 </div>
             </div>
@@ -627,17 +660,17 @@
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
                 ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
-                ciQ1Title: "🔑 Kdy a jak dostanete kód?",
+                ciQ1Title: "Kdy a jak dostanete kód?",
                 ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
-                ciBfTitle: "☕ Snídaně",
+                ciBfTitle: "Snídaně",
                 ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
-                ciQ2Title: "❓ Kód vám nedorazil?",
+                ciQ2Title: "Kód vám nedorazil?",
                 ciQ2Text: "Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.",
-                ciQ3Title: "🧳 Zavazadla",
+                ciQ3Title: "Zavazadla",
                 ciQ3Text: "Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.",
-                ciQ4Title: "🅿️ Parkování",
+                ciQ4Title: "Parkování",
                 ciQ4Text: "Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku.",
-                ciQ5Title: "🏛️ Architektura",
+                ciQ5Title: "Architektura",
                 ciQ5Text: "Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.",
                 ciInfoStandText: "Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.",
                 ciWifiTitle: "📶 Wi-Fi Připojení",
@@ -666,17 +699,17 @@
 
                 ciWelcomeTitle: "Welcome to our hotel!",
                 ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
-                ciQ1Title: "🔑 When and how will you receive your code?",
+                ciQ1Title: "When and how will you receive your code?",
                 ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
-                ciBfTitle: "☕ Breakfast",
+                ciBfTitle: "Breakfast",
                 ciBfText: "Breakfast is served buffet-style on the ground floor of the restaurant from 8:00 AM to 10:00 AM.",
-                ciQ2Title: "❓ Haven't received your code?",
+                ciQ2Title: "Haven't received your code?",
                 ciQ2Text: "If you booked via a third-party platform, we might not have your direct contact details. Between 8:00 AM and 4:00 PM, please use the landline phone next to this kiosk. Outside these hours, please call the emergency contact.",
-                ciQ3Title: "🧳 Luggage Storage",
+                ciQ3Title: "Luggage Storage",
                 ciQ3Text: "If your room is not ready yet, our restaurant staff will gladly store your luggage. However, as this is a historic building, our storage space is limited and we cannot accept legal liability for stored items.",
-                ciQ4Title: "🅿️ Parking",
+                ciQ4Title: "Parking",
                 ciQ4Text: "Due to our location in the historic city center, we do not have private parking. You can find complete local parking tips under the \"Parking\" button on the main screen.",
-                ciQ5Title: "🏛️ Architecture",
+                ciQ5Title: "Architecture",
                 ciQ5Text: "Our building is a unique historic property and unfortunately does not have an elevator. If you need any assistance with your luggage, we are here to help.",
                 ciInfoStandText: "You can find further useful information and recommendations on the information stand in your room.",
                 ciWifiTitle: "📶 Wi-Fi Connection",
@@ -705,17 +738,17 @@
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
                 ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
-                ciQ1Title: "🔑 Wann und wie erhalten Sie Ihren Zugangscode?",
+                ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
                 ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
-                ciBfTitle: "☕ Frühstück",
+                ciBfTitle: "Frühstück",
                 ciBfText: "Das Frühstück wird im Erdgeschoss des Restaurants von 8:00 bis 10:00 Uhr als Buffet serviert.",
-                ciQ2Title: "❓ Sie haben keinen Code erhalten?",
+                ciQ2Title: "Sie haben keinen Code erhalten?",
                 ciQ2Text: "Wenn Sie über einen Drittanbieter gebucht haben, liegen uns eventuell keine direkten Kontaktdaten vor. Von 8:00 bis 16:00 Uhr nutzen Sie bitte das Festnetztelefon neben dem Kiosk, außerhalb dieser Zeiten rufen Sie bitte den Notfallkontakt an.",
-                ciQ3Title: "🧳 Gepäckaufbewahrung",
+                ciQ3Title: "Gepäckaufbewahrung",
                 ciQ3Text: "Falls Ihr Zimmer noch nicht bereit ist, bewahrt unser Restaurantpersonal Ihr Gepäck gerne auf. Da es sich um ein historisches Gebäude handelt, sind unsere Kapazitäten begrenzt und wir übernehmen keine rechtliche Haftung.",
-                ciQ4Title: "🅿️ Parken",
+                ciQ4Title: "Parken",
                 ciQ4Text: "Aufgrund der Lage im historischen Zentrum verfügen wir über keine eigenen Parkplätze. Ausführliche Parktipps in der Umgebung finden Sie unter der Schaltfläche „Parken“ auf dem Hauptbildschirm.",
-                ciQ5Title: "🏛️ Architektur",
+                ciQ5Title: "Architektur",
                 ciQ5Text: "Unser Gebäude ist ein historisches Unikat und verfügt daher leider über keinen Aufzug. Wenn Sie Hilfe benötigen, sind wir gerne für Sie da.",
                 ciInfoStandText: "Weitere nützliche Informationen finden Sie auf dem Aufsteller in Ihrem Zimmer.",
                 ciWifiTitle: "📶 Wi-Fi Verbindung",
@@ -744,17 +777,17 @@
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
                 ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
-                ciQ1Title: "🔑 Quando e come riceverai il codice?",
+                ciQ1Title: "Quando e come riceverai il codice?",
                 ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
-                ciBfTitle: "☕ Colazione",
+                ciBfTitle: "Colazione",
                 ciBfText: "La colazione viene servita a buffet al piano terra del ristorante dalle 8:00 alle 10:00.",
-                ciQ2Title: "❓ Non hai ricevuto il codice?",
+                ciQ2Title: "Non hai ricevuto il codice?",
                 ciQ2Text: "Se hai prenotato tramite terzi, potremmo non avere i tuoi contatti diretti. Dalle 8:00 alle 16:00 utilizza il telefono fisso accanto al chiosco, al di fuori di questi orari chiama il contatto di emergenza.",
-                ciQ3Title: "🧳 Deposito bagagli",
+                ciQ3Title: "Deposito bagagli",
                 ciQ3Text: "Se la tua camera non è ancora pronta, il personale del nostro ristorante sarà lieto di custodire i tuoi bagagli. Trattandosi di un edificio storico, i nostri spazi sono limitati e non possiamo assumerne la responsabilità legale.",
-                ciQ4Title: "🅿️ Parcheggio",
+                ciQ4Title: "Parcheggio",
                 ciQ4Text: "Situati nel centro storico, non disponiamo di un parcheggio privato. Trovi i consigli completi per il parcheggio premendo il pulsante \"Parcheggio\" nella schermata principale.",
-                ciQ5Title: "🏛️ Architettura",
+                ciQ5Title: "Architettura",
                 ciQ5Text: "Il nostro edificio è una struttura storica tutelata e purtroppo non dispone di ascensore. Se hai bisogno di aiuto, siamo a tua disposizione.",
                 ciInfoStandText: "Troverai ulteriori informazioni e consigli utili sull'espositore informativo presente nella tua camera.",
                 ciWifiTitle: "📶 Connessione Wi-Fi",
@@ -783,17 +816,17 @@
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
                 ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
-                ciQ1Title: "🔑 ¿Cuándo y cómo recibirá el código?",
+                ciQ1Title: "¿Cuándo y cómo recibirá el código?",
                 ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
-                ciBfTitle: "☕ Desayuno",
+                ciBfTitle: "Desayuno",
                 ciBfText: "El desayuno se sirve tipo bufé en la planta baja del restaurante de 8:00 a 10:00.",
-                ciQ2Title: "❓ ¿No ha recibido su código?",
+                ciQ2Title: "¿No ha recibido su código?",
                 ciQ2Text: "Si reservó a través de terceros, es posible que no tengamos sus datos de contacto directos. De 8:00 a 16:00, utilice el teléfono fijo junto al quiosco. Fuera de este horario, llame al contacto de emergencia.",
-                ciQ3Title: "🧳 Equipaje",
+                ciQ3Title: "Equipaje",
                 ciQ3Text: "Si su habitación aún no está lista, el personal del restaurante guardará su equipaje con gusto. Al ser un edificio histórico, el espacio es limitado y no asumimos responsabilidad legal sobre el mismo.",
-                ciQ4Title: "🅿️ Aparcamiento",
+                ciQ4Title: "Aparcamiento",
                 ciQ4Text: "Al estar en el centro histórico, no disponemos de aparcamiento propio. Encontrará toda la información y opciones cercanas pulsando el botón \"Aparcamiento\" en la pantalla principal.",
-                ciQ5Title: "🏛️ Arquitectura",
+                ciQ5Title: "Arquitectura",
                 ciQ5Text: "Nuestro edificio es un inmueble histórico único y lamentablemente no dispone de ascensor. Si necesita ayuda, estamos a su disposición.",
                 ciInfoStandText: "Encontrará más información útil y consejos en el expositor informativo de su habitación.",
                 ciWifiTitle: "📶 Conexión Wi-Fi",
@@ -822,17 +855,17 @@
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
                 ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
-                ciQ1Title: "🔑 Quand et comment recevrez-vous votre code ?",
+                ciQ1Title: "Quand et comment recevrez-vous votre code ?",
                 ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
-                ciBfTitle: "☕ Petit-déjeuner",
+                ciBfTitle: "Petit-déjeuner",
                 ciBfText: "Le petit-déjeuner est servi sous forme de buffet au rez-de-chaussée du restaurant de 8h00 à 10h00.",
-                ciQ2Title: "❓ Vous n'avez pas reçu votre code ?",
+                ciQ2Title: "Vous n'avez pas reçu votre code ?",
                 ciQ2Text: "Si vous avez réservé via un intermédiaire, nous n'avons peut-être pas vos coordonnées directes. Entre 8h00 et 16h00, utilisez le téléphone fixe à côté de la borne. En dehors de ces heures, appelez le numéro d'urgence.",
-                ciQ3Title: "🧳 Bagagerie",
+                ciQ3Title: "Bagagerie",
                 ciQ3Text: "Si votre chambre n'est pas encore prête, le personnel du restaurant gardera vos bagages avec plaisir. S'agissant d'un bâtiment historique, nos espaces sont restreints et nous ne pouvons en assumer la responsabilité juridique.",
-                ciQ4Title: "🅿️ Parking",
+                ciQ4Title: "Parking",
                 ciQ4Text: "Situés dans le centre historique, nous ne possédons pas de parking privé. Retrouvez tous nos conseils de stationnement via le bouton \"Parking\" sur l'écran d'accueil.",
-                ciQ5Title: "🏛️ Architecture",
+                ciQ5Title: "Architecture",
                 ciQ5Text: "Notre bâtiment est un monument historique classé et ne dispose malheureusement pas d'ascenseur. Si vous avez besoin d'aide, notre équipe est à votre service.",
                 ciInfoStandText: "Vous trouverez d'autres informations utiles sur le présentoir d'information situé dans votre chambre.",
                 ciWifiTitle: "📶 Connexion Wi-Fi",
@@ -853,7 +886,7 @@
                 roomLabel: "Numer pokoju",
                 nameLabel: "Imię i nazwisko",
                 issueLabel: "Opis usterki / Prośba",
-                cancel: "ANULUJ",
+                cancel: "ANANULUJ",
                 submit: "POTWIERDŹ",
                 back: "POWRÓT DO EKRANU GŁÓWNEGO",
                 fillAll: "Proszę wypełnić wszystkie pola.",
@@ -861,17 +894,17 @@
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
                 ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
-                ciQ1Title: "🔑 Kiedy i jak otrzymasz kod?",
+                ciQ1Title: "Kiedy i jak otrzymasz kod?",
                 ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
-                ciBfTitle: "☕ Śniadanie",
+                ciBfTitle: "Śniadanie",
                 ciBfText: "Śniadanie serwowane jest w formie bufetu na parterze restauracji w godzinach 8:00–10:00.",
-                ciQ2Title: "❓ Nie otrzymałeś kodu?",
+                ciQ2Title: "Nie otrzymałeś kodu?",
                 ciQ2Text: "Jeśli rezerwacja była składana przez portal zewnętrzny, możemy nie mieć Twoich bezpośrednich danych. W godzinach 8:00–16:00 skorzystaj z telefonu obok kiosku, poza tymi godzinami zadzwoń pod numer alarmowy.",
-                ciQ3Title: "🧳 Bagaż",
+                ciQ3Title: "Bagaż",
                 ciQ3Text: "Jeśli Twój pokój nie jest jeszcze gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
-                ciQ4Title: "🅿️ Parking",
+                ciQ4Title: "Parking",
                 ciQ4Text: "Ze względu na lokalizację w historycznym centrum nie posiadamy własnego parkingu. Pełne informacje o parkingach w okolicy znajdziesz pod przyciskiem „Parking” na ekranie głównym.",
-                ciQ5Title: "🏛️ Architektura",
+                ciQ5Title: "Architektura",
                 ciQ5Text: "Nasz budynek to unikalny obiekt zabytkowy i niestety nie posiada windy. Jeśli potrzebujesz pomocy, chętnie služymy pomocą.",
                 ciInfoStandText: "Dalsze przydatne informacje znajdziesz w swoim pokoju na stojaku informacyjnym.",
                 ciWifiTitle: "📶 Połączenie Wi-Fi",
@@ -900,17 +933,17 @@
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
                 ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
-                ciQ1Title: "🔑 Коли та як ви отримаєте код?",
+                ciQ1Title: "Коли та як ви отримаєте код?",
                 ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
-                ciBfTitle: "☕ Сніданок",
+                ciBfTitle: "Сніданок",
                 ciBfText: "Сніданок подається у формі шведського столу на першому поверсі ресторану з 8:00 до 10:00.",
-                ciQ2Title: "❓ Код не надійшов?",
+                ciQ2Title: "Код не надійшов?",
                 ciQ2Text: "Якщо ви бронювали через сторонні сервіси, у нас може не бути ваших прямих контактів. З 8:00 до 16:00 скористайтеся телефоном біля терміналу. В інший час телефонуйте за аварійним номером.",
-                ciQ3Title: "🧳 Багаж",
+                ciQ3Title: "Багаж",
                 ciQ3Text: "Якщо ваш номер ще не готовий, персонал нашого ресторану із задоволенням прийме ваш багаж. Оскільки будівля є історичною, місце обмежене, і ми не несемо юридичної відповідальності за речі.",
-                ciQ4Title: "🅿️ Паркування",
+                ciQ4Title: "Паркування",
                 ciQ4Text: "У зв'язку з розташуванням в історичному центрі ми не маємо власного паркінгу. Поради щодо паркування поблизу шукайте за кнопкою «Паркування» на головному екрані.",
-                ciQ5Title: "🏛️ Архітектура",
+                ciQ5Title: "Архітектура",
                 ciQ5Text: "Наша будівля є унікальною історичною пам'яткою, тому, на жаль, ліфт відсутній. Якщо вам потрібна допомога, ми завжди поруч.",
                 ciInfoStandText: "Додаткову корисну інформацію ви знайдете у вашому номері на інформаційній стійці.",
                 ciWifiTitle: "📶 Підключення Wi-Fi",
