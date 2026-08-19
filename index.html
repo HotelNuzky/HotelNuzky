@@ -187,6 +187,14 @@
             color: #e0e6ed;
         }
 
+        /* Zvýrazněný styl pro Registraci */
+        .info-item-highlight {
+            background: rgba(76, 175, 80, 0.12);
+            border: 2px solid #81c784;
+            border-left: 6px solid #4caf50;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .info-item strong {
             color: #ffffff;
             display: flex;
@@ -436,14 +444,11 @@
 
             <div class="kiosk-grid">
                 
-                <!-- Check-in s plně funkční šipkou doprava do dveří -->
+                <!-- Check-in -->
                 <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <!-- Rám dveří vpravo -->
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-                        <!-- Šipka směřující doprava do dveří -->
-                        <path d="M2 11h10v2H2z"/>
-                        <path d="M10 8l5 4-5 4V8z"/>
+                        <path d="M3 10.5h5V7.5l4.5 4.5-4.5 4.5v-3H3z"/>
                     </svg>
                     <span class="btn-title" id="btn-checkin-text">Check-in</span>
                 </button>
@@ -484,7 +489,15 @@
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
 
             <div class="info-list">
-                <!-- Kód -->
+                <!-- Zvýrazněná položka Registrace -->
+                <div class="info-item info-item-highlight">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span id="ci-reg-title">Registrace</span>
+                    </strong>
+                    <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
+                </div>
+
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
@@ -493,7 +506,6 @@
                     <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
                 </div>
 
-                <!-- Snídaně -->
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 19h20v2H2v-2z"/></svg>
@@ -502,7 +514,6 @@
                     <span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
                 </div>
 
-                <!-- Pomoc / Nedorazil kód -->
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
@@ -511,7 +522,6 @@
                     <span id="ci-q2-text">Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.</span>
                 </div>
 
-                <!-- Zavazadla -->
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
@@ -520,7 +530,6 @@
                     <span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
                 </div>
 
-                <!-- Parkování -->
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
@@ -529,7 +538,6 @@
                     <span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku.</span>
                 </div>
 
-                <!-- Architektura -->
                 <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
@@ -661,6 +669,8 @@
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
                 ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
+                ciRegTitle: "Registrace",
+                ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
                 ciQ1Title: "Kdy a jak dostanete kód?",
                 ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
                 ciBfTitle: "Snídaně",
@@ -700,6 +710,8 @@
 
                 ciWelcomeTitle: "Welcome to our hotel!",
                 ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
+                ciRegTitle: "Registration",
+                ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
                 ciQ1Title: "When and how will you receive your code?",
                 ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
                 ciBfTitle: "Breakfast",
@@ -739,6 +751,8 @@
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
                 ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
+                ciRegTitle: "Registrierung",
+                ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
                 ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
                 ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
                 ciBfTitle: "Frühstück",
@@ -778,6 +792,8 @@
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
                 ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
+                ciRegTitle: "Registrazione",
+                ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
                 ciQ1Title: "Quando e come riceverai il codice?",
                 ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
                 ciBfTitle: "Colazione",
@@ -817,6 +833,8 @@
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
                 ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
+                ciRegTitle: "Registro de huéspedes",
+                ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
                 ciQ1Title: "¿Cuándo y cómo recibirá el código?",
                 ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
                 ciBfTitle: "Desayuno",
@@ -856,6 +874,8 @@
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
                 ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
+                ciRegTitle: "Enregistrement",
+                ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
                 ciQ1Title: "Quand et comment recevrez-vous votre code ?",
                 ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
                 ciBfTitle: "Petit-déjeuner",
@@ -895,6 +915,8 @@
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
                 ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
+                ciRegTitle: "Rejestracja",
+                ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
                 ciQ1Title: "Kiedy i jak otrzymasz kod?",
                 ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
                 ciBfTitle: "Śniadanie",
@@ -902,7 +924,7 @@
                 ciQ2Title: "Nie otrzymałeś kodu?",
                 ciQ2Text: "Jeśli rezerwacja była składana przez portal zewnętrzny, możemy nie mieć Twoich bezpośrednich danych. W godzinach 8:00–16:00 skorzystaj z telefonu obok kiosku, poza tymi godzinami zadzwoń pod numer alarmowy.",
                 ciQ3Title: "Bagaż",
-                ciQ3Text: "Jeśli Twój pokój nie jest jeszcze gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
+                ciQ3Text: "Jeśli Twój pokój nie jest ještě gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
                 ciQ4Title: "Parking",
                 ciQ4Text: "Ze względu na lokalizację w historycznym centrum nie posiadamy własnego parkingu. Pełne informacje o parkingach w okolicy znajdziesz pod przyciskiem „Parking” na ekranie głównym.",
                 ciQ5Title: "Architektura",
@@ -934,6 +956,8 @@
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
                 ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
+                ciRegTitle: "Реєстрація",
+                ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
                 ciQ1Title: "Коли та як ви отримаєте код?",
                 ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
                 ciBfTitle: "Сніданок",
@@ -961,14 +985,12 @@
             document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
             if(e && e.target) e.target.classList.add('active');
 
-            // Main elements
             document.getElementById('main-title').innerText = t.title;
             document.getElementById('btn-checkin-text').innerText = t.checkin;
             document.getElementById('btn-checkout-text').innerText = t.checkout;
             document.getElementById('btn-service-text').innerText = t.service;
             document.getElementById('btn-parking-text').innerText = t.parking;
 
-            // Form instructions & labels
             document.getElementById('co-instructions').innerText = t.coInstructions;
             document.getElementById('co-luggage-title').innerText = t.coLuggageTitle;
             document.getElementById('co-luggage-text').innerText = t.coLuggageText;
@@ -988,9 +1010,10 @@
 
             document.getElementById('thanks-message').innerText = t.thanks;
 
-            // Check-in Screen Texts
             document.getElementById('ci-welcome-title').innerText = t.ciWelcomeTitle;
             document.getElementById('ci-welcome-subtitle').innerText = t.ciWelcomeSubtitle;
+            document.getElementById('ci-reg-title').innerText = t.ciRegTitle;
+            document.getElementById('ci-reg-text').innerText = t.ciRegText;
             document.getElementById('ci-q1-title').innerText = t.ciQ1Title;
             document.getElementById('ci-q1-text').innerText = t.ciQ1Text;
             document.getElementById('ci-bf-title').innerText = t.ciBfTitle;
@@ -1010,7 +1033,6 @@
             document.getElementById('ci-wish-text').innerText = t.ciWishText;
             document.getElementById('btn-back-ci').innerText = t.back;
 
-            // Dynamic Wi-Fi injects
             document.getElementById('ci-wifi-net-val').innerText = WIFI_NET;
             document.getElementById('ci-wifi-pass-val').innerText = WIFI_PASS;
         }
@@ -1091,7 +1113,6 @@
             setTimeout(resetToStart, 4000);
         }
 
-        // Init setup
         setLanguage('cs', null);
     </script>
 </body>
