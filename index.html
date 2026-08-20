@@ -257,6 +257,26 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
+        .info-item-highlight-blue {
+            background: rgba(66, 165, 245, 0.12);
+            border: 2px solid rgba(66, 165, 245, 0.35);
+            border-left: 6px solid var(--blue-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-item-highlight-blue .info-item-icon {
+            fill: var(--blue-light);
+        }
+
+        .info-subtitle-highlight-blue {
+            background: rgba(66, 165, 245, 0.12);
+            border: 2px solid rgba(66, 165, 245, 0.35);
+            border-left: 6px solid var(--blue-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .info-item strong {
             color: var(--text-main);
             display: flex;
@@ -632,12 +652,12 @@
 
             <div class="info-list">
 
-                <div class="info-item">
+                <div class="info-item info-item-highlight">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                         <span id="ci-q1-title">Kdy a jak dostanete kód?</span>
                     </strong>
-                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
+                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny způsoby kontaktování. Pokud již máte kód ke dveřím a číslo pokoje, postupujte dále chodbou rovně po schodech nahoru.</span>
                 </div><div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
@@ -730,9 +750,9 @@
             <div class="luggage-box">
                 <div class="luggage-header">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
-                    <strong>Poplatky a doklad</strong>
+                    <strong id="co-fees-title">Poplatky a doklad</strong>
                 </div>
-                <span>Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
+                <span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
             </div>
 
             <div class="input-group">
@@ -793,7 +813,7 @@
         <!-- SCREEN PARKING INFO -->
         <div id="screen-parking" class="card hidden">
             <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
+            <div class="card-subtitle-welcome info-subtitle-highlight-blue" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
 
             <div class="info-list">
                 <!-- PARKING OPTION 1 -->
@@ -927,7 +947,9 @@
                 parking: "Parkování",
                 coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
                 coLuggageTitle: "Úschova zavazadel",
-                coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
+                coLuggageText: "Pokud si přejete uložit svá zavazadla,
+                 coFeesTitle: "Poplatky a doklad",
+                 coFeesText: "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.", prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
                 srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
                 roomLabel: "Číslo pokoje",
                 nameLabel: "Jméno a příjmení",
@@ -943,7 +965,7 @@
                 ciRegTitle: "Registrace",
                 ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
                 ciQ1Title: "Kdy a jak dostanete kód?",
-                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
+                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny způsoby kontaktování. Pokud již máte kód ke dveřím a číslo pokoje, postupujte dále chodbou rovně po schodech nahoru.",
                 ciBfTitle: "Snídaně",
                 ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
                 ciQ2Title: "Kód vám nedorazil?",
@@ -980,7 +1002,9 @@
                 parking: "Parking",
                 coInstructions: "Please enter your room number and the registered guest's name.",
                 coLuggageTitle: "Luggage Storage",
-                coLuggageText: "If you wish to store your luggage, please ask our restaurant staff. Due to the historical nature of the building, our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station (Hlavní nádraží). You can get there by tram No. 15 from Malostranské náměstí – get off at the stop \"Hlavní nádraží\".",
+                coLuggageText: "If you wish to store your luggage,
+                 coFeesTitle: "Fees and Receipt",
+                 coFeesText: "All fees are already included in the accommodation price. If you would like an invoice issued to a company, please contact us using the hotel email address found on the hotel business card next to this kiosk.", please ask our restaurant staff. Due to the historical nature of the building, our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station (Hlavní nádraží). You can get there by tram No. 15 from Malostranské náměstí – get off at the stop \"Hlavní nádraží\".",
                 srvInstructions: "Please fill out the form below and we will attend to your request as soon as possible. If the matter is urgent, please use the landline next to the kiosk – from 8:00 AM to 4:00 PM it connects to remote reception, outside these hours an emergency contact is available.",
                 roomLabel: "Room number",
                 nameLabel: "Full Name",
@@ -996,7 +1020,7 @@
                 ciRegTitle: "Registration",
                 ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
                 ciQ1Title: "When and how will you receive your code?",
-                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
+                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins. Please check all available ways to contact us. If you already have the door code and your room number, continue straight down the corridor and up the stairs.",
                 ciBfTitle: "Breakfast",
                 ciBfText: "Breakfast is served buffet-style on the ground floor of the restaurant from 8:00 AM to 10:00 AM.",
                 ciQ2Title: "Haven't received your code?",
@@ -1033,7 +1057,9 @@
                 parking: "Parken",
                 coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein.",
                 coLuggageTitle: "Gepäckaufbewahrung",
-                coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten, wenden Sie sich bitte an das Restaurantpersonal. Aufgrund des historischen Charakters des Gebäudes sind unsere Aufbewahrungskapazitäten begrenzt und das Hotel übernimmt keine Haftung. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen. Sie erreichen diesen mit der Straßenbahn Linie 15 ab Malostranské náměstí – steigen Sie an der Haltestelle „Hlavní nádraží“ aus.",
+                coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten,
+                 coFeesTitle: "Gebühren und Beleg",
+                 coFeesText: "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Rechnung auf eine Firma ausstellen lassen möchten, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse, die Sie auf der Hotelvisitenkarte neben diesem Kiosk finden.", wenden Sie sich bitte an das Restaurantpersonal. Aufgrund des historischen Charakters des Gebäudes sind unsere Aufbewahrungskapazitäten begrenzt und das Hotel übernimmt keine Haftung. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen. Sie erreichen diesen mit der Straßenbahn Linie 15 ab Malostranské náměstí – steigen Sie an der Haltestelle „Hlavní nádraží“ aus.",
                 srvInstructions: "Bitte füllen Sie das folgende Formular aus, wir werden uns so schnell wie möglich um Ihr Anliegen kümmern. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk – von 8:00 bis 16:00 Uhr werden Sie mit der entfernten Rezeption verbunden, außerhalb dieser Zeiten steht ein Notfallkontakt zur Verfügung.",
                 roomLabel: "Zimmernummer",
                 nameLabel: "Vollständiger Name",
@@ -1049,7 +1075,7 @@
                 ciRegTitle: "Registrierung",
                 ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
                 ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
-                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
+                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt. Bitte überprüfen Sie alle Möglichkeiten zur Kontaktaufnahme. Wenn Sie bereits den Türcode und Ihre Zimmernummer haben, gehen Sie weiter geradeaus den Flur entlang und die Treppe hinauf.",
                 ciBfTitle: "Frühstück",
                 ciBfText: "Das Frühstück wird im Erdgeschoss des Restaurants von 8:00 bis 10:00 Uhr als Buffet serviert.",
                 ciQ2Title: "Sie haben keinen Code erhalten?",
@@ -1086,7 +1112,9 @@
                 parking: "Parcheggio",
                 coInstructions: "Si prega di inserire il numero di camera e il nome dell'ospite registrato.",
                 coLuggageTitle: "Deposito Bagagli",
-                coLuggageText: "Se desideri depositare i tuoi bagagli, rivolgiti al personale del ristorante dell'hotel. A causa della natura storica dell'edificio, i nostri spazi sono limitati e l'hotel non si assume responsabilità per i bagagli custoditi. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale (Hlavní nádraží). Puoi raggiungerla con il tram n. 15 da Malostranské náměstí – scendi alla fermata \"Hlavní nádraží\".",
+                coLuggageText: "Se desideri depositare i tuoi bagagli,
+                 coFeesTitle: "Costi e ricevuta",
+                 coFeesText: "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desideri una fattura intestata a un’azienda, contattaci all’indirizzo e-mail dell’hotel riportato sul biglietto da visita dell’hotel accanto a questo kiosk.", rivolgiti al personale del ristorante dell'hotel. A causa della natura storica dell'edificio, i nostri spazi sono limitati e l'hotel non si assume responsabilità per i bagagli custoditi. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale (Hlavní nádraží). Puoi raggiungerla con il tram n. 15 da Malostranské náměstí – scendi alla fermata \"Hlavní nádraží\".",
                 srvInstructions: "Compila il modulo sottostante e ci occuperemo della tua richiesta il prima possibile. Se la questione è urgente, utiliza il telefono fisso accanto al kiosk – dalle 8:00 alle 16:00 ti collegherà con la reception remota, al di fuori di questo orario è disponibile un contatto di emergenza.",
                 roomLabel: "Numero di camera",
                 nameLabel: "Nome e cognome",
@@ -1102,7 +1130,7 @@
                 ciRegTitle: "Registrazione",
                 ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
                 ciQ1Title: "Quando e come riceverai il codice?",
-                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
+                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in. Si prega di controllare tutti i modi disponibili per contattarci. Se avete già il codice della porta e il numero della camera, proseguite lungo il corridoio dritto e salite le scale.",
                 ciBfTitle: "Colazione",
                 ciBfText: "La colazione viene servita a buffet al piano terra del ristorante dalle 8:00 alle 10:00.",
                 ciQ2Title: "Non hai ricevuto il codice?",
@@ -1139,7 +1167,9 @@
                 parking: "Aparcamiento",
                 coInstructions: "Por favor, introduzca su número de habitación y el nombre del huésped registrado.",
                 coLuggageTitle: "Consigna de Equipaje",
-                coLuggageText: "Si desea guardar su equipaje, por favor consulte con el personal del restaurante. Debido al carácter histórico del edificio, nuestro espacio de almacenamiento es limitado y el hotel no se hace responsable del equipaje guardado. Alternativamente, puede utilizar la consigna de pago en la Estación Central (Hlavní nádraží). Puede llegar tomando el tranvía número 15 desde Malostranské náměstí – bájese en la parada \"Hlavní nádraží\".",
+                coLuggageText: "Si desea guardar su equipaje,
+                 coFeesTitle: "Cargos y justificante",
+                 coFeesText: "Todos los cargos ya están incluidos en el precio del alojamiento. Si desea que la factura se emita a nombre de una empresa, póngase en contacto con nosotros en la dirección de correo electrónico del hotel que aparece en la tarjeta de visita del hotel junto a este quiosco.", por favor consulte con el personal del restaurante. Debido al carácter histórico del edificio, nuestro espacio de almacenamiento es limitado y el hotel no se hace responsable del equipaje guardado. Alternativamente, puede utilizar la consigna de pago en la Estación Central (Hlavní nádraží). Puede llegar tomando el tranvía número 15 desde Malostranské náměstí – bájese en la parada \"Hlavní nádraží\".",
                 srvInstructions: "Rellene el siguiente formulario y atenderemos su solicitud lo antes posible. Si el asunto es urgente, utilice el teléfono fijo junto al quiosco; de 8:00 a 16:00 le conectará con la recepción remota, fuera de este horario hay un contacto de emergencia disponible.",
                 roomLabel: "Número de habitación",
                 nameLabel: "Nombre completo",
@@ -1155,7 +1185,7 @@
                 ciRegTitle: "Registro de huéspedes",
                 ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
                 ciQ1Title: "¿Cuándo y cómo recibirá el código?",
-                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
+                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in. Por favor, compruebe todas las formas disponibles de contacto. Si ya tiene el código de la puerta y el número de habitación, continúe recto por el pasillo y suba las escaleras.",
                 ciBfTitle: "Desayuno",
                 ciBfText: "El desayuno se sirve tipo bufé en la planta baja del restaurante de 8:00 a 10:00.",
                 ciQ2Title: "¿No ha recibido su código?",
@@ -1192,7 +1222,9 @@
                 parking: "Parking",
                 coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré.",
                 coLuggageTitle: "Bagagerie",
-                coLuggageText: "Si vous souhaitez déposer vos bagages, veuillez vous adresser au personnel du restaurant. En raison du caractère historique du bâtiment, notre espace de stockage est limité et l'hôtel décline toute responsabilité. Vous pouvez également utiliser la consigne payante de la gare centrale (Hlavní nádraží). Vous pouvez vous y rendre en prenant le tramway n° 15 depuis Malostranské náměstí – descendez à l'arrêt \"Hlavní nádraží\".",
+                coLuggageText: "Si vous souhaitez déposer vos bagages,
+                 coFeesTitle: "Frais et justificatif",
+                 coFeesText: "Tous les frais sont déjà inclus dans le prix de l’hébergement. Si vous souhaitez que la facture soit établie au nom d’une entreprise, veuillez nous contacter à l’adresse e-mail de l’hôtel indiquée sur la carte de visite de l’hôtel à côté de cette borne.", veuillez vous adresser au personnel du restaurant. En raison du caractère historique du bâtiment, notre espace de stockage est limité et l'hôtel décline toute responsabilité. Vous pouvez également utiliser la consigne payante de la gare centrale (Hlavní nádraží). Vous pouvez vous y rendre en prenant le tramway n° 15 depuis Malostranské náměstí – descendez à l'arrêt \"Hlavní nádraží\".",
                 srvInstructions: "Veuillez remplir le formulaire ci-dessous et nous traiterons votre demande dans les plus brefs délais. Si l'affaire est urgente, veuillez utiliser le téléphone fixe à côté du kiosque – de 8h00 à 16h00, il vous mettra en relation avec la réception à distance, en dehors de ces heures, un contact d'urgence est disponible.",
                 roomLabel: "Numéro de chambre",
                 nameLabel: "Nom complet",
@@ -1208,7 +1240,7 @@
                 ciRegTitle: "Enregistrement",
                 ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
                 ciQ1Title: "Quand et comment recevrez-vous votre code ?",
-                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
+                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in. Veuillez vérifier tous les moyens de nous contacter. Si vous avez déjà le code de la porte et votre numéro de chambre, continuez tout droit dans le couloir et montez les escaliers.",
                 ciBfTitle: "Petit-déjeuner",
                 ciBfText: "Le petit-déjeuner est servi sous forme de buffet au rez-de-chaussée du restaurant de 8h00 à 10h00.",
                 ciQ2Title: "Vous n'avez pas reçu votre code ?",
@@ -1245,7 +1277,9 @@
                 parking: "Parking",
                 coInstructions: "Wpisz numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa.",
                 coLuggageTitle: "Przechowalnia Bagażu",
-                coLuggageText: "Jeśli chcesz zostawić bagaż, skontaktuj się z obsługą restauracji hotelowej. Ze względu na zabytkowy charakter budynku nasza przestrzeń magazynowa jest ograniczona i hotel nie ponosi odpowiedzialności za pozostawiony bagaż. Alternatywnie możesz skorzystać z płatnej przechowalni bagażu na Dworcu Głównym (Hlavní nádraží). Dojedziesz tam tramwajem nr 15 z Malostranské náměstí – wysiądź na przystanku „Hlavní nádraží”.",
+                coLuggageText: "Jeśli chcesz zostawić bagaż,
+                 coFeesTitle: "Opłaty i dokument",
+                 coFeesText: "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli chcesz otrzymać fakturę na firmę, skontaktuj się z nami pod adresem e-mail hotelu podanym na wizytówce hotelu obok tego kiosku.", skontaktuj się z obsługą restauracji hotelowej. Ze względu na zabytkowy charakter budynku nasza przestrzeń magazynowa jest ograniczona i hotel nie ponosi odpowiedzialności za pozostawiony bagaż. Alternatywnie możesz skorzystać z płatnej przechowalni bagażu na Dworcu Głównym (Hlavní nádraží). Dojedziesz tam tramwajem nr 15 z Malostranské náměstí – wysiądź na przystanku „Hlavní nádraží”.",
                 srvInstructions: "Wypełnij poniższy formularz, a zajmiemy się Twoim zgłoszeniem najszybciej jak to możliwe. Jeśli sprawa jest pilna, skorzystaj z telefonu stacjonarnego obok kiosku – w godzinach 8:00–16:00 połączy Cię z zdalną recepcją, poza tymi godzinami dostępny jest kontakt alarmowy.",
                 roomLabel: "Numer pokoju",
                 nameLabel: "Imię i nazwisko",
@@ -1261,7 +1295,7 @@
                 ciRegTitle: "Rejestracja",
                 ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
                 ciQ1Title: "Kiedy i jak otrzymasz kod?",
-                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
+                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in. Proszę sprawdzić wszystkie dostępne sposoby kontaktu. Jeśli mają już Państwo kod do drzwi i numer pokoju, proszę iść dalej prosto korytarzem i wejść po schodach na górę.",
                 ciBfTitle: "Śniadanie",
                 ciBfText: "Śniadanie serwowane jest w formie bufetu na parterze restauracji w godzinach 8:00–10:00.",
                 ciQ2Title: "Nie otrzymałeś kodu?",
@@ -1298,7 +1332,9 @@
                 parking: "Паркування",
                 coInstructions: "Будь ласка, введіть номер кімнати та ім'я зареєстрованого гостя.",
                 coLuggageTitle: "Камера Зберігання Багажу",
-                coLuggageText: "Якщо ви бажаєте залишити свій багаж, будь ласка, зверніться до персоналу ресторану готелю. З огляду на історичний характер будівлі, наші приміщення для зберігання обмежені, і готель не несе відповідальності за залишені речі. Також ви можете скористатися платною камерою зберігання на Головному залізничному вокзалі (Hlavní nádraží). Туди можна дістатися трамваєм № 15 від Malostranské náměstí – виходьте на зупинці «Hlavní nádraží».",
+                coLuggageText: "Якщо ви бажаєте залишити свій багаж,
+                 coFeesTitle: "Оплати та документ",
+                 coFeesText: "Усі збори вже включені у вартість проживання. Якщо ви бажаєте отримати рахунок на компанію, будь ласка, зв’яжіться з нами за електронною адресою готелю, зазначеною на візитівці готелю поруч із цим терміналом.", будь ласка, зверніться до персоналу ресторану готелю. З огляду на історичний характер будівлі, наші приміщення для зберігання обмежені, і готель не несе відповідальності за залишені речі. Також ви можете скористатися платною камерою зберігання на Головному залізничному вокзалі (Hlavní nádraží). Туди можна дістатися трамваєм № 15 від Malostranské náměstí – виходьте на зупинці «Hlavní nádraží».",
                 srvInstructions: "Будь ласка, заповніть форму нижче, і ми розглянемо ваш запит якомога швидше. Якщо справа термінова, скористайтеся стаціонарним телефоном поруч із кіоском – з 8:00 до 16:00 він з'єднає вас із віддаленою рецепцією, в інший час доступний аварійний контакт.",
                 roomLabel: "Номер кімнати",
                 nameLabel: "Ім'я та прізвище",
@@ -1314,7 +1350,7 @@
                 ciRegTitle: "Реєстрація",
                 ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
                 ciQ1Title: "Коли та як ви отримаєте код?",
-                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
+                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд. Будь ласка, перевірте всі доступні способи зв’язку. Якщо ви вже маєте код від дверей і номер кімнати, продовжуйте прямо коридором і підніміться сходами вгору.",
                 ciBfTitle: "Сніданок",
                 ciBfText: "Сніданок подається у формі шведського столу на першому поверсі ресторану з 8:00 до 10:00.",
                 ciQ2Title: "Код не надійшов?",
@@ -1351,7 +1387,9 @@
                 parking: "Otopark",
                 coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
                 coLuggageTitle: "Bagaj Muhafazası",
-                coLuggageText: "Bagajınızı bırakmak isterseniz, lütfen otel restoran personeliyle iletişime geçin. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otel bırakılan eşyalardan sorumlu tutulamaz. Alternatif olarak, Ana Tren İstasyonu'ndaki (Hlavní nádraží) ücretli bagaj muhafaza hizmetini kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvaya binip „Hlavní nádraží“ durağında inerek ulaşabilirsiniz.",
+                coLuggageText: "Bagajınızı bırakmak isterseniz,
+                 coFeesTitle: "Ücretler ve belge",
+                 coFeesText: "Tüm ücretler konaklama fiyatına dahildir. Faturanın bir şirket adına düzenlenmesini istiyorsanız, lütfen bu kioskun yanındaki otel kartvizitinde bulunan otel e-posta adresi üzerinden bizimle iletişime geçin.", lütfen otel restoran personeliyle iletişime geçin. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otel bırakılan eşyalardan sorumlu tutulamaz. Alternatif olarak, Ana Tren İstasyonu'ndaki (Hlavní nádraží) ücretli bagaj muhafaza hizmetini kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvaya binip „Hlavní nádraží“ durağında inerek ulaşabilirsiniz.",
                 srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa, lütfen kiosk yanındaki sabit telefonu kullanın – 8:00–16:00 saatleri arasında sizi uzaktan resepsiyona bağlar, bu saatler dışında acil durum irtibatı mevcuttur.",
                 roomLabel: "Oda numarası",
                 nameLabel: "Ad Soyad",
@@ -1367,7 +1405,7 @@
                 ciRegTitle: "Kayıt",
                 ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar.",
+                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar. Lütfen tüm iletişim yöntemlerini kontrol edin. Kapı kodunuz ve oda numaranız zaten varsa, koridordan dümdüz ilerleyip merdivenlerden yukarı çıkın.",
                 ciBfTitle: "Kahvaltı",
                 ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak servis edilir.",
                 ciQ2Title: "Kodunuz ulaşmadı mı?",
@@ -1404,7 +1442,9 @@
                 parking: "Parkering",
                 coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede gæst.",
                 coLuggageTitle: "Bagageopbevaring",
-                coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte personalet i hotellets restaurant. På grund af bygningens historiske karakter er vores opbevaringsplads begrænset, og hotellet påtager sig intet ansvar for opbevarede genstande. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží). Du kan komme dertil med sporvogn nr. 15 fra Malostranské náměstí – stå af ved stoppestedet „Hlavní nádraží“.",
+                coLuggageText: "Hvis du ønsker at opbevare din bagage,
+                 coFeesTitle: "Gebyrer og kvittering",
+                 coFeesText: "Alle gebyrer er allerede inkluderet i prisen for overnatningen. Hvis du ønsker en faktura udstedt til en virksomhed, bedes du kontakte os på hotellets e-mailadresse, som du finder på hotellets visitkort ved siden af denne kiosk.", bedes du kontakte personalet i hotellets restaurant. På grund af bygningens historiske karakter er vores opbevaringsplads begrænset, og hotellet påtager sig intet ansvar for opbevarede genstande. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží). Du kan komme dertil med sporvogn nr. 15 fra Malostranské náměstí – stå af ved stoppestedet „Hlavní nádraží“.",
                 srvInstructions: "Udfyld venligst formularen nedenfor, så vil vi behandle din anmodning hurtigst muligt. Hvis sagen er hastende, bedes du benytte fastnettelefonen ved siden af kiosken – fra 8:00 til 16:00 forbinder den dig til fjernreceptionen, uden for dette tidsrum er der en nødkontakt tilgængelig.",
                 roomLabel: "Værelsesnummer",
                 nameLabel: "Fulde navn",
@@ -1420,7 +1460,7 @@
                 ciRegTitle: "Registrering",
                 ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
                 ciQ1Title: "Hvornår og hvordan modtager du din kode?",
-                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter.",
+                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter. Kontrollér venligst alle kontaktmuligheder. Hvis du allerede har dørkoden og dit værelsesnummer, skal du fortsætte ligeud ad gangen og gå op ad trapperne.",
                 ciBfTitle: "Morgenmad",
                 ciBfText: "Morgenmad serveres som buffet i restaurantens stueetage fra 8:00 til 10:00.",
                 ciQ2Title: "Har du ikke modtaget din kode?",
@@ -1458,6 +1498,8 @@
                 coInstructions: "部屋番号とご登録者様のお名前を入力してください。",
                 coLuggageTitle: "手荷物預かり",
                 coLuggageText: "お荷物のお預かりをご希望の場合は、ホテルレストランのスタッフにお申し付けください。歴史的建造物のため保管スペースに限りがあり、お預かりした荷物についてホテルは責任を負いかねます。また、プラハ中央駅（Hlavní nádraží）の有料コインロッカーもご利用いただけます。マロストランスケー広場から15番のトラムに乗り、「Hlavní nádraží」で下車してください。",
+                 coFeesTitle: "料金と領収書",
+                 coFeesText: "すべての料金は宿泊料金に含まれています。会社名義の請求書をご希望の場合は、このキオスクの横にあるホテルの名刺に記載されたホテルのメールアドレスまでご連絡ください。",
                 srvInstructions: "以下のフォームにご記入ください。できるだけ早く対応いたします。緊急の場合は、キオスクの横にある固定電話をご利用ください。8:00〜16:00はリモートレセプションにつながり、それ以外の時間帯は緊急連絡先が利用可能です。",
                 roomLabel: "部屋番号",
                 nameLabel: "お名前（フルネーム）",
@@ -1473,7 +1515,7 @@
                 ciRegTitle: "宿泊者登録",
                 ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
                 ciQ1Title: "暗証番号の受け取り方法と時間",
-                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。",
+                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。 すべての連絡方法をご確認ください。すでにドアの暗証番号とお部屋番号をお持ちの場合は、廊下をそのまままっすぐ進み、階段を上ってください。",
                 ciBfTitle: "朝食",
                 ciBfText: "朝食は1階レストランにて、8:00から10:00までビュッフェ形式でご用意しております。",
                 ciQ2Title: "コードが届かない場合",
@@ -1510,7 +1552,9 @@
                 parking: "חנייה",
                 coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום.",
                 coLuggageTitle: "אחסון מזוודות",
-                coLuggageText: "אם ברצונך לאחסן את החפצים שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של המבנה, שטח האחסון מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, ניתן להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - לרדת בתחנת „Hlavní nádraží”.",
+                coLuggageText: "אם ברצונך לאחסן את החפצים שלך,
+                 coFeesTitle: "חיובים וקבלה",
+                 coFeesText: "כל החיובים כבר כלולים במחיר האירוח. אם ברצונך לקבל חשבונית על שם חברה, אנא פנה אלינו באמצעות כתובת הדוא״ל של המלון המופיעה בכרטיס הביקור של המלון לצד הקיוסק הזה.", אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של המבנה, שטח האחסון מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, ניתן להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - לרדת בתחנת „Hlavní nádraží”.",
                 srvInstructions: "אנא מלא את הטופס להלן ונטפל בפנייתך בהקדם האפשרי. אם העניין דחוף, אנא השתמש בטלפון הקווי לצד הקיוסק - בין השעות 8:00 ל-16:00 הוא יקשר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
@@ -1526,7 +1570,7 @@
                 ciRegTitle: "הרשמה",
                 ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
                 ciQ1Title: "מתי ואיך תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית.",
+                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית. אנא בדקו את כל דרכי יצירת הקשר. אם כבר יש לכם את קוד הדלת ואת מספר החדר, המשיכו ישר במסדרון ועלו במדרגות.",
                 ciBfTitle: "ארוחת בוקר",
                 ciBfText: "ארוחת הבוקר מוגשת במתכונת בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
                 ciQ2Title: "הקוד לא הגיע?",
@@ -1563,7 +1607,9 @@
                 parking: "Στάθμευση",
                 coInstructions: "Παρακαλώ εισάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη.",
                 coLuggageTitle: "Φύλαξη Αποσκευών",
-                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε επικοινωνήστε με το προσωπικό του εστιατορίου του ξενοδοχείου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος αποθήκευσης είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη για τα αντικείμενα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη επί πληρωμή φύλαξη αποσκευών στον Κεντρικό Σταθμό (Hlavní nádraží). Μπορείτε να πάτε εκεί με το τραμ 15 από τη στάση Malostranské náměstí – κατεβείτε στη στάση „Hlavní nádraží”.",
+                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας,
+                 coFeesTitle: "Χρεώσεις και παραστατικό",
+                 coFeesText: "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Εάν επιθυμείτε να εκδοθεί τιμολόγιο σε εταιρεία, παρακαλούμε επικοινωνήστε μαζί μας στη διεύθυνση e-mail του ξενοδοχείου που αναγράφεται στην επαγγελματική κάρτα του ξενοδοχείου δίπλα σε αυτό το κιόσκι.", παρακαλούμε επικοινωνήστε με το προσωπικό του εστιατορίου του ξενοδοχείου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος αποθήκευσης είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη για τα αντικείμενα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη επί πληρωμή φύλαξη αποσκευών στον Κεντρικό Σταθμό (Hlavní nádraží). Μπορείτε να πάτε εκεί με το τραμ 15 από τη στάση Malostranské náměstí – κατεβείτε στη στάση „Hlavní nádraží”.",
                 srvInstructions: "Παρακαλούμε συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Εάν το θέμα είναι επείγον, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι – από τις 8:00 έως τις 16:00 σας συνδέει με την εξ αποστάσεως υποδοχή, εκτός αυτών των ωρών υπάρχει διαθέσιμη επαφή έκτακτης ανάγκης.",
                 roomLabel: "Αριθμός δωματίου",
                 nameLabel: "Ονοματεπώνυμο",
@@ -1579,7 +1625,7 @@
                 ciRegTitle: "Εγγραφή",
                 ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
                 ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
-                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in.",
+                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in. Παρακαλούμε ελέγξτε όλους τους διαθέσιμους τρόπους επικοινωνίας. Εάν έχετε ήδη τον κωδικό της πόρτας και τον αριθμό του δωματίου σας, συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες.",
                 ciBfTitle: "Πρωινό",
                 ciBfText: "Το πρωινό σερβίρεται σε μορφή μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
                 ciQ2Title: "Δεν λάβατε τον κωδικό;",
@@ -1786,6 +1832,8 @@
             document.getElementById('co-instructions').innerText = dict.coInstructions;
             document.getElementById('co-luggage-title').innerText = dict.coLuggageTitle;
             document.getElementById('co-luggage-text').innerText = dict.coLuggageText;
+            document.getElementById('co-fees-title').innerText = dict.coFeesTitle;
+            document.getElementById('co-fees-text').innerText = dict.coFeesText;
             document.getElementById('label-co-room').innerText = dict.roomLabel;
             document.getElementById('label-co-name').innerText = dict.nameLabel;
             document.getElementById('btn-cancel-1').innerText = dict.cancel;
