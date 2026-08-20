@@ -957,10 +957,11 @@
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
-        const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
+        const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
 
         let currentLang = 'cs';
         let autoResetTimer = null;
+        let thanksType = 'service';
 
         // INTERNATIONALIZATION DATA
         const i18n = {
@@ -984,6 +985,7 @@
                 back: "ZPĚT NA HLAVNÍ OBRAZOVKU",
                 fillAll: "Prosím vyplňte všechna pole.",
                 thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
+                coThanks: "Vše je vyřízeno. Děkujeme vám za pobyt a přejeme šťastnou cestu.",
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
                 ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
@@ -1039,6 +1041,7 @@
                 back: "BACK TO MAIN SCREEN",
                 fillAll: "Please fill in all fields.",
                 thanks: "Thank you! Your request has been sent successfully.",
+                coThanks: "Everything is taken care of. Thank you for staying with us, and we wish you a safe journey.",
 
                 ciWelcomeTitle: "Welcome to our hotel!",
                 ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
@@ -1094,6 +1097,7 @@
                 back: "ZURÜCK ZUR HAUPTSEITE",
                 fillAll: "Bitte füllen Sie alle Felder aus.",
                 thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
+                coThanks: "Alles ist erledigt. Vielen Dank für Ihren Aufenthalt und wir wünschen Ihnen eine gute Reise.",
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
                 ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
@@ -1149,6 +1153,7 @@
                 back: "TORNA ALLA SCHERMATA PRINCIPALE",
                 fillAll: "Si prega di compilare tutti i campi.",
                 thanks: "Grazie! La tua richiesta è stata inviata con successo.",
+                coThanks: "È tutto sistemato. Grazie per il vostro soggiorno e vi auguriamo buon viaggio.",
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
                 ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
@@ -1204,6 +1209,7 @@
                 back: "VOLVER A LA PANTALLA PRINCIPAL",
                 fillAll: "Por favor, rellene todos los campos.",
                 thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
+                coThanks: "Todo está solucionado. Gracias por su estancia y le deseamos un buen viaje.",
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
                 ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
@@ -1259,6 +1265,7 @@
                 back: "RETOURNER À L'ACCUEIL",
                 fillAll: "Veuillez remplir tous les champs.",
                 thanks: "Merci ! Votre demande a été envoyée avec succès.",
+                coThanks: "Tout est réglé. Merci pour votre séjour et nous vous souhaitons un bon voyage.",
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
                 ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
@@ -1314,6 +1321,7 @@
                 back: "POWRÓT DO EKRANU GŁÓWNEGO",
                 fillAll: "Proszę wypełnić wszystkie pola.",
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
+                coThanks: "Wszystko jest załatwione. Dziękujemy za pobyt i życzymy szczęśliwej podróży.",
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
                 ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
@@ -1369,6 +1377,7 @@
                 back: "ПОВЕРНУТИСЯ НА ГОЛОВНУ",
                 fillAll: "Будь ласка, заповніть усі поля.",
                 thanks: "Дякуємо! Ваш запит успішно надіслано.",
+                coThanks: "Усе вирішено. Дякуємо за перебування та бажаємо щасливої дороги.",
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
                 ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
@@ -1424,6 +1433,7 @@
                 back: "ANA EKRANA DÖN",
                 fillAll: "Lütfen tüm alanları doldurun.",
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
+                coThanks: "Her şey tamamlandı. Konaklamanız için teşekkür ederiz ve iyi yolculuklar dileriz.",
 
                 ciWelcomeTitle: "Otelimize hoş geldiniz!",
                 ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 rahatça giriş yapabilirsiniz.",
@@ -1479,6 +1489,7 @@
                 back: "TILBAGE TIL HOVEDSKÆRM",
                 fillAll: "Udfyld venligst alle felter.",
                 thanks: "Tak! Din anmodning er blevet sendt med succes.",
+                coThanks: "Alt er ordnet. Tak for jeres ophold, og vi ønsker jer en god rejse.",
 
                 ciWelcomeTitle: "Velkommen til vores hotel!",
                 ciWelcomeSubtitle: "Takket være vores selvbetjeningskiosk kan du tjekke ind nemt døgnet rundt.",
@@ -1534,6 +1545,7 @@
                 back: "メイン画面に戻る",
                 fillAll: "すべての項目を入力してください。",
                 thanks: "ありがとうございます！リクエストが正常に送信されました。",
+                coThanks: "すべて完了しました。ご滞在ありがとうございました。どうぞお気をつけてお帰りください。",
 
                 ciWelcomeTitle: "当ホテルへようこそ！",
                 ciWelcomeSubtitle: "セルフサービス・キオスクにより、24時間いつでもスムーズにチェックインいただけます。",
@@ -1589,6 +1601,7 @@
                 back: "חזרה למסך הראשי",
                 fillAll: "אנא מלא את כל השדות.",
                 thanks: "תודה! פנייתך נשלחה בהצלחה.",
+                coThanks: "הכול טופל. תודה על שהותכם ואנו מאחלים לכם נסיעה טובה ובטוחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
                 ciWelcomeSubtitle: "בזכות עמדת השירות העצמי תוכלו לבצע צ'ק-אין בקלות 24/7.",
@@ -1644,6 +1657,7 @@
                 back: "ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ",
                 fillAll: "Παρακαλούμε συμπληρώστε όλα τα πεδία.",
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
+                coThanks: "Όλα ολοκληρώθηκαν. Σας ευχαριστούμε για τη διαμονή σας και σας ευχόμαστε καλό ταξίδι.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
                 ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in εύκολα 24/7.",
@@ -1785,10 +1799,10 @@
                     'Tags': 'red_circle,checkout'
                 }
             }).then(() => {
-                showThanks();
+                showThanks('checkout');
             }).catch(err => {
                 console.error("NTFY Push failed:", err);
-                showThanks(); // Show thanks anyway to keep UX smooth
+                showThanks('checkout'); // Show thanks anyway to keep UX smooth
             });
         }
 
@@ -1815,14 +1829,15 @@
                     'Tags': 'yellow_circle,service'
                 }
             }).then(() => {
-                showThanks();
+                showThanks('service');
             }).catch(err => {
                 console.error("NTFY Push failed:", err);
-                showThanks();
+                showThanks('service');
             });
         }
 
-        function showThanks() {
+        function showThanks(type = 'service') {
+            thanksType = type;
             hideAllScreens();
             document.getElementById('screen-thanks').classList.remove('hidden');
             setTimeout(() => {
@@ -1924,7 +1939,7 @@
             document.getElementById('btn-back-pk').innerText = dict.back;
 
             // Thanks Message
-            document.getElementById('thanks-message').innerText = dict.thanks;
+            document.getElementById('thanks-message').innerText = thanksType === 'checkout' ? dict.coThanks : dict.thanks;
         }
     </script>
 </body>
