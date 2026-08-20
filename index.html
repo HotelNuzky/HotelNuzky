@@ -257,56 +257,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .info-item-highlight-blue {
-            background: rgba(66, 165, 245, 0.12);
-            border: 2px solid rgba(66, 165, 245, 0.35);
-            border-left: 6px solid var(--blue-light);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .info-item-highlight-blue .info-item-icon {
-            fill: var(--blue-light);
-        }
-
-        .info-subtitle-highlight-blue {
-            background: rgba(66, 165, 245, 0.12);
-            border: 2px solid rgba(66, 165, 245, 0.35);
-            border-left: 6px solid var(--blue-light);
-            border-radius: 12px;
-            padding: 14px 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-
-        .info-subtitle-highlight-yellow {
-            background: rgba(255, 167, 38, 0.12);
-            border: 2px solid rgba(255, 167, 38, 0.35);
-            border-left: 6px solid var(--orange-light);
-            border-radius: 12px;
-            padding: 14px 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .info-subtitle-highlight-green {
-            background: rgba(76, 175, 80, 0.12);
-            border: 2px solid var(--green-border);
-            border-left: 6px solid var(--green-light);
-            border-radius: 12px;
-            padding: 14px 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .info-subtitle-highlight-red {
-            background: rgba(239, 83, 80, 0.16);
-            border: 2px solid rgba(239, 83, 80, 0.55);
-            border-left: 6px solid #ef5350;
-            border-radius: 12px;
-            padding: 14px 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            color: #fff;
-            font-weight: 600;
-        }
-
         .info-item strong {
             color: var(--text-main);
             display: flex;
@@ -361,38 +311,6 @@
             padding: 18px;
             margin-bottom: 20px;
             text-align: center;
-        }
-
-
-        /* COMPACT CHECK-IN WIFI BOX */
-        .wifi-box-top {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.10), rgba(27, 94, 32, 0.18));
-            border: 1px solid rgba(76, 175, 80, 0.30);
-            border-radius: 12px;
-            padding: 10px 14px;
-            margin: 8px auto 18px;
-            text-align: center;
-            width: 62%;
-            max-width: 520px;
-        }
-
-        .wifi-box-top .wifi-title {
-            font-size: 14px;
-            margin-bottom: 7px;
-            letter-spacing: 0.8px;
-        }
-
-        .wifi-box-top .wifi-details {
-            gap: 22px;
-            font-size: 14px;
-        }
-
-        .wifi-box-top .wifi-detail-item span {
-            font-size: 11px;
-        }
-
-        .wifi-box-top .wifi-detail-item strong {
-            font-size: 16px;
         }
 
         .wifi-box-blue {
@@ -455,14 +373,15 @@
             margin-bottom: 20px;
             text-align: center;
             font-size: 16px;
-            color: #e0e6ed;
+            color: #90caf9;
             line-height: 1.5;
+            font-weight: 600;
         }
 
         .luggage-box {
-            background: rgba(239, 83, 80, 0.12);
-            border: 1px solid rgba(239, 83, 80, 0.35);
-            border-left: 5px solid var(--red-light);
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.20), rgba(52, 58, 64, 0.30));
+            border: 1px solid rgba(160, 170, 184, 0.45);
+            border-left: 5px solid var(--gray-light);
             border-radius: 14px;
             padding: 18px;
             margin-bottom: 25px;
@@ -482,15 +401,29 @@
         .luggage-header svg {
             width: 34px;
             height: 34px;
-            fill: var(--red-light);
+            fill: var(--gray-light);
             flex-shrink: 0;
         }
 
         .luggage-header strong {
-            color: var(--red-light);
+            color: #d7dde3;
             font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        .fees-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.16), rgba(27, 94, 32, 0.28));
+            border-color: rgba(129, 199, 132, 0.45);
+            border-left-color: var(--green-light);
+        }
+
+        .fees-box .luggage-header svg {
+            fill: var(--green-light);
+        }
+
+        .fees-box .luggage-header strong {
+            color: var(--green-border);
         }
 
         .info-stand-box {
@@ -559,7 +492,7 @@
 
         .btn-form-submit {
             flex: 2;
-            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
             color: var(--text-main);
             border: none;
             padding: 18px;
@@ -567,14 +500,14 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 5px 0 var(--green-shadow), 0 6px 12px rgba(0,0,0,0.3);
-            border-top: 1px solid var(--green-light);
+            box-shadow: 0 5px 0 var(--blue-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--blue-light);
             transition: all 0.1s ease;
             text-align: center;
         }
 
         .btn-form-submit:active {
-            box-shadow: 0 2px 0 var(--green-shadow), 0 3px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 0 var(--blue-shadow), 0 3px 6px rgba(0,0,0,0.3);
             transform: translateY(3px);
         }
 
@@ -712,28 +645,14 @@
             <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
 
-            <div class="wifi-box-top">
-                <div class="wifi-title" id="ci-wifi-title-top">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-net-label-top">Název / SSID</span>
-                        <strong id="ci-wifi-net-val-top">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-pass-label-top">Heslo / Password</span>
-                        <strong id="ci-wifi-pass-val-top">Hotel2017</strong>
-                    </div>
-                </div>
-            </div>
-
             <div class="info-list">
 
-                <div class="info-item info-item-highlight">
+                <div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                         <span id="ci-q1-title">Kdy a jak dostanete kód?</span>
                     </strong>
-                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny možnosti, kterými jsme vás mohli kontaktovat. Pokud již máte kód ke dveřím a číslo pokoje, postupujte chodbou rovně po schodech nahoru.</span>
+                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
                 </div><div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
@@ -811,6 +730,9 @@
 
         <!-- SCREEN CHECKOUT FORM -->
         <div id="screen-checkout" class="card hidden">
+            <div class="instructions" id="co-instructions">
+                Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.
+            </div>
 
             <div class="luggage-box">
                 <div class="luggage-header">
@@ -820,16 +742,12 @@
                 <span id="co-luggage-text">Pokud si přejete uložit zavazadla, obraťte se prosím na personál hotelové restaurace. Prostor úschovy je vzhledem k historickému charakteru budovy omezený a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží, kam se dostanete tramvají č. 15 z Malostranského náměstí (zastávka „Hlavní nádraží“).</span>
             </div>
 
-            <div class="luggage-box">
+            <div class="luggage-box fees-box">
                 <div class="luggage-header">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
-                    <strong id="co-fees-title">Poplatky a doklad</strong>
+                    <strong>Poplatky a doklad</strong>
                 </div>
-                <span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
-            </div>
-
-            <div class="instructions info-subtitle-highlight-red" id="co-instructions">
-                Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Pro odeslání prosím stiskněte tlačítko POTVRDIT.
+                <span>Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
             </div>
 
             <div class="input-group">
@@ -862,7 +780,7 @@
 
         <!-- SCREEN SERVICE FORM -->
         <div id="screen-service" class="card hidden">
-            <div class="instructions info-subtitle-highlight-yellow" id="srv-instructions">
+            <div class="instructions" id="srv-instructions">
                 Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
             </div>
 
@@ -890,22 +808,7 @@
         <!-- SCREEN PARKING INFO -->
         <div id="screen-parking" class="card hidden">
             <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome info-subtitle-highlight-blue" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
-
-            <!-- BLUE WIFI BOX UNDER PARKING INTRO -->
-            <div class="wifi-box-blue">
-                <div class="wifi-title-blue" id="pk-wifi-title-top">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="pk-wifi-net-label-top">Název / SSID</span>
-                        <strong id="pk-wifi-net-val-top">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="pk-wifi-pass-label-top">Heslo / Password</span>
-                        <strong id="pk-wifi-pass-val-top">Hotel2017</strong>
-                    </div>
-                </div>
-            </div>
+            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
 
             <div class="info-list">
                 <!-- PARKING OPTION 1 -->
@@ -1024,11 +927,10 @@
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
-        const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
+        const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
 
         let currentLang = 'cs';
         let autoResetTimer = null;
-        let thanksType = 'service';
 
         // INTERNATIONALIZATION DATA
         const i18n = {
@@ -1038,11 +940,9 @@
                 checkout: "Check-out",
                 service: "Oprava / Pomoc",
                 parking: "Parkování",
-                coInstructions: "Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Pro odeslání prosím stiskněte tlačítko POTVRDIT.",
+                coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
                 coLuggageTitle: "Úschova zavazadel",
                 coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
-                 coFeesTitle: "Poplatky a doklad",
-                 coFeesText: "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.",
                 srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
                 roomLabel: "Číslo pokoje",
                 nameLabel: "Jméno a příjmení",
@@ -1052,14 +952,13 @@
                 back: "ZPĚT NA HLAVNÍ OBRAZOVKU",
                 fillAll: "Prosím vyplňte všechna pole.",
                 thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
-                coThanks: "Vše je vyřízeno. Děkujeme vám za pobyt a přejeme šťastnou cestu.",
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
                 ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
                 ciRegTitle: "Registrace",
                 ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
                 ciQ1Title: "Kdy a jak dostanete kód?",
-                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny možnosti, kterými jsme vás mohli kontaktovat. Pokud již máte kód ke dveřím a číslo pokoje, postupujte chodbou rovně po schodech nahoru.",
+                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
                 ciBfTitle: "Snídaně",
                 ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
                 ciQ2Title: "Kód vám nedorazil?",
@@ -1077,7 +976,7 @@
                 ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!",
 
                 pkWelcomeTitle: "Možnosti parkování",
-                pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. Na pár minut je možné zaparkovat před hotelem pro vyložení a naložení zavazadel.",
+                pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.",
                 pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
                 pkOpt1Title: "Hlídané podzemní garáže",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
@@ -1094,11 +993,9 @@
                 checkout: "Check-out",
                 service: "Repair / Help",
                 parking: "Parking",
-                coInstructions: "Please enter your room number and the name of the registered guest. To submit, please press the CONFIRM button.",
+                coInstructions: "Please enter your room number and the registered guest's name.",
                 coLuggageTitle: "Luggage Storage",
                 coLuggageText: "If you wish to store your luggage, please ask our restaurant staff. Due to the historical nature of the building, our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station (Hlavní nádraží). You can get there by tram No. 15 from Malostranské náměstí – get off at the stop \"Hlavní nádraží\".",
-                 coFeesTitle: "Fees and Receipt",
-                 coFeesText: "All fees are already included in the accommodation price. If you would like an invoice issued to a company, please contact us using the hotel email address found on the hotel business card next to this kiosk.",
                 srvInstructions: "Please fill out the form below and we will attend to your request as soon as possible. If the matter is urgent, please use the landline next to the kiosk – from 8:00 AM to 4:00 PM it connects to remote reception, outside these hours an emergency contact is available.",
                 roomLabel: "Room number",
                 nameLabel: "Full Name",
@@ -1108,14 +1005,13 @@
                 back: "BACK TO MAIN SCREEN",
                 fillAll: "Please fill in all fields.",
                 thanks: "Thank you! Your request has been sent successfully.",
-                coThanks: "Everything is taken care of. Thank you for staying with us, and we wish you a safe journey.",
 
                 ciWelcomeTitle: "Welcome to our hotel!",
                 ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
                 ciRegTitle: "Registration",
                 ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
                 ciQ1Title: "When and how will you receive your code?",
-                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins. Please check all the ways we may have contacted you. If you already have the door code and your room number, continue straight down the corridor and up the stairs.",
+                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
                 ciBfTitle: "Breakfast",
                 ciBfText: "Breakfast is served buffet-style on the ground floor of the restaurant from 8:00 AM to 10:00 AM.",
                 ciQ2Title: "Haven't received your code?",
@@ -1133,7 +1029,7 @@
                 ciWishText: "We wish you a wonderful and pleasant stay!",
 
                 pkWelcomeTitle: "Parking Options",
-                pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot. This information is mentioned on our website, including all third-party profiles. For a few minutes, it is possible to park in front of the hotel to unload and load luggage.",
+                pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot. This information is mentioned on our website, including all third-party profiles.",
                 pkQrText: "Scan the QR code to open the website.",
                 pkOpt1Title: "Guarded Underground Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
@@ -1150,11 +1046,9 @@
                 checkout: "Check-out",
                 service: "Reparatur / Hilfe",
                 parking: "Parken",
-                coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein. Zum Absenden drücken Sie bitte die Taste BESTÄTIGEN.",
+                coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein.",
                 coLuggageTitle: "Gepäckaufbewahrung",
                 coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten, wenden Sie sich bitte an das Restaurantpersonal. Aufgrund des historischen Charakters des Gebäudes sind unsere Aufbewahrungskapazitäten begrenzt und das Hotel übernimmt keine Haftung. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen. Sie erreichen diesen mit der Straßenbahn Linie 15 ab Malostranské náměstí – steigen Sie an der Haltestelle „Hlavní nádraží“ aus.",
-                 coFeesTitle: "Gebühren und Beleg",
-                 coFeesText: "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Rechnung auf eine Firma ausstellen lassen möchten, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse, die Sie auf der Hotelvisitenkarte neben diesem Kiosk finden.",
                 srvInstructions: "Bitte füllen Sie das folgende Formular aus, wir werden uns so schnell wie möglich um Ihr Anliegen kümmern. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk – von 8:00 bis 16:00 Uhr werden Sie mit der entfernten Rezeption verbunden, außerhalb dieser Zeiten steht ein Notfallkontakt zur Verfügung.",
                 roomLabel: "Zimmernummer",
                 nameLabel: "Vollständiger Name",
@@ -1164,14 +1058,13 @@
                 back: "ZURÜCK ZUR HAUPTSEITE",
                 fillAll: "Bitte füllen Sie alle Felder aus.",
                 thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
-                coThanks: "Alles ist erledigt. Vielen Dank für Ihren Aufenthalt und wir wünschen Ihnen eine gute Reise.",
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
                 ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
                 ciRegTitle: "Registrierung",
                 ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
                 ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
-                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt. Bitte überprüfen Sie alle Möglichkeiten, über die wir Sie kontaktiert haben könnten. Wenn Sie bereits den Türcode und Ihre Zimmernummer haben, gehen Sie weiter geradeaus den Flur entlang und die Treppe hinauf.",
+                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
                 ciBfTitle: "Frühstück",
                 ciBfText: "Das Frühstück wird im Erdgeschoss des Restaurants von 8:00 bis 10:00 Uhr als Buffet serviert.",
                 ciQ2Title: "Sie haben keinen Code erhalten?",
@@ -1189,7 +1082,7 @@
                 ciWishText: "Wir wünschen Ihnen einen wunderschönen und ungestörten Aufenthalt!",
 
                 pkWelcomeTitle: "Parkmöglichkeiten",
-                pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze. Diese Information ist auf unserer Website einschließlich aller Profile von Drittanbietern aufgeführt. Für einige Minuten ist es möglich, vor dem Hotel zum Aus- und Einladen des Gepäcks zu parken.",
+                pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze. Diese Information ist auf unserer Website einschließlich aller Profile von Drittanbietern aufgeführt.",
                 pkQrText: "Scannen Sie den QR-Code, um die Website zu öffnen.",
                 pkOpt1Title: "Bewachte Tiefgarage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
@@ -1206,11 +1099,9 @@
                 checkout: "Check-out",
                 service: "Riparazione / Aiuto",
                 parking: "Parcheggio",
-                coInstructions: "Inserisci il numero della tua camera e il nome dell’ospite registrato. Per inviare, premi il pulsante CONFERMA.",
+                coInstructions: "Si prega di inserire il numero di camera e il nome dell'ospite registrato.",
                 coLuggageTitle: "Deposito Bagagli",
                 coLuggageText: "Se desideri depositare i tuoi bagagli, rivolgiti al personale del ristorante dell'hotel. A causa della natura storica dell'edificio, i nostri spazi sono limitati e l'hotel non si assume responsabilità per i bagagli custoditi. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale (Hlavní nádraží). Puoi raggiungerla con il tram n. 15 da Malostranské náměstí – scendi alla fermata \"Hlavní nádraží\".",
-                 coFeesTitle: "Costi e ricevuta",
-                 coFeesText: "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desideri una fattura intestata a un’azienda, contattaci all’indirizzo e-mail dell’hotel riportato sul biglietto da visita dell’hotel accanto a questo kiosk.",
                 srvInstructions: "Compila il modulo sottostante e ci occuperemo della tua richiesta il prima possibile. Se la questione è urgente, utiliza il telefono fisso accanto al kiosk – dalle 8:00 alle 16:00 ti collegherà con la reception remota, al di fuori di questo orario è disponibile un contatto di emergenza.",
                 roomLabel: "Numero di camera",
                 nameLabel: "Nome e cognome",
@@ -1220,14 +1111,13 @@
                 back: "TORNA ALLA SCHERMATA PRINCIPALE",
                 fillAll: "Si prega di compilare tutti i campi.",
                 thanks: "Grazie! La tua richiesta è stata inviata con successo.",
-                coThanks: "È tutto sistemato. Grazie per il vostro soggiorno e vi auguriamo buon viaggio.",
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
                 ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
                 ciRegTitle: "Registrazione",
                 ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
                 ciQ1Title: "Quando e come riceverai il codice?",
-                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in. La preghiamo di controllare tutti i possibili canali attraverso i quali potremmo averla contattata. Se avete già il codice della porta e il numero della camera, proseguite lungo il corridoio dritto e salite le scale.",
+                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
                 ciBfTitle: "Colazione",
                 ciBfText: "La colazione viene servita a buffet al piano terra del ristorante dalle 8:00 alle 10:00.",
                 ciQ2Title: "Non hai ricevuto il codice?",
@@ -1245,7 +1135,7 @@
                 ciWishText: "Ti auguriamo un soggiorno splendido e sereno!",
 
                 pkWelcomeTitle: "Opzioni di Parcheggio",
-                pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata sul nostro sito web, inclusi tutti i profili di terze parti. Per alcuni minuti è possibile parcheggiare davanti all’hotel per scaricare e caricare i bagagli.",
+                pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata sul nostro sito web, inclusi tutti i profili di terze parti.",
                 pkQrText: "Scansiona il codice QR per aprire il sito web.",
                 pkOpt1Title: "Garage Sotterraneo Custodito",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
@@ -1262,11 +1152,9 @@
                 checkout: "Check-out",
                 service: "Reparación / Ayuda",
                 parking: "Aparcamiento",
-                coInstructions: "Introduzca el número de su habitación y el nombre del huésped registrado. Para enviar, pulse el botón CONFIRMAR.",
+                coInstructions: "Por favor, introduzca su número de habitación y el nombre del huésped registrado.",
                 coLuggageTitle: "Consigna de Equipaje",
                 coLuggageText: "Si desea guardar su equipaje, por favor consulte con el personal del restaurante. Debido al carácter histórico del edificio, nuestro espacio de almacenamiento es limitado y el hotel no se hace responsable del equipaje guardado. Alternativamente, puede utilizar la consigna de pago en la Estación Central (Hlavní nádraží). Puede llegar tomando el tranvía número 15 desde Malostranské náměstí – bájese en la parada \"Hlavní nádraží\".",
-                 coFeesTitle: "Cargos y justificante",
-                 coFeesText: "Todos los cargos ya están incluidos en el precio del alojamiento. Si desea que la factura se emita a nombre de una empresa, póngase en contacto con nosotros en la dirección de correo electrónico del hotel que aparece en la tarjeta de visita del hotel junto a este quiosco.",
                 srvInstructions: "Rellene el siguiente formulario y atenderemos su solicitud lo antes posible. Si el asunto es urgente, utilice el teléfono fijo junto al quiosco; de 8:00 a 16:00 le conectará con la recepción remota, fuera de este horario hay un contacto de emergencia disponible.",
                 roomLabel: "Número de habitación",
                 nameLabel: "Nombre completo",
@@ -1276,14 +1164,13 @@
                 back: "VOLVER A LA PANTALLA PRINCIPAL",
                 fillAll: "Por favor, rellene todos los campos.",
                 thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
-                coThanks: "Todo está solucionado. Gracias por su estancia y le deseamos un buen viaje.",
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
                 ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
                 ciRegTitle: "Registro de huéspedes",
                 ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
                 ciQ1Title: "¿Cuándo y cómo recibirá el código?",
-                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in. Por favor, compruebe todas las opciones mediante las cuales podríamos haberle contactado. Si ya tiene el código de la puerta y el número de habitación, continúe recto por el pasillo y suba las escaleras.",
+                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
                 ciBfTitle: "Desayuno",
                 ciBfText: "El desayuno se sirve tipo bufé en la planta baja del restaurante de 8:00 a 10:00.",
                 ciQ2Title: "¿No ha recibido su código?",
@@ -1301,7 +1188,7 @@
                 ciWishText: "¡Le deseamos una estancia maravillosa y placentera!",
 
                 pkWelcomeTitle: "Opciones de Aparcamiento",
-                pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio. Esta información se menciona en nuestro sitio web, incluidos todos los perfiles de terceros. Durante unos minutos, es posible aparcar delante del hotel para descargar y cargar el equipaje.",
+                pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio. Esta información se menciona en nuestro sitio web, incluidos todos los perfiles de terceros.",
                 pkQrText: "Escanee el código QR para abrir el sitio web.",
                 pkOpt1Title: "Garaje Subterráneo Vigilado",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
@@ -1318,11 +1205,9 @@
                 checkout: "Check-out",
                 service: "Réparation / Aide",
                 parking: "Parking",
-                coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré. Pour envoyer, veuillez appuyer sur le bouton VALIDER.",
+                coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré.",
                 coLuggageTitle: "Bagagerie",
                 coLuggageText: "Si vous souhaitez déposer vos bagages, veuillez vous adresser au personnel du restaurant. En raison du caractère historique du bâtiment, notre espace de stockage est limité et l'hôtel décline toute responsabilité. Vous pouvez également utiliser la consigne payante de la gare centrale (Hlavní nádraží). Vous pouvez vous y rendre en prenant le tramway n° 15 depuis Malostranské náměstí – descendez à l'arrêt \"Hlavní nádraží\".",
-                 coFeesTitle: "Frais et justificatif",
-                 coFeesText: "Tous les frais sont déjà inclus dans le prix de l’hébergement. Si vous souhaitez que la facture soit établie au nom d’une entreprise, veuillez nous contacter à l’adresse e-mail de l’hôtel indiquée sur la carte de visite de l’hôtel à côté de cette borne.",
                 srvInstructions: "Veuillez remplir le formulaire ci-dessous et nous traiterons votre demande dans les plus brefs délais. Si l'affaire est urgente, veuillez utiliser le téléphone fixe à côté du kiosque – de 8h00 à 16h00, il vous mettra en relation avec la réception à distance, en dehors de ces heures, un contact d'urgence est disponible.",
                 roomLabel: "Numéro de chambre",
                 nameLabel: "Nom complet",
@@ -1332,14 +1217,13 @@
                 back: "RETOURNER À L'ACCUEIL",
                 fillAll: "Veuillez remplir tous les champs.",
                 thanks: "Merci ! Votre demande a été envoyée avec succès.",
-                coThanks: "Tout est réglé. Merci pour votre séjour et nous vous souhaitons un bon voyage.",
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
                 ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
                 ciRegTitle: "Enregistrement",
                 ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
                 ciQ1Title: "Quand et comment recevrez-vous votre code ?",
-                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in. Veuillez vérifier toutes les possibilités par lesquelles nous avons pu vous contacter. Si vous avez déjà le code de la porte et votre numéro de chambre, continuez tout droit dans le couloir et montez les escaliers.",
+                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
                 ciBfTitle: "Petit-déjeuner",
                 ciBfText: "Le petit-déjeuner est servi sous forme de buffet au rez-de-chaussée du restaurant de 8h00 à 10h00.",
                 ciQ2Title: "Vous n'avez pas reçu votre code ?",
@@ -1357,7 +1241,7 @@
                 ciWishText: "Nous vous souhaitons un d'un séjour agréable et paisible !",
 
                 pkWelcomeTitle: "Options de Stationnement",
-                pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information est mentionnée sur notre site web, y compris sur tous les profils de tiers. Il est possible de se garer quelques minutes devant l’hôtel pour décharger et charger les bagages.",
+                pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information est mentionnée sur notre site web, y compris sur tous les profils de tiers.",
                 pkQrText: "Scannez le code QR pour ouvrir le site web.",
                 pkOpt1Title: "Parking Souterrain Sécurisé",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
@@ -1374,11 +1258,9 @@
                 checkout: "Check-out",
                 service: "Naprawa / Pomoc",
                 parking: "Parking",
-                coInstructions: "Proszę wpisać numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa. Aby wysłać, naciśnij przycisk POTWIERDŹ.",
+                coInstructions: "Wpisz numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa.",
                 coLuggageTitle: "Przechowalnia Bagażu",
                 coLuggageText: "Jeśli chcesz zostawić bagaż, skontaktuj się z obsługą restauracji hotelowej. Ze względu na zabytkowy charakter budynku nasza przestrzeń magazynowa jest ograniczona i hotel nie ponosi odpowiedzialności za pozostawiony bagaż. Alternatywnie możesz skorzystać z płatnej przechowalni bagażu na Dworcu Głównym (Hlavní nádraží). Dojedziesz tam tramwajem nr 15 z Malostranské náměstí – wysiądź na przystanku „Hlavní nádraží”.",
-                 coFeesTitle: "Opłaty i dokument",
-                 coFeesText: "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli chcesz otrzymać fakturę na firmę, skontaktuj się z nami pod adresem e-mail hotelu podanym na wizytówce hotelu obok tego kiosku.",
                 srvInstructions: "Wypełnij poniższy formularz, a zajmiemy się Twoim zgłoszeniem najszybciej jak to możliwe. Jeśli sprawa jest pilna, skorzystaj z telefonu stacjonarnego obok kiosku – w godzinach 8:00–16:00 połączy Cię z zdalną recepcją, poza tymi godzinami dostępny jest kontakt alarmowy.",
                 roomLabel: "Numer pokoju",
                 nameLabel: "Imię i nazwisko",
@@ -1388,14 +1270,13 @@
                 back: "POWRÓT DO EKRANU GŁÓWNEGO",
                 fillAll: "Proszę wypełnić wszystkie pola.",
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
-                coThanks: "Wszystko jest załatwione. Dziękujemy za pobyt i życzymy szczęśliwej podróży.",
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
                 ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
                 ciRegTitle: "Rejestracja",
                 ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
                 ciQ1Title: "Kiedy i jak otrzymasz kod?",
-                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in. Prosimy o sprawdzenie wszystkich możliwości, za pośrednictwem których mogliśmy się z Państwem skontaktować. Jeśli mają już Państwo kod do drzwi i numer pokoju, proszę iść dalej prosto korytarzem i wejść po schodach na górę.",
+                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
                 ciBfTitle: "Śniadanie",
                 ciBfText: "Śniadanie serwowane jest w formie bufetu na parterze restauracji w godzinach 8:00–10:00.",
                 ciQ2Title: "Nie otrzymałeś kodu?",
@@ -1413,7 +1294,7 @@
                 ciWishText: "Życzymy wspaniałego i udanego pobytu!",
 
                 pkWelcomeTitle: "Opcje Parkowania",
-                pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta jest podana na naszej stronie internetowej, w tym na wszystkich profilach stron trzecich. Na kilka minut można zaparkować przed hotelem, aby rozładować i załadować bagaż.",
+                pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta jest podana na naszej stronie internetowej, w tym na wszystkich profilach stron trzecich.",
                 pkQrText: "Zeskanuj kod QR, aby otworzyć stronę internetową.",
                 pkOpt1Title: "Strzeżony Garaż Podziemny",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
@@ -1430,11 +1311,9 @@
                 checkout: "Check-out",
                 service: "Ремонт / Допомога",
                 parking: "Паркування",
-                coInstructions: "Будь ласка, введіть номер кімнати та ім’я зареєстрованого гостя. Щоб надіслати, натисніть кнопку ПІДТВЕРДИТИ.",
+                coInstructions: "Будь ласка, введіть номер кімнати та ім'я зареєстрованого гостя.",
                 coLuggageTitle: "Камера Зберігання Багажу",
                 coLuggageText: "Якщо ви бажаєте залишити свій багаж, будь ласка, зверніться до персоналу ресторану готелю. З огляду на історичний характер будівлі, наші приміщення для зберігання обмежені, і готель не несе відповідальності за залишені речі. Також ви можете скористатися платною камерою зберігання на Головному залізничному вокзалі (Hlavní nádraží). Туди можна дістатися трамваєм № 15 від Malostranské náměstí – виходьте на зупинці «Hlavní nádraží».",
-                 coFeesTitle: "Оплати та документ",
-                 coFeesText: "Усі збори вже включені у вартість проживання. Якщо ви бажаєте отримати рахунок на компанію, будь ласка, зв’яжіться з нами за електронною адресою готелю, зазначеною на візитівці готелю поруч із цим терміналом.",
                 srvInstructions: "Будь ласка, заповніть форму нижче, і ми розглянемо ваш запит якомога швидше. Якщо справа термінова, скористайтеся стаціонарним телефоном поруч із кіоском – з 8:00 до 16:00 він з'єднає вас із віддаленою рецепцією, в інший час доступний аварійний контакт.",
                 roomLabel: "Номер кімнати",
                 nameLabel: "Ім'я та прізвище",
@@ -1444,14 +1323,13 @@
                 back: "ПОВЕРНУТИСЯ НА ГОЛОВНУ",
                 fillAll: "Будь ласка, заповніть усі поля.",
                 thanks: "Дякуємо! Ваш запит успішно надіслано.",
-                coThanks: "Усе вирішено. Дякуємо за перебування та бажаємо щасливої дороги.",
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
                 ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
                 ciRegTitle: "Реєстрація",
                 ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
                 ciQ1Title: "Коли та як ви отримаєте код?",
-                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд. Будь ласка, перевірте всі можливості, за допомогою яких ми могли з вами зв’язатися. Якщо ви вже маєте код від дверей і номер кімнати, продовжуйте прямо коридором і підніміться сходами вгору.",
+                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
                 ciBfTitle: "Сніданок",
                 ciBfText: "Сніданок подається у формі шведського столу на першому поверсі ресторану з 8:00 до 10:00.",
                 ciQ2Title: "Код не надійшов?",
@@ -1469,7 +1347,7 @@
                 ciWishText: "Бажаємо вам чудового та приємного відпочинку!",
 
                 pkWelcomeTitle: "Варіанти паркування",
-                pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу. Ця інформація зазначена на нашому вебсайті, включно з усіма профілями третіх сторін. На кілька хвилин можна припаркуватися перед готелем, щоб розвантажити та завантажити багаж.",
+                pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу. Ця інформація зазначена на нашому вебсайті, включно з усіма профілями третіх сторін.",
                 pkQrText: "Відскануйте QR-код, щоб відкрити вебсайт.",
                 pkOpt1Title: "Підземний гараж під охороною",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
@@ -1486,11 +1364,9 @@
                 checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
-                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin. Göndermek için lütfen ONAYLA düğmesine basın.",
+                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
                 coLuggageTitle: "Bagaj Muhafazası",
                 coLuggageText: "Bagajınızı bırakmak isterseniz, lütfen otel restoran personeliyle iletişime geçin. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otel bırakılan eşyalardan sorumlu tutulamaz. Alternatif olarak, Ana Tren İstasyonu'ndaki (Hlavní nádraží) ücretli bagaj muhafaza hizmetini kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvaya binip „Hlavní nádraží“ durağında inerek ulaşabilirsiniz.",
-                 coFeesTitle: "Ücretler ve belge",
-                 coFeesText: "Tüm ücretler konaklama fiyatına dahildir. Faturanın bir şirket adına düzenlenmesini istiyorsanız, lütfen bu kioskun yanındaki otel kartvizitinde bulunan otel e-posta adresi üzerinden bizimle iletişime geçin.",
                 srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa, lütfen kiosk yanındaki sabit telefonu kullanın – 8:00–16:00 saatleri arasında sizi uzaktan resepsiyona bağlar, bu saatler dışında acil durum irtibatı mevcuttur.",
                 roomLabel: "Oda numarası",
                 nameLabel: "Ad Soyad",
@@ -1500,14 +1376,13 @@
                 back: "ANA EKRANA DÖN",
                 fillAll: "Lütfen tüm alanları doldurun.",
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
-                coThanks: "Her şey tamamlandı. Konaklamanız için teşekkür ederiz ve iyi yolculuklar dileriz.",
 
                 ciWelcomeTitle: "Otelimize hoş geldiniz!",
                 ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 rahatça giriş yapabilirsiniz.",
                 ciRegTitle: "Kayıt",
                 ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar. Lütfen sizinle iletişim kurmuş olabileceğimiz tüm yolları kontrol edin. Kapı kodunuz ve oda numaranız zaten varsa, koridordan dümdüz ilerleyip merdivenlerden yukarı çıkın.",
+                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar.",
                 ciBfTitle: "Kahvaltı",
                 ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak servis edilir.",
                 ciQ2Title: "Kodunuz ulaşmadı mı?",
@@ -1525,7 +1400,7 @@
                 ciWishText: "Harika ve huzurlu bir konaklama dileriz!",
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
-                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır. Bu bilgi, tüm üçüncü taraf profilleri de dahil olmak üzere web sitemizde belirtilmiştir. Bagajları indirip yüklemek için otelin önünde birkaç dakikalığına park etmek mümkündür.",
+                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır. Bu bilgi, tüm üçüncü taraf profilleri de dahil olmak üzere web sitemizde belirtilmiştir.",
                 pkQrText: "Web sitesini açmak için QR kodunu tarayın.",
                 pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Fiyat:</strong> 11–24 saat için 750 CZK (güncel fiyatı web sitesinden kontrol edin)<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG ve CNG'li araçlar giremez<br><strong>Otele Dönüş Mesafesi:</strong> Mánes Köprüsü üzerinden yürüyerek 10 dakika<br><strong>Not:</strong> İdeal seçim. Web sitesinden önceden rezerve edilebilir ve ödenebilir.",
@@ -1542,11 +1417,9 @@
                 checkout: "Check-out",
                 service: "Reparation / Hjælp",
                 parking: "Parkering",
-                coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede gæst. Tryk på knappen BEKRÆFT for at sende.",
+                coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede gæst.",
                 coLuggageTitle: "Bagageopbevaring",
                 coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte personalet i hotellets restaurant. På grund af bygningens historiske karakter er vores opbevaringsplads begrænset, og hotellet påtager sig intet ansvar for opbevarede genstande. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží). Du kan komme dertil med sporvogn nr. 15 fra Malostranské náměstí – stå af ved stoppestedet „Hlavní nádraží“.",
-                 coFeesTitle: "Gebyrer og kvittering",
-                 coFeesText: "Alle gebyrer er allerede inkluderet i prisen for overnatningen. Hvis du ønsker en faktura udstedt til en virksomhed, bedes du kontakte os på hotellets e-mailadresse, som du finder på hotellets visitkort ved siden af denne kiosk.",
                 srvInstructions: "Udfyld venligst formularen nedenfor, så vil vi behandle din anmodning hurtigst muligt. Hvis sagen er hastende, bedes du benytte fastnettelefonen ved siden af kiosken – fra 8:00 til 16:00 forbinder den dig til fjernreceptionen, uden for dette tidsrum er der en nødkontakt tilgængelig.",
                 roomLabel: "Værelsesnummer",
                 nameLabel: "Fulde navn",
@@ -1556,14 +1429,13 @@
                 back: "TILBAGE TIL HOVEDSKÆRM",
                 fillAll: "Udfyld venligst alle felter.",
                 thanks: "Tak! Din anmodning er blevet sendt med succes.",
-                coThanks: "Alt er ordnet. Tak for jeres ophold, og vi ønsker jer en god rejse.",
 
                 ciWelcomeTitle: "Velkommen til vores hotel!",
                 ciWelcomeSubtitle: "Takket være vores selvbetjeningskiosk kan du tjekke ind nemt døgnet rundt.",
                 ciRegTitle: "Registrering",
                 ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
                 ciQ1Title: "Hvornår og hvordan modtager du din kode?",
-                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter. Tjek venligst alle de muligheder, vi kan have brugt til at kontakte dig. Hvis du allerede har dørkoden og dit værelsesnummer, skal du fortsætte ligeud ad gangen og gå op ad trapperne.",
+                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter.",
                 ciBfTitle: "Morgenmad",
                 ciBfText: "Morgenmad serveres som buffet i restaurantens stueetage fra 8:00 til 10:00.",
                 ciQ2Title: "Har du ikke modtaget din kode?",
@@ -1581,7 +1453,7 @@
                 ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
 
                 pkWelcomeTitle: "Parkeringsmuligheder",
-                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkeringsplads. Denne information fremgår af vores hjemmeside, inklusive alle tredjepartsprofiler. Det er muligt at parkere foran hotellet i et par minutter for at læsse bagage af og på.",
+                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkeringsplads. Denne information fremgår af vores hjemmeside, inklusive alle tredjepartsprofiler.",
                 pkQrText: "Scan QR-koden for at åbne hjemmesiden.",
                 pkOpt1Title: "Overvåget Underjordisk Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek aktuel pris på hjemmesiden)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærkning:</strong> Den gyldne middelvej. Kan reserveres og betales på forhånd online.",
@@ -1598,11 +1470,9 @@
                 checkout: "チェックアウト",
                 service: "修理 / お問い合わせ",
                 parking: "駐車場",
-                coInstructions: "部屋番号とご登録者様のお名前を入力してください。送信するには「送信」ボタンを押してください。",
+                coInstructions: "部屋番号とご登録者様のお名前を入力してください。",
                 coLuggageTitle: "手荷物預かり",
                 coLuggageText: "お荷物のお預かりをご希望の場合は、ホテルレストランのスタッフにお申し付けください。歴史的建造物のため保管スペースに限りがあり、お預かりした荷物についてホテルは責任を負いかねます。また、プラハ中央駅（Hlavní nádraží）の有料コインロッカーもご利用いただけます。マロストランスケー広場から15番のトラムに乗り、「Hlavní nádraží」で下車してください。",
-                 coFeesTitle: "料金と領収書",
-                 coFeesText: "すべての料金は宿泊料金に含まれています。会社名義の請求書をご希望の場合は、このキオスクの横にあるホテルの名刺に記載されたホテルのメールアドレスまでご連絡ください。",
                 srvInstructions: "以下のフォームにご記入ください。できるだけ早く対応いたします。緊急の場合は、キオスクの横にある固定電話をご利用ください。8:00〜16:00はリモートレセプションにつながり、それ以外の時間帯は緊急連絡先が利用可能です。",
                 roomLabel: "部屋番号",
                 nameLabel: "お名前（フルネーム）",
@@ -1612,14 +1482,13 @@
                 back: "メイン画面に戻る",
                 fillAll: "すべての項目を入力してください。",
                 thanks: "ありがとうございます！リクエストが正常に送信されました。",
-                coThanks: "すべて完了しました。ご滞在ありがとうございました。どうぞお気をつけてお帰りください。",
 
                 ciWelcomeTitle: "当ホテルへようこそ！",
                 ciWelcomeSubtitle: "セルフサービス・キオスクにより、24時間いつでもスムーズにチェックインいただけます。",
                 ciRegTitle: "宿泊者登録",
                 ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
                 ciQ1Title: "暗証番号の受け取り方法と時間",
-                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。 当ホテルからご連絡した可能性のあるすべての方法をご確認ください。すでにドアの暗証番号とお部屋番号をお持ちの場合は、廊下をそのまままっすぐ進み、階段を上ってください。",
+                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。",
                 ciBfTitle: "朝食",
                 ciBfText: "朝食は1階レストランにて、8:00から10:00までビュッフェ形式でご用意しております。",
                 ciQ2Title: "コードが届かない場合",
@@ -1637,7 +1506,7 @@
                 ciWishText: "快適で素晴らしい滞在になりますように！",
 
                 pkWelcomeTitle: "駐車場のご案内",
-                pkWelcomeSubtitle: "プラハ歴史地区の中心部に位置するため、ホテル専用の駐車場はございません。この情報は、すべての第三者プロフィールを含む当ホテルのウェブサイトに記載されています。 荷物の積み下ろしのため、ホテル前に数分間駐車することができます。",
+                pkWelcomeSubtitle: "プラハ歴史地区の中心部に位置するため、ホテル専用の駐車場はございません。この情報は、すべての第三者プロフィールを含む当ホテルのウェブサイトに記載されています。",
                 pkQrText: "QRコードをスキャンしてウェブサイトを開いてください。",
                 pkOpt1Title: "監視付き地下駐車場",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>住所:</strong> Alšovo nábřeží, 110 00<br><strong>料金:</strong> 11〜24時間で750 CZK（最新料金はWebサイトでご確認ください）<br><strong>車両制限:</strong> 高さ最大2メートル<br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>重要:</strong> LPG / CNG車は入場不可<br><strong>ホテルまでの距離:</strong> マーネス橋経由で徒歩10分<br><strong>特徴:</strong> 一番おすすめの駐車場。Webサイトから事前予約・事前決済が可能です。",
@@ -1654,11 +1523,9 @@
                 checkout: "צ'ק-אאוט",
                 service: "תיקונים / עזרה",
                 parking: "חנייה",
-                coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום. לשליחה, לחץ על כפתור האישור.",
+                coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום.",
                 coLuggageTitle: "אחסון מזוודות",
                 coLuggageText: "אם ברצונך לאחסן את החפצים שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של המבנה, שטח האחסון מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, ניתן להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - לרדת בתחנת „Hlavní nádraží”.",
-                 coFeesTitle: "חיובים וקבלה",
-                 coFeesText: "כל החיובים כבר כלולים במחיר האירוח. אם ברצונך לקבל חשבונית על שם חברה, אנא פנה אלינו באמצעות כתובת הדוא״ל של המלון המופיעה בכרטיס הביקור של המלון לצד הקיוסק הזה.",
                 srvInstructions: "אנא מלא את הטופס להלן ונטפל בפנייתך בהקדם האפשרי. אם העניין דחוף, אנא השתמש בטלפון הקווי לצד הקיוסק - בין השעות 8:00 ל-16:00 הוא יקשר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
@@ -1668,14 +1535,13 @@
                 back: "חזרה למסך הראשי",
                 fillAll: "אנא מלא את כל השדות.",
                 thanks: "תודה! פנייתך נשלחה בהצלחה.",
-                coThanks: "הכול טופל. תודה על שהותכם ואנו מאחלים לכם נסיעה טובה ובטוחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
                 ciWelcomeSubtitle: "בזכות עמדת השירות העצמי תוכלו לבצע צ'ק-אין בקלות 24/7.",
                 ciRegTitle: "הרשמה",
                 ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
                 ciQ1Title: "מתי ואיך תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית. אנא בדקו את כל האפשרויות שבאמצעותן ייתכן שיצרנו איתכם קשר. אם כבר יש לכם את קוד הדלת ואת מספר החדר, המשיכו ישר במסדרון ועלו במדרגות.",
+                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית.",
                 ciBfTitle: "ארוחת בוקר",
                 ciBfText: "ארוחת הבוקר מוגשת במתכונת בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
                 ciQ2Title: "הקוד לא הגיע?",
@@ -1693,7 +1559,7 @@
                 ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
 
                 pkWelcomeTitle: "אפשרויות חנייה",
-                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חניון פרטי. מידע זה מצוין באתר האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים. ניתן לחנות מול המלון למספר דקות לצורך פריקה וטעינה של מזוודות.",
+                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חניון פרטי. מידע זה מצוין באתר האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים.",
                 pkQrText: "סרקו את קוד ה-QR כדי לפתוח את אתר האינטרנט.",
                 pkOpt1Title: "חניון תת-קרקעי שמור",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות (בדקו מחיר עדכני באתר)<br><strong>גובה רכב:</strong> מקסימום 2 מטרים<br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז (LPG / CNG)<br><strong>מרחק בחזרה למלון:</strong> 10 דקות הליכה דרך גשר Mánes<br><strong>הערה:</strong> השילוב המנצח. ניתן להזמין מקום ולשלם מראש באתר.",
@@ -1710,11 +1576,9 @@
                 checkout: "Check-out",
                 service: "Επισκευή / Βοήθεια",
                 parking: "Στάθμευση",
-                coInstructions: "Παρακαλώ συμπληρώστε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη. Για αποστολή, πατήστε το κουμπί ΕΠΙΒΕΒΑΙΩΣΗ.",
+                coInstructions: "Παρακαλώ εισάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη.",
                 coLuggageTitle: "Φύλαξη Αποσκευών",
                 coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε επικοινωνήστε με το προσωπικό του εστιατορίου του ξενοδοχείου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος αποθήκευσης είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη για τα αντικείμενα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη επί πληρωμή φύλαξη αποσκευών στον Κεντρικό Σταθμό (Hlavní nádraží). Μπορείτε να πάτε εκεί με το τραμ 15 από τη στάση Malostranské náměstí – κατεβείτε στη στάση „Hlavní nádraží”.",
-                 coFeesTitle: "Χρεώσεις και παραστατικό",
-                 coFeesText: "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Εάν επιθυμείτε να εκδοθεί τιμολόγιο σε εταιρεία, παρακαλούμε επικοινωνήστε μαζί μας στη διεύθυνση e-mail του ξενοδοχείου που αναγράφεται στην επαγγελματική κάρτα του ξενοδοχείου δίπλα σε αυτό το κιόσκι.",
                 srvInstructions: "Παρακαλούμε συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Εάν το θέμα είναι επείγον, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι – από τις 8:00 έως τις 16:00 σας συνδέει με την εξ αποστάσεως υποδοχή, εκτός αυτών των ωρών υπάρχει διαθέσιμη επαφή έκτακτης ανάγκης.",
                 roomLabel: "Αριθμός δωματίου",
                 nameLabel: "Ονοματεπώνυμο",
@@ -1724,14 +1588,13 @@
                 back: "ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ",
                 fillAll: "Παρακαλούμε συμπληρώστε όλα τα πεδία.",
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
-                coThanks: "Όλα ολοκληρώθηκαν. Σας ευχαριστούμε για τη διαμονή σας και σας ευχόμαστε καλό ταξίδι.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
                 ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in εύκολα 24/7.",
                 ciRegTitle: "Εγγραφή",
                 ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
                 ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
-                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in. Παρακαλούμε ελέγξτε όλους τους τρόπους με τους οποίους ενδέχεται να επικοινωνήσαμε μαζί σας. Εάν έχετε ήδη τον κωδικό της πόρτας και τον αριθμό του δωματίου σας, συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες.",
+                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in.",
                 ciBfTitle: "Πρωινό",
                 ciBfText: "Το πρωινό σερβίρεται σε μορφή μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
                 ciQ2Title: "Δεν λάβατε τον κωδικό;",
@@ -1749,7 +1612,7 @@
                 ciWishText: "Σας ευχόμαστε μια υπέροχη και ευχάριστη διαμονή!",
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
-                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης. Αυτή η πληροφορία αναφέρεται στον ιστότοπό μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων. Για λίγα λεπτά, μπορείτε να σταθμεύσετε μπροστά από το ξενοδοχείο για να ξεφορτώσετε και να φορτώσετε τις αποσκευές σας.",
+                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης. Αυτή η πληροφορία αναφέρεται στον ιστότοπό μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων.",
                 pkQrText: "Σαρώστε τον κωδικό QR για να ανοίξετε τον ιστότοπο.",
                 pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες (ελέγξτε τις τρέχουσες τιμές στον ιστότοπο)<br><strong>Ύψος οχήματος:</strong> μέγιστο 2 μέτρα<br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται η είσοδος σε οχήματα LPG / CNG<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes<br><strong>Σημείωση:</strong> Η χρυσή τομή. Δυνατότητα κράτησης και προπληρωμής online.",
@@ -1866,10 +1729,10 @@
                     'Tags': 'red_circle,checkout'
                 }
             }).then(() => {
-                showThanks('checkout');
+                showThanks();
             }).catch(err => {
                 console.error("NTFY Push failed:", err);
-                showThanks('checkout'); // Show thanks anyway to keep UX smooth
+                showThanks(); // Show thanks anyway to keep UX smooth
             });
         }
 
@@ -1896,18 +1759,14 @@
                     'Tags': 'yellow_circle,service'
                 }
             }).then(() => {
-                showThanks('service');
+                showThanks();
             }).catch(err => {
                 console.error("NTFY Push failed:", err);
-                showThanks('service');
+                showThanks();
             });
         }
 
-        function showThanks(type = 'service') {
-            thanksType = type;
-            const dict = i18n[currentLang] || i18n['en'];
-            document.getElementById('thanks-message').innerText =
-                thanksType === 'checkout' ? dict.coThanks : dict.thanks;
+        function showThanks() {
             hideAllScreens();
             document.getElementById('screen-thanks').classList.remove('hidden');
             setTimeout(() => {
@@ -1942,8 +1801,6 @@
             document.getElementById('co-instructions').innerText = dict.coInstructions;
             document.getElementById('co-luggage-title').innerText = dict.coLuggageTitle;
             document.getElementById('co-luggage-text').innerText = dict.coLuggageText;
-            document.getElementById('co-fees-title').innerText = dict.coFeesTitle;
-            document.getElementById('co-fees-text').innerText = dict.coFeesText;
             document.getElementById('label-co-room').innerText = dict.roomLabel;
             document.getElementById('label-co-name').innerText = dict.nameLabel;
             document.getElementById('btn-cancel-1').innerText = dict.cancel;
@@ -1975,9 +1832,6 @@
             document.getElementById('ci-q5-title').innerText = dict.ciQ5Title;
             document.getElementById('ci-q5-text').innerText = dict.ciQ5Text;
             document.getElementById('ci-info-stand-text').innerText = dict.ciInfoStandText;
-            document.getElementById('ci-wifi-title-top').innerText = dict.ciWifiTitle;
-            document.getElementById('ci-wifi-net-label-top').innerText = dict.ciWifiNetLabel;
-            document.getElementById('ci-wifi-pass-label-top').innerText = dict.ciWifiPassLabel;
             document.getElementById('ci-wifi-title').innerText = dict.ciWifiTitle;
             document.getElementById('ci-wifi-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
@@ -2006,13 +1860,10 @@
             document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
             document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
-            document.getElementById('pk-wifi-title-top').innerText = dict.ciWifiTitle;
-            document.getElementById('pk-wifi-net-label-top').innerText = dict.ciWifiNetLabel;
-            document.getElementById('pk-wifi-pass-label-top').innerText = dict.ciWifiPassLabel;
             document.getElementById('btn-back-pk').innerText = dict.back;
 
             // Thanks Message
-            document.getElementById('thanks-message').innerText = thanksType === 'checkout' ? dict.coThanks : dict.thanks;
+            document.getElementById('thanks-message').innerText = dict.thanks;
         }
     </script>
 </body>
