@@ -439,6 +439,22 @@
             border-left-color: var(--green-light);
         }
 
+        .parking-dropoff-box {
+            background: rgba(66, 165, 245, 0.12);
+            border: 2px solid rgba(66, 165, 245, 0.45);
+            border-left: 6px solid var(--blue-light);
+            margin: 0 0 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .parking-dropoff-box .info-item-icon {
+            fill: var(--blue-light);
+        }
+
+        .parking-dropoff-box strong {
+            color: var(--blue-light);
+        }
+
         .fees-box .luggage-header svg {
             fill: var(--green-light);
         }
@@ -678,12 +694,12 @@
 
             <div class="info-list">
 
-                <div class="info-item">
+                <div class="info-item info-item-highlight">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                         <span id="ci-q1-title">Kdy a jak dostanete kód?</span>
                     </strong>
-                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
+                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny možnosti, kterými jsme vás mohli kontaktovat. Pokud jste obdrželi kód a číslo pokoje, pokračujte chodbou rovně po schodech nahoru.</span>
                 </div><div class="info-item">
                     <strong>
                         <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
@@ -841,7 +857,15 @@
         <!-- SCREEN PARKING INFO -->
         <div id="screen-parking" class="card hidden">
             <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
+            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</div>
+
+            <div class="info-item info-item-highlight parking-dropoff-box">
+                <strong>
+                    <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    <span id="pk-dropoff-title">Krátké zastavení před hotelem</span>
+                </strong>
+                <span id="pk-dropoff-text">Před hotelem se můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span>
+            </div>
 
             <div class="info-list">
                 <!-- PARKING OPTION 1 -->
@@ -968,6 +992,8 @@
         // INTERNATIONALIZATION DATA
         const i18n = {
             cs: {
+                pkDropoffTitle: "Krátké zastavení před hotelem",
+                pkDropoffText: "Před hotelem se můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -991,7 +1017,7 @@
                 ciRegTitle: "Registrace",
                 ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
                 ciQ1Title: "Kdy a jak dostanete kód?",
-                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
+                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny možnosti, kterými jsme vás mohli kontaktovat. Pokud jste obdrželi kód a číslo pokoje, pokračujte chodbou rovně po schodech nahoru.",
                 ciBfTitle: "Snídaně",
                 ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
                 ciQ2Title: "Kód vám nedorazil?",
@@ -1009,7 +1035,7 @@
                 ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!",
 
                 pkWelcomeTitle: "Možnosti parkování",
-                pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.",
+                pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.",
                 pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
                 pkOpt1Title: "Hlídané podzemní garáže",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
@@ -1021,6 +1047,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
             },
             en: {
+                pkDropoffTitle: "Short stop in front of the hotel",
+                pkDropoffText: "You may stop in front of the hotel for a few minutes to unload or load your luggage.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1044,7 +1072,7 @@
                 ciRegTitle: "Registration",
                 ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
                 ciQ1Title: "When and how will you receive your code?",
-                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
+                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or the internal chat of your booking provider, no later than 3:00 PM, when official check-in begins. Please check all the ways we may have tried to contact you. If you have received the code and your room number, continue straight down the corridor and up the stairs.",
                 ciBfTitle: "Breakfast",
                 ciBfText: "Breakfast is served buffet-style on the ground floor of the restaurant from 8:00 AM to 10:00 AM.",
                 ciQ2Title: "Haven't received your code?",
@@ -1062,7 +1090,7 @@
                 ciWishText: "We wish you a wonderful and pleasant stay!",
 
                 pkWelcomeTitle: "Parking Options",
-                pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot. This information is mentioned on our website, including all third-party profiles.",
+                pkWelcomeSubtitle: "Due to our location in Prague's historic city center, the hotel does not have private parking. This information is also mentioned on our websites, including all third-party profiles. You may, however, stop in front of the hotel for a few minutes to unload or load your luggage.",
                 pkQrText: "Scan the QR code to open the website.",
                 pkOpt1Title: "Guarded Underground Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
@@ -1074,6 +1102,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Address:</strong> Plzeňská<br><strong>GPS Entrance:</strong> 50.0685878N, 14.3580586E<br><strong>Price:</strong> 50 CZK for first 24 hours, 10 CZK per each additional hour<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Distance to hotel:</strong> 30 minutes by public transport<br><strong>Note:</strong> The cheapest possible parking option in Prague."
             },
             de: {
+                pkDropoffTitle: "Kurzer Halt vor dem Hotel",
+                pkDropoffText: "Sie können vor dem Hotel für einige Minuten halten, um Ihr Gepäck aus- oder einzuladen.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1097,7 +1127,7 @@
                 ciRegTitle: "Registrierung",
                 ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
                 ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
-                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
+                ciQ1Text: "Sobald Ihr Zimmer bereit ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder über den internen Chat Ihres Buchungsanbieters, spätestens um 15:00 Uhr, wenn der Check-in offiziell beginnt. Bitte prüfen Sie alle Möglichkeiten, über die wir versucht haben könnten, Sie zu kontaktieren. Wenn Sie den Code und Ihre Zimmernummer erhalten haben, gehen Sie den Flur geradeaus weiter und die Treppe hinauf.",
                 ciBfTitle: "Frühstück",
                 ciBfText: "Das Frühstück wird im Erdgeschoss des Restaurants von 8:00 bis 10:00 Uhr als Buffet serviert.",
                 ciQ2Title: "Sie haben keinen Code erhalten?",
@@ -1115,7 +1145,7 @@
                 ciWishText: "Wir wünschen Ihnen einen wunderschönen und ungestörten Aufenthalt!",
 
                 pkWelcomeTitle: "Parkmöglichkeiten",
-                pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze. Diese Information ist auf unserer Website einschließlich aller Profile von Drittanbietern aufgeführt.",
+                pkWelcomeSubtitle: "Aufgrund unserer Lage im historischen Zentrum von Prag verfügt das Hotel über keinen eigenen Parkplatz. Diese Information ist auch auf unseren Websites einschließlich aller Drittanbieterprofile angegeben. Sie können jedoch für einige Minuten vor dem Hotel halten, um Ihr Gepäck aus- oder einzuladen.",
                 pkQrText: "Scannen Sie den QR-Code, um die Website zu öffnen.",
                 pkOpt1Title: "Bewachte Tiefgarage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
@@ -1127,6 +1157,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Einfahrt:</strong> 50.0685878N, 14.3580586E<br><strong>Preis:</strong> 50 CZK für die ersten 24 Std., 10 CZK für jede weitere Stunde<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Entfernung zum Hotel:</strong> 30 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Die günstigste Parkmöglichkeit in Prag."
             },
             it: {
+                pkDropoffTitle: "Breve sosta davanti all'hotel",
+                pkDropoffText: "È possibile fermarsi per alcuni minuti davanti all'hotel per scaricare o caricare i bagagli.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1150,7 +1182,7 @@
                 ciRegTitle: "Registrazione",
                 ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
                 ciQ1Title: "Quando e come riceverai il codice?",
-                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
+                ciQ1Text: "Non appena la vostra camera sarà pronta, vi invieremo il codice di accesso a tutte le porte tramite SMS, e-mail o la chat interna del vostro fornitore di prenotazione, entro le 15:00, quando inizia ufficialmente il check-in. Controllate tutti i possibili canali attraverso i quali potremmo aver cercato di contattarvi. Se avete ricevuto il codice e il numero della camera, proseguite dritto lungo il corridoio e salite le scale.",
                 ciBfTitle: "Colazione",
                 ciBfText: "La colazione viene servita a buffet al piano terra del ristorante dalle 8:00 alle 10:00.",
                 ciQ2Title: "Non hai ricevuto il codice?",
@@ -1168,7 +1200,7 @@
                 ciWishText: "Ti auguriamo un soggiorno splendido e sereno!",
 
                 pkWelcomeTitle: "Opzioni di Parcheggio",
-                pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata sul nostro sito web, inclusi tutti i profili di terze parti.",
+                pkWelcomeSubtitle: "A causa della nostra posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata anche sui nostri siti web, inclusi tutti i profili di terze parti. È tuttavia possibile fermarsi per alcuni minuti davanti all'hotel per scaricare o caricare i bagagli.",
                 pkQrText: "Scansiona il codice QR per aprire il sito web.",
                 pkOpt1Title: "Garage Sotterraneo Custodito",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
@@ -1180,6 +1212,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Indirizzo:</strong> Plzeňská<br><strong>GPS Ingresso:</strong> 50.0685878N, 14.3580586E<br><strong>Prezzo:</strong> 50 CZK per le prime 24 ore, 10 CZK per ogni ora successiva<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 30 minuti con i mezzi pubblici<br><strong>Nota:</strong> L'opzione più economica a Praga."
             },
             es: {
+                pkDropoffTitle: "Parada breve frente al hotel",
+                pkDropoffText: "Puede detenerse unos minutos frente al hotel para descargar o cargar su equipaje.",
                 title: "Quiosco",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1203,7 +1237,7 @@
                 ciRegTitle: "Registro de huéspedes",
                 ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
                 ciQ1Title: "¿Cuándo y cómo recibirá el código?",
-                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
+                ciQ1Text: "En cuanto su habitación esté preparada, le enviaremos el código de acceso a todas las puertas por SMS, correo electrónico o el chat interno de su proveedor de reservas, como muy tarde a las 15:00, cuando comienza oficialmente el check-in. Compruebe todas las vías por las que podríamos haber intentado ponernos en contacto con usted. Si ha recibido el código y el número de habitación, continúe recto por el pasillo y suba las escaleras.",
                 ciBfTitle: "Desayuno",
                 ciBfText: "El desayuno se sirve tipo bufé en la planta baja del restaurante de 8:00 a 10:00.",
                 ciQ2Title: "¿No ha recibido su código?",
@@ -1221,7 +1255,7 @@
                 ciWishText: "¡Le deseamos una estancia maravillosa y placentera!",
 
                 pkWelcomeTitle: "Opciones de Aparcamiento",
-                pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio. Esta información se menciona en nuestro sitio web, incluidos todos los perfiles de terceros.",
+                pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento privado. Esta información también aparece en nuestros sitios web, incluidos todos los perfiles de terceros. No obstante, puede detenerse unos minutos frente al hotel para descargar o cargar su equipaje.",
                 pkQrText: "Escanee el código QR para abrir el sitio web.",
                 pkOpt1Title: "Garaje Subterráneo Vigilado",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
@@ -1233,6 +1267,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Dirección:</strong> Plzeňská<br><strong>GPS Entrada:</strong> 50.0685878N, 14.3580586E<br><strong>Precio:</strong> 50 CZK por las primeras 24 horas, 10 CZK por hora adicional<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Distancia al hotel:</strong> 30 minutos en transporte público<br><strong>Nota:</strong> La opción más barata de Praga."
             },
             fr: {
+                pkDropoffTitle: "Arrêt de courte durée devant l'hôtel",
+                pkDropoffText: "Vous pouvez vous arrêter quelques minutes devant l'hôtel pour décharger ou charger vos bagages.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1256,7 +1292,7 @@
                 ciRegTitle: "Enregistrement",
                 ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
                 ciQ1Title: "Quand et comment recevrez-vous votre code ?",
-                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
+                ciQ1Text: "Dès que votre chambre est prête, nous vous enverrons le code d’accès à toutes les portes par SMS, e-mail ou via le chat interne de votre prestataire de réservation, au plus tard à 15 h, heure officielle du début du check-in. Veuillez vérifier tous les moyens par lesquels nous avons pu essayer de vous contacter. Si vous avez reçu le code et le numéro de chambre, continuez tout droit dans le couloir puis montez les escaliers.",
                 ciBfTitle: "Petit-déjeuner",
                 ciBfText: "Le petit-déjeuner est servi sous forme de buffet au rez-de-chaussée du restaurant de 8h00 à 10h00.",
                 ciQ2Title: "Vous n'avez pas reçu votre code ?",
@@ -1274,7 +1310,7 @@
                 ciWishText: "Nous vous souhaitons un d'un séjour agréable et paisible !",
 
                 pkWelcomeTitle: "Options de Stationnement",
-                pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information est mentionnée sur notre site web, y compris sur tous les profils de tiers.",
+                pkWelcomeSubtitle: "En raison de notre emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information figure également sur nos sites web, y compris sur tous les profils de tiers. Vous pouvez toutefois vous arrêter quelques minutes devant l'hôtel pour décharger ou charger vos bagages.",
                 pkQrText: "Scannez le code QR pour ouvrir le site web.",
                 pkOpt1Title: "Parking Souterrain Sécurisé",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
@@ -1286,6 +1322,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse :</strong> Plzeňská<br><strong>GPS Entrée :</strong> 50.0685878N, 14.3580586E<br><strong>Prix :</strong> 50 CZK pour les 24 premières heures, 10 CZK/heure suivante<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte ou espèces à l'automate<br><strong>Distance de l'hôtel :</strong> 30 minutes en transports en commun<br><strong>Note :</strong> L'option la moins chère de Prague."
             },
             pl: {
+                pkDropoffTitle: "Krótkie zatrzymanie przed hotelem",
+                pkDropoffText: "Można zatrzymać się na kilka minut przed hotelem, aby rozładować lub załadować bagaż.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1309,7 +1347,7 @@
                 ciRegTitle: "Rejestracja",
                 ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
                 ciQ1Title: "Kiedy i jak otrzymasz kod?",
-                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
+                ciQ1Text: "Gdy tylko pokój będzie gotowy, wyślemy kod dostępu do wszystkich drzwi SMS-em, e-mailem lub przez wewnętrzny czat dostawcy rezerwacji, najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się zameldowanie. Proszę sprawdzić wszystkie możliwe sposoby, za pomocą których mogliśmy próbować się z Państwem skontaktować. Jeśli otrzymali Państwo kod i numer pokoju, proszę iść korytarzem prosto i wejść po schodach na górę.",
                 ciBfTitle: "Śniadanie",
                 ciBfText: "Śniadanie serwowane jest w formie bufetu na parterze restauracji w godzinach 8:00–10:00.",
                 ciQ2Title: "Nie otrzymałeś kodu?",
@@ -1327,7 +1365,7 @@
                 ciWishText: "Życzymy wspaniałego i udanego pobytu!",
 
                 pkWelcomeTitle: "Opcje Parkowania",
-                pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta jest podana na naszej stronie internetowej, w tym na wszystkich profilach stron trzecich.",
+                pkWelcomeSubtitle: "Ze względu na położenie w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta znajduje się również na naszych stronach internetowych, w tym na wszystkich profilach stron trzecich. Można jednak zatrzymać się na kilka minut przed hotelem, aby rozładować lub załadować bagaż.",
                 pkQrText: "Zeskanuj kod QR, aby otworzyć stronę internetową.",
                 pkOpt1Title: "Strzeżony Garaż Podziemny",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
@@ -1339,6 +1377,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Wjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 CZK za pierwsze 24 godz., 10 CZK za każdą kolejną godzinę<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Odległość do hotelu:</strong> 30 minut komunikacją miejską<br><strong>Wskazówka:</strong> Najtańszy możliwy parking w Pradze."
             },
             ua: {
+                pkDropoffTitle: "Коротка зупинка перед готелем",
+                pkDropoffText: "Перед готелем можна на кілька хвилин зупинитися, щоб висадити або завантажити багаж.",
                 title: "Кіоск",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1362,7 +1402,7 @@
                 ciRegTitle: "Реєстрація",
                 ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
                 ciQ1Title: "Коли та як ви отримаєте код?",
-                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
+                ciQ1Text: "Щойно ваш номер буде готовий, ми надішлемо вам код доступу до всіх дверей через SMS, електронну пошту або внутрішній чат вашого сервісу бронювання, не пізніше 15:00, коли офіційно починається заселення. Будь ласка, перевірте всі способи, якими ми могли намагатися з вами зв’язатися. Якщо ви отримали код і номер кімнати, пройдіть коридором прямо та підніміться сходами нагору.",
                 ciBfTitle: "Сніданок",
                 ciBfText: "Сніданок подається у формі шведського столу на першому поверсі ресторану з 8:00 до 10:00.",
                 ciQ2Title: "Код не надійшов?",
@@ -1380,7 +1420,7 @@
                 ciWishText: "Бажаємо вам чудового та приємного відпочинку!",
 
                 pkWelcomeTitle: "Варіанти паркування",
-                pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу. Ця інформація зазначена на нашому вебсайті, включно з усіма профілями третіх сторін.",
+                pkWelcomeSubtitle: "Через розташування в історичному центрі Праги готель не має власної парковки. Ця інформація також зазначена на наших вебсайтах, включно з усіма профілями третіх сторін. Однак перед готелем можна на кілька хвилин зупинитися, щоб висадити або завантажити багаж.",
                 pkQrText: "Відскануйте QR-код, щоб відкрити вебсайт.",
                 pkOpt1Title: "Підземний гараж під охороною",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
@@ -1392,6 +1432,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший варіант паркування в Празі."
             },
             tr: {
+                pkDropoffTitle: "Otel önünde kısa süreli duraklama",
+                pkDropoffText: "Bagajınızı indirip yüklemek için otelin önünde birkaç dakikalığına durabilirsiniz.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1415,7 +1457,7 @@
                 ciRegTitle: "Kayıt",
                 ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar.",
+                ciQ1Text: "Odanız hazır olduğunda, en geç check-in'in resmi olarak başladığı 15:00'e kadar tüm kapılara giriş kodunu SMS, e-posta veya rezervasyon sağlayıcınızın dahili sohbeti üzerinden göndereceğiz. Lütfen sizinle iletişime geçmiş olabileceğimiz tüm kanalları kontrol edin. Kodu ve oda numaranızı aldıysanız koridordan dümdüz ilerleyip merdivenlerden yukarı çıkın.",
                 ciBfTitle: "Kahvaltı",
                 ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak servis edilir.",
                 ciQ2Title: "Kodunuz ulaşmadı mı?",
@@ -1433,7 +1475,7 @@
                 ciWishText: "Harika ve huzurlu bir konaklama dileriz!",
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
-                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır. Bu bilgi, tüm üçüncü taraf profilleri de dahil olmak üzere web sitemizde belirtilmiştir.",
+                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumumuz nedeniyle otelin özel otoparkı yoktur. Bu bilgi web sitelerimizde ve tüm üçüncü taraf profillerinde de yer almaktadır. Ancak bagajınızı indirip yüklemek için otelin önünde birkaç dakikalığına durabilirsiniz.",
                 pkQrText: "Web sitesini açmak için QR kodunu tarayın.",
                 pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Fiyat:</strong> 11–24 saat için 750 CZK (güncel fiyatı web sitesinden kontrol edin)<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG ve CNG'li araçlar giremez<br><strong>Otele Dönüş Mesafesi:</strong> Mánes Köprüsü üzerinden yürüyerek 10 dakika<br><strong>Not:</strong> İdeal seçim. Web sitesinden önceden rezerve edilebilir ve ödenebilir.",
@@ -1445,6 +1487,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Giriş:</strong> 50.0685878N, 14.3580586E<br><strong>Fiyat:</strong> İlk 24 saat için 50 CZK, sonraki her saat için 10 CZK<br><em>(güncel fiyatı web sitesinden kontrol edin)</em><br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Otele Dönüş Mesafesi:</strong> Toplu taşıma ile 30 dakika<br><strong>Not:</strong> Prag'daki gerçekten en ucuz otopark seçeneği."
             },
             da: {
+                pkDropoffTitle: "Kort stop foran hotellet",
+                pkDropoffText: "Du kan holde foran hotellet i et par minutter for at læsse bagage af eller på.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1468,7 +1512,7 @@
                 ciRegTitle: "Registrering",
                 ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
                 ciQ1Title: "Hvornår og hvordan modtager du din kode?",
-                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter.",
+                ciQ1Text: "Så snart dit værelse er klar, sender vi dig adgangskoden til alle døre via SMS, e-mail eller din reservationsudbyders interne chat, senest kl. 15.00, hvor check-in officielt begynder. Tjek venligst alle de måder, vi kan have forsøgt at kontakte dig på. Hvis du har modtaget koden og værelsesnummeret, skal du fortsætte ligeud gennem gangen og op ad trapperne.",
                 ciBfTitle: "Morgenmad",
                 ciBfText: "Morgenmad serveres som buffet i restaurantens stueetage fra 8:00 til 10:00.",
                 ciQ2Title: "Har du ikke modtaget din kode?",
@@ -1486,7 +1530,7 @@
                 ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
 
                 pkWelcomeTitle: "Parkeringsmuligheder",
-                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkeringsplads. Denne information fremgår af vores hjemmeside, inklusive alle tredjepartsprofiler.",
+                pkWelcomeSubtitle: "På grund af vores beliggenhed i Prags historiske centrum har hotellet ingen egen parkering. Denne information findes også på vores hjemmesider, herunder alle tredjepartsprofiler. Du kan dog holde foran hotellet i et par minutter for at læsse bagage af eller på.",
                 pkQrText: "Scan QR-koden for at åbne hjemmesiden.",
                 pkOpt1Title: "Overvåget Underjordisk Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek aktuel pris på hjemmesiden)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærkning:</strong> Den gyldne middelvej. Kan reserveres og betales på forhånd online.",
@@ -1498,6 +1542,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Indkørsel:</strong> 50.0685878N, 14.3580586E<br><strong>Pris:</strong> 50 CZK for de første 24 timer, 10 CZK for hver efterfølgende time<br><em>(tjek aktuel pris på hjemmesiden)</em><br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Afstand til hotel:</strong> 30 minutter med offentlig transport<br><strong>Bemærkning:</strong> Den absolut billigste parkeringsmulighed i Prag."
             },
             ja: {
+                pkDropoffTitle: "ホテル前での短時間の停車",
+                pkDropoffText: "荷物の積み下ろしのために、ホテル前に数分間停車できます。",
                 title: "キオスク",
                 checkin: "チェックイン",
                 checkout: "チェックアウト",
@@ -1521,7 +1567,7 @@
                 ciRegTitle: "宿泊者登録",
                 ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
                 ciQ1Title: "暗証番号の受け取り方法と時間",
-                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。",
+                ciQ1Text: "お部屋の準備が整い次第、チェックインが正式に開始される15:00までに、SMS、メール、または予約サイトの内部チャットで、すべてのドアのアクセスコードをお送りします。ご連絡した可能性のあるすべての方法をご確認ください。コードとお部屋番号を受け取った場合は、廊下をまっすぐ進み、階段を上ってください。",
                 ciBfTitle: "朝食",
                 ciBfText: "朝食は1階レストランにて、8:00から10:00までビュッフェ形式でご用意しております。",
                 ciQ2Title: "コードが届かない場合",
@@ -1539,7 +1585,7 @@
                 ciWishText: "快適で素晴らしい滞在になりますように！",
 
                 pkWelcomeTitle: "駐車場のご案内",
-                pkWelcomeSubtitle: "プラハ歴史地区の中心部に位置するため、ホテル専用の駐車場はございません。この情報は、すべての第三者プロフィールを含む当ホテルのウェブサイトに記載されています。",
+                pkWelcomeSubtitle: "プラハの歴史地区に位置しているため、ホテルには専用駐車場がありません。この情報は、第三者のすべてのプロフィールを含む当ホテルのウェブサイトにも掲載されています。ただし、荷物の積み下ろしのためにホテル前に数分間停車することは可能です。",
                 pkQrText: "QRコードをスキャンしてウェブサイトを開いてください。",
                 pkOpt1Title: "監視付き地下駐車場",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>住所:</strong> Alšovo nábřeží, 110 00<br><strong>料金:</strong> 11〜24時間で750 CZK（最新料金はWebサイトでご確認ください）<br><strong>車両制限:</strong> 高さ最大2メートル<br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>重要:</strong> LPG / CNG車は入場不可<br><strong>ホテルまでの距離:</strong> マーネス橋経由で徒歩10分<br><strong>特徴:</strong> 一番おすすめの駐車場。Webサイトから事前予約・事前決済が可能です。",
@@ -1551,6 +1597,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>住所:</strong> Plzeňská<br><strong>GPS入口:</strong> 50.0685878N, 14.3580586E<br><strong>料金:</strong> 最初の24時間は50 CZK、以降1時間ごとに10 CZK<br><em>（最新料金はWebサイトでご確認ください）</em><br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>ホテルまでの距離:</strong> 公共交通機関で約30分<br><strong>特徴:</strong> プラハで最も安く利用できる駐車場です。"
             },
             he: {
+                pkDropoffTitle: "עצירה קצרה מול המלון",
+                pkDropoffText: "ניתן לעצור למספר דקות מול המלון כדי לפרוק או להעמיס את המזוודות.",
                 title: "קיוסק",
                 checkin: "צ'ק-אין",
                 checkout: "צ'ק-אאוט",
@@ -1574,7 +1622,7 @@
                 ciRegTitle: "הרשמה",
                 ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
                 ciQ1Title: "מתי ואיך תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית.",
+                ciQ1Text: "ברגע שהחדר שלכם יהיה מוכן, נשלח לכם את קוד הגישה לכל הדלתות באמצעות SMS, דוא״ל או הצ׳אט הפנימי של ספק ההזמנה שלכם, לא יאוחר מהשעה 15:00, שבה מתחיל הצ׳ק-אין באופן רשמי. אנא בדקו את כל הדרכים שבהן ייתכן שניסינו ליצור איתכם קשר. אם קיבלתם את הקוד ואת מספר החדר, המשיכו ישר במסדרון ועלו במדרגות.",
                 ciBfTitle: "ארוחת בוקר",
                 ciBfText: "ארוחת הבוקר מוגשת במתכונת בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
                 ciQ2Title: "הקוד לא הגיע?",
@@ -1592,7 +1640,7 @@
                 ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
 
                 pkWelcomeTitle: "אפשרויות חנייה",
-                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חניון פרטי. מידע זה מצוין באתר האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים.",
+                pkWelcomeSubtitle: "בשל מיקומנו במרכז ההיסטורי של פראג, למלון אין חניה פרטית. מידע זה מופיע גם באתרי האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים. עם זאת, ניתן לעצור למספר דקות מול המלון כדי לפרוק או להעמיס את המזוודות.",
                 pkQrText: "סרקו את קוד ה-QR כדי לפתוח את אתר האינטרנט.",
                 pkOpt1Title: "חניון תת-קרקעי שמור",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות (בדקו מחיר עדכני באתר)<br><strong>גובה רכב:</strong> מקסימום 2 מטרים<br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז (LPG / CNG)<br><strong>מרחק בחזרה למלון:</strong> 10 דקות הליכה דרך גשר Mánes<br><strong>הערה:</strong> השילוב המנצח. ניתן להזמין מקום ולשלם מראש באתר.",
@@ -1604,6 +1652,8 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>כתובת:</strong> Plzeňská<br><strong>GPS כניסה:</strong> 50.0685878N, 14.3580586E<br><strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות, 10 CZK לכל שעה נוספת<br><em>(בדקו מחיר עדכני באתר)</em><br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>מרחק בחזרה למלון:</strong> 30 דקות בתחבורה ציבורית<br><strong>הערה:</strong> אפשרות החנייה הזולה ביותר בפראג."
             },
             el: {
+                pkDropoffTitle: "Σύντομη στάση μπροστά από το ξενοδοχείο",
+                pkDropoffText: "Μπορείτε να σταματήσετε για λίγα λεπτά μπροστά από το ξενοδοχείο για να ξεφορτώσετε ή να φορτώσετε τις αποσκευές σας.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1627,7 +1677,7 @@
                 ciRegTitle: "Εγγραφή",
                 ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
                 ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
-                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in.",
+                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή της εσωτερικής συνομιλίας του παρόχου κράτησής σας, το αργότερο στις 15:00, όταν ξεκινά επίσημα το check-in. Παρακαλούμε ελέγξτε όλους τους τρόπους με τους οποίους μπορεί να προσπαθήσαμε να επικοινωνήσουμε μαζί σας. Αν έχετε λάβει τον κωδικό και τον αριθμό του δωματίου, συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες.",
                 ciBfTitle: "Πρωινό",
                 ciBfText: "Το πρωινό σερβίρεται σε μορφή μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
                 ciQ2Title: "Δεν λάβατε τον κωδικό;",
@@ -1645,7 +1695,7 @@
                 ciWishText: "Σας ευχόμαστε μια υπέροχη και ευχάριστη διαμονή!",
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
-                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης. Αυτή η πληροφορία αναφέρεται στον ιστότοπό μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων.",
+                pkWelcomeSubtitle: "Λόγω της τοποθεσίας μας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει ιδιωτικό χώρο στάθμευσης. Η πληροφορία αυτή αναφέρεται επίσης στις ιστοσελίδες μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων. Ωστόσο, μπορείτε να σταματήσετε για λίγα λεπτά μπροστά από το ξενοδοχείο για να ξεφορτώσετε ή να φορτώσετε τις αποσκευές σας.",
                 pkQrText: "Σαρώστε τον κωδικό QR για να ανοίξετε τον ιστότοπο.",
                 pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες (ελέγξτε τις τρέχουσες τιμές στον ιστότοπο)<br><strong>Ύψος οχήματος:</strong> μέγιστο 2 μέτρα<br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται η είσοδος σε οχήματα LPG / CNG<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes<br><strong>Σημείωση:</strong> Η χρυσή τομή. Δυνατότητα κράτησης και προπληρωμής online.",
@@ -1874,6 +1924,8 @@
             // Parking Info
             document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
             document.getElementById('pk-welcome-subtitle').innerText = dict.pkWelcomeSubtitle;
+            document.getElementById('pk-dropoff-title').innerText = dict.pkDropoffTitle;
+            document.getElementById('pk-dropoff-text').innerText = dict.pkDropoffText;
             document.getElementById('pk-qr-text-1').innerText = dict.pkQrText;
             document.getElementById('pk-qr-text-3').innerText = dict.pkQrText;
             document.getElementById('pk-qr-text-4').innerText = dict.pkQrText;
