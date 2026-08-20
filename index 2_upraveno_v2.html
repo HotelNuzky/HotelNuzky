@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kiosk">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>Kiosk - Samoobslužný Terminál / Self-Service Terminal</title>
+    <style>
+        /* BASE & RESET STYLES */
+        * { 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-gradient-start: #1f2228;
+            --bg-gradient-end: #2d323b;
+            --text-main: #ffffff;
+            --text-sub: #a0aab8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --item-bg: rgba(0, 0, 0, 0.2);
+            --input-bg: rgba(0, 0, 0, 0.3);
+            
+            /* Action Colors */
+            --green-main: #2e7d32;
+            --green-dark: #1b5e20;
+            --green-light: #4caf50;
+            --green-border: #81c784;
+            --green-shadow: #0f4012;
+
+            --red-main: #c62828;
+            --red-dark: #8e0000;
+            --red-light: #ef5350;
+            --red-shadow: #5f0000;
+
+            --orange-main: #f57f17;
+            --orange-dark: #bc5100;
+            --orange-light: #ffeb3b;
+            --orange-shadow: #7f2d00;
+
+            --blue-main: #1565c0;
+            --blue-dark: #003c8f;
+            --blue-light: #42a5f5;
+            --blue-shadow: #001959;
+
+            --gray-main: #5a6268;
+            --gray-dark: #343a40;
+            --gray-light: #6c757d;
+            --gray-shadow: #212529;
+        }
+
+        body { 
+            margin: 0; 
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end)); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            color: var(--text-main);
+            user-select: none;
+            overflow-x: hidden;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 960px;
+            text-align: center;
+            padding: 15px;
+            margin: auto;
+        }
+        
+        /* LANGUAGE BAR */
+        .language-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px 18px;
+            border-radius: 50px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .flag-btn {
+            font-size: 28px;
+            cursor: pointer;
+            filter: grayscale(50%);
+            transition: transform 0.2s ease, filter 0.2s ease, background 0.2s ease;
+            line-height: 1;
+            padding: 6px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .flag-btn:hover, .flag-btn.active {
+            filter: grayscale(0%);
+            transform: scale(1.25);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* HEADER */
+        .header-title {
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-sub);
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* MAIN GRID & BUTTONS */
+        .kiosk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-kiosk {
+            color: var(--text-main);
+            border: none;
+            padding: 22px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            min-height: 170px;
+            outline: none;
+        }
+
+        .btn-kiosk:active {
+            transform: translateY(6px);
+        }
+
+        .btn-svg-icon {
+            width: 68px;
+            height: 68px;
+            fill: var(--text-main);
+            margin-bottom: 2px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .btn-title {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-subtitle {
+            font-size: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .btn-checkin {
+            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            border-top: 2px solid var(--green-light);
+            box-shadow: 0 8px 0 var(--green-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-checkin:active { box-shadow: 0 2px 0 var(--green-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        .btn-checkout {
+            background: linear-gradient(180deg, var(--red-main) 0%, var(--red-dark) 100%);
+            border-top: 2px solid var(--red-light);
+            box-shadow: 0 8px 0 var(--red-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-checkout:active { box-shadow: 0 2px 0 var(--red-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        .btn-service {
+            background: linear-gradient(180deg, var(--orange-main) 0%, var(--orange-dark) 100%);
+            border-top: 2px solid var(--orange-light);
+            box-shadow: 0 8px 0 var(--orange-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-service:active { box-shadow: 0 2px 0 var(--orange-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        .btn-parking {
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+            border-top: 2px solid var(--blue-light);
+            box-shadow: 0 8px 0 var(--blue-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-parking:active { box-shadow: 0 2px 0 var(--blue-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* CARDS & CONTAINERS */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: left;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-title-welcome {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--green-light);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle-welcome {
+            font-size: 16px;
+            color: #b0bec5;
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* INFO LIST & ITEMS */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            background: var(--item-bg);
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 4px solid var(--green-light);
+            line-height: 1.5;
+            font-size: 15px;
+            color: #e0e6ed;
+        }
+
+        .info-item-highlight {
+            background: rgba(76, 175, 80, 0.12);
+            border: 2px solid var(--green-border);
+            border-left: 6px solid var(--green-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-item strong {
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            font-size: 17px;
+        }
+
+        .info-item-icon {
+            width: 22px;
+            height: 22px;
+            fill: var(--green-light);
+            flex-shrink: 0;
+        }
+
+        .parking-qr-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 0 auto;
+            padding: 8px 10px;
+            width: fit-content;
+            max-width: 240px;
+            background: rgba(66, 165, 245, 0.08);
+            border: 1px solid rgba(66, 165, 245, 0.28);
+            border-radius: 10px;
+        }
+
+        .parking-qr-code {
+            width: 82px;
+            height: 82px;
+            padding: 4px;
+            background: #ffffff;
+            border-radius: 7px;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .parking-qr-text {
+            color: #b0bec5;
+            font-size: 13px;
+            line-height: 1.35;
+            max-width: 180px;
+        }
+
+        /* WIFI BOX */
+        .wifi-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(27, 94, 32, 0.25));
+            border: 1px solid rgba(76, 175, 80, 0.4);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .wifi-box-blue {
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.15), rgba(21, 101, 192, 0.25));
+            border: 1px solid rgba(66, 165, 245, 0.4);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .wifi-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--green-border);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wifi-title-blue {
+            font-size: 18px;
+            font-weight: bold;
+            color: #90caf9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wifi-details {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 16px;
+        }
+
+        .wifi-detail-item span {
+            color: var(--text-sub);
+            font-size: 13px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .wifi-detail-item strong {
+            color: var(--text-main);
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .wish-text {
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--green-border);
+            margin-bottom: 20px;
+        }
+
+        /* INSTRUCTIONS & SPECIAL BOXES */
+        .instructions {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #e0e6ed;
+            line-height: 1.5;
+        }
+
+        .luggage-box {
+            background: rgba(239, 83, 80, 0.12);
+            border: 1px solid rgba(239, 83, 80, 0.35);
+            border-left: 5px solid var(--red-light);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 25px;
+            font-size: 14.5px;
+            color: #e0e6ed;
+            line-height: 1.55;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .luggage-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .luggage-header svg {
+            width: 34px;
+            height: 34px;
+            fill: var(--red-light);
+            flex-shrink: 0;
+        }
+
+        .luggage-header strong {
+            color: var(--red-light);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-stand-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #b0bec5;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-stand-box svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--green-border);
+            flex-shrink: 0;
+        }
+
+        /* FORM INPUTS & LABELS */
+        .input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px;
+            background: var(--input-bg);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            font-size: 20px;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--green-light);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* FORM BUTTONS */
+        .button-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-form-submit {
+            flex: 2;
+            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            color: var(--text-main);
+            border: none;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--green-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--green-light);
+            transition: all 0.1s ease;
+            text-align: center;
+        }
+
+        .btn-form-submit:active {
+            box-shadow: 0 2px 0 var(--green-shadow), 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(3px);
+        }
+
+        .btn-form-cancel {
+            flex: 1;
+            background: linear-gradient(180deg, var(--gray-main) 0%, var(--gray-dark) 100%);
+            color: #e0e0e0;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--gray-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--gray-light);
+            transition: all 0.1s ease;
+            text-align: center;
+        }
+
+        .btn-form-cancel:active {
+            box-shadow: 0 2px 0 var(--gray-shadow), 0 3px 6px rgba(0,0,0,0.3);
+            transform: translateY(3px);
+        }
+
+        /* THANKS BOX */
+        .thanks-box {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .thanks-icon {
+            font-size: 60px;
+            color: var(--green-light);
+            margin-bottom: 15px;
+        }
+
+        .thanks-msg {
+            font-size: 22px;
+            color: #e0e6ed;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .hidden { display: none !important; }
+
+        /* RESPONSIVE DESIGN ADJUSTMENTS */
+        @media (max-width: 600px) {
+            .kiosk-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-kiosk {
+                min-height: 140px;
+            }
+            .wifi-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .button-row {
+                flex-direction: column-reverse;
+            }
+            .btn-form-cancel, .btn-form-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- LANGUAGE SELECTION BAR -->
+        <div class="language-bar">
+            <span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+            <span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+            <span class="flag-btn" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+            <span class="flag-btn" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+            <span class="flag-btn" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
+            <span class="flag-btn" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+            <span class="flag-btn" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+            <span class="flag-btn" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
+            <span class="flag-btn" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
+            <span class="flag-btn" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
+            <span class="flag-btn" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
+            <span class="flag-btn" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
+            <span class="flag-btn" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
+        </div>
+
+        <!-- SCREEN 1: MAIN MENU -->
+        <div id="screen-1">
+            <div class="header-title" id="main-title">Kiosk</div>
+
+            <div class="kiosk-grid">
+                
+                <!-- Check-in Button -->
+                <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                        <path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-checkin-text">Check-in</span>
+                </button>
+
+                <!-- Check-out Button -->
+                <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
+                        <path d="M12 10.5H17V7.5l4.5 4.5-4.5 4.5v-3H12z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-checkout-text">Check-out</span>
+                </button>
+
+                <!-- Service / Help Button -->
+                <button class="btn-kiosk btn-service" onclick="openServiceForm()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-service-text">Oprava / Pomoc</span>
+                    <span class="btn-subtitle">8:00 – 16:00</span>
+                </button>
+
+                <!-- Parking Button -->
+                <button class="btn-kiosk btn-parking" onclick="openParkingInfo()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                        <path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"/>
+                    </svg>
+                    <span class="btn-title" id="btn-parking-text">Parkování</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- SCREEN CHECK-IN INFO -->
+        <div id="screen-checkin" class="card hidden">
+            <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
+            <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
+
+            <div class="info-list">
+
+                <div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span id="ci-q1-title">Kdy a jak dostanete kód?</span>
+                    </strong>
+                    <span id="ci-q1-text">Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.</span>
+                </div><div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        <span id="ci-q2-title">Kód vám nedorazil?</span>
+                    </strong>
+                    <span id="ci-q2-text">Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 19h20v2H2v-2z"/></svg>
+                        <span id="ci-bf-title">Snídaně</span>
+                    </strong>
+                    <span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
+                </div>
+
+                <div class="info-item info-item-highlight">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span id="ci-reg-title">Registrace</span>
+                    </strong>
+                    <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
+                        <span id="ci-q3-title">Zavazadla</span>
+                    </strong>
+                    <span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                        <span id="ci-q4-title">Parkování</span>
+                    </strong>
+                    <span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku. Tato informace je zmíněna na našich webových stránkách vč. všech profilů třetích stran jako je Booking.com, Expedia aj.</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>
+                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                        <span id="ci-q5-title">Architektura</span>
+                    </strong>
+                    <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
+                </div>
+            </div>
+
+            <div class="info-stand-box">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span id="ci-info-stand-text">Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.</span>
+            </div>
+
+            <div class="wifi-box">
+                <div class="wifi-title" id="ci-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-net-label">Název / SSID</span>
+                        <strong id="ci-wifi-net-val">Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-pass-label">Heslo / Password</span>
+                        <strong id="ci-wifi-pass-val">Hotel2017</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wish-text" id="ci-wish-text">Přejeme vám nádherný a ničím nerušený pobyt!</div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-back-ci" style="flex:1;">ZPĚT / BACK</button>
+            </div>
+        </div>
+
+        <!-- SCREEN CHECKOUT FORM -->
+        <div id="screen-checkout" class="card hidden">
+            <div class="instructions" id="co-instructions">
+                Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.
+            </div>
+
+            <div class="luggage-box">
+                <div class="luggage-header">
+                    <svg viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
+                    <strong id="co-luggage-title">Úschova zavazadel</strong>
+                </div>
+                <span id="co-luggage-text">Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.</span>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-co-room">Číslo pokoje</label>
+                <input type="text" id="coRoomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-co-name">Jméno a příjmení</label>
+                <input type="text" id="coNameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-1">ZRUŠIT</button>
+                <button class="btn-form-submit" onclick="submitCheckout()" id="btn-submit-1">POTVRDIT</button>
+            </div>
+        </div>
+
+        <!-- SCREEN SERVICE FORM -->
+        <div id="screen-service" class="card hidden">
+            <div class="instructions" id="srv-instructions">
+                Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-srv-room">Číslo pokoje</label>
+                <input type="text" id="srvRoomInput" placeholder="e.g. 102" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
+                <textarea id="srvIssueInput" placeholder="..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
+                <input type="text" id="srvNameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-2">ZRUŠIT</button>
+                <button class="btn-form-submit" onclick="submitService()" id="btn-submit-2">POTVRDIT</button>
+            </div>
+        </div>
+
+        <!-- SCREEN PARKING INFO -->
+        <div id="screen-parking" class="card hidden">
+            <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
+            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.</div>
+
+            <div class="info-list">
+                <!-- PARKING OPTION 1 -->
+                <div class="info-item" style="border-left-color: #42a5f5;">
+                    <strong>
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">1</text></svg>
+                        <span id="pk-opt1-title">Hlídané podzemní garáže</span>
+                    </strong>
+                    <div class="parking-content-row" id="parking-content-row-1" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt1-text">
+                        <strong>www.oldtownparking.cz</strong><br>
+                        <strong>Adresa:</strong> Alšovo nábřeží, 110 00<br>
+                        <strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br>
+                        <strong>Výška vozidla:</strong> max. 2 metry<br>
+                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
+                        <strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br>
+                        <strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.
+                    </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADHElEQVR42u3dS27rMBAF0ceH7H/LztwDAUx/+NGpaSJbVqEbF6RIjs/n8w+v4b9HwDf4Bt/gG3yDb/ANvpHKz/Ofxxg99/E1zPf8vc9jgl/XRgYQI7exyZNU3/o5+AbfuD2vRRLKqihUF9ASf0Lbk1Tf+jn4Bt94WV6LJIXEGJWY5hKHvdpyYuSL1Ld+Dr7BN16W1+qoi1GRZDQV/fZcyKG+9XPwDb4hr9UQyVxTs5Zf/9w27KW+wTf4Bt+oyWttCSUxoD3/89RKhsQBtbYnqb71c/ANvnF7Xmtb5PgcZyLzkolzmpFrVz1J9a2fg2/wjevy2tt200182W3PJ6m+9XPwDb5xXV47YmFmJHMlLj9oS5ERR+pbPwff4BvX5bUp2iYTpzJX4jYbdTdZd6361s/BN/jG8Yy6jVsTX+BqexfsgpMTjK+Bb77BN+S1DTJX5KPq3lBLjLqRe5bXwDff4Bu3UXh+aGSsKvF7E48ijfyEutUIU9eqb/0cfINvnMeoS1V12//XjUbVnWCwybFY6ls/B9/gG+dRuF/uqhG0Pc+FSryNyJNU3/o5+AbfuD2vJc4trhpger6Nur1Anm+ybamp+tbPwTf4xu15LRJJpo7mbFsFsepFuVVnWalv/Rx8g2+cx1h1bFLiGs/Cp1O260ZbMFTf+jn4Bt84nszzqNoO0GxLkZHp0cTtghOnktW3fg6+wTfOI3P/tQsWhE6lubrNThKfhvrWz8E3+MbxZO6/Fhlfq8t6kdxUN5AXyYnG18A3+Abf72Jsst3FVJxp2xpkk93ZEq9V3/o5+AbfOI/C8w0iuWmTj0rMiYkv90V+oPrWz8E3+MZ1ea0uCrWNoE3lplW7wk39c2QwTn3r5+AbfOP2vDaVuSKBpW0ZQOKizshPiNyV+VDwDb75hry2gsTpwrqlC5ssqDC+Br7BN9+Q1zYgcfJ06qPq3jJLXJdqfA18g2++Ia/9NXQkUrfD2qrDRtv2jFPf+jn4Bt94WV5rWy4aCUptZzJElhAkrgA1Hwq+wTffuJxN91+D+gbf4Bt8g2++wTf4Bt84gl99iClleTnWdQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-1">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div></div>
+                </div>
+
+                <!-- PARKING OPTION 2 -->
+                <div class="info-item" style="border-left-color: #42a5f5;">
+                    <strong>
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">2</text></svg>
+                        <span id="pk-opt2-title">Nehlídané venkovní parkoviště</span>
+                    </strong>
+                    <span id="pk-opt2-text">
+                        <strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br>
+                        <strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br>
+                        <em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br>
+                        <strong>Platba:</strong> Pouze kartou v automatu<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br>
+                        <strong>Značka:</strong> Nejbližší, ale velice drahé.
+                    </span>
+                </div>
+
+                <!-- PARKING OPTION 3 -->
+                <div class="info-item" style="border-left-color: #42a5f5;">
+                    <strong>
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">3</text></svg>
+                        <span id="pk-opt3-title">Hlídané venkovní i garážové parkoviště The Cloud One</span>
+                    </strong>
+                    <div class="parking-content-row" id="parking-content-row-3" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt3-text">
+                        <strong>www.aprecoparking.cz/praha-1-hybernska</strong><br>
+                        <strong>Adresa:</strong> Hybernská 2140/17<br>
+                        <strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br>
+                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
+                        <strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br>
+                        <strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.
+                    </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAADyklEQVR42u3dwW6kMBBF0WGU///lzGZWWaCU6pXthnO3rYChr8ovblNc39/ff4Bf8NctAFfAFXAFXAFXwBWAK+AKlvB1//F1XWvGcb98fD+MH39bGnPnb4NH7lz+sm9BXYE5CFwBV/Dh2baUfUoEE2gn+nWGsevW7foW1BVwBVwBV/CsbLssGHYWakufls4bXD7uDHJXPFdXwBVwBVzBo7PtmQSjbidjzu12UFfAFXAFXAFek23v6az53h9qbjVZXYE5CFwBV4D5bLsrkXWey+ocOfi3Z26/VVfAFXAFXMGbsu2uH9aDS6LBT5eN+ZBvQV0BV8AVcAWnc535a/iyn+znThTc7aCuwBwEroArwK+o9bdd1g22tHA5t8rZOVFwRXjuPqsrMAeBK+AKHsU1lyKXPVt1ZretYOQ8pPeYugJzELgCruDDs+3gicdWhIONu4Jj3vVvQXDzg7oCroAr4Ao+PNsuy5jB894PY9dO3rlBencDzEHgCrgC/CfZA2zZptHOMIKJu3SoXa9yCO45UVdgDgJXwBU8OtuW4tuyna3LHnibC++lO7lsVOoKuAKugCs4nWvZOmbwGaddDbTOfGdEsAmvugJzELgCruBN2XZXN9hDMnUnkM69JCJ4ReoKzEHgCriCz6a1JyHYGWBZiJ7L8sHrLcXVzvXabwtzELgCrkC2HciYwXXMudTcOfLcFS3bsKGugCvgCriC0xncbxuMq3OvJ1jWQCu4Er0r6qor4Aq4Aq7gTdk2GAx3/UbfGcZc1N31PjR1BeYgcAVcwYcxuCdh1/NRuxZqd61EBy9BXQFXwBVwBY/Otp3OqsuSb2cbbLDZWDCAly6hE7E9SwZzELgCruBN2bYTKjsPU801Rgj2K5iL2MG7Yb8tzEHgCriCF3F1VgwP+X0/mEB3rZ8G0/rc8rG6AnMQuAKu4HS29QALrif+OFQwVAZ3DhzS5Kxzc9QVcAVcAVdwOtfcG2rnkm+JXc+hlYYRjPbWbWEOAlfAFbyX2rNkc5SeUivltWC468TVYNLf1WZXXQFXwBVwBR+ebe/TXDCvLcvUnag7t5EgeNuDL7ZQV2AOAlfAFTw623by2rKGYcueJQvGxrktw/fntW4LcxC4Aq5Atj2MUooMdrAtJd9ludh+W5iDwBVwBbLtJzPXmWxur25pofaQt5apK+AKuAKu4NHZdq7HwrJ3fJXCbCmuzl1vJ4CrKzAHgSvgCmTbgaB0yIlKGbOT9IPPzgX3YFi3hTkIXAFX8CgO7W8LdQVcAVcAroAr4Aq4Aq6AK3gt/wB8We+hbEJbUQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-3">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div></div>
+                </div>
+
+                <!-- PARKING OPTION 4 -->
+                <div class="info-item" style="border-left-color: #42a5f5;">
+                    <strong>
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">4</text></svg>
+                        <span id="pk-opt4-title">P+R Kotlářka – levné venkovní parkování zřizované městem Prahou</span>
+                    </strong>
+                    <div class="parking-content-row" id="parking-content-row-4" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt4-text">
+                        <strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br>
+                        <strong>Adresa:</strong> Plzeňská<br>
+                        <strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br>
+                        <strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br>
+                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
+                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br>
+                        <strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze.
+                    </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEi0lEQVR42u3dy47jMAxE0XiQ///lzL4XBgQ+RNnnbjtRO3aBZMmUdP1+vw9QzD+3AHQGOgPoDHQGOgPoDHQG0Bm28r3/83VdPddx/1pi6TL+DHX/3fsPR4aqu7GJ19z2BMUzyJugM4DOcJQPiJS6uxzGfV2ceJGRejziexI9RNsTFM8gb4LOADrDyT4gUglGpssj310aKlImJ07EJ74d2fUExTPIm6AzgM7wXB9wBEs1deIk/pItaKvHxTPImwCdgc6Ah/qAtgb5XasWxDOAzkBnoDNgqw8YMjHd1vkTqdYjnU51y5XbnqB4BjoDnQF0hpN9wJCJ6UgzT91fh/yimU9QPAOdgc4AOsMsrpnN5rv65RN39Zl5zeIZ5E2AzkBnwOezen5AXd/6n5ETt9VMbKqp++4RmwvZLwjyJkBnoDM8h2vI9vpLtXzm7+9ar9vWYhQxdom+RzyDvAk6A+gMJ/uAxEpwSEE6pMROvBt1u5lGjI54BnkTdAbQGUYTOk94VzdL5DLqqubIh3dt8lP3Nkg8g7wJOgPoDKO52lpuEhtjdnUNtXU61Z1MUIf3AZA3QWcAneFBPmBmtV63m1Bdn0ziGuMjFl6IZ5A3QWcAneFBPiBSCLeNPMRSFD6zTZubRqyMeAZ5E3QG0Blm8Y1Ugm09/m3rZu8/vGsPziFrfcUzyJsAnYHO8BofEGkjqXMJkUW2ib830RUNOai5zn+IZ5A3QWcAnWFYqTeke2fmPv5tywV27WJUt/OSeAZ5E3QG0BlO9gGhocu289xV6j5+n6JEryaeQd4EnQF0htGE+oISu4aWOn8iBWnkJyQajjqHEXmHkfgUxDPIm6AzgM4wmqttgrhtOWvby4Nd1XrkPrc1AolnkDdBZwCdYTTfxLHqVhEnTuIn2oJEl7CrXaet8Uk8g7wJOgPoDEf5gMTCMDIT3XZwWF3xXtdEFDFYbYZDPIO8CToD6AyzuGYet9t2VYkT8W0tN3X3yvkBkDcBOgOdgQ8IV9xt62ZnTqbv2oJ018jeB0DeBJ0BdIaTyOwLqtuSs20We+bK58Sh2vqgxDPIm6AzgM5wsg9IdAlL35256U3dZdT5rboz15ZurHgGeRN0BtAZHuQDEl3CrkagRGez9H8TrypyN9pORhPPIG+CzgA6w4N8QN1ul4lT/HUrgSPVemRH0siNTRxq6caKZ5A3QWcAnWEWV90UcFsFmliutvUjta24rvu9fADkTdAZQGd4rg9InFxeKnUj5WrdT6hbJn0/VNt7CPsFQd4E6Ax0hrew1hfUtjNPpD5t66av8xCJE/F1i7e9D4C8CToD6Ayv8QFLtXyih4gU/pFKv23WPnGavm2DIPEM8iboDKAzvNUHtBFpyKlr16mr9Ouq9bpT1fQFQd4EnQF0Bj4gm6USO1IIR14tLJmGXSMnWgrxDPIm6AygM7zVB9TtNXREN/1Seb7LM0UK/8R10eIZ5E3QGUBnONkHtJW6iS8A2g49Xqqa63Yxajs/QDyDvAk6A+gMBzP0/ACIZwCdgc5AZwCdgc4AOgOdgc6ARP4Da7avs4qZ0IEAAAAASUVORK5CYII=" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-4">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- BLUE WIFI BOX FOR PARKING SCREEN -->
+            <div class="wifi-box-blue">
+                <div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="pk-wifi-net-label">Název / SSID</span>
+                        <strong id="pk-wifi-net-val">Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="pk-wifi-pass-label">Heslo / Password</span>
+                        <strong id="pk-wifi-pass-val">Hotel2017</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-back-pk" style="flex:1;">ZPĚT / BACK</button>
+            </div>
+        </div>
+
+        <!-- SCREEN THANKS -->
+        <div id="screen-thanks" class="card hidden thanks-box">
+            <div class="thanks-icon">✓</div>
+            <div class="thanks-msg" id="thanks-message">
+                Děkujeme! Váš požadavek byl úspěšně odeslán.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
+    <script>
+        // CONFIGURATION
+        const NTFY_TOPIC = "HotelNuzky";
+        const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
+
+        let currentLang = 'cs';
+        let autoResetTimer = null;
+
+        // INTERNATIONALIZATION DATA
+        const i18n = {
+            cs: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Oprava / Pomoc",
+                parking: "Parkování",
+                coInstructions: "Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.",
+                coLuggageTitle: "Úschova zavazadel",
+                coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
+                srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
+                roomLabel: "Číslo pokoje",
+                nameLabel: "Jméno a příjmení",
+                issueLabel: "Popis závady / požadavek",
+                cancel: "ZRUŠIT",
+                submit: "POTVRDIT",
+                back: "ZPĚT NA HLAVNÍ OBRAZOVKU",
+                fillAll: "Prosím vyplňte všechna pole.",
+                thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
+                
+                ciWelcomeTitle: "Vítejte v našem hotelu!",
+                ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
+                ciRegTitle: "Registrace",
+                ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
+                ciQ1Title: "Kdy a jak dostanete kód?",
+                ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in.",
+                ciBfTitle: "Snídaně",
+                ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
+                ciQ2Title: "Kód vám nedorazil?",
+                ciQ2Text: "Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím zvedněte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.",
+                ciQ3Title: "Zavazadla",
+                ciQ3Text: "Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.",
+                ciQ4Title: "Parkování",
+                ciQ4Text: "Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku. Tato informace je zmíněna na našich webových stránkách vč. všech profilů třetích stran jako je Booking.com, Expedia aj.",
+                ciQ5Title: "Architektura",
+                ciQ5Text: "Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.",
+                ciInfoStandText: "Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.",
+                ciWifiTitle: "📶 Wi-Fi Připojení",
+                ciWifiNetLabel: "Název / SSID",
+                ciWifiPassLabel: "Heslo / Password",
+                ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!",
+
+                pkWelcomeTitle: "Možnosti parkování",
+                pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.",
+                pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
+                pkOpt1Title: "Hlídané podzemní garáže",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
+                pkOpt2Title: "Nehlídané venkovní parkoviště",
+                pkOpt2Text: "<strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br><strong>Platba:</strong> Pouze kartou v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br><strong>Značka:</strong> Nejbližší, ale velice drahé.",
+                pkOpt3Title: "Hlídané venkovní i garážové parkoviště The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br><strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.",
+                pkOpt4Title: "P+R Kotlářka – levné venkovní parkování zřizované městem Prahou",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
+            },
+            en: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Repair / Help",
+                parking: "Parking",
+                coInstructions: "Please enter your room number and the registered guest's name.",
+                coLuggageTitle: "Luggage Storage",
+                coLuggageText: "If you wish to store your luggage, please ask our restaurant staff. Due to the historical nature of the building, our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station (Hlavní nádraží). You can get there by tram No. 15 from Malostranské náměstí – get off at the stop \"Hlavní nádraží\".",
+                srvInstructions: "Please fill out the form below and we will attend to your request as soon as possible. If the matter is urgent, please use the landline next to the kiosk – from 8:00 AM to 4:00 PM it connects to remote reception, outside these hours an emergency contact is available.",
+                roomLabel: "Room number",
+                nameLabel: "Full Name",
+                issueLabel: "Issue description / Request",
+                cancel: "CANCEL",
+                submit: "SUBMIT",
+                back: "BACK TO MAIN SCREEN",
+                fillAll: "Please fill in all fields.",
+                thanks: "Thank you! Your request has been sent successfully.",
+
+                ciWelcomeTitle: "Welcome to our hotel!",
+                ciWelcomeSubtitle: "Thanks to our self-service kiosk, you can check in conveniently 24/7.",
+                ciRegTitle: "Registration",
+                ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
+                ciQ1Title: "When and how will you receive your code?",
+                ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or internal booking platform chat — no later than 3:00 PM, when official check-in begins.",
+                ciBfTitle: "Breakfast",
+                ciBfText: "Breakfast is served buffet-style on the ground floor of the restaurant from 8:00 AM to 10:00 AM.",
+                ciQ2Title: "Haven't received your code?",
+                ciQ2Text: "If you booked via a third-party platform, we might not have your direct contact details. Between 8:00 AM and 4:00 PM, please use the landline phone next to this kiosk. Outside these hours, please call the emergency contact.",
+                ciQ3Title: "Luggage Storage",
+                ciQ3Text: "If your room is not ready yet, our restaurant staff will gladly store your luggage. However, as this is a historic building, our storage space is limited and we cannot accept legal liability for stored items.",
+                ciQ4Title: "Parking",
+                ciQ4Text: "Due to our location in the historic city center, we do not have private parking. You can find complete local parking tips under the \"Parking\" button on the main screen. This information is also mentioned on our websites, including all third-party profiles such as Booking.com, Expedia, and others.",
+                ciQ5Title: "Architecture",
+                ciQ5Text: "Our building is a unique historic property and unfortunately does not have an elevator. If you need any assistance with your luggage, we are here to help.",
+                ciInfoStandText: "You can find further useful information and recommendations on the information stand in your room.",
+                ciWifiTitle: "📶 Wi-Fi Connection",
+                ciWifiNetLabel: "Network Name / SSID",
+                ciWifiPassLabel: "Password",
+                ciWishText: "We wish you a wonderful and pleasant stay!",
+
+                pkWelcomeTitle: "Parking Options",
+                pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot. This information is mentioned on our website, including all third-party profiles.",
+                pkQrText: "Scan the QR code to open the website.",
+                pkOpt1Title: "Guarded Underground Garage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
+                pkOpt2Title: "Unguarded Outdoor Parking",
+                pkOpt2Text: "<strong>Entrance Address:</strong> Nosticova 634 (exit on opposite side with payment machine)<br><strong>Price:</strong> 75 CZK/hr (6:00–23:00) | 100 CZK/hr (23:00–6:00)<br><em>(check current rates on site)</em><br><strong>Payment:</strong> Card only at automated machine<br><strong>Distance to hotel:</strong> 5-minute walk through Kampa park<br><strong>Note:</strong> Closest option, but very expensive.",
+                pkOpt3Title: "Guarded Outdoor & Garage Parking (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Address:</strong> Hybernská 2140/17<br><strong>Price:</strong> 750 CZK / 24 hrs online, 1,200 CZK / 24 hrs on site<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card online or on site<br><strong>Distance to hotel:</strong> 20 minutes by public transport<br><strong>Note:</strong> Excellent backup if Old Town Parking is full.",
+                pkOpt4Title: "P+R Kotlářka – Budget City Parking",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Address:</strong> Plzeňská<br><strong>GPS Entrance:</strong> 50.0685878N, 14.3580586E<br><strong>Price:</strong> 50 CZK for first 24 hours, 10 CZK per each additional hour<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Distance to hotel:</strong> 30 minutes by public transport<br><strong>Note:</strong> The cheapest possible parking option in Prague."
+            },
+            de: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Reparatur / Hilfe",
+                parking: "Parken",
+                coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen des registrierten Gastes ein.",
+                coLuggageTitle: "Gepäckaufbewahrung",
+                coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten, wenden Sie sich bitte an das Restaurantpersonal. Aufgrund des historischen Charakters des Gebäudes sind unsere Aufbewahrungskapazitäten begrenzt und das Hotel übernimmt keine Haftung. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen. Sie erreichen diesen mit der Straßenbahn Linie 15 ab Malostranské náměstí – steigen Sie an der Haltestelle „Hlavní nádraží“ aus.",
+                srvInstructions: "Bitte füllen Sie das folgende Formular aus, wir werden uns so schnell wie möglich um Ihr Anliegen kümmern. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk – von 8:00 bis 16:00 Uhr werden Sie mit der entfernten Rezeption verbunden, außerhalb dieser Zeiten steht ein Notfallkontakt zur Verfügung.",
+                roomLabel: "Zimmernummer",
+                nameLabel: "Vollständiger Name",
+                issueLabel: "Problembeschreibung / Anfrage",
+                cancel: "ABBRECHEN",
+                submit: "BESTÄTIGEN",
+                back: "ZURÜCK ZUR HAUPTSEITE",
+                fillAll: "Bitte füllen Sie alle Felder aus.",
+                thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
+
+                ciWelcomeTitle: "Willkommen in unserem Hotel!",
+                ciWelcomeSubtitle: "Dank unseres Selbstbedienungkiosks checken Sie bequem rund um die Uhr ein.",
+                ciRegTitle: "Registrierung",
+                ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
+                ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
+                ciQ1Text: "Sobald Ihr Zimmer fertig ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder den internen Chat Ihres Buchungsanbieters — spätestens um 15:00 Uhr, wenn der offizielle Check-in beginnt.",
+                ciBfTitle: "Frühstück",
+                ciBfText: "Das Frühstück wird im Erdgeschoss des Restaurants von 8:00 bis 10:00 Uhr als Buffet serviert.",
+                ciQ2Title: "Sie haben keinen Code erhalten?",
+                ciQ2Text: "Wenn Sie über einen Drittanbieter gebucht haben, liegen uns eventuell keine direkten Kontaktdaten vor. Von 8:00 bis 16:00 Uhr nutzen Sie bitte das Festnetztelefon neben dem Kiosk, außerhalb dieser Zeiten rufen Sie bitte den Notfallkontakt an.",
+                ciQ3Title: "Gepäckaufbewahrung",
+                ciQ3Text: "Falls Ihr Zimmer noch nicht bereit ist, bewahrt unser Restaurantpersonal Ihr Gepäck gerne auf. Da es sich um ein historisches Gebäude handelt, sind unsere Kapazitäten begrenzt und wir übernehmen keine rechtliche Haftung.",
+                ciQ4Title: "Parken",
+                ciQ4Text: "Aufgrund der Lage im historischen Zentrum verfügen wir über keine eigenen Parkplätze. Ausführliche Parktipps in der Umgebung finden Sie unter der Schaltfläche „Parken“ auf dem Hauptbildschirm. Diese Information finden Sie auch auf unseren Webseiten einschließlich aller Profile von Drittanbietern wie Booking.com, Expedia und anderen.",
+                ciQ5Title: "Architektur",
+                ciQ5Text: "Unser Gebäude ist ein historisches Unikat und verfügt daher leider über keinen Aufzug. Wenn Sie Hilfe benötigen, sind wir gerne für Sie da.",
+                ciInfoStandText: "Weitere nützliche Informationen finden Sie auf dem Aufsteller in Ihrem Zimmer.",
+                ciWifiTitle: "📶 Wi-Fi Verbindung",
+                ciWifiNetLabel: "Netzwerkname / SSID",
+                ciWifiPassLabel: "Passwort",
+                ciWishText: "Wir wünschen Ihnen einen wunderschönen und ungestörten Aufenthalt!",
+
+                pkWelcomeTitle: "Parkmöglichkeiten",
+                pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze. Diese Information ist auf unserer Website einschließlich aller Profile von Drittanbietern aufgeführt.",
+                pkQrText: "Scannen Sie den QR-Code, um die Website zu öffnen.",
+                pkOpt1Title: "Bewachte Tiefgarage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
+                pkOpt2Title: "Unbewachter Außenparkplatz",
+                pkOpt2Text: "<strong>Einfahrtsadresse:</strong> Nosticova 634 (Ausfahrt gegenüber mit Automat)<br><strong>Preis:</strong> 75 CZK/Std. (6:00–23:00) | 100 CZK/Std. (23:00–6:00)<br><em>(Preise vor Ort prüfen)</em><br><strong>Zahlung:</strong> Nur Karte am Automaten<br><strong>Entfernung zum Hotel:</strong> 5 Minuten zu Fuß durch den Kampa-Park<br><strong>Hinweis:</strong> Am nächsten gelegen, aber sehr teuer.",
+                pkOpt3Title: "Bewachter Parkplatz & Garage (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Adresse:</strong> Hybernská 2140/17<br><strong>Preis:</strong> Online 750 CZK / 24 Std., vor Ort 1.200 CZK / 24 Std.<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte online oder vor Ort<br><strong>Entfernung zum Hotel:</strong> 20 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Gute Alternative, wenn Old Town Parking voll ist.",
+                pkOpt4Title: "P+R Kotlářka – Günstiger städtischer Parkplatz",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Einfahrt:</strong> 50.0685878N, 14.3580586E<br><strong>Preis:</strong> 50 CZK für die ersten 24 Std., 10 CZK für jede weitere Stunde<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Entfernung zum Hotel:</strong> 30 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Die günstigste Parkmöglichkeit in Prag."
+            },
+            it: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Riparazione / Aiuto",
+                parking: "Parcheggio",
+                coInstructions: "Si prega di inserire il numero di camera e il nome dell'ospite registrato.",
+                coLuggageTitle: "Deposito Bagagli",
+                coLuggageText: "Se desideri depositare i tuoi bagagli, rivolgiti al personale del ristorante dell'hotel. A causa della natura storica dell'edificio, i nostri spazi sono limitati e l'hotel non si assume responsabilità per i bagagli custoditi. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale (Hlavní nádraží). Puoi raggiungerla con il tram n. 15 da Malostranské náměstí – scendi alla fermata \"Hlavní nádraží\".",
+                srvInstructions: "Compila il modulo sottostante e ci occuperemo della tua richiesta il prima possibile. Se la questione è urgente, utiliza il telefono fisso accanto al kiosk – dalle 8:00 alle 16:00 ti collegherà con la reception remota, al di fuori di questo orario è disponibile un contatto di emergenza.",
+                roomLabel: "Numero di camera",
+                nameLabel: "Nome e cognome",
+                issueLabel: "Descrizione del problema / Richiesta",
+                cancel: "ANNULLA",
+                submit: "INVIA",
+                back: "TORNA ALLA SCHERMATA PRINCIPALE",
+                fillAll: "Si prega di compilare tutti i campi.",
+                thanks: "Grazie! La tua richiesta è stata inviata con successo.",
+
+                ciWelcomeTitle: "Benvenuti nel nostro hotel!",
+                ciWelcomeSubtitle: "Grazie al chiosco self-service, puoi effettuare il check-in comodamente 24/7.",
+                ciRegTitle: "Registrazione",
+                ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
+                ciQ1Title: "Quando e come riceverai il codice?",
+                ciQ1Text: "Non appena la tua camera sarà pronta, ti invieremo il codice di accesso tramite SMS, e-mail o chat dell'operatore di prenotazione — al più tardi entro le 15:00, orario in cui inizia ufficialmente il check-in.",
+                ciBfTitle: "Colazione",
+                ciBfText: "La colazione viene servita a buffet al piano terra del ristorante dalle 8:00 alle 10:00.",
+                ciQ2Title: "Non hai ricevuto il codice?",
+                ciQ2Text: "Se hai prenotato tramite terzi, potremmo non avere i tuoi contatti diretti. Dalle 8:00 alle 16:00 utilizza il telefono fisso accanto al chiosco, al di fuori di questi orari chiama il contatto di emergenza.",
+                ciQ3Title: "Deposito bagagli",
+                ciQ3Text: "Se la tua camera non è ancora pronta, il personale del nostro ristorante sarà lieto di custodire i tuoi bagagli. Trattandosi di un edificio storico, i nostri spazi sono limitati e non possiamo assumerne la responsabilità legale.",
+                ciQ4Title: "Parcheggio",
+                ciQ4Text: "Situati nel centro storico, non disponiamo di un parcheggio privato. Trovi i consigli completi per il parcheggio premendo il pulsante \"Parcheggio\" nella schermata principale. Questa informazione è inoltre riportata sui nostri siti web, inclusi tutti i profili di terze parti come Booking.com, Expedia e altri.",
+                ciQ5Title: "Architettura",
+                ciQ5Text: "Il nostro edificio è una struttura storica tutelata e purtroppo non dispone di ascensore. Se hai bisogno di aiuto, siamo a tua disposizione.",
+                ciInfoStandText: "Troverai ulteriori informazioni e consigli utili sull'espositore informativo presente nella tua camera.",
+                ciWifiTitle: "📶 Connessione Wi-Fi",
+                ciWifiNetLabel: "Nome rete / SSID",
+                ciWifiPassLabel: "Password",
+                ciWishText: "Ti auguriamo un soggiorno splendido e sereno!",
+
+                pkWelcomeTitle: "Opzioni di Parcheggio",
+                pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata sul nostro sito web, inclusi tutti i profili di terze parti.",
+                pkQrText: "Scansiona il codice QR per aprire il sito web.",
+                pkOpt1Title: "Garage Sotterraneo Custodito",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
+                pkOpt2Title: "Parcheggio Esterno Non Custodito",
+                pkOpt2Text: "<strong>Indirizzo Ingresso:</strong> Nosticova 634 (uscita sul lato opposto con cassa)<br><strong>Prezzo:</strong> 75 CZK/ora (6:00–23:00) | 100 CZK/ora (23:00–6:00)<br><em>(verifica i prezzi sul posto)</em><br><strong>Pagamento:</strong> Solo carta alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 5 minuti a piedi attraverso il parco Kampa<br><strong>Nota:</strong> Il più vicino, ma molto costoso.",
+                pkOpt3Title: "Parcheggio Coperto e Scoperto (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Indirizzo:</strong> Hybernská 2140/17<br><strong>Prezzo:</strong> online 750 CZK / 24 ore, sul posto 1.200 CZK / 24 ore<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta online o sul posto<br><strong>Distanza dall'hotel:</strong> 20 minuti con i mezzi pubblici<br><strong>Nota:</strong> Ottima alternativa se Old Town Parking è completo.",
+                pkOpt4Title: "P+R Kotlářka – Parcheggio Economico",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Indirizzo:</strong> Plzeňská<br><strong>GPS Ingresso:</strong> 50.0685878N, 14.3580586E<br><strong>Prezzo:</strong> 50 CZK per le prime 24 ore, 10 CZK per ogni ora successiva<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 30 minuti con i mezzi pubblici<br><strong>Nota:</strong> L'opzione più economica a Praga."
+            },
+            es: {
+                title: "Quiosco",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Reparación / Ayuda",
+                parking: "Aparcamiento",
+                coInstructions: "Por favor, introduzca su número de habitación y el nombre del huésped registrado.",
+                coLuggageTitle: "Consigna de Equipaje",
+                coLuggageText: "Si desea guardar su equipaje, por favor consulte con el personal del restaurante. Debido al carácter histórico del edificio, nuestro espacio de almacenamiento es limitado y el hotel no se hace responsable del equipaje guardado. Alternativamente, puede utilizar la consigna de pago en la Estación Central (Hlavní nádraží). Puede llegar tomando el tranvía número 15 desde Malostranské náměstí – bájese en la parada \"Hlavní nádraží\".",
+                srvInstructions: "Rellene el siguiente formulario y atenderemos su solicitud lo antes posible. Si el asunto es urgente, utilice el teléfono fijo junto al quiosco; de 8:00 a 16:00 le conectará con la recepción remota, fuera de este horario hay un contacto de emergencia disponible.",
+                roomLabel: "Número de habitación",
+                nameLabel: "Nombre completo",
+                issueLabel: "Descripción del problema / Solicitud",
+                cancel: "CANCELAR",
+                submit: "ENVIAR",
+                back: "VOLVER A LA PANTALLA PRINCIPAL",
+                fillAll: "Por favor, rellene todos los campos.",
+                thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
+
+                ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
+                ciWelcomeSubtitle: "Gracias a nuestro quiosco autoservicio, puede registrarse cómodamente las 24 horas.",
+                ciRegTitle: "Registro de huéspedes",
+                ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
+                ciQ1Title: "¿Cuándo y cómo recibirá el código?",
+                ciQ1Text: "En cuanto su habitación esté lista, le enviaremos el código de acceso a las puertas por SMS, email o chat de su plataforma de reserva — como máximo a las 15:00, inicio oficial del check-in.",
+                ciBfTitle: "Desayuno",
+                ciBfText: "El desayuno se sirve tipo bufé en la planta baja del restaurante de 8:00 a 10:00.",
+                ciQ2Title: "¿No ha recibido su código?",
+                ciQ2Text: "Si reservó a través de terceros, es posible que no tengamos sus datos de contacto directos. De 8:00 a 16:00, utilice el teléfono fijo junto al quiosco. Fuera de este horario, llame al contacto de emergencia.",
+                ciQ3Title: "Equipaje",
+                ciQ3Text: "Si su habitación aún no está lista, el personal del restaurante guardará su equipaje con gusto. Al ser un edificio histórico, el espacio es limitado y no asumimos responsabilidad legal sobre el mismo.",
+                ciQ4Title: "Aparcamiento",
+                ciQ4Text: "Al estar en el centro histórico, no disponemos de aparcamiento propio. Encontrará toda la información y opciones cercanas pulsando el botón \"Aparcamiento\" en la pantalla principal. Esta información también se menciona en nuestros sitios web, incluidos todos los perfiles de terceros como Booking.com, Expedia y otros.",
+                ciQ5Title: "Arquitectura",
+                ciQ5Text: "Nuestro edificio es un inmueble histórico único y lamentablemente no dispone de ascensor. Si necesita ayuda, estamos a su disposición.",
+                ciInfoStandText: "Encontrará más información útil y consejos en el expositor informativo de su habitación.",
+                ciWifiTitle: "📶 Conexión Wi-Fi",
+                ciWifiNetLabel: "Nombre de red / SSID",
+                ciWifiPassLabel: "Contraseña / Password",
+                ciWishText: "¡Le deseamos una estancia maravillosa y placentera!",
+
+                pkWelcomeTitle: "Opciones de Aparcamiento",
+                pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio. Esta información se menciona en nuestro sitio web, incluidos todos los perfiles de terceros.",
+                pkQrText: "Escanee el código QR para abrir el sitio web.",
+                pkOpt1Title: "Garaje Subterráneo Vigilado",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
+                pkOpt2Title: "Aparcamiento Exterior No Vigilado",
+                pkOpt2Text: "<strong>Dirección de entrada:</strong> Nosticova 634 (salida al otro lado con cajero)<br><strong>Precio:</strong> 75 CZK/h (6:00–23:00) | 100 CZK/h (23:00–6:00)<br><em>(comprobar precios en el sitio)</em><br><strong>Pago:</strong> Solo tarjeta en cajero automático<br><strong>Distancia al hotel:</strong> 5 minutos a pie por el parque Kampa<br><strong>Nota:</strong> El más cercano, pero muy caro.",
+                pkOpt3Title: "Aparcamiento Cubierto y Exterior (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Dirección:</strong> Hybernská 2140/17<br><strong>Precio:</strong> 750 CZK / 24 h online, 1 200 CZK / 24 h en el sitio<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta online o en el sitio<br><strong>Distancia al hotel:</strong> 20 minutos en transporte público<br><strong>Nota:</strong> Buena alternativa si Old Town Parking está lleno.",
+                pkOpt4Title: "P+R Kotlářka – Aparcamiento Económico",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Dirección:</strong> Plzeňská<br><strong>GPS Entrada:</strong> 50.0685878N, 14.3580586E<br><strong>Precio:</strong> 50 CZK por las primeras 24 horas, 10 CZK por hora adicional<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Distancia al hotel:</strong> 30 minutos en transporte público<br><strong>Nota:</strong> La opción más barata de Praga."
+            },
+            fr: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Réparation / Aide",
+                parking: "Parking",
+                coInstructions: "Veuillez saisir votre numéro de chambre et le nom du client enregistré.",
+                coLuggageTitle: "Bagagerie",
+                coLuggageText: "Si vous souhaitez déposer vos bagages, veuillez vous adresser au personnel du restaurant. En raison du caractère historique du bâtiment, notre espace de stockage est limité et l'hôtel décline toute responsabilité. Vous pouvez également utiliser la consigne payante de la gare centrale (Hlavní nádraží). Vous pouvez vous y rendre en prenant le tramway n° 15 depuis Malostranské náměstí – descendez à l'arrêt \"Hlavní nádraží\".",
+                srvInstructions: "Veuillez remplir le formulaire ci-dessous et nous traiterons votre demande dans les plus brefs délais. Si l'affaire est urgente, veuillez utiliser le téléphone fixe à côté du kiosque – de 8h00 à 16h00, il vous mettra en relation avec la réception à distance, en dehors de ces heures, un contact d'urgence est disponible.",
+                roomLabel: "Numéro de chambre",
+                nameLabel: "Nom complet",
+                issueLabel: "Description du problème / Demande",
+                cancel: "ANNULER",
+                submit: "VALIDER",
+                back: "RETOURNER À L'ACCUEIL",
+                fillAll: "Veuillez remplir tous les champs.",
+                thanks: "Merci ! Votre demande a été envoyée avec succès.",
+
+                ciWelcomeTitle: "Bienvenue dans notre hôtel !",
+                ciWelcomeSubtitle: "Grâce à notre borne libre-service, enregistrez-vous facilement 24h/24.",
+                ciRegTitle: "Enregistrement",
+                ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
+                ciQ1Title: "Quand et comment recevrez-vous votre code ?",
+                ciQ1Text: "Dès que votre chambre sera prête, nous vous enverrons le code d'accès par SMS, e-mail ou via la messagerie de votre site de réservation — au plus tard à 15h00, heure officielle du check-in.",
+                ciBfTitle: "Petit-déjeuner",
+                ciBfText: "Le petit-déjeuner est servi sous forme de buffet au rez-de-chaussée du restaurant de 8h00 à 10h00.",
+                ciQ2Title: "Vous n'avez pas reçu votre code ?",
+                ciQ2Text: "Si vous avez réservé via un intermédiaire, nous n'avons peut-être pas vos coordonnées directes. Entre 8h00 et 16h00, utilisez le téléphone fixe à côté de la borne. En dehors de ces heures, appelez le numéro d'urgence.",
+                ciQ3Title: "Bagagerie",
+                ciQ3Text: "Si votre chambre n'est pas encore prête, le personnel du restaurant gardera vos bagages avec plaisir. S'agissant d'un bâtiment historique, nos espaces sont restreints et nous ne pouvons en assumer la responsabilité juridique.",
+                ciQ4Title: "Parking",
+                ciQ4Text: "Situés dans le centre historique, nous ne possédons pas de parking privé. Retrouvez tous nos conseils de stationnement via le bouton \"Parking\" sur l'écran d'accueil. Cette information est également mentionnée sur nos sites web, y compris tous les profils de tiers tels que Booking.com, Expedia et autres.",
+                ciQ5Title: "Architecture",
+                ciQ5Text: "Notre bâtiment est un monument historique classé et ne dispose malheureusement pas d'ascenseur. Si vous avez besoin d'aide, notre équipe est à votre service.",
+                ciInfoStandText: "Vous trouverez d'autres informations utiles sur le présentoir d'information situé dans votre chambre.",
+                ciWifiTitle: "📶 Connexion Wi-Fi",
+                ciWifiNetLabel: "Nom du réseau / SSID",
+                ciWifiPassLabel: "Mot de passe",
+                ciWishText: "Nous vous souhaitons un d'un séjour agréable et paisible !",
+
+                pkWelcomeTitle: "Options de Stationnement",
+                pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information est mentionnée sur notre site web, y compris sur tous les profils de tiers.",
+                pkQrText: "Scannez le code QR pour ouvrir le site web.",
+                pkOpt1Title: "Parking Souterrain Sécurisé",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
+                pkOpt2Title: "Parking Extérieur Non Surveillé",
+                pkOpt2Text: "<strong>Adresse d'accès :</strong> Nosticova 634 (sortie de l'autre côté avec horodateur)<br><strong>Prix :</strong> 75 CZK/h (6:00–23:00) | 100 CZK/h (23:00–6:00)<br><em>(vérifier les prix sur place)</em><br><strong>Paiement :</strong> Carte uniquement à l'automat<br><strong>Distance de l'hôtel :</strong> 5 min à pied via le parc Kampa<br><strong>Note :</strong> Le plus proche, mais très cher.",
+                pkOpt3Title: "Parking Couvert & Extérieur (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Adresse :</strong> Hybernská 2140/17<br><strong>Prix :</strong> 750 CZK / 24h en ligne, 1 200 CZK / 24h sur place<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte en ligne ou sur place<br><strong>Distance de l'hôtel :</strong> 20 minutes en transports en commun<br><strong>Note :</strong> Bonne alternative si Old Town Parking est complet.",
+                pkOpt4Title: "P+R Kotlářka – Parking Économique",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse :</strong> Plzeňská<br><strong>GPS Entrée :</strong> 50.0685878N, 14.3580586E<br><strong>Prix :</strong> 50 CZK pour les 24 premières heures, 10 CZK/heure suivante<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte ou espèces à l'automate<br><strong>Distance de l'hôtel :</strong> 30 minutes en transports en commun<br><strong>Note :</strong> L'option la moins chère de Prague."
+            },
+            pl: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Naprawa / Pomoc",
+                parking: "Parking",
+                coInstructions: "Wpisz numer swojego pokoju oraz imię i nazwisko zarejestrowanego gościa.",
+                coLuggageTitle: "Przechowalnia Bagażu",
+                coLuggageText: "Jeśli chcesz zostawić bagaż, skontaktuj się z obsługą restauracji hotelowej. Ze względu na zabytkowy charakter budynku nasza przestrzeń magazynowa jest ograniczona i hotel nie ponosi odpowiedzialności za pozostawiony bagaż. Alternatywnie możesz skorzystać z płatnej przechowalni bagażu na Dworcu Głównym (Hlavní nádraží). Dojedziesz tam tramwajem nr 15 z Malostranské náměstí – wysiądź na przystanku „Hlavní nádraží”.",
+                srvInstructions: "Wypełnij poniższy formularz, a zajmiemy się Twoim zgłoszeniem najszybciej jak to możliwe. Jeśli sprawa jest pilna, skorzystaj z telefonu stacjonarnego obok kiosku – w godzinach 8:00–16:00 połączy Cię z zdalną recepcją, poza tymi godzinami dostępny jest kontakt alarmowy.",
+                roomLabel: "Numer pokoju",
+                nameLabel: "Imię i nazwisko",
+                issueLabel: "Opis usterki / Prośba",
+                cancel: "ANULUJ",
+                submit: "POTWIERDŹ",
+                back: "POWRÓT DO EKRANU GŁÓWNEGO",
+                fillAll: "Proszę wypełnić wszystkie pola.",
+                thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
+
+                ciWelcomeTitle: "Witamy w naszym hotelu!",
+                ciWelcomeSubtitle: "Dzięki samoobsługowemu kioskowi meldunek jest wygodny i możliwy przez całą dobę.",
+                ciRegTitle: "Rejestracja",
+                ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
+                ciQ1Title: "Kiedy i jak otrzymasz kod?",
+                ciQ1Text: "Gdy tylko Twój pokój będzie gotowy, wyślemy Ci kod dostępu do drzwi SMS-em, e-mailem lub przez czat serwisu rezerwacyjnego — najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się check-in.",
+                ciBfTitle: "Śniadanie",
+                ciBfText: "Śniadanie serwowane jest w formie bufetu na parterze restauracji w godzinach 8:00–10:00.",
+                ciQ2Title: "Nie otrzymałeś kodu?",
+                ciQ2Text: "Jeśli rezerwacja była składana przez portal zewnętrzny, możemy nie mieć Twoich bezpośrednich danych. W godzinach 8:00–16:00 skorzystaj z telefonu obok kiosku, poza tymi godzinami zadzwoń pod numer alarmowy.",
+                ciQ3Title: "Bagaż",
+                ciQ3Text: "Jeśli Twój pokój nie jest ještě gotowy, obsługa naszej restauracji chętnie przechowa Twój bagaż. Ponieważ jest to budynek zabytkowy, nasza przestrzeń jest ograniczona i nie ponosimy odpowiedzialności prawnej za rzeczy.",
+                ciQ4Title: "Parking",
+                ciQ4Text: "Ze względu na lokalizację w historycznym centrum nie posiadamy własnego parkingu. Pełne informacje o parkingach w okolicy znajdziesz pod przyciskiem „Parking” na ekranie głównym. Informacja ta jest również zamieszczona na naszych stronach internetowych, w tym na wszystkich profilach stron trzecich, takich jak Booking.com, Expedia i inne.",
+                ciQ5Title: "Architektura",
+                ciQ5Text: "Nasz budynek to unikalny obiekt zabytkowy i niestety nie posiada windy. Jeśli potrzebujesz pomocy, chętnie služymy pomocą.",
+                ciInfoStandText: "Dalsze przydatne informacje znajdziesz w swoim pokoju na stojaku informacyjnym.",
+                ciWifiTitle: "📶 Połączenie Wi-Fi",
+                ciWifiNetLabel: "Nazwa sieci / SSID",
+                ciWifiPassLabel: "Hasło / Password",
+                ciWishText: "Życzymy wspaniałego i udanego pobytu!",
+
+                pkWelcomeTitle: "Opcje Parkowania",
+                pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta jest podana na naszej stronie internetowej, w tym na wszystkich profilach stron trzecich.",
+                pkQrText: "Zeskanuj kod QR, aby otworzyć stronę internetową.",
+                pkOpt1Title: "Strzeżony Garaż Podziemny",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
+                pkOpt2Title: "Niestrzeżony Parking Zewnętrzny",
+                pkOpt2Text: "<strong>Adres wjazdu:</strong> Nosticova 634 (wyjazd po drugiej stronie z automatami)<br><strong>Cena:</strong> 75 CZK/godz. (6:00–23:00) | 100 CZK/godz. (23:00–6:00)<br><em>(sprawdź ceny na miejscu)</em><br><strong>Płatność:</strong> Tylko kartą w automacie<br><strong>Odległość do hotelu:</strong> 5 minut pieszo przez park Kampa<br><strong>Wskazówka:</strong> Najbliższy, ale bardzo drogi.",
+                pkOpt3Title: "Strzeżony Parking i Garaż (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Cena:</strong> online 750 CZK / 24 godz., na miejscu 1200 CZK / 24 godz.<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą online lub na miejscu<br><strong>Odległość do hotelu:</strong> 20 minut komunikacją miejską<br><strong>Wskazówka:</strong> Dobra alternatywa, gdy Old Town Parking jest pełny.",
+                pkOpt4Title: "P+R Kotlářka – Tani Parking Miejski",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Wjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 CZK za pierwsze 24 godz., 10 CZK za każdą kolejną godzinę<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Odległość do hotelu:</strong> 30 minut komunikacją miejską<br><strong>Wskazówka:</strong> Najtańszy możliwy parking w Pradze."
+            },
+            ua: {
+                title: "Кіоск",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Ремонт / Допомога",
+                parking: "Паркування",
+                coInstructions: "Будь ласка, введіть номер кімнати та ім'я зареєстрованого гостя.",
+                coLuggageTitle: "Камера Зберігання Багажу",
+                coLuggageText: "Якщо ви бажаєте залишити свій багаж, будь ласка, зверніться до персоналу ресторану готелю. З огляду на історичний характер будівлі, наші приміщення для зберігання обмежені, і готель не несе відповідальності за залишені речі. Також ви можете скористатися платною камерою зберігання на Головному залізничному вокзалі (Hlavní nádraží). Туди можна дістатися трамваєм № 15 від Malostranské náměstí – виходьте на зупинці «Hlavní nádraží».",
+                srvInstructions: "Будь ласка, заповніть форму нижче, і ми розглянемо ваш запит якомога швидше. Якщо справа термінова, скористайтеся стаціонарним телефоном поруч із кіоском – з 8:00 до 16:00 він з'єднає вас із віддаленою рецепцією, в інший час доступний аварійний контакт.",
+                roomLabel: "Номер кімнати",
+                nameLabel: "Ім'я та прізвище",
+                issueLabel: "Опис проблеми / Запит",
+                cancel: "СКАСУВАТИ",
+                submit: "ПІДТВЕРДИТИ",
+                back: "ПОВЕРНУТИСЯ НА ГОЛОВНУ",
+                fillAll: "Будь ласка, заповніть усі поля.",
+                thanks: "Дякуємо! Ваш запит успішно надіслано.",
+
+                ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
+                ciWelcomeSubtitle: "Завдяки терміналу самообслуговування ви можете зручно заселитися 24/7.",
+                ciRegTitle: "Реєстрація",
+                ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
+                ciQ1Title: "Коли та як ви отримаєте код?",
+                ciQ1Text: "Як тільки ваш номер буде готовий, ми надішлемо вам код доступу в SMS, e-mail або через чат системи бронювання — найпізніше о 15:00, коли офіційно розпочинається заїзд.",
+                ciBfTitle: "Сніданок",
+                ciBfText: "Сніданок подається у формі шведського столу на першому поверсі ресторану з 8:00 до 10:00.",
+                ciQ2Title: "Код не надійшов?",
+                ciQ2Text: "Якщо ви бронювали через сторонні сервіси, у нас може не бути ваших прямих контактів. З 8:00 до 16:00 скористайтеся телефоном біля терміналу. В інший час телефонуйте за аварійним номером.",
+                ciQ3Title: "Багаж",
+                ciQ3Text: "Якщо ваш номер ще не готовий, персонал нашого ресторану із задоволенням прийме ваш багаж. Оскільки будівля є історичною, місце обмежене, і ми не несемо юридичної відповідальності за речі.",
+                ciQ4Title: "Паркування",
+                ciQ4Text: "У зв'язку з розташуванням в історичному центрі ми не маємо власного паркінгу. Поради щодо паркування поблизу шукайте за кнопкою «Паркування» на головному екрані. Ця інформація також зазначена на наших вебсайтах, включно з усіма профілями третіх сторін, такими як Booking.com, Expedia та інші.",
+                ciQ5Title: "Архітектура",
+                ciQ5Text: "Наша будівля є унікальною історичною пам'яткою, тому, на жаль, ліфт відсутній. Якщо вам потрібна допомога, ми завжди поруч.",
+                ciInfoStandText: "Додаткову корисну інформацію ви знайдете у вашому номері на інформаційній стійці.",
+                ciWifiTitle: "📶 Підключення Wi-Fi",
+                ciWifiNetLabel: "Назва мережі / SSID",
+                ciWifiPassLabel: "Пароль / Password",
+                ciWishText: "Бажаємо вам чудового та приємного відпочинку!",
+
+                pkWelcomeTitle: "Варіанти паркування",
+                pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу. Ця інформація зазначена на нашому вебсайті, включно з усіма профілями третіх сторін.",
+                pkQrText: "Відскануйте QR-код, щоб відкрити вебсайт.",
+                pkOpt1Title: "Підземний гараж під охороною",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
+                pkOpt2Title: "Відкритий паркінг без охорони",
+                pkOpt2Text: "<strong>Адреса в'їзду:</strong> Nosticova 634 (виїзд з протилежного боку, там паркомат)<br><strong>Ціна:</strong> 75 CZK/год (6:00–23:00) | 100 CZK/год (23:00–6:00)<br><em>(перевіряйте ціни на місці)</em><br><strong>Оплата:</strong> Лише карткою в автоматі<br><strong>Відстань до готелю:</strong> 5 хвилин пішки через парк Кампа<br><strong>Примітка:</strong> Найближчий, але дуже дорогий.",
+                pkOpt3Title: "Охоронюваний паркінг та гараж (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Адреса:</strong> Hybernská 2140/17<br><strong>Ціна:</strong> онлайн 750 CZK / 24 год, на місці 1200 CZK / 24 год<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою онлайн або на місці<br><strong>Відстань до готелю:</strong> 20 хвилин громадським транспортом<br><strong>Примітка:</strong> Чудова альтернатива, якщо Old Town Parking заповнений.",
+                pkOpt4Title: "P+R Kotlářka – Бюджетний міський паркінг",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший варіант паркування в Празі."
+            },
+            tr: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Tamir / Yardım",
+                parking: "Otopark",
+                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
+                coLuggageTitle: "Bagaj Muhafazası",
+                coLuggageText: "Bagajınızı bırakmak isterseniz, lütfen otel restoran personeliyle iletişime geçin. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otel bırakılan eşyalardan sorumlu tutulamaz. Alternatif olarak, Ana Tren İstasyonu'ndaki (Hlavní nádraží) ücretli bagaj muhafaza hizmetini kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvaya binip „Hlavní nádraží“ durağında inerek ulaşabilirsiniz.",
+                srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa, lütfen kiosk yanındaki sabit telefonu kullanın – 8:00–16:00 saatleri arasında sizi uzaktan resepsiyona bağlar, bu saatler dışında acil durum irtibatı mevcuttur.",
+                roomLabel: "Oda numarası",
+                nameLabel: "Ad Soyad",
+                issueLabel: "Sorun açıklaması / Talep",
+                cancel: "İPTAL",
+                submit: "ONAYLA",
+                back: "ANA EKRANA DÖN",
+                fillAll: "Lütfen tüm alanları doldurun.",
+                thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
+
+                ciWelcomeTitle: "Otelimize hoş geldiniz!",
+                ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 rahatça giriş yapabilirsiniz.",
+                ciRegTitle: "Kayıt",
+                ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
+                ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
+                ciQ1Text: "Odanız hazır olur olmaz, tüm kapılar için erişim kodunu SMS, e-posta veya rezervasyon sağlayıcınızın uygulama içi mesajı ile göndereceğiz — en geç resmi giriş saati olan 15:00'e kadar.",
+                ciBfTitle: "Kahvaltı",
+                ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak servis edilir.",
+                ciQ2Title: "Kodunuz ulaşmadı mı?",
+                ciQ2Text: "Üçüncü taraf bir platform üzerinden rezervasyon yaptıysanız, doğrudan iletişim bilgileriniz bizde olmayabilir. 8:00–16:00 saatleri arasında kioskun yanındaki telefonu kullanın, bu saatler dışında acil durum numarasını arayın.",
+                ciQ3Title: "Bagaj",
+                ciQ3Text: "Odanız henüz hazır değilse, restoran personelimiz bagajınızı saklamaktan mutluluk duyacaktır. Ancak tarihi bir binada olduğumuz için alanımız sınırlıdır ve hukuki sorumluluk kabul edememekteyiz.",
+                ciQ4Title: "Otopark",
+                ciQ4Text: "Tarihi merkezde yer aldığımız için özel otoparkımız yoktur. Çevredeki tüm otopark ipuçlarını ana ekrandaki „Otopark“ butonuna basarak bulabilirsiniz. Bu bilgi ayrıca Booking.com, Expedia ve diğerleri gibi tüm üçüncü taraf profilleri dâhil olmak üzere web sitelerimizde de yer almaktadır.",
+                ciQ5Title: "Mimari",
+                ciQ5Text: "Binamız tarihi bir yapı olup ne yazık ki asansör bulunmamaktadır. Bir şeye ihtiyacınız olursa size yardımcı olmaktan mutluluk duyarız.",
+                ciInfoStandText: "Daha fazla yararlı bilgi ve ipucunu odanızdaki bilgi standında bulabilirsiniz.",
+                ciWifiTitle: "📶 Wi-Fi Bağlantısı",
+                ciWifiNetLabel: "Ağ Adı / SSID",
+                ciWifiPassLabel: "Şifre / Password",
+                ciWishText: "Harika ve huzurlu bir konaklama dileriz!",
+
+                pkWelcomeTitle: "Otopark Seçenekleri",
+                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır. Bu bilgi, tüm üçüncü taraf profilleri de dahil olmak üzere web sitemizde belirtilmiştir.",
+                pkQrText: "Web sitesini açmak için QR kodunu tarayın.",
+                pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Fiyat:</strong> 11–24 saat için 750 CZK (güncel fiyatı web sitesinden kontrol edin)<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG ve CNG'li araçlar giremez<br><strong>Otele Dönüş Mesafesi:</strong> Mánes Köprüsü üzerinden yürüyerek 10 dakika<br><strong>Not:</strong> İdeal seçim. Web sitesinden önceden rezerve edilebilir ve ödenebilir.",
+                pkOpt2Title: "Güvenliksiz Açık Otopark",
+                pkOpt2Text: "<strong>Giriş Adresi:</strong> Nosticova 634 (çıkış karşı taraftadır, otomat oradadır)<br><strong>Fiyat:</strong> 75 CZK/saat (6:00–23:00) | 100 CZK/saat (23:00–6:00)<br><em>(güncel fiyatı yerinde kontrol edin)</em><br><strong>Ödeme:</strong> Otomatta sadece kart ile<br><strong>Otele Dönüş Mesafesi:</strong> Kampa Parkı üzerinden yürüyerek 5 dakika<br><strong>Not:</strong> En yakını ama oldukça pahalı.",
+                pkOpt3Title: "Güvenlikli Açık ve Kapalı Otopark (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Fiyat:</strong> Online rezervasyonda 750 CZK / 24 saat, yerinde 1.200 CZK / 24 saat<br><em>(güncel fiyatı web sitesinden kontrol edin)</em><br><strong>Ödeme:</strong> Web sitesinden kartla veya yerinde<br><strong>Otele Dönüş Mesafesi:</strong> Toplu taşıma ile 20 dakika<br><strong>Not:</strong> Old Town Parking doluysa harika bir alternatif.",
+                pkOpt4Title: "P+R Kotlářka – Uygun Fiyatlı Şehir Otoparkı",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Giriş:</strong> 50.0685878N, 14.3580586E<br><strong>Fiyat:</strong> İlk 24 saat için 50 CZK, sonraki her saat için 10 CZK<br><em>(güncel fiyatı web sitesinden kontrol edin)</em><br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Otele Dönüş Mesafesi:</strong> Toplu taşıma ile 30 dakika<br><strong>Not:</strong> Prag'daki gerçekten en ucuz otopark seçeneği."
+            },
+            da: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Reparation / Hjælp",
+                parking: "Parkering",
+                coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede gæst.",
+                coLuggageTitle: "Bagageopbevaring",
+                coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte personalet i hotellets restaurant. På grund af bygningens historiske karakter er vores opbevaringsplads begrænset, og hotellet påtager sig intet ansvar for opbevarede genstande. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží). Du kan komme dertil med sporvogn nr. 15 fra Malostranské náměstí – stå af ved stoppestedet „Hlavní nádraží“.",
+                srvInstructions: "Udfyld venligst formularen nedenfor, så vil vi behandle din anmodning hurtigst muligt. Hvis sagen er hastende, bedes du benytte fastnettelefonen ved siden af kiosken – fra 8:00 til 16:00 forbinder den dig til fjernreceptionen, uden for dette tidsrum er der en nødkontakt tilgængelig.",
+                roomLabel: "Værelsesnummer",
+                nameLabel: "Fulde navn",
+                issueLabel: "Beskrivelse af problem / Anmodning",
+                cancel: "ANNULLER",
+                submit: "BEKRÆFT",
+                back: "TILBAGE TIL HOVEDSKÆRM",
+                fillAll: "Udfyld venligst alle felter.",
+                thanks: "Tak! Din anmodning er blevet sendt med succes.",
+
+                ciWelcomeTitle: "Velkommen til vores hotel!",
+                ciWelcomeSubtitle: "Takket være vores selvbetjeningskiosk kan du tjekke ind nemt døgnet rundt.",
+                ciRegTitle: "Registrering",
+                ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
+                ciQ1Title: "Hvornår og hvordan modtager du din kode?",
+                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode til alle døre via SMS, e-mail eller besked i din bookingsystem-app — senest kl. 15:00, hvor den officielle check-in starter.",
+                ciBfTitle: "Morgenmad",
+                ciBfText: "Morgenmad serveres som buffet i restaurantens stueetage fra 8:00 til 10:00.",
+                ciQ2Title: "Har du ikke modtaget din kode?",
+                ciQ2Text: "Hvis du har booket via en tredjepart, har vi muligvis ikke dine direkte kontaktoplysninger. Mellem 8:00 og 16:00 bedes du benytte fastnettelefonen ved kiosken. Uden for dette tidsrum bedes du ringe til nødkontakten.",
+                ciQ3Title: "Bagage",
+                ciQ3Text: "Hvis dit værelse ikke er klar endnu, opbevarer restaurantens personale gerne din bagage. Da dette er en historisk bygning, er vores plads begrænset, og vi kan ikke påtage os juridisk ansvar.",
+                ciQ4Title: "Parkering",
+                ciQ4Text: "Grundet vores placering i det historiske centrum har vi ikke egen parkering. Du kan finde alle parkeringstips i nærheden ved at trykke på knappen „Parkering“ på hovedskærmen. Denne information findes også på vores hjemmesider, inklusive alle tredjepartsprofiler som Booking.com, Expedia og andre.",
+                ciQ5Title: "Arkitektur",
+                ciQ5Text: "Vores bygning er en unik historisk ejendom og har desværre ingen elevator. Hvis du har brug for hjælp, står vi til rådighed.",
+                ciInfoStandText: "Du kan finde flere nyttige oplysninger og tips på informationsstanderen på dit værelse.",
+                ciWifiTitle: "📶 Wi-Fi Forbindelse",
+                ciWifiNetLabel: "Netværksnavn / SSID",
+                ciWifiPassLabel: "Adgangskode / Password",
+                ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
+
+                pkWelcomeTitle: "Parkeringsmuligheder",
+                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkeringsplads. Denne information fremgår af vores hjemmeside, inklusive alle tredjepartsprofiler.",
+                pkQrText: "Scan QR-koden for at åbne hjemmesiden.",
+                pkOpt1Title: "Overvåget Underjordisk Garage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek aktuel pris på hjemmesiden)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærkning:</strong> Den gyldne middelvej. Kan reserveres og betales på forhånd online.",
+                pkOpt2Title: "Uovervåget Udendørs Parkering",
+                pkOpt2Text: "<strong>Indkørselsadresse:</strong> Nosticova 634 (udkørsel på modsatte side med automat)<br><strong>Pris:</strong> 75 CZK/time (6:00–23:00) | 100 CZK/time (23:00–6:00)<br><em>(tjek prisen på stedet)</em><br><strong>Betaling:</strong> Kun kort i automaten<br><strong>Afstand til hotel:</strong> 5 minutters gang gennem Kampa parken<br><strong>Bemærkning:</strong> Tættest på, men meget dyrt.",
+                pkOpt3Title: "Overvåget Parkering & Garage (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Adresse:</strong> Hybernská 2140/17<br><strong>Pris:</strong> Online 750 CZK / 24 timer, på stedet 1.200 CZK / 24 timer<br><em>(tjek aktuel pris på hjemmesiden)</em><br><strong>Betaling:</strong> Kort online eller på stedet<br><strong>Afstand til hotel:</strong> 20 minutter med offentlig transport<br><strong>Bemærkning:</strong> Godt alternativ, hvis Old Town Parking er fuldt optaget.",
+                pkOpt4Title: "P+R Kotlářka – Billig By-parkering",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Indkørsel:</strong> 50.0685878N, 14.3580586E<br><strong>Pris:</strong> 50 CZK for de første 24 timer, 10 CZK for hver efterfølgende time<br><em>(tjek aktuel pris på hjemmesiden)</em><br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Afstand til hotel:</strong> 30 minutter med offentlig transport<br><strong>Bemærkning:</strong> Den absolut billigste parkeringsmulighed i Prag."
+            },
+            ja: {
+                title: "キオスク",
+                checkin: "チェックイン",
+                checkout: "チェックアウト",
+                service: "修理 / お問い合わせ",
+                parking: "駐車場",
+                coInstructions: "部屋番号とご登録者様のお名前を入力してください。",
+                coLuggageTitle: "手荷物預かり",
+                coLuggageText: "お荷物のお預かりをご希望の場合は、ホテルレストランのスタッフにお申し付けください。歴史的建造物のため保管スペースに限りがあり、お預かりした荷物についてホテルは責任を負いかねます。また、プラハ中央駅（Hlavní nádraží）の有料コインロッカーもご利用いただけます。マロストランスケー広場から15番のトラムに乗り、「Hlavní nádraží」で下車してください。",
+                srvInstructions: "以下のフォームにご記入ください。できるだけ早く対応いたします。緊急の場合は、キオスクの横にある固定電話をご利用ください。8:00〜16:00はリモートレセプションにつながり、それ以外の時間帯は緊急連絡先が利用可能です。",
+                roomLabel: "部屋番号",
+                nameLabel: "お名前（フルネーム）",
+                issueLabel: "ご要望・ご意見の内容",
+                cancel: "キャンセル",
+                submit: "送信",
+                back: "メイン画面に戻る",
+                fillAll: "すべての項目を入力してください。",
+                thanks: "ありがとうございます！リクエストが正常に送信されました。",
+
+                ciWelcomeTitle: "当ホテルへようこそ！",
+                ciWelcomeSubtitle: "セルフサービス・キオスクにより、24時間いつでもスムーズにチェックインいただけます。",
+                ciRegTitle: "宿泊者登録",
+                ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
+                ciQ1Title: "暗証番号の受け取り方法と時間",
+                ciQ1Text: "お部屋の準備が整い次第、遅くとも公式チェックイン開始時間の15:00までに、SMS、メール、または予約サイトのメッセージにて全ドア共通の暗証番号をお送りします。",
+                ciBfTitle: "朝食",
+                ciBfText: "朝食は1階レストランにて、8:00から10:00までビュッフェ形式でご用意しております。",
+                ciQ2Title: "コードが届かない場合",
+                ciQ2Text: "旅行サイト経由でご予約の場合、連絡先が直接届いていない可能性がございます。8:00〜16:00はキオスク横の固定電話を、時間外は緊急連絡先にお電話ください。",
+                ciQ3Title: "手荷物のお預かり",
+                ciQ3Text: "お部屋の準備がまだの場合は、レストランスタッフが手荷物をお預かりいたします。ただし歴史的建造物のためスペースが狭く、法的責任は負いかねますのでご了承ください。",
+                ciQ4Title: "駐車場について",
+                ciQ4Text: "歴史的保全地区に位置するため、専用駐車場はございません。周辺の駐車場情報は、メイン画面の「駐車場」ボタンよりご確認いただけます。この情報は、Booking.com、Expediaなどのすべての第三者プロフィールを含む、当社のウェブサイトにも掲載されています。",
+                ciQ5Title: "館内設備・エレベーター",
+                ciQ5Text: "当館は歴史的建造物をそのまま活かしているため、エレベーターがございません。お荷物の運搬などサポートが必要な場合はお気軽にお声がけください。",
+                ciInfoStandText: "その他の役立つ情報やガイドは、お部屋に設置されているインフォメーションスタンドをご覧ください。",
+                ciWifiTitle: "📶 Wi-Fi 接続",
+                ciWifiNetLabel: "ネットワーク名 / SSID",
+                ciWifiPassLabel: "パスワード",
+                ciWishText: "快適で素晴らしい滞在になりますように！",
+
+                pkWelcomeTitle: "駐車場のご案内",
+                pkWelcomeSubtitle: "プラハ歴史地区の中心部に位置するため、ホテル専用の駐車場はございません。この情報は、すべての第三者プロフィールを含む当ホテルのウェブサイトに記載されています。",
+                pkQrText: "QRコードをスキャンしてウェブサイトを開いてください。",
+                pkOpt1Title: "監視付き地下駐車場",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>住所:</strong> Alšovo nábřeží, 110 00<br><strong>料金:</strong> 11〜24時間で750 CZK（最新料金はWebサイトでご確認ください）<br><strong>車両制限:</strong> 高さ最大2メートル<br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>重要:</strong> LPG / CNG車は入場不可<br><strong>ホテルまでの距離:</strong> マーネス橋経由で徒歩10分<br><strong>特徴:</strong> 一番おすすめの駐車場。Webサイトから事前予約・事前決済が可能です。",
+                pkOpt2Title: "屋屋外駐車場（監視なし）",
+                pkOpt2Text: "<strong>入口住所:</strong> Nosticova 634（出口は反対側で、そこに精算機があります）<br><strong>料金:</strong> 75 CZK/時間 (6:00–23:00) | 100 CZK/時間 (23:00–6:00)<br><em>（現地の看板・精算機で料金をご確認ください）</em><br><strong>支払い:</strong> 精算機にてクレジットカードのみ<br><strong>ホテルまでの距離:</strong> カンパ公園経由で徒歩5分<br><strong>特徴:</strong> 最も近いですが、非常に高額です。",
+                pkOpt3Title: "監視付き屋外・ガレージ駐車場 (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>住所:</strong> Hybernská 2140/17<br><strong>料金:</strong> オンライン予約 750 CZK / 24時間、現地決済 1,200 CZK / 24時間<br><em>（最新料金はWebサイトでご確認ください）</em><br><strong>支払い:</strong> Webサイトでカード決済、または現地支払い<br><strong>ホテルまでの距離:</strong> 公共交通機関で約20分<br><strong>特徴:</strong> Old Town Parkingが満車の場合の良い代替案です。",
+                pkOpt4Title: "P+R Kotlářka – 市営格安駐車場",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>住所:</strong> Plzeňská<br><strong>GPS入口:</strong> 50.0685878N, 14.3580586E<br><strong>料金:</strong> 最初の24時間は50 CZK、以降1時間ごとに10 CZK<br><em>（最新料金はWebサイトでご確認ください）</em><br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>ホテルまでの距離:</strong> 公共交通機関で約30分<br><strong>特徴:</strong> プラハで最も安く利用できる駐車場です。"
+            },
+            he: {
+                title: "קיוסק",
+                checkin: "צ'ק-אין",
+                checkout: "צ'ק-אאוט",
+                service: "תיקונים / עזרה",
+                parking: "חנייה",
+                coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום.",
+                coLuggageTitle: "אחסון מזוודות",
+                coLuggageText: "אם ברצונך לאחסן את החפצים שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של המבנה, שטח האחסון מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, ניתן להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - לרדת בתחנת „Hlavní nádraží”.",
+                srvInstructions: "אנא מלא את הטופס להלן ונטפל בפנייתך בהקדם האפשרי. אם העניין דחוף, אנא השתמש בטלפון הקווי לצד הקיוסק - בין השעות 8:00 ל-16:00 הוא יקשר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
+                roomLabel: "מספר חדר",
+                nameLabel: "שם מלא",
+                issueLabel: "תיאור הבעיה / בקשה",
+                cancel: "ביטול",
+                submit: "אישור",
+                back: "חזרה למסך הראשי",
+                fillAll: "אנא מלא את כל השדות.",
+                thanks: "תודה! פנייתך נשלחה בהצלחה.",
+
+                ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
+                ciWelcomeSubtitle: "בזכות עמדת השירות העצמי תוכלו לבצע צ'ק-אין בקלות 24/7.",
+                ciRegTitle: "הרשמה",
+                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
+                ciQ1Title: "מתי ואיך תקבלו את הקוד?",
+                ciQ1Text: "ברגע שהחדר מוכן, נשלח לכם קוד גישה לכל הדלתות ב-SMS, במייל או בצ'אט של האתר דרכו הזמנתם — לכל המאוחר בשעה 15:00, שעת הצ'ק-אין הרשמית.",
+                ciBfTitle: "ארוחת בוקר",
+                ciBfText: "ארוחת הבוקר מוגשת במתכונת בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
+                ciQ2Title: "הקוד לא הגיע?",
+                ciQ2Text: "אם הזמנתם דרך צד שלישי, ייתכן שאין לנו את פרטי ההתקשרות הישירים שלכם. בין 8:00 ל-16:00 אנא השתמשו בטלפון הקווי לצד העמדה. מחוץ לשעות אלה התקשרו למספר החירום.",
+                ciQ3Title: "מזוודות",
+                ciQ3Text: "אם החדר עדיין אינו מוכן, צוות המסעדה ישמח לשמור על המזוודות שלכם. מכיוון מדובר במבנה היסטורי, השטח מוגבל ואיננו יכולים לקחת אחריות משפטית.",
+                ciQ4Title: "חנייה",
+                ciQ4Text: "בשל המיקום במרכז ההיסטורי, אין לנו חנייה פרטית. טיפים מלאים לחנייה בסביבה תמצאו תחת הלחצן „חנייה” במסך הראשי. מידע זה מופיע גם באתרי האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים כגון Booking.com, Expedia ואחרים.",
+                ciQ5Title: "ארכיטקטורה",
+                ciQ5Text: "המבנה שלנו הוא נכס היסטורי ייחודי ולצערינו אין בו מעלית. אם אתם זקוקים לעזרה, אנו כאן לשירותכם.",
+                ciInfoStandText: "מידע שימושי נוסף והמלצות תמצאו על מעמד המידע בחדרכם.",
+                ciWifiTitle: "📶 חיבור Wi-Fi",
+                ciWifiNetLabel: "שם רשת / SSID",
+                ciWifiPassLabel: "סיסמה / Password",
+                ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
+
+                pkWelcomeTitle: "אפשרויות חנייה",
+                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חניון פרטי. מידע זה מצוין באתר האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים.",
+                pkQrText: "סרקו את קוד ה-QR כדי לפתוח את אתר האינטרנט.",
+                pkOpt1Title: "חניון תת-קרקעי שמור",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות (בדקו מחיר עדכני באתר)<br><strong>גובה רכב:</strong> מקסימום 2 מטרים<br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז (LPG / CNG)<br><strong>מרחק בחזרה למלון:</strong> 10 דקות הליכה דרך גשר Mánes<br><strong>הערה:</strong> השילוב המנצח. ניתן להזמין מקום ולשלם מראש באתר.",
+                pkOpt2Title: "חניון חיצוני לא שמור",
+                pkOpt2Text: "<strong>כתובת כניסה:</strong> Nosticova 634 (היציאה בצד השני, שם ממוקמת המכונה)<br><strong>מחיר:</strong> 75 CZK לשעה (6:00–23:00) | 100 CZK לשעה (23:00–6:00)<br><em>(בדקו מחירים עדכניים במקום)</em><br><strong>תשלום:</strong> בכרטיס אשראי בלבד במכונה<br><strong>מרחק בחזרה למלון:</strong> 5 דקות הליכה דרך פארק קאמפה<br><strong>הערה:</strong> הכי קרוב, אך יקר מאוד.",
+                pkOpt3Title: "חניון פתוח וסגור שמור (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>כתובת:</strong> Hybernská 2140/17<br><strong>מחיר:</strong> בהזמנה אונליין 750 CZK / 24 שעות, במקום 1,200 CZK / 24 שעות<br><em>(בדקו מחיר עדכני באתר)</em><br><strong>תשלום:</strong> בכרטיס באתר או במקום<br><strong>מרחק בחזרה למלון:</strong> 20 דקות בתחבורה ציבורית<br><strong>הערה:</strong> אלטרנטיבה מצוינת אם חניון Old Town Parking מלא.",
+                pkOpt4Title: "P+R Kotlářka – חניון עירוני זול",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>כתובת:</strong> Plzeňská<br><strong>GPS כניסה:</strong> 50.0685878N, 14.3580586E<br><strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות, 10 CZK לכל שעה נוספת<br><em>(בדקו מחיר עדכני באתר)</em><br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>מרחק בחזרה למלון:</strong> 30 דקות בתחבורה ציבורית<br><strong>הערה:</strong> אפשרות החנייה הזולה ביותר בפראג."
+            },
+            el: {
+                title: "Kiosk",
+                checkin: "Check-in",
+                checkout: "Check-out",
+                service: "Επισκευή / Βοήθεια",
+                parking: "Στάθμευση",
+                coInstructions: "Παρακαλώ εισάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη.",
+                coLuggageTitle: "Φύλαξη Αποσκευών",
+                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε επικοινωνήστε με το προσωπικό του εστιατορίου του ξενοδοχείου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος αποθήκευσης είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη για τα αντικείμενα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη επί πληρωμή φύλαξη αποσκευών στον Κεντρικό Σταθμό (Hlavní nádraží). Μπορείτε να πάτε εκεί με το τραμ 15 από τη στάση Malostranské náměstí – κατεβείτε στη στάση „Hlavní nádraží”.",
+                srvInstructions: "Παρακαλούμε συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Εάν το θέμα είναι επείγον, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι – από τις 8:00 έως τις 16:00 σας συνδέει με την εξ αποστάσεως υποδοχή, εκτός αυτών των ωρών υπάρχει διαθέσιμη επαφή έκτακτης ανάγκης.",
+                roomLabel: "Αριθμός δωματίου",
+                nameLabel: "Ονοματεπώνυμο",
+                issueLabel: "Περιγραφή προβλήματος / Αίτημα",
+                cancel: "ΑΚΥΡΩΣΗ",
+                submit: "ΕΠΙΒΕΒΑΙΩΣΗ",
+                back: "ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ",
+                fillAll: "Παρακαλούμε συμπληρώστε όλα τα πεδία.",
+                thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
+
+                ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
+                ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in εύκολα 24/7.",
+                ciRegTitle: "Εγγραφή",
+                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
+                ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
+                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή μέσω της εφαρμογής κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά επίσημα το check-in.",
+                ciBfTitle: "Πρωινό",
+                ciBfText: "Το πρωινό σερβίρεται σε μορφή μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
+                ciQ2Title: "Δεν λάβατε τον κωδικό;",
+                ciQ2Text: "Εάν κάνατε κράτηση μέσω τρίτων, ίσως να μην έχουμε τα άμεσα στοιχεία επικοινωνίας σας. Από τις 8:00 έως τις 16:00 χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι. Εκτός αυτών των ωρών καλέστε την επαφή έκτακτης ανάγκης.",
+                ciQ3Title: "Αποσκευές",
+                ciQ3Text: "Εάν το δωμάτιό σας δεν είναι ακόμα έτοιμο, το προσωπικό του εστιατορίου μας θα φυλάξει ευχαρίστως τις αποσκευές σας. Καθώς πρόκειται για ιστορικό κτίριο, ο χώρος μας είναι περιορισμένος και δεν φέρουμε νομική ευθύνη.",
+                ciQ4Title: "Στάθμευση",
+                ciQ4Text: "Λόγω της موقع μας στο ιστορικό κέντρο, δεν διαθέτουμε ιδιωτικό χώρο στάθμευσης. Θα βρείτε όλες τις συμβουλές στάθμευσης στη γύρω περιοχή πατώντας το κουμπί „Στάθμευση” στην αρχική οθόνη. Η πληροφορία αυτή αναφέρεται επίσης στις ιστοσελίδες μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων, όπως Booking.com, Expedia και άλλα.",
+                ciQ5Title: "Αρχιτεκτονική",
+                ciQ5Text: "Το κτίριό μας είναι ένα μοναδικό ιστορικό ακίνητο και δυστυχώς δεν διαθέτει ασανσέρ. Εάν χρειάζεστε βοήθεια, είμαστε στη διάθεσή σας.",
+                ciInfoStandText: "Περισσότερες χρήσιμες πληροφορίες και συμβουλές θα βρείτε στο ειδικό stand πληροφοριών στο δωμάτιό σας.",
+                ciWifiTitle: "📶 Σύνδεση Wi-Fi",
+                ciWifiNetLabel: "Όνομα δικτύου / SSID",
+                ciWifiPassLabel: "Κωδικός / Password",
+                ciWishText: "Σας ευχόμαστε μια υπέροχη και ευχάριστη διαμονή!",
+
+                pkWelcomeTitle: "Επιλογές Στάθμευσης",
+                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης. Αυτή η πληροφορία αναφέρεται στον ιστότοπό μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων.",
+                pkQrText: "Σαρώστε τον κωδικό QR για να ανοίξετε τον ιστότοπο.",
+                pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
+                pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες (ελέγξτε τις τρέχουσες τιμές στον ιστότοπο)<br><strong>Ύψος οχήματος:</strong> μέγιστο 2 μέτρα<br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται η είσοδος σε οχήματα LPG / CNG<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes<br><strong>Σημείωση:</strong> Η χρυσή τομή. Δυνατότητα κράτησης και προπληρωμής online.",
+                pkOpt2Title: "Μη Φυλασσόμενος Εξωτερικός Χώρος Στάθμευσης",
+                pkOpt2Text: "<strong>Διεύθυνση Εισόδου:</strong> Nosticova 634 (η έξοδος είναι στην απέναντι πλευρά, εκεί βρίσκεται το μηχάνημα)<br><strong>Τιμή:</strong> 75 CZK/ώρα (6:00–23:00) | 100 CZK/ώρα (23:00–6:00)<br><em>(ελέγξτε τις τιμές επί τόπου)</em><br><strong>Πληρωμή:</strong> Μόνο με κάρτα στο μηχάνημα<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 5 λεπτά με τα πόδια μέσω του πάρκου Kampa<br><strong>Σημείωση:</strong> Το πλησιέστερο, αλλά πολύ ακριβό.",
+                pkOpt3Title: "Φυλασσόμενο Εξωτερικό & Στεγασμένο Γκαράζ (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/en/prague-1-hybernska/</strong><br><strong>Διεύθυνση:</strong> Hybernská 2140/17<br><strong>Τιμή:</strong> online 750 CZK / 24 ώρες, επί τόπου 1.200 CZK / 24 ώρες<br><em>(ελέγξτε τις τιμές στον ιστότοπο)</em><br><strong>Πληρωμή:</strong> Με κάρτα online ή επί τόπου<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 20 λεπτά με τη δημόσια συγκοινωνία<br><strong>Σημείωση:</strong> Εξαιρετική εναλλακτική εάν το Old Town Parking είναι γεμάτο.",
+                pkOpt4Title: "P+R Kotlářka – Οικονομικός Δημοτικός Χώρος Στάθμευσης",
+                pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Διεύθυνση:</strong> Plzeňská<br><strong>GPS Εισόδου:</strong> 50.0685878N, 14.3580586E<br><strong>Τιμή:</strong> 50 CZK για τις πρώτες 24 ώρες, 10 CZK για κάθε επιπλέον ώρα<br><em>(ελέγξτε τις τιμές στον ιστότοπο)</em><br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 30 λεπτά με τη δημόσια συγκοινωνία<br><strong>Σημείωση:</strong> Η φθηνότερη επιλογή στάθμευσης στην Πράγα."
+            }
+        };
+
+        // NAVIGATION LOGIC
+        function hideAllScreens() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-checkin').classList.add('hidden');
+            document.getElementById('screen-checkout').classList.add('hidden');
+            document.getElementById('screen-service').classList.add('hidden');
+            document.getElementById('screen-parking').classList.add('hidden');
+            document.getElementById('screen-thanks').classList.add('hidden');
+        }
+
+        function openCheckinInfo() {
+            hideAllScreens();
+            document.getElementById('screen-checkin').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function openCheckoutForm() {
+            hideAllScreens();
+            document.getElementById('screen-checkout').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function openServiceForm() {
+            hideAllScreens();
+            document.getElementById('screen-service').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function openParkingInfo() {
+            hideAllScreens();
+            document.getElementById('screen-parking').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function resetToStart() {
+            clearTimeout(autoResetTimer);
+            hideAllScreens();
+            document.getElementById('screen-1').classList.remove('hidden');
+            
+            // Clear inputs
+            document.getElementById('coRoomInput').value = '';
+            document.getElementById('coNameInput').value = '';
+            document.getElementById('srvRoomInput').value = '';
+            document.getElementById('srvIssueInput').value = '';
+            document.getElementById('srvNameInput').value = '';
+        }
+
+        function startAutoResetTimer() {
+            clearTimeout(autoResetTimer);
+            autoResetTimer = setTimeout(() => {
+                resetToStart();
+            }, AUTO_RESET_TIMEOUT);
+        }
+
+        // Reset timer on user interactions
+        document.addEventListener('click', () => {
+            if (!document.getElementById('screen-1').classList.contains('hidden')) return;
+            startAutoResetTimer();
+        });
+
+        document.addEventListener('keypress', () => {
+            if (!document.getElementById('screen-1').classList.contains('hidden')) return;
+            startAutoResetTimer();
+        });
+
+        // FORM SUBMISSION (NTFY INTEGRATION)
+        function submitCheckout() {
+            const room = document.getElementById('coRoomInput').value.trim();
+            const name = document.getElementById('coNameInput').value.trim();
+            const dict = i18n[currentLang] || i18n['en'];
+
+            if (!room || !name) {
+                alert(dict.fillAll);
+                return;
+            }
+
+            const message = `🔴 CHECK-OUT\n\nPokoj: ${room}\nJméno: ${name}`;
+
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: message,
+                headers: {
+                    'Title': `Check-out: Pokoj ${room}`,
+                    'Priority': 'high',
+                    'Tags': 'red_circle,checkout'
+                }
+            }).then(() => {
+                showThanks();
+            }).catch(err => {
+                console.error("NTFY Push failed:", err);
+                showThanks(); // Show thanks anyway to keep UX smooth
+            });
+        }
+
+        function submitService() {
+            const room = document.getElementById('srvRoomInput').value.trim();
+            const issue = document.getElementById('srvIssueInput').value.trim();
+            const name = document.getElementById('srvNameInput').value.trim();
+            const dict = i18n[currentLang] || i18n['en'];
+
+            if (!room || !issue || !name) {
+                alert(dict.fillAll);
+                return;
+            }
+
+            const message = `🟡 OPRAVA / POMOC\n\nPokoj: ${room}\nJméno: ${name}\nZávada / požadavek: ${issue}`;
+
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: message,
+                headers: {
+                    'Title': `Oprava/Pomoc: Pokoj ${room}`,
+                    'Priority': 'urgent',
+                    'Tags': 'yellow_circle,service'
+                }
+            }).then(() => {
+                showThanks();
+            }).catch(err => {
+                console.error("NTFY Push failed:", err);
+                showThanks();
+            });
+        }
+
+        function showThanks() {
+            hideAllScreens();
+            document.getElementById('screen-thanks').classList.remove('hidden');
+            setTimeout(() => {
+                resetToStart();
+            }, 4000);
+        }
+
+
+        const parkingQrByLang = {"en": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "de": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "it": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "es": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "fr": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "pl": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "ua": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "tr": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "da": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "ja": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "he": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}, "el": {1: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADGklEQVR42u3dSY4kIRAF0aZV979y1j4XSJQPAcSzbXZXDCZ3fUEA4/P5/MNr+O8V8A2+wTf4Bt/gG3yDb6TyM/95jNFzH1/DfF/XTfy17QHnd9X2JtW3fg6+wTduz2tLWWCJSH6J3Mb8unV/eZM3qb71c/ANvnF7XmtLKImDU4kDW/ORuyOynvrWz8E3+MbL8lodbfOhS7lpaWp1z4Uc6ls/B9/gG/JaEnXThfO/HAl3R6y0Vd/6OfgG33hZXmtLKJFklDj61naT6ht8g2/wjb/mtbZFjnUznnXXXXo5bW9Sfevn4Bt84/a8dsQcX2KMqtuEY5M3qb71c/ANvnEeI/IN/dLX+ZvkproLJa5GSHzt6ls/B9/gG7fntXmOqAssa89QtiD0KeqWPahv/Rx8g2+cR+b5BokHCyQOPyUOTiVOvEYCaSTcqW/9HHyDb5zH2OSsgMQxssR52MTrJsbGyKtT3/o5+AbfeFleiwSHtjizyRM9FYTVt34OvsE3bs9rdRmkbquMOW0jaIkRLHGIUH3r5+AbfOM81vbziISOumnKtlGwxK/5vn5tOypBfevn4Bt847q8FgkdiUlw6aD1tkWskcdfInG7YPWtn4Nv8I3r8tpSjpjHmcivTy01reOp4Tb1rZ+Db/CN8xibfLv/1FqFPadl69a0qm/9HHyDb5xH5nzoUqyoO4szkkDbtlRLfFfqG3yDb77x7ry2FA3q5vieGgSsy4lPHSeqvvVz8A2+cV1ei8SZpTQXuY1NtkXb82gr9a2fg2/wjeMZTw30RBJZ3XZsmxyVkPhE6ls/B9/gG8eTeX5oXcqI/N9Nvm5LnDy1nwf4Bt/gW16rSVV1STDx9KYTz9Byfij4Bt98Q15Lylx1I0qRca7IdesCaV0SVN/6OfgG33hZXqujLaAlXjdxR7m6BRXqWz8H3+Ab8lpLfJuzyfFUkWAY+cfqG3zzDb4hryUFh0jmimz0FjkHayk3JW4cYr0B9HPwDb7ltb/miDoiySgS3yIX2iTqqm/wzTf4xm1suv8a1Df4Bt/gG3zzDb7BN/jGEfwCU6IveiiWQWMAAAAASUVORK5CYII=", 3: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAAD3ElEQVR42u3dS1LDMBBFUUyx/y2HeQauNP2RZM6dAo7i3Go9lLZ0vV6vL+ADvt0CcAVcAVfAFXAFXAG4Aq5ghJ/7H1/XNTOO++Xj+2G8/e3bL4cWpu//tu9uZN7+2DDUFZiDwBVwBYdn21D2CRHKa6HXzYTZVXn8iE9BXQFXwBVwBc/KtmP5NHPl0NpraGW2cIH4/v2O3St1BeYgcAVcgWy7N/fxLfPTUAId62dQV8AVcAVcAZ6bbft6Zgu7YgvXfNUVcAVcAVeAimw7lsj6XigUV/s6FjJRd+xTUFfAFXAFXMGzsu0mX6z3LXoW9uqONeeqKzAHgSvgCvBZtt3ku/JNMnWovaGwNWKTT0FdAVfAFXAFh2fbsf1e3668alPawsXWwv0Z+u6zugJzELgCruBRXGMp8ojjCfYcVabPt3AY6grMQeAKuILdadwnYSz5Fq6Bju0QlgnRfTv2qiswB4Er4ArO5jqio3ZsabIwCI89eObsBpiDwBVwBfgs2/aFrFB67VvV7dvNoC+BrnoOTV0BV8AVcAWHZ9tQ1C38Yr2QwtXVviv37aJQeCl1BeYgcAVcweHZdmyfhFDICgXwTKbecwfbwivrt4U5CFwBV/AoYvvbrvo2fJP9Cgr3t+17g325WF0BV8AVcAWHZ9vCYNh3YG1hLh7bRSFzYwvTa+g+qyswB4Er4Ap251r1BXdq0ItOxl3VBluYfDNjVldgDgJXwBXsTupcsrG8FhpkJgiPDbLwXwr728IcBK6AK8Bn2baQsb6CzMm4Y2G277G0TA+GdVuYg8AVcAVnc43tIDXWcNoXwAsj56qkn1nGVVdgDgJXwBXszi7rtn0rs6EV0r4twTJRty9Th267ugKugCvgCp6VbUPBcM9tEwoT99jRFWPdx+oKzEHgCriCs5k7c3fskIi+nR/GwntfHs9cWV2BOQhcAVewO409CX3fs2eC4f3rFobZTPND6C0URnt1BVwBV8AVnM01tiltYXwbS9x9rzt2/kLhSrS6AnMQuAKuYHdi+9v2cb9+GhrVqj7fvqbgVe3G6grMQeAKuIJnZdtMFMqk5lXPZRWOas+TLDKpWV2BOQhcAVfwrGxbmEALw12m0fX+yn0P2vV142aCv7oCcxC4Aq7gH2fbMTIPgIWyXt+qbl8bbOFas7oCroAr4Apk234y0S9zpML9pUIBPBTe+1KzugJzELgCrkC2/VPW6wuzITY58SwTkwvTeuYjU1fAFXAFXMGzsu3Ytgl9rayFy7iZeF74sFxft4O6AnMQuAKu4DA23d8W6gq4Aq4AXAFXwBVwBVwBV/Bv+QVFHuCYV8f+gAAAAABJRU5ErkJggg==", 4: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEoklEQVR42u3dy5LiQAxE0fEE///LPfteEKPQo1Rw7hYoMM6QlLZKfn5+fv4Azfz1F4DOQGcAnYHOQGcAnYHOADrDUV7vX36eZ+Z3hG5LvP9V75cqPKLMrZRfP+PXUu9fzSx16gyKZ5A3QWcAneEqH1BY+Wbq8UwxG/rsWD0+5nuWnEHxDPIm6AygM9zsAwpL7L7Cv/CIMtfW37/5/ReN3dLoO4PiGeRN0BlAZ/hcH3AjodK+r3tnie8Rz0BnAJ2BzsAH3FO8Z8hc8S+8xB9q9cn0FIlnkDcBOgOdAdU+YKwgzTTIF/bYjC0VsgWFK4tnkDcBOgOdgQ9Il7qFjDXzjO317ftVO8+geAY6A50BdIarfMCSFpTCxpjQzYPCWUOn/uclZ1A8A52BzgA6w1U+YGw2fWhgTp/DCBXRhRsC+q7pL3legngGeRN0BtAZdvEUNrcUWorCxpjC5vrCzb03LpWxBeIZ5E3QGUBnuMoH9I21GattQ0eUqXzHGoEKfU+fDRLPIG+CzgA6w2oqnyd8qpZfMpKzr2mqj76xReIZ5E3QGUBn+CAfUFhyZvrlb5xXWtjUX3hbYsysiGegM9AZQGf4IB9QeBE/9ObQUn0bEULVeuiLCuekZt4snkHeBOgMdAY+4D8K0vdkCuHMUqHPFh7RKRvUd+PB/gDImwCdgc7wrT4gVPqNPeb3VKnbN1R1zMqEvlc8g7wJ0BnoDF/jA/qmCS2pT/vcSd/zAzJNRKd2aYhnkDdBZwCdYRfPqUp/7LkFmYo7c7yFTTWV57tuxiofAHkTdAbQGS4mNTc00xjTt8m2z0P02aAlz0vIvNn+AMiboDOAzvC5PiBTGPZN6u/zLqeGGmUOv/AifqHDEM8gb4LOADrDB/mAvkk1faV94cqFZuXU5onMjCN9QZA3QWcAneFinsI+mVMt8GMt/32eqa/z59Q+DPEM8iboDKAz3OwDxgbZF668ZKzm2LzSPgo3XohnkDdBZwCd4SofkCl1M0V0YYkdWuqUlbliPmvmboF4BnkTdAbQGW72AZlKMFO8990e6NvMnPFMfX/O2KviGeRN0BlAZ1jNq696HSv8C29p9F1bHzMcGRtU6E7EM8iboDOAzrCap7AVZGf7Sl9NXWg4+pZasiFZPIO8CToD6Ay7ePUtnZmYX/gMssLPZkrssaUKz0KhkxPPIG+CzgA6wy6evq2hfYN6xqrmvivvO8lsvBDPIG+CzgA6w028QoVhpqiM2ZO2FqOxPqgryvNfS/VZGfEM8iboDKAz7OLZWeqGyvO+2Z+Zn1FokpZMBMockXgGeRN0BtAZdhHbHzA2R3NsrH/oe0O99oU9RX0Ga+xniGeQN0FnAJ3hZh8QquULPcRYu86pSf0Zk9R3+PYHQN4E6Ax0Bj5gE33dSqH7AYW3NAqfjJap9PvuYYhnkDdBZwCdgQ+Ic+opuJnSvvCIQjaobxSofcKQNwE6A52BD4iXnIUr7+zTH6upT13T9/wAyJsAnYHO8K0+YGx8UGHbzKmHAGfuUmQOsPAcFS4lnkHeBJ0BdIZdPH3X9AHxDHQGOgPoDHQGOgPoDHQG0BmW8A9BZfengGhxFAAAAABJRU5ErkJggg=="}};
+
+        // LANGUAGE SWITCHING LOGIC
+        function setLanguage(lang, event) {
+            currentLang = lang;
+
+            // Highlight active flag
+            const flags = document.querySelectorAll('.flag-btn');
+            flags.forEach(f => f.classList.remove('active'));
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            const dict = i18n[lang] || i18n['en'];
+
+            // Main UI
+            document.getElementById('main-title').innerText = dict.title;
+            document.getElementById('btn-checkin-text').innerText = dict.checkin;
+            document.getElementById('btn-checkout-text').innerText = dict.checkout;
+            document.getElementById('btn-service-text').innerText = dict.service;
+            document.getElementById('btn-parking-text').innerText = dict.parking;
+
+            // Checkout Form
+            document.getElementById('co-instructions').innerText = dict.coInstructions;
+            document.getElementById('co-luggage-title').innerText = dict.coLuggageTitle;
+            document.getElementById('co-luggage-text').innerText = dict.coLuggageText;
+            document.getElementById('label-co-room').innerText = dict.roomLabel;
+            document.getElementById('label-co-name').innerText = dict.nameLabel;
+            document.getElementById('btn-cancel-1').innerText = dict.cancel;
+            document.getElementById('btn-submit-1').innerText = dict.submit;
+
+            // Service Form
+            document.getElementById('srv-instructions').innerText = dict.srvInstructions;
+            document.getElementById('label-srv-room').innerText = dict.roomLabel;
+            document.getElementById('label-srv-issue').innerText = dict.issueLabel;
+            document.getElementById('label-srv-name').innerText = dict.nameLabel;
+            document.getElementById('btn-cancel-2').innerText = dict.cancel;
+            document.getElementById('btn-submit-2').innerText = dict.submit;
+
+            // Check-in Info
+            document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
+            document.getElementById('ci-welcome-subtitle').innerText = dict.ciWelcomeSubtitle;
+            document.getElementById('ci-reg-title').innerText = dict.ciRegTitle;
+            document.getElementById('ci-reg-text').innerText = dict.ciRegText;
+            document.getElementById('ci-q1-title').innerText = dict.ciQ1Title;
+            document.getElementById('ci-q1-text').innerText = dict.ciQ1Text;
+            document.getElementById('ci-bf-title').innerText = dict.ciBfTitle;
+            document.getElementById('ci-bf-text').innerText = dict.ciBfText;
+            document.getElementById('ci-q2-title').innerText = dict.ciQ2Title;
+            document.getElementById('ci-q2-text').innerText = dict.ciQ2Text;
+            document.getElementById('ci-q3-title').innerText = dict.ciQ3Title;
+            document.getElementById('ci-q3-text').innerText = dict.ciQ3Text;
+            document.getElementById('ci-q4-title').innerText = dict.ciQ4Title;
+            document.getElementById('ci-q4-text').innerText = dict.ciQ4Text;
+            document.getElementById('ci-q5-title').innerText = dict.ciQ5Title;
+            document.getElementById('ci-q5-text').innerText = dict.ciQ5Text;
+            document.getElementById('ci-info-stand-text').innerText = dict.ciInfoStandText;
+            document.getElementById('ci-wifi-title').innerText = dict.ciWifiTitle;
+            document.getElementById('ci-wifi-net-label').innerText = dict.ciWifiNetLabel;
+            document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
+            document.getElementById('ci-wish-text').innerText = dict.ciWishText;
+            document.getElementById('btn-back-ci').innerText = dict.back;
+
+            // Parking Info
+            document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
+            document.getElementById('pk-welcome-subtitle').innerText = dict.pkWelcomeSubtitle;
+            document.getElementById('pk-qr-text-1').innerText = dict.pkQrText;
+            document.getElementById('pk-qr-text-3').innerText = dict.pkQrText;
+            document.getElementById('pk-qr-text-4').innerText = dict.pkQrText;
+            if (parkingQrByLang[lang]) {
+                document.querySelector('#parking-content-row-1 .parking-qr-code').src = parkingQrByLang[lang][1];
+                document.querySelector('#parking-content-row-3 .parking-qr-code').src = parkingQrByLang[lang][3];
+                document.querySelector('#parking-content-row-4 .parking-qr-code').src = parkingQrByLang[lang][4];
+            }
+            document.getElementById('pk-opt1-title').innerText = dict.pkOpt1Title;
+            document.getElementById('pk-opt1-text').innerHTML = dict.pkOpt1Text;
+            document.getElementById('pk-opt2-title').innerText = dict.pkOpt2Title;
+            document.getElementById('pk-opt2-text').innerHTML = dict.pkOpt2Text;
+            document.getElementById('pk-opt3-title').innerText = dict.pkOpt3Title;
+            document.getElementById('pk-opt3-text').innerHTML = dict.pkOpt3Text;
+            document.getElementById('pk-opt4-title').innerText = dict.pkOpt4Title;
+            document.getElementById('pk-opt4-text').innerHTML = dict.pkOpt4Text;
+            document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
+            document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
+            document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
+            document.getElementById('btn-back-pk').innerText = dict.back;
+
+            // Thanks Message
+            document.getElementById('thanks-message').innerText = dict.thanks;
+        }
+    </script>
+</body>
+</html>
