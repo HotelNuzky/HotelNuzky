@@ -441,24 +441,39 @@
 
         .parking-intro-highlight {
             display: block;
-            padding: 12px 14px;
-            border-radius: 10px;
-            background: rgba(66, 165, 245, 0.10);
-            border: 1px solid rgba(66, 165, 245, 0.30);
-            color: #dceeff;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+            border: 1px solid var(--blue-light);
+            border-left: 5px solid var(--blue-light);
+            color: var(--text-main);
+            line-height: 1.55;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .parking-dropoff-highlight {
             display: block;
-            margin-top: 10px;
-            padding: 12px 14px;
-            border-radius: 10px;
-            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
-            border: 1px solid var(--blue-light);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(144, 202, 249, 0.35);
             color: var(--text-main);
             font-weight: 700;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+        }
+
+
+        #screen-parking .wifi-box {
+            background: var(--card-bg) !important;
+            border: 1px solid var(--blue-light) !important;
+            border-left: 5px solid var(--blue-light) !important;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+        }
+
+        #screen-parking .wifi-box .wifi-title {
+            color: var(--blue-light) !important;
+        }
+
+        #screen-parking .wifi-box .wifi-label {
+            color: var(--blue-light) !important;
         }
 
         .wifi-box-compact {
@@ -1083,7 +1098,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
             },
             sk: {
-
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1091,52 +1105,49 @@
                 parking: "Parkovanie",
                 coInstructions: "Prosím, vyplňte číslo svojej izby a meno registrovanej osoby. Potom stlačte tlačidlo POTVRDIŤ.",
                 coLuggageTitle: "Úschova batožiny",
-                coLuggageText: "Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost. Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.",
-                srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
-                roomLabel: "Číslo pokoje",
-                nameLabel: "Jméno a příjmení",
-                issueLabel: "Popis závady / požadavek",
+                coLuggageText: "Ak si želáte uložiť batožinu, obráťte sa, prosím, na personál hotelovej reštaurácie. Vzhľadom na historický charakter budovy máme obmedzené priestory na uschovanie batožiny a hotel za uloženú batožinu nenesie zodpovednosť. Prípadne môžete využiť platenú úschovňu na Hlavnej stanici. Dostanete sa tam električkou číslo 15 z Malostranského námestia – vystúpte na zastávke „Hlavná stanica“.",
+                srvInstructions: "Vyplňte, prosím, formulár nižšie a vašej požiadavke sa budeme čo najskôr venovať. Ak je záležitosť naliehavá, využite pevnú linku vedľa kiosku – v čase od 8:00 do 16:00 vás spojí so vzdialenou recepciou, mimo tohto času je k dispozícii núdzový kontakt.",
+                roomLabel: "Číslo izby",
+                nameLabel: "Meno a priezvisko",
+                issueLabel: "Popis závady / požiadavka",
                 cancel: "ZRUŠIŤ",
                 submit: "POTVRDIŤ",
                 back: "SPÄŤ NA HLAVNÚ OBRAZOVKU",
-                fillAll: "Prosím vyplňte všechna pole.",
-                thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
-                
-                ciWelcomeTitle: "Vítejte v našem hotelu!",
-                ciWelcomeSubtitle: "Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.",
-                ciRegTitle: "Registrace",
-                ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
+                fillAll: "Prosím, vyplňte všetky polia.",
+                thanks: "Ďakujeme! Vaša požiadavka bola úspešne odoslaná.",
+                ciWelcomeTitle: "Vitajte v našom hoteli!",
+                ciWelcomeSubtitle: "Vďaka samoobslužnému kiosku sa u nás ubytujete pohodlne a nonstop.",
+                ciRegTitle: "Registrácia",
+                ciRegText: "Registračný formulár nájdete na izbe. Prosíme o jeho vyplnenie, aby sme vás mohli zaregistrovať na cudzineckej polícii, ako nám ukladá zákon. Vyplnený formulár stačí odovzdať personálu reštaurácie. Ďakujeme.",
                 ciQ1Title: "Kedy a ako dostanete kód?",
                 ciQ1Text: "Hneď ako bude vaša izba pripravená, pošleme vám prístupový kód ku všetkým dverám prostredníctvom SMS, e-mailu alebo interného chatu vášho poskytovateľa rezervácie, najneskôr o 15:00, keď sa oficiálne začína check-in. Prosím, skontrolujte všetky možnosti, ktorými sme vás mohli kontaktovať. Ak ste dostali kód a číslo izby, pokračujte chodbou rovno a po schodoch nahor.",
-                ciBfTitle: "Snídaně",
-                ciBfText: "Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.",
-                ciQ2Title: "Kód vám nedorazil?",
-                ciQ2Text: "Pokud jste rezervovali přes třetí stranu, možná na vás nemáme přímý kontakt. V čase 8:00–16:00 prosím využijte pevnou linku vedle tohoto kiosku, mimo tyto hodiny volejte nouzový kontakt.",
-                ciQ3Title: "Zavazadla",
-                ciQ3Text: "Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.",
-                ciQ4Title: "Parkování",
-                ciQ4Text: "Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku. Tato informace je zmíněna na našich webových stránkách vč. všech profilů třetích stran jako je Booking.com, Expedia aj.",
-                ciQ5Title: "Architektura",
-                ciQ5Text: "Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.",
-                ciInfoStandText: "Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.",
+                ciBfTitle: "Raňajky",
+                ciBfText: "Raňajky sa podávajú formou bufetu na prízemí reštaurácie od 8:00 do 10:00.",
+                ciQ2Title: "Kód vám neprišiel?",
+                ciQ2Text: "Ak ste rezerváciu uskutočnili cez tretiu stranu, možno na vás nemáme priamy kontakt. V čase od 8:00 do 16:00, prosím, využite pevnú linku vedľa tohto kiosku, mimo týchto hodín zavolajte na núdzový kontakt.",
+                ciQ3Title: "Batožina",
+                ciQ3Text: "Ak vaša izba ešte nie je pripravená, personál našej reštaurácie vám batožinu rád uschová. Keďže sa však nachádzame v historickej budove, naše priestory sú malé a za uložené veci nemôžeme právne zodpovedať.",
+                ciQ4Title: "Parkovanie",
+                ciQ4Text: "Vzhľadom na historické centrum nemáme vlastné parkovisko. Kompletné tipy na parkovanie v okolí nájdete pod tlačidlom „Parkovanie“ na hlavnej obrazovke tohto kiosku. Táto informácia je uvedená aj na našich webových stránkach vrátane všetkých profilov tretích strán, ako sú Booking.com, Expedia a ďalšie.",
+                ciQ5Title: "Architektúra",
+                ciQ5Text: "Naša budova je historickou pamiatkou, preto v nej, žiaľ, nie je výťah. Ak potrebujete s niečím pomôcť, sme tu pre vás.",
+                ciInfoStandText: "Ďalšie užitočné informácie a tipy nájdete priamo vo svojej izbe na stojane s informačnými materiálmi.",
                 ciWifiTitle: "📶 Wi-Fi pripojenie",
                 ciWifiNetLabel: "Názov / SSID",
-                ciWifiPassLabel: "Heslo / Password",
-                ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!",
-
+                ciWifiPassLabel: "Heslo",
+                ciWishText: "Prajeme vám nádherný a ničím nerušený pobyt!",
                 pkWelcomeTitle: "Možnosti parkovania",
-                pkWelcomeSubtitle: "<span class=\"parking-intro-highlight\">Vzhľadom na umiestnenie v historickom centre Prahy hotel nemá vlastné parkovisko. Táto informácia je uvedená aj na našich webových stránkach vrátane všetkých profilov tretích strán. </span><span class=\"parking-dropoff-highlight\">Pred hotelom však môžete na niekoľko minút zastaviť za účelom vyloženia alebo naloženia batožiny.</span></span>",
-                pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
-                pkOpt1Title: "Hlídané podzemní garáže",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
-                pkOpt2Title: "Nehlídané venkovní parkoviště",
-                pkOpt2Text: "<strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br><strong>Platba:</strong> Pouze kartou v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br><strong>Značka:</strong> Nejbližší, ale velice drahé.",
-                pkOpt3Title: "Hlídané venkovní i garážové parkoviště The Cloud One",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br><strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.",
-                pkOpt4Title: "P+R Kotlářka – levné venkovní parkování zřizované městem Prahou",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
-            },
-            en: {
+                pkWelcomeSubtitle: "<span class=\"parking-intro-highlight\">Vzhľadom na umiestnenie v historickom centre Prahy hotel nemá vlastné parkovisko. Táto informácia je uvedená aj na našich webových stránkach vrátane všetkých profilov tretích strán. </span><span class=\"parking-dropoff-highlight\">Pred hotelom však môžete na niekoľko minút zastaviť za účelom vyloženia alebo naloženia batožiny.</span>",
+                pkQrText: "Naskenujte QR kód a otvorte webovú stránku.",
+                pkOpt1Title: "Strážené podzemné garáže",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábrežie, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodín (aktuálnu cenu si skontrolujte na webovej stránke)<br><strong>Výška vozidla:</strong> max. 2 metre<br><strong>Platba:</strong> Kartou alebo v hotovosti v automate<br><strong>Dôležité:</strong> Zákaz vjazdu pre vozidlá na LPG a CNG<br><strong>Vzdialenosť späť k hotelu:</strong> 10 minút chôdze cez Mánesov most<br><strong>Označenie:</strong> Zlatá stredná cesta. Miesto je možné rezervovať a zaplatiť vopred cez webovú stránku.",
+                pkOpt2Title: "Nestrážené vonkajšie parkovisko",
+                pkOpt2Text: "<strong>Adresa vjazdu:</strong> Nosticova 634 (výjazd je na opačnej strane, tam nájdete aj automat)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuálnu cenu si skontrolujte na mieste pri vjazde a automate)</em><br><strong>Platba:</strong> Iba kartou v automate<br><strong>Vzdialenosť späť k hotelu:</strong> 5 minút chôdze cez park Kampa<br><strong>Označenie:</strong> Najbližšie, ale veľmi drahé.",
+                pkOpt3Title: "Strážené vonkajšie aj garážové parkovisko The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> pri rezervácii online 750 Kč / 24 h, na mieste 1 200 Kč / 24 h<br><em>(aktuálnu cenu si skontrolujte na webovej stránke)</em><br><strong>Platba:</strong> Kartou cez webovú stránku alebo na mieste<br><strong>Vzdialenosť späť k hotelu:</strong> 20 minút pražskou hromadnou dopravou<br><strong>Označenie:</strong> Dobrá možnosť, ak je Old Town Parking plný.",
+                pkOpt4Title: "P+R Kotlářka – lacné vonkajšie parkovanie zriadené mestom Praha",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjazdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvých 24 hodín, každá ďalšia začatá hodina 10 Kč<br><em>(aktuálnu cenu si skontrolujte na webovej stránke)</em><br><strong>Platba:</strong> Kartou alebo v hotovosti v automate<br><strong>Vzdialenosť späť k hotelu:</strong> 30 minút pražskou hromadnou dopravou<br><strong>Označenie:</strong> Naozaj najlacnejšie možné parkovanie v Prahe.",
+            
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
