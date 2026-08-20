@@ -557,7 +557,9 @@
                 width: 100%;
             }
         }
-    </style>
+    
+        #co-fees-cell { margin-top: -12px; }
+
 </head>
 <body>
 
@@ -727,12 +729,12 @@
                 <span id="co-luggage-text">Pokud si přejete uložit zavazadla, obraťte se prosím na personál hotelové restaurace. Máme omezené prostory a za uložená zavazadla neneseme odpovědnost. Případně můžete využít placenou úschovnu na Hlavním nádraží, kam se dostanete tramvají č. 15 z Malostranského náměstí.</span>
             </div>
 
-            <div class="info-item">
+            <div class="info-item" id="co-fees-cell">
                 <strong>
                     <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-1.9 2-2V5c0-1.1-.9-2-2-2zm-2 14H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                     <span id="co-fees-title">Poplatky a daňové doklady</span>
                 </strong>
-                <span id="co-fees-text">Turistické poplatky jsou již zahrnuty v ceně vašeho ubytování. V případě, že potřebujete vystavit doklad za své ubytování, kontaktujte nás na hotelovém e-mailu, který najdete na našich webových stránkách nebo na hotelové vizitce na tomto pultu, a my vám ho zašleme elektronickou formou, pakliže k tomu již nedošlo.</span>
+                <span id="co-fees-text">Turistické poplatky jsou již zahrnuty v ceně vašeho ubytování. V případě, že potřebujete vystavit/pozměnit doklad za své ubytování, kontaktujte nás na hotelovém e-mailu, který najdete na našich webových stránkách nebo na hotelové vizitce na tomto pultu, a my vám ho zašleme elektronickou formou, pakliže k tomu již nedošlo.</span>
             </div>
 
             <div class="input-group">
@@ -743,6 +745,16 @@
             <div class="input-group">
                 <label class="input-label" id="label-co-name">Jméno a příjmení</label>
                 <input type="text" id="coNameInput" placeholder="e.g. John Smith">
+            </div>
+
+            <div class="checkout-email-option" style="margin-top: 10px;">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                    <input type="checkbox" id="coEmailCheckbox" onchange="toggleCheckoutEmail()">
+                    <span id="co-email-checkbox-label"></span>
+                </label>
+                <div id="co-email-wrap" class="hidden" style="margin-top:10px;">
+                    <input type="email" id="coEmailInput" placeholder="E-mail">
+                </div>
             </div>
 
             <div class="button-row">
@@ -917,11 +929,12 @@
                 coLuggageTitle: "Úschova zavazadel",
                 coLuggageText: "Pokud si přejete uložit zavazadla, obraťte se prosím na personál hotelové restaurace. Máme omezené prostory a za uložená zavazadla neneseme odpovědnost. Případně můžete využít placenou úschovnu na Hlavním nádraží, kam se dostanete tramvají č. 15 z Malostranského náměstí.",
                 coFeesTitle: "Poplatky a daňové doklady",
-                coFeesText: "Turistické poplatky jsou již zahrnuty v ceně vašeho ubytování. V případě, že potřebujete vystavit doklad za své ubytování, kontaktujte nás na hotelovém e-mailu, který najdete na našich webových stránkách nebo na hotelové vizitce na tomto pultu, a my vám ho zašleme elektronickou formou, pakliže k tomu již nedošlo.",
+                coFeesText: "Turistické poplatky jsou již zahrnuty v ceně vašeho ubytování. V případě, že potřebujete vystavit/pozměnit doklad za své ubytování, kontaktujte nás na hotelovém e-mailu, který najdete na našich webových stránkách nebo na hotelové vizitce na tomto pultu, a my vám ho zašleme elektronickou formou, pakliže k tomu již nedošlo.",
                 checkoutThanks: "Vše je vyřízeno. Děkujeme za návštěvu a přejeme šťastnou cestu.",
                 srvInstructions: "Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.",
                 roomLabel: "Číslo pokoje",
                 nameLabel: "Jméno a příjmení",
+                coEmailCheckboxLabel: "Zaškrtněte, pokud chcete zaslat doklad elektronicky",
                 issueLabel: "Popis závady / požadavek",
                 cancel: "ZRUŠIT",
                 submit: "POTVRDIT",
@@ -973,11 +986,12 @@
                 coLuggageTitle: "Luggage Storage",
                 coLuggageText: "If you would like to store your luggage, please ask our hotel restaurant staff. Our storage space is limited and the hotel cannot accept liability for stored items. Alternatively, you can use the paid luggage storage at the Main Railway Station, reached by tram No. 15 from Malostranské náměstí.",
                 coFeesTitle: "Fees and Tax Documents",
-                coFeesText: "Tourist fees are already included in the price of your accommodation. If you need a document for your stay, please contact us at the hotel email address, which you can find on our website or on the hotel card at this counter, and we will send it to you electronically if it has not already been provided.",
+                coFeesText: "Tourist fees are already included in the price of your accommodation. If you need to issue/modify a document for your stay, please contact us at the hotel email address, which you can find on our website or on the hotel card at this counter, and we will send it to you electronically if it has not already been provided.",
                 checkoutThanks: "Everything is taken care of. Thank you for your visit, and we wish you a safe journey.",
                 srvInstructions: "Please fill out the form below and we will attend to your request as soon as possible. If the matter is urgent, please use the landline next to the kiosk – from 8:00 AM to 4:00 PM it connects to remote reception, outside these hours an emergency contact is available.",
                 roomLabel: "Room number",
                 nameLabel: "Full Name",
+                coEmailCheckboxLabel: "Check this box if you would like to receive the document electronically",
                 issueLabel: "Issue description / Request",
                 cancel: "CANCEL",
                 submit: "SUBMIT",
@@ -1029,11 +1043,12 @@
                 coLuggageTitle: "Gepäckaufbewahrung",
                 coLuggageText: "Wenn Sie Ihr Gepäck aufbewahren möchten, wenden Sie sich bitte an das Personal unseres Hotelrestaurants. Unser Stauraum ist begrenzt und das Hotel übernimmt keine Haftung für aufbewahrtes Gepäck. Alternativ können Sie die kostenpflichtige Gepäckaufbewahrung am Hauptbahnhof nutzen, den Sie mit der Straßenbahn Nr. 15 ab Malostranské náměstí erreichen.",
                 coFeesTitle: "Gebühren und Steuerbelege",
-                coFeesText: "Die Tourismusgebühren sind bereits im Preis Ihrer Unterkunft enthalten. Wenn Sie einen Beleg für Ihren Aufenthalt benötigen, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse, die Sie auf unserer Website oder auf der Hotelvisitenkarte an diesem Pult finden. Wir senden ihn Ihnen elektronisch zu, sofern dies nicht bereits geschehen ist.",
+                coFeesText: "Die Tourismusgebühren sind bereits im Preis Ihrer Unterkunft enthalten. Wenn Sie einen Beleg für Ihren Aufenthalt ausstellen/ändern möchten, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse, die Sie auf unserer Website oder auf der Hotelvisitenkarte an diesem Pult finden. Wir senden ihn Ihnen elektronisch zu, sofern dies nicht bereits geschehen ist.",
                 checkoutThanks: "Alles ist erledigt. Vielen Dank für Ihren Besuch und gute Reise!",
                 srvInstructions: "Bitte füllen Sie das folgende Formular aus, wir werden uns so schnell wie möglich um Ihr Anliegen kümmern. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk – von 8:00 bis 16:00 Uhr werden Sie mit der entfernten Rezeption verbunden, außerhalb dieser Zeiten steht ein Notfallkontakt zur Verfügung.",
                 roomLabel: "Zimmernummer",
                 nameLabel: "Vollständiger Name",
+                coEmailCheckboxLabel: "Bitte ankreuzen, wenn Sie den Beleg elektronisch erhalten möchten",
                 issueLabel: "Problembeschreibung / Anfrage",
                 cancel: "ABBRECHEN",
                 submit: "BESTÄTIGEN",
@@ -1085,11 +1100,12 @@
                 coLuggageTitle: "Deposito Bagagli",
                 coLuggageText: "Se desideri depositare i bagagli, rivolgiti al personale del ristorante dell'hotel. Lo spazio a disposizione è limitato e l'hotel non può assumersi la responsabilità dei bagagli depositati. In alternativa, puoi utilizzare il deposito bagagli a pagamento presso la Stazione Centrale, raggiungibile con il tram n. 15 da Malostranské náměstí.",
                 coFeesTitle: "Tasse e documenti fiscali",
-                coFeesText: "Le tasse di soggiorno sono già incluse nel prezzo del soggiorno. Se hai bisogno di un documento relativo al tuo soggiorno, contattaci all'indirizzo e-mail dell'hotel, che trovi sul nostro sito web o sul biglietto da visita dell'hotel presso questo banco, e te lo invieremo in formato elettronico, qualora non sia già stato fornito.",
+                coFeesText: "Le tasse di soggiorno sono già incluse nel prezzo del soggiorno. Se hai bisogno di emettere/modificare un documento relativo al tuo soggiorno, contattaci all'indirizzo e-mail dell'hotel, che trovi sul nostro sito web o sul biglietto da visita dell'hotel presso questo banco, e te lo invieremo in formato elettronico, qualora non sia già stato fornito.",
                 checkoutThanks: "È tutto sistemato. Grazie per la vostra visita e buon viaggio!",
                 srvInstructions: "Compila il modulo sottostante e ci occuperemo della tua richiesta il prima possibile. Se la questione è urgente, utiliza il telefono fisso accanto al kiosk – dalle 8:00 alle 16:00 ti collegherà con la reception remota, al di fuori di questo orario è disponibile un contatto di emergenza.",
                 roomLabel: "Numero di camera",
                 nameLabel: "Nome e cognome",
+                coEmailCheckboxLabel: "Seleziona se desideri ricevere il documento in formato elettronico",
                 issueLabel: "Descrizione del problema / Richiesta",
                 cancel: "ANNULLA",
                 submit: "INVIA",
@@ -1141,11 +1157,12 @@
                 coLuggageTitle: "Consigna de Equipaje",
                 coLuggageText: "Si desea guardar su equipaje, consulte con el personal del restaurante del hotel. Nuestro espacio es limitado y el hotel no se hace responsable del equipaje guardado. Como alternativa, puede utilizar la consigna de pago de la Estación Central, a la que puede llegar en el tranvía número 15 desde Malostranské náměstí.",
                 coFeesTitle: "Tasas y documentos fiscales",
-                coFeesText: "Las tasas turísticas ya están incluidas en el precio de su alojamiento. Si necesita un documento de su estancia, póngase en contacto con nosotros en el correo electrónico del hotel, que encontrará en nuestra página web o en la tarjeta del hotel en este mostrador, y se lo enviaremos electrónicamente si aún no se le ha enviado.",
+                coFeesText: "Las tasas turísticas ya están incluidas en el precio de su alojamiento. Si necesita emitir/modificar un documento de su estancia, póngase en contacto con nosotros en el correo electrónico del hotel, que encontrará en nuestra página web o en la tarjeta del hotel en este mostrador, y se lo enviaremos electrónicamente si aún no se le ha enviado.",
                 checkoutThanks: "Todo está listo. Gracias por su visita y ¡buen viaje!",
                 srvInstructions: "Rellene el siguiente formulario y atenderemos su solicitud lo antes posible. Si el asunto es urgente, utilice el teléfono fijo junto al quiosco; de 8:00 a 16:00 le conectará con la recepción remota, fuera de este horario hay un contacto de emergencia disponible.",
                 roomLabel: "Número de habitación",
                 nameLabel: "Nombre completo",
+                coEmailCheckboxLabel: "Marque esta casilla si desea recibir el documento electrónicamente",
                 issueLabel: "Descripción del problema / Solicitud",
                 cancel: "CANCELAR",
                 submit: "ENVIAR",
@@ -1197,11 +1214,12 @@
                 coLuggageTitle: "Bagagerie",
                 coLuggageText: "Si vous souhaitez déposer vos bagages, veuillez vous adresser au personnel du restaurant de l'hôtel. Notre espace est limité et l'hôtel décline toute responsabilité pour les bagages déposés. Vous pouvez également utiliser la consigne payante de la gare centrale, accessible par le tramway n° 15 depuis Malostranské náměstí.",
                 coFeesTitle: "Frais et justificatifs fiscaux",
-                coFeesText: "Les taxes de séjour sont déjà incluses dans le prix de votre hébergement. Si vous avez besoin d'un justificatif pour votre séjour, contactez-nous à l'adresse e-mail de l'hôtel, que vous trouverez sur notre site internet ou sur la carte de l'hôtel à ce comptoir, et nous vous l'enverrons par voie électronique si cela n'a pas déjà été fait.",
+                coFeesText: "Les taxes de séjour sont déjà incluses dans le prix de votre hébergement. Si vous avez besoin d'établir/modifier un justificatif pour votre séjour, contactez-nous à l'adresse e-mail de l'hôtel, que vous trouverez sur notre site internet ou sur la carte de l'hôtel à ce comptoir, et nous vous l'enverrons par voie électronique si cela n'a pas déjà été fait.",
                 checkoutThanks: "Tout est réglé. Merci pour votre visite et bon voyage !",
                 srvInstructions: "Veuillez remplir le formulaire ci-dessous et nous traiterons votre demande dans les plus brefs délais. Si l'affaire est urgente, veuillez utiliser le téléphone fixe à côté du kiosque – de 8h00 à 16h00, il vous mettra en relation avec la réception à distance, en dehors de ces heures, un contact d'urgence est disponible.",
                 roomLabel: "Numéro de chambre",
                 nameLabel: "Nom complet",
+                coEmailCheckboxLabel: "Cochez cette case si vous souhaitez recevoir le document par voie électronique",
                 issueLabel: "Description du problème / Demande",
                 cancel: "ANNULER",
                 submit: "VALIDER",
@@ -1253,11 +1271,12 @@
                 coLuggageTitle: "Przechowalnia Bagażu",
                 coLuggageText: "Jeśli chcesz zostawić bagaż, skontaktuj się proszę z obsługą restauracji hotelowej. Mamy ograniczoną przestrzeń i hotel nie ponosi odpowiedzialności za przechowywany bagaż. Możesz też skorzystać z płatnej przechowalni bagażu na Dworcu Głównym, do którego dojedziesz tramwajem nr 15 z Malostranské náměstí.",
                 coFeesTitle: "Opłaty i dokumenty podatkowe",
-                coFeesText: "Opłaty turystyczne są już wliczone w cenę pobytu. Jeśli potrzebujesz dokumentu potwierdzającego pobyt, skontaktuj się z nami pod adresem e-mail hotelu, który znajdziesz na naszej stronie internetowej lub na wizytówce hotelu przy tym stanowisku, a prześlemy go elektronicznie, jeśli nie został już wcześniej wystawiony.",
+                coFeesText: "Opłaty turystyczne są już wliczone w cenę pobytu. Jeśli chcesz wystawić/zmienić dokument potwierdzający pobyt, skontaktuj się z nami pod adresem e-mail hotelu, który znajdziesz na naszej stronie internetowej lub na wizytówce hotelu przy tym stanowisku, a prześlemy go elektronicznie, jeśli nie został już wcześniej wystawiony.",
                 checkoutThanks: "Wszystko załatwione. Dziękujemy za wizytę i życzymy szczęśliwej podróży.",
                 srvInstructions: "Wypełnij poniższy formularz, a zajmiemy się Twoim zgłoszeniem najszybciej jak to możliwe. Jeśli sprawa jest pilna, skorzystaj z telefonu stacjonarnego obok kiosku – w godzinach 8:00–16:00 połączy Cię z zdalną recepcją, poza tymi godzinami dostępny jest kontakt alarmowy.",
                 roomLabel: "Numer pokoju",
                 nameLabel: "Imię i nazwisko",
+                coEmailCheckboxLabel: "Zaznacz, jeśli chcesz otrzymać dokument w formie elektronicznej",
                 issueLabel: "Opis usterki / Prośba",
                 cancel: "ANULUJ",
                 submit: "POTWIERDŹ",
@@ -1309,11 +1328,12 @@
                 coLuggageTitle: "Камера Зберігання Багажу",
                 coLuggageText: "Якщо ви бажаєте залишити багаж, зверніться, будь ласка, до персоналу ресторану готелю. Наші приміщення обмежені, і готель не несе відповідальності за залишений багаж. Також можна скористатися платною камерою зберігання на Головному вокзалі, куди можна дістатися трамваєм № 15 від Malostranské náměstí.",
                 coFeesTitle: "Збори та податкові документи",
-                coFeesText: "Туристичні збори вже включені у вартість вашого проживання. Якщо вам потрібен документ про проживання, зв'яжіться з нами за електронною адресою готелю, яку ви знайдете на нашому вебсайті або на візитівці готелю на цій стійці, і ми надішлемо його вам в електронному вигляді, якщо він ще не був наданий.",
+                coFeesText: "Туристичні збори вже включені у вартість вашого проживання. Якщо вам потрібно оформити/змінити документ про проживання, зв'яжіться з нами за електронною адресою готелю, яку ви знайдете на нашому вебсайті або на візитівці готелю на цій стійці, і ми надішлемо його вам в електронному вигляді, якщо він ще не був наданий.",
                 checkoutThanks: "Усе вирішено. Дякуємо за ваш візит і бажаємо щасливої дороги.",
                 srvInstructions: "Будь ласка, заповніть форму нижче, і ми розглянемо ваш запит якомога швидше. Якщо справа термінова, скористайтеся стаціонарним телефоном поруч із кіоском – з 8:00 до 16:00 він з'єднає вас із віддаленою рецепцією, в інший час доступний аварійний контакт.",
                 roomLabel: "Номер кімнати",
                 nameLabel: "Ім'я та прізвище",
+                coEmailCheckboxLabel: "Поставте позначку, якщо хочете отримати документ в електронному вигляді",
                 issueLabel: "Опис проблеми / Запит",
                 cancel: "СКАСУВАТИ",
                 submit: "ПІДТВЕРДИТИ",
@@ -1365,11 +1385,12 @@
                 coLuggageTitle: "Bagaj Muhafazası",
                 coLuggageText: "Bagajınızı bırakmak isterseniz lütfen otel restoran personeliyle iletişime geçin. Alanımız sınırlıdır ve otel bırakılan bagajlardan sorumlu değildir. Alternatif olarak, Malostranské náměstí'den 15 numaralı tramvayla ulaşabileceğiniz Ana Tren İstasyonu'ndaki ücretli bagaj muhafazasını kullanabilirsiniz.",
                 coFeesTitle: "Ücretler ve Vergi Belgeleri",
-                coFeesText: "Konaklama vergileri konaklama ücretinize zaten dahildir. Konaklamanızla ilgili bir belgeye ihtiyacınız varsa, web sitemizde veya bu bankodaki otel kartında bulabileceğiniz otel e-posta adresinden bizimle iletişime geçin; belge daha önce gönderilmediyse size elektronik olarak ileteceğiz.",
+                coFeesText: "Konaklama vergileri konaklama ücretinize zaten dahildir. Konaklamanızla ilgili bir belge düzenlemeniz/değiştirmeniz gerekiyorsa, web sitemizde veya bu bankodaki otel kartında bulabileceğiniz otel e-posta adresinden bizimle iletişime geçin; belge daha önce gönderilmediyse size elektronik olarak ileteceğiz.",
                 checkoutThanks: "Her şey tamamlandı. Ziyaretiniz için teşekkür eder, iyi yolculuklar dileriz.",
                 srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa, lütfen kiosk yanındaki sabit telefonu kullanın – 8:00–16:00 saatleri arasında sizi uzaktan resepsiyona bağlar, bu saatler dışında acil durum irtibatı mevcuttur.",
                 roomLabel: "Oda numarası",
                 nameLabel: "Ad Soyad",
+                coEmailCheckboxLabel: "Belgeyi elektronik olarak almak istiyorsanız işaretleyin",
                 issueLabel: "Sorun açıklaması / Talep",
                 cancel: "İPTAL",
                 submit: "ONAYLA",
@@ -1421,11 +1442,12 @@
                 coLuggageTitle: "Bagageopbevaring",
                 coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte personalet i hotellets restaurant. Vores plads er begrænset, og hotellet påtager sig ikke ansvar for opbevaret bagage. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården, som du kan nå med sporvogn nr. 15 fra Malostranské náměstí.",
                 coFeesTitle: "Gebyrer og skattedokumenter",
-                coFeesText: "Turistafgifter er allerede inkluderet i prisen for dit ophold. Hvis du har brug for et dokument for dit ophold, bedes du kontakte os på hotellets e-mailadresse, som du finder på vores hjemmeside eller på hotellets visitkort ved denne skranke, så sender vi det elektronisk, hvis det ikke allerede er blevet udstedt.",
+                coFeesText: "Turistafgifter er allerede inkluderet i prisen for dit ophold. Hvis du har brug for at udstede/ændre et dokument for dit ophold, bedes du kontakte os på hotellets e-mailadresse, som du finder på vores hjemmeside eller på hotellets visitkort ved denne skranke, så sender vi det elektronisk, hvis det ikke allerede er blevet udstedt.",
                 checkoutThanks: "Alt er ordnet. Tak for dit besøg, og vi ønsker dig en god rejse.",
                 srvInstructions: "Udfyld venligst formularen nedenfor, så vil vi behandle din anmodning hurtigst muligt. Hvis sagen er hastende, bedes du benytte fastnettelefonen ved siden af kiosken – fra 8:00 til 16:00 forbinder den dig til fjernreceptionen, uden for dette tidsrum er der en nødkontakt tilgængelig.",
                 roomLabel: "Værelsesnummer",
                 nameLabel: "Fulde navn",
+                coEmailCheckboxLabel: "Markér, hvis du ønsker at modtage dokumentet elektronisk",
                 issueLabel: "Beskrivelse af problem / Anmodning",
                 cancel: "ANNULLER",
                 submit: "BEKRÆFT",
@@ -1477,11 +1499,12 @@
                 coLuggageTitle: "手荷物預かり",
                 coLuggageText: "お荷物をお預けになりたい場合は、ホテルレストランのスタッフにお申し付けください。保管スペースには限りがあり、お預かりしたお荷物についてホテルは責任を負いかねます。代わりに、マロストランスケー広場から15番のトラムで行けるプラハ中央駅の有料手荷物預かりもご利用いただけます。",
                 coFeesTitle: "料金・税務書類",
-                coFeesText: "宿泊税は宿泊料金にすでに含まれています。宿泊に関する書類が必要な場合は、当ホテルのウェブサイトまたはこのカウンターのホテルカードに記載されているホテルのメールアドレスまでご連絡ください。まだ発行されていない場合は、電子形式でお送りします。",
+                coFeesText: "宿泊税は宿泊料金にすでに含まれています。宿泊に関する書類を発行・変更する必要がある場合は、当ホテルのウェブサイトまたはこのカウンターのホテルカードに記載されているホテルのメールアドレスまでご連絡ください。まだ発行されていない場合は、電子形式でお送りします。",
                 checkoutThanks: "すべて完了しました。ご来訪ありがとうございました。どうぞお気をつけてお帰りください。",
                 srvInstructions: "以下のフォームにご記入ください。できるだけ早く対応いたします。緊急の場合は、キオスクの横にある固定電話をご利用ください。8:00〜16:00はリモートレセプションにつながり、それ以外の時間帯は緊急連絡先が利用可能です。",
                 roomLabel: "部屋番号",
                 nameLabel: "お名前（フルネーム）",
+                coEmailCheckboxLabel: "書類を電子形式で受け取りたい場合はチェックしてください",
                 issueLabel: "ご要望・ご意見の内容",
                 cancel: "キャンセル",
                 submit: "送信",
@@ -1533,11 +1556,12 @@
                 coLuggageTitle: "אחסון מזוודות",
                 coLuggageText: "אם ברצונך לאחסן את המזוודות שלך, אנא פנה לצוות מסעדת המלון. שטח האחסון שלנו מוגבל והמלון אינו נושא באחריות למזוודות המאוחסנות. לחלופין, ניתן להשתמש בשירות שמירת המזוודות בתשלום בתחנת הרכבת המרכזית, שאליה ניתן להגיע בחשמלית מספר 15 מ-Malostranské náměstí.",
                 coFeesTitle: "עמלות ומסמכי מס",
-                coFeesText: "מסי התיירות כבר כלולים במחיר האירוח. אם אתם זקוקים למסמך עבור שהייתכם, אנא צרו איתנו קשר בכתובת הדוא\"ל של המלון, אותה תוכלו למצוא באתר האינטרנט שלנו או בכרטיס המלון שעל הדלפק הזה, ונשלח אותו אליכם באופן אלקטרוני, אם טרם נשלח.",
+                coFeesText: "מסי התיירות כבר כלולים במחיר האירוח. אם ברצונכם להנפיק/לשנות מסמך עבור שהייתכם, אנא צרו איתנו קשר בכתובת הדוא\"ל של המלון, אותה תוכלו למצוא באתר האינטרנט שלנו או בכרטיס המלון שעל הדלפק הזה, ונשלח אותו אליכם באופן אלקטרוני, אם טרם נשלח.",
                 checkoutThanks: "הכול טופל. תודה על ביקורכם ואנו מאחלים לכם נסיעה טובה!",
                 srvInstructions: "אנא מלא את הטופס להלן ונטפל בפנייתך בהקדם האפשרי. אם העניין דחוף, אנא השתמש בטלפון הקווי לצד הקיוסק - בין השעות 8:00 ל-16:00 הוא יקשר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
+                coEmailCheckboxLabel: "סמנו אם ברצונכם לקבל את המסמך באופן אלקטרוני",
                 issueLabel: "תיאור הבעיה / בקשה",
                 cancel: "ביטול",
                 submit: "אישור",
@@ -1589,11 +1613,12 @@
                 coLuggageTitle: "Φύλαξη Αποσκευών",
                 coLuggageText: "Εάν επιθυμείτε να αφήσετε τις αποσκευές σας, παρακαλούμε απευθυνθείτε στο προσωπικό του εστιατορίου του ξενοδοχείου. Ο χώρος μας είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη για τις αποσκευές που φυλάσσονται. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη φύλαξη αποσκευών επί πληρωμή στον Κεντρικό Σταθμό, στον οποίο μπορείτε να φτάσετε με το τραμ 15 από τη στάση Malostranské náměstí.",
                 coFeesTitle: "Τέλη και φορολογικά παραστατικά",
-                coFeesText: "Οι τουριστικοί φόροι περιλαμβάνονται ήδη στην τιμή της διαμονής σας. Εάν χρειάζεστε παραστατικό για τη διαμονή σας, επικοινωνήστε μαζί μας στη διεύθυνση e-mail του ξενοδοχείου, την οποία θα βρείτε στην ιστοσελίδα μας ή στην επαγγελματική κάρτα του ξενοδοχείου σε αυτό το γκισέ, και θα σας το στείλουμε ηλεκτρονικά, εφόσον δεν έχει ήδη αποσταλεί.",
+                coFeesText: "Οι τουριστικοί φόροι περιλαμβάνονται ήδη στην τιμή της διαμονής σας. Εάν χρειάζεστε την έκδοση/αλλαγή παραστατικού για τη διαμονή σας, επικοινωνήστε μαζί μας στη διεύθυνση e-mail του ξενοδοχείου, την οποία θα βρείτε στην ιστοσελίδα μας ή στην επαγγελματική κάρτα του ξενοδοχείου σε αυτό το γκισέ, και θα σας το στείλουμε ηλεκτρονικά, εφόσον δεν έχει ήδη αποσταλεί.",
                 checkoutThanks: "Όλα έχουν τακτοποιηθεί. Ευχαριστούμε για την επίσκεψή σας και σας ευχόμαστε καλό ταξίδι!",
                 srvInstructions: "Παρακαλούμε συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Εάν το θέμα είναι επείγον, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι – από τις 8:00 έως τις 16:00 σας συνδέει με την εξ αποστάσεως υποδοχή, εκτός αυτών των ωρών υπάρχει διαθέσιμη επαφή έκτακτης ανάγκης.",
                 roomLabel: "Αριθμός δωματίου",
                 nameLabel: "Ονοματεπώνυμο",
+                coEmailCheckboxLabel: "Επιλέξτε το πλαίσιο εάν επιθυμείτε να λάβετε το έγγραφο ηλεκτρονικά",
                 issueLabel: "Περιγραφή προβλήματος / Αίτημα",
                 cancel: "ΑΚΥΡΩΣΗ",
                 submit: "ΕΠΙΒΕΒΑΙΩΣΗ",
@@ -1679,6 +1704,9 @@
             // Clear inputs
             document.getElementById('coRoomInput').value = '';
             document.getElementById('coNameInput').value = '';
+            document.getElementById('coEmailCheckbox').checked = false;
+            document.getElementById('coEmailInput').value = '';
+            document.getElementById('co-email-wrap').classList.add('hidden');
             document.getElementById('srvRoomInput').value = '';
             document.getElementById('srvIssueInput').value = '';
             document.getElementById('srvNameInput').value = '';
@@ -1702,18 +1730,27 @@
             startAutoResetTimer();
         });
 
+
+        function toggleCheckoutEmail() {
+            const checked = document.getElementById('coEmailCheckbox').checked;
+            document.getElementById('co-email-wrap').classList.toggle('hidden', !checked);
+            if (!checked) document.getElementById('coEmailInput').value = '';
+        }
+
         // FORM SUBMISSION (NTFY INTEGRATION)
         function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
+            const sendEmail = document.getElementById('coEmailCheckbox').checked;
+            const email = document.getElementById('coEmailInput').value.trim();
             const dict = i18n[currentLang] || i18n['en'];
 
-            if (!room || !name) {
+            if (!room || !name || (sendEmail && !email)) {
                 alert(dict.fillAll);
                 return;
             }
 
-            const message = `🔴 CHECK-OUT\n\nPokoj: ${room}\nJméno: ${name}`;
+            const message = `🔴 CHECK-OUT\n\nPokoj: ${room}\nJméno: ${name}${sendEmail ? `\nE-mail: ${email}` : ''}`;
 
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST',
@@ -1803,6 +1840,7 @@
             document.getElementById('co-fees-text').innerText = dict.coFeesText;
             document.getElementById('label-co-room').innerText = dict.roomLabel;
             document.getElementById('label-co-name').innerText = dict.nameLabel;
+            document.getElementById('co-email-checkbox-label').innerText = dict.coEmailCheckboxLabel;
             document.getElementById('btn-cancel-1').innerText = dict.cancel;
             document.getElementById('btn-submit-1').innerText = dict.submit;
 
