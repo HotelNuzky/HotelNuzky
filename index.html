@@ -343,6 +343,38 @@
             text-align: center;
         }
 
+
+        /* COMPACT CHECK-IN WIFI BOX */
+        .wifi-box-top {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.10), rgba(27, 94, 32, 0.18));
+            border: 1px solid rgba(76, 175, 80, 0.30);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin: 8px auto 18px;
+            text-align: center;
+            width: 62%;
+            max-width: 520px;
+        }
+
+        .wifi-box-top .wifi-title {
+            font-size: 14px;
+            margin-bottom: 7px;
+            letter-spacing: 0.8px;
+        }
+
+        .wifi-box-top .wifi-details {
+            gap: 22px;
+            font-size: 14px;
+        }
+
+        .wifi-box-top .wifi-detail-item span {
+            font-size: 11px;
+        }
+
+        .wifi-box-top .wifi-detail-item strong {
+            font-size: 16px;
+        }
+
         .wifi-box-blue {
             background: linear-gradient(135deg, rgba(66, 165, 245, 0.15), rgba(21, 101, 192, 0.25));
             border: 1px solid rgba(66, 165, 245, 0.4);
@@ -659,6 +691,20 @@
         <div id="screen-checkin" class="card hidden">
             <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
+
+            <div class="wifi-box-top">
+                <div class="wifi-title" id="ci-wifi-title-top">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-net-label-top">Název / SSID</span>
+                        <strong id="ci-wifi-net-val-top">Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="ci-wifi-pass-label-top">Heslo / Password</span>
+                        <strong id="ci-wifi-pass-val-top">Hotel2017</strong>
+                    </div>
+                </div>
+            </div>
 
             <div class="info-list">
 
@@ -1908,6 +1954,9 @@
             document.getElementById('ci-q5-title').innerText = dict.ciQ5Title;
             document.getElementById('ci-q5-text').innerText = dict.ciQ5Text;
             document.getElementById('ci-info-stand-text').innerText = dict.ciInfoStandText;
+            document.getElementById('ci-wifi-title-top').innerText = dict.ciWifiTitle;
+            document.getElementById('ci-wifi-net-label-top').innerText = dict.ciWifiNetLabel;
+            document.getElementById('ci-wifi-pass-label-top').innerText = dict.ciWifiPassLabel;
             document.getElementById('ci-wifi-title').innerText = dict.ciWifiTitle;
             document.getElementById('ci-wifi-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
