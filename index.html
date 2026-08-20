@@ -1762,26 +1762,36 @@
         }
 
         // FORM SUBMISSION LOGIC
-        function submitCheckout() {
+         function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
-            const dict = i18n[currentLang] || i18n['cs'];
 
             if (!room || !name) {
-                alert(dict.fillAll);
+                alert(i18n[currentLang].fillAll);
                 return;
             }
 
-            const title = `Check-out: Pokoj ${room}`;
-            const message = `Pokoj: ${room}\nJméno: ${name}`;
+            const message = `🔴 CHECK-OUT: Pokoj ${room} | ${name}`;
 
-            sendNtfyNotification("checkout", room, name, "");
-
-            hideAllScreens();
-            screens.thanks.classList.remove('hidden');
-            setTimeout(resetToStart, 4000);
+            sendNtfyNotification("Check-out Notification", message);
+            showThanksScreen();
         }
 
+        function submitService() {
+            const room = document.getElementById('srvRoomInput').value.trim();
+            const issue = document.getElementById('srvIssueInput').value.trim();
+            const name = document.getElementById('srvNameInput').value.trim();
+
+            if (!room || !issue || !name) {
+                alert(i18n[currentLang].fillAll);
+                return;
+            }
+
+            const message = `🟡 SERVIS / POMOC: Pokoj ${room} | ${name} | Požadavek: ${issue}`;
+
+            sendNtfyNotification("Service Request", message);
+            showThanksScreen();
+        }
         function submitService() {
             const room = document.getElementById('srvRoomInput').value.trim();
             const issue = document.getElementById('srvIssueInput').value.trim();
