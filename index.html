@@ -273,6 +273,37 @@
             flex-shrink: 0;
         }
 
+        .parking-qr-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            margin-left: 32px;
+            padding: 9px 12px;
+            width: fit-content;
+            max-width: 100%;
+            background: rgba(66, 165, 245, 0.08);
+            border: 1px solid rgba(66, 165, 245, 0.28);
+            border-radius: 10px;
+        }
+
+        .parking-qr-code {
+            width: 82px;
+            height: 82px;
+            padding: 4px;
+            background: #ffffff;
+            border-radius: 7px;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .parking-qr-text {
+            color: #b0bec5;
+            font-size: 13px;
+            line-height: 1.35;
+            max-width: 180px;
+        }
+
         /* WIFI BOX */
         .wifi-box {
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(27, 94, 32, 0.25));
@@ -763,6 +794,10 @@
                         <strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br>
                         <strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.
                     </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADHElEQVR42u3dS27rMBAF0ceH7H/LztwDAUx/+NGpaSJbVqEbF6RIjs/n8w+v4b9HwDf4Bt/gG3yDb/ANvpHKz/Ofxxg99/E1zPf8vc9jgl/XRgYQI7exyZNU3/o5+AbfuD2vRRLKqihUF9ASf0Lbk1Tf+jn4Bt94WV6LJIXEGJWY5hKHvdpyYuSL1Ld+Dr7BN16W1+qoi1GRZDQV/fZcyKG+9XPwDb4hr9UQyVxTs5Zf/9w27KW+wTf4Bt+oyWttCSUxoD3/89RKhsQBtbYnqb71c/ANvnF7Xmtb5PgcZyLzkolzmpFrVz1J9a2fg2/wjevy2tt200182W3PJ6m+9XPwDb5xXV47YmFmJHMlLj9oS5ERR+pbPwff4BvX5bUp2iYTpzJX4jYbdTdZd6361s/BN/jG8Yy6jVsTX+BqexfsgpMTjK+Bb77BN+S1DTJX5KPq3lBLjLqRe5bXwDff4Bu3UXh+aGSsKvF7E48ijfyEutUIU9eqb/0cfINvnMeoS1V12//XjUbVnWCwybFY6ls/B9/gG+dRuF/uqhG0Pc+FSryNyJNU3/o5+AbfuD2vJc4trhpger6Nur1Anm+ybamp+tbPwTf4xu15LRJJpo7mbFsFsepFuVVnWalv/Rx8g2+cx1h1bFLiGs/Cp1O260ZbMFTf+jn4Bt84nszzqNoO0GxLkZHp0cTtghOnktW3fg6+wTfOI3P/tQsWhE6lubrNThKfhvrWz8E3+MbxZO6/Fhlfq8t6kdxUN5AXyYnG18A3+Abf72Jsst3FVJxp2xpkk93ZEq9V3/o5+AbfOI/C8w0iuWmTj0rMiYkv90V+oPrWz8E3+MZ1ea0uCrWNoE3lplW7wk39c2QwTn3r5+AbfOP2vDaVuSKBpW0ZQOKizshPiNyV+VDwDb75hry2gsTpwrqlC5ssqDC+Br7BN9+Q1zYgcfJ06qPq3jJLXJdqfA18g2++Ia/9NXQkUrfD2qrDRtv2jFPf+jn4Bt94WV5rWy4aCUptZzJElhAkrgA1Hwq+wTffuJxN91+D+gbf4Bt8g2++wTf4Bt84gl99iClleTnWdQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-1">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div>
                 </div>
 
                 <!-- PARKING OPTION 2 -->
@@ -796,6 +831,10 @@
                         <strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br>
                         <strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.
                     </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAADyklEQVR42u3dwW6kMBBF0WGU///lzGZWWaCU6pXthnO3rYChr8ovblNc39/ff4Bf8NctAFfAFXAFXAFXwBWAK+AKlvB1//F1XWvGcb98fD+MH39bGnPnb4NH7lz+sm9BXYE5CFwBV/Dh2baUfUoEE2gn+nWGsevW7foW1BVwBVwBV/CsbLssGHYWakufls4bXD7uDHJXPFdXwBVwBVzBo7PtmQSjbidjzu12UFfAFXAFXAFek23v6az53h9qbjVZXYE5CFwBV4D5bLsrkXWey+ocOfi3Z26/VVfAFXAFXMGbsu2uH9aDS6LBT5eN+ZBvQV0BV8AVcAWnc535a/iyn+znThTc7aCuwBwEroArwK+o9bdd1g22tHA5t8rZOVFwRXjuPqsrMAeBK+AKHsU1lyKXPVt1ZretYOQ8pPeYugJzELgCruDDs+3gicdWhIONu4Jj3vVvQXDzg7oCroAr4Ao+PNsuy5jB894PY9dO3rlBencDzEHgCrgC/CfZA2zZptHOMIKJu3SoXa9yCO45UVdgDgJXwBU8OtuW4tuyna3LHnibC++lO7lsVOoKuAKugCs4nWvZOmbwGaddDbTOfGdEsAmvugJzELgCruBN2XZXN9hDMnUnkM69JCJ4ReoKzEHgCriCz6a1JyHYGWBZiJ7L8sHrLcXVzvXabwtzELgCrkC2HciYwXXMudTcOfLcFS3bsKGugCvgCriC0xncbxuMq3OvJ1jWQCu4Er0r6qor4Aq4Aq7gTdk2GAx3/UbfGcZc1N31PjR1BeYgcAVcwYcxuCdh1/NRuxZqd61EBy9BXQFXwBVwBY/Otp3OqsuSb2cbbLDZWDCAly6hE7E9SwZzELgCruBN2bYTKjsPU801Rgj2K5iL2MG7Yb8tzEHgCriCF3F1VgwP+X0/mEB3rZ8G0/rc8rG6AnMQuAKu4HS29QALrif+OFQwVAZ3DhzS5Kxzc9QVcAVcAVdwOtfcG2rnkm+JXc+hlYYRjPbWbWEOAlfAFbyX2rNkc5SeUivltWC468TVYNLf1WZXXQFXwBVwBR+ebe/TXDCvLcvUnag7t5EgeNuDL7ZQV2AOAlfAFTw623by2rKGYcueJQvGxrktw/fntW4LcxC4Aq5Atj2MUooMdrAtJd9ludh+W5iDwBVwBbLtJzPXmWxur25pofaQt5apK+AKuAKu4NHZdq7HwrJ3fJXCbCmuzl1vJ4CrKzAHgSvgCmTbgaB0yIlKGbOT9IPPzgX3YFi3hTkIXAFX8CgO7W8LdQVcAVcAroAr4Aq4Aq6AK3gt/wB8We+hbEJbUQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-3">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div>
                 </div>
 
                 <!-- PARKING OPTION 4 -->
@@ -814,6 +853,10 @@
                         <strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br>
                         <strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze.
                     </span>
+                    <div class="parking-qr-option">
+                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEi0lEQVR42u3dy47jMAxE0XiQ///lzL4XBgQ+RNnnbjtRO3aBZMmUdP1+vw9QzD+3AHQGOgPoDHQGOgPoDHQG0Bm28r3/83VdPddx/1pi6TL+DHX/3fsPR4aqu7GJ19z2BMUzyJugM4DOcJQPiJS6uxzGfV2ceJGRejziexI9RNsTFM8gb4LOADrDyT4gUglGpssj310aKlImJ07EJ74d2fUExTPIm6AzgM7wXB9wBEs1deIk/pItaKvHxTPImwCdgc6Ah/qAtgb5XasWxDOAzkBnoDNgqw8YMjHd1vkTqdYjnU51y5XbnqB4BjoDnQF0hpN9wJCJ6UgzT91fh/yimU9QPAOdgc4AOsMsrpnN5rv65RN39Zl5zeIZ5E2AzkBnwOezen5AXd/6n5ETt9VMbKqp++4RmwvZLwjyJkBnoDM8h2vI9vpLtXzm7+9ar9vWYhQxdom+RzyDvAk6A+gMJ/uAxEpwSEE6pMROvBt1u5lGjI54BnkTdAbQGUYTOk94VzdL5DLqqubIh3dt8lP3Nkg8g7wJOgPoDKO52lpuEhtjdnUNtXU61Z1MUIf3AZA3QWcAneFBPmBmtV63m1Bdn0ziGuMjFl6IZ5A3QWcAneFBPiBSCLeNPMRSFD6zTZubRqyMeAZ5E3QG0Blm8Y1Ugm09/m3rZu8/vGsPziFrfcUzyJsAnYHO8BofEGkjqXMJkUW2ib830RUNOai5zn+IZ5A3QWcAnWFYqTeke2fmPv5tywV27WJUt/OSeAZ5E3QG0BlO9gGhocu289xV6j5+n6JEryaeQd4EnQF0htGE+oISu4aWOn8iBWnkJyQajjqHEXmHkfgUxDPIm6AzgM4wmqttgrhtOWvby4Nd1XrkPrc1AolnkDdBZwCdYTTfxLHqVhEnTuIn2oJEl7CrXaet8Uk8g7wJOgPoDEf5gMTCMDIT3XZwWF3xXtdEFDFYbYZDPIO8CToD6AyzuGYet9t2VYkT8W0tN3X3yvkBkDcBOgOdgQ8IV9xt62ZnTqbv2oJ018jeB0DeBJ0BdIaTyOwLqtuSs20We+bK58Sh2vqgxDPIm6AzgM5wsg9IdAlL35256U3dZdT5rboz15ZurHgGeRN0BtAZHuQDEl3CrkagRGez9H8TrypyN9pORhPPIG+CzgA6w4N8QN1ul4lT/HUrgSPVemRH0siNTRxq6caKZ5A3QWcAnWEWV90UcFsFmliutvUjta24rvu9fADkTdAZQGd4rg9InFxeKnUj5WrdT6hbJn0/VNt7CPsFQd4E6Ax0hrew1hfUtjNPpD5t66av8xCJE/F1i7e9D4C8CToD6Ayv8QFLtXyih4gU/pFKv23WPnGavm2DIPEM8iboDKAzvNUHtBFpyKlr16mr9Ouq9bpT1fQFQd4EnQF0Bj4gm6USO1IIR14tLJmGXSMnWgrxDPIm6AygM7zVB9TtNXREN/1Seb7LM0UK/8R10eIZ5E3QGUBnONkHtJW6iS8A2g49Xqqa63Yxajs/QDyDvAk6A+gMBzP0/ACIZwCdgc5AZwCdgc4AOgOdgc6ARP4Da7avs4qZ0IEAAAAASUVORK5CYII=" alt="QR kód pro otevření webové stránky">
+                        <span class="parking-qr-text" id="pk-qr-text-4">Naskenujte QR kód pro otevření webové stránky.</span>
+                    </div>
                 </div>
             </div>
 
@@ -901,6 +944,7 @@
 
                 pkWelcomeTitle: "Možnosti parkování",
                 pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.",
+                pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
                 pkOpt1Title: "Hlídané podzemní garáže",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
                 pkOpt2Title: "Nehlídané venkovní parkoviště",
@@ -953,6 +997,7 @@
 
                 pkWelcomeTitle: "Parking Options",
                 pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot. This information is mentioned on our website, including all third-party profiles.",
+                pkQrText: "Scan the QR code to open the website.",
                 pkOpt1Title: "Guarded Underground Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
                 pkOpt2Title: "Unguarded Outdoor Parking",
@@ -1005,6 +1050,7 @@
 
                 pkWelcomeTitle: "Parkmöglichkeiten",
                 pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze. Diese Information ist auf unserer Website einschließlich aller Profile von Drittanbietern aufgeführt.",
+                pkQrText: "Scannen Sie den QR-Code, um die Website zu öffnen.",
                 pkOpt1Title: "Bewachte Tiefgarage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
                 pkOpt2Title: "Unbewachter Außenparkplatz",
@@ -1057,6 +1103,7 @@
 
                 pkWelcomeTitle: "Opzioni di Parcheggio",
                 pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata sul nostro sito web, inclusi tutti i profili di terze parti.",
+                pkQrText: "Scansiona il codice QR per aprire il sito web.",
                 pkOpt1Title: "Garage Sotterraneo Custodito",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
                 pkOpt2Title: "Parcheggio Esterno Non Custodito",
@@ -1109,6 +1156,7 @@
 
                 pkWelcomeTitle: "Opciones de Aparcamiento",
                 pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio. Esta información se menciona en nuestro sitio web, incluidos todos los perfiles de terceros.",
+                pkQrText: "Escanee el código QR para abrir el sitio web.",
                 pkOpt1Title: "Garaje Subterráneo Vigilado",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
                 pkOpt2Title: "Aparcamiento Exterior No Vigilado",
@@ -1161,6 +1209,7 @@
 
                 pkWelcomeTitle: "Options de Stationnement",
                 pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information est mentionnée sur notre site web, y compris sur tous les profils de tiers.",
+                pkQrText: "Scannez le code QR pour ouvrir le site web.",
                 pkOpt1Title: "Parking Souterrain Sécurisé",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
                 pkOpt2Title: "Parking Extérieur Non Surveillé",
@@ -1213,6 +1262,7 @@
 
                 pkWelcomeTitle: "Opcje Parkowania",
                 pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta jest podana na naszej stronie internetowej, w tym na wszystkich profilach stron trzecich.",
+                pkQrText: "Zeskanuj kod QR, aby otworzyć stronę internetową.",
                 pkOpt1Title: "Strzeżony Garaż Podziemny",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
                 pkOpt2Title: "Niestrzeżony Parking Zewnętrzny",
@@ -1265,6 +1315,7 @@
 
                 pkWelcomeTitle: "Варіанти паркування",
                 pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу. Ця інформація зазначена на нашому вебсайті, включно з усіма профілями третіх сторін.",
+                pkQrText: "Відскануйте QR-код, щоб відкрити вебсайт.",
                 pkOpt1Title: "Підземний гараж під охороною",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
                 pkOpt2Title: "Відкритий паркінг без охорони",
@@ -1317,6 +1368,7 @@
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
                 pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır. Bu bilgi, tüm üçüncü taraf profilleri de dahil olmak üzere web sitemizde belirtilmiştir.",
+                pkQrText: "Web sitesini açmak için QR kodunu tarayın.",
                 pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Fiyat:</strong> 11–24 saat için 750 CZK (güncel fiyatı web sitesinden kontrol edin)<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG ve CNG'li araçlar giremez<br><strong>Otele Dönüş Mesafesi:</strong> Mánes Köprüsü üzerinden yürüyerek 10 dakika<br><strong>Not:</strong> İdeal seçim. Web sitesinden önceden rezerve edilebilir ve ödenebilir.",
                 pkOpt2Title: "Güvenliksiz Açık Otopark",
@@ -1369,6 +1421,7 @@
 
                 pkWelcomeTitle: "Parkeringsmuligheder",
                 pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkeringsplads. Denne information fremgår af vores hjemmeside, inklusive alle tredjepartsprofiler.",
+                pkQrText: "Scan QR-koden for at åbne hjemmesiden.",
                 pkOpt1Title: "Overvåget Underjordisk Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek aktuel pris på hjemmesiden)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærkning:</strong> Den gyldne middelvej. Kan reserveres og betales på forhånd online.",
                 pkOpt2Title: "Uovervåget Udendørs Parkering",
@@ -1421,6 +1474,7 @@
 
                 pkWelcomeTitle: "駐車場のご案内",
                 pkWelcomeSubtitle: "プラハ歴史地区の中心部に位置するため、ホテル専用の駐車場はございません。この情報は、すべての第三者プロフィールを含む当ホテルのウェブサイトに記載されています。",
+                pkQrText: "QRコードをスキャンしてウェブサイトを開いてください。",
                 pkOpt1Title: "監視付き地下駐車場",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>住所:</strong> Alšovo nábřeží, 110 00<br><strong>料金:</strong> 11〜24時間で750 CZK（最新料金はWebサイトでご確認ください）<br><strong>車両制限:</strong> 高さ最大2メートル<br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>重要:</strong> LPG / CNG車は入場不可<br><strong>ホテルまでの距離:</strong> マーネス橋経由で徒歩10分<br><strong>特徴:</strong> 一番おすすめの駐車場。Webサイトから事前予約・事前決済が可能です。",
                 pkOpt2Title: "屋屋外駐車場（監視なし）",
@@ -1473,6 +1527,7 @@
 
                 pkWelcomeTitle: "אפשרויות חנייה",
                 pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חניון פרטי. מידע זה מצוין באתר האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים.",
+                pkQrText: "סרקו את קוד ה-QR כדי לפתוח את אתר האינטרנט.",
                 pkOpt1Title: "חניון תת-קרקעי שמור",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות (בדקו מחיר עדכני באתר)<br><strong>גובה רכב:</strong> מקסימום 2 מטרים<br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז (LPG / CNG)<br><strong>מרחק בחזרה למלון:</strong> 10 דקות הליכה דרך גשר Mánes<br><strong>הערה:</strong> השילוב המנצח. ניתן להזמין מקום ולשלם מראש באתר.",
                 pkOpt2Title: "חניון חיצוני לא שמור",
@@ -1525,6 +1580,7 @@
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
                 pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης. Αυτή η πληροφορία αναφέρεται στον ιστότοπό μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων.",
+                pkQrText: "Σαρώστε τον κωδικό QR για να ανοίξετε τον ιστότοπο.",
                 pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες (ελέγξτε τις τρέχουσες τιμές στον ιστότοπο)<br><strong>Ύψος οχήματος:</strong> μέγιστο 2 μέτρα<br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται η είσοδος σε οχήματα LPG / CNG<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes<br><strong>Σημείωση:</strong> Η χρυσή τομή. Δυνατότητα κράτησης και προπληρωμής online.",
                 pkOpt2Title: "Μη Φυλασσόμενος Εξωτερικός Χώρος Στάθμευσης",
@@ -1733,6 +1789,9 @@
             // Parking Info
             document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
             document.getElementById('pk-welcome-subtitle').innerText = dict.pkWelcomeSubtitle;
+            document.getElementById('pk-qr-text-1').innerText = dict.pkQrText;
+            document.getElementById('pk-qr-text-3').innerText = dict.pkQrText;
+            document.getElementById('pk-qr-text-4').innerText = dict.pkQrText;
             document.getElementById('pk-opt1-title').innerText = dict.pkOpt1Title;
             document.getElementById('pk-opt1-text').innerHTML = dict.pkOpt1Text;
             document.getElementById('pk-opt2-title').innerText = dict.pkOpt2Title;
