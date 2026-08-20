@@ -758,7 +758,6 @@
                 <!-- PARKING OPTION 1 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <!-- Ikona Podzemní Garáž / Budova -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"/></svg>
                         <span id="pk-opt1-title">Hlídané podzemní garáže</span>
                     </strong>
@@ -777,7 +776,6 @@
                 <!-- PARKING OPTION 2 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <!-- Ikona Venkovní Parkoviště / Auto pod širým nebem -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
                         <span id="pk-opt2-title">Nehlídané venkovní parkoviště</span>
                     </strong>
@@ -794,7 +792,6 @@
                 <!-- PARKING OPTION 3 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <!-- Ikona Hotelové Garáže Cloud One -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
                         <span id="pk-opt3-title">Hlídané venkovní i garážové parkoviště The Cloud One</span>
                     </strong>
@@ -812,7 +809,6 @@
                 <!-- PARKING OPTION 4 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <!-- Ikona P+R Metro / Záchytné Parkoviště -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         <span id="pk-opt4-title">P+R Kotlářka – levné venkovní parkování zřizované městem Prahou</span>
                     </strong>
@@ -863,8 +859,6 @@
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
-        const WIFI_NET = "Nuzky";
-        const WIFI_PASS = "Hotel2017";
         const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
 
         let currentLang = 'cs';
@@ -887,7 +881,7 @@
                 issueLabel: "Popis závady / požadavek",
                 cancel: "ZRUŠIT",
                 submit: "POTVRDIT",
-                back: "ZPĚT NA HLAVNÍ OBRAZOVKU",
+                back: "ZPĚT / BACK",
                 fillAll: "Prosím vyplňte všechna pole.",
                 thanks: "Děkujeme! Vaše požadavka byla úspěšně odeslána.",
                 
@@ -939,7 +933,7 @@
                 issueLabel: "Issue description / Request",
                 cancel: "CANCEL",
                 submit: "SUBMIT",
-                back: "BACK TO MAIN SCREEN",
+                back: "BACK",
                 fillAll: "Please fill in all fields.",
                 thanks: "Thank you! Your request has been sent successfully.",
 
@@ -991,7 +985,7 @@
                 issueLabel: "Problembeschreibung / Anfrage",
                 cancel: "ABBRECHEN",
                 submit: "BESTÄTIGEN",
-                back: "ZURÜCK ZUR HAUPTSEITE",
+                back: "ZURÜCK",
                 fillAll: "Bitte füllen Sie alle Felder aus.",
                 thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
 
@@ -1043,7 +1037,7 @@
                 issueLabel: "Descrizione del problema / Richiesta",
                 cancel: "ANNULLA",
                 submit: "INVIA",
-                back: "TORNA ALLA SCHERMATA PRINCIPALE",
+                back: "INDIETRO",
                 fillAll: "Si prega di compilare tutti i campi.",
                 thanks: "Grazie! La tua richiesta è stata inviata con successo.",
 
@@ -1095,7 +1089,7 @@
                 issueLabel: "Descripción del problema / Solicitud",
                 cancel: "CANCELAR",
                 submit: "ENVIAR",
-                back: "VOLVER A LA PANTALLA PRINCIPAL",
+                back: "VOLVER",
                 fillAll: "Por favor, rellene todos los campos.",
                 thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
 
@@ -1147,7 +1141,7 @@
                 issueLabel: "Description du problème / Demande",
                 cancel: "ANNULER",
                 submit: "VALIDER",
-                back: "RETOURNER À L'ACCUEIL",
+                back: "RETOUR",
                 fillAll: "Veuillez remplir tous les champs.",
                 thanks: "Merci ! Votre demande a été envoyée avec succès.",
 
@@ -1199,7 +1193,7 @@
                 issueLabel: "Opis usterki / Prośba",
                 cancel: "ANULUJ",
                 submit: "POTWIERDŹ",
-                back: "POWRÓT DO EKRANU GŁÓWNEGO",
+                back: "POWRÓT",
                 fillAll: "Proszę wypełnić wszystkie pola.",
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
 
@@ -1251,7 +1245,7 @@
                 issueLabel: "Опис проблеми / Запит",
                 cancel: "СКАСУВАТИ",
                 submit: "ПІДТВЕРДИТИ",
-                back: "ПОВЕРНУТИСЯ НА ГОЛОВНУ",
+                back: "НАЗАД",
                 fillAll: "Будь ласка, заповніть усі поля.",
                 thanks: "Дякуємо! Ваш запит успішно надіслано.",
 
@@ -1286,7 +1280,7 @@
                 pkOpt3Title: "Паркінг та гараж під охороною (The Cloud One)",
                 pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Адреса:</strong> Hybernská 2140/17<br><strong>Ціна:</strong> онлайн 750 CZK / 24 год, на місці 1 200 CZK / 24 год<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою онлайн або на місці<br><strong>Відстань до готелю:</strong> 20 хвилин громадським транспортом<br><strong>Примітка:</strong> Чудова альтернатива, якщо Old Town Parking зайнятий.",
                 pkOpt4Title: "P+R Kotlářka – Бюджетний міський паркінг",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший варіант паркування в Празі."
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший можливий варіант паркування в Празі."
             },
             sk: {
                 title: "Kiosk",
@@ -1296,49 +1290,49 @@
                 parking: "Parkovanie",
                 coInstructions: "Prosím, napíšte číslo svojej izby a meno zaregistrovanej osoby.",
                 coLuggageTitle: "Úschovňa batožiny",
-                coLuggageText: "Ak si želáte uložiť svoju batožinu, prosím, obráťte sa na personál reštaurácie. Vzhľadom na historický charakter budovy sú naše skladovacie priestory obmedzené a hotel za uloženú batožinu nenesieme zodpovednosť. Alternatívne môžete využiť platenú úschovňu na Hlavnej stanici (Hlavní nádraží). Dostanete sa tam električkou číslo 15 z Malostranského námestia – vystúpte na zastávke „Hlavní nádraží“.",
-                srvInstructions: "Vyplňte formulár nižšie a my sa vašej požiadavke budeme čo najskôr venovať. Ak je vec neodkladná, využite pevnú linku vedľa kiosku – v čase 8:00–16:00 vás spojí so vzdialenou recepciou, mimo týchto hodín volajte núdzový kontakt.",
+                coLuggageText: "Ak si prajete uložiť svoju batožinu, prosím, obráťte sa na personál reštaurácie. Vzhľadom na historický charakter budovy sú naše priestory obmedzené a hotel za uloženú batožinu nenesieme zodpovednosť. Alternatívne môžete využiť placenú úschovňu na Hlavnej stanici (Hlavní nádraží). Dostanete sa tam električkou číslo 15 z Malostranského námestia – vystúpte na zastávke „Hlavní nádraží“.",
+                srvInstructions: "Vyplňte formulár nižšie a my sa vašej požiadavke budeme čo najskôr venovať. Ak je vec neodkladná, využite pevnú linku vedľa kiosku – v čase 8:00–16:00 vás spojí so vzdialenou recepciou, mimo tejto doby je k dispozícii núdzový kontakt.",
                 roomLabel: "Číslo izby",
                 nameLabel: "Meno a priezvisko",
                 issueLabel: "Popis poruchy / požiadavka",
                 cancel: "ZRUŠIŤ",
                 submit: "POTVRDIŤ",
-                back: "SPÄŤ NA HLAVNÚ OBRAZOVKU",
+                back: "SPÄŤ",
                 fillAll: "Prosím vyplňte všetky polia.",
                 thanks: "Ďakujeme! Vaša požiadavka bola úspešne odoslaná.",
 
                 ciWelcomeTitle: "Vitajte v našom hoteli!",
                 ciWelcomeSubtitle: "Vďaka samoobslužnému kiosku sa u nás ubytujete pohodlne a nonstop.",
                 ciRegTitle: "Registrácia",
-                ciRegText: "Registračný formulár nájdete na izbe. Prosíme o jeho vyplnenie, aby sme vás mohli zaregistrovať na cudzineckej polícii, ako nám ukladá zákon. Vyplnený formulár stačí odovzdať personálu reštaurácie. Ďakujeme.",
+                ciRegText: "Registračný formulár nájdete na izbe. Prosíme o jeho vyplnenie, aby sme vás mohli zaregistrovať na cudzineckej polícii. Vyplnený formulár stačí odovzdať personálu reštaurácie. Ďakujeme.",
                 ciQ1Title: "Kedy a ako dostanete kód?",
-                ciQ1Text: "Hneď ako je vaša izba pripravená, odosleme vám prístupový kód ku všetkým dverám v SMS, e-maile alebo cez interný chat vášho poskytovateľa rezervácie, najneskôr o 15:00, kedy oficiálne začína check-in.",
+                ciQ1Text: "Akonáhle je Vaša izba pripravená, odešleme Vám prístupový kód ku všetkým dverám v SMS, e-maile alebo cez chat vašej rezervačnej platformy, najneskôr o 15:00.",
                 ciBfTitle: "Raňajky",
                 ciBfText: "Raňajky sa podávajú formou bufetu na prízemí reštaurácie od 8:00 do 10:00.",
                 ciQ2Title: "Kód vám nedorazil?",
-                ciQ2Text: "Ak ste rezervovali cez tretiu stranu, možná na vás nemáme priamy kontakt. V čase 8:00–16:00 prosím zdvihnite pevnou linku vedľa tohto kiosku, mimo týchto hodín volajte núdzový kontakt.",
+                ciQ2Text: "Ak ste rezervovali cez tretiu stranu, v čase 8:00–16:00 prosím zdvihnite pevnú linku vedľa kiosku, mimo týchto hodín volajte núdzový kontakt.",
                 ciQ3Title: "Batožina",
-                ciQ3Text: "Ak vaša izba ešte nie je pripravená, personál našej reštaurácie vám batožinu rád schová. Pretože sme ale v historickej budove, naše priestory sú malé a za veci nemôžeme právne zodpovedať.",
+                ciQ3Text: "Ak vaša izba ešte nie je pripravená, personál reštaurácie vám batožinu rád uschová. Kapacity sú však obmedzené.",
                 ciQ4Title: "Parkovanie",
-                ciQ4Text: "Vzhľadom na historické centrum vlastné parkovisko nemáme. Kompletné tipy na parkovanie v okolí nájdete pod tlačidlom „Parkovanie“ na hlavnej obrazovke.",
+                ciQ4Text: "Vlastné parkovisko nemáme. Tipy na parkovanie nájdete pod tlačidlom „Parkovanie“ na hlavnej obrazovke.",
                 ciQ5Title: "Architektúra",
-                ciQ5Text: "Naša budova je historický unikát, preto v nej bohužiaľ nie je výťah. Ak potrebujete s niečím pomôcť, sme tu pre vás.",
-                ciInfoStandText: "Ďalšie užitočné informácie nájdete priamo na svojej izbe na listovacom stojane.",
+                ciQ5Text: "Naša budova je historický unikát, preto v nej bohužiaľ nie je výťah. Ak potrebujete pomoc, sme tu pre vás.",
+                ciInfoStandText: "Ďalšie užitočné informácie nájdete priamo na izbe na stojane.",
                 ciWifiTitle: "📶 Wi-Fi Pripojenie",
                 ciWifiNetLabel: "Názov / SSID",
                 ciWifiPassLabel: "Heslo / Password",
-                ciWishText: "Prajeme vám nádherný a ničím nerušený pobyt!",
+                ciWishText: "Prajeme vám nádherný a príjemný pobyt!",
 
                 pkWelcomeTitle: "Možnosti parkovania",
-                pkWelcomeSubtitle: "Vzhľadom na umiestnenie v historickom centre Prahy nemá hotel vlastné parkovisko.",
+                pkWelcomeSubtitle: "Vzhľadom na umiestnenie v historickom centre Prahy hotel nemá vlastné parkovisko.",
                 pkOpt1Title: "Strážené podzemné garáže",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodín (aktuálnu cenu skontrolujte na webe)<br><strong>Výška vozidla:</strong> max. 2 metre<br><strong>Platba:</strong> Kartou alebo hotovosťou v automate<br><strong>Dôležité:</strong> Zákaz vjazdu pre vozidlá na LPG a CNG<br><strong>Vzdialenosť k hotelu:</strong> 10 minút pešo cez Mánesov most<br><strong>Značka:</strong> Zlatá stredná cesta. Možnosť rezervácie a platby vopred cez web.",
-                pkOpt2Title: "Nestráté vonkajšie parkovisko",
-                pkOpt2Text: "<strong>Adresa vjazdu:</strong> Nosticova 634 (výjazd na druhej strane s automatom)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuálnu cenu skontrolujte na mieste)</em><br><strong>Platba:</strong> Iba kartou v automate<br><strong>Vzdialenosť k hotelu:</strong> 5 minút pešo cez park Kampa<br><strong>Značka:</strong> Najbližšie, ale veľmi drahé.",
-                pkOpt3Title: "Strážené vonkajšie aj garážové parkovisko The Cloud One",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> online 750 Kč / 24 h, na mieste 1 200 Kč / 24 h<br><em>(aktuálnu cenu skontrolujte na webe)</em><br><strong>Platba:</strong> Kartou cez web alebo na mieste<br><strong>Vzdialenosť k hotelu:</strong> 20 minút mestskou hromadnou dopravou<br><strong>Značka:</strong> Dobrá možnosť, ak je Old Town Parking plný.",
-                pkOpt4Title: "P+R Kotlářka – lacné mestskej parkovisko",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvých 24 hodín, každá ďalšia hodina 10 Kč<br><em>(aktuálnu cenu skontrolujte na webe)</em><br><strong>Platba:</strong> Kartou alebo hotovosťou v automate<br><strong>Vzdialenosť k hotelu:</strong> 30 minút mestskou hromadnou dopravou<br><strong>Značka:</strong> Najlacnejšie možné parkovanie v Prahe."
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK / 11–24 h<br><strong>Výška vozidla:</strong> max. 2 metre<br><strong>Vzdialenosť:</strong> 10 minút chôdze cez Mánesov most.",
+                pkOpt2Title: "NestrControlled venkovní parkoviště",
+                pkOpt2Text: "<strong>Adresa:</strong> Nosticova 634<br><strong>Cena:</strong> 75 CZK/h (6:00–23:00) | 100 CZK/h (23:00–6:00)<br><strong>Vzdialenosť:</strong> 5 minút chôdze cez park Kampa.",
+                pkOpt3Title: "Garáže The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> online 750 CZK / 24 h.",
+                pkOpt4Title: "P+R Kotlářka",
+                pkOpt4Text: "<strong>Adresa:</strong> Plzeňská<br><strong>Cena:</strong> 50 CZK na prvých 24 hodín.<br><strong>Vzdialenosť:</strong> 30 minút MHD."
             },
             nl: {
                 title: "Kiosk",
@@ -1346,51 +1340,51 @@
                 checkout: "Check-out",
                 service: "Reparatie / Help",
                 parking: "Parkeren",
-                coInstructions: "Voer uw kamernummer en de naam van de geregistreerde gast in.",
+                coInstructions: "Vul uw kamernummer en de naam van de geregistreerde gast in.",
                 coLuggageTitle: "Bagage-opslag",
-                coLuggageText: "Als u uw bagage wilt opslaan, vraag het dan aan ons restaurantpersoneel. Vanwege het historische karakter van het gebouw is onze opslagruimte beperkt en kan het hotel geen aansprakelijkheid aanvaarden. U kunt ook gebruikmaken van de betaalde bagage-opslag op het Centraal Station (Hlavní nádraží). Neem tram 15 vanaf Malostranské náměstí – stap uit bij halte \"Hlavní nádraží\".",
-                srvInstructions: "Vul het onderstaande formulier in en wij behandelen uw verzoek zo snel mogelijk. Voor dringende zaken gebruikt u de vaste telefoon naast de kiosk – van 8:00 tot 16:00 uur verbindt deze u met de receptie op afstand, buiten deze tijden is een noodcontact beschikbaar.",
+                coLuggageText: "Als u uw bagage wilt opslaan, vraag dit dan aan het restaurantpersoneel. Vanwege het historische karakter van het gebouw is onze opslagruimte beperkt. U kunt ook gebruikmaken van de betaalde bagage-opslag op het Centraal Station (Hlavní nádraží). Tram 15 vanaf Malostranské náměstí.",
+                srvInstructions: "Vul het onderstaande formulier in. Bij dringende gevallen kunt u tussen 08:00 en 16:00 uur de vaste telefoon naast de kiosk gebruiken.",
                 roomLabel: "Kamernummer",
                 nameLabel: "Volledige naam",
-                issueLabel: "Beschrijving van probleem / Verzoek",
+                issueLabel: "Beschrijving van het probleem",
                 cancel: "ANNULEREN",
-                submit: "VERSTUREN",
-                back: "TERUG NAAR HOOFDSCHERM",
-                fillAll: "Vul alstublieft alle velden in.",
+                submit: "BEVESTIGEN",
+                back: "TERUG",
+                fillAll: "Vul a.u.b. alle velden in.",
                 thanks: "Bedankt! Uw verzoek is succesvol verzonden.",
 
                 ciWelcomeTitle: "Welkom in ons hotel!",
-                ciWelcomeSubtitle: "Dankzij onze zelfbedieningskiosk kunt u 24/7 gemakkelijk inchecken.",
+                ciWelcomeSubtitle: "Dankzij onze zelfbedieningskiosk kunt u 24/7 inchecken.",
                 ciRegTitle: "Registratie",
-                ciRegText: "U vindt het registratieformulier op uw kamer. Vul dit in zodat wij u volgens de wet kunnen registreren bij de vreemdelingenpolitie. Geef het ingevulde formulier af aan het restaurantpersoneel. Bedankt.",
-                ciQ1Title: "Wanneer en hoe ontvangt u uw code?",
-                ciQ1Text: "Zodra uw kamer klaar is, sturen wij uw toegangscode via SMS, e-mail of de chat van uw boekingsplatform — uiterlijk om 15:00 uur, wanneer de officiële check-in begint.",
+                ciRegText: "U vindt het registratieformulier op uw kamer. Vul het in en geef het af bij het restaurantpersoneel. Bedankt.",
+                ciQ1Title: "Wanneer ontvangt u uw code?",
+                ciQ1Text: "Zodra uw kamer klaar is, sturen wij u de toegangscode per SMS, e-mail en chat (uiterlijk om 15:00 uur).",
                 ciBfTitle: "Ontbijt",
-                ciBfText: "Het ontbijt wordt in buffetvorm geserveerd op de begaande grond van het restaurant van 8:00 tot 10:00 uur.",
+                ciBfText: "Het ontbijtbuffet wordt geserveerd op de begane grond van 8:00 tot 10:00 uur.",
                 ciQ2Title: "Geen code ontvangen?",
-                ciQ2Text: "Als u via een extern platform heeft geboekt, hebben we mogelijk geen directe contactgegevens. Tussen 8:00 en 16:00 uur kunt u de telefoon naast de kiosk gebruiken. Buiten deze tijden belt u het noodnummer.",
-                ciQ3Title: "Bagage-opslag",
-                ciQ3Text: "Als uw kamer nog niet klaar is, bewaart ons restaurantpersoneel uw bagage graag. Vanwege het historische gebouw is de ruimte echter beperkt en kunnen wij geen wettelijke aansprakelijkheid aanvaarden.",
+                ciQ2Text: "Gebruik tussen 8:00 en 16:00 uur de telefoon naast de kiosk of bel het noodnummer.",
+                ciQ3Title: "Bagage",
+                ciQ3Text: "Als uw kamer nog niet klaar is, kan het restaurantpersoneel uw bagage bewaren.",
                 ciQ4Title: "Parkeren",
-                ciQ4Text: "Vanwege onze locatie in het historische centrum hebben wij geen eigen parkeergelegenheid. Bekijk alle parkeertips via de knop \"Parkeren\" op het hoofdscherm.",
+                ciQ4Text: "Wij hebben geen eigen parkeergelegenheid. Zie de knop 'Parkeren' op het hoofdscherm.",
                 ciQ5Title: "Architectuur",
-                ciQ5Text: "Ons gebouw is een uniek historisch pand en heeft helaas geen lift. Als u hulp nodig heeft met uw bagage, staan we voor u klaar.",
-                ciInfoStandText: "Meer nuttige informatie vindt u op de informatie-standaard op uw kamer.",
+                ciQ5Text: "Ons gebouw is historisch en heeft helaas geen lift.",
+                ciInfoStandText: "Meer informatie vindt u op de standaard in uw kamer.",
                 ciWifiTitle: "📶 Wi-Fi Verbinding",
                 ciWifiNetLabel: "Netwerknaam / SSID",
                 ciWifiPassLabel: "Wachtwoord",
-                ciWishText: "Wij wensen u een geweldig en aangenaam verblijf!",
+                ciWishText: "Wij wensen u een prettig verblijf!",
 
                 pkWelcomeTitle: "Parkeermogelijkheden",
-                pkWelcomeSubtitle: "Vanwege de ligging in het historische centrum van Prag heeft het hotel geen eigen parkeergelegenheid.",
-                pkOpt1Title: "Bewaakte Ondergrondse Garage",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Prijs:</strong> 750 CZK voor 11–24 uur (controleer prijzen op de website)<br><strong>Voertuighoogte:</strong> max. 2 meter<br><strong>Betaling:</strong> Pin/Creditcard of contant bij automaat<br><strong>Belangrijk:</strong> Geen toegang voor LPG / CNG voertuigen<br><strong>Afstand tot hotel:</strong> 10 minuten lopen via Mánesbrug<br><strong>Tip:</strong> Goede prijs-kwaliteitverhouding. Online reserveren mogelijk.",
-                pkOpt2Title: "Onbewaakt Buitenterrein",
-                pkOpt2Text: "<strong>Inrij-adres:</strong> Nosticova 634 (uitrit aan de andere kant met automaat)<br><strong>Prijs:</strong> 75 CZK/uur (6:00–23:00) | 100 CZK/uur (23:00–6:00)<br><em>(controleer tarieven ter plaatse)</em><br><strong>Betaling:</strong> Alleen pinnen bij automaat<br><strong>Afstand tot hotel:</strong> 5 minuten lopen door Kampapark<br><strong>Tip:</strong> Dichtstbijzijnde, maar erg duur.",
-                pkOpt3Title: "Bewaakte Parkeergarage & Terrein (The Cloud One)",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Prijs:</strong> online 750 CZK / 24u, ter plaatse 1.200 CZK / 24u<br><em>(controleer prijzen op de website)</em><br><strong>Betaling:</strong> Online of ter plaatse met kaart<br><strong>Afstand tot hotel:</strong> 20 minuten met het openbaar vervoer<br><strong>Tip:</strong> Goed alternatief als Old Town Parking vol is.",
-                pkOpt4Title: "P+R Kotlářka – Goedkoop Gemeentelijk Parkeren",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Inrit:</strong> 50.0685878N, 14.3580586E<br><strong>Prijs:</strong> 50 CZK voor de eerste 24 uur, 10 CZK per volgend uur<br><em>(controleer prijzen op de website)</em><br><strong>Betaling:</strong> Kaart of contant bij automaat<br><strong>Afstand tot hotel:</strong> 30 minuten met het openbaar vervoer<br><strong>Tip:</strong> De goedkoopste parkeeroptie in Klaag."
+                pkWelcomeSubtitle: "Het hotel beschikt niet over een eigen parkeerterrein.",
+                pkOpt1Title: "Bewaakte parkeergarage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Prijs:</strong> 750 CZK / 11–24 uur.",
+                pkOpt2Title: "Onbewaakt parkeerterrein",
+                pkOpt2Text: "<strong>Adres:</strong> Nosticova 634<br><strong>Prijs:</strong> 75 CZK/uur.",
+                pkOpt3Title: "The Cloud One Garage",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Prijs:</strong> 750 CZK online.",
+                pkOpt4Title: "P+R Kotlářka",
+                pkOpt4Text: "<strong>Prijs:</strong> 50 CZK voor de eerste 24 uur."
             },
             da: {
                 title: "Kiosk",
@@ -1400,49 +1394,49 @@
                 parking: "Parkering",
                 coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede gæst.",
                 coLuggageTitle: "Bagageopbevaring",
-                coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte restaurantpersonalet. På grund af bygningens historiske karakter er vores opbevaringsplads begrænset, og hotellet påtager sig intet ansvar. Alternativt kan du benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží). Tag sporvogn nr. 15 fra Malostranské náměstí – stå af ved stoppet \"Hlavní nádraží\".",
-                srvInstructions: "Udfyld venligst formularen nedenfor, så behandler vi din anmodning hurtigst muligt. Hvis det er akut, bedes du benytte fastnettelefonen ved siden af kiosken – fra 8:00 til 16:00 forbinder den til fjernreceptionen, uden for dette tidsrum er der en nødkontakt tilgængelig.",
+                coLuggageText: "Hvis du ønsker at opbevare din bagage, bedes du kontakte restaurantpersonalet. Du kan også benytte den betalte bagageopbevaring på Hovedbanegården (Hlavní nádraží) via sporvogn 15.",
+                srvInstructions: "Udfyld venligst formularen nedenfor. I hastesager bedes du benytte fastnettelefonen ved siden af kiosken mellem 8:00 og 16:00.",
                 roomLabel: "Værelsesnummer",
                 nameLabel: "Fulde navn",
-                issueLabel: "Beskrivelse af problem / Anmodning",
+                issueLabel: "Beskrivelse af problemet",
                 cancel: "ANNULLER",
                 submit: "BEKRÆFT",
-                back: "TILBAGE TIL HOVEDSKÆRM",
+                back: "TILBAGE",
                 fillAll: "Udfyld venligst alle felter.",
                 thanks: "Tak! Din anmodning er blevet sendt.",
 
                 ciWelcomeTitle: "Velkommen til vores hotel!",
-                ciWelcomeSubtitle: "Takket være vores selvbetjeningskiosk kan du tjekke ind nemt 24/7.",
+                ciWelcomeSubtitle: "Takket være vores selvbetjeningskiosk kan du tjekke ind 24/7.",
                 ciRegTitle: "Registrering",
-                ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet, som loven kræver. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
-                ciQ1Title: "Hvornår og hvordan modtager du din kode?",
-                ciQ1Text: "Så snart dit værelse er klar, sender vi din adgangskode via SMS, e-mail eller intern booking-chat — senest kl. 15:00, hvor den officielle check-in starter.",
+                ciRegText: "Du finder registreringsformularen på dit værelse. Aflever den venligst til restaurantpersonalet.",
+                ciQ1Title: "Hvornår modtager du koden?",
+                ciQ1Text: "Så snart dit værelse er klar, sender vi adgangskoden via SMS eller e-mail (senest kl. 15:00).",
                 ciBfTitle: "Morgenmad",
-                ciBfText: "Morgenmad serveres som buffet i stueetagen i restauranten fra 8:00 til 10:00.",
-                ciQ2Title: "Har du ikke modtaget din kode?",
-                ciQ2Text: "Hvis du har booket via en tredjepart, har vi muligvis ikke dine direkte kontaktoplysninger. Mellem 8:00 og 16:00 kan du bruge telefonen ved siden af kiosken. Uden for dette tidsrum bedes du ringe til nødkontakten.",
-                ciQ3Title: "Bagageopbevaring",
-                ciQ3Text: "Hvis dit værelse ikke er klar endnu, opbevarer vores restaurantpersonale gerne din bagage. Som en historisk bygning er vores plads dog begrænset, og vi kan ikke påtage os juridisk ansvar.",
+                ciBfText: "Morgenmadsbuffet serveres i stueetagen fra 8:00 til 10:00.",
+                ciQ2Title: "Har du ikke modtaget koden?",
+                ciQ2Text: "Brug telefonen ved siden af kiosken mellem 8:00 og 16:00 eller ring til nødnummeret.",
+                ciQ3Title: "Bagage",
+                ciQ3Text: "Personalet i restauranten opbevarer gerne din bagage, hvis værelset ikke er klar.",
                 ciQ4Title: "Parkering",
-                ciQ4Text: "Pga. vores placering i det historiske centrum har vi ikke privat parkering. Du kan finde alle parkeringstips under knappen \"Parkering\" på hovedskærmen.",
+                ciQ4Text: "Vi har ingen privat parkering. Se knappen 'Parkering' på hovedskærmen.",
                 ciQ5Title: "Arkitektur",
-                ciQ5Text: "Vores bygning er en unik historisk ejendom og har desværre ingen elevator. Hvis du har brug for hjælp, er vi her for dig.",
-                ciInfoStandText: "Du kan finde yderligere oplysninger på informationsstanderen på dit værelse.",
+                ciQ5Text: "Bygningen er historisk og har desværre ingen elevator.",
+                ciInfoStandText: "Du kan finde mere information på informationsstanderen på dit værelse.",
                 ciWifiTitle: "📶 Wi-Fi Forbindelse",
                 ciWifiNetLabel: "Netværksnavn / SSID",
                 ciWifiPassLabel: "Adgangskode",
-                ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
+                ciWishText: "Vi ønsker dig et fantastisk ophold!",
 
                 pkWelcomeTitle: "Parkeringsmuligheder",
-                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkering.",
-                pkOpt1Title: "Overvåget Underjordisk Garage",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek priser online)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontant ved automat<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærk:</strong> God balance mellem pris og sikkerhed. Online booking muligt.",
-                pkOpt2Title: "Uovervåget Udendørs Parkering",
-                pkOpt2Text: "<strong>Indkørselsadresse:</strong> Nosticova 634 (udkørsel på modsat side med automat)<br><strong>Pris:</strong> 75 CZK/time (6:00–23:00) | 100 CZK/time (23:00–6:00)<br><em>(tjek priser på stedet)</em><br><strong>Betaling:</strong> Kun kort i automat<br><strong>Afstand til hotel:</strong> 5 minutters gang gennem Kampa-parken<br><strong>Bemærk:</strong> Tættest på, men meget dyrt.",
-                pkOpt3Title: "Overvåget Parkering & Garage (The Cloud One)",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresse:</strong> Hybernská 2140/17<br><strong>Pris:</strong> 750 CZK / 24 t online, 1.200 CZK / 24 t på stedet<br><em>(tjek priser online)</em><br><strong>Betaling:</strong> Kort online eller på stedet<br><strong>Afstand til hotel:</strong> 20 minutter med offentlig transport<br><strong>Bemærk:</strong> Godt alternativ, hvis Old Town Parking er fuldt opfyldt.",
-                pkOpt4Title: "P+R Kotlářka – Billig By-Parkering",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Indkørsel:</strong> 50.0685878N, 14.3580586E<br><strong>Pris:</strong> 50 CZK for de første 24 timer, 10 CZK pr. efterfølgende time<br><em>(tjek priser online)</em><br><strong>Betaling:</strong> Kort eller kontant ved automat<br><strong>Afstand til hotel:</strong> 30 minutter med offentlig transport<br><strong>Bemærk:</strong> Den billigste parkering i Prag."
+                pkWelcomeSubtitle: "Hotellet har ingen privat parkeringsplads.",
+                pkOpt1Title: "Overvåget p-hus",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK / 11–24 timer.",
+                pkOpt2Title: "Uovervåget parkering",
+                pkOpt2Text: "<strong>Adresse:</strong> Nosticova 634<br><strong>Pris:</strong> 75 CZK/time.",
+                pkOpt3Title: "The Cloud One Parkering",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Pris:</strong> 750 CZK online.",
+                pkOpt4Title: "P+R Kotlářka",
+                pkOpt4Text: "<strong>Pris:</strong> 50 CZK for de første 24 timer."
             },
             el: {
                 title: "Kiosk",
@@ -1450,51 +1444,51 @@
                 checkout: "Check-out",
                 service: "Επισκευή / Βοήθεια",
                 parking: "Στάθμευση",
-                coInstructions: "Παρακαλώ εισάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη.",
+                coInstructions: "Παρακαλούμε εισάγετε τον αριθμό δωματίου και το όνομα του εγγεγραμμένου επισκέπτη.",
                 coLuggageTitle: "Φύλαξη Αποσκευών",
-                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε απευθυνθείτε στο προσωπικό του εστιατορίου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος είναι περιορισμένος. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη付费 φύλαξη στον Κεντρικό Σταθμό (Hlavní nádraží) με το τραμ 15.",
-                srvInstructions: "Συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Για επείγοντα θέματα, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι (8:00–16:00).",
+                coLuggageText: "Εάν επιθυμείτε να φυλάξετε τις αποσκευές σας, παρακαλούμε απευθυνθείτε στο προσωπικό του εστιατορίου. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη επί πληρωμή φύλαξη στο Κεντρικό Σταθμό (Hlavní nádraží).",
+                srvInstructions: "Συμπληρώστε τη φορμα παρακάτω. Για επείγοντα θέματα, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο kiosk (08:00 - 16:00).",
                 roomLabel: "Αριθμός δωματίου",
                 nameLabel: "Ονοματεπώνυμο",
-                issueLabel: "Περιγραφή προβλήματος / Αίτημα",
+                issueLabel: "Περιγραφή προβλήματος",
                 cancel: "ΑΚΥΡΩΣΗ",
                 submit: "ΥΠΟΒΟΛΗ",
-                back: "ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ",
-                fillAll: "Παρακαλώ συμπληρώστε όλα τα πεδία.",
+                back: "ΠΙΣΩ",
+                fillAll: "Παρακαλούμε συμπληρώστε όλα τα πεδία.",
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
-                ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in 24/7.",
+                ciWelcomeSubtitle: "Χάρη στο kiosk αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in 24/7.",
                 ciRegTitle: "Εγγραφή",
-                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε την για την αστυνομία αλλοδαπών και παραδώστε την στο εστιατόριο.",
-                ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό;",
-                ciQ1Text: "Μόλις το δωμάτιο είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης μέσω SMS, email ή chat (το αργότερο στις 15:00).",
+                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε παραδώστε την συμπληρωμένη στο προσωπικό.",
+                ciQ1Title: "Πότε θα λάβετε τον κωδικό;",
+                ciQ1Text: "Μόλις το δωμάτιο είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης μέσω SMS ή email (έως τις 15:00).",
                 ciBfTitle: "Πρωινό",
-                ciBfText: "Το πρωινό σερβίρεται σε μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
+                ciBfText: "Το πρωινό σερβίρεται σε μπουφέ στο ισόγειο από τις 08:00 έως τις 10:00.",
                 ciQ2Title: "Δεν λάβατε τον κωδικό;",
-                ciQ2Text: "Εάν πραγματοποιήσατε κράτηση μέσω τρίτων, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι (8:00–16:00) ή καλέστε την εκτάκτου ανάγκης.",
+                ciQ2Text: "Χρησιμοποιήστε το τηλέφωνο δίπλα στο kiosk (08:00–16:00) ή καλέστε τον αριθμό εκτάκτου ανάγκης.",
                 ciQ3Title: "Αποσκευές",
-                ciQ3Text: "Εάν το δωμάτιο δεν είναι έτοιμο, το προσωπικό μπορεί να φυλάξει τις αποσκευές σας.",
+                ciQ3Text: "Το προσωπικό του εστιατορίου μπορεί να φυλάξει τις αποσκευές σας εάν το δωμάτιο δεν είναι έτοιμο.",
                 ciQ4Title: "Στάθμευση",
-                ciQ4Text: "Δεν διαθέτουμε ιδιωτικό πάρκινγκ. Δείτε τις επιλογές στο κουμπί «Στάθμευση».",
+                ciQ4Text: "Δεν διαθέτουμε ιδιωτικό χώρο στάθμευσης. Δείτε την επιλογή 'Στάθμευση'.",
                 ciQ5Title: "Αρχιτεκτονική",
-                ciQ5Text: "Το κτίριο είναι ιστορικό και δεν διαθέτει ασανσέρ. Είμαστε στη διάθεσή σας για βοήθεια.",
-                ciInfoStandText: "Περισσότερες πληροφορίες θα βρείτε στο σταντ του δωματίου σας.",
+                ciQ5Text: "Το κτίριο είναι ιστορικό και δυστυχώς δεν διαθέτει ασανσέρ.",
+                ciInfoStandText: "Περισσότερες πληροφορίες θα βρείτε στο stand πληροφοριών στο δωμάτιό σας.",
                 ciWifiTitle: "📶 Σύνδεση Wi-Fi",
                 ciWifiNetLabel: "Όνομα δικτύου / SSID",
                 ciWifiPassLabel: "Κωδικός πρόσβασης",
                 ciWishText: "Σας ευχόμαστε μια ευχάριστη διαμονή!",
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
-                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει ιδιωτικό πάρκινγκ.",
+                pkWelcomeSubtitle: "Το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης.",
                 pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες<br><strong>Ύψος:</strong> έως 2 μέτρα<br><strong>Πληρωμή:</strong> Κάρτα ή μετρητά σε μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται το LPG / CNG<br><strong>Απόσταση:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes.",
-                pkOpt2Title: "Μη Φυλασσόμενο Εξωτερικό Πάρκινγκ",
-                pkOpt2Text: "<strong>Διεύθυνση Εισόδου:</strong> Nosticova 634<br><strong>Τιμή:</strong> 75 CZK/ώρα (6:00–23:00) | 100 CZK/ώρα (23:00–6:00)<br><strong>Πληρωμή:</strong> Μόνο κάρτα σε μηχάνημα<br><strong>Απόσταση:</strong> 5 λεπτά με τα πόδια μέσω του πάρκου Kampa.",
-                pkOpt3Title: "Φυλασσόμενο Πάρκινγκ & Γκαράζ (The Cloud One)",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Διεύθυνση:</strong> Hybernská 2140/17<br><strong>Τιμή:</strong> 750 CZK / 24h online, 1.200 CZK / 24h επί τόπου<br><strong>Πληρωμή:</strong> Κάρτα online ή επί τόπου<br><strong>Απόσταση:</strong> 20 λεπτά με συγκοινωνία.",
-                pkOpt4Title: "P+R Kotlářka – Οικονομικό Δημοτικό Πάρκινγκ",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Διεύθυνση:</strong> Plzeňská<br><strong>Τιμή:</strong> 50 CZK για τις πρώτες 24 ώρες, 10 CZK κάθε επόμενη ώρα<br><strong>Πληρωμή:</strong> Κάρτα ή μετρητά<br><strong>Απόσταση:</strong> 30 λεπτά με συγκοινωνία."
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK / 11–24 ώρες.",
+                pkOpt2Title: "Υπαίθριος Χώρος Στάθμευσης",
+                pkOpt2Text: "<strong>Διεύθυνση:</strong> Nosticova 634<br><strong>Τιμή:</strong> 75 CZK/ώρα.",
+                pkOpt3Title: "The Cloud One Parking",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Τιμή:</strong> 750 CZK online.",
+                pkOpt4Title: "P+R Kotlářka",
+                pkOpt4Text: "<strong>Τιμή:</strong> 50 CZK για τις πρώτες 24 ώρες."
             },
             tr: {
                 title: "Kiosk",
@@ -1502,295 +1496,304 @@
                 checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
-                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
+                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafir adını giriniz.",
                 coLuggageTitle: "Bagaj Muhafazası",
-                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeline danışın. Binanın tarihi yapısı nedeniyle alanımız sınırlıdır. Alternatif olarak Ana Tren Garı'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz (Tramvay No. 15).",
-                srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil durumlar için kiosk yanındaki sabit telefonu kullanabilirsiniz (8:00–16:00).",
+                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeli ile iletişime geçiniz. Alternatif olarak Ana Tren Garı'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz.",
+                srvInstructions: "Lütfen aşağıdaki formu doldurunuz. Acil durumlarda 08:00 - 16:00 saatleri arasında kiosk yanındaki sabit telefonu kullanabilirsiniz.",
                 roomLabel: "Oda numarası",
                 nameLabel: "Ad Soyad",
-                issueLabel: "Arıza açıklaması / Talep",
+                issueLabel: "Sorun açıklaması",
                 cancel: "İPTAL",
                 submit: "ONAYLA",
-                back: "ANA EKRANA DÖN",
-                fillAll: "Lütfen tüm alanları doldurun.",
+                back: "GERİ",
+                fillAll: "Lütfen tüm alanları doldurunuz.",
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
 
                 ciWelcomeTitle: "Otelimize hoş geldiniz!",
-                ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 rahatça giriş yapabilirsiniz.",
-                ciRegTitle: "Kayıt Formu",
-                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Yabancılar Polisi kaydı için formu doldurup restoran personeline teslim ediniz.",
-                ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olduğunda giriş kodunuz SMS, e-posta veya rezervasyon sohbeti üzerinden iletilecektir (en geç 15:00'te).",
+                ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 kolayca giriş yapabilirsiniz.",
+                ciRegTitle: "Kayıt",
+                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Lütfen doldurup restoran personeline teslim ediniz.",
+                ciQ1Title: "Kodu ne zaman alacaksınız?",
+                ciQ1Text: "Odanız hazır olduğunda erişim kodunuzu SMS veya e-posta ile göndereceğiz (en geç saat 15:00'te).",
                 ciBfTitle: "Kahvaltı",
-                ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak sunulmaktadır.",
-                ciQ2Title: "Kod gelmedi mi?",
-                ciQ2Text: "Üçüncü taraf acentelerden rezervasyon yaptıysanız sabit telefonu (8:00–16:00) kullanabilir veya acil durum numarasını arayabilirsiniz.",
+                ciBfText: "Açık büfe kahvaltı restoranın giriş katında 08:00 - 10:00 saatleri arasında servis edilir.",
+                ciQ2Title: "Kodunuz gelmedi mi?",
+                ciQ2Text: "08:00–16:00 saatleri arasında kiosk yanındaki telefonu kullanın veya acil durum numarasını arayın.",
                 ciQ3Title: "Bagaj",
-                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı muhafaza edebilir.",
+                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı memnuniyetle muhafaza edecektir.",
                 ciQ4Title: "Otopark",
-                ciQ4Text: "Tarihi merkezde yer aldığımız için özel otoparkımız yoktur. Detaylar için «Otopark» butonuna tıklayın.",
+                ciQ4Text: "Özel otoparkımız bulunmamaktadır. Ana ekrandaki 'Otopark' butonuna tıklayarak bilgi alabilirsiniz.",
                 ciQ5Title: "Mimari",
-                ciQ5Text: "Binamız tarihi bir yapı olup asansör bulunmamaktadır. Yardım için buradayız.",
-                ciInfoStandText: "Daha fazla bilgi odanızdaki bilgilendirme standında yer almaktadır.",
+                ciQ5Text: "Binamız tarihi bir yapı olup ne yazık ki asansör bulunmamaktadır.",
+                ciInfoStandText: "Daha fazla bilgiyi odanızdaki bilgi standında bulabilirsiniz.",
                 ciWifiTitle: "📶 Wi-Fi Bağlantısı",
                 ciWifiNetLabel: "Ağ Adı / SSID",
-                ciWifiPassLabel: "Şifre / Password",
+                ciWifiPassLabel: "Şifre",
                 ciWishText: "Harika bir konaklama dileriz!",
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
-                pkWelcomeSubtitle: "Prag tarihi merkezindeki konumumuz nedeniyle otelin kendine ait otoparkı bulunmamaktadır.",
-                pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Ücret:</strong> 11–24 saat için 750 CZK<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG / CNG araç giremez<br><strong>Mesafe:</strong> Mánes köprüsü üzerinden yürüyerek 10 dakika.",
-                pkOpt2Title: "Güvenliksiz Açık Otopark",
-                pkOpt2Text: "<strong>Giriş Adresi:</strong> Nosticova 634<br><strong>Ücret:</strong> 75 CZK/saat (6:00–23:00) | 100 CZK/saat (23:00–6:00)<br><strong>Ödeme:</strong> Otomatta sadece kart geçerlidir<br><strong>Mesafe:</strong> Kampa parkından yürüyerek 5 dakika.",
-                pkOpt3Title: "Güvenlikli Açık ve Kapalı Otopark (The Cloud One)",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Ücret:</strong> Online 750 CZK / 24 saat, yerinde 1.200 CZK / 24 saat<br><strong>Ödeme:</strong> Online veya yerinde kart ile<br><strong>Mesafe:</strong> Toplu taşıma ile 20 dakika.",
-                pkOpt4Title: "P+R Kotlářka – Uygun Fiyatlı Şehir Otoparkı",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>Ücret:</strong> İlk 24 saat için 50 CZK, sonraki her saat 10 CZK<br><strong>Ödeme:</strong> Kart veya nakit<br><strong>Mesafe:</strong> Toplu taşıma ile 30 dakika."
+                pkWelcomeSubtitle: "Tarihi merkezde yer almamız nedeniyle otelin kendine ait otoparkı yoktur.",
+                pkOpt1Title: "Güvenlikli Kapalı Otopark",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Ücret:</strong> 750 CZK / 11–24 saat.",
+                pkOpt2Title: "Açık Otopark",
+                pkOpt2Text: "<strong>Adres:</strong> Nosticova 634<br><strong>Ücret:</strong> 75 CZK/saat.",
+                pkOpt3Title: "The Cloud One Otoparkı",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Ücret:</strong> Online 750 CZK.",
+                pkOpt4Title: "P+R Kotlářka",
+                pkOpt4Text: "<strong>Ücret:</strong> İlk 24 saat için 50 CZK."
             },
             he: {
                 title: "קיוסק",
                 checkin: "צ'ק-אין",
                 checkout: "צ'ק-אאוט",
                 service: "תיקון / עזרה",
-                parking: "חנייה",
+                parking: "חניה",
                 coInstructions: "אנא הזן את מספר החדר ושם האורח הרשום.",
-                coLuggageTitle: "אחסון מזוודות",
-                coLuggageText: "אם ברצונך לאחסן את המזוודות, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של הבניין, המקום מוגבל. לחלופין, ניתן להשתמש בשירות השמרטפות בתשלום בתחנה המרכזית (Hlavní nádraží) באמצעות חשמלית 15.",
-                srvInstructions: "אנא מלא את הטופס ונפנה לבקשתך בהקדם. במקרים דחופים ניתן להשתמש בטלפון הקווי ליד הקיוסק (8:00–16:00).",
+                coLuggageTitle: "אחסון שמירת חפצים",
+                coLuggageText: "אם ברצונך לאחסן את המטען שלך, אנא פנה לצוות המסעדה. לחלופין, ניתן להשתמש בשמירת החפצים בתשלום בתחנה המרכזית (Hlavní nádraží).",
+                srvInstructions: "אנא מלא את הטופס למטה. במקרים דחופים ניתן להשתמש בטלפון הקווי ליד הקיוסק בין השעות 08:00 ל-16:00.",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
-                issueLabel: "תיאור התקלה / בקשה",
+                issueLabel: "תיאור הבעיה",
                 cancel: "ביטול",
                 submit: "אישור",
-                back: "חזרה למסך הראשי",
+                back: "חזרה",
                 fillAll: "אנא מלא את כל השדות.",
                 thanks: "תודה! בקשתך נשלחה בהצלחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
-                ciWelcomeSubtitle: "בזכות הקיוסק בשירות עצמי, תוכלו לבצע צ'ק-אין בקלות 24/7.",
+                ciWelcomeSubtitle: "בזכות קיוסק השירות העצמי תוכלו לבצע צ'ק-אין בקלות 24/7.",
                 ciRegTitle: "הרשמה",
-                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו עבור משטרת הזרים ומסרו אותו לצוות המסעדה.",
-                ciQ1Title: "מתי ואיך תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר מוכן, נשלח את קוד הכניסה ב-SMS, אימייל או בצ'אט ההזמנות (לכל המאוחר עד 15:00).",
+                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו ומסרו אותו לצוות המסעדה.",
+                ciQ1Title: "מתי וכיצד תקבלו את הקוד?",
+                ciQ1Text: "ברגע שהחדר יהיה מוכן, נשלח את קוד הכניסה ב-SMS או במייל (לכל המאוחר עד השעה 15:00).",
                 ciBfTitle: "ארוחת בוקר",
-                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
-                ciQ2Title: "לא קיבלתם קוד?",
-                ciQ2Text: "אם הזמנתם דרך צד שלישי, השתמשו בטלפון הקווי ליד הקיוסק (8:00–16:00) או התקשרו למספר החירום.",
-                ciQ3Title: "מזוודות",
-                ciQ3Text: "אם החדר אינו מוכן, צוות המסעדה ישמח לשמור על המזוודות שלכם.",
-                ciQ4Title: "חנייה",
-                ciQ4Text: "אין לנו חנייה פרטית במלון. פרטים מלאים בלחיצה על כפתור «חנייה».",
+                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומה הראשונה במסעדה בין 08:00 ל-10:00.",
+                ciQ2Title: "לא קיבלתם את הקוד?",
+                ciQ2Text: "בין השעות 08:00 ל-16:00 השתמשו בטלפון ליד הקיוסק או התקשרו למספר החירום.",
+                ciQ3Title: "מטען",
+                ciQ3Text: "צוות המסעדה ישמח לשמור על המטען שלכם אם החדר עדיין אינו מוכן.",
+                ciQ4Title: "חניה",
+                ciQ4Text: "אין לנו חניה פרטית. ניתן לראות אפשרויות חניה בלחיצה על כפתור 'חניה'.",
                 ciQ5Title: "ארכיטקטורה",
-                ciQ5Text: "הבניין הינו לשימור היסטורי ולכן אין מעלית. אנו כאן לעזור במידת הצורך.",
-                ciInfoStandText: "מידע נוסף זמין בסטנד המידע בחדרכם.",
+                ciQ5Text: "הבניין שלנו היסטורי ולצערינו אין בו מעלית.",
+                ciInfoStandText: "מידע נוסף ניתן למצוא על מעמד המידע בחדרכם.",
                 ciWifiTitle: "📶 חיבור Wi-Fi",
                 ciWifiNetLabel: "שם רשת / SSID",
-                ciWifiPassLabel: "סיסמה / Password",
+                ciWifiPassLabel: "סיסמה",
                 ciWishText: "מאחלים לכם שהייה נעימה ומקסימה!",
 
-                pkWelcomeTitle: "אפשרויות חנייה",
-                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חנייה פרטית.",
-                pkOpt1Title: "חניון תת-קרקעי שמור",
-                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות<br><strong>גובה רכב:</strong> עד 2 מטרים<br><strong>תשלום:</strong> כרטיס או מזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז LPG / CNG<br><strong>מרחק:</strong> 10 דקות הליכה דרך גשר Mánes.",
-                pkOpt2Title: "חניון חיצוני לא שמור",
-                pkOpt2Text: "<strong>כתובת כניסה:</strong> Nosticova 634<br><strong>מחיר:</strong> 75 CZK/שעה (6:00–23:00) | 100 CZK/שעה (23:00–6:00)<br><strong>תשלום:</strong> כרטיס אשראי בלבד במכונה<br><strong>מרחק:</strong> 5 דקות הליכה דרך פארק קאמפה.",
-                pkOpt3Title: "חניון פתוח ומקורה שמור (The Cloud One)",
-                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>כתובת:</strong> Hybernská 2140/17<br><strong>מחיר:</strong> 750 CZK / 24 שעות באונליין, 1,200 CZK במקום<br><strong>תשלום:</strong> אשראי באונליין או במקום<br><strong>מרחק:</strong> 20 דקות בתחבורה ציבורית.",
-                pkOpt4Title: "P+R Kotlářka – חניון עירוני זול",
-                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>כתובת:</strong> Plzeňská<br><strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות, 10 CZK לכל שעה נוספת<br><strong>תשלום:</strong> כרטיס או מזומן במכונה<br><strong>מרחק:</strong> 30 דקות בתחבורה ציבורית."
+                pkWelcomeTitle: "אפשרויות חניה",
+                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי, למלון אין חניה פרטית.",
+                pkOpt1Title: "חניון תת קרקעי שמור",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות.",
+                pkOpt2Title: "חניון פתוח לא שמור",
+                pkOpt2Text: "<strong>כתובת:</strong> Nosticova 634<br><strong>מחיר:</strong> 75 CZK לשעה.",
+                pkOpt3Title: "חניון The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>מחיר:</strong> 750 CZK באינטרנט.",
+                pkOpt4Title: "חניון P+R Kotlářka",
+                pkOpt4Text: "<strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות."
             }
         };
 
-        // NAVIGATION FUNCTIONS
-        function hideAllScreens() {
-            document.querySelectorAll('.card, #screen-1').forEach(el => el.classList.add('hidden'));
+        // UI HELPERS & SWITCHING
+        function setLanguage(lang, event) {
+            currentLang = lang;
+            const dict = i18n[lang] || i18n['en'];
+
+            // RTL Handling for Hebrew
+            if (lang === 'he') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.removeAttribute('dir');
+            }
+
+            // Update Flag UI
+            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            // Text replacements
+            document.getElementById('main-title').innerText = dict.title;
+            document.getElementById('btn-checkin-text').innerText = dict.checkin;
+            document.getElementById('btn-checkout-text').innerText = dict.checkout;
+            document.getElementById('btn-service-text').innerText = dict.service;
+            document.getElementById('btn-parking-text').innerText = dict.parking;
+
+            // Form Labels & Buttons
+            document.getElementById('co-instructions').innerText = dict.coInstructions;
+            document.getElementById('co-luggage-title').innerText = dict.coLuggageTitle;
+            document.getElementById('co-luggage-text').innerText = dict.coLuggageText;
+            document.getElementById('srv-instructions').innerText = dict.srvInstructions;
+            
+            document.getElementById('label-co-room').innerText = dict.roomLabel;
+            document.getElementById('label-co-name').innerText = dict.nameLabel;
+            document.getElementById('label-srv-room').innerText = dict.roomLabel;
+            document.getElementById('label-srv-issue').innerText = dict.issueLabel;
+            document.getElementById('label-srv-name').innerText = dict.nameLabel;
+
+            document.getElementById('btn-cancel-1').innerText = dict.cancel;
+            document.getElementById('btn-submit-1').innerText = dict.submit;
+            document.getElementById('btn-cancel-2').innerText = dict.cancel;
+            document.getElementById('btn-submit-2').innerText = dict.submit;
+            document.getElementById('btn-back-ci').innerText = dict.back;
+            document.getElementById('btn-back-pk').innerText = dict.back;
+
+            // Check-in Content
+            document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
+            document.getElementById('ci-welcome-subtitle').innerText = dict.ciWelcomeSubtitle;
+            document.getElementById('ci-q1-title').innerText = dict.ciQ1Title;
+            document.getElementById('ci-q1-text').innerText = dict.ciQ1Text;
+            document.getElementById('ci-bf-title').innerText = dict.ciBfTitle;
+            document.getElementById('ci-bf-text').innerText = dict.ciBfText;
+            document.getElementById('ci-q2-title').innerText = dict.ciQ2Title;
+            document.getElementById('ci-q2-text').innerText = dict.ciQ2Text;
+            document.getElementById('ci-reg-title').innerText = dict.ciRegTitle;
+            document.getElementById('ci-reg-text').innerText = dict.ciRegText;
+            document.getElementById('ci-q3-title').innerText = dict.ciQ3Title;
+            document.getElementById('ci-q3-text').innerText = dict.ciQ3Text;
+            document.getElementById('ci-q4-title').innerText = dict.ciQ4Title;
+            document.getElementById('ci-q4-text').innerText = dict.ciQ4Text;
+            document.getElementById('ci-q5-title').innerText = dict.ciQ5Title;
+            document.getElementById('ci-q5-text').innerText = dict.ciQ5Text;
+            document.getElementById('ci-info-stand-text').innerText = dict.ciInfoStandText;
+            document.getElementById('ci-wifi-title').innerText = dict.ciWifiTitle;
+            document.getElementById('ci-wifi-net-label').innerText = dict.ciWifiNetLabel;
+            document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
+            document.getElementById('ci-wish-text').innerText = dict.ciWishText;
+
+            // Parking Content
+            document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
+            document.getElementById('pk-welcome-subtitle').innerText = dict.pkWelcomeSubtitle;
+            document.getElementById('pk-opt1-title').innerText = dict.pkOpt1Title;
+            document.getElementById('pk-opt1-text').innerHTML = dict.pkOpt1Text;
+            document.getElementById('pk-opt2-title').innerText = dict.pkOpt2Title;
+            document.getElementById('pk-opt2-text').innerHTML = dict.pkOpt2Text;
+            document.getElementById('pk-opt3-title').innerText = dict.pkOpt3Title;
+            document.getElementById('pk-opt3-text').innerHTML = dict.pkOpt3Text;
+            document.getElementById('pk-opt4-title').innerText = dict.pkOpt4Title;
+            document.getElementById('pk-opt4-text').innerHTML = dict.pkOpt4Text;
+            document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
+            document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
+            document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
+
+            document.getElementById('thanks-message').innerText = dict.thanks;
+
+            resetAutoResetTimer();
         }
 
-        function showScreen(id) {
-            hideAllScreens();
-            document.getElementById(id).classList.remove('hidden');
-            startAutoResetTimer();
+        function hideAllScreens() {
+            document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-checkin').classList.add('hidden');
+            document.getElementById('screen-checkout').classList.add('hidden');
+            document.getElementById('screen-service').classList.add('hidden');
+            document.getElementById('screen-parking').classList.add('hidden');
+            document.getElementById('screen-thanks').classList.add('hidden');
         }
 
         function resetToStart() {
-            stopAutoResetTimer();
+            clearTimeout(autoResetTimer);
             hideAllScreens();
             document.getElementById('screen-1').classList.remove('hidden');
-            
-            // Clear inputs
-            document.querySelectorAll('input, textarea').forEach(input => input.value = '');
+
+            // Clear Form Inputs
+            document.getElementById('coRoomInput').value = '';
+            document.getElementById('coNameInput').value = '';
+            document.getElementById('srvRoomInput').value = '';
+            document.getElementById('srvIssueInput').value = '';
+            document.getElementById('srvNameInput').value = '';
         }
 
-        function openCheckinInfo() { showScreen('screen-checkin'); }
-        function openCheckoutForm() { showScreen('screen-checkout'); }
-        function openServiceForm() { showScreen('screen-service'); }
-        function openParkingInfo() { showScreen('screen-parking'); }
-
-        // AUTO RESET TIMER FOR INACTIVITY
-        function startAutoResetTimer() {
-            stopAutoResetTimer();
+        function resetAutoResetTimer() {
+            clearTimeout(autoResetTimer);
             autoResetTimer = setTimeout(() => {
                 resetToStart();
             }, AUTO_RESET_TIMEOUT);
         }
 
-        function stopAutoResetTimer() {
-            if (autoResetTimer) {
-                clearTimeout(autoResetTimer);
-                autoResetTimer = null;
-            }
+        // NAVIGATION
+        function openCheckinInfo() {
+            hideAllScreens();
+            document.getElementById('screen-checkin').classList.remove('hidden');
+            resetAutoResetTimer();
         }
 
-        // RESET TIMER ON USER INTERACTION
-        ['touchstart', 'mousemove', 'mousedown', 'keydown'].forEach(evt => {
-            window.addEventListener(evt, () => {
-                if (!document.getElementById('screen-1').classList.contains('hidden')) return;
-                startAutoResetTimer();
-            });
-        });
-
-        // LANGUAGE CHANGING LOGIC
-        function setLanguage(lang, event) {
-            currentLang = lang;
-            
-            // Toggle active class on flag buttons
-            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
-
-            // Set RTL for Hebrew
-            if (lang === 'he') {
-                document.body.setAttribute('dir', 'rtl');
-            } else {
-                document.body.removeAttribute('dir');
-            }
-
-            const data = i18n[lang] || i18n['cs'];
-
-            // UI Elements Text Replacement
-            document.getElementById('main-title').innerText = data.title;
-            document.getElementById('btn-checkin-text').innerText = data.checkin;
-            document.getElementById('btn-checkout-text').innerText = data.checkout;
-            document.getElementById('btn-service-text').innerText = data.service;
-            document.getElementById('btn-parking-text').innerText = data.parking;
-
-            // Form Instructions
-            document.getElementById('co-instructions').innerText = data.coInstructions;
-            document.getElementById('co-luggage-title').innerText = data.coLuggageTitle;
-            document.getElementById('co-luggage-text').innerText = data.coLuggageText;
-            document.getElementById('srv-instructions').innerText = data.srvInstructions;
-
-            // Form Labels & Buttons
-            document.getElementById('label-co-room').innerText = data.roomLabel;
-            document.getElementById('label-co-name').innerText = data.nameLabel;
-            document.getElementById('label-srv-room').innerText = data.roomLabel;
-            document.getElementById('label-srv-name').innerText = data.nameLabel;
-            document.getElementById('label-srv-issue').innerText = data.issueLabel;
-
-            document.getElementById('btn-cancel-1').innerText = data.cancel;
-            document.getElementById('btn-submit-1').innerText = data.submit;
-            document.getElementById('btn-cancel-2').innerText = data.cancel;
-            document.getElementById('btn-submit-2').innerText = data.submit;
-            document.getElementById('btn-back-ci').innerText = data.back;
-            document.getElementById('btn-back-pk').innerText = data.back;
-
-            // Check-in Info Texts
-            document.getElementById('ci-welcome-title').innerText = data.ciWelcomeTitle;
-            document.getElementById('ci-welcome-subtitle').innerText = data.ciWelcomeSubtitle;
-            document.getElementById('ci-reg-title').innerText = data.ciRegTitle;
-            document.getElementById('ci-reg-text').innerText = data.ciRegText;
-            document.getElementById('ci-q1-title').innerText = data.ciQ1Title;
-            document.getElementById('ci-q1-text').innerText = data.ciQ1Text;
-            document.getElementById('ci-bf-title').innerText = data.ciBfTitle;
-            document.getElementById('ci-bf-text').innerText = data.ciBfText;
-            document.getElementById('ci-q2-title').innerText = data.ciQ2Title;
-            document.getElementById('ci-q2-text').innerText = data.ciQ2Text;
-            document.getElementById('ci-q3-title').innerText = data.ciQ3Title;
-            document.getElementById('ci-q3-text').innerText = data.ciQ3Text;
-            document.getElementById('ci-q4-title').innerText = data.ciQ4Title;
-            document.getElementById('ci-q4-text').innerText = data.ciQ4Text;
-            document.getElementById('ci-q5-title').innerText = data.ciQ5Title;
-            document.getElementById('ci-q5-text').innerText = data.ciQ5Text;
-            document.getElementById('ci-info-stand-text').innerText = data.ciInfoStandText;
-            document.getElementById('ci-wifi-title').innerText = data.ciWifiTitle;
-            document.getElementById('ci-wifi-net-label').innerText = data.ciWifiNetLabel;
-            document.getElementById('ci-wifi-pass-label').innerText = data.ciWifiPassLabel;
-            document.getElementById('ci-wish-text').innerText = data.ciWishText;
-
-            // Parking Info Texts
-            document.getElementById('pk-welcome-title').innerText = data.pkWelcomeTitle;
-            document.getElementById('pk-welcome-subtitle').innerText = data.pkWelcomeSubtitle;
-            document.getElementById('pk-opt1-title').innerText = data.pkOpt1Title;
-            document.getElementById('pk-opt1-text').innerHTML = data.pkOpt1Text;
-            document.getElementById('pk-opt2-title').innerText = data.pkOpt2Title;
-            document.getElementById('pk-opt2-text').innerHTML = data.pkOpt2Text;
-            document.getElementById('pk-opt3-title').innerText = data.pkOpt3Title;
-            document.getElementById('pk-opt3-text').innerHTML = data.pkOpt3Text;
-            document.getElementById('pk-opt4-title').innerText = data.pkOpt4Title;
-            document.getElementById('pk-opt4-text').innerHTML = data.pkOpt4Text;
-
-            document.getElementById('pk-wifi-title').innerText = data.ciWifiTitle;
-            document.getElementById('pk-wifi-net-label').innerText = data.ciWifiNetLabel;
-            document.getElementById('pk-wifi-pass-label').innerText = data.ciWifiPassLabel;
-
-            document.getElementById('thanks-message').innerText = data.thanks;
+        function openCheckoutForm() {
+            hideAllScreens();
+            document.getElementById('screen-checkout').classList.remove('hidden');
+            resetAutoResetTimer();
         }
 
-        // FORM SUBMISSION HANDLERS (NTFY INTEGRATION)
-        function sendNtfyNotification(title, message, tags) {
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                body: message,
-                headers: {
-                    'Title': title,
-                    'Tags': tags || 'bell'
-                }
-            }).catch(err => console.error('Error sending notification:', err));
+        function openServiceForm() {
+            hideAllScreens();
+            document.getElementById('screen-service').classList.remove('hidden');
+            resetAutoResetTimer();
         }
 
-        function showThanksAndReset() {
-            showScreen('screen-thanks');
+        function openParkingInfo() {
+            hideAllScreens();
+            document.getElementById('screen-parking').classList.remove('hidden');
+            resetAutoResetTimer();
+        }
+
+        function showThanksScreen() {
+            hideAllScreens();
+            document.getElementById('screen-thanks').classList.remove('hidden');
             setTimeout(() => {
                 resetToStart();
             }, 4000);
         }
 
+        // NOTIFICATION SUBMISSIONS (ntfy.sh)
+        function sendNtfyNotification(message, title) {
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                body: message,
+                headers: {
+                    'Title': title,
+                    'Priority': 'high',
+                    'Tags': 'hotel,kiosk'
+                }
+            }).catch(err => console.error("Error sending notification:", err));
+        }
+
         function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
-            const data = i18n[currentLang] || i18n['cs'];
+            const dict = i18n[currentLang] || i18n['cs'];
 
             if (!room || !name) {
-                alert(data.fillAll);
+                alert(dict.fillAll);
+                resetAutoResetTimer();
                 return;
             }
 
-            const title = `CHECK-OUT: Pokoj ${room}`;
-            const message = `Host: ${name}\nPokoj: ${room}\nJazyk: ${currentLang.toUpperCase()}`;
-            
-            sendNtfyNotification(title, message, 'door,outbox');
-            showThanksAndReset();
+            const message = `Check-out: Pokoj ${room} - ${name}`;
+            sendNtfyNotification(message, "Kiosk: CHECK-OUT");
+            showThanksScreen();
         }
 
         function submitService() {
             const room = document.getElementById('srvRoomInput').value.trim();
             const issue = document.getElementById('srvIssueInput').value.trim();
             const name = document.getElementById('srvNameInput').value.trim();
-            const data = i18n[currentLang] || i18n['cs'];
+            const dict = i18n[currentLang] || i18n['cs'];
 
             if (!room || !issue || !name) {
-                alert(data.fillAll);
+                alert(dict.fillAll);
+                resetAutoResetTimer();
                 return;
             }
 
-            const title = `OPRAVA / POMOC: Pokoj ${room}`;
-            const message = `Host: ${name}\nPokoj: ${room}\nPožadavek: ${issue}\nJazyk: ${currentLang.toUpperCase()}`;
-            
-            sendNtfyNotification(title, message, 'wrench,warning');
-            showThanksAndReset();
+            const message = `Oprava / Pomoc: Pokoj ${room}\nJméno: ${name}\nPožadavek: ${issue}`;
+            sendNtfyNotification(message, "Kiosk: OPRAVA / POMOC");
+            showThanksScreen();
         }
+
+        // Global activity listener to restart idle timer
+        document.addEventListener('touchstart', resetAutoResetTimer, false);
+        document.addEventListener('click', resetAutoResetTimer, false);
     </script>
 </body>
 </html>
