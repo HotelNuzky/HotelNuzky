@@ -1838,6 +1838,9 @@
 
         function showThanks(type = 'service') {
             thanksType = type;
+            const dict = i18n[currentLang] || i18n['en'];
+            document.getElementById('thanks-message').innerText =
+                thanksType === 'checkout' ? dict.coThanks : dict.thanks;
             hideAllScreens();
             document.getElementById('screen-thanks').classList.remove('hidden');
             setTimeout(() => {
