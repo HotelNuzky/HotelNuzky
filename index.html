@@ -370,12 +370,17 @@
 
         /* INSTRUCTIONS & SPECIAL BOXES */
         .instructions {
-            margin-bottom: 20px;
+            margin: 0;
             text-align: center;
             font-size: 16px;
-            color: #90caf9;
+            color: var(--text-main);
             line-height: 1.5;
-            font-weight: 600;
+            font-weight: 700;
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+            border: 1px solid var(--blue-light);
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 5px 0 var(--blue-shadow), 0 6px 12px rgba(0,0,0,0.3);
         }
 
         .luggage-box {
@@ -389,6 +394,13 @@
             color: #e0e6ed;
             line-height: 1.55;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .luggage-box:has(.instructions) {
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
 
         .luggage-header {
@@ -730,8 +742,10 @@
 
         <!-- SCREEN CHECKOUT FORM -->
         <div id="screen-checkout" class="card hidden">
-            <div class="instructions" id="co-instructions">
-                Prosím, napište číslo svého pokoje a jméno zaregistrované osoby.
+            <div class="luggage-box">
+                <div class="instructions" id="co-instructions">
+                    Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT. Poté stiskněte tlačítko POTVRDIT.
+                </div>
             </div>
 
             <div class="luggage-box">
