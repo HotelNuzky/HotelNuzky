@@ -713,6 +713,7 @@
                         <strong id="ci-wifi-top-pass-val">Hotel2017</strong>
                     </div>
                 </div>
+            </div>
 
             <div class="info-item info-item-highlight">
                     <strong>
@@ -877,19 +878,19 @@
         <!-- SCREEN PARKING INFO -->
         <div id="screen-parking" class="card hidden">
             <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span>
+            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
 
 
             <div class="wifi-box">
-                <div class="wifi-title" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-title" id="pk-top-wifi-title">📶 Wi-Fi Připojení</div>
                 <div class="wifi-details">
                     <div class="wifi-detail-item">
-                        <span id="pk-wifi-net-label">Název / SSID</span>
-                        <strong id="pk-wifi-net-val">Nuzky</strong>
+                        <span id="pk-top-wifi-net-label">Název / SSID</span>
+                        <strong id="pk-top-wifi-net-val">Nuzky</strong>
                     </div>
                     <div class="wifi-detail-item">
-                        <span id="pk-wifi-pass-label">Heslo / Password</span>
-                        <strong id="pk-wifi-pass-val">Hotel2017</strong>
+                        <span id="pk-top-wifi-pass-label">Heslo / Password</span>
+                        <strong id="pk-top-wifi-pass-val">Hotel2017</strong>
                     </div>
                 </div></div>
 
@@ -978,15 +979,15 @@
 
             <!-- BLUE WIFI BOX FOR PARKING SCREEN -->
             <div class="wifi-box-blue">
-                <div class="wifi-title-blue" >📶 Wi-Fi Připojení</div>
+                <div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
                 <div class="wifi-details">
                     <div class="wifi-detail-item">
-                        <span >Název / SSID</span>
-                        <strong >Nuzky</strong>
+                        <span id="pk-wifi-net-label">Název / SSID</span>
+                        <strong id="pk-wifi-net-val">Nuzky</strong>
                     </div>
                     <div class="wifi-detail-item">
-                        <span >Heslo / Password</span>
-                        <strong >Hotel2017</strong>
+                        <span id="pk-wifi-pass-label">Heslo / Password</span>
+                        <strong id="pk-wifi-pass-val">Hotel2017</strong>
                     </div>
                 </div>
             </div>
@@ -1018,8 +1019,6 @@
         // INTERNATIONALIZATION DATA
         const i18n = {
             cs: {
-                pkDropoffTitle: "Krátké zastavení před hotelem",
-                pkDropoffText: "Před hotelem se můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1073,8 +1072,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
             },
             en: {
-                pkDropoffTitle: "Short stop in front of the hotel",
-                pkDropoffText: "You may stop in front of the hotel for a few minutes to unload or load your luggage.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1128,8 +1125,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Address:</strong> Plzeňská<br><strong>GPS Entrance:</strong> 50.0685878N, 14.3580586E<br><strong>Price:</strong> 50 CZK for first 24 hours, 10 CZK per each additional hour<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Distance to hotel:</strong> 30 minutes by public transport<br><strong>Note:</strong> The cheapest possible parking option in Prague."
             },
             de: {
-                pkDropoffTitle: "Kurzer Halt vor dem Hotel",
-                pkDropoffText: "Sie können vor dem Hotel für einige Minuten halten, um Ihr Gepäck aus- oder einzuladen.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1183,8 +1178,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Einfahrt:</strong> 50.0685878N, 14.3580586E<br><strong>Preis:</strong> 50 CZK für die ersten 24 Std., 10 CZK für jede weitere Stunde<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Entfernung zum Hotel:</strong> 30 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Die günstigste Parkmöglichkeit in Prag."
             },
             it: {
-                pkDropoffTitle: "Breve sosta davanti all'hotel",
-                pkDropoffText: "È possibile fermarsi per alcuni minuti davanti all'hotel per scaricare o caricare i bagagli.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1238,8 +1231,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Indirizzo:</strong> Plzeňská<br><strong>GPS Ingresso:</strong> 50.0685878N, 14.3580586E<br><strong>Prezzo:</strong> 50 CZK per le prime 24 ore, 10 CZK per ogni ora successiva<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 30 minuti con i mezzi pubblici<br><strong>Nota:</strong> L'opzione più economica a Praga."
             },
             es: {
-                pkDropoffTitle: "Parada breve frente al hotel",
-                pkDropoffText: "Puede detenerse unos minutos frente al hotel para descargar o cargar su equipaje.",
                 title: "Quiosco",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1293,8 +1284,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Dirección:</strong> Plzeňská<br><strong>GPS Entrada:</strong> 50.0685878N, 14.3580586E<br><strong>Precio:</strong> 50 CZK por las primeras 24 horas, 10 CZK por hora adicional<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Distancia al hotel:</strong> 30 minutos en transporte público<br><strong>Nota:</strong> La opción más barata de Praga."
             },
             fr: {
-                pkDropoffTitle: "Arrêt de courte durée devant l'hôtel",
-                pkDropoffText: "Vous pouvez vous arrêter quelques minutes devant l'hôtel pour décharger ou charger vos bagages.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1348,8 +1337,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse :</strong> Plzeňská<br><strong>GPS Entrée :</strong> 50.0685878N, 14.3580586E<br><strong>Prix :</strong> 50 CZK pour les 24 premières heures, 10 CZK/heure suivante<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte ou espèces à l'automate<br><strong>Distance de l'hôtel :</strong> 30 minutes en transports en commun<br><strong>Note :</strong> L'option la moins chère de Prague."
             },
             pl: {
-                pkDropoffTitle: "Krótkie zatrzymanie przed hotelem",
-                pkDropoffText: "Można zatrzymać się na kilka minut przed hotelem, aby rozładować lub załadować bagaż.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1403,8 +1390,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Wjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 CZK za pierwsze 24 godz., 10 CZK za każdą kolejną godzinę<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Odległość do hotelu:</strong> 30 minut komunikacją miejską<br><strong>Wskazówka:</strong> Najtańszy możliwy parking w Pradze."
             },
             ua: {
-                pkDropoffTitle: "Коротка зупинка перед готелем",
-                pkDropoffText: "Перед готелем можна на кілька хвилин зупинитися, щоб висадити або завантажити багаж.",
                 title: "Кіоск",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1458,8 +1443,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший варіант паркування в Празі."
             },
             tr: {
-                pkDropoffTitle: "Otel önünde kısa süreli duraklama",
-                pkDropoffText: "Bagajınızı indirip yüklemek için otelin önünde birkaç dakikalığına durabilirsiniz.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1513,8 +1496,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Giriş:</strong> 50.0685878N, 14.3580586E<br><strong>Fiyat:</strong> İlk 24 saat için 50 CZK, sonraki her saat için 10 CZK<br><em>(güncel fiyatı web sitesinden kontrol edin)</em><br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Otele Dönüş Mesafesi:</strong> Toplu taşıma ile 30 dakika<br><strong>Not:</strong> Prag'daki gerçekten en ucuz otopark seçeneği."
             },
             da: {
-                pkDropoffTitle: "Kort stop foran hotellet",
-                pkDropoffText: "Du kan holde foran hotellet i et par minutter for at læsse bagage af eller på.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1568,8 +1549,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Indkørsel:</strong> 50.0685878N, 14.3580586E<br><strong>Pris:</strong> 50 CZK for de første 24 timer, 10 CZK for hver efterfølgende time<br><em>(tjek aktuel pris på hjemmesiden)</em><br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Afstand til hotel:</strong> 30 minutter med offentlig transport<br><strong>Bemærkning:</strong> Den absolut billigste parkeringsmulighed i Prag."
             },
             ja: {
-                pkDropoffTitle: "ホテル前での短時間の停車",
-                pkDropoffText: "荷物の積み下ろしのために、ホテル前に数分間停車できます。",
                 title: "キオスク",
                 checkin: "チェックイン",
                 checkout: "チェックアウト",
@@ -1623,8 +1602,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>住所:</strong> Plzeňská<br><strong>GPS入口:</strong> 50.0685878N, 14.3580586E<br><strong>料金:</strong> 最初の24時間は50 CZK、以降1時間ごとに10 CZK<br><em>（最新料金はWebサイトでご確認ください）</em><br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>ホテルまでの距離:</strong> 公共交通機関で約30分<br><strong>特徴:</strong> プラハで最も安く利用できる駐車場です。"
             },
             he: {
-                pkDropoffTitle: "עצירה קצרה מול המלון",
-                pkDropoffText: "ניתן לעצור למספר דקות מול המלון כדי לפרוק או להעמיס את המזוודות.",
                 title: "קיוסק",
                 checkin: "צ'ק-אין",
                 checkout: "צ'ק-אאוט",
@@ -1678,8 +1655,6 @@
                 pkOpt4Text: "<strong>https://parking.praha.eu/en/parking-options-in-prague/pr-park-ride/kotlarka/</strong><br><strong>כתובת:</strong> Plzeňská<br><strong>GPS כניסה:</strong> 50.0685878N, 14.3580586E<br><strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות, 10 CZK לכל שעה נוספת<br><em>(בדקו מחיר עדכני באתר)</em><br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>מרחק בחזרה למלון:</strong> 30 דקות בתחבורה ציבורית<br><strong>הערה:</strong> אפשרות החנייה הזולה ביותר בפראג."
             },
             el: {
-                pkDropoffTitle: "Σύντομη στάση μπροστά από το ξενοδοχείο",
-                pkDropoffText: "Μπορείτε να σταματήσετε για λίγα λεπτά μπροστά από το ξενοδοχείο για να ξεφορτώσετε ή να φορτώσετε τις αποσκευές σας.",
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
@@ -1949,14 +1924,12 @@
 
             // Parking Info
             document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
-            document.getElementById('pk-welcome-subtitle').innerText = dict.pkWelcomeSubtitle;
-            document.getElementById('pk-dropoff-title').innerText = dict.pkDropoffTitle;
-            document.getElementById('pk-dropoff-text').innerText = dict.pkDropoffText;
-            document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
-            document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
-            document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
-            document.getElementById('pk-wifi-net-val').innerText = document.getElementById('ci-wifi-net-val').innerText;
-            document.getElementById('pk-wifi-pass-val').innerText = document.getElementById('ci-wifi-pass-val').innerText;
+            document.getElementById('pk-welcome-subtitle').innerHTML = dict.pkWelcomeSubtitle;
+            document.getElementById('pk-top-wifi-title').innerText = dict.ciWifiTitle;
+            document.getElementById('pk-top-wifi-net-label').innerText = dict.ciWifiNetLabel;
+            document.getElementById('pk-top-wifi-net-val').innerText = document.getElementById('ci-wifi-net-val').innerText;
+            document.getElementById('pk-top-wifi-pass-label').innerText = dict.ciWifiPassLabel;
+            document.getElementById('pk-top-wifi-pass-val').innerText = document.getElementById('ci-wifi-pass-val').innerText;
             document.getElementById('ci-wifi-top-title').innerText = dict.ciWifiTitle;
             document.getElementById('ci-wifi-top-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('ci-wifi-top-pass-label').innerText = dict.ciWifiPassLabel;
