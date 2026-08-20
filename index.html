@@ -283,10 +283,28 @@
             text-align: center;
         }
 
+        .wifi-box-blue {
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.15), rgba(21, 101, 192, 0.25));
+            border: 1px solid rgba(66, 165, 245, 0.4);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .wifi-title {
             font-size: 18px;
             font-weight: bold;
             color: var(--green-border);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wifi-title-blue {
+            font-size: 18px;
+            font-weight: bold;
+            color: #90caf9;
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -737,36 +755,92 @@
             <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště.</div>
 
             <div class="info-list">
+                <!-- PARKING OPTION 1 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
+                        <!-- Ikona Podzemní Garáž / Budova -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"/></svg>
-                        <span id="pk-opt1-title">Modré zóny v okolí hotelu</span>
+                        <span id="pk-opt1-title">Hlídané podzemní garáže</span>
                     </strong>
-                    <span id="pk-opt1-text">Parkování přímo v ulicích na Malé Straně podléhá městským zónám. Platba je možná pouze online přes aplikaci MPLA / Virtuální parkovací hodiny. Obsazenost bývá vysoká.</span>
+                    <span id="pk-opt1-text">
+                        <strong>www.oldtownparking.cz</strong><br>
+                        <strong>Adresa:</strong> Alšovo nábřeží, 110 00<br>
+                        <strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br>
+                        <strong>Výška vozidla:</strong> max. 2 metry<br>
+                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
+                        <strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br>
+                        <strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.
+                    </span>
                 </div>
 
+                <!-- PARKING OPTION 2 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        <span id="pk-opt2-title">Podzemní garáže Rudolfinum</span>
-                    </strong>
-                    <span id="pk-opt2-text">Nejbližší kryté garáže se nacházejí na Alšově nábřeží u Rudolfina (cca 10 minut pěšky přes Karlův most nebo 1 zastávka tramvají). Jedná se o hlídané nonstop garáže.</span>
-                </div>
-
-                <div class="info-item" style="border-left-color: #42a5f5;">
-                    <strong>
+                        <!-- Ikona Venkovní Parkoviště / Auto pod širým nebem -->
                         <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-                        <span id="pk-opt3-title">Garáže OC Nový Smíchov</span>
+                        <span id="pk-opt2-title">Nehlídané venkovní parkoviště</span>
                     </strong>
-                    <span id="pk-opt3-text">Dostupné parkování v nákupním centru na Andělu. Přímé spojení tramvají číslo 12, 15 nebo 20 na Malostranské náměstí.</span>
+                    <span id="pk-opt2-text">
+                        <strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br>
+                        <strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br>
+                        <em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br>
+                        <strong>Platba:</strong> Pouze kartou v automatu<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br>
+                        <strong>Značka:</strong> Nejbližší, ale velice drahé.
+                    </span>
                 </div>
 
+                <!-- PARKING OPTION 3 -->
                 <div class="info-item" style="border-left-color: #42a5f5;">
                     <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        <span id="pk-opt4-title">Parkoviště P+R na okraji Prahy</span>
+                        <!-- Ikona Hotelové Garáže Cloud One -->
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                        <span id="pk-opt3-title">Hlídané venkovní i garážové parkoviště The Cloud One</span>
                     </strong>
-                    <span id="pk-opt4-text">Ekonomická varianta na záchytných parkovištích u stanic metra (např. Zličín, Cerný Most, Nádraží Holešovice). Odtud se pohodlně dostanete metrem či tramvají.</span>
+                    <span id="pk-opt3-text">
+                        <strong>www.aprecoparking.cz/praha-1-hybernska</strong><br>
+                        <strong>Adresa:</strong> Hybernská 2140/17<br>
+                        <strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br>
+                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
+                        <strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br>
+                        <strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.
+                    </span>
+                </div>
+
+                <!-- PARKING OPTION 4 -->
+                <div class="info-item" style="border-left-color: #42a5f5;">
+                    <strong>
+                        <!-- Ikona P+R Metro / Záchytné Parkoviště -->
+                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span id="pk-opt4-title">P+R Kotlářka – levné venkovní parkování zřizované městem Prahou</span>
+                    </strong>
+                    <span id="pk-opt4-text">
+                        <strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br>
+                        <strong>Adresa:</strong> Plzeňská<br>
+                        <strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br>
+                        <strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br>
+                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
+                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
+                        <strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br>
+                        <strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze.
+                    </span>
+                </div>
+            </div>
+
+            <!-- BLUE WIFI BOX FOR PARKING SCREEN -->
+            <div class="wifi-box-blue">
+                <div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="pk-wifi-net-label">Název / SSID</span>
+                        <strong id="pk-wifi-net-val">Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="pk-wifi-pass-label">Heslo / Password</span>
+                        <strong id="pk-wifi-pass-val">Hotel2017</strong>
+                    </div>
                 </div>
             </div>
 
@@ -841,14 +915,14 @@
 
                 pkWelcomeTitle: "Možnosti parkování",
                 pkWelcomeSubtitle: "Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště.",
-                pkOpt1Title: "Modré zóny v okolí hotelu",
-                pkOpt1Text: "Parkování přímo v ulicích na Malé Straně podléhá městským zónám. Platba je možná pouze online přes aplikaci MPLA / Virtuální parkovací hodiny. Obsazenost bývá vysoká.",
-                pkOpt2Title: "Podzemní garáže Rudolfinum",
-                pkOpt2Text: "Nejbližší kryté garáže se nacházejí na Alšově nábřeží u Rudolfina (cca 10 minut pěšky přes Karlův most nebo 1 zastávka tramvají). Jedná se o hlídané nonstop garáže.",
-                pkOpt3Title: "Garáže OC Nový Smíchov",
-                pkOpt3Text: "Dostupné parkování v nákupním centru na Andělu. Přímé spojení tramvají číslo 12, 15 nebo 20 na Malostranské náměstí.",
-                pkOpt4Title: "Parkoviště P+R na okraji Prahy",
-                pkOpt4Text: "Ekonomická varianta na záchytných parkovištích u stanic metra (např. Zličín, Černý Most, Nádraží Holešovice). Odtud se pohodlně dostanete metrem či tramvají."
+                pkOpt1Title: "Hlídané podzemní garáže",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
+                pkOpt2Title: "Nehlídané venkovní parkoviště",
+                pkOpt2Text: "<strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br><strong>Platba:</strong> Pouze kartou v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br><strong>Značka:</strong> Nejbližší, ale velice drahé.",
+                pkOpt3Title: "Hlídané venkovní i garážové parkoviště The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br><strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.",
+                pkOpt4Title: "P+R Kotlářka – levné venkovní parkování zřizované městem Prahou",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br><em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br><strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze."
             },
             en: {
                 title: "Kiosk",
@@ -893,14 +967,14 @@
 
                 pkWelcomeTitle: "Parking Options",
                 pkWelcomeSubtitle: "Due to our location in the historic center of Prague, the hotel does not have its own parking lot.",
-                pkOpt1Title: "Blue Parking Zones Nearby",
-                pkOpt1Text: "Street parking in Lesser Town is subject to municipal zones. Payment is possible online via the MPLA app / Virtual Parking Meter. Availability is usually limited.",
-                pkOpt2Title: "Rudolfinum Underground Garage",
-                pkOpt2Text: "The closest covered garage is located at Alšovo nábřeží near Rudolfinum (approx. 10 minutes on foot across Charles Bridge or 1 tram stop). It is a guarded 24/7 garage.",
-                pkOpt3Title: "OC Nový Smíchov Garage",
-                pkOpt3Text: "Available parking in the shopping center at Anděl. Direct tram connection (No. 12, 15, or 20) to Malostranské náměstí.",
-                pkOpt4Title: "P+R Parking on the Outskirts",
-                pkOpt4Text: "An economical option at park-and-ride lots near metro stations (e.g., Zličín, Černý Most, Nádraží Holešovice). From there, you can easily reach us by metro or tram."
+                pkOpt1Title: "Guarded Underground Garage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
+                pkOpt2Title: "Unguarded Outdoor Parking",
+                pkOpt2Text: "<strong>Entrance Address:</strong> Nosticova 634 (exit on opposite side with payment machine)<br><strong>Price:</strong> 75 CZK/hr (6:00–23:00) | 100 CZK/hr (23:00–6:00)<br><em>(check current rates on site)</em><br><strong>Payment:</strong> Card only at automated machine<br><strong>Distance to hotel:</strong> 5-minute walk through Kampa park<br><strong>Note:</strong> Closest option, but very expensive.",
+                pkOpt3Title: "Guarded Outdoor & Garage Parking (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Address:</strong> Hybernská 2140/17<br><strong>Price:</strong> 750 CZK / 24 hrs online, 1,200 CZK / 24 hrs on site<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card online or on site<br><strong>Distance to hotel:</strong> 20 minutes by public transport<br><strong>Note:</strong> Excellent backup if Old Town Parking is full.",
+                pkOpt4Title: "P+R Kotlářka – Budget City Parking",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Address:</strong> Plzeňská<br><strong>GPS Entrance:</strong> 50.0685878N, 14.3580586E<br><strong>Price:</strong> 50 CZK for first 24 hours, 10 CZK per each additional hour<br><em>(check current price on website)</em><br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Distance to hotel:</strong> 30 minutes by public transport<br><strong>Note:</strong> The cheapest possible parking option in Prague."
             },
             de: {
                 title: "Kiosk",
@@ -945,14 +1019,14 @@
 
                 pkWelcomeTitle: "Parkmöglichkeiten",
                 pkWelcomeSubtitle: "Aufgrund der Lage im historischen Zentrum von Prag verfügt das Hotel über keine eigenen Parkplätze.",
-                pkOpt1Title: "Blaue Zonen in der Umgebung",
-                pkOpt1Text: "Das Parken auf den Straßen der Kleinseite unterliegt städtischen Zonen. Die Bezahlung ist nur online über die MPLA-App / Virtuelle Parkuhr möglich. Die Auslastung ist meist hoch.",
-                pkOpt2Title: "Tiefgarage Rudolfinum",
-                pkOpt2Text: "Die nächstgelegene überdachte Garage befindet sich am Alšovo nábřeží beim Rudolfinum (ca. 10 Gehminuten über die Karlsbrücke oder 1 Straßenbahnhaltestelle). Rund um die Uhr bewacht.",
-                pkOpt3Title: "Tiefgarage OC Nový Smíchov",
-                pkOpt3Text: "Günstige Parkmöglichkeiten im Einkaufszentrum in Anděl. Direktverbindung mit der Straßenbahn Linie 12, 15 oder 20 zum Malostranské náměstí.",
-                pkOpt4Title: "P+R Parkplätze am Stadtrand",
-                pkOpt4Text: "Günstige Option auf Auffangparkplätzen an U-Bahn-Stationen (z. B. Zličín, Černý Most, Nádraží Holešovice). Von dort erreichen Sie uns bequem per U-Bahn oder Straßenbahn."
+                pkOpt1Title: "Bewachte Tiefgarage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
+                pkOpt2Title: "Unbewachter Außenparkplatz",
+                pkOpt2Text: "<strong>Einfahrtsadresse:</strong> Nosticova 634 (Ausfahrt gegenüber mit Automat)<br><strong>Preis:</strong> 75 CZK/Std. (6:00–23:00) | 100 CZK/Std. (23:00–6:00)<br><em>(Preise vor Ort prüfen)</em><br><strong>Zahlung:</strong> Nur Karte am Automaten<br><strong>Entfernung zum Hotel:</strong> 5 Minuten zu Fuß durch den Kampa-Park<br><strong>Hinweis:</strong> Am nächsten gelegen, aber sehr teuer.",
+                pkOpt3Title: "Bewachter Parkplatz & Garage (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresse:</strong> Hybernská 2140/17<br><strong>Preis:</strong> Online 750 CZK / 24 Std., vor Ort 1.200 CZK / 24 Std.<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte online oder vor Ort<br><strong>Entfernung zum Hotel:</strong> 20 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Gute Alternative, wenn Old Town Parking voll ist.",
+                pkOpt4Title: "P+R Kotlářka – Günstiger städtischer Parkplatz",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Einfahrt:</strong> 50.0685878N, 14.3580586E<br><strong>Preis:</strong> 50 CZK für die ersten 24 Std., 10 CZK für jede weitere Stunde<br><em>(Preise online prüfen)</em><br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Entfernung zum Hotel:</strong> 30 Minuten mit öffentlichen Verkehrsmitteln<br><strong>Hinweis:</strong> Die günstigste Parkmöglichkeit in Prag."
             },
             it: {
                 title: "Kiosk",
@@ -997,14 +1071,14 @@
 
                 pkWelcomeTitle: "Opzioni di Parcheggio",
                 pkWelcomeSubtitle: "A causa della posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato.",
-                pkOpt1Title: "Zone Blu Nelle Vicinanze",
-                pkOpt1Text: "Il parcheggio in strada a Malá Strana è regolato da zone comunali. Il pagamento è possibile solo online tramite l'app MPLA / Parcometro Virtuale. La disponibilità è limitata.",
-                pkOpt2Title: "Garage Sotterraneo Rudolfinum",
-                pkOpt2Text: "Il garage coperto più vicino si trova in Alšovo nábřeží vicino al Rudolfinum (circa 10 minuti a piedi attraversando il Ponte Carlo o 1 fermata di tram). Garage sorvegliato h24.",
-                pkOpt3Title: "Garage CC Nový Smíchov",
-                pkOpt3Text: "Parcheggio disponibile presso il centro commerciale ad Anděl. Collegamento diretto con i tram n. 12, 15 o 20 per Malostranské náměstí.",
-                pkOpt4Title: "Parcheggi P+R in Periferia",
-                pkOpt4Text: "Opzione economica nei parcheggi di scambio vicino alle stazioni della metropolitana (ad es. Zličín, Černý Most, Nádraží Holešovice). Da lì si raggiunge facilmente il centro in metro o tram."
+                pkOpt1Title: "Garage Sotterraneo Custodito",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
+                pkOpt2Title: "Parcheggio Esterno Non Custodito",
+                pkOpt2Text: "<strong>Indirizzo Ingresso:</strong> Nosticova 634 (uscita sul lato opposto con cassa)<br><strong>Prezzo:</strong> 75 CZK/ora (6:00–23:00) | 100 CZK/ora (23:00–6:00)<br><em>(verifica i prezzi sul posto)</em><br><strong>Pagamento:</strong> Solo carta alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 5 minuti a piedi attraverso il parco Kampa<br><strong>Nota:</strong> Il più vicino, ma molto costoso.",
+                pkOpt3Title: "Parcheggio Coperto e Scoperto (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Indirizzo:</strong> Hybernská 2140/17<br><strong>Prezzo:</strong> online 750 CZK / 24 ore, sul posto 1.200 CZK / 24 ore<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta online o sul posto<br><strong>Distanza dall'hotel:</strong> 20 minuti con i mezzi pubblici<br><strong>Nota:</strong> Ottima alternativa se Old Town Parking è completo.",
+                pkOpt4Title: "P+R Kotlářka – Parcheggio Economico",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Indirizzo:</strong> Plzeňská<br><strong>GPS Ingresso:</strong> 50.0685878N, 14.3580586E<br><strong>Prezzo:</strong> 50 CZK per le prime 24 ore, 10 CZK per ogni ora successiva<br><em>(verifica prezzi sul sito)</em><br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Distanza dall'hotel:</strong> 30 minuti con i mezzi pubblici<br><strong>Nota:</strong> L'opzione più economica a Praga."
             },
             es: {
                 title: "Quiosco",
@@ -1049,14 +1123,14 @@
 
                 pkWelcomeTitle: "Opciones de Aparcamiento",
                 pkWelcomeSubtitle: "Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento propio.",
-                pkOpt1Title: "Zonas Azules Cercanas",
-                pkOpt1Text: "El aparcamiento en las calles de Malá Strana está sujeto a zonas municipales. El pago solo es posible en línea mediante la app MPLA / Parquímetro Virtual. La disponibilidad suele ser limitada.",
-                pkOpt2Title: "Garaje Subterráneo Rudolfinum",
-                pkOpt2Text: "El garaje cubierto más cercano está en Alšovo nábřeží junto al Rudolfinum (aprox. 10 minutos a pie cruzando el Puente de Carlos o 1 parada de tranvía). Vigilado 24/7.",
-                pkOpt3Title: "Garaje CC Nový Smíchov",
-                pkOpt3Text: "Aparcamiento disponible en el centro comercial de Anděl. Conexión directa en tranvía (líneas 12, 15 o 20) hasta Malostranské náměstí.",
-                pkOpt4Title: "Aparcamientos P+R en la Periferia",
-                pkOpt4Text: "Opción económica en aparcamientos disuasorios junto a estaciones de metro (ej. Zličín, Černý Most, Nádraží Holešovice). Desde allí se llega fácilmente en metro o tranvía."
+                pkOpt1Title: "Garaje Subterráneo Vigilado",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
+                pkOpt2Title: "Aparcamiento Exterior No Vigilado",
+                pkOpt2Text: "<strong>Dirección de entrada:</strong> Nosticova 634 (salida al otro lado con cajero)<br><strong>Precio:</strong> 75 CZK/h (6:00–23:00) | 100 CZK/h (23:00–6:00)<br><em>(comprobar precios en el sitio)</em><br><strong>Pago:</strong> Solo tarjeta en cajero automático<br><strong>Distancia al hotel:</strong> 5 minutos a pie por el parque Kampa<br><strong>Nota:</strong> El más cercano, pero muy caro.",
+                pkOpt3Title: "Aparcamiento Cubierto y Exterior (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Dirección:</strong> Hybernská 2140/17<br><strong>Precio:</strong> 750 CZK / 24 h online, 1 200 CZK / 24 h en el sitio<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta online o en el sitio<br><strong>Distancia al hotel:</strong> 20 minutos en transporte público<br><strong>Nota:</strong> Buena alternativa si Old Town Parking está lleno.",
+                pkOpt4Title: "P+R Kotlářka – Aparcamiento Económico",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Dirección:</strong> Plzeňská<br><strong>GPS Entrada:</strong> 50.0685878N, 14.3580586E<br><strong>Precio:</strong> 50 CZK por las primeras 24 horas, 10 CZK por hora adicional<br><em>(consultar precio en web)</em><br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Distancia al hotel:</strong> 30 minutos en transporte público<br><strong>Nota:</strong> La opción más barata de Praga."
             },
             fr: {
                 title: "Kiosk",
@@ -1101,14 +1175,14 @@
 
                 pkWelcomeTitle: "Options de Stationnement",
                 pkWelcomeSubtitle: "En raison de son emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé.",
-                pkOpt1Title: "Zones Bleues à Proximité",
-                pkOpt1Text: "Le stationnement dans les rues de Malá Strana est soumis aux zones municipales. Paiement uniquement en ligne via l'application MPLA / Horodateur Virtuel. Disponibilité souvent limitée.",
-                pkOpt2Title: "Parking Souterrain Rudolfinum",
-                pkOpt2Text: "Le parking couvert le plus proche se trouve Alšovo nábřeží près du Rudolfinum (environ 10 min à pied via le Pont Charles ou 1 station de tramway). Surveillé 24h/24.",
-                pkOpt3Title: "Parking CC Nový Smíchov",
-                pkOpt3Text: "Stationnement disponible dans le centre commercial à Anděl. Liaison directe en tramway (n° 12, 15 ou 20) jusqu'à Malostranské náměstí.",
-                pkOpt4Title: "Parkings P+R en Périphérie",
-                pkOpt4Text: "Option économique dans les parkings relais près des stations de métro (ex. Zličín, Černý Most, Nádraží Holešovice). Accès facile en métro ou tramway."
+                pkOpt1Title: "Parking Souterrain Sécurisé",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
+                pkOpt2Title: "Parking Extérieur Non Surveillé",
+                pkOpt2Text: "<strong>Adresse d'accès :</strong> Nosticova 634 (sortie de l'autre côté avec horodateur)<br><strong>Prix :</strong> 75 CZK/h (6:00–23:00) | 100 CZK/h (23:00–6:00)<br><em>(vérifier les prix sur place)</em><br><strong>Paiement :</strong> Carte uniquement à l'automat<br><strong>Distance de l'hôtel :</strong> 5 min à pied via le parc Kampa<br><strong>Note :</strong> Le plus proche, mais très cher.",
+                pkOpt3Title: "Parking Couvert & Extérieur (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresse :</strong> Hybernská 2140/17<br><strong>Prix :</strong> 750 CZK / 24h en ligne, 1 200 CZK / 24h sur place<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte en ligne ou sur place<br><strong>Distance de l'hôtel :</strong> 20 minutes en transports en commun<br><strong>Note :</strong> Bonne alternative si Old Town Parking est complet.",
+                pkOpt4Title: "P+R Kotlářka – Parking Économique",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresse :</strong> Plzeňská<br><strong>GPS Entrée :</strong> 50.0685878N, 14.3580586E<br><strong>Prix :</strong> 50 CZK pour les 24 premières heures, 10 CZK/heure suivante<br><em>(vérifier les prix sur le site)</em><br><strong>Paiement :</strong> Carte ou espèces à l'automate<br><strong>Distance de l'hôtel :</strong> 30 minutes en transports en commun<br><strong>Note :</strong> L'option la moins chère de Prague."
             },
             pl: {
                 title: "Kiosk",
@@ -1153,14 +1227,14 @@
 
                 pkWelcomeTitle: "Opcje Parkowania",
                 pkWelcomeSubtitle: "Ze względu na lokalizację w zabytkowym centrum Pragi hotel nie posiada własnego parkingu.",
-                pkOpt1Title: "Niebieskie Strefy w Okolicy",
-                pkOpt1Text: "Parkowanie na ulicach Malostranskich podlega miejskim strefom. Płatność możliwa wyłącznie online przez aplikację MPLA / Wirtualny Parkometr. Dostępność bywa ograniczona.",
-                pkOpt2Title: "Garaż Podziemny Rudolfinum",
-                pkOpt2Text: "Najbliższy zadaszony garaż znajduje się na Alšovo nábřeží przy Rudolfinum (ok. 10 minut pieszo przez Most Karola lub 1 przystanek tramwajem). Garaż strzeżony 24/7.",
-                pkOpt3Title: "Garaż CH Nový Smíchov",
-                pkOpt3Text: "Dostępny parking w centrum handlowym na Andělu. Bezpośrednie połączenie tramwajowe (nr 12, 15 lub 20) na Malostranské náměstí.",
-                pkOpt4Title: "Parkingi P+R na Obrzeżach Pragi",
-                pkOpt4Text: "Ekonomiczna opcja na parkingach przesiadkowych przy stacjach metra (np. Zličín, Černý Most, Nádraží Holešovice). Stamtąd łatwo dojedziesz metrem lub tramwajem."
+                pkOpt1Title: "Strzeżony Garaż Podziemny",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
+                pkOpt2Title: "Niestrzeżony Parking Zewnętrzny",
+                pkOpt2Text: "<strong>Adres wjazdu:</strong> Nosticova 634 (wyjazd po drugiej stronie z automatami)<br><strong>Cena:</strong> 75 CZK/godz. (6:00–23:00) | 100 CZK/godz. (23:00–6:00)<br><em>(sprawdź ceny na miejscu)</em><br><strong>Płatność:</strong> Tylko kartą w automacie<br><strong>Odległość do hotelu:</strong> 5 minut pieszo przez park Kampa<br><strong>Wskazówka:</strong> Najbliższy, ale bardzo drogi.",
+                pkOpt3Title: "Strzeżony Parking i Garaż (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Cena:</strong> online 750 CZK / 24 godz., na miejscu 1200 CZK / 24 godz.<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą online lub na miejscu<br><strong>Odległość do hotelu:</strong> 20 minut komunikacją miejską<br><strong>Wskazówka:</strong> Dobra alternatywa, gdy Old Town Parking jest pełny.",
+                pkOpt4Title: "P+R Kotlářka – Tani Parking Miejski",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Wjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 CZK za pierwsze 24 godz., 10 CZK za każdą kolejną godzinę<br><em>(sprawdź ceny na stronie)</em><br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Odległość do hotelu:</strong> 30 minut komunikacją miejską<br><strong>Wskazówka:</strong> Najtańszy możliwy parking w Pradze."
             },
             ua: {
                 title: "Кіоск",
@@ -1205,14 +1279,14 @@
 
                 pkWelcomeTitle: "Варіанти паркування",
                 pkWelcomeSubtitle: "У зв'язку з розташуванням в історичному центрі Праги готель не має власного паркінгу.",
-                pkOpt1Title: "Сині зони поблизу",
-                pkOpt1Text: "Паркування на вулицях Малої Страни підпорядковується міським зонам. Оплата можлива лише онлайн через додаток MPLA / Віртуальний паркомат. Вільні місця обмежені.",
-                pkOpt2Title: "Підземний гараж Rudolfinum",
-                pkOpt2Text: "Найближчий критий гараж розташований на Alšovo nábřeží біля Рудольфінуму (близько 10 хвилин пішки через Карлів міст або 1 зупинка трамваєм). Охороняється 24/7.",
-                pkOpt3Title: "Гараж ТЦ Nový Smíchov",
-                pkOpt3Text: "Паркування в торговому центрі на Anděl. Пряме трамвайне сполучення (№ 12, 15 або 20) до Malostranské náměstí.",
-                pkOpt4Title: "Паркінги P+R на околицях",
-                pkOpt4Text: "Економічний варіант на перехоплювальних паркінгах біля станцій метро (наприклад, Zličín, Černý Most, Nádraží Holešovice). Звідти легко дістатися метро чи трамваєм."
+                pkOpt1Title: "Підземний гараж під охороною",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
+                pkOpt2Title: "Відкритий паркінг без охорони",
+                pkOpt2Text: "<strong>Адреса в'їзду:</strong> Nosticova 634 (виїзд з протилежного боку, там паркомат)<br><strong>Ціна:</strong> 75 CZK/год (6:00–23:00) | 100 CZK/год (23:00–6:00)<br><em>(перевіряйте ціни на місці)</em><br><strong>Оплата:</strong> Тільки карткою в автоматі<br><strong>Відстань до готелю:</strong> 5 хвилин пішки через парк Кампа<br><strong>Примітка:</strong> Найближчий, але дуже дорогий.",
+                pkOpt3Title: "Паркінг та гараж під охороною (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Адреса:</strong> Hybernská 2140/17<br><strong>Ціна:</strong> онлайн 750 CZK / 24 год, на місці 1 200 CZK / 24 год<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою онлайн або на місці<br><strong>Відстань до готелю:</strong> 20 хвилин громадським транспортом<br><strong>Примітка:</strong> Чудова альтернатива, якщо Old Town Parking зайнятий.",
+                pkOpt4Title: "P+R Kotlářka – Бюджетний міський паркінг",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Адреса:</strong> Plzeňská<br><strong>GPS В'їзду:</strong> 50.0685878N, 14.3580586E<br><strong>Ціна:</strong> 50 CZK за перші 24 години, 10 CZK за кожну наступну годину<br><em>(перевіряйте ціни на сайті)</em><br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Відстань до готелю:</strong> 30 хвилин громадським транспортом<br><strong>Примітка:</strong> Найдешевший варіант паркування в Празі."
             },
             sk: {
                 title: "Kiosk",
@@ -1242,7 +1316,7 @@
                 ciBfTitle: "Raňajky",
                 ciBfText: "Raňajky sa podávajú formou bufetu na prízemí reštaurácie od 8:00 do 10:00.",
                 ciQ2Title: "Kód vám nedorazil?",
-                ciQ2Text: "Ak ste rezervovali cez tretiu stranu, možná na vás nemáme priamy kontakt. V čase 8:00–16:00 prosím zdvihnite pevnú linku vedľa tohto kiosku, mimo týchto hodín volajte núdzový kontakt.",
+                ciQ2Text: "Ak ste rezervovali cez tretiu stranu, možná na vás nemáme priamy kontakt. V čase 8:00–16:00 prosím zdvihnite pevnou linku vedľa tohto kiosku, mimo týchto hodín volajte núdzový kontakt.",
                 ciQ3Title: "Batožina",
                 ciQ3Text: "Ak vaša izba ešte nie je pripravená, personál našej reštaurácie vám batožinu rád schová. Pretože sme ale v historickej budove, naše priestory sú malé a za veci nemôžeme právne zodpovedať.",
                 ciQ4Title: "Parkovanie",
@@ -1257,14 +1331,14 @@
 
                 pkWelcomeTitle: "Možnosti parkovania",
                 pkWelcomeSubtitle: "Vzhľadom na umiestnenie v historickom centre Prahy nemá hotel vlastné parkovisko.",
-                pkOpt1Title: "Modré zóny v okolí hotela",
-                pkOpt1Text: "Parkovanie priamo v uliciach na Malej Strane podlieha mestským zónam. Platba je možná iba online cez aplikáciu MPLA / Virtuálne parkovacie hodiny. Obsadenosť býva vysoká.",
-                pkOpt2Title: "Podzemné garáže Rudolfinum",
-                pkOpt2Text: "Najbližšie kryté garáže sa nachádzajú na Alšovom nábreží pri Rudolfine (cca 10 minút pešo cez Karlov most alebo 1 zastávka električkou). Strážené nonstop garáže.",
-                pkOpt3Title: "Garáže OC Nový Smíchov",
-                pkOpt3Text: "Dostupné parkovanie v nákupnom centre na Anděly. Priame spojenie električkou číslo 12, 15 alebo 20 na Malostranské námestie.",
-                pkOpt4Title: "Parkoviská P+R na okraji Prahy",
-                pkOpt4Text: "Ekonomická alternatíva na záchytných parkoviskách pri staniciach metra (napr. Zličín, Černý Most, Nádraží Holešovice). Odtiaľ sa pohodlne dostanete metrom či električkou."
+                pkOpt1Title: "Strážené podzemné garáže",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodín (aktuálnu cenu skontrolujte na webe)<br><strong>Výška vozidla:</strong> max. 2 metre<br><strong>Platba:</strong> Kartou alebo hotovosťou v automate<br><strong>Dôležité:</strong> Zákaz vjazdu pre vozidlá na LPG a CNG<br><strong>Vzdialenosť k hotelu:</strong> 10 minút pešo cez Mánesov most<br><strong>Značka:</strong> Zlatá stredná cesta. Možnosť rezervácie a platby vopred cez web.",
+                pkOpt2Title: "Nestráté vonkajšie parkovisko",
+                pkOpt2Text: "<strong>Adresa vjazdu:</strong> Nosticova 634 (výjazd na druhej strane s automatom)<br><strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br><em>(aktuálnu cenu skontrolujte na mieste)</em><br><strong>Platba:</strong> Iba kartou v automate<br><strong>Vzdialenosť k hotelu:</strong> 5 minút pešo cez park Kampa<br><strong>Značka:</strong> Najbližšie, ale veľmi drahé.",
+                pkOpt3Title: "Strážené vonkajšie aj garážové parkovisko The Cloud One",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresa:</strong> Hybernská 2140/17<br><strong>Cena:</strong> online 750 Kč / 24 h, na mieste 1 200 Kč / 24 h<br><em>(aktuálnu cenu skontrolujte na webe)</em><br><strong>Platba:</strong> Kartou cez web alebo na mieste<br><strong>Vzdialenosť k hotelu:</strong> 20 minút mestskou hromadnou dopravou<br><strong>Značka:</strong> Dobrá možnosť, ak je Old Town Parking plný.",
+                pkOpt4Title: "P+R Kotlářka – lacné mestskej parkovisko",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresa:</strong> Plzeňská<br><strong>GPS vjazdu:</strong> 50.0685878N, 14.3580586E<br><strong>Cena:</strong> 50 Kč za prvých 24 hodín, každá ďalšia hodina 10 Kč<br><em>(aktuálnu cenu skontrolujte na webe)</em><br><strong>Platba:</strong> Kartou alebo hotovosťou v automate<br><strong>Vzdialenosť k hotelu:</strong> 30 minút mestskou hromadnou dopravou<br><strong>Značka:</strong> Najlacnejšie možné parkovanie v Prahe."
             },
             nl: {
                 title: "Kiosk",
@@ -1308,15 +1382,15 @@
                 ciWishText: "Wij wensen u een geweldig en aangenaam verblijf!",
 
                 pkWelcomeTitle: "Parkeermogelijkheden",
-                pkWelcomeSubtitle: "Vanwege de ligging in het historische centrum van Klaag heeft het hotel geen eigen parkeergelegenheid.",
-                pkOpt1Title: "Blauwe Zones in de Buurt",
-                pkOpt1Text: "Parkeren op straat in de Kleine Zijde valt onder gemeentelijke zones. Betaling is alleen online mogelijk via de MPLA-app / Virtuele Parkeermeter. Beschikbaarheid is vaak beperkt.",
-                pkOpt2Title: "Ondergrondse Garage Rudolfinum",
-                pkOpt2Text: "De dichtstbijzijnde overdekte garage bevindt zich aan de Alšovo nábřeží bij het Rudolfinum (ca. 10 minuten lopen over de Karelsbrug of 1 tramhalte). 24/7 bewaakt.",
-                pkOpt3Title: "Garage Winkelcentrum Nový Smíchov",
-                pkOpt3Text: "Beschikbare parkeergelegenheid in het winkelcentrum bij Anděl. Directe tramverbinding (lijn 12, 15 of 20) naar Malostranské náměstí.",
-                pkOpt4Title: "P+R Parkeerterreinen aan de Rand",
-                pkOpt4Text: "Voordelige optie op P+R terreinen bij metrostations (bijv. Zličín, Černý Most, Nádraží Holešovice). Van daaruit reist u eenvoudig per metro of tram."
+                pkWelcomeSubtitle: "Vanwege de ligging in het historische centrum van Prag heeft het hotel geen eigen parkeergelegenheid.",
+                pkOpt1Title: "Bewaakte Ondergrondse Garage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Prijs:</strong> 750 CZK voor 11–24 uur (controleer prijzen op de website)<br><strong>Voertuighoogte:</strong> max. 2 meter<br><strong>Betaling:</strong> Pin/Creditcard of contant bij automaat<br><strong>Belangrijk:</strong> Geen toegang voor LPG / CNG voertuigen<br><strong>Afstand tot hotel:</strong> 10 minuten lopen via Mánesbrug<br><strong>Tip:</strong> Goede prijs-kwaliteitverhouding. Online reserveren mogelijk.",
+                pkOpt2Title: "Onbewaakt Buitenterrein",
+                pkOpt2Text: "<strong>Inrij-adres:</strong> Nosticova 634 (uitrit aan de andere kant met automaat)<br><strong>Prijs:</strong> 75 CZK/uur (6:00–23:00) | 100 CZK/uur (23:00–6:00)<br><em>(controleer tarieven ter plaatse)</em><br><strong>Betaling:</strong> Alleen pinnen bij automaat<br><strong>Afstand tot hotel:</strong> 5 minuten lopen door Kampapark<br><strong>Tip:</strong> Dichtstbijzijnde, maar erg duur.",
+                pkOpt3Title: "Bewaakte Parkeergarage & Terrein (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Prijs:</strong> online 750 CZK / 24u, ter plaatse 1.200 CZK / 24u<br><em>(controleer prijzen op de website)</em><br><strong>Betaling:</strong> Online of ter plaatse met kaart<br><strong>Afstand tot hotel:</strong> 20 minuten met het openbaar vervoer<br><strong>Tip:</strong> Goed alternatief als Old Town Parking vol is.",
+                pkOpt4Title: "P+R Kotlářka – Goedkoop Gemeentelijk Parkeren",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>GPS Inrit:</strong> 50.0685878N, 14.3580586E<br><strong>Prijs:</strong> 50 CZK voor de eerste 24 uur, 10 CZK per volgend uur<br><em>(controleer prijzen op de website)</em><br><strong>Betaling:</strong> Kaart of contant bij automaat<br><strong>Afstand tot hotel:</strong> 30 minuten met het openbaar vervoer<br><strong>Tip:</strong> De goedkoopste parkeeroptie in Klaag."
             },
             da: {
                 title: "Kiosk",
@@ -1350,77 +1424,77 @@
                 ciQ3Title: "Bagageopbevaring",
                 ciQ3Text: "Hvis dit værelse ikke er klar endnu, opbevarer vores restaurantpersonale gerne din bagage. Som en historisk bygning er vores plads dog begrænset, og vi kan ikke påtage os juridisk ansvar.",
                 ciQ4Title: "Parkering",
-                ciQ4Text: "Da vi ligger i det historiske centrum, har vi ingen privat parkering. Du kan finde alle parkeringstips under knappen \"Parkering\" på hovedskærmen.",
+                ciQ4Text: "Pga. vores placering i det historiske centrum har vi ikke privat parkering. Du kan finde alle parkeringstips under knappen \"Parkering\" på hovedskærmen.",
                 ciQ5Title: "Arkitektur",
                 ciQ5Text: "Vores bygning er en unik historisk ejendom og har desværre ingen elevator. Hvis du har brug for hjælp, er vi her for dig.",
-                ciInfoStandText: "Du kan finde flere nyttige oplysninger på informationsstanderen på dit værelse.",
+                ciInfoStandText: "Du kan finde yderligere oplysninger på informationsstanderen på dit værelse.",
                 ciWifiTitle: "📶 Wi-Fi Forbindelse",
                 ciWifiNetLabel: "Netværksnavn / SSID",
                 ciWifiPassLabel: "Adgangskode",
                 ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
 
                 pkWelcomeTitle: "Parkeringsmuligheder",
-                pkWelcomeSubtitle: "På grund af placeringen i Prags historiske centrum har hotellet ikke sin egen parkeringsplads.",
-                pkOpt1Title: "Blå Zoner i Nærheden",
-                pkOpt1Text: "Gadeparkering i Lille-siden er underlagt kommunale zoner. Betaling er kun mulig online via MPLA-appen / Virtuel Parkeringstæller. Kapaciteten er ofte begrænset.",
-                pkOpt2Title: "Underjordisk Garage Rudolfinum",
-                pkOpt2Text: "Den nærmeste overdækkede garage ligger på Alšovo nábřeží ved Rudolfinum (ca. 10 minutters gang over Karlsbroen eller 1 stop med sporvogn). Overvåget døgnet rundt.",
-                pkOpt3Title: "Garage OC Nový Smíchov",
-                pkOpt3Text: "Tilgængelig parkering i indkøbscentret i Anděl. Direkte sporvognsforbindelse (nr. 12, 15 eller 20) til Malostranské náměstí.",
-                pkOpt4Title: "P+R Parkering i Udkanten",
-                pkOpt4Text: "Økonomisk mulighed på indfarts-parkeringspladser nær metrostationer (f.eks. Zličín, Černý Most, Nádraží Holešovice). Derfra kommer du nemt frem med metro eller sporvogn."
+                pkWelcomeSubtitle: "På grund af beliggenheden i Prags historiske centrum har hotellet ikke sin egen parkering.",
+                pkOpt1Title: "Overvåget Underjordisk Garage",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek priser online)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontant ved automat<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærk:</strong> God balance mellem pris og sikkerhed. Online booking muligt.",
+                pkOpt2Title: "Uovervåget Udendørs Parkering",
+                pkOpt2Text: "<strong>Indkørselsadresse:</strong> Nosticova 634 (udkørsel på modsat side med automat)<br><strong>Pris:</strong> 75 CZK/time (6:00–23:00) | 100 CZK/time (23:00–6:00)<br><em>(tjek priser på stedet)</em><br><strong>Betaling:</strong> Kun kort i automat<br><strong>Afstand til hotel:</strong> 5 minutters gang gennem Kampa-parken<br><strong>Bemærk:</strong> Tættest på, men meget dyrt.",
+                pkOpt3Title: "Overvåget Parkering & Garage (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adresse:</strong> Hybernská 2140/17<br><strong>Pris:</strong> 750 CZK / 24 t online, 1.200 CZK / 24 t på stedet<br><em>(tjek priser online)</em><br><strong>Betaling:</strong> Kort online eller på stedet<br><strong>Afstand til hotel:</strong> 20 minutter med offentlig transport<br><strong>Bemærk:</strong> Godt alternativ, hvis Old Town Parking er fuldt opfyldt.",
+                pkOpt4Title: "P+R Kotlářka – Billig By-Parkering",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adresse:</strong> Plzeňská<br><strong>GPS Indkørsel:</strong> 50.0685878N, 14.3580586E<br><strong>Pris:</strong> 50 CZK for de første 24 timer, 10 CZK pr. efterfølgende time<br><em>(tjek priser online)</em><br><strong>Betaling:</strong> Kort eller kontant ved automat<br><strong>Afstand til hotel:</strong> 30 minutter med offentlig transport<br><strong>Bemærk:</strong> Den billigste parkering i Prag."
             },
             el: {
                 title: "Kiosk",
                 checkin: "Check-in",
                 checkout: "Check-out",
                 service: "Επισκευή / Βοήθεια",
-                parking: "Χώρος στάθμευσης",
-                coInstructions: "Παρακαλούμε εισάγετε τον αριθμό δωματίου και το όνομα του εγγεγραμμένου επισκέπτη.",
+                parking: "Στάθμευση",
+                coInstructions: "Παρακαλώ εισάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη.",
                 coLuggageTitle: "Φύλαξη Αποσκευών",
-                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε απευθυνθείτε στο προσωπικό του εστιατορίου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος φύλαξης είναι περιορισμένος και το ξενοδοχείο δεν φέρει ευθύνη. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη φυλασσόμενη υπηρεσία αποσκευών στον Κεντρικό Σταθμό (Hlavní nádraží) με το τραμ 15 από το Malostranské náměstí – στάση «Hlavní nádraží».",
-                srvInstructions: "Συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Εάν πρόκειται για επείγον ζήτημα, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι – 8:00 έως 16:00 συνδέεται με τη ρεσεψιόν, ενώ εκτός αυτών των ωρών υπάρχει τηλέφωνο έκτακτης ανάγκης.",
+                coLuggageText: "Εάν επιθυμείτε να αποθηκεύσετε τις αποσκευές σας, παρακαλούμε απευθυνθείτε στο προσωπικό του εστιατορίου. Λόγω του ιστορικού χαρακτήρα του κτιρίου, ο χώρος είναι περιορισμένος. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τη付费 φύλαξη στον Κεντρικό Σταθμό (Hlavní nádraží) με το τραμ 15.",
+                srvInstructions: "Συμπληρώστε την παρακάτω φόρμα και θα εξυπηρετήσουμε το αίτημά σας το συντομότερο δυνατό. Για επείγοντα θέματα, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι (8:00–16:00).",
                 roomLabel: "Αριθμός δωματίου",
                 nameLabel: "Ονοματεπώνυμο",
                 issueLabel: "Περιγραφή προβλήματος / Αίτημα",
                 cancel: "ΑΚΥΡΩΣΗ",
                 submit: "ΥΠΟΒΟΛΗ",
                 back: "ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ",
-                fillAll: "Παρακαλούμε συμπληρώστε όλα τα πεδία.",
+                fillAll: "Παρακαλώ συμπληρώστε όλα τα πεδία.",
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
-                ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in εύκολα 24/7.",
+                ciWelcomeSubtitle: "Χάρη στο κιόσκι αυτοεξυπηρέτησης, μπορείτε να κάνετε check-in 24/7.",
                 ciRegTitle: "Εγγραφή",
-                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε την για να σας δηλώσουμε στην Αστυνομία Αλλοδαπών. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
-                ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
-                ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης μέσω SMS, email ή chat της πλατφόρμας κράτησης — το αργότερο έως τις 15:00, όταν ξεκινά το επίσημο check-in.",
+                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε την για την αστυνομία αλλοδαπών και παραδώστε την στο εστιατόριο.",
+                ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό;",
+                ciQ1Text: "Μόλις το δωμάτιο είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης μέσω SMS, email ή chat (το αργότερο στις 15:00).",
                 ciBfTitle: "Πρωινό",
                 ciBfText: "Το πρωινό σερβίρεται σε μπουφέ στο ισόγειο του εστιατορίου από τις 8:00 έως τις 10:00.",
-                ciQ2Title: "Δεν λάβατε τον κωδικό σας;",
-                ciQ2Text: "Εάν κάνατε κράτηση μέσω τρίτου, ενδέχεται να μην έχουμε τα στοιχεία επικοινωνίας σας. Μεταξύ 8:00 και 16:00 χρησιμοποιήστε το τηλέφωνο δίπλα στο κιόσκι. Εκτός αυτών των ωρών, καλέστε την επαφή έκτακτης ανάγκης.",
-                ciQ3Title: "Φύλαξη αποσκευών",
-                ciQ3Text: "Εάν το δωμάτιό σας δεν είναι ακόμα έτοιμο, το προσωπικό μας θα φυλάξει ευχαρίστως τις αποσκευές σας. Ωστόσο, ως ιστορικό κτίριο, ο χώρος μας είναι περιορισμένος και δεν φέρουμε νομική ευθύνη.",
-                ciQ4Title: "Χώρος στάθμευσης",
-                ciQ4Text: "Λόγω της τοποθεσίας μας στο ιστορικό κέντρο, δεν διαθέτουμε ιδιωτικό χώρο στάθμευσης. Βρείτε όλες τις συμβουλές στάθμευσης στο κουμπί «Χώρος στάθμευσης» στην αρχική οθόνη.",
+                ciQ2Title: "Δεν λάβατε τον κωδικό;",
+                ciQ2Text: "Εάν πραγματοποιήσατε κράτηση μέσω τρίτων, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο κιόσκι (8:00–16:00) ή καλέστε την εκτάκτου ανάγκης.",
+                ciQ3Title: "Αποσκευές",
+                ciQ3Text: "Εάν το δωμάτιο δεν είναι έτοιμο, το προσωπικό μπορεί να φυλάξει τις αποσκευές σας.",
+                ciQ4Title: "Στάθμευση",
+                ciQ4Text: "Δεν διαθέτουμε ιδιωτικό πάρκινγκ. Δείτε τις επιλογές στο κουμπί «Στάθμευση».",
                 ciQ5Title: "Αρχιτεκτονική",
-                ciQ5Text: "Το κτίριό μας είναι διατηρητέο ιστορικό μνημείο και δυστυχώς δεν διαθέτει ασανσέρ. Εάν χρειάζεστε βοήθεια, είμαστε στη διάθεσή σας.",
-                ciInfoStandText: "Θα βρείτε περισσότερες χρήσιμες πληροφορίες στη συσκευή πληροφοριών στο δωμάτιό σας.",
+                ciQ5Text: "Το κτίριο είναι ιστορικό και δεν διαθέτει ασανσέρ. Είμαστε στη διάθεσή σας για βοήθεια.",
+                ciInfoStandText: "Περισσότερες πληροφορίες θα βρείτε στο σταντ του δωματίου σας.",
                 ciWifiTitle: "📶 Σύνδεση Wi-Fi",
                 ciWifiNetLabel: "Όνομα δικτύου / SSID",
                 ciWifiPassLabel: "Κωδικός πρόσβασης",
-                ciWishText: "Σας ευχόμαστε μια υπέροχη και ευχάριστη διαμονή!",
+                ciWishText: "Σας ευχόμαστε μια ευχάριστη διαμονή!",
 
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
-                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει δικό του χώρο στάθμευσης.",
-                pkOpt1Title: "Μπλε Ζώνες Κοντά",
-                pkOpt1Text: "Η στάθμευση στους δρόμους της Μικρής Πόλης υπόκειται σε δημοτικές ζώνες. Η πληρωμή είναι δυνατή μόνο ηλεκτρονικά μέσω της εφαρμογής MPLA / Εικονικό Παρκόμετρο. Η διαθεσιμότητα είναι περιορισμένη.",
-                pkOpt2Title: "Υπόγειο Γκαράζ Rudolfinum",
-                pkOpt2Text: "Το πλησιέστερο στεγασμένο γκαράζ βρίσκεται στο Alšovo nábřeží κοντά στο Rudolfinum (περίπου 10 λεπτά με τα πόδια μέσω της Γέφυρας του Καρόλου ή 1 στάση με το τραμ). Φυλασσόμενο 24/7.",
-                pkOpt3Title: "Γκαράζ Εμπορικού Κέντρου Nový Smíchov",
-                pkOpt3Text: "Διαθέσιμος χώρος στάθμευσης στο εμπορικό κέντρο στο Anděl. Απευθείας σύνδεση με το τραμ (αρ. 12, 15 ή 20) προς το Malostranské náměstí.",
-                pkOpt4Title: "Σταθμοί P+R στα Προάστιa",
-                pkOpt4Text: "Οικονομική επιλογή σε χώρους στάθμευσης κοντά σε σταθμούς του μετρό (π.χ. Zličín, Černý Most, Nádraží Holešovice). Από εκεί μπορείτε εύκολα να φτάσετε με το μετρό ή το τραμ."
+                pkWelcomeSubtitle: "Λόγω της τοποθεσίας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει ιδιωτικό πάρκινγκ.",
+                pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες<br><strong>Ύψος:</strong> έως 2 μέτρα<br><strong>Πληρωμή:</strong> Κάρτα ή μετρητά σε μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται το LPG / CNG<br><strong>Απόσταση:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes.",
+                pkOpt2Title: "Μη Φυλασσόμενο Εξωτερικό Πάρκινγκ",
+                pkOpt2Text: "<strong>Διεύθυνση Εισόδου:</strong> Nosticova 634<br><strong>Τιμή:</strong> 75 CZK/ώρα (6:00–23:00) | 100 CZK/ώρα (23:00–6:00)<br><strong>Πληρωμή:</strong> Μόνο κάρτα σε μηχάνημα<br><strong>Απόσταση:</strong> 5 λεπτά με τα πόδια μέσω του πάρκου Kampa.",
+                pkOpt3Title: "Φυλασσόμενο Πάρκινγκ & Γκαράζ (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Διεύθυνση:</strong> Hybernská 2140/17<br><strong>Τιμή:</strong> 750 CZK / 24h online, 1.200 CZK / 24h επί τόπου<br><strong>Πληρωμή:</strong> Κάρτα online ή επί τόπου<br><strong>Απόσταση:</strong> 20 λεπτά με συγκοινωνία.",
+                pkOpt4Title: "P+R Kotlářka – Οικονομικό Δημοτικό Πάρκινγκ",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Διεύθυνση:</strong> Plzeňská<br><strong>Τιμή:</strong> 50 CZK για τις πρώτες 24 ώρες, 10 CZK κάθε επόμενη ώρα<br><strong>Πληρωμή:</strong> Κάρτα ή μετρητά<br><strong>Απόσταση:</strong> 30 λεπτά με συγκοινωνία."
             },
             tr: {
                 title: "Kiosk",
@@ -1428,51 +1502,51 @@
                 checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
-                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını giriniz.",
+                coInstructions: "Lütfen oda numaranızı ve kayıtlı misafirin adını girin.",
                 coLuggageTitle: "Bagaj Muhafazası",
-                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeli ile iletişime geçiniz. Binanın tarihi yapısı nedeniyle depolama alanımız sınırlıdır ve otelimiz muhafaza edilen eşyalardan sorumlu tutulamaz. Alternatif olarak Ana Tren Garı'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz. Malostranské náměstí'den 15 numaralı tramvayla ulaşabilirsiniz – „Hlavní nádraží“ durağında ininiz.",
-                srvInstructions: "Lütfen aşağıdaki formu doldurunuz, talebinizle en kısa sürede ilgileneceğiz. Acil bir durumsa lütfen kiosk yanındaki sabit telefonu kullanınız – 08:00 - 16:00 saatleri arasında sizi resepsiyona bağlar, bu saatler dışında acil durum hattı mevcuttur.",
+                coLuggageText: "Bagajınızı bırakmak isterseniz lütfen restoran personeline danışın. Binanın tarihi yapısı nedeniyle alanımız sınırlıdır. Alternatif olarak Ana Tren Garı'ndaki (Hlavní nádraží) ücretli bagaj muhafazasını kullanabilirsiniz (Tramvay No. 15).",
+                srvInstructions: "Lütfen aşağıdaki formu doldurun, talebinizle en kısa sürede ilgileneceğiz. Acil durumlar için kiosk yanındaki sabit telefonu kullanabilirsiniz (8:00–16:00).",
                 roomLabel: "Oda numarası",
-                nameLabel: "Adı Soyadı",
-                issueLabel: "Sorun açıklaması / Talep",
+                nameLabel: "Ad Soyad",
+                issueLabel: "Arıza açıklaması / Talep",
                 cancel: "İPTAL",
                 submit: "ONAYLA",
                 back: "ANA EKRANA DÖN",
-                fillAll: "Lütfen tüm alanları doldurunuz.",
+                fillAll: "Lütfen tüm alanları doldurun.",
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
 
-                ciWelcomeTitle: "Otelimize Hoş Geldiniz!",
-                ciWelcomeSubtitle: "Self-servis kioskumuz sayesinde 7/24 rahatça giriş yapabilirsiniz.",
-                ciRegTitle: "Kayıt",
-                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Yasal zorunluluk gereği Yabancılar Polisine bildirim yapabilmemiz için lütfen formu doldurunuz. Doldurulan formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
+                ciWelcomeTitle: "Otelimize hoş geldiniz!",
+                ciWelcomeSubtitle: "Self-servis kiosk sayesinde 7/24 rahatça giriş yapabilirsiniz.",
+                ciRegTitle: "Kayıt Formu",
+                ciRegText: "Kayıt formunu odanızda bulabilirsiniz. Yabancılar Polisi kaydı için formu doldurup restoran personeline teslim ediniz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
-                ciQ1Text: "Odanız hazır olur olmaz, kapı erişim kodunuzu SMS, e-posta veya rezervasyon platformu mesajı ile göndereceğiz — en geç resmi check-in saati olan 15:00'te.",
+                ciQ1Text: "Odanız hazır olduğunda giriş kodunuz SMS, e-posta veya rezervasyon sohbeti üzerinden iletilecektir (en geç 15:00'te).",
                 ciBfTitle: "Kahvaltı",
-                ciBfText: "Kahvaltı, restoranın giriş katında 08:00 - 10:00 saatleri arasında açık büfe olarak servis edilmektedir.",
-                ciQ2Title: "Kodunuz ulaşmadı mı?",
-                ciQ2Text: "Üçüncü taraf acenteler üzerinden rezervasyon yaptıysanız doğrudan iletişim bilgileriniz bizde olmayabilir. 08:00 - 16:00 saatleri arasında kiosk yanındaki sabit telefonu kullanabilirsiniz. Bu saatler dışında acil hattı arayınız.",
+                ciBfText: "Kahvaltı restoranın giriş katında 8:00 - 10:00 saatleri arasında açık büfe olarak sunulmaktadır.",
+                ciQ2Title: "Kod gelmedi mi?",
+                ciQ2Text: "Üçüncü taraf acentelerden rezervasyon yaptıysanız sabit telefonu (8:00–16:00) kullanabilir veya acil durum numarasını arayabilirsiniz.",
                 ciQ3Title: "Bagaj",
-                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı memnuniyetle muhafaza edecektir. Ancak tarihi bina olması sebebiyle alanımız kısıtlıdır ve yasal sorumluluk kabul edilememektedir.",
+                ciQ3Text: "Odanız henüz hazır değilse restoran personelimiz bagajınızı muhafaza edebilir.",
                 ciQ4Title: "Otopark",
-                ciQ4Text: "Tarihi şehir merkezindeki konumumuz nedeniyle özel otoparkımız bulunmamaktadır. Çevredeki otopark seçeneklerini ana ekrandaki „Otopark“ butonundan inceleyebilirsiniz.",
+                ciQ4Text: "Tarihi merkezde yer aldığımız için özel otoparkımız yoktur. Detaylar için «Otopark» butonuna tıklayın.",
                 ciQ5Title: "Mimari",
-                ciQ5Text: "Binamız tarihi bir yapı olup ne yazık ki asansör bulunmamaktadır. Yardım ihtiyacınız olursa sizlere destek olmaktan mutluluk duyarız.",
-                ciInfoStandText: "Diğer faydalı bilgileri odanızdaki bilgi standında bulabilirsiniz.",
+                ciQ5Text: "Binamız tarihi bir yapı olup asansör bulunmamaktadır. Yardım için buradayız.",
+                ciInfoStandText: "Daha fazla bilgi odanızdaki bilgilendirme standında yer almaktadır.",
                 ciWifiTitle: "📶 Wi-Fi Bağlantısı",
                 ciWifiNetLabel: "Ağ Adı / SSID",
                 ciWifiPassLabel: "Şifre / Password",
-                ciWishText: "Harika ve huzurlu bir konaklama dileriz!",
+                ciWishText: "Harika bir konaklama dileriz!",
 
                 pkWelcomeTitle: "Otopark Seçenekleri",
-                pkWelcomeSubtitle: "Prag'ın tarihi merkezindeki konumu nedeniyle otelin kendine ait otoparkı bulunmamaktadır.",
-                pkOpt1Title: "Yakındaki Mavi Bölge Park Alanları",
-                pkOpt1Text: "Malá Strana sokaklarındaki park yerleri belediye bölgelerine tabidir. Ödeme yalnızca MPLA uygulaması / Sanal Park Metresi üzerinden online yapılabilir. Doluluk oranı genelde yüksektir.",
-                pkOpt2Title: "Rudolfinum Yeraltı Otoparkı",
-                pkOpt2Text: "En yakın kapalı otopark Rudolfinum yanındaki Alšovo nábřeží üzerinde yer almaktadır (Karl Köprüsü üzerinden yürüyerek yaklaşık 10 dakika veya 1 tramvay durağı). 7/24 güvenliklidir.",
-                pkOpt3Title: "OC Nový Smíchov Otoparkı",
-                pkOpt3Text: "Anděl'deki alışveriş merkezinde mevcut otopark. Malostranské náměstí'ye 12, 15 veya 20 numaralı tramvaylarla doğrudan ulaşım imkanı.",
-                pkOpt4Title: "Şehir Dışındaki P+R Otoparkları",
-                pkOpt4Text: "Metro istasyonlarının yakınındaki aktarma otoparklarında ekonomik seçenek (örneğin Zličín, Černý Most, Nádraží Holešovice). Buradan metro veya tramvayla kolayca ulaşabilirsiniz."
+                pkWelcomeSubtitle: "Prag tarihi merkezindeki konumumuz nedeniyle otelin kendine ait otoparkı bulunmamaktadır.",
+                pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Ücret:</strong> 11–24 saat için 750 CZK<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG / CNG araç giremez<br><strong>Mesafe:</strong> Mánes köprüsü üzerinden yürüyerek 10 dakika.",
+                pkOpt2Title: "Güvenliksiz Açık Otopark",
+                pkOpt2Text: "<strong>Giriş Adresi:</strong> Nosticova 634<br><strong>Ücret:</strong> 75 CZK/saat (6:00–23:00) | 100 CZK/saat (23:00–6:00)<br><strong>Ödeme:</strong> Otomatta sadece kart geçerlidir<br><strong>Mesafe:</strong> Kampa parkından yürüyerek 5 dakika.",
+                pkOpt3Title: "Güvenlikli Açık ve Kapalı Otopark (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>Adres:</strong> Hybernská 2140/17<br><strong>Ücret:</strong> Online 750 CZK / 24 saat, yerinde 1.200 CZK / 24 saat<br><strong>Ödeme:</strong> Online veya yerinde kart ile<br><strong>Mesafe:</strong> Toplu taşıma ile 20 dakika.",
+                pkOpt4Title: "P+R Kotlářka – Uygun Fiyatlı Şehir Otoparkı",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>Adres:</strong> Plzeňská<br><strong>Ücret:</strong> İlk 24 saat için 50 CZK, sonraki her saat 10 CZK<br><strong>Ödeme:</strong> Kart veya nakit<br><strong>Mesafe:</strong> Toplu taşıma ile 30 dakika."
             },
             he: {
                 title: "קיוסק",
@@ -1480,13 +1554,13 @@
                 checkout: "צ'ק-אאוט",
                 service: "תיקון / עזרה",
                 parking: "חנייה",
-                coInstructions: "אנא הזן את מספר החדר שלך ואת שם האורח הרשום.",
-                coLuggageTitle: "אחסון מטען",
-                coLuggageText: "אם ברצונך לאחסן את המטען שלך, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של הבניין, שטח האחסון שלנו מוגבל והמלון אינו נושא באחריות לחפצים מאוחסנים. לחלופין, תוכל להשתמש בשירות שמירת החפצים בתשלום בתחנת הרכבת המרכזית (Hlavní nádraží). ניתן להגיע לשם בחשמלית מספר 15 מ-Malostranské náměstí - רד בתחנת „Hlavní nádraží”.",
-                srvInstructions: "אנא מלא את הטופס שמתווסף מטה ואנו נטפל בבקשתך בהקדם האפשרי. אם הנושא דחוף, אנא השתמש בטלפון הקווי ליד הקיוסק – בין השעות 8:00 ל-16:00 הוא מחבר אותך לקבלה המרוחקת, מחוץ לשעות אלה זמין איש קשר לחירום.",
+                coInstructions: "אנא הזן את מספר החדר ושם האורח הרשום.",
+                coLuggageTitle: "אחסון מזוודות",
+                coLuggageText: "אם ברצונך לאחסן את המזוודות, אנא פנה לצוות המסעדה. בשל האופי ההיסטורי של הבניין, המקום מוגבל. לחלופין, ניתן להשתמש בשירות השמרטפות בתשלום בתחנה המרכזית (Hlavní nádraží) באמצעות חשמלית 15.",
+                srvInstructions: "אנא מלא את הטופס ונפנה לבקשתך בהקדם. במקרים דחופים ניתן להשתמש בטלפון הקווי ליד הקיוסק (8:00–16:00).",
                 roomLabel: "מספר חדר",
                 nameLabel: "שם מלא",
-                issueLabel: "תיאור הבעיה / בקשה",
+                issueLabel: "תיאור התקלה / בקשה",
                 cancel: "ביטול",
                 submit: "אישור",
                 back: "חזרה למסך הראשי",
@@ -1494,254 +1568,229 @@
                 thanks: "תודה! בקשתך נשלחה בהצלחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
-                ciWelcomeSubtitle: "בזכות קיוסק השירות העצמי שלנו, תוכלו לבצע צ'ק-אין בנוחות 24/7.",
+                ciWelcomeSubtitle: "בזכות הקיוסק בשירות עצמי, תוכלו לבצע צ'ק-אין בקלות 24/7.",
                 ciRegTitle: "הרשמה",
-                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת הזרים כחוק. פשוט מסרו את הטופס המלא לצוות המסעדה. תודה.",
-                ciQ1Title: "מתי וכיצד תקבלו את הקוד?",
-                ciQ1Text: "ברגע שהחדר שלכם יהיה מוכן, נשלח את קוד הכניסה לכל הדלתות ב-SMS, במייל או בצ'אט הפלטפורמה – ולא יאוחר מהשעה 15:00, מועד הצ'ק-אין הרשמי.",
+                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו עבור משטרת הזרים ומסרו אותו לצוות המסעדה.",
+                ciQ1Title: "מתי ואיך תקבלו את הקוד?",
+                ciQ1Text: "ברגע שהחדר מוכן, נשלח את קוד הכניסה ב-SMS, אימייל או בצ'אט ההזמנות (לכל המאוחר עד 15:00).",
                 ciBfTitle: "ארוחת בוקר",
-                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומה הראשונה של המסעדה בין השעות 8:00 ל-10:00.",
-                ciQ2Title: "הקוד לא הגיע?",
-                ciQ2Text: "אם הזמנתם דרך צד שלישי, ייתכן שאין לנו את פרטי ההתקשרות הישירים שלכם. בין השעות 8:00 ל-16:00 אנא השתמשו בטלפון הקווי ליד הקיוסק. מחוץ לשעות אלה התקשרו למספר החירום.",
-                ciQ3Title: "מטען",
-                ciQ3Text: "אם החדר שלכם עדיין אינו מוכן, צוות המסעדה ישמח לשמור על המטען שלכם. אך מכיוון מדובר במבנה היסטורי, השטח מוגבל ואיננו יכולים לקחת אחריות משפטית.",
+                ciBfText: "ארוחת הבוקר מוגשת בסגנון בופה בקומת הקרקע במסעדה בין השעות 8:00 ל-10:00.",
+                ciQ2Title: "לא קיבלתם קוד?",
+                ciQ2Text: "אם הזמנתם דרך צד שלישי, השתמשו בטלפון הקווי ליד הקיוסק (8:00–16:00) או התקשרו למספר החירום.",
+                ciQ3Title: "מזוודות",
+                ciQ3Text: "אם החדר אינו מוכן, צוות המסעדה ישמח לשמור על המזוודות שלכם.",
                 ciQ4Title: "חנייה",
-                ciQ4Text: "בשל המיקום במרכז ההיסטורי, אין לנו חנייה פרטית. תוכלו למצוא טיפים מלאים לחנייה באזור תחת הלחצן \"חנייה\" במסך הראשי.",
+                ciQ4Text: "אין לנו חנייה פרטית במלון. פרטים מלאים בלחיצה על כפתור «חנייה».",
                 ciQ5Title: "ארכיטקטורה",
-                ciQ5Text: "הבניין שלנו הוא מבנה היסטורי ייחודי ולמרבה הצער אין בו מעלית. אם אתם זקוקים לעזרה, אנו כאן לשירותכם.",
-                ciInfoStandText: "מידע שימושי נוסף וטיפים תוכלו למצוא בחדרכם על מעמד המידע.",
-                ciWifiTitle: "📶 חיבור אינטרנט Wi-Fi",
+                ciQ5Text: "הבניין הינו לשימור היסטורי ולכן אין מעלית. אנו כאן לעזור במידת הצורך.",
+                ciInfoStandText: "מידע נוסף זמין בסטנד המידע בחדרכם.",
+                ciWifiTitle: "📶 חיבור Wi-Fi",
                 ciWifiNetLabel: "שם רשת / SSID",
                 ciWifiPassLabel: "סיסמה / Password",
-                ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
+                ciWishText: "מאחלים לכם שהייה נעימה ומקסימה!",
 
                 pkWelcomeTitle: "אפשרויות חנייה",
-                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין מגרש חנייה משלו.",
-                pkOpt1Title: "אזורים כחולים בסביבה",
-                pkOpt1Text: "חנייה ברחובות העיר העתיקה כפופה לאזורים עירוניים. התשלום אפשרי רק אונליין דרך אפליקציית MPLA / מדחן וירטואלי. התפוסה בדרך כלל גבוהה.",
-                pkOpt2Title: "חניון תת קרקעי רודולפינום",
-                pkOpt2Text: "החניון המקורה הקרוב ביותר ממוקם ב-Alšovo nábřeží ליד רודולפינום (כ-10 דקות הליכה מעבר לגשר צ'ארלס או תחנת חשמלית אחת). חניון שמור 24/7.",
-                pkOpt3Title: "חניון קניון Nový Smíchov",
-                pkOpt3Text: "חנייה זמינה במרכז הקניות באנדל. חיבור ישיר בחשמלית (מספר 12, 15 או 20) ל-Malostranské náměstí.",
-                pkOpt4Title: "חניוני P+R בפאתי העיר",
-                pkOpt4Text: "אפשרות כלכלית בחניוני מעבר ליד תחנות מטרו (למשל Zličín, Černý Most, Nádraží Holešovice). משם תוכלו להגיע בקלות במטרו או בחשמלית."
+                pkWelcomeSubtitle: "בשל המיקום במרכז ההיסטורי של פראג, למלון אין חנייה פרטית.",
+                pkOpt1Title: "חניון תת-קרקעי שמור",
+                pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות<br><strong>גובה רכב:</strong> עד 2 מטרים<br><strong>תשלום:</strong> כרטיס או מזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז LPG / CNG<br><strong>מרחק:</strong> 10 דקות הליכה דרך גשר Mánes.",
+                pkOpt2Title: "חניון חיצוני לא שמור",
+                pkOpt2Text: "<strong>כתובת כניסה:</strong> Nosticova 634<br><strong>מחיר:</strong> 75 CZK/שעה (6:00–23:00) | 100 CZK/שעה (23:00–6:00)<br><strong>תשלום:</strong> כרטיס אשראי בלבד במכונה<br><strong>מרחק:</strong> 5 דקות הליכה דרך פארק קאמפה.",
+                pkOpt3Title: "חניון פתוח ומקורה שמור (The Cloud One)",
+                pkOpt3Text: "<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br><strong>כתובת:</strong> Hybernská 2140/17<br><strong>מחיר:</strong> 750 CZK / 24 שעות באונליין, 1,200 CZK במקום<br><strong>תשלום:</strong> אשראי באונליין או במקום<br><strong>מרחק:</strong> 20 דקות בתחבורה ציבורית.",
+                pkOpt4Title: "P+R Kotlářka – חניון עירוני זול",
+                pkOpt4Text: "<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br><strong>כתובת:</strong> Plzeňská<br><strong>מחיר:</strong> 50 CZK ל-24 השעות הראשונות, 10 CZK לכל שעה נוספת<br><strong>תשלום:</strong> כרטיס או מזומן במכונה<br><strong>מרחק:</strong> 30 דקות בתחבורה ציבורית."
             }
         };
 
-        // NAVIGATION & SCREEN SWITCHING LOGIC
+        // NAVIGATION FUNCTIONS
         function hideAllScreens() {
-            const screens = ['screen-1', 'screen-checkin', 'screen-checkout', 'screen-service', 'screen-parking', 'screen-thanks'];
-            screens.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
+            document.querySelectorAll('.card, #screen-1').forEach(el => el.classList.add('hidden'));
         }
 
-        function resetAutoResetTimer() {
-            if (autoResetTimer) clearTimeout(autoResetTimer);
+        function showScreen(id) {
+            hideAllScreens();
+            document.getElementById(id).classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function resetToStart() {
+            stopAutoResetTimer();
+            hideAllScreens();
+            document.getElementById('screen-1').classList.remove('hidden');
+            
+            // Clear inputs
+            document.querySelectorAll('input, textarea').forEach(input => input.value = '');
+        }
+
+        function openCheckinInfo() { showScreen('screen-checkin'); }
+        function openCheckoutForm() { showScreen('screen-checkout'); }
+        function openServiceForm() { showScreen('screen-service'); }
+        function openParkingInfo() { showScreen('screen-parking'); }
+
+        // AUTO RESET TIMER FOR INACTIVITY
+        function startAutoResetTimer() {
+            stopAutoResetTimer();
             autoResetTimer = setTimeout(() => {
                 resetToStart();
             }, AUTO_RESET_TIMEOUT);
         }
 
-        function resetToStart() {
-            if (autoResetTimer) clearTimeout(autoResetTimer);
-            hideAllScreens();
-            
-            // Clear Inputs
-            const inputs = ['coRoomInput', 'coNameInput', 'srvRoomInput', 'srvIssueInput', 'srvNameInput'];
-            inputs.forEach(id => {
-                const inputEl = document.getElementById(id);
-                if (inputEl) inputEl.value = '';
+        function stopAutoResetTimer() {
+            if (autoResetTimer) {
+                clearTimeout(autoResetTimer);
+                autoResetTimer = null;
+            }
+        }
+
+        // RESET TIMER ON USER INTERACTION
+        ['touchstart', 'mousemove', 'mousedown', 'keydown'].forEach(evt => {
+            window.addEventListener(evt, () => {
+                if (!document.getElementById('screen-1').classList.contains('hidden')) return;
+                startAutoResetTimer();
             });
-
-            document.getElementById('screen-1').classList.remove('hidden');
-        }
-
-        function openCheckinInfo() {
-            hideAllScreens();
-            document.getElementById('screen-checkin').classList.remove('hidden');
-            resetAutoResetTimer();
-        }
-
-        function openCheckoutForm() {
-            hideAllScreens();
-            document.getElementById('screen-checkout').classList.remove('hidden');
-            resetAutoResetTimer();
-        }
-
-        function openServiceForm() {
-            hideAllScreens();
-            document.getElementById('screen-service').classList.remove('hidden');
-            resetAutoResetTimer();
-        }
-
-        function openParkingInfo() {
-            hideAllScreens();
-            document.getElementById('screen-parking').classList.remove('hidden');
-            resetAutoResetTimer();
-        }
+        });
 
         // LANGUAGE CHANGING LOGIC
         function setLanguage(lang, event) {
-            if (!i18n[lang]) return;
             currentLang = lang;
-
-            // Handle Active Class on Flags
+            
+            // Toggle active class on flag buttons
             document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
             }
 
-            // Handle RTL/LTR
+            // Set RTL for Hebrew
             if (lang === 'he') {
-                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.setAttribute('dir', 'rtl');
             } else {
-                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.removeAttribute('dir');
             }
 
-            const dict = i18n[lang];
+            const data = i18n[lang] || i18n['cs'];
 
-            // Main Menu
-            setText('main-title', dict.title);
-            setText('btn-checkin-text', dict.checkin);
-            setText('btn-checkout-text', dict.checkout);
-            setText('btn-service-text', dict.service);
-            setText('btn-parking-text', dict.parking);
+            // UI Elements Text Replacement
+            document.getElementById('main-title').innerText = data.title;
+            document.getElementById('btn-checkin-text').innerText = data.checkin;
+            document.getElementById('btn-checkout-text').innerText = data.checkout;
+            document.getElementById('btn-service-text').innerText = data.service;
+            document.getElementById('btn-parking-text').innerText = data.parking;
 
-            // Check-in Info
-            setText('ci-welcome-title', dict.ciWelcomeTitle);
-            setText('ci-welcome-subtitle', dict.ciWelcomeSubtitle);
-            setText('ci-q1-title', dict.ciQ1Title);
-            setText('ci-q1-text', dict.ciQ1Text);
-            setText('ci-bf-title', dict.ciBfTitle);
-            setText('ci-bf-text', dict.ciBfText);
-            setText('ci-q2-title', dict.ciQ2Title);
-            setText('ci-q2-text', dict.ciQ2Text);
-            setText('ci-reg-title', dict.ciRegTitle);
-            setText('ci-reg-text', dict.ciRegText);
-            setText('ci-q3-title', dict.ciQ3Title);
-            setText('ci-q3-text', dict.ciQ3Text);
-            setText('ci-q4-title', dict.ciQ4Title);
-            setText('ci-q4-text', dict.ciQ4Text);
-            setText('ci-q5-title', dict.ciQ5Title);
-            setText('ci-q5-text', dict.ciQ5Text);
-            setText('ci-info-stand-text', dict.ciInfoStandText);
-            setText('ci-wifi-title', dict.ciWifiTitle);
-            setText('ci-wifi-net-label', dict.ciWifiNetLabel);
-            setText('ci-wifi-pass-label', dict.ciWifiPassLabel);
-            setText('ci-wish-text', dict.ciWishText);
-            setText('btn-back-ci', dict.back);
+            // Form Instructions
+            document.getElementById('co-instructions').innerText = data.coInstructions;
+            document.getElementById('co-luggage-title').innerText = data.coLuggageTitle;
+            document.getElementById('co-luggage-text').innerText = data.coLuggageText;
+            document.getElementById('srv-instructions').innerText = data.srvInstructions;
 
-            // Checkout Form
-            setText('co-instructions', dict.coInstructions);
-            setText('co-luggage-title', dict.coLuggageTitle);
-            setText('co-luggage-text', dict.coLuggageText);
-            setText('label-co-room', dict.roomLabel);
-            setText('label-co-name', dict.nameLabel);
-            setText('btn-cancel-1', dict.cancel);
-            setText('btn-submit-1', dict.submit);
+            // Form Labels & Buttons
+            document.getElementById('label-co-room').innerText = data.roomLabel;
+            document.getElementById('label-co-name').innerText = data.nameLabel;
+            document.getElementById('label-srv-room').innerText = data.roomLabel;
+            document.getElementById('label-srv-name').innerText = data.nameLabel;
+            document.getElementById('label-srv-issue').innerText = data.issueLabel;
 
-            // Service Form
-            setText('srv-instructions', dict.srvInstructions);
-            setText('label-srv-room', dict.roomLabel);
-            setText('label-srv-issue', dict.issueLabel);
-            setText('label-srv-name', dict.nameLabel);
-            setText('btn-cancel-2', dict.cancel);
-            setText('btn-submit-2', dict.submit);
+            document.getElementById('btn-cancel-1').innerText = data.cancel;
+            document.getElementById('btn-submit-1').innerText = data.submit;
+            document.getElementById('btn-cancel-2').innerText = data.cancel;
+            document.getElementById('btn-submit-2').innerText = data.submit;
+            document.getElementById('btn-back-ci').innerText = data.back;
+            document.getElementById('btn-back-pk').innerText = data.back;
 
-            // Parking Info
-            setText('pk-welcome-title', dict.pkWelcomeTitle);
-            setText('pk-welcome-subtitle', dict.pkWelcomeSubtitle);
-            setText('pk-opt1-title', dict.pkOpt1Title);
-            setText('pk-opt1-text', dict.pkOpt1Text);
-            setText('pk-opt2-title', dict.pkOpt2Title);
-            setText('pk-opt2-text', dict.pkOpt2Text);
-            setText('pk-opt3-title', dict.pkOpt3Title);
-            setText('pk-opt3-text', dict.pkOpt3Text);
-            setText('pk-opt4-title', dict.pkOpt4Title);
-            setText('pk-opt4-text', dict.pkOpt4Text);
-            setText('btn-back-pk', dict.back);
+            // Check-in Info Texts
+            document.getElementById('ci-welcome-title').innerText = data.ciWelcomeTitle;
+            document.getElementById('ci-welcome-subtitle').innerText = data.ciWelcomeSubtitle;
+            document.getElementById('ci-reg-title').innerText = data.ciRegTitle;
+            document.getElementById('ci-reg-text').innerText = data.ciRegText;
+            document.getElementById('ci-q1-title').innerText = data.ciQ1Title;
+            document.getElementById('ci-q1-text').innerText = data.ciQ1Text;
+            document.getElementById('ci-bf-title').innerText = data.ciBfTitle;
+            document.getElementById('ci-bf-text').innerText = data.ciBfText;
+            document.getElementById('ci-q2-title').innerText = data.ciQ2Title;
+            document.getElementById('ci-q2-text').innerText = data.ciQ2Text;
+            document.getElementById('ci-q3-title').innerText = data.ciQ3Title;
+            document.getElementById('ci-q3-text').innerText = data.ciQ3Text;
+            document.getElementById('ci-q4-title').innerText = data.ciQ4Title;
+            document.getElementById('ci-q4-text').innerText = data.ciQ4Text;
+            document.getElementById('ci-q5-title').innerText = data.ciQ5Title;
+            document.getElementById('ci-q5-text').innerText = data.ciQ5Text;
+            document.getElementById('ci-info-stand-text').innerText = data.ciInfoStandText;
+            document.getElementById('ci-wifi-title').innerText = data.ciWifiTitle;
+            document.getElementById('ci-wifi-net-label').innerText = data.ciWifiNetLabel;
+            document.getElementById('ci-wifi-pass-label').innerText = data.ciWifiPassLabel;
+            document.getElementById('ci-wish-text').innerText = data.ciWishText;
 
-            // Thanks Message
-            setText('thanks-message', dict.thanks);
+            // Parking Info Texts
+            document.getElementById('pk-welcome-title').innerText = data.pkWelcomeTitle;
+            document.getElementById('pk-welcome-subtitle').innerText = data.pkWelcomeSubtitle;
+            document.getElementById('pk-opt1-title').innerText = data.pkOpt1Title;
+            document.getElementById('pk-opt1-text').innerHTML = data.pkOpt1Text;
+            document.getElementById('pk-opt2-title').innerText = data.pkOpt2Title;
+            document.getElementById('pk-opt2-text').innerHTML = data.pkOpt2Text;
+            document.getElementById('pk-opt3-title').innerText = data.pkOpt3Title;
+            document.getElementById('pk-opt3-text').innerHTML = data.pkOpt3Text;
+            document.getElementById('pk-opt4-title').innerText = data.pkOpt4Title;
+            document.getElementById('pk-opt4-text').innerHTML = data.pkOpt4Text;
 
-            resetAutoResetTimer();
+            document.getElementById('pk-wifi-title').innerText = data.ciWifiTitle;
+            document.getElementById('pk-wifi-net-label').innerText = data.ciWifiNetLabel;
+            document.getElementById('pk-wifi-pass-label').innerText = data.ciWifiPassLabel;
+
+            document.getElementById('thanks-message').innerText = data.thanks;
         }
 
-        function setText(id, text) {
-            const el = document.getElementById(id);
-            if (el && text) {
-                el.innerText = text;
-            }
+        // FORM SUBMISSION HANDLERS (NTFY INTEGRATION)
+        function sendNtfyNotification(title, message, tags) {
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                body: message,
+                headers: {
+                    'Title': title,
+                    'Tags': tags || 'bell'
+                }
+            }).catch(err => console.error('Error sending notification:', err));
         }
 
-        // FORM SUBMISSION & NTFY NOTIFICATIONS
+        function showThanksAndReset() {
+            showScreen('screen-thanks');
+            setTimeout(() => {
+                resetToStart();
+            }, 4000);
+        }
+
         function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
+            const data = i18n[currentLang] || i18n['cs'];
 
             if (!room || !name) {
-                alert(i18n[currentLang].fillAll || "Prosím vyplňte všechna pole.");
+                alert(data.fillAll);
                 return;
             }
 
-            const payloadMessage = `🚪 CHECK-OUT KOISK\nPokoj: ${room}\nJméno: ${name}\nJazyk: ${currentLang.toUpperCase()}`;
-
-            sendNtfyNotification("Check-out Request", payloadMessage);
-            showThanksScreen();
+            const title = `CHECK-OUT: Pokoj ${room}`;
+            const message = `Host: ${name}\nPokoj: ${room}\nJazyk: ${currentLang.toUpperCase()}`;
+            
+            sendNtfyNotification(title, message, 'door,outbox');
+            showThanksAndReset();
         }
 
         function submitService() {
             const room = document.getElementById('srvRoomInput').value.trim();
             const issue = document.getElementById('srvIssueInput').value.trim();
             const name = document.getElementById('srvNameInput').value.trim();
+            const data = i18n[currentLang] || i18n['cs'];
 
             if (!room || !issue || !name) {
-                alert(i18n[currentLang].fillAll || "Prosím vyplňte všechna pole.");
+                alert(data.fillAll);
                 return;
             }
 
-            const payloadMessage = `🔧 OPRAVA / POMOC KOISK\nPokoj: ${room}\nJméno: ${name}\nPožadavek: ${issue}\nJazyk: ${currentLang.toUpperCase()}`;
-
-            sendNtfyNotification("Service Request", payloadMessage);
-            showThanksScreen();
+            const title = `OPRAVA / POMOC: Pokoj ${room}`;
+            const message = `Host: ${name}\nPokoj: ${room}\nPožadavek: ${issue}\nJazyk: ${currentLang.toUpperCase()}`;
+            
+            sendNtfyNotification(title, message, 'wrench,warning');
+            showThanksAndReset();
         }
-
-        function sendNtfyNotification(title, message) {
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                headers: {
-                    'Title': title,
-                    'Priority': 'high',
-                    'Tags': 'bell,hotel,kiosk'
-                },
-                body: message
-            }).catch(err => console.error("NTFY Push Error: ", err));
-        }
-
-        function showThanksScreen() {
-            hideAllScreens();
-            document.getElementById('screen-thanks').classList.remove('hidden');
-            setTimeout(() => {
-                resetToStart();
-            }, 4000);
-        }
-
-        // USER ACTIVITY RESET MONITORING
-        ['click', 'touchstart', 'mousemove', 'keypress'].forEach(evt => {
-            window.addEventListener(evt, () => {
-                const mainScreenActive = !document.getElementById('screen-1').classList.contains('hidden');
-                if (!mainScreenActive) {
-                    resetAutoResetTimer();
-                }
-            }, { passive: true });
-        });
-
-        // INITIALIZATION
-        document.addEventListener('DOMContentLoaded', () => {
-            setLanguage('cs', null);
-        });
     </script>
 </body>
 </html>
