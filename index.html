@@ -463,8 +463,25 @@
 
 
         #screen-parking .parking-main-highlight { display:block; padding:15px 17px; border-radius:14px; background:rgba(66,165,245,0.10); border:1px solid rgba(144,202,249,0.38); border-left:4px solid rgba(144,202,249,0.65); color:#e3f2fd; line-height:1.55; box-shadow:0 3px 9px rgba(0,0,0,0.14); }
-        #screen-parking .wifi-box-blue { background:var(--card-bg); border:1px solid var(--blue-light); border-left:5px solid var(--blue-light); box-shadow:0 8px 18px rgba(0,0,0,0.28); }
+        #screen-parking .wifi-box-blue {
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.15), rgba(66, 165, 245, 0.08));
+            border: none;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
         #screen-parking .wifi-title-blue { color:var(--blue-light); }
+        #screen-parking .parking-historical-highlight {
+            display: block;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(66, 165, 245, 0.10);
+            border: 1px solid rgba(144, 202, 249, 0.55);
+            color: #dceeff;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
 
         .wifi-box-compact {
             width: 78%;
@@ -894,7 +911,7 @@
         <!-- SCREEN PARKING INFO -->
         <div id="screen-parking" class="card hidden">
             <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
+            <div class="card-subtitle-welcome parking-historical-highlight" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
 
 
             <div class="wifi-box-blue">
