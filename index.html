@@ -174,6 +174,7 @@
             box-shadow: 0 8px 0 var(--green-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
         .btn-checkin:active { box-shadow: 0 2px 0 var(--green-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+        .btn-checkin .btn-title { word-spacing: 8px; }
 
         .btn-checkout {
             background: linear-gradient(180deg, var(--red-main) 0%, var(--red-dark) 100%);
@@ -709,7 +710,7 @@
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
                         <path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"/>
                     </svg>
-                    <span class="btn-title" id="btn-checkin-text">Check-in</span>
+                    <span class="btn-title" id="btn-checkin-text">Check-in Info</span>
                 </button>
 
                 <!-- Check-out Button -->
@@ -746,6 +747,10 @@
         <div id="screen-checkin" class="card hidden">
             <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
             <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Díky samoobslužnému kiosku se u nás ubytujete pohodlně a nonstop.</div>
+
+            <div class="info-item info-item-highlight">
+                <span id="ci-access-info-text">Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu. Děkujeme.</span>
+            </div>
 
             <div class="info-list">
 
@@ -1068,7 +1073,7 @@
         const i18n = {
             cs: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Info",
                 checkout: "Check-out",
                 service: "Oprava / Pomoc",
                 parking: "Parkování",
@@ -1086,6 +1091,7 @@
                 thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
+                ciAccessInfoText: "Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu. Děkujeme.",
                 ciWelcomeSubtitle: "Rezervace přijímáme pouze online.",
                 ciRegTitle: "Registrace",
                 ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
@@ -1121,7 +1127,7 @@
             },
             sk: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Info",
                 checkout: "Check-out",
                 service: "Oprava / Pomoc",
                 parking: "Parkovanie",
@@ -1138,6 +1144,7 @@
                 fillAll: "Prosím, vyplňte všetky polia.",
                 thanks: "Ďakujeme! Vaša požiadavka bola úspešne odoslaná.",
                 ciWelcomeTitle: "Vitajte v našom hoteli!",
+                ciAccessInfoText: "Ak už máte vstupný kód, informácie nižšie nájdete aj na izbe na stojane s informačnými materiálmi. Môžete teda pokračovať chodbou rovno a po schodoch nahor. Na izbe, prosím, vyplňte registračný formulár a odovzdajte ho personálu. Ďakujeme.",
                 ciWelcomeSubtitle: "Rezervácie prijímame iba online.",
                 ciRegTitle: "Registrácia",
                 ciRegText: "Registračný formulár nájdete na izbe. Prosíme o jeho vyplnenie, aby sme vás mohli zaregistrovať na cudzineckej polícii, ako nám ukladá zákon. Vyplnený formulár stačí odovzdať personálu reštaurácie. Ďakujeme.",
@@ -1172,7 +1179,7 @@
             },
             en: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Info",
                 checkout: "Check-out",
                 service: "Repair / Help",
                 parking: "Parking",
@@ -1190,6 +1197,7 @@
                 thanks: "Thank you! Your request has been sent successfully.",
 
                 ciWelcomeTitle: "Welcome to our hotel!",
+                ciAccessInfoText: "If you already have an access code, you can also find the information below in your room on the information stand. You can therefore continue straight down the corridor and up the stairs. In your room, please fill out the registration form and hand it to the staff. Thank you.",
                 ciWelcomeSubtitle: "We accept reservations online only.",
                 ciRegTitle: "Registration",
                 ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
@@ -1225,7 +1233,7 @@
             },
             de: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Info",
                 checkout: "Check-out",
                 service: "Reparatur / Hilfe",
                 parking: "Parken",
@@ -1243,6 +1251,7 @@
                 thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
+                ciAccessInfoText: "Wenn Sie bereits einen Zugangscode haben, finden Sie die untenstehenden Informationen auch in Ihrem Zimmer auf dem Informationsständer. Sie können daher den Flur geradeaus weitergehen und die Treppe hinaufgehen. Bitte füllen Sie in Ihrem Zimmer das Anmeldeformular aus und übergeben Sie es dem Personal. Vielen Dank.",
                 ciWelcomeSubtitle: "Reservierungen nehmen wir ausschließlich online entgegen.",
                 ciRegTitle: "Registrierung",
                 ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
@@ -1278,7 +1287,7 @@
             },
             it: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Info",
                 checkout: "Check-out",
                 service: "Riparazione / Aiuto",
                 parking: "Parcheggio",
@@ -1296,6 +1305,7 @@
                 thanks: "Grazie! La tua richiesta è stata inviata con successo.",
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
+                ciAccessInfoText: "Se avete già il codice di accesso, le informazioni riportate di seguito sono disponibili anche in camera sul supporto informativo. Potete quindi proseguire dritto lungo il corridoio e salire le scale. In camera, compilate il modulo di registrazione e consegnatelo al personale. Grazie.",
                 ciWelcomeSubtitle: "Accettiamo prenotazioni esclusivamente online.",
                 ciRegTitle: "Registrazione",
                 ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
@@ -1331,7 +1341,7 @@
             },
             es: {
                 title: "Quiosco",
-                checkin: "Check-in",
+                checkin: "Info de Check-in",
                 checkout: "Check-out",
                 service: "Reparación / Ayuda",
                 parking: "Aparcamiento",
@@ -1349,6 +1359,7 @@
                 thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
+                ciAccessInfoText: "Si ya tiene el código de acceso, también encontrará la información siguiente en su habitación, en el expositor informativo. Por lo tanto, puede continuar recto por el pasillo y subir las escaleras. En la habitación, rellene el formulario de registro y entréguelo al personal. Gracias.",
                 ciWelcomeSubtitle: "Aceptamos reservas únicamente en línea.",
                 ciRegTitle: "Registro de huéspedes",
                 ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
@@ -1384,7 +1395,7 @@
             },
             fr: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Infos Check-in",
                 checkout: "Check-out",
                 service: "Réparation / Aide",
                 parking: "Parking",
@@ -1402,6 +1413,7 @@
                 thanks: "Merci ! Votre demande a été envoyée avec succès.",
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
+                ciAccessInfoText: "Si vous avez déjà le code d’accès, vous trouverez également les informations ci-dessous dans votre chambre, sur le présentoir d’information. Vous pouvez donc continuer tout droit dans le couloir et monter les escaliers. Dans votre chambre, veuillez remplir le formulaire d’enregistrement et le remettre au personnel. Merci.",
                 ciWelcomeSubtitle: "Nous acceptons les réservations uniquement en ligne.",
                 ciRegTitle: "Enregistrement",
                 ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
@@ -1437,7 +1449,7 @@
             },
             pl: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Informacje – Check-in",
                 checkout: "Check-out",
                 service: "Naprawa / Pomoc",
                 parking: "Parking",
@@ -1455,6 +1467,7 @@
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
+                ciAccessInfoText: "Jeśli masz już kod dostępu, poniższe informacje znajdziesz również w swoim pokoju na stojaku informacyjnym. Możesz więc kontynuować korytarzem prosto i wejść po schodach na górę. W pokoju prosimy wypełnić formularz rejestracyjny i przekazać go personelowi. Dziękujemy.",
                 ciWelcomeSubtitle: "Rezerwacje przyjmujemy wyłącznie online.",
                 ciRegTitle: "Rejestracja",
                 ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
@@ -1490,7 +1503,7 @@
             },
             ua: {
                 title: "Кіоск",
-                checkin: "Check-in",
+                checkin: "Інфо про заселення",
                 checkout: "Check-out",
                 service: "Ремонт / Допомога",
                 parking: "Паркування",
@@ -1508,6 +1521,7 @@
                 thanks: "Дякуємо! Ваш запит успішно надіслано.",
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
+                ciAccessInfoText: "Якщо ви вже маєте код доступу, наведену нижче інформацію ви також знайдете у своєму номері на інформаційному стенді. Тож можете продовжити прямо коридором і піднятися сходами нагору. У номері, будь ласка, заповніть реєстраційну форму та передайте її персоналу. Дякуємо.",
                 ciWelcomeSubtitle: "Ми приймаємо бронювання лише онлайн.",
                 ciRegTitle: "Реєстрація",
                 ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
@@ -1543,7 +1557,7 @@
             },
             tr: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in Bilgileri",
                 checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
@@ -1561,6 +1575,7 @@
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
 
                 ciWelcomeTitle: "Otelimize hoş geldiniz!",
+                ciAccessInfoText: "Giriş kodunuz zaten varsa, aşağıdaki bilgileri odanızdaki bilgi standında da bulabilirsiniz. Bu nedenle koridordan düz devam edip merdivenlerden yukarı çıkabilirsiniz. Odanızda lütfen kayıt formunu doldurun ve personele teslim edin. Teşekkür ederiz.",
                 ciWelcomeSubtitle: "Rezervasyonları yalnızca çevrim içi kabul ediyoruz.",
                 ciRegTitle: "Kayıt",
                 ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
@@ -1596,7 +1611,7 @@
             },
             da: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Check-in info",
                 checkout: "Check-out",
                 service: "Reparation / Hjælp",
                 parking: "Parkering",
@@ -1614,6 +1629,7 @@
                 thanks: "Tak! Din anmodning er blevet sendt med succes.",
 
                 ciWelcomeTitle: "Velkommen til vores hotel!",
+                ciAccessInfoText: "Hvis du allerede har en adgangskode, finder du også oplysningerne nedenfor på dit værelse på informationsstanden. Du kan derfor fortsætte ligeud ad gangen og gå op ad trapperne. Udfyld venligst registreringsformularen på værelset, og aflever den til personalet. Tak.",
                 ciWelcomeSubtitle: "Vi modtager kun reservationer online.",
                 ciRegTitle: "Registrering",
                 ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
@@ -1649,7 +1665,7 @@
             },
             ja: {
                 title: "キオスク",
-                checkin: "チェックイン",
+                checkin: "チェックイン案内",
                 checkout: "チェックアウト",
                 service: "修理 / お問い合わせ",
                 parking: "駐車場",
@@ -1667,6 +1683,7 @@
                 thanks: "ありがとうございます！リクエストが正常に送信されました。",
 
                 ciWelcomeTitle: "当ホテルへようこそ！",
+                ciAccessInfoText: "すでに入室コードをお持ちの場合は、以下の情報をお部屋の案内スタンドでもご確認いただけます。そのまま廊下をまっすぐ進み、階段を上ってください。お部屋で登録フォームにご記入のうえ、スタッフにお渡しください。ありがとうございます。",
                 ciWelcomeSubtitle: "ご予約はオンラインでのみ受け付けています。",
                 ciRegTitle: "宿泊者登録",
                 ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
@@ -1702,7 +1719,7 @@
             },
             he: {
                 title: "קיוסק",
-                checkin: "צ'ק-אין",
+                checkin: "מידע על צ'ק-אין",
                 checkout: "צ'ק-אאוט",
                 service: "תיקונים / עזרה",
                 parking: "חנייה",
@@ -1720,6 +1737,7 @@
                 thanks: "תודה! פנייתך נשלחה בהצלחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
+                ciAccessInfoText: "אם כבר יש ברשותכם קוד כניסה, תוכלו למצוא את המידע שלהלן גם בחדרכם על גבי מעמד המידע. לכן תוכלו להמשיך ישר במסדרון ולעלות במדרגות. בחדר, אנא מלאו את טופס הרישום ומסרו אותו לצוות. תודה.",
                 ciWelcomeSubtitle: "אנו מקבלים הזמנות באופן מקוון בלבד.",
                 ciRegTitle: "הרשמה",
                 ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
@@ -1755,7 +1773,7 @@
             },
             el: {
                 title: "Kiosk",
-                checkin: "Check-in",
+                checkin: "Πληροφορίες Check-in",
                 checkout: "Check-out",
                 service: "Επισκευή / Βοήθεια",
                 parking: "Στάθμευση",
@@ -1773,6 +1791,7 @@
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
+                ciAccessInfoText: "Εάν έχετε ήδη κωδικό πρόσβασης, θα βρείτε επίσης τις παρακάτω πληροφορίες στο δωμάτιό σας, στο ενημερωτικό σταντ. Μπορείτε επομένως να συνεχίσετε ευθεία στον διάδρομο και να ανεβείτε τις σκάλες. Στο δωμάτιο, παρακαλούμε συμπληρώστε τη φόρμα εγγραφής και παραδώστε την στο προσωπικό. Ευχαριστούμε.",
                 ciWelcomeSubtitle: "Δεχόμαστε κρατήσεις فقط online.",
                 ciRegTitle: "Εγγραφή",
                 ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
@@ -2006,6 +2025,7 @@
             // Check-in Info
             document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
             document.getElementById('ci-welcome-subtitle').innerText = dict.ciWelcomeSubtitle;
+            document.getElementById('ci-access-info-text').innerText = dict.ciAccessInfoText;
             document.getElementById('ci-reg-title').innerText = dict.ciRegTitle;
             document.getElementById('ci-reg-text').innerText = dict.ciRegText;
             document.getElementById('ci-q1-title').innerText = dict.ciQ1Title;
