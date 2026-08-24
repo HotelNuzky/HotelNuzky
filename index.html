@@ -1702,9 +1702,9 @@
             <div class="luggage-box fees-box">
                 <div class="luggage-header">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
-                    <strong>Poplatky a doklad</strong>
+                    <strong id="co-fees-title">Poplatky a doklad</strong>
                 </div>
-                <span>Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
+                <span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
             </div>
 
             <div class="luggage-box">
@@ -1726,12 +1726,12 @@
             <div class="input-group">
                 <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; text-transform:none; letter-spacing:0; font-size:15px; color:#e0e6ed; line-height:1.4;">
                     <input type="checkbox" id="coElectronicReceipt" onchange="toggleElectronicReceipt()" style="width:22px; height:22px; flex-shrink:0; margin:0; accent-color:var(--green-light);">
-                    <span>Zaškrtněte, pokud chcete zaslat doklad elektronicky</span>
+                    <span id="co-electronic-label">Zaškrtněte, pokud chcete zaslat doklad elektronicky</span>
                 </label>
             </div>
 
             <div class="input-group hidden" id="coEmailGroup">
-                <label class="input-label">E-mailová adresa</label>
+                <label class="input-label" id="co-email-label">E-mailová adresa</label>
                 <input type="email" id="coEmailInput" placeholder="e.g. email@example.com">
             </div>
 
@@ -2831,6 +2831,8 @@
 
 
 
+        const checkoutExtraI18n = {"cs": {"feesTitle": "Poplatky a doklad", "feesText": "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, kontaktujte nás prosím na hotelovém e-mailu uvedeném na vizitce vedle kiosku.", "electronic": "Zaškrtněte, pokud chcete zaslat doklad elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím vyplňte e-mailovou adresu."}, "en": {"feesTitle": "Fees and receipt", "feesText": "All fees are already included in the accommodation price. If you need a company invoice, please contact us at the hotel e-mail shown on the business card next to the kiosk.", "electronic": "Tick if you would like the receipt sent electronically", "email": "E-mail address", "emailRequired": "Please enter an e-mail address."}, "de": {"feesTitle": "Gebühren und Beleg", "feesText": "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Firmenrechnung benötigen, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse auf der Visitenkarte neben dem Kiosk.", "electronic": "Ankreuzen, wenn Sie den Beleg elektronisch erhalten möchten", "email": "E-Mail-Adresse", "emailRequired": "Bitte geben Sie eine E-Mail-Adresse ein."}, "sk": {"feesTitle": "Poplatky a doklad", "feesText": "Všetky poplatky sú už zahrnuté v cene ubytovania. Ak potrebujete faktúru na firmu, kontaktujte nás prosím na hotelovom e-maile uvedenom na vizitke vedľa kiosku.", "electronic": "Zaškrtnite, ak chcete doklad zaslať elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím, zadajte e-mailovú adresu."}, "it": {"feesTitle": "Costi e ricevuta", "feesText": "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desiderate una fattura intestata a un’azienda, contattateci all’e-mail dell’hotel indicata sul biglietto da visita accanto al chiosco.", "electronic": "Selezionate se desiderate ricevere la ricevuta in formato elettronico", "email": "Indirizzo e-mail", "emailRequired": "Inserite un indirizzo e-mail."}, "es": {"feesTitle": "Cargos y recibo", "feesText": "Todos los cargos están incluidos en el precio del alojamiento. Si necesita una factura a nombre de una empresa, contáctenos en el e-mail del hotel indicado en la tarjeta junto al quiosco.", "electronic": "Marque esta opción si desea recibir el recibo electrónicamente", "email": "Dirección de e-mail", "emailRequired": "Introduzca una dirección de e-mail."}, "fr": {"feesTitle": "Frais et reçu", "feesText": "Tous les frais sont déjà inclus dans le prix de l’hébergement. Pour une facture au nom d’une entreprise, contactez-nous à l’adresse e-mail de l’hôtel indiquée sur la carte près du kiosque.", "electronic": "Cochez cette case pour recevoir le reçu par voie électronique", "email": "Adresse e-mail", "emailRequired": "Veuillez saisir une adresse e-mail."}, "pl": {"feesTitle": "Opłaty i dokument", "feesText": "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli potrzebujesz faktury na firmę, skontaktuj się z nami przez hotelowy adres e-mail podany na wizytówce obok kiosku.", "electronic": "Zaznacz, jeśli chcesz otrzymać dokument elektronicznie", "email": "Adres e-mail", "emailRequired": "Proszę podać adres e-mail."}, "ua": {"feesTitle": "Оплати та квитанція", "feesText": "Усі платежі вже включені у вартість проживання. Якщо вам потрібен рахунок на компанію, зв’яжіться з нами за електронною адресою готелю, вказаною на візитівці біля кіоску.", "electronic": "Позначте, якщо бажаєте отримати квитанцію електронною поштою", "email": "Електронна адреса", "emailRequired": "Будь ласка, введіть електронну адресу."}, "tr": {"feesTitle": "Ücretler ve makbuz", "feesText": "Tüm ücretler konaklama fiyatına dahildir. Şirket adına fatura istiyorsanız, kiosk yanındaki kartvizitte bulunan otel e-posta adresinden bizimle iletişime geçin.", "electronic": "Makbuzu elektronik olarak almak istiyorsanız işaretleyin", "email": "E-posta adresi", "emailRequired": "Lütfen bir e-posta adresi girin."}, "da": {"feesTitle": "Gebyrer og kvittering", "feesText": "Alle gebyrer er allerede inkluderet i overnatningsprisen. Hvis du ønsker en faktura til en virksomhed, bedes du kontakte os på hotellets e-mailadresse på visitkortet ved siden af kiosken.", "electronic": "Markér, hvis du ønsker kvitteringen sendt elektronisk", "email": "E-mailadresse", "emailRequired": "Indtast venligst en e-mailadresse."}, "ja": {"feesTitle": "料金と領収書", "feesText": "すべての料金は宿泊料金に含まれています。会社名義の請求書が必要な場合は、キオスク横のホテルのカードに記載されたメールアドレスまでご連絡ください。", "electronic": "領収書の電子送付を希望する場合はチェックしてください", "email": "メールアドレス", "emailRequired": "メールアドレスを入力してください。"}, "he": {"feesTitle": "חיובים וקבלה", "feesText": "כל החיובים כבר כלולים במחיר האירוח. אם דרושה לכם חשבונית על שם חברה, אנא צרו קשר בדוא״ל המלון המופיע בכרטיס שליד הקיוסק.", "electronic": "סמנו אם ברצונכם לקבל את הקבלה באופן אלקטרוני", "email": "כתובת דוא״ל", "emailRequired": "נא להזין כתובת דוא״ל."}, "el": {"feesTitle": "Χρεώσεις και απόδειξη", "feesText": "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Αν χρειάζεστε τιμολόγιο για εταιρεία, επικοινωνήστε μαζί μας στο e-mail του ξενοδοχείου που αναγράφεται στην κάρτα δίπλα στο κιόσκι.", "electronic": "Επιλέξτε αν θέλετε να λάβετε την απόδειξη ηλεκτρονικά", "email": "Διεύθυνση e-mail", "emailRequired": "Παρακαλώ εισαγάγετε μια διεύθυνση e-mail."}};
+
         const checkoutTimeI18n = {"cs": "do 11:00", "en": "by 11:00", "de": "bis 11:00", "sk": "do 11:00", "it": "entro le 11:00", "es": "hasta las 11:00", "fr": "avant 11:00", "pl": "do 11:00", "ua": "до 11:00", "tr": "11:00’e kadar", "da": "senest kl. 11.00", "ja": "11:00まで", "he": "עד 11:00", "el": "έως τις 11:00"};
 
         const kioskLocales = {"cs": "cs-CZ", "en": "en-GB", "de": "de-DE", "sk": "sk-SK", "it": "it-IT", "es": "es-ES", "fr": "fr-FR", "pl": "pl-PL", "ua": "uk-UA", "tr": "tr-TR", "da": "da-DK", "ja": "ja-JP", "he": "he-IL", "el": "el-GR"};
@@ -3210,7 +3212,7 @@
             }
 
             if (electronicReceipt && !email) {
-                alert('Prosím vyplňte e-mailovou adresu.');
+                alert((checkoutExtraI18n[currentLang] || checkoutExtraI18n.en).emailRequired);
                 return;
             }
 
@@ -3413,6 +3415,11 @@ Cena: ${taxiPrice(taxiData)}`;
             document.getElementById('co-luggage-text').innerText = dict.coLuggageText;
             document.getElementById('label-co-room').innerText = dict.roomLabel;
             document.getElementById('label-co-name').innerText = dict.nameLabel;
+            const coExtra = checkoutExtraI18n[currentLang] || checkoutExtraI18n.en;
+            document.getElementById('co-fees-title').innerText = coExtra.feesTitle;
+            document.getElementById('co-fees-text').innerText = coExtra.feesText;
+            document.getElementById('co-electronic-label').innerText = coExtra.electronic;
+            document.getElementById('co-email-label').innerText = coExtra.email;
             document.getElementById('btn-cancel-1').innerText = dict.cancel;
             document.getElementById('btn-submit-1').innerText = dict.submit;
 
