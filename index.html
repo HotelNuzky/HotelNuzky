@@ -1134,6 +1134,61 @@
             box-shadow: 0 5px 0 #a97800, 0 6px 12px rgba(0,0,0,.3);
         }
 
+
+        /* Service/Taxi footer buttons:
+           BACK matches the standard gray back button;
+           CONFIRM is one unified orange/yellow split button. */
+        #btn-cancel-2 {
+            background: linear-gradient(180deg, var(--gray-main) 0%, var(--gray-dark) 100%) !important;
+            color: #e0e0e0 !important;
+            border-top: 1px solid var(--gray-light) !important;
+            box-shadow: 0 5px 0 var(--gray-shadow), 0 6px 12px rgba(0,0,0,0.3) !important;
+        }
+        #btn-cancel-2:active {
+            box-shadow: 0 2px 0 var(--gray-shadow), 0 3px 6px rgba(0,0,0,0.3) !important;
+        }
+
+        #btn-submit-2 {
+            position: relative;
+            overflow: hidden;
+            color: #fff !important;
+            background: linear-gradient(90deg,
+                var(--orange-main) 0%,
+                var(--orange-main) 46%,
+                #f3c400 54%,
+                #f3c400 100%) !important;
+            border-top: 1px solid rgba(255,255,255,.28) !important;
+            box-shadow: 0 5px 0 var(--orange-shadow), 0 6px 12px rgba(0,0,0,.3) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,.35);
+        }
+        #btn-submit-2::after {
+            content: "";
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(255,255,255,.12),
+                rgba(255,255,255,.40),
+                rgba(255,255,255,.12));
+            opacity: .75;
+        }
+        #btn-submit-2:active {
+            box-shadow: 0 2px 0 var(--orange-shadow), 0 3px 6px rgba(0,0,0,.3) !important;
+        }
+
+
+        #screen-thanks.confirm-checkout #thanks-ok-btn {
+            background: linear-gradient(180deg, #1976d2 0%, #0d47a1 100%) !important;
+            border-top: 1px solid #64b5f6 !important;
+            box-shadow: 0 5px 0 #082f6b, 0 6px 12px rgba(0,0,0,.3) !important;
+            color: #fff !important;
+        }
+        #screen-thanks.confirm-checkout #thanks-ok-btn:active {
+            box-shadow: 0 2px 0 #082f6b, 0 3px 6px rgba(0,0,0,.3) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1699,7 +1754,7 @@
             </div>
             <div class="checkin-countdown">
                 <span id="thanks-countdown-label">Návrat na hlavní obrazovku za</span>
-                <strong id="thanks-countdown">0:03</strong>
+                <strong id="thanks-countdown">0:10</strong>
             </div>
             <div class="result-ok-row">
                 <button class="btn-form-submit" onclick="resetToStart()" id="thanks-ok-btn">OK</button>
@@ -2892,10 +2947,10 @@ Cena: ${taxiPrice(taxiData)}`;
             const sci = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
             document.getElementById('thanks-countdown-label').innerText = sci.count;
 
-            let remaining = 3;
+            let remaining = 10;
             const countdown = document.getElementById('thanks-countdown');
             const render = () => {
-                countdown.innerText = `0:0${remaining}`;
+                countdown.innerText = `0:${String(remaining).padStart(2, '0')}`;
             };
             render();
 
