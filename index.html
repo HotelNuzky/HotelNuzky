@@ -1036,16 +1036,39 @@
             border: 1px solid rgba(255,213,79,.45);
         }
         .unverified-status-box {
-            background: linear-gradient(135deg, rgba(108,117,125,.18), rgba(52,58,64,.28));
-            border: 1px solid rgba(160,170,184,.38);
+            background: linear-gradient(135deg, rgba(198,40,40,.16), rgba(142,0,0,.24));
+            border: 1px solid rgba(239,83,80,.50);
         }
         .checkin-status-icon {
-            font-size: 42px;
-            line-height: 1;
-            margin-bottom: 14px;
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+        }
+        .checkin-status-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .waiting-status-box .checkin-status-icon {
+            color: #ffd54f;
+            background: rgba(255,193,7,.10);
+            border: 1px solid rgba(255,213,79,.32);
+        }
+        .unverified-status-box .checkin-status-icon {
+            color: #ef5350;
+            background: rgba(198,40,40,.13);
+            border: 1px solid rgba(239,83,80,.38);
         }
         #screen-checkin-waiting .card-title-welcome { color: #ffd54f; }
-        #screen-checkin-unverified .card-title-welcome { color: #cfd8dc; }
+        #screen-checkin-unverified .card-title-welcome { color: #ef5350; }
 
 
         #btn-sci-submit,
@@ -1515,7 +1538,7 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN RESULT -->
+        <!-- SCREEN SELF CHECK-IN RESULT (DEMO UNTIL BACKEND IS CONNECTED) -->
         <div id="screen-checkin-result" class="card hidden">
             <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
             <div class="checkin-result-box">
@@ -1551,11 +1574,11 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY -->
+        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY (DEMO) -->
         <div id="screen-checkin-waiting" class="card hidden">
             <div class="card-title-welcome" id="sci-waiting-title">Váš pokoj ještě není připraven</div>
             <div class="checkin-status-box waiting-status-box">
-                <div class="checkin-status-icon">⌛</div>
+                <div class="checkin-status-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M14 7h20M14 41h20M16 7c0 8 2.5 11.5 8 17-5.5 5.5-8 9-8 17M32 7c0 8-2.5 11.5-8 17 5.5 5.5 8 9 8 17M18.5 35.5h11L24 30z"/></svg></div>
                 <div id="sci-waiting-text">Váš pokoj ještě není připraven. Pokoj bude připraven nejpozději v 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.</div>
             </div>
             <div class="result-ok-row">
@@ -1563,11 +1586,11 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED -->
+        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED (DEMO) -->
         <div id="screen-checkin-unverified" class="card hidden">
             <div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
             <div class="checkin-status-box unverified-status-box">
-                <div class="checkin-status-icon">?</div>
+                <div class="checkin-status-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M18.5 18.5a6.2 6.2 0 0 1 11.6 3c0 4.5-6.1 5.1-6.1 9.2M24 36h.01"/></svg></div>
                 <div id="sci-unverified-text">Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
             </div>
             <div class="result-ok-row">
@@ -2013,7 +2036,6 @@
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
-        const CHECKIN_API_URL = 'https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/';
         const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
 
         let currentLang = 'cs';
@@ -3036,69 +3058,31 @@
             startAutoResetTimer();
         }
 
-        async function submitSelfCheckin() {
+        function submitSelfCheckin() {
             const name = document.getElementById('sciNameInput').value.trim();
             const from = document.getElementById('sciFromInput').value;
             const to = document.getElementById('sciToInput').value;
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
-            const submitButton = document.getElementById('btn-sci-submit');
 
             if (!name || !from || !to) {
                 alert(t.fill);
                 return;
             }
 
-            submitButton.disabled = true;
-            submitButton.style.opacity = '0.7';
+            const demoName = name.toUpperCase().replace(/\s+/g, ' ').trim();
+            hideAllScreens();
 
-            try {
-                const response = await fetch(CHECKIN_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        guestName: name,
-                        arrivalDate: from,
-                        departureDate: to
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const result = await response.json();
-
-                hideAllScreens();
-
-                if (result.status === 'READY') {
-                    document.getElementById('sci-room-value').innerText = result.room || '—';
-                    document.getElementById('sci-code-value').innerText = result.roomCode || '—';
-                    document.getElementById('sci-main-code-value').innerText = '2018';
-                    document.getElementById('screen-checkin-result').classList.remove('hidden');
-                } else if (result.status === 'WAITING') {
-                    document.getElementById('screen-checkin-waiting').classList.remove('hidden');
-                } else if (result.status === 'NOT_FOUND') {
-                    document.getElementById('screen-checkin-unverified').classList.remove('hidden');
-                } else {
-                    throw new Error(`Unexpected API status: ${result.status}`);
-                }
-
-                startCheckinResultCountdown();
-
-            } catch (error) {
-                console.error('Check-in API error:', error);
-                alert(
-                    currentLang === 'cs'
-                        ? 'Nepodařilo se spojit se systémem check-inu. Zkuste to prosím znovu za chvíli.'
-                        : 'Unable to connect to the check-in system. Please try again in a moment.'
-                );
-                startAutoResetTimer();
-            } finally {
-                submitButton.disabled = false;
-                submitButton.style.opacity = '';
+            if (demoName === 'DEMO READY') {
+                document.getElementById('sci-room-value').innerText = '203';
+                document.getElementById('sci-code-value').innerText = '4826#';
+                document.getElementById('screen-checkin-result').classList.remove('hidden');
+            } else if (demoName === 'DEMO WAITING') {
+                document.getElementById('screen-checkin-waiting').classList.remove('hidden');
+            } else {
+                document.getElementById('screen-checkin-unverified').classList.remove('hidden');
             }
+
+            startCheckinResultCountdown();
         }
 
         function startCheckinResultCountdown() {
