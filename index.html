@@ -35,6 +35,12 @@
             --green-border: #81c784;
             --green-shadow: #0f4012;
 
+            --turquoise-main: #008c95;
+            --turquoise-dark: #00666d;
+            --turquoise-light: #35c6cc;
+            --turquoise-border: #80dfe3;
+            --turquoise-shadow: #003f43;
+
             --red-main: #c62828;
             --red-dark: #8e0000;
             --red-light: #ef5350;
@@ -196,6 +202,105 @@
             box-shadow: 0 8px 0 var(--blue-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
         }
         .btn-parking:active { box-shadow: 0 2px 0 var(--blue-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* PRIMARY SELF CHECK-IN + WELCOME GUIDE */
+        .primary-checkin-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .primary-checkin-row .btn-kiosk {
+            width: calc(50% - 10px);
+            min-height: 170px;
+        }
+
+        .btn-guide {
+            background: linear-gradient(180deg, var(--turquoise-main) 0%, var(--turquoise-dark) 100%);
+            border-top: 2px solid var(--turquoise-light);
+            box-shadow: 0 8px 0 var(--turquoise-shadow), 0 10px 18px rgba(0, 0, 0, 0.5);
+        }
+        .btn-guide:active { box-shadow: 0 2px 0 var(--turquoise-shadow), 0 4px 8px rgba(0, 0, 0, 0.5); }
+
+        /* The former green Check-in Info page is now the turquoise Welcome Guide. */
+        #screen-checkin .card-title-welcome,
+        #screen-checkin .wish-text { color: var(--turquoise-border); }
+        #screen-checkin .info-item { border-left-color: var(--turquoise-light); }
+        #screen-checkin .info-item-highlight {
+            background: rgba(53, 198, 204, 0.12);
+            border-color: var(--turquoise-border);
+            border-left-color: var(--turquoise-light);
+        }
+        #screen-checkin .info-item-icon,
+        #screen-checkin .info-stand-box svg { fill: var(--turquoise-light); }
+        #screen-checkin .wifi-box {
+            background: linear-gradient(135deg, rgba(53, 198, 204, 0.15), rgba(0, 102, 109, 0.25));
+            border-color: rgba(53, 198, 204, 0.4);
+        }
+        #screen-checkin .wifi-title { color: var(--turquoise-border); }
+
+        #screen-self-checkin .card-title-welcome, #screen-checkin-result .card-title-welcome { color: var(--green-light); }
+        #screen-self-checkin input:focus { border-color: var(--green-light); }
+        .btn-self-checkin-submit {
+            background: linear-gradient(180deg, var(--green-main) 0%, var(--green-dark) 100%);
+            box-shadow: 0 5px 0 var(--green-shadow), 0 6px 12px rgba(0,0,0,0.3);
+            border-top: 1px solid var(--green-light);
+        }
+        .btn-self-checkin-submit:active {
+            box-shadow: 0 2px 0 var(--green-shadow), 0 3px 6px rgba(0,0,0,0.3);
+        }
+        .checkin-instructions {
+            text-align: center;
+            color: #e0e6ed;
+            line-height: 1.55;
+            margin: 4px 0 24px;
+            font-size: 16px;
+        }
+        .date-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        input[type="date"] { color-scheme: dark; }
+        .checkin-result-box {
+            background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(27,94,32,0.28));
+            border: 1px solid rgba(129,199,132,0.55);
+            border-radius: 18px;
+            padding: 24px;
+            margin: 22px 0;
+            text-align: center;
+        }
+        .checkin-result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .checkin-result-label {
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        .checkin-result-value {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .checkin-countdown {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-top: 14px;
+        }
+        .checkin-result-note {
+            text-align: center;
+            line-height: 1.55;
+            color: #e0e6ed;
+            margin: 18px 0 4px;
+        }
+        .result-ok-row { display:flex; justify-content:center; margin-top:24px; }
+        .result-ok-row .btn-self-checkin-submit { flex:0 1 280px; width:280px; }
 
         /* CARDS & CONTAINERS */
         .card {
@@ -675,10 +780,273 @@
             .button-row {
                 flex-direction: column-reverse;
             }
+            .date-row, .checkin-result-grid { grid-template-columns: 1fr; }
             .btn-form-cancel, .btn-form-submit {
                 width: 100%;
             }
         }
+
+        /* MAIN MENU REORDERING */
+        .primary-guide-row {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .primary-guide-row .btn-kiosk {
+            width: calc(50% - 10px);
+            min-height: 170px;
+        }
+
+        /* SPLIT SERVICE / TAXI BUTTON */
+        .btn-service-taxi {
+            padding: 0;
+            overflow: hidden;
+            flex-direction: row;
+            gap: 0;
+            background: linear-gradient(90deg,
+                var(--orange-main) 0%,
+                var(--orange-main) 46%,
+                #f3c400 54%,
+                #f3c400 100%);
+            border: none;
+            border-top: 2px solid rgba(255,255,255,.26);
+            box-shadow: 0 8px 0 var(--orange-shadow), 0 10px 18px rgba(0,0,0,.5);
+            position: relative;
+        }
+        .btn-service-taxi::after {
+            content: "";
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            bottom: 0;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.42), rgba(255,255,255,.18));
+            opacity: .75;
+        }
+        .btn-service-taxi:active {
+            box-shadow: 0 2px 0 var(--orange-shadow), 0 4px 8px rgba(0,0,0,.5);
+        }
+        .split-half {
+            width: 50%;
+            min-height: 170px;
+            padding: 18px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        .split-service {
+            border-right: 1px solid rgba(255,255,255,.12);
+        }
+        .split-taxi {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,.35);
+        }
+        .split-taxi .btn-svg-icon {
+            fill: #fff;
+        }
+        .taxi-icon {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,.28));
+        }
+        .taxi-checker {
+            fill: #111;
+        }
+        .split-title {
+            font-size: 19px;
+            line-height: 1.12;
+            text-align: center;
+        }
+
+        /* FIXED IDLE TIMER - ALWAYS VISIBLE WHILE A SUBPAGE IS OPEN */
+        .global-idle-timer {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 13px;
+            border-radius: 999px;
+            background: rgba(10,12,15,.88);
+            border: 1px solid rgba(255,255,255,.22);
+            box-shadow: 0 5px 18px rgba(0,0,0,.42);
+            color: #cfd8e3;
+            font-size: 12px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            font-variant-numeric: tabular-nums;
+        }
+        .global-idle-timer strong {
+            color: #fff;
+            font-size: 15px;
+            min-width: 34px;
+            text-align: center;
+        }
+
+        /* SERVICE + TAXI PAGE */
+        #screen-service { max-width: 920px; }
+        .service-taxi-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+        .service-panel, .taxi-panel { min-width: 0; }
+        .taxi-instructions {
+            margin: 0 0 24px;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 700;
+            color: #191919;
+            background: linear-gradient(180deg, #ffd83d 0%, #e0a900 100%);
+            border: 1px solid #ffe77a;
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 5px 0 #7d5c00, 0 6px 12px rgba(0,0,0,.3);
+        }
+        .taxi-prices {
+            background: rgba(255,214,51,.08);
+            border: 1px solid rgba(255,214,51,.34);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 18px;
+        }
+        .taxi-price-title {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #ffe16b;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .taxi-price-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3px 10px;
+            padding: 10px 4px;
+            border-bottom: 1px solid rgba(255,255,255,.09);
+        }
+        .taxi-price-row:last-child { border-bottom: none; }
+        .taxi-price-row span { font-weight: 700; color: #f0f3f6; }
+        .taxi-price-row strong { color: #ffe16b; white-space: nowrap; }
+        .taxi-price-row small { grid-column: 1 / -1; color: var(--text-sub); line-height: 1.35; }
+
+        .transfer-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255,214,51,.12);
+            border: 1px solid rgba(255,214,51,.35);
+            font-weight: 700;
+            color: #fff1a0;
+            margin-bottom: 16px;
+        }
+        .transfer-toggle input {
+            width: 22px;
+            height: 22px;
+            margin: 0;
+            flex: 0 0 auto;
+            accent-color: #f3c400;
+        }
+        .taxi-order-form {
+            background: rgba(0,0,0,.14);
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+        select {
+            width: 100%;
+            padding: 16px;
+            background: var(--input-bg);
+            border: 2px solid rgba(255,255,255,.15);
+            border-radius: 12px;
+            font-size: 18px;
+            color: var(--text-main);
+            outline: none;
+        }
+        select:focus { border-color: #f3c400; }
+        .phone-row {
+            display: grid;
+            grid-template-columns: minmax(145px,.8fr) 1.2fr;
+            gap: 10px;
+        }
+        .taxi-choice-group {
+            border: 1px solid rgba(255,214,51,.25);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 0 0 15px;
+        }
+        .taxi-choice-group legend {
+            padding: 0 7px;
+            color: #ffe16b;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+        .taxi-choice-group label {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 3px;
+            color: #e8edf2;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .taxi-choice-group input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            flex: 0 0 auto;
+            accent-color: #f3c400;
+        }
+        #screen-service .btn-form-submit {
+            background: linear-gradient(180deg, var(--orange-main) 0%, var(--orange-dark) 100%);
+            box-shadow: 0 5px 0 var(--orange-shadow), 0 6px 12px rgba(0,0,0,.3);
+            border-top-color: var(--orange-light);
+        }
+        @media (max-width: 760px) {
+            .service-taxi-form-grid { grid-template-columns: 1fr; }
+            .primary-guide-row .btn-kiosk { width: 100%; }
+            .phone-row { grid-template-columns: 1fr; }
+        }
+
+
+        .checkin-status-box {
+            border-radius: 18px;
+            padding: 24px;
+            margin: 22px 0;
+            text-align: center;
+            line-height: 1.6;
+            color: #e8edf2;
+            font-size: 16px;
+        }
+        .waiting-status-box {
+            background: linear-gradient(135deg, rgba(255,193,7,.13), rgba(245,127,23,.18));
+            border: 1px solid rgba(255,213,79,.45);
+        }
+        .unverified-status-box {
+            background: linear-gradient(135deg, rgba(108,117,125,.18), rgba(52,58,64,.28));
+            border: 1px solid rgba(160,170,184,.38);
+        }
+        .checkin-status-icon {
+            font-size: 42px;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+        #screen-checkin-waiting .card-title-welcome { color: #ffd54f; }
+        #screen-checkin-unverified .card-title-welcome { color: #cfd8dc; }
+
     </style>
 </head>
 <body>
@@ -708,35 +1076,53 @@
             <div class="header-title" id="main-title">Kiosk</div>
 
             <div class="kiosk-grid">
-                
-                <!-- Check-in Button -->
-                <button class="btn-kiosk btn-checkin" onclick="openCheckinInfo()">
+                <button class="btn-kiosk btn-checkin" onclick="openSelfCheckin()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
                         <path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"/>
                     </svg>
-                    <span class="btn-title" id="btn-checkin-text">Check-in Info</span>
+                    <span class="btn-title" id="btn-self-checkin-text">Check-in</span>
                 </button>
 
-                <!-- Check-out Button -->
                 <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
+                        <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1.9 2 2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
                         <path d="M12 10.5H17V7.5l4.5 4.5-4.5 4.5v-3H12z"/>
                     </svg>
                     <span class="btn-title" id="btn-checkout-text">Check-out</span>
                 </button>
+            </div>
 
-                <!-- Service / Help Button -->
-                <button class="btn-kiosk btn-service" onclick="openServiceForm()">
-                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"/>
+            <div class="primary-guide-row">
+                <button class="btn-kiosk btn-guide" onclick="openCheckinInfo()">
+                    <svg class="btn-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 4H14c-.77 0-1.47.3-2 .78A2.98 2.98 0 0 0 10 4H3c-1.1 0-2 .9-2 2v13c0 .55.45 1 1 1h8c.55 0 1 .45 1 1h2c0-.55.45-1 1-1h8c.55 0 1-.45 1-1V6c0-1.1-.9-2-2-2zm-10 14.05A5.04 5.04 0 0 0 9 18H3V6h7c.55 0 1 .45 1 1v11.05zm10-.05h-6c-.7 0-1.37.14-2 .4V7c0-.55.45-1 1-1h7v12z"/>
                     </svg>
-                    <span class="btn-title" id="btn-service-text">Oprava / Pomoc</span>
-                    <span class="btn-subtitle">8:00 – 16:00</span>
+                    <span class="btn-title" id="btn-checkin-text">Průvodce pobytem</span>
+                </button>
+            </div>
+
+            <div class="kiosk-grid">
+                <button class="btn-kiosk btn-service-taxi" onclick="openServiceForm()">
+                    <span class="split-half split-service">
+                        <svg class="btn-svg-icon" viewBox="0 0 24 24">
+                            <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"/>
+                        </svg>
+                        <span class="btn-title split-title" id="btn-service-text">Oprava / Pomoc</span>
+                        <span class="btn-subtitle">8:00 – 16:00</span>
+                    </span>
+                    <span class="split-half split-taxi">
+                        <svg class="btn-svg-icon taxi-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5.5 11 7 7h2V5h6v2h2l1.5 4H20a2 2 0 0 1 2 2v5h-2v1.5a1.5 1.5 0 0 1-3 0V18H7v1.5a1.5 1.5 0 0 1-3 0V18H2v-5a2 2 0 0 1 2-2h1.5zM8 9l-.75 2h9.5L16 9H8zm-2 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm12 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                            <rect class="taxi-checker" x="9.2" y="5.7" width="1.4" height="1.4" rx=".15"/>
+                            <rect class="taxi-checker" x="12" y="5.7" width="1.4" height="1.4" rx=".15"/>
+                            <rect class="taxi-checker" x="10.6" y="7.1" width="1.4" height="1.4" rx=".15"/>
+                            <rect class="taxi-checker" x="13.4" y="7.1" width="1.4" height="1.4" rx=".15"/>
+                        </svg>
+                        <span class="btn-title split-title" id="btn-taxi-text">Taxi</span>
+                    </span>
                 </button>
 
-                <!-- Parking Button -->
                 <button class="btn-kiosk btn-parking" onclick="openParkingInfo()">
                     <svg class="btn-svg-icon" viewBox="0 0 24 24">
                         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
@@ -744,7 +1130,78 @@
                     </svg>
                     <span class="btn-title" id="btn-parking-text">Parkování</span>
                 </button>
+            </div>
+        </div>
 
+        <!-- SCREEN SELF CHECK-IN -->
+        <div id="screen-self-checkin" class="card hidden">
+            <div class="card-title-welcome" id="sci-welcome-title">Vítejte v našem hotelu!</div>
+            <div class="checkin-instructions" id="sci-instructions">Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
+
+            <div class="input-group">
+                <label class="input-label" id="sci-name-label">Jméno uvedené na rezervaci</label>
+                <input type="text" id="sciNameInput" placeholder="např. Jan Novák" autocomplete="off">
+            </div>
+            <div class="date-row">
+                <div class="input-group">
+                    <label class="input-label" id="sci-from-label">Datum příjezdu</label>
+                    <input type="date" id="sciFromInput">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" id="sci-to-label">Datum odjezdu</label>
+                    <input type="date" id="sciToInput">
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-sci-back">ZPĚT</button>
+                <button class="btn-form-submit btn-self-checkin-submit" onclick="submitSelfCheckin()" id="btn-sci-submit">CHECK-IN</button>
+            </div>
+        </div>
+
+        <!-- SCREEN SELF CHECK-IN RESULT (DEMO UNTIL BACKEND IS CONNECTED) -->
+        <div id="screen-checkin-result" class="card hidden">
+            <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
+            <div class="checkin-result-box">
+                <div class="checkin-result-grid">
+                    <div>
+                        <div class="checkin-result-label" id="sci-room-label">Číslo pokoje</div>
+                        <div class="checkin-result-value" id="sci-room-value">—</div>
+                    </div>
+                    <div>
+                        <div class="checkin-result-label" id="sci-code-label">Přístupový kód</div>
+                        <div class="checkin-result-value" id="sci-code-value">—</div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
+            <div class="checkin-countdown"><span id="sci-countdown-label">Návrat na hlavní obrazovku za</span> <strong id="sci-countdown">1:30</strong></div>
+            <div class="result-ok-row">
+                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-ok">OK</button>
+            </div>
+        </div>
+
+        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY (DEMO) -->
+        <div id="screen-checkin-waiting" class="card hidden">
+            <div class="card-title-welcome" id="sci-waiting-title">Váš pokoj ještě není připraven</div>
+            <div class="checkin-status-box waiting-status-box">
+                <div class="checkin-status-icon">⌛</div>
+                <div id="sci-waiting-text">Váš pokoj ještě není připraven. Check-in je garantován nejpozději od 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.</div>
+            </div>
+            <div class="result-ok-row">
+                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-waiting-ok">OK</button>
+            </div>
+        </div>
+
+        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED (DEMO) -->
+        <div id="screen-checkin-unverified" class="card hidden">
+            <div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
+            <div class="checkin-status-box unverified-status-box">
+                <div class="checkin-status-icon">?</div>
+                <div id="sci-unverified-text">Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
+            </div>
+            <div class="result-ok-row">
+                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-unverified-ok">OK</button>
             </div>
         </div>
 
@@ -906,25 +1363,100 @@
             </div>
         </div>
 
-        <!-- SCREEN SERVICE FORM -->
+        <!-- SCREEN SERVICE / TAXI FORM -->
         <div id="screen-service" class="card hidden">
-            <div class="instructions" id="srv-instructions">
-                Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
-            </div>
+            <div class="service-taxi-form-grid">
+                <section class="service-panel">
+                    <div class="instructions" id="srv-instructions">
+                        Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
+                    </div>
 
-            <div class="input-group">
-                <label class="input-label" id="label-srv-room">Číslo pokoje</label>
-                <input type="text" id="srvRoomInput" placeholder="e.g. 102" inputmode="numeric">
-            </div>
+                    <div class="input-group">
+                        <label class="input-label" id="label-srv-room">Číslo pokoje</label>
+                        <input type="text" id="srvRoomInput" placeholder="e.g. 102" inputmode="numeric">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
+                        <textarea id="srvIssueInput" placeholder="..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
+                        <input type="text" id="srvNameInput" placeholder="e.g. John Smith">
+                    </div>
+                </section>
 
-            <div class="input-group">
-                <label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
-                <textarea id="srvIssueInput" placeholder="..."></textarea>
-            </div>
+                <section class="taxi-panel">
+                    <div class="taxi-instructions" id="taxi-instructions">
+                        Pro objednání vozu zaškrtněte políčko níže a vyplňte potřebné údaje. V případě, že chcete přistavit hotelový vůz co nejdříve, použijte telefonní linku vedle tohoto kiosku, která je k dispozici od 8:00 do 16:00. Mimo tyto hodiny volejte na telefonní číslo +420 724 212 121.
+                    </div>
 
-            <div class="input-group">
-                <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
-                <input type="text" id="srvNameInput" placeholder="e.g. John Smith">
+                    <div class="taxi-prices">
+                        <div class="taxi-price-title" id="taxi-prices-title">Transfery a ceny</div>
+                        <div class="taxi-price-row"><span id="taxi-airport-label">Letiště Václava Havla</span><strong>900 CZK</strong><small id="taxi-airport-car-info">jednosměrně · osobní vůz · max. 4 osoby</small></div>
+                        <div class="taxi-price-row"><span id="taxi-airport-mini-label">Letiště Václava Havla</span><strong id="taxi-airport-mini-price">Cena na vyžádání</strong><small id="taxi-airport-mini-info">jednosměrně · minibus · max. 8 osob</small></div>
+                        <div class="taxi-price-row"><span id="taxi-station-label">Praha hlavní nádraží / centrum</span><strong>450 CZK</strong><small id="taxi-station-car-info">osobní vůz · max. 4 osoby</small></div>
+                        <div class="taxi-price-row"><span id="taxi-station-mini-label">Praha hlavní nádraží / centrum</span><strong>700 CZK</strong><small id="taxi-station-mini-info">minibus · max. 8 osob</small></div>
+                    </div>
+
+                    <label class="transfer-toggle">
+                        <input type="checkbox" id="taxiOrderToggle" onchange="toggleTaxiForm()">
+                        <span id="taxi-order-label">Chci si objednat transfer</span>
+                    </label>
+
+                    <div id="taxiOrderForm" class="taxi-order-form hidden">
+                        <div class="input-group">
+                            <label class="input-label" id="taxi-name-label">Jméno hosta</label>
+                            <input type="text" id="taxiNameInput" placeholder="e.g. John Smith" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
+                            <input type="date" id="taxiDateInput">
+                        </div>
+
+                        <div class="phone-row">
+                            <div class="input-group">
+                                <label class="input-label" id="taxi-prefix-label">Mezinárodní předvolba</label>
+                                <select id="taxiPrefixInput">
+                                    <option value="+420" selected>🇨🇿 +420</option><option value="+421">🇸🇰 +421</option>
+                                    <option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option>
+                                    <option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option>
+                                    <option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option>
+                                    <option value="+48">🇵🇱 +48</option><option value="+380">🇺🇦 +380</option>
+                                    <option value="+45">🇩🇰 +45</option><option value="+30">🇬🇷 +30</option>
+                                    <option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option>
+                                    <option value="+81">🇯🇵 +81</option><option value="+31">🇳🇱 +31</option>
+                                    <option value="+32">🇧🇪 +32</option><option value="+41">🇨🇭 +41</option>
+                                    <option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option>
+                                    <option value="+358">🇫🇮 +358</option><option value="+351">🇵🇹 +351</option>
+                                    <option value="+353">🇮🇪 +353</option><option value="+1">🇺🇸/🇨🇦 +1</option>
+                                    <option value="+61">🇦🇺 +61</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label" id="taxi-phone-label">Telefonní číslo</label>
+                                <input type="tel" id="taxiPhoneInput" inputmode="tel" placeholder="123 456 789">
+                            </div>
+                        </div>
+
+                        <fieldset class="taxi-choice-group">
+                            <legend id="taxi-destination-title">Cíl cesty</legend>
+                            <label><input type="radio" name="taxiDestination" value="airport" onchange="updateTaxiDestination()"><span id="taxi-dest-airport">Letiště Václava Havla</span></label>
+                            <label><input type="radio" name="taxiDestination" value="station" onchange="updateTaxiDestination()"><span id="taxi-dest-station">Praha hlavní nádraží</span></label>
+                            <label><input type="radio" name="taxiDestination" value="center" onchange="updateTaxiDestination()"><span id="taxi-dest-center">Centrum Prahy</span></label>
+                        </fieldset>
+
+                        <div class="input-group hidden" id="taxiCenterAddressGroup">
+                            <label class="input-label" id="taxi-center-address-label">Adresa nebo název místa</label>
+                            <input type="text" id="taxiCenterAddressInput" placeholder="e.g. Old Town Square">
+                        </div>
+
+                        <fieldset class="taxi-choice-group">
+                            <legend id="taxi-vehicle-title">Typ vozu</legend>
+                            <label><input type="radio" name="taxiVehicle" value="car"><span id="taxi-vehicle-car">Osobní vůz · max. 4 osoby</span></label>
+                            <label><input type="radio" name="taxiVehicle" value="minibus"><span id="taxi-vehicle-minibus">Minibus · max. 8 osob</span></label>
+                        </fieldset>
+                    </div>
+                </section>
             </div>
 
             <div class="button-row">
@@ -1065,16 +1597,46 @@
 
     </div>
 
+
+    <div id="global-idle-timer" class="global-idle-timer hidden">
+        <span id="global-idle-label">Návrat za</span>
+        <strong id="global-idle-countdown">1:30</strong>
+    </div>
+
     <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
-        const AUTO_RESET_TIMEOUT = 30000; // 30 seconds idle reset
+        const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
 
         let currentLang = 'cs';
         let autoResetTimer = null;
+        let checkinCountdownTimer = null;
+        let idleCountdownTimer = null;
+        let idleRemaining = 90;
+
+        const selfCheckinI18n = {
+            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',name:'Jméno uvedené na rezervaci',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
+            en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',name:'Name on the reservation',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
+            de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',name:'Name auf der Reservierung',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
+            sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',name:'Meno uvedené na rezervácii',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
+            it:{guide:'Guida al soggiorno',welcome:'Benvenuti nel nostro hotel!',instructions:'Per visualizzare il codice di accesso, inserite il nome indicato sulla prenotazione e le date di arrivo e partenza.',name:'Nome sulla prenotazione',from:'Data di arrivo',to:'Data di partenza',back:'INDIETRO',submit:'CHECK-IN',result:'La vostra camera è pronta',room:'Numero della camera',code:'Codice di accesso',note:'Fotografate questa schermata oppure annotate i dati sul foglio accanto al chiosco. Poi premete OK.',count:'Ritorno alla schermata principale tra',fill:'Inserite il nome sulla prenotazione e le date di arrivo e partenza.'},
+            es:{guide:'Guía de estancia',welcome:'¡Bienvenidos a nuestro hotel!',instructions:'Para ver el código de acceso, introduzca el nombre que figura en la reserva y las fechas de llegada y salida.',name:'Nombre en la reserva',from:'Fecha de llegada',to:'Fecha de salida',back:'VOLVER',submit:'CHECK-IN',result:'Su habitación está lista',room:'Número de habitación',code:'Código de acceso',note:'Haga una foto de esta pantalla o anote los datos en el papel junto al quiosco. Después pulse OK.',count:'Regreso a la pantalla principal en',fill:'Introduzca el nombre que figura en la reserva y las fechas de llegada y salida.'},
+            fr:{guide:'Guide du séjour',welcome:'Bienvenue dans notre hôtel !',instructions:'Pour afficher votre code d’accès, saisissez le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.',name:'Nom sur la réservation',from:'Date d’arrivée',to:'Date de départ',back:'RETOUR',submit:'CHECK-IN',result:'Votre chambre est prête',room:'Numéro de chambre',code:'Code d’accès',note:'Prenez cette page en photo ou notez les informations sur le papier à côté de la borne. Appuyez ensuite sur OK.',count:'Retour à l’écran principal dans',fill:'Veuillez saisir le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.'},
+            pl:{guide:'Przewodnik pobytu',welcome:'Witamy w naszym hotelu!',instructions:'Aby wyświetlić kod dostępu, wpisz imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.',name:'Imię i nazwisko z rezerwacji',from:'Data przyjazdu',to:'Data wyjazdu',back:'WSTECZ',submit:'CHECK-IN',result:'Twój pokój jest gotowy',room:'Numer pokoju',code:'Kod dostępu',note:'Zrób zdjęcie tego ekranu lub zapisz dane na kartce obok kiosku. Następnie naciśnij OK.',count:'Powrót do ekranu głównego za',fill:'Wpisz imię i nazwisko z rezerwacji oraz datę przyjazdu i wyjazdu.'},
+            ua:{guide:'Путівник гостя',welcome:'Ласкаво просимо до нашого готелю!',instructions:'Щоб побачити код доступу, введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.',name:'Ім’я у бронюванні',from:'Дата заїзду',to:'Дата виїзду',back:'НАЗАД',submit:'CHECK-IN',result:'Ваш номер готовий',room:'Номер кімнати',code:'Код доступу',note:'Сфотографуйте цей екран або запишіть дані на папері поруч із кіоском. Потім натисніть OK.',count:'Повернення на головний екран через',fill:'Введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.'},
+            tr:{guide:'Konaklama Rehberi',welcome:'Otelimize hoş geldiniz!',instructions:'Erişim kodunuzu görüntülemek için rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.',name:'Rezervasyondaki ad',from:'Giriş tarihi',to:'Çıkış tarihi',back:'GERİ',submit:'CHECK-IN',result:'Odanız hazır',room:'Oda numarası',code:'Erişim kodu',note:'Bu ekranın fotoğrafını çekin veya bilgileri kioskun yanındaki kâğıda yazın. Ardından OK düğmesine basın.',count:'Ana ekrana dönüş',fill:'Lütfen rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.'},
+            da:{guide:'Opholdsguide',welcome:'Velkommen til vores hotel!',instructions:'For at se din adgangskode skal du indtaste navnet på reservationen samt ankomst- og afrejsedato.',name:'Navn på reservationen',from:'Ankomstdato',to:'Afrejsedato',back:'TILBAGE',submit:'CHECK-IN',result:'Dit værelse er klar',room:'Værelsesnummer',code:'Adgangskode',note:'Tag et billede af denne skærm, eller skriv oplysningerne på papiret ved siden af kiosken. Tryk derefter OK.',count:'Tilbage til hovedskærmen om',fill:'Indtast navnet på reservationen samt ankomst- og afrejsedato.'},
+            ja:{guide:'ご滞在ガイド',welcome:'当ホテルへようこそ！',instructions:'アクセスコードを表示するには、予約名義とチェックイン日・チェックアウト日を入力してください。',name:'予約名義',from:'チェックイン日',to:'チェックアウト日',back:'戻る',submit:'CHECK-IN',result:'お部屋の準備ができました',room:'部屋番号',code:'アクセスコード',note:'この画面を撮影するか、キオスク横の用紙に情報をメモしてください。その後、OKを押してください。',count:'メイン画面に戻るまで',fill:'予約名義とチェックイン日・チェックアウト日を入力してください。'},
+            he:{guide:'מדריך השהייה',welcome:'ברוכים הבאים למלון שלנו!',instructions:'כדי להציג את קוד הכניסה, הזינו את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.',name:'השם בהזמנה',from:'תאריך הגעה',to:'תאריך עזיבה',back:'חזרה',submit:'CHECK-IN',result:'החדר שלכם מוכן',room:'מספר חדר',code:'קוד כניסה',note:'צלמו את המסך או רשמו את הפרטים על הדף שליד הקיוסק. לאחר מכן לחצו OK.',count:'חזרה למסך הראשי בעוד',fill:'נא להזין את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.'},
+            el:{guide:'Οδηγός διαμονής',welcome:'Καλώς ήρθατε στο ξενοδοχείο μας!',instructions:'Για να εμφανίσετε τον κωδικό πρόσβασης, εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.',name:'Όνομα στην κράτηση',from:'Ημερομηνία άφιξης',to:'Ημερομηνία αναχώρησης',back:'ΠΙΣΩ',submit:'CHECK-IN',result:'Το δωμάτιό σας είναι έτοιμο',room:'Αριθμός δωματίου',code:'Κωδικός πρόσβασης',note:'Φωτογραφίστε αυτή την οθόνη ή σημειώστε τα στοιχεία στο χαρτί δίπλα στο κιόσκι. Στη συνέχεια πατήστε OK.',count:'Επιστροφή στην αρχική οθόνη σε',fill:'Εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.'}
+        };
 
         // INTERNATIONALIZATION DATA
+        const selfCheckinStatusI18n = {"cs":{"waitingTitle":"Váš pokoj ještě není připraven","waitingText":"Váš pokoj ještě není připraven. Check-in je garantován nejpozději od 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.","unverifiedTitle":"Rezervaci se nepodařilo ověřit","unverifiedText":"Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu."},"en":{"waitingTitle":"Your room is not ready yet","waitingText":"Your room is not ready yet. Check-in is guaranteed by 15:00 at the latest. After speaking with the restaurant staff, you may leave your luggage on the ground floor. Due to the limited space in our historic building, however, we cannot accept responsibility for stored luggage. More information is available under the “Welcome Guide” button.","unverifiedTitle":"We could not verify the reservation","unverifiedText":"We could not verify a reservation with the details entered. Please check the name shown on the reservation and both your arrival and departure dates."},"de":{"waitingTitle":"Ihr Zimmer ist noch nicht bereit","waitingText":"Ihr Zimmer ist noch nicht bereit. Der Check-in ist spätestens ab 15:00 garantiert. Nach Rücksprache mit dem Restaurantpersonal können Sie Ihr Gepäck im Erdgeschoss abstellen. Aufgrund der begrenzten Räume in unserem historischen Gebäude können wir jedoch keine Haftung für aufbewahrtes Gepäck übernehmen. Weitere Informationen finden Sie unter der Schaltfläche „Gästeführer“.","unverifiedTitle":"Die Reservierung konnte nicht verifiziert werden","unverifiedText":"Mit den eingegebenen Angaben konnte keine Reservierung verifiziert werden. Bitte prüfen Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum."},"sk":{"waitingTitle":"Vaša izba ešte nie je pripravená","waitingText":"Vaša izba ešte nie je pripravená. Check-in je garantovaný najneskôr od 15:00. Po dohode s personálom reštaurácie si môžete nechať batožinu na prízemí. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť. Ďalšie informácie nájdete pod tlačidlom „Sprievodca pobytom“.","unverifiedTitle":"Rezerváciu sa nepodarilo overiť","unverifiedText":"Rezerváciu so zadanými údajmi sa nepodarilo overiť. Skontrolujte, prosím, meno uvedené na rezervácii a dátum príchodu aj odchodu."},"it":{"waitingTitle":"La vostra camera non è ancora pronta","waitingText":"La vostra camera non è ancora pronta. Il check-in è garantito entro le 15:00. Dopo aver parlato con il personale del ristorante, potete lasciare i bagagli al piano terra. A causa degli spazi limitati del nostro edificio storico, tuttavia, non possiamo assumerci la responsabilità per i bagagli depositati. Ulteriori informazioni sono disponibili sotto il pulsante “Guida al soggiorno”.","unverifiedTitle":"Non è stato possibile verificare la prenotazione","unverifiedText":"Non è stato possibile verificare una prenotazione con i dati inseriti. Controllate il nome indicato sulla prenotazione e le date di arrivo e partenza."},"es":{"waitingTitle":"Su habitación todavía no está lista","waitingText":"Su habitación todavía no está lista. El check-in está garantizado como máximo a partir de las 15:00. Tras consultarlo con el personal del restaurante, puede dejar su equipaje en la planta baja. Debido al espacio limitado de nuestro edificio histórico, no podemos asumir responsabilidad por el equipaje depositado. Encontrará más información en el botón “Guía de estancia”.","unverifiedTitle":"No se ha podido verificar la reserva","unverifiedText":"No se ha podido verificar una reserva con los datos introducidos. Compruebe el nombre que figura en la reserva y las fechas de llegada y salida."},"fr":{"waitingTitle":"Votre chambre n’est pas encore prête","waitingText":"Votre chambre n’est pas encore prête. Le check-in est garanti au plus tard à partir de 15:00. Après en avoir parlé au personnel du restaurant, vous pouvez laisser vos bagages au rez-de-chaussée. En raison de l’espace limité dans notre bâtiment historique, nous ne pouvons toutefois pas être responsables des bagages déposés. Vous trouverez plus d’informations sous le bouton « Guide du séjour ».","unverifiedTitle":"La réservation n’a pas pu être vérifiée","unverifiedText":"Aucune réservation n’a pu être vérifiée avec les informations saisies. Veuillez vérifier le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ."},"pl":{"waitingTitle":"Twój pokój nie jest jeszcze gotowy","waitingText":"Twój pokój nie jest jeszcze gotowy. Check-in jest gwarantowany najpóźniej od godziny 15:00. Po uzgodnieniu z personelem restauracji możesz zostawić bagaż na parterze. Ze względu na ograniczoną przestrzeń w naszym zabytkowym budynku nie możemy jednak przyjąć odpowiedzialności za pozostawiony bagaż. Więcej informacji znajdziesz pod przyciskiem „Przewodnik pobytu”.","unverifiedTitle":"Nie udało się zweryfikować rezerwacji","unverifiedText":"Nie udało się zweryfikować rezerwacji na podstawie podanych danych. Sprawdź imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu."},"ua":{"waitingTitle":"Ваш номер ще не готовий","waitingText":"Ваш номер ще не готовий. Заселення гарантоване не пізніше 15:00. Після узгодження з персоналом ресторану ви можете залишити багаж на першому поверсі. Через обмежений простір у нашій історичній будівлі ми не можемо нести відповідальність за залишений багаж. Додаткову інформацію ви знайдете під кнопкою «Путівник гостя».","unverifiedTitle":"Не вдалося перевірити бронювання","unverifiedText":"Не вдалося перевірити бронювання за введеними даними. Перевірте ім’я, зазначене в бронюванні, а також дати заїзду та виїзду."},"tr":{"waitingTitle":"Odanız henüz hazır değil","waitingText":"Odanız henüz hazır değil. Check-in en geç 15:00 itibarıyla garanti edilmektedir. Restoran personeliyle görüştükten sonra bagajınızı giriş katında bırakabilirsiniz. Tarihi binamızdaki sınırlı alan nedeniyle bırakılan bagajlardan sorumluluk kabul edemiyoruz. Daha fazla bilgiyi “Konaklama Rehberi” düğmesinde bulabilirsiniz.","unverifiedTitle":"Rezervasyon doğrulanamadı","unverifiedText":"Girilen bilgilerle bir rezervasyon doğrulanamadı. Lütfen rezervasyondaki adı ve giriş-çıkış tarihlerini kontrol edin."},"da":{"waitingTitle":"Dit værelse er ikke klar endnu","waitingText":"Dit værelse er ikke klar endnu. Check-in er garanteret senest fra kl. 15:00. Efter aftale med restaurantens personale kan du efterlade din bagage i stueetagen. På grund af den begrænsede plads i vores historiske bygning kan vi dog ikke påtage os ansvar for opbevaret bagage. Du finder flere oplysninger under knappen “Opholdsguide”.","unverifiedTitle":"Reservationen kunne ikke bekræftes","unverifiedText":"Vi kunne ikke bekræfte en reservation med de indtastede oplysninger. Kontrollér navnet på reservationen samt ankomst- og afrejsedatoen."},"ja":{"waitingTitle":"お部屋はまだ準備中です","waitingText":"お部屋はまだ準備中です。チェックインは遅くとも15:00から保証されています。レストランスタッフにお声がけいただければ、1階にお荷物を置いていただけます。ただし、歴史的建物のため保管スペースが限られており、お預かりした荷物について責任を負うことはできません。詳しい情報は「ご滞在ガイド」ボタンをご覧ください。","unverifiedTitle":"予約を確認できませんでした","unverifiedText":"入力された情報では予約を確認できませんでした。予約名義のお名前と到着日・出発日をご確認ください。"},"he":{"waitingTitle":"החדר שלכם עדיין אינו מוכן","waitingText":"החדר שלכם עדיין אינו מוכן. הצ'ק-אין מובטח לכל המאוחר החל מהשעה 15:00. לאחר תיאום עם צוות המסעדה תוכלו להשאיר את המזוודות בקומת הכניסה. בשל המקום המוגבל בבניין ההיסטורי שלנו, איננו יכולים לקבל אחריות על מזוודות שהושארו. מידע נוסף נמצא תחת הכפתור „מדריך השהייה“.","unverifiedTitle":"לא ניתן היה לאמת את ההזמנה","unverifiedText":"לא ניתן היה לאמת הזמנה לפי הפרטים שהוזנו. אנא בדקו את השם המופיע בהזמנה ואת תאריכי ההגעה והעזיבה."},"el":{"waitingTitle":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο","waitingText":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο. Το check-in είναι εγγυημένο το αργότερο από τις 15:00. Μετά από συνεννόηση με το προσωπικό του εστιατορίου, μπορείτε να αφήσετε τις αποσκευές σας στο ισόγειο. Λόγω του περιορισμένου χώρου στο ιστορικό μας κτίριο, δεν μπορούμε να αναλάβουμε ευθύνη για αποθηκευμένες αποσκευές. Περισσότερες πληροφορίες θα βρείτε στο κουμπί «Οδηγός διαμονής».","unverifiedTitle":"Δεν ήταν δυνατή η επαλήθευση της κράτησης","unverifiedText":"Δεν ήταν δυνατή η επαλήθευση κράτησης με τα στοιχεία που εισαγάγατε. Ελέγξτε το όνομα της κράτησης καθώς και τις ημερομηνίες άφιξης και αναχώρησης."}};
+
+        const taxiI18n = {"cs":{"taxi":"Taxi","instructions":"Pro objednání vozu zaškrtněte políčko níže a vyplňte potřebné údaje. V případě, že chcete přistavit hotelový vůz co nejdříve, použijte telefonní linku vedle tohoto kiosku, která je k dispozici od 8:00 do 16:00. Mimo tyto hodiny volejte na telefonní číslo +420 724 212 121.","prices":"Transfery a ceny","airport":"Letiště Václava Havla","stationCenter":"Praha hlavní nádraží / centrum","airportCar":"jednosměrně · osobní vůz · max. 4 osoby","airportMini":"jednosměrně · minibus · max. 8 osob","car":"osobní vůz · max. 4 osoby","mini":"minibus · max. 8 osob","requestPrice":"Cena na vyžádání","order":"Chci si objednat transfer","name":"Jméno hosta","date":"Datum vyzvednutí od hotelu","prefix":"Mezinárodní předvolba","phone":"Telefonní číslo","destination":"Cíl cesty","airportDest":"Letiště Václava Havla","stationDest":"Praha hlavní nádraží","centerDest":"Centrum Prahy","address":"Adresa nebo název místa","vehicle":"Typ vozu","carChoice":"Osobní vůz · max. 4 osoby","miniChoice":"Minibus · max. 8 osob","fillTaxi":"Prosím, vyplňte všechny potřebné údaje pro transfer.","fillEither":"Vyplňte celý formulář Oprava/Pomoc, nebo zaškrtněte transfer a vyplňte údaje pro taxi.","timer":"Návrat za"},"en":{"taxi":"Taxi","instructions":"To book a vehicle, tick the box below and complete the required details. If you need the hotel vehicle as soon as possible, use the telephone next to the kiosk, available from 8:00 to 16:00. Outside these hours call +420 724 212 121.","prices":"Transfers & prices","airport":"Václav Havel Airport","stationCenter":"Prague Main Station / city centre","airportCar":"one way · car · max. 4 persons","airportMini":"one way · minibus · max. 8 persons","car":"car · max. 4 persons","mini":"minibus · max. 8 persons","requestPrice":"Price on request","order":"I want to book a transfer","name":"Guest name","date":"Pick-up date from the hotel","prefix":"International calling code","phone":"Phone number","destination":"Destination","airportDest":"Václav Havel Airport","stationDest":"Prague Main Station","centerDest":"Prague city centre","address":"Address or place name","vehicle":"Vehicle type","carChoice":"Car · max. 4 persons","miniChoice":"Minibus · max. 8 persons","fillTaxi":"Please complete all required transfer details.","fillEither":"Please complete the full Service/Help form, or select a transfer and complete the taxi details.","timer":"Return in"},"de":{"taxi":"Taxi","instructions":"Um ein Fahrzeug zu bestellen, aktivieren Sie das Kästchen unten und füllen Sie die erforderlichen Angaben aus. Wenn Sie das Hotelfahrzeug so schnell wie möglich benötigen, nutzen Sie das Telefon neben dem Kiosk von 8:00 bis 16:00. Außerhalb dieser Zeiten rufen Sie +420 724 212 121 an.","prices":"Transfers & Preise","airport":"Flughafen Václav Havel","stationCenter":"Prager Hauptbahnhof / Stadtzentrum","airportCar":"einfache Fahrt · Pkw · max. 4 Personen","airportMini":"einfache Fahrt · Minibus · max. 8 Personen","car":"Pkw · max. 4 Personen","mini":"Minibus · max. 8 Personen","requestPrice":"Preis auf Anfrage","order":"Ich möchte einen Transfer buchen","name":"Name des Gastes","date":"Abholdatum am Hotel","prefix":"Ländervorwahl","phone":"Telefonnummer","destination":"Ziel","airportDest":"Flughafen Václav Havel","stationDest":"Prager Hauptbahnhof","centerDest":"Prager Stadtzentrum","address":"Adresse oder Name des Ortes","vehicle":"Fahrzeugtyp","carChoice":"Pkw · max. 4 Personen","miniChoice":"Minibus · max. 8 Personen","fillTaxi":"Bitte füllen Sie alle erforderlichen Transferangaben aus.","fillEither":"Bitte füllen Sie entweder das Formular Reparatur/Hilfe vollständig aus oder wählen Sie einen Transfer und füllen Sie die Taxidaten aus.","timer":"Rückkehr in"},"sk":{"taxi":"Taxi","instructions":"Ak si chcete objednať vozidlo, zaškrtnite políčko nižšie a vyplňte potrebné údaje. Ak chcete pristaviť hotelové vozidlo čo najskôr, využite telefón vedľa kiosku od 8:00 do 16:00. Mimo týchto hodín volajte +420 724 212 121.","prices":"Transfery a ceny","airport":"Letisko Václava Havla","stationCenter":"Praha hlavná stanica / centrum","airportCar":"jednosmerne · osobné vozidlo · max. 4 osoby","airportMini":"jednosmerne · minibus · max. 8 osôb","car":"osobné vozidlo · max. 4 osoby","mini":"minibus · max. 8 osôb","requestPrice":"Cena na vyžiadanie","order":"Chcem si objednať transfer","name":"Meno hosťa","date":"Dátum vyzdvihnutia od hotela","prefix":"Medzinárodná predvoľba","phone":"Telefónne číslo","destination":"Cieľ cesty","airportDest":"Letisko Václava Havla","stationDest":"Praha hlavná stanica","centerDest":"Centrum Prahy","address":"Adresa alebo názov miesta","vehicle":"Typ vozidla","carChoice":"Osobné vozidlo · max. 4 osoby","miniChoice":"Minibus · max. 8 osôb","fillTaxi":"Vyplňte všetky potrebné údaje pre transfer.","fillEither":"Vyplňte celý formulár Oprava/Pomoc alebo zaškrtnite transfer a vyplňte údaje pre taxi.","timer":"Návrat o"},"it":{"taxi":"Taxi","instructions":"Per prenotare un veicolo, selezionate la casella qui sotto e compilate i dati richiesti. Se desiderate il veicolo dell’hotel il prima possibile, utilizzate il telefono accanto al chiosco dalle 8:00 alle 16:00. Fuori da questi orari chiamate +420 724 212 121.","prices":"Transfer e prezzi","airport":"Aeroporto Václav Havel","stationCenter":"Stazione Centrale di Praga / centro","airportCar":"solo andata · auto · max. 4 persone","airportMini":"solo andata · minibus · max. 8 persone","car":"auto · max. 4 persone","mini":"minibus · max. 8 persone","requestPrice":"Prezzo su richiesta","order":"Voglio prenotare un transfer","name":"Nome dell’ospite","date":"Data del prelievo dall’hotel","prefix":"Prefisso internazionale","phone":"Numero di telefono","destination":"Destinazione","airportDest":"Aeroporto Václav Havel","stationDest":"Stazione Centrale di Praga","centerDest":"Centro di Praga","address":"Indirizzo o nome del luogo","vehicle":"Tipo di veicolo","carChoice":"Auto · max. 4 persone","miniChoice":"Minibus · max. 8 persone","fillTaxi":"Compilate tutti i dati richiesti per il transfer.","fillEither":"Compilate interamente il modulo Assistenza oppure selezionate il transfer e compilate i dati taxi.","timer":"Ritorno tra"},"es":{"taxi":"Taxi","instructions":"Para reservar un vehículo, marque la casilla de abajo y complete los datos necesarios. Si desea que el vehículo del hotel llegue lo antes posible, utilice el teléfono junto al quiosco de 8:00 a 16:00. Fuera de este horario llame al +420 724 212 121.","prices":"Traslados y precios","airport":"Aeropuerto Václav Havel","stationCenter":"Estación Central de Praga / centro","airportCar":"solo ida · coche · máx. 4 personas","airportMini":"solo ida · minibús · máx. 8 personas","car":"coche · máx. 4 personas","mini":"minibús · máx. 8 personas","requestPrice":"Precio bajo petición","order":"Quiero reservar un traslado","name":"Nombre del huésped","date":"Fecha de recogida en el hotel","prefix":"Prefijo internacional","phone":"Número de teléfono","destination":"Destino","airportDest":"Aeropuerto Václav Havel","stationDest":"Estación Central de Praga","centerDest":"Centro de Praga","address":"Dirección o nombre del lugar","vehicle":"Tipo de vehículo","carChoice":"Coche · máx. 4 personas","miniChoice":"Minibús · máx. 8 personas","fillTaxi":"Complete todos los datos necesarios del traslado.","fillEither":"Complete todo el formulario de Ayuda/Servicio o seleccione un traslado y complete los datos del taxi.","timer":"Regreso en"},"fr":{"taxi":"Taxi","instructions":"Pour réserver un véhicule, cochez la case ci-dessous et renseignez les informations demandées. Si vous souhaitez que le véhicule de l’hôtel arrive au plus vite, utilisez le téléphone à côté de la borne de 8:00 à 16:00. En dehors de ces horaires, appelez le +420 724 212 121.","prices":"Transferts et tarifs","airport":"Aéroport Václav Havel","stationCenter":"Gare centrale de Prague / centre-ville","airportCar":"aller simple · voiture · max. 4 personnes","airportMini":"aller simple · minibus · max. 8 personnes","car":"voiture · max. 4 personnes","mini":"minibus · max. 8 personnes","requestPrice":"Prix sur demande","order":"Je souhaite réserver un transfert","name":"Nom du client","date":"Date de prise en charge à l’hôtel","prefix":"Indicatif international","phone":"Numéro de téléphone","destination":"Destination","airportDest":"Aéroport Václav Havel","stationDest":"Gare centrale de Prague","centerDest":"Centre de Prague","address":"Adresse ou nom du lieu","vehicle":"Type de véhicule","carChoice":"Voiture · max. 4 personnes","miniChoice":"Minibus · max. 8 personnes","fillTaxi":"Veuillez renseigner toutes les informations nécessaires au transfert.","fillEither":"Veuillez remplir entièrement le formulaire Service/Aide, ou sélectionner un transfert et compléter les informations taxi.","timer":"Retour dans"},"pl":{"taxi":"Taxi","instructions":"Aby zamówić samochód, zaznacz pole poniżej i uzupełnij wymagane dane. Jeśli potrzebujesz samochodu hotelowego jak najszybciej, skorzystaj z telefonu obok kiosku w godzinach 8:00–16:00. Poza tymi godzinami zadzwoń pod +420 724 212 121.","prices":"Transfery i ceny","airport":"Lotnisko Václava Havla","stationCenter":"Dworzec Główny w Pradze / centrum","airportCar":"w jedną stronę · samochód · maks. 4 osoby","airportMini":"w jedną stronę · minibus · maks. 8 osób","car":"samochód · maks. 4 osoby","mini":"minibus · maks. 8 osób","requestPrice":"Cena na zapytanie","order":"Chcę zamówić transfer","name":"Imię i nazwisko gościa","date":"Data odbioru z hotelu","prefix":"Kierunkowy kraju","phone":"Numer telefonu","destination":"Cel podróży","airportDest":"Lotnisko Václava Havla","stationDest":"Dworzec Główny w Pradze","centerDest":"Centrum Pragi","address":"Adres lub nazwa miejsca","vehicle":"Typ pojazdu","carChoice":"Samochód · maks. 4 osoby","miniChoice":"Minibus · maks. 8 osób","fillTaxi":"Uzupełnij wszystkie wymagane dane transferu.","fillEither":"Wypełnij cały formularz Naprawa/Pomoc albo wybierz transfer i uzupełnij dane taxi.","timer":"Powrót za"},"ua":{"taxi":"Таксі","instructions":"Щоб замовити автомобіль, поставте позначку нижче та заповніть необхідні дані. Якщо вам потрібен автомобіль готелю якнайшвидше, скористайтеся телефоном біля кіоску з 8:00 до 16:00. В інший час телефонуйте +420 724 212 121.","prices":"Трансфери та ціни","airport":"Аеропорт Вацлава Гавела","stationCenter":"Головний вокзал Праги / центр","airportCar":"в один бік · легковий автомобіль · макс. 4 особи","airportMini":"в один бік · мікроавтобус · макс. 8 осіб","car":"легковий автомобіль · макс. 4 особи","mini":"мікроавтобус · макс. 8 осіб","requestPrice":"Ціна за запитом","order":"Я хочу замовити трансфер","name":"Ім’я гостя","date":"Дата виїзду з готелю","prefix":"Міжнародний код","phone":"Номер телефону","destination":"Місце призначення","airportDest":"Аеропорт Вацлава Гавела","stationDest":"Головний вокзал Праги","centerDest":"Центр Праги","address":"Адреса або назва місця","vehicle":"Тип автомобіля","carChoice":"Легковий автомобіль · макс. 4 особи","miniChoice":"Мікроавтобус · макс. 8 осіб","fillTaxi":"Заповніть усі необхідні дані для трансферу.","fillEither":"Заповніть повністю форму Ремонт/Допомога або виберіть трансфер і заповніть дані таксі.","timer":"Повернення через"},"tr":{"taxi":"Taksi","instructions":"Araç rezervasyonu yapmak için aşağıdaki kutuyu işaretleyin ve gerekli bilgileri doldurun. Otel aracının mümkün olan en kısa sürede gelmesini istiyorsanız, kiosk yanındaki telefonu 8:00–16:00 saatleri arasında kullanın. Bu saatler dışında +420 724 212 121 numarasını arayın.","prices":"Transferler ve fiyatlar","airport":"Václav Havel Havalimanı","stationCenter":"Prag Ana Tren İstasyonu / şehir merkezi","airportCar":"tek yön · otomobil · en fazla 4 kişi","airportMini":"tek yön · minibüs · en fazla 8 kişi","car":"otomobil · en fazla 4 kişi","mini":"minibüs · en fazla 8 kişi","requestPrice":"Fiyat talep üzerine","order":"Transfer rezervasyonu yapmak istiyorum","name":"Misafir adı","date":"Otelden alınış tarihi","prefix":"Uluslararası kod","phone":"Telefon numarası","destination":"Varış noktası","airportDest":"Václav Havel Havalimanı","stationDest":"Prag Ana Tren İstasyonu","centerDest":"Prag şehir merkezi","address":"Adres veya yer adı","vehicle":"Araç tipi","carChoice":"Otomobil · en fazla 4 kişi","miniChoice":"Minibüs · en fazla 8 kişi","fillTaxi":"Lütfen transfer için gerekli tüm bilgileri doldurun.","fillEither":"Lütfen Servis/Yardım formunun tamamını doldurun veya transferi seçip taksi bilgilerini doldurun.","timer":"Ana ekrana dönüş"},"da":{"taxi":"Taxi","instructions":"For at bestille en bil skal du markere feltet nedenfor og udfylde de nødvendige oplysninger. Hvis du ønsker hotelbilen hurtigst muligt, kan du bruge telefonen ved siden af kiosken mellem 8:00 og 16:00. Uden for dette tidsrum ring +420 724 212 121.","prices":"Transfer og priser","airport":"Václav Havel Lufthavn","stationCenter":"Prag Hovedbanegård / centrum","airportCar":"én vej · bil · maks. 4 personer","airportMini":"én vej · minibus · maks. 8 personer","car":"bil · maks. 4 personer","mini":"minibus · maks. 8 personer","requestPrice":"Pris på forespørgsel","order":"Jeg vil bestille en transfer","name":"Gæstens navn","date":"Afhentningsdato fra hotellet","prefix":"Landekode","phone":"Telefonnummer","destination":"Destination","airportDest":"Václav Havel Lufthavn","stationDest":"Prag Hovedbanegård","centerDest":"Prags centrum","address":"Adresse eller stednavn","vehicle":"Køretøjstype","carChoice":"Bil · maks. 4 personer","miniChoice":"Minibus · maks. 8 personer","fillTaxi":"Udfyld venligst alle nødvendige oplysninger til transferen.","fillEither":"Udfyld hele Service/Hjælp-formularen, eller vælg en transfer og udfyld taxioplysningerne.","timer":"Tilbage om"},"ja":{"taxi":"タクシー","instructions":"車を予約するには、下のチェックボックスを選択して必要事項を入力してください。ホテル車両をできるだけ早く手配したい場合は、8:00～16:00にキオスク横の電話をご利用ください。それ以外の時間は +420 724 212 121 へお電話ください。","prices":"送迎料金","airport":"ヴァーツラフ・ハヴェル空港","stationCenter":"プラハ本駅 / 市内中心部","airportCar":"片道 · 乗用車 · 最大4名","airportMini":"片道 · ミニバス · 最大8名","car":"乗用車 · 最大4名","mini":"ミニバス · 最大8名","requestPrice":"料金はお問い合わせください","order":"送迎を予約する","name":"宿泊者名","date":"ホテルからの迎車日","prefix":"国番号","phone":"電話番号","destination":"目的地","airportDest":"ヴァーツラフ・ハヴェル空港","stationDest":"プラハ本駅","centerDest":"プラハ市内中心部","address":"住所または場所の名称","vehicle":"車両タイプ","carChoice":"乗用車 · 最大4名","miniChoice":"ミニバス · 最大8名","fillTaxi":"送迎に必要な項目をすべて入力してください。","fillEither":"修理/ヘルプフォームをすべて入力するか、送迎を選択してタクシー情報を入力してください。","timer":"メイン画面まで"},"he":{"taxi":"מונית","instructions":"כדי להזמין רכב, סמנו את התיבה למטה ומלאו את הפרטים הנדרשים. אם אתם צריכים את רכב המלון בהקדם האפשרי, השתמשו בטלפון שליד הקיוסק בין 8:00 ל-16:00. מחוץ לשעות אלה התקשרו ל-+420 724 212 121.","prices":"הסעות ומחירים","airport":"נמל התעופה ואצלב האוול","stationCenter":"התחנה המרכזית של פראג / מרכז העיר","airportCar":"כיוון אחד · רכב · עד 4 נוסעים","airportMini":"כיוון אחד · מיניבוס · עד 8 נוסעים","car":"רכב · עד 4 נוסעים","mini":"מיניבוס · עד 8 נוסעים","requestPrice":"מחיר לפי בקשה","order":"אני רוצה להזמין הסעה","name":"שם האורח","date":"תאריך איסוף מהמלון","prefix":"קידומת בינלאומית","phone":"מספר טלפון","destination":"יעד","airportDest":"נמל התעופה ואצלב האוול","stationDest":"התחנה המרכזית של פראג","centerDest":"מרכז פראג","address":"כתובת או שם המקום","vehicle":"סוג רכב","carChoice":"רכב · עד 4 נוסעים","miniChoice":"מיניבוס · עד 8 נוסעים","fillTaxi":"אנא מלאו את כל הפרטים הנדרשים להזמנת ההסעה.","fillEither":"מלאו את טופס תיקון/עזרה במלואו, או בחרו הסעה ומלאו את פרטי המונית.","timer":"חזרה בעוד"},"el":{"taxi":"Ταξί","instructions":"Για να κλείσετε όχημα, επιλέξτε το παρακάτω πλαίσιο και συμπληρώστε τα απαραίτητα στοιχεία. Αν χρειάζεστε το όχημα του ξενοδοχείου το συντομότερο δυνατό, χρησιμοποιήστε το τηλέφωνο δίπλα στο κιόσκι από 8:00 έως 16:00. Εκτός αυτών των ωρών καλέστε +420 724 212 121.","prices":"Μεταφορές και τιμές","airport":"Αεροδρόμιο Václav Havel","stationCenter":"Κεντρικός Σταθμός Πράγας / κέντρο","airportCar":"απλή διαδρομή · αυτοκίνητο · έως 4 άτομα","airportMini":"απλή διαδρομή · μίνιμπας · έως 8 άτομα","car":"αυτοκίνητο · έως 4 άτομα","mini":"μίνιμπας · έως 8 άτομα","requestPrice":"Τιμή κατόπιν αιτήματος","order":"Θέλω να κλείσω μεταφορά","name":"Όνομα επισκέπτη","date":"Ημερομηνία παραλαβής από το ξενοδοχείο","prefix":"Διεθνής κωδικός","phone":"Αριθμός τηλεφώνου","destination":"Προορισμός","airportDest":"Αεροδρόμιο Václav Havel","stationDest":"Κεντρικός Σταθμός Πράγας","centerDest":"Κέντρο Πράγας","address":"Διεύθυνση ή όνομα τοποθεσίας","vehicle":"Τύπος οχήματος","carChoice":"Αυτοκίνητο · έως 4 άτομα","miniChoice":"Μίνιμπας · έως 8 άτομα","fillTaxi":"Συμπληρώστε όλα τα απαραίτητα στοιχεία για τη μεταφορά.","fillEither":"Συμπληρώστε ολόκληρη τη φόρμα Επισκευή/Βοήθεια ή επιλέξτε μεταφορά και συμπληρώστε τα στοιχεία ταξί.","timer":"Επιστροφή σε"}};
+
         const i18n = {
             cs: {
                 title: "Kiosk",
@@ -1835,11 +2397,93 @@
         // NAVIGATION LOGIC
         function hideAllScreens() {
             document.getElementById('screen-1').classList.add('hidden');
+            document.getElementById('screen-self-checkin').classList.add('hidden');
+            document.getElementById('screen-checkin-result').classList.add('hidden');
+            document.getElementById('screen-checkin-waiting').classList.add('hidden');
+            document.getElementById('screen-checkin-unverified').classList.add('hidden');
             document.getElementById('screen-checkin').classList.add('hidden');
             document.getElementById('screen-checkout').classList.add('hidden');
             document.getElementById('screen-service').classList.add('hidden');
             document.getElementById('screen-parking').classList.add('hidden');
             document.getElementById('screen-thanks').classList.add('hidden');
+        }
+
+        function isSubpageOpen() {
+            return document.getElementById('screen-1').classList.contains('hidden');
+        }
+
+        function renderIdleCountdown() {
+            const m = Math.floor(idleRemaining / 60);
+            const s = String(idleRemaining % 60).padStart(2, '0');
+            const value = `${m}:${s}`;
+            document.getElementById('global-idle-countdown').innerText = value;
+            if (!document.getElementById('screen-checkin-result').classList.contains('hidden')) {
+                document.getElementById('sci-countdown').innerText = value;
+            }
+        }
+
+        function startAutoResetTimer() {
+            clearTimeout(autoResetTimer);
+            clearInterval(idleCountdownTimer);
+            clearInterval(checkinCountdownTimer);
+            idleRemaining = 90;
+            const timer = document.getElementById('global-idle-timer');
+            timer.classList.remove('hidden');
+            renderIdleCountdown();
+
+            autoResetTimer = setTimeout(resetToStart, AUTO_RESET_TIMEOUT);
+            idleCountdownTimer = setInterval(() => {
+                idleRemaining = Math.max(0, idleRemaining - 1);
+                renderIdleCountdown();
+                if (idleRemaining <= 0) clearInterval(idleCountdownTimer);
+            }, 1000);
+        }
+
+        function registerUserActivity() {
+            if (!isSubpageOpen()) return;
+            if (!document.getElementById('screen-thanks').classList.contains('hidden')) return;
+            startAutoResetTimer();
+        }
+
+        ['click','input','change','touchstart','touchmove','pointerdown','keydown','scroll'].forEach(evt => {
+            document.addEventListener(evt, registerUserActivity, {passive:true});
+        });
+
+        function openSelfCheckin() {
+            hideAllScreens();
+            document.getElementById('screen-self-checkin').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function submitSelfCheckin() {
+            const name = document.getElementById('sciNameInput').value.trim();
+            const from = document.getElementById('sciFromInput').value;
+            const to = document.getElementById('sciToInput').value;
+            const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
+
+            if (!name || !from || !to) {
+                alert(t.fill);
+                return;
+            }
+
+            const demoName = name.toUpperCase().replace(/\s+/g, ' ').trim();
+            hideAllScreens();
+
+            if (demoName === 'DEMO READY') {
+                document.getElementById('sci-room-value').innerText = '203';
+                document.getElementById('sci-code-value').innerText = '4826#';
+                document.getElementById('screen-checkin-result').classList.remove('hidden');
+            } else if (demoName === 'DEMO WAITING') {
+                document.getElementById('screen-checkin-waiting').classList.remove('hidden');
+            } else {
+                document.getElementById('screen-checkin-unverified').classList.remove('hidden');
+            }
+
+            startCheckinResultCountdown();
+        }
+
+        function startCheckinResultCountdown() {
+            startAutoResetTimer();
         }
 
         function openCheckinInfo() {
@@ -1868,10 +2512,15 @@
 
         function resetToStart() {
             clearTimeout(autoResetTimer);
+            clearInterval(checkinCountdownTimer);
+            clearInterval(idleCountdownTimer);
+            document.getElementById('global-idle-timer').classList.add('hidden');
             hideAllScreens();
             document.getElementById('screen-1').classList.remove('hidden');
-            
-            // Clear inputs
+
+            document.getElementById('sciNameInput').value = '';
+            document.getElementById('sciFromInput').value = '';
+            document.getElementById('sciToInput').value = '';
             document.getElementById('coRoomInput').value = '';
             document.getElementById('coNameInput').value = '';
             document.getElementById('coElectronicReceipt').checked = false;
@@ -1880,30 +2529,75 @@
             document.getElementById('srvRoomInput').value = '';
             document.getElementById('srvIssueInput').value = '';
             document.getElementById('srvNameInput').value = '';
+
+            document.getElementById('taxiOrderToggle').checked = false;
+            document.getElementById('taxiOrderForm').classList.add('hidden');
+            document.getElementById('taxiNameInput').value = '';
+            document.getElementById('taxiDateInput').value = '';
+            document.getElementById('taxiPrefixInput').value = '+420';
+            document.getElementById('taxiPhoneInput').value = '';
+            document.querySelectorAll('input[name="taxiDestination"], input[name="taxiVehicle"]').forEach(el => el.checked = false);
+            document.getElementById('taxiCenterAddressInput').value = '';
+            document.getElementById('taxiCenterAddressGroup').classList.add('hidden');
         }
-
-        function startAutoResetTimer() {
-            clearTimeout(autoResetTimer);
-            autoResetTimer = setTimeout(() => {
-                resetToStart();
-            }, AUTO_RESET_TIMEOUT);
-        }
-
-        // Reset timer on user interactions
-        document.addEventListener('click', () => {
-            if (!document.getElementById('screen-1').classList.contains('hidden')) return;
-            startAutoResetTimer();
-        });
-
-        document.addEventListener('keypress', () => {
-            if (!document.getElementById('screen-1').classList.contains('hidden')) return;
-            startAutoResetTimer();
-        });
 
         function toggleElectronicReceipt() {
             const checkbox = document.getElementById('coElectronicReceipt');
             const emailGroup = document.getElementById('coEmailGroup');
             emailGroup.classList.toggle('hidden', !checkbox.checked);
+        }
+
+
+        function toggleTaxiForm() {
+            const checked = document.getElementById('taxiOrderToggle').checked;
+            document.getElementById('taxiOrderForm').classList.toggle('hidden', !checked);
+            if (checked) startAutoResetTimer();
+        }
+
+        function updateTaxiDestination() {
+            const selected = document.querySelector('input[name="taxiDestination"]:checked');
+            document.getElementById('taxiCenterAddressGroup').classList.toggle('hidden', !selected || selected.value !== 'center');
+            startAutoResetTimer();
+        }
+
+        function getTaxiData() {
+            const destinationEl = document.querySelector('input[name="taxiDestination"]:checked');
+            const vehicleEl = document.querySelector('input[name="taxiVehicle"]:checked');
+            return {
+                enabled: document.getElementById('taxiOrderToggle').checked,
+                name: document.getElementById('taxiNameInput').value.trim(),
+                date: document.getElementById('taxiDateInput').value,
+                prefix: document.getElementById('taxiPrefixInput').value,
+                phone: document.getElementById('taxiPhoneInput').value.trim(),
+                destination: destinationEl ? destinationEl.value : '',
+                vehicle: vehicleEl ? vehicleEl.value : '',
+                centerAddress: document.getElementById('taxiCenterAddressInput').value.trim()
+            };
+        }
+
+        function taxiIsComplete(data) {
+            if (!data.enabled || !data.name || !data.date || !data.prefix || !data.phone || !data.destination || !data.vehicle) return false;
+            if (data.destination === 'center' && !data.centerAddress) return false;
+            return true;
+        }
+
+        function taxiPrice(data) {
+            if (data.destination === 'airport' && data.vehicle === 'car') return '900 CZK';
+            if (data.destination === 'airport' && data.vehicle === 'minibus') return 'CENA NA VYŽÁDÁNÍ';
+            if ((data.destination === 'station' || data.destination === 'center') && data.vehicle === 'car') return '450 CZK';
+            if ((data.destination === 'station' || data.destination === 'center') && data.vehicle === 'minibus') return '700 CZK';
+            return '—';
+        }
+
+        function taxiDestinationCz(data) {
+            if (data.destination === 'airport') return 'Letiště Václava Havla';
+            if (data.destination === 'station') return 'Praha hlavní nádraží';
+            if (data.destination === 'center') return `Centrum Prahy – ${data.centerAddress}`;
+            return '—';
+        }
+
+        function taxiVehicleCz(data) {
+            return data.vehicle === 'minibus' ? 'Minibus (max. 8 osob)' : 'Osobní vůz (max. 4 osoby)';
         }
 
         // FORM SUBMISSION (NTFY INTEGRATION)
@@ -1947,33 +2641,70 @@
             const room = document.getElementById('srvRoomInput').value.trim();
             const issue = document.getElementById('srvIssueInput').value.trim();
             const name = document.getElementById('srvNameInput').value.trim();
-            const dict = i18n[currentLang] || i18n['en'];
+            const serviceAny = !!(room || issue || name);
+            const serviceComplete = !!(room && issue && name);
 
-            if (!room || !issue || !name) {
-                alert(dict.fillAll);
+            const taxiData = getTaxiData();
+            const taxiComplete = taxiIsComplete(taxiData);
+            const t = taxiI18n[currentLang] || taxiI18n.en;
+
+            if (taxiData.enabled && !taxiComplete) {
+                alert(t.fillTaxi);
                 return;
             }
 
-            const message = `🟡 OPRAVA / POMOC\n\nPokoj: ${room}\nJméno: ${name}\nZávada / požadavek: ${issue}`;
+            if (!serviceComplete && !taxiComplete) {
+                alert(t.fillEither);
+                return;
+            }
 
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: message,
-                headers: {
-                    'Title': `Oprava/Pomoc: Pokoj ${room}`,
-                    'Priority': 'urgent',
-                    'Tags': 'yellow_circle,service'
-                }
-            }).then(() => {
-                showThanks();
-            }).catch(err => {
-                console.error("NTFY Push failed:", err);
-                showThanks();
-            });
+            const requests = [];
+
+            if (serviceComplete) {
+                const serviceMessage = `🟡 OPRAVA / POMOC\n\nPokoj: ${room}\nJméno: ${name}\nZávada / požadavek: ${issue}`;
+                requests.push(fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: serviceMessage,
+                    headers: {
+                        'Title': `Oprava/Pomoc: Pokoj ${room}`,
+                        'Priority': 'urgent',
+                        'Tags': 'yellow_circle,service'
+                    }
+                }));
+            }
+
+            if (taxiComplete) {
+                const taxiMessage =
+`⚫ TAXI / TRANSFER
+
+Jméno hosta: ${taxiData.name}
+Datum vyzvednutí: ${taxiData.date}
+Telefon: ${taxiData.prefix} ${taxiData.phone}
+Cíl: ${taxiDestinationCz(taxiData)}
+Vozidlo: ${taxiVehicleCz(taxiData)}
+Cena: ${taxiPrice(taxiData)}`;
+
+                requests.push(fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: taxiMessage,
+                    headers: {
+                        'Title': `Taxi/Transfer: ${taxiData.name}`,
+                        'Priority': 'high',
+                        'Tags': 'black_circle,taxi'
+                    }
+                }));
+            }
+
+            Promise.allSettled(requests).then(() => showThanks());
         }
 
         function showThanks(message) {
+            clearTimeout(autoResetTimer);
+            clearInterval(idleCountdownTimer);
+            clearInterval(checkinCountdownTimer);
+            document.getElementById('global-idle-timer').classList.add('hidden');
             hideAllScreens();
             if (message) {
                 document.getElementById('thanks-message').innerText = message;
@@ -2005,9 +2736,31 @@
 
             // Main UI
             document.getElementById('main-title').innerText = dict.title;
-            document.getElementById('btn-checkin-text').innerText = dict.checkin;
+            const sci = selfCheckinI18n[lang] || selfCheckinI18n.en;
+            document.getElementById('btn-checkin-text').innerText = sci.guide;
+            document.getElementById('btn-self-checkin-text').innerText = sci.submit;
+            document.getElementById('sci-welcome-title').innerText = sci.welcome;
+            document.getElementById('sci-instructions').innerText = sci.instructions;
+            document.getElementById('sci-name-label').innerText = sci.name;
+            document.getElementById('sci-from-label').innerText = sci.from;
+            document.getElementById('sci-to-label').innerText = sci.to;
+            document.getElementById('btn-sci-back').innerText = sci.back;
+            document.getElementById('btn-sci-submit').innerText = sci.submit;
+            document.getElementById('sci-result-title').innerText = sci.result;
+            document.getElementById('sci-room-label').innerText = sci.room;
+            document.getElementById('sci-code-label').innerText = sci.code;
+            document.getElementById('sci-result-note').innerText = sci.note;
+            document.getElementById('sci-countdown-label').innerText = sci.count;
+            const sciStatus = selfCheckinStatusI18n[lang] || selfCheckinStatusI18n.en;
+            document.getElementById('sci-waiting-title').innerText = sciStatus.waitingTitle;
+            document.getElementById('sci-waiting-text').innerText = sciStatus.waitingText;
+            document.getElementById('sci-unverified-title').innerText = sciStatus.unverifiedTitle;
+            document.getElementById('sci-unverified-text').innerText = sciStatus.unverifiedText;
             document.getElementById('btn-checkout-text').innerText = dict.checkout;
             document.getElementById('btn-service-text').innerText = dict.service;
+            const taxiDict = taxiI18n[lang] || taxiI18n.en;
+            document.getElementById('btn-taxi-text').innerText = taxiDict.taxi;
+            document.getElementById('global-idle-label').innerText = taxiDict.timer;
             document.getElementById('btn-parking-text').innerText = dict.parking;
 
             // Checkout Form
@@ -2026,6 +2779,30 @@
             document.getElementById('label-srv-name').innerText = dict.nameLabel;
             document.getElementById('btn-cancel-2').innerText = dict.cancel;
             document.getElementById('btn-submit-2').innerText = dict.submit;
+            document.getElementById('taxi-instructions').innerText = taxiDict.instructions;
+            document.getElementById('taxi-prices-title').innerText = taxiDict.prices;
+            document.getElementById('taxi-airport-label').innerText = taxiDict.airport;
+            document.getElementById('taxi-airport-mini-label').innerText = taxiDict.airport;
+            document.getElementById('taxi-station-label').innerText = taxiDict.stationCenter;
+            document.getElementById('taxi-station-mini-label').innerText = taxiDict.stationCenter;
+            document.getElementById('taxi-airport-car-info').innerText = taxiDict.airportCar;
+            document.getElementById('taxi-airport-mini-info').innerText = taxiDict.airportMini;
+            document.getElementById('taxi-station-car-info').innerText = taxiDict.car;
+            document.getElementById('taxi-station-mini-info').innerText = taxiDict.mini;
+            document.getElementById('taxi-airport-mini-price').innerText = taxiDict.requestPrice;
+            document.getElementById('taxi-order-label').innerText = taxiDict.order;
+            document.getElementById('taxi-name-label').innerText = taxiDict.name;
+            document.getElementById('taxi-date-label').innerText = taxiDict.date;
+            document.getElementById('taxi-prefix-label').innerText = taxiDict.prefix;
+            document.getElementById('taxi-phone-label').innerText = taxiDict.phone;
+            document.getElementById('taxi-destination-title').innerText = taxiDict.destination;
+            document.getElementById('taxi-dest-airport').innerText = taxiDict.airportDest;
+            document.getElementById('taxi-dest-station').innerText = taxiDict.stationDest;
+            document.getElementById('taxi-dest-center').innerText = taxiDict.centerDest;
+            document.getElementById('taxi-center-address-label').innerText = taxiDict.address;
+            document.getElementById('taxi-vehicle-title').innerText = taxiDict.vehicle;
+            document.getElementById('taxi-vehicle-car').innerText = taxiDict.carChoice;
+            document.getElementById('taxi-vehicle-minibus').innerText = taxiDict.miniChoice;
 
             // Check-in Info
             document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
