@@ -1425,6 +1425,23 @@
             word-spacing: normal;
         }
 
+
+        #screen-checkin-unverified .unverified-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red-light);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,.28));
+        }
+        #screen-checkin-unverified .unverified-icon svg {
+            width: 52px;
+            height: 52px;
+            fill: currentColor;
+        }
+
     </style>
 </head>
 <body>
@@ -1590,7 +1607,11 @@
         <div id="screen-checkin-unverified" class="card hidden">
             <div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
             <div class="checkin-status-box unverified-status-box">
-                <div class="checkin-status-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M18.5 18.5a6.2 6.2 0 0 1 11.6 3c0 4.5-6.1 5.1-6.1 9.2M24 36h.01"/></svg></div>
+                <div class="checkin-status-icon unverified-icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" role="img">
+                        <path d="M22 20c1.2-8.2 7.6-13 17-13 10.4 0 18 6.4 18 15.6 0 7.6-4.2 11.7-10.3 15.1-5.3 3-7.7 5.3-7.7 10.3v2.2h-9.2v-3.4c0-7.6 3.8-11.5 10.1-15 4.8-2.7 7-5 7-9.1 0-4.6-3.5-7.5-8.6-7.5-5.4 0-8.6 2.8-9.5 7.7L22 20zm6.7 36.6c0-3.4 2.7-6.1 6.1-6.1s6.1 2.7 6.1 6.1-2.7 6.1-6.1 6.1-6.1-2.7-6.1-6.1z"/>
+                    </svg>
+                </div>
                 <div id="sci-unverified-text">Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
             </div>
             <div class="result-ok-row">
