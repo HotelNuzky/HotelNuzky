@@ -1189,6 +1189,70 @@
             box-shadow: 0 2px 0 #082f6b, 0 3px 6px rgba(0,0,0,.3) !important;
         }
 
+
+        /* Clear visual hierarchy for room vs. main entrance access */
+        .guest-access-main {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+        .guest-room-block,
+        .guest-room-code-block {
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+        }
+        .guest-room-value {
+            color: #ffffff;
+        }
+        .guest-room-code-value {
+            color: var(--green-light);
+        }
+
+        .main-entrance-code-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 16px 20px;
+            margin: 4px 0 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(66,165,245,.16), rgba(21,101,192,.24));
+            border: 1px solid rgba(144,202,249,.55);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+        }
+        .main-entrance-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            background: rgba(66,165,245,.16);
+            border: 1px solid rgba(144,202,249,.45);
+            color: #90caf9;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .main-entrance-label {
+            color: #90caf9;
+            margin-bottom: 4px;
+        }
+        .main-entrance-code {
+            color: #ffffff;
+            font-size: 36px;
+            letter-spacing: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .guest-access-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1305,20 +1369,25 @@
         <div id="screen-checkin-result" class="card hidden">
             <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
             <div class="checkin-result-box">
-                <div class="checkin-result-grid">
-                    <div>
+                <div class="guest-access-main">
+                    <div class="guest-room-block">
                         <div class="checkin-result-label" id="sci-room-label">Číslo pokoje</div>
-                        <div class="checkin-result-value" id="sci-room-value">—</div>
+                        <div class="checkin-result-value guest-room-value" id="sci-room-value">—</div>
                     </div>
-                    <div>
+                    <div class="guest-room-code-block">
                         <div class="checkin-result-label" id="sci-code-label">Kód k pokoji a mezidveřím</div>
-                        <div class="checkin-result-value" id="sci-code-value">—</div>
-                    </div>
-                    <div>
-                        <div class="checkin-result-label" id="sci-main-code-label">Kód hlavního vchodu</div>
-                        <div class="checkin-result-value" id="sci-main-code-value">2018</div>
+                        <div class="checkin-result-value guest-room-code-value" id="sci-code-value">—</div>
                     </div>
                 </div>
+
+                <div class="main-entrance-code-box">
+                    <div class="main-entrance-icon">↪</div>
+                    <div>
+                        <div class="checkin-result-label main-entrance-label" id="sci-main-code-label">Kód hlavního vchodu</div>
+                        <div class="checkin-result-value main-entrance-code" id="sci-main-code-value">2018</div>
+                    </div>
+                </div>
+
                 <div class="checkin-result-direction" id="sci-result-direction">Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.</div>
             </div>
             <div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
@@ -1497,7 +1566,7 @@
 
             <div class="input-group">
                 <label class="input-label" id="label-co-name">Jméno a příjmení</label>
-                <input type="text" id="coNameInput" placeholder="e.g. John Smith">
+                <input type="text" id="coNameInput" placeholder="např. Jan Novák">
             </div>
 
             <div class="input-group">
@@ -1536,7 +1605,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
-                        <input type="text" id="srvNameInput" placeholder="e.g. John Smith">
+                        <input type="text" id="srvNameInput" placeholder="např. Jan Novák">
                     </div>
                 </section>
 
@@ -1561,7 +1630,7 @@
                     <div id="taxiOrderForm" class="taxi-order-form hidden">
                         <div class="input-group">
                             <label class="input-label" id="taxi-name-label">Jméno hosta</label>
-                            <input type="text" id="taxiNameInput" placeholder="e.g. John Smith" autocomplete="off">
+                            <input type="text" id="taxiNameInput" placeholder="např. Jan Novák" autocomplete="off">
                         </div>
                         <div class="input-group">
                             <label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
@@ -1783,20 +1852,20 @@
         let idleRemaining = 90;
 
         const selfCheckinI18n = {
-            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',name:'Jméno uvedené na rezervaci',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
-            en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',name:'Name on the reservation',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',roomDoorCode:'Room & mezzanine door code',mainDoorCode:'Main entrance code',direction:'Now continue straight down the corridor and upstairs to your room.',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
-            de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',name:'Name auf der Reservierung',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',roomDoorCode:'Code für Zimmer & Zwischentüren',mainDoorCode:'Code für den Haupteingang',direction:'Gehen Sie nun den Flur geradeaus und die Treppe hinauf zu Ihrem Zimmer.',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
-            sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',name:'Meno uvedené na rezervácii',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',roomDoorCode:'Kód k izbe a medzidverám',mainDoorCode:'Kód hlavného vchodu',direction:'Teraz pokračujte chodbou rovno a po schodoch hore k svojej izbe.',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
-            it:{guide:'Guida al soggiorno',welcome:'Benvenuti nel nostro hotel!',instructions:'Per visualizzare il codice di accesso, inserite il nome indicato sulla prenotazione e le date di arrivo e partenza.',name:'Nome sulla prenotazione',from:'Data di arrivo',to:'Data di partenza',back:'INDIETRO',submit:'CHECK-IN',result:'La vostra camera è pronta',room:'Numero della camera',code:'Codice di accesso',roomDoorCode:'Codice camera e porte intermedie',mainDoorCode:'Codice ingresso principale',direction:'Ora proseguite dritto lungo il corridoio e salite le scale fino alla vostra camera.',note:'Fotografate questa schermata oppure annotate i dati sul foglio accanto al chiosco. Poi premete OK.',count:'Ritorno alla schermata principale tra',fill:'Inserite il nome sulla prenotazione e le date di arrivo e partenza.'},
-            es:{guide:'Guía de estancia',welcome:'¡Bienvenidos a nuestro hotel!',instructions:'Para ver el código de acceso, introduzca el nombre que figura en la reserva y las fechas de llegada y salida.',name:'Nombre en la reserva',from:'Fecha de llegada',to:'Fecha de salida',back:'VOLVER',submit:'CHECK-IN',result:'Su habitación está lista',room:'Número de habitación',code:'Código de acceso',roomDoorCode:'Código de habitación y puertas intermedias',mainDoorCode:'Código de la entrada principal',direction:'Ahora continúe recto por el pasillo y suba las escaleras hasta su habitación.',note:'Haga una foto de esta pantalla o anote los datos en el papel junto al quiosco. Después pulse OK.',count:'Regreso a la pantalla principal en',fill:'Introduzca el nombre que figura en la reserva y las fechas de llegada y salida.'},
-            fr:{guide:'Guide du séjour',welcome:'Bienvenue dans notre hôtel !',instructions:'Pour afficher votre code d’accès, saisissez le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.',name:'Nom sur la réservation',from:'Date d’arrivée',to:'Date de départ',back:'RETOUR',submit:'CHECK-IN',result:'Votre chambre est prête',room:'Numéro de chambre',code:'Code d’accès',roomDoorCode:'Code chambre et portes intermédiaires',mainDoorCode:'Code de l’entrée principale',direction:'Continuez maintenant tout droit dans le couloir, puis montez les escaliers jusqu’à votre chambre.',note:'Prenez cette page en photo ou notez les informations sur le papier à côté de la borne. Appuyez ensuite sur OK.',count:'Retour à l’écran principal dans',fill:'Veuillez saisir le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.'},
-            pl:{guide:'Przewodnik pobytu',welcome:'Witamy w naszym hotelu!',instructions:'Aby wyświetlić kod dostępu, wpisz imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.',name:'Imię i nazwisko z rezerwacji',from:'Data przyjazdu',to:'Data wyjazdu',back:'WSTECZ',submit:'CHECK-IN',result:'Twój pokój jest gotowy',room:'Numer pokoju',code:'Kod dostępu',roomDoorCode:'Kod do pokoju i drzwi pośrednich',mainDoorCode:'Kod głównego wejścia',direction:'Teraz idź prosto korytarzem i schodami na górę do swojego pokoju.',note:'Zrób zdjęcie tego ekranu lub zapisz dane na kartce obok kiosku. Następnie naciśnij OK.',count:'Powrót do ekranu głównego za',fill:'Wpisz imię i nazwisko z rezerwacji oraz datę przyjazdu i wyjazdu.'},
-            ua:{guide:'Путівник гостя',welcome:'Ласкаво просимо до нашого готелю!',instructions:'Щоб побачити код доступу, введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.',name:'Ім’я у бронюванні',from:'Дата заїзду',to:'Дата виїзду',back:'НАЗАД',submit:'CHECK-IN',result:'Ваш номер готовий',room:'Номер кімнати',code:'Код доступу',roomDoorCode:'Код номера та проміжних дверей',mainDoorCode:'Код головного входу',direction:'Тепер пройдіть прямо коридором і підніміться сходами до свого номера.',note:'Сфотографуйте цей екран або запишіть дані на папері поруч із кіоском. Потім натисніть OK.',count:'Повернення на головний екран через',fill:'Введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.'},
-            tr:{guide:'Konaklama Rehberi',welcome:'Otelimize hoş geldiniz!',instructions:'Erişim kodunuzu görüntülemek için rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.',name:'Rezervasyondaki ad',from:'Giriş tarihi',to:'Çıkış tarihi',back:'GERİ',submit:'CHECK-IN',result:'Odanız hazır',room:'Oda numarası',code:'Erişim kodu',roomDoorCode:'Oda ve ara kapı kodu',mainDoorCode:'Ana giriş kodu',direction:'Şimdi koridorda düz ilerleyin ve merdivenlerden yukarı çıkarak odanıza gidin.',note:'Bu ekranın fotoğrafını çekin veya bilgileri kioskun yanındaki kâğıda yazın. Ardından OK düğmesine basın.',count:'Ana ekrana dönüş',fill:'Lütfen rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.'},
-            da:{guide:'Opholdsguide',welcome:'Velkommen til vores hotel!',instructions:'For at se din adgangskode skal du indtaste navnet på reservationen samt ankomst- og afrejsedato.',name:'Navn på reservationen',from:'Ankomstdato',to:'Afrejsedato',back:'TILBAGE',submit:'CHECK-IN',result:'Dit værelse er klar',room:'Værelsesnummer',code:'Adgangskode',roomDoorCode:'Kode til værelse og mellemdøre',mainDoorCode:'Kode til hovedindgangen',direction:'Fortsæt nu ligeud ad gangen og op ad trappen til dit værelse.',note:'Tag et billede af denne skærm, eller skriv oplysningerne på papiret ved siden af kiosken. Tryk derefter OK.',count:'Tilbage til hovedskærmen om',fill:'Indtast navnet på reservationen samt ankomst- og afrejsedato.'},
-            ja:{guide:'ご滞在ガイド',welcome:'当ホテルへようこそ！',instructions:'アクセスコードを表示するには、予約名義とチェックイン日・チェックアウト日を入力してください。',name:'予約名義',from:'チェックイン日',to:'チェックアウト日',back:'戻る',submit:'CHECK-IN',result:'お部屋の準備ができました',room:'部屋番号',code:'アクセスコード',roomDoorCode:'客室・中間ドアのコード',mainDoorCode:'正面玄関コード',direction:'廊下をまっすぐ進み、階段を上がってお部屋へお進みください。',note:'この画面を撮影するか、キオスク横の用紙に情報をメモしてください。その後、OKを押してください。',count:'メイン画面に戻るまで',fill:'予約名義とチェックイン日・チェックアウト日を入力してください。'},
-            he:{guide:'מדריך השהייה',welcome:'ברוכים הבאים למלון שלנו!',instructions:'כדי להציג את קוד הכניסה, הזינו את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.',name:'השם בהזמנה',from:'תאריך הגעה',to:'תאריך עזיבה',back:'חזרה',submit:'CHECK-IN',result:'החדר שלכם מוכן',room:'מספר חדר',code:'קוד כניסה',roomDoorCode:'קוד לחדר ולדלתות הביניים',mainDoorCode:'קוד הכניסה הראשית',direction:'כעת המשיכו ישר במסדרון ועלו במדרגות אל החדר שלכם.',note:'צלמו את המסך או רשמו את הפרטים על הדף שליד הקיוסק. לאחר מכן לחצו OK.',count:'חזרה למסך הראשי בעוד',fill:'נא להזין את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.'},
-            el:{guide:'Οδηγός διαμονής',welcome:'Καλώς ήρθατε στο ξενοδοχείο μας!',instructions:'Για να εμφανίσετε τον κωδικό πρόσβασης, εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.',name:'Όνομα στην κράτηση',from:'Ημερομηνία άφιξης',to:'Ημερομηνία αναχώρησης',back:'ΠΙΣΩ',submit:'CHECK-IN',result:'Το δωμάτιό σας είναι έτοιμο',room:'Αριθμός δωματίου',code:'Κωδικός πρόσβασης',roomDoorCode:'Κωδικός δωματίου και ενδιάμεσων θυρών',mainDoorCode:'Κωδικός κύριας εισόδου',direction:'Τώρα συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες προς το δωμάτιό σας.',note:'Φωτογραφίστε αυτή την οθόνη ή σημειώστε τα στοιχεία στο χαρτί δίπλα στο κιόσκι. Στη συνέχεια πατήστε OK.',count:'Επιστροφή στην αρχική οθόνη σε',fill:'Εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.'}
+            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Jan Novák',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
+            en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',name:'Name on the reservation',namePlaceholder:'e.g. John Smith',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',roomDoorCode:'Room & mezzanine door code',mainDoorCode:'Main entrance code',direction:'Now continue straight down the corridor and upstairs to your room.',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
+            de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',name:'Name auf der Reservierung',namePlaceholder:'z. B. Max Mustermann',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',roomDoorCode:'Code für Zimmer & Zwischentüren',mainDoorCode:'Code für den Haupteingang',direction:'Gehen Sie nun den Flur geradeaus und die Treppe hinauf zu Ihrem Zimmer.',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
+            sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',name:'Meno uvedené na rezervácii',namePlaceholder:'napr. Ján Novák',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',roomDoorCode:'Kód k izbe a medzidverám',mainDoorCode:'Kód hlavného vchodu',direction:'Teraz pokračujte chodbou rovno a po schodoch hore k svojej izbe.',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
+            it:{guide:'Guida al soggiorno',welcome:'Benvenuti nel nostro hotel!',instructions:'Per visualizzare il codice di accesso, inserite il nome indicato sulla prenotazione e le date di arrivo e partenza.',name:'Nome sulla prenotazione',namePlaceholder:'es. Mario Rossi',from:'Data di arrivo',to:'Data di partenza',back:'INDIETRO',submit:'CHECK-IN',result:'La vostra camera è pronta',room:'Numero della camera',code:'Codice di accesso',roomDoorCode:'Codice camera e porte intermedie',mainDoorCode:'Codice ingresso principale',direction:'Ora proseguite dritto lungo il corridoio e salite le scale fino alla vostra camera.',note:'Fotografate questa schermata oppure annotate i dati sul foglio accanto al chiosco. Poi premete OK.',count:'Ritorno alla schermata principale tra',fill:'Inserite il nome sulla prenotazione e le date di arrivo e partenza.'},
+            es:{guide:'Guía de estancia',welcome:'¡Bienvenidos a nuestro hotel!',instructions:'Para ver el código de acceso, introduzca el nombre que figura en la reserva y las fechas de llegada y salida.',name:'Nombre en la reserva',namePlaceholder:'p. ej. Juan García',from:'Fecha de llegada',to:'Fecha de salida',back:'VOLVER',submit:'CHECK-IN',result:'Su habitación está lista',room:'Número de habitación',code:'Código de acceso',roomDoorCode:'Código de habitación y puertas intermedias',mainDoorCode:'Código de la entrada principal',direction:'Ahora continúe recto por el pasillo y suba las escaleras hasta su habitación.',note:'Haga una foto de esta pantalla o anote los datos en el papel junto al quiosco. Después pulse OK.',count:'Regreso a la pantalla principal en',fill:'Introduzca el nombre que figura en la reserva y las fechas de llegada y salida.'},
+            fr:{guide:'Guide du séjour',welcome:'Bienvenue dans notre hôtel !',instructions:'Pour afficher votre code d’accès, saisissez le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.',name:'Nom sur la réservation',namePlaceholder:'p. ex. Jean Dupont',from:'Date d’arrivée',to:'Date de départ',back:'RETOUR',submit:'CHECK-IN',result:'Votre chambre est prête',room:'Numéro de chambre',code:'Code d’accès',roomDoorCode:'Code chambre et portes intermédiaires',mainDoorCode:'Code de l’entrée principale',direction:'Continuez maintenant tout droit dans le couloir, puis montez les escaliers jusqu’à votre chambre.',note:'Prenez cette page en photo ou notez les informations sur le papier à côté de la borne. Appuyez ensuite sur OK.',count:'Retour à l’écran principal dans',fill:'Veuillez saisir le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.'},
+            pl:{guide:'Przewodnik pobytu',welcome:'Witamy w naszym hotelu!',instructions:'Aby wyświetlić kod dostępu, wpisz imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.',name:'Imię i nazwisko z rezerwacji',namePlaceholder:'np. Jan Kowalski',from:'Data przyjazdu',to:'Data wyjazdu',back:'WSTECZ',submit:'CHECK-IN',result:'Twój pokój jest gotowy',room:'Numer pokoju',code:'Kod dostępu',roomDoorCode:'Kod do pokoju i drzwi pośrednich',mainDoorCode:'Kod głównego wejścia',direction:'Teraz idź prosto korytarzem i schodami na górę do swojego pokoju.',note:'Zrób zdjęcie tego ekranu lub zapisz dane na kartce obok kiosku. Następnie naciśnij OK.',count:'Powrót do ekranu głównego za',fill:'Wpisz imię i nazwisko z rezerwacji oraz datę przyjazdu i wyjazdu.'},
+            ua:{guide:'Путівник гостя',welcome:'Ласкаво просимо до нашого готелю!',instructions:'Щоб побачити код доступу, введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.',name:'Ім’я у бронюванні',namePlaceholder:'напр. Іван Петренко',from:'Дата заїзду',to:'Дата виїзду',back:'НАЗАД',submit:'CHECK-IN',result:'Ваш номер готовий',room:'Номер кімнати',code:'Код доступу',roomDoorCode:'Код номера та проміжних дверей',mainDoorCode:'Код головного входу',direction:'Тепер пройдіть прямо коридором і підніміться сходами до свого номера.',note:'Сфотографуйте цей екран або запишіть дані на папері поруч із кіоском. Потім натисніть OK.',count:'Повернення на головний екран через',fill:'Введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.'},
+            tr:{guide:'Konaklama Rehberi',welcome:'Otelimize hoş geldiniz!',instructions:'Erişim kodunuzu görüntülemek için rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.',name:'Rezervasyondaki ad',namePlaceholder:'örn. Ahmet Yılmaz',from:'Giriş tarihi',to:'Çıkış tarihi',back:'GERİ',submit:'CHECK-IN',result:'Odanız hazır',room:'Oda numarası',code:'Erişim kodu',roomDoorCode:'Oda ve ara kapı kodu',mainDoorCode:'Ana giriş kodu',direction:'Şimdi koridorda düz ilerleyin ve merdivenlerden yukarı çıkarak odanıza gidin.',note:'Bu ekranın fotoğrafını çekin veya bilgileri kioskun yanındaki kâğıda yazın. Ardından OK düğmesine basın.',count:'Ana ekrana dönüş',fill:'Lütfen rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.'},
+            da:{guide:'Opholdsguide',welcome:'Velkommen til vores hotel!',instructions:'For at se din adgangskode skal du indtaste navnet på reservationen samt ankomst- og afrejsedato.',name:'Navn på reservationen',namePlaceholder:'f.eks. Jens Jensen',from:'Ankomstdato',to:'Afrejsedato',back:'TILBAGE',submit:'CHECK-IN',result:'Dit værelse er klar',room:'Værelsesnummer',code:'Adgangskode',roomDoorCode:'Kode til værelse og mellemdøre',mainDoorCode:'Kode til hovedindgangen',direction:'Fortsæt nu ligeud ad gangen og op ad trappen til dit værelse.',note:'Tag et billede af denne skærm, eller skriv oplysningerne på papiret ved siden af kiosken. Tryk derefter OK.',count:'Tilbage til hovedskærmen om',fill:'Indtast navnet på reservationen samt ankomst- og afrejsedato.'},
+            ja:{guide:'ご滞在ガイド',welcome:'当ホテルへようこそ！',instructions:'アクセスコードを表示するには、予約名義とチェックイン日・チェックアウト日を入力してください。',name:'予約名義',namePlaceholder:'例：山田 太郎',from:'チェックイン日',to:'チェックアウト日',back:'戻る',submit:'CHECK-IN',result:'お部屋の準備ができました',room:'部屋番号',code:'アクセスコード',roomDoorCode:'客室・中間ドアのコード',mainDoorCode:'正面玄関コード',direction:'廊下をまっすぐ進み、階段を上がってお部屋へお進みください。',note:'この画面を撮影するか、キオスク横の用紙に情報をメモしてください。その後、OKを押してください。',count:'メイン画面に戻るまで',fill:'予約名義とチェックイン日・チェックアウト日を入力してください。'},
+            he:{guide:'מדריך השהייה',welcome:'ברוכים הבאים למלון שלנו!',instructions:'כדי להציג את קוד הכניסה, הזינו את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.',name:'השם בהזמנה',namePlaceholder:'לדוגמה: ישראל ישראלי',from:'תאריך הגעה',to:'תאריך עזיבה',back:'חזרה',submit:'CHECK-IN',result:'החדר שלכם מוכן',room:'מספר חדר',code:'קוד כניסה',roomDoorCode:'קוד לחדר ולדלתות הביניים',mainDoorCode:'קוד הכניסה הראשית',direction:'כעת המשיכו ישר במסדרון ועלו במדרגות אל החדר שלכם.',note:'צלמו את המסך או רשמו את הפרטים על הדף שליד הקיוסק. לאחר מכן לחצו OK.',count:'חזרה למסך הראשי בעוד',fill:'נא להזין את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.'},
+            el:{guide:'Οδηγός διαμονής',welcome:'Καλώς ήρθατε στο ξενοδοχείο μας!',instructions:'Για να εμφανίσετε τον κωδικό πρόσβασης, εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.',name:'Όνομα στην κράτηση',namePlaceholder:'π.χ. Γιάννης Παπαδόπουλος',from:'Ημερομηνία άφιξης',to:'Ημερομηνία αναχώρησης',back:'ΠΙΣΩ',submit:'CHECK-IN',result:'Το δωμάτιό σας είναι έτοιμο',room:'Αριθμός δωματίου',code:'Κωδικός πρόσβασης',roomDoorCode:'Κωδικός δωματίου και ενδιάμεσων θυρών',mainDoorCode:'Κωδικός κύριας εισόδου',direction:'Τώρα συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες προς το δωμάτιό σας.',note:'Φωτογραφίστε αυτή την οθόνη ή σημειώστε τα στοιχεία στο χαρτί δίπλα στο κιόσκι. Στη συνέχεια πατήστε OK.',count:'Επιστροφή στην αρχική οθόνη σε',fill:'Εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.'}
         };
 
         // INTERNATIONALIZATION DATA
@@ -2990,6 +3059,10 @@ Cena: ${taxiPrice(taxiData)}`;
             document.getElementById('sci-welcome-title').innerText = sci.welcome;
             document.getElementById('sci-instructions').innerText = sci.instructions;
             document.getElementById('sci-name-label').innerText = sci.name;
+            document.getElementById('sciNameInput').placeholder = sci.namePlaceholder;
+            document.getElementById('coNameInput').placeholder = sci.namePlaceholder;
+            document.getElementById('srvNameInput').placeholder = sci.namePlaceholder;
+            document.getElementById('taxiNameInput').placeholder = sci.namePlaceholder;
             document.getElementById('sci-from-label').innerText = sci.from;
             document.getElementById('sci-to-label').innerText = sci.to;
             document.getElementById('btn-sci-back').innerText = sci.back;
