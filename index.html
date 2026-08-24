@@ -1253,6 +1253,125 @@
             }
         }
 
+
+        .native-date-storage {
+            position: absolute !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            border: 0 !important;
+        }
+        .localized-date-display {
+            cursor: pointer;
+            background: var(--input-bg);
+        }
+        .localized-calendar-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 12000;
+            background: rgba(0,0,0,.62);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .localized-calendar-card {
+            width: min(92vw, 430px);
+            background: #252a32;
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 20px;
+            box-shadow: 0 24px 60px rgba(0,0,0,.55);
+            padding: 18px;
+            color: #fff;
+        }
+        .localized-calendar-header {
+            display: grid;
+            grid-template-columns: 46px 1fr 46px;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .localized-calendar-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: capitalize;
+        }
+        .calendar-nav-btn {
+            width: 46px;
+            height: 42px;
+            border: 0;
+            border-radius: 11px;
+            background: rgba(255,255,255,.09);
+            color: #fff;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .localized-calendar-weekdays,
+        .localized-calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+        .localized-calendar-weekdays {
+            margin-bottom: 6px;
+        }
+        .localized-calendar-weekdays div {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 0;
+            text-transform: uppercase;
+        }
+        .calendar-day {
+            aspect-ratio: 1 / 1;
+            border: 0;
+            border-radius: 11px;
+            background: rgba(255,255,255,.055);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 650;
+            cursor: pointer;
+        }
+        .calendar-day:hover,
+        .calendar-day:active {
+            background: rgba(76,175,80,.22);
+        }
+        .calendar-day.today {
+            outline: 1px solid rgba(144,202,249,.65);
+        }
+        .calendar-day.selected {
+            background: linear-gradient(180deg, var(--green-main), var(--green-dark));
+            box-shadow: inset 0 0 0 1px var(--green-light);
+        }
+        .calendar-day.empty {
+            background: transparent;
+            pointer-events: none;
+        }
+        .localized-calendar-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .calendar-secondary-btn {
+            flex: 1;
+            border: 0;
+            border-radius: 11px;
+            padding: 12px 14px;
+            background: linear-gradient(180deg, var(--gray-main), var(--gray-dark));
+            color: #fff;
+            font-size: 15px;
+            font-weight: 750;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--gray-shadow);
+        }
+
     </style>
 </head>
 <body>
@@ -1351,11 +1470,11 @@
             <div class="date-row">
                 <div class="input-group">
                     <label class="input-label" id="sci-from-label">Datum příjezdu</label>
-                    <input type="date" id="sciFromInput">
+                    <input type="date" id="sciFromInput" class="native-date-storage"><input type="text" id="sciFromDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('sciFromInput', 'sciFromDisplay')">
                 </div>
                 <div class="input-group">
                     <label class="input-label" id="sci-to-label">Datum odjezdu</label>
-                    <input type="date" id="sciToInput">
+                    <input type="date" id="sciToInput" class="native-date-storage"><input type="text" id="sciToDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('sciToInput', 'sciToDisplay')">
                 </div>
             </div>
 
@@ -1638,7 +1757,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
-                            <input type="date" id="taxiDateInput">
+                            <input type="date" id="taxiDateInput" class="native-date-storage"><input type="text" id="taxiDateDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('taxiDateInput', 'taxiDateDisplay')">
                         </div>
                         <div class="input-group">
                             <label class="input-label" id="taxi-time-label">Čas vyzvednutí</label>
@@ -1836,6 +1955,23 @@
 
     </div>
 
+
+
+    <div id="localized-calendar-overlay" class="localized-calendar-overlay hidden" onclick="calendarOverlayClick(event)">
+        <div class="localized-calendar-card" role="dialog" aria-modal="true">
+            <div class="localized-calendar-header">
+                <button type="button" class="calendar-nav-btn" onclick="calendarMoveMonth(-1)" aria-label="Previous month">‹</button>
+                <div id="localized-calendar-title" class="localized-calendar-title"></div>
+                <button type="button" class="calendar-nav-btn" onclick="calendarMoveMonth(1)" aria-label="Next month">›</button>
+            </div>
+            <div id="localized-calendar-weekdays" class="localized-calendar-weekdays"></div>
+            <div id="localized-calendar-days" class="localized-calendar-days"></div>
+            <div class="localized-calendar-actions">
+                <button type="button" class="calendar-secondary-btn" id="calendar-today-btn" onclick="calendarChooseToday()">Dnes</button>
+                <button type="button" class="calendar-secondary-btn" id="calendar-close-btn" onclick="closeLocalizedCalendar()">Zavřít</button>
+            </div>
+        </div>
+    </div>
 
     <div id="global-idle-timer" class="global-idle-timer hidden">
         <span id="global-idle-label">Návrat za</span>
@@ -2662,6 +2798,146 @@
             }
         };
 
+
+        const kioskLocales = {"cs": "cs-CZ", "en": "en-GB", "de": "de-DE", "sk": "sk-SK", "it": "it-IT", "es": "es-ES", "fr": "fr-FR", "pl": "pl-PL", "ua": "uk-UA", "tr": "tr-TR", "da": "da-DK", "ja": "ja-JP", "he": "he-IL", "el": "el-GR"};
+        const calendarLabels = {"cs": {"today": "Dnes", "close": "Zavřít"}, "en": {"today": "Today", "close": "Close"}, "de": {"today": "Heute", "close": "Schließen"}, "sk": {"today": "Dnes", "close": "Zavrieť"}, "it": {"today": "Oggi", "close": "Chiudi"}, "es": {"today": "Hoy", "close": "Cerrar"}, "fr": {"today": "Aujourd’hui", "close": "Fermer"}, "pl": {"today": "Dzisiaj", "close": "Zamknij"}, "ua": {"today": "Сьогодні", "close": "Закрити"}, "tr": {"today": "Bugün", "close": "Kapat"}, "da": {"today": "I dag", "close": "Luk"}, "ja": {"today": "今日", "close": "閉じる"}, "he": {"today": "היום", "close": "סגירה"}, "el": {"today": "Σήμερα", "close": "Κλείσιμο"}};
+        let calendarTargetInputId = null;
+        let calendarTargetDisplayId = null;
+        let calendarViewDate = new Date();
+
+        function currentKioskLocale() {
+            return kioskLocales[currentLang] || 'en-GB';
+        }
+
+        function parseIsoDate(value) {
+            if (!value) return null;
+            const parts = value.split('-').map(Number);
+            if (parts.length !== 3) return null;
+            return new Date(parts[0], parts[1] - 1, parts[2], 12, 0, 0);
+        }
+
+        function isoDate(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function formatLocalizedDate(value) {
+            const date = parseIsoDate(value);
+            if (!date) return '';
+            return new Intl.DateTimeFormat(currentKioskLocale(), {
+                day: '2-digit', month: '2-digit', year: 'numeric'
+            }).format(date);
+        }
+
+        function updateLocalizedDateDisplays() {
+            [
+                ['sciFromInput','sciFromDisplay'],
+                ['sciToInput','sciToDisplay'],
+                ['taxiDateInput','taxiDateDisplay']
+            ].forEach(([inputId, displayId]) => {
+                const input = document.getElementById(inputId);
+                const display = document.getElementById(displayId);
+                if (input && display) display.value = formatLocalizedDate(input.value);
+            });
+        }
+
+        function openLocalizedCalendar(inputId, displayId) {
+            calendarTargetInputId = inputId;
+            calendarTargetDisplayId = displayId;
+            const selected = parseIsoDate(document.getElementById(inputId).value);
+            calendarViewDate = selected || new Date();
+            calendarViewDate = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth(), 1, 12);
+            renderLocalizedCalendar();
+            document.getElementById('localized-calendar-overlay').classList.remove('hidden');
+            startAutoResetTimer();
+        }
+
+        function closeLocalizedCalendar() {
+            document.getElementById('localized-calendar-overlay').classList.add('hidden');
+            calendarTargetInputId = null;
+            calendarTargetDisplayId = null;
+        }
+
+        function calendarOverlayClick(event) {
+            if (event.target.id === 'localized-calendar-overlay') closeLocalizedCalendar();
+        }
+
+        function calendarMoveMonth(delta) {
+            calendarViewDate = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() + delta, 1, 12);
+            renderLocalizedCalendar();
+            startAutoResetTimer();
+        }
+
+        function calendarChooseToday() {
+            chooseCalendarDate(new Date());
+        }
+
+        function chooseCalendarDate(date) {
+            if (!calendarTargetInputId) return;
+            const value = isoDate(date);
+            document.getElementById(calendarTargetInputId).value = value;
+            if (calendarTargetDisplayId) {
+                document.getElementById(calendarTargetDisplayId).value = formatLocalizedDate(value);
+            }
+            document.getElementById(calendarTargetInputId).dispatchEvent(new Event('change', {bubbles:true}));
+            closeLocalizedCalendar();
+            startAutoResetTimer();
+        }
+
+        function renderLocalizedCalendar() {
+            const locale = currentKioskLocale();
+            const title = new Intl.DateTimeFormat(locale, {month:'long', year:'numeric'}).format(calendarViewDate);
+            document.getElementById('localized-calendar-title').innerText = title;
+
+            const labels = calendarLabels[currentLang] || calendarLabels.en;
+            document.getElementById('calendar-today-btn').innerText = labels.today;
+            document.getElementById('calendar-close-btn').innerText = labels.close;
+
+            const weekdaysEl = document.getElementById('localized-calendar-weekdays');
+            const daysEl = document.getElementById('localized-calendar-days');
+            weekdaysEl.innerHTML = '';
+            daysEl.innerHTML = '';
+
+            // Monday-first calendar, consistent across kiosk languages.
+            const baseMonday = new Date(2024, 0, 1, 12); // Monday
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(baseMonday);
+                d.setDate(baseMonday.getDate() + i);
+                const el = document.createElement('div');
+                el.innerText = new Intl.DateTimeFormat(locale, {weekday:'short'}).format(d);
+                weekdaysEl.appendChild(el);
+            }
+
+            const year = calendarViewDate.getFullYear();
+            const month = calendarViewDate.getMonth();
+            const first = new Date(year, month, 1, 12);
+            const offset = (first.getDay() + 6) % 7; // Monday=0
+            const count = new Date(year, month + 1, 0).getDate();
+            const selectedValue = calendarTargetInputId ? document.getElementById(calendarTargetInputId).value : '';
+            const todayValue = isoDate(new Date());
+
+            for (let i = 0; i < offset; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day empty';
+                daysEl.appendChild(empty);
+            }
+
+            for (let day = 1; day <= count; day++) {
+                const date = new Date(year, month, day, 12);
+                const value = isoDate(date);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'calendar-day';
+                if (value === todayValue) btn.classList.add('today');
+                if (value === selectedValue) btn.classList.add('selected');
+                btn.innerText = new Intl.NumberFormat(locale, {useGrouping:false}).format(day);
+                btn.onclick = () => chooseCalendarDate(date);
+                daysEl.appendChild(btn);
+            }
+        }
+
         // NAVIGATION LOGIC
         function hideAllScreens() {
             document.getElementById('screen-1').classList.add('hidden');
@@ -2802,6 +3078,8 @@
             document.getElementById('sciNameInput').value = '';
             document.getElementById('sciFromInput').value = '';
             document.getElementById('sciToInput').value = '';
+            document.getElementById('sciFromDisplay').value = '';
+            document.getElementById('sciToDisplay').value = '';
             document.getElementById('coRoomInput').value = '';
             document.getElementById('coNameInput').value = '';
             document.getElementById('coElectronicReceipt').checked = false;
@@ -2815,6 +3093,7 @@
             document.getElementById('taxiOrderForm').classList.add('hidden');
             document.getElementById('taxiNameInput').value = '';
             document.getElementById('taxiDateInput').value = '';
+            document.getElementById('taxiDateDisplay').value = '';
             document.getElementById('taxiTimeInput').value = '';
             document.getElementById('taxiPrefixInput').value = '+420';
             document.getElementById('taxiPhoneInput').value = '';
@@ -3133,6 +3412,7 @@ Cena: ${taxiPrice(taxiData)}`;
             document.getElementById('taxi-vehicle-title').innerText = taxiDict.vehicle;
             document.getElementById('taxi-vehicle-car').innerText = taxiDict.carChoice;
             document.getElementById('taxi-vehicle-minibus').innerText = taxiDict.miniChoice;
+            updateLocalizedDateDisplays();
 
             // Check-in Info
             document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
