@@ -1515,7 +1515,7 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN RESULT (DEMO UNTIL BACKEND IS CONNECTED) -->
+        <!-- SCREEN SELF CHECK-IN RESULT -->
         <div id="screen-checkin-result" class="card hidden">
             <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
             <div class="checkin-result-box">
@@ -1551,7 +1551,7 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY (DEMO) -->
+        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY -->
         <div id="screen-checkin-waiting" class="card hidden">
             <div class="card-title-welcome" id="sci-waiting-title">Váš pokoj ještě není připraven</div>
             <div class="checkin-status-box waiting-status-box">
@@ -1563,7 +1563,7 @@
             </div>
         </div>
 
-        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED (DEMO) -->
+        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED -->
         <div id="screen-checkin-unverified" class="card hidden">
             <div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
             <div class="checkin-status-box unverified-status-box">
@@ -2013,6 +2013,7 @@
     <script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
+        const CHECKIN_API_URL = 'https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/';
         const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
 
         let currentLang = 'cs';
@@ -3035,31 +3036,69 @@
             startAutoResetTimer();
         }
 
-        function submitSelfCheckin() {
+        async function submitSelfCheckin() {
             const name = document.getElementById('sciNameInput').value.trim();
             const from = document.getElementById('sciFromInput').value;
             const to = document.getElementById('sciToInput').value;
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
+            const submitButton = document.getElementById('btn-sci-submit');
 
             if (!name || !from || !to) {
                 alert(t.fill);
                 return;
             }
 
-            const demoName = name.toUpperCase().replace(/\s+/g, ' ').trim();
-            hideAllScreens();
+            submitButton.disabled = true;
+            submitButton.style.opacity = '0.7';
 
-            if (demoName === 'DEMO READY') {
-                document.getElementById('sci-room-value').innerText = '203';
-                document.getElementById('sci-code-value').innerText = '4826#';
-                document.getElementById('screen-checkin-result').classList.remove('hidden');
-            } else if (demoName === 'DEMO WAITING') {
-                document.getElementById('screen-checkin-waiting').classList.remove('hidden');
-            } else {
-                document.getElementById('screen-checkin-unverified').classList.remove('hidden');
+            try {
+                const response = await fetch(CHECKIN_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        guestName: name,
+                        arrivalDate: from,
+                        departureDate: to
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                hideAllScreens();
+
+                if (result.status === 'READY') {
+                    document.getElementById('sci-room-value').innerText = result.room || '—';
+                    document.getElementById('sci-code-value').innerText = result.roomCode || '—';
+                    document.getElementById('sci-main-code-value').innerText = '2018';
+                    document.getElementById('screen-checkin-result').classList.remove('hidden');
+                } else if (result.status === 'WAITING') {
+                    document.getElementById('screen-checkin-waiting').classList.remove('hidden');
+                } else if (result.status === 'NOT_FOUND') {
+                    document.getElementById('screen-checkin-unverified').classList.remove('hidden');
+                } else {
+                    throw new Error(`Unexpected API status: ${result.status}`);
+                }
+
+                startCheckinResultCountdown();
+
+            } catch (error) {
+                console.error('Check-in API error:', error);
+                alert(
+                    currentLang === 'cs'
+                        ? 'Nepodařilo se spojit se systémem check-inu. Zkuste to prosím znovu za chvíli.'
+                        : 'Unable to connect to the check-in system. Please try again in a moment.'
+                );
+                startAutoResetTimer();
+            } finally {
+                submitButton.disabled = false;
+                submitButton.style.opacity = '';
             }
-
-            startCheckinResultCountdown();
         }
 
         function startCheckinResultCountdown() {
