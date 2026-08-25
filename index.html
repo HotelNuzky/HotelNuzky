@@ -2142,84 +2142,120 @@
 
 
         /* =========================================================
-           FINAL ALIGNMENT TWEAKS v3 — iPad verified
+           iPad layout correction v4
+           Stable explicit layout — no auto-placement gaps
            ========================================================= */
 
-        /* GUIDE — Wi-Fi truly centered */
-        #screen-checkin .wifi-box,
-        #screen-checkin .wifi-details,
-        #screen-checkin .wifi-title {
+        /* GUIDE: explicit grid prevents empty spaces and chaos */
+        #screen-checkin .info-list {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            grid-template-areas:
+                "wifi wifi"
+                "code code"
+                "alt alt"
+                "breakfast luggage"
+                "architecture luggage"
+                "registration registration"
+                "parking housekeeping" !important;
+            gap: 16px !important;
+            align-items: stretch !important;
+        }
+
+        #screen-checkin .info-list > .wifi-box-compact {
+            grid-area: wifi !important;
+            width: 100% !important;
+            max-width: none !important;
+            justify-self: stretch !important;
+            text-align: center !important;
+            margin: 0 !important;
+        }
+
+        #screen-checkin .info-list > .wifi-box-compact .wifi-title,
+        #screen-checkin .info-list > .wifi-box-compact .wifi-details,
+        #screen-checkin .info-list > .wifi-box-compact .wifi-detail-item {
             text-align: center !important;
         }
 
-        #screen-checkin .wifi-details {
+        #screen-checkin .info-list > .wifi-box-compact .wifi-details {
             justify-content: center !important;
             align-items: center !important;
         }
 
-        #screen-checkin .wifi-detail-item {
-            text-align: center !important;
-            align-items: center !important;
+        #screen-checkin .guide-code {
+            grid-area: code !important;
         }
 
-        /* GUIDE — explicit grid placement */
-        #screen-checkin .info-list {
-            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            grid-auto-flow: row;
-            align-items: stretch;
+        #screen-checkin .guide-alt-luggage {
+            grid-area: alt !important;
         }
 
-        /* Registration goes full-width */
-        #screen-checkin .guide-registration {
-            grid-column: 1 / -1 !important;
-            max-width: none !important;
-            width: 100% !important;
-        }
-
-        /* Breakfast made more compact */
         #screen-checkin .guide-breakfast {
+            grid-area: breakfast !important;
             min-height: 0 !important;
             padding-top: 14px !important;
             padding-bottom: 14px !important;
         }
 
-        #screen-checkin .guide-breakfast > strong {
-            margin-bottom: 6px !important;
-        }
-
-        /* Architecture sits directly below Breakfast in same column */
-        #screen-checkin .guide-breakfast {
-            grid-column: 1;
-        }
-
         #screen-checkin .guide-architecture {
-            grid-column: 1;
+            grid-area: architecture !important;
+            min-height: 0 !important;
         }
 
-        /* Parking + Housekeeping are a paired row */
+        #screen-checkin .guide-luggage {
+            grid-area: luggage !important;
+        }
+
+        #screen-checkin .guide-registration {
+            grid-area: registration !important;
+        }
+
         #screen-checkin .guide-parking {
-            grid-column: 1;
+            grid-area: parking !important;
         }
 
-        #screen-checkin .guide-housekeeping-v3 {
-            grid-column: 2 !important;
+        #screen-checkin .guide-housekeeping-v4 {
+            grid-area: housekeeping !important;
             max-width: none !important;
             width: 100% !important;
             justify-self: stretch !important;
         }
 
-        /* Existing older housekeeping full-width rule must be neutralized */
-        #screen-checkin .info-list .guide-housekeeping,
-        #screen-checkin .info-list .guide-housekeeping-v3 {
-            grid-column: auto;
+        /* Neutralise earlier full-width housekeeping rule */
+        #screen-checkin .info-list .guide-housekeeping {
+            grid-column: auto !important;
+            max-width: none !important;
         }
 
-        /* Keep full-width code block as before */
-        #screen-checkin .info-list .guide-full-width {
-            grid-column: 1 / -1 !important;
+        /* Uniform cards inside guide */
+        #screen-checkin .info-item {
+            height: 100% !important;
+            min-height: 0 !important;
+            margin: 0 !important;
         }
 
-        /* PARKING — make numeric markers much more readable */
+        /* Alternative storage QR centered */
+        #screen-checkin .guide-alt-luggage .luggage-service-row {
+            align-items: center !important;
+        }
+
+        #screen-checkin .guide-alt-luggage .parking-qr-option {
+            margin: 12px auto 0 !important;
+            justify-content: center !important;
+        }
+
+        /* CHECKOUT: keep luggage QR blocks centered */
+        #screen-checkout .luggage-service-row {
+            align-items: center !important;
+        }
+
+        #screen-checkout .luggage-service-row .parking-qr-option {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            justify-content: center !important;
+        }
+
+        /* PARKING: larger numeric markers */
         #screen-parking .info-item > strong .info-item-icon {
             width: 34px !important;
             height: 34px !important;
@@ -2227,59 +2263,62 @@
         }
 
         #screen-parking .info-item > strong .info-item-icon text {
-            font-size: 14px !important;
+            font-size: 15px !important;
             font-weight: 900 !important;
         }
 
-        /* Prevent long URLs / hypertext from crossing card edges */
+        /* Long URLs always stay inside the card */
         #screen-parking .info-item,
-        #screen-parking .info-item span,
-        #screen-parking .info-item strong {
-            min-width: 0;
-        }
-
-        #screen-parking .info-item a,
-        #screen-parking .info-item span,
-        #screen-parking .info-item strong {
-            overflow-wrap: anywhere;
-            word-break: break-word;
-        }
-
-        #parking-content-row-4 > span {
+        #screen-parking .info-item > span,
+        #screen-parking .parking-content-row > span {
+            min-width: 0 !important;
             overflow-wrap: anywhere !important;
             word-break: break-word !important;
         }
 
-        /* Align option 3 and 4 QR blocks at a similar vertical level */
+        /* Options 3 and 4: QR codes aligned to the same bottom baseline,
+           while keeping a safe distance from the card edge */
         #parking-content-row-3,
         #parking-content-row-4 {
-            display: grid !important;
-            grid-template-rows: 1fr auto !important;
-            align-content: stretch !important;
-            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            height: calc(100% - 58px) !important;
+            padding-bottom: 4px !important;
         }
 
         #parking-content-row-3 .parking-qr-option,
         #parking-content-row-4 .parking-qr-option {
-            align-self: end !important;
-            margin-top: 14px !important;
-            margin-bottom: 10px !important;
+            margin: auto auto 8px !important;
+            width: 100% !important;
+            max-width: 280px !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
         }
 
         @media (max-width: 760px) {
-            #screen-checkin .guide-registration,
-            #screen-checkin .guide-breakfast,
-            #screen-checkin .guide-architecture,
-            #screen-checkin .guide-parking,
-            #screen-checkin .guide-housekeeping-v3,
-            #screen-checkin .info-list .guide-full-width {
-                grid-column: 1 !important;
+            #screen-checkin .info-list {
+                grid-template-columns: 1fr !important;
+                grid-template-areas:
+                    "wifi"
+                    "code"
+                    "alt"
+                    "breakfast"
+                    "architecture"
+                    "luggage"
+                    "registration"
+                    "parking"
+                    "housekeeping" !important;
             }
 
             #parking-content-row-3,
             #parking-content-row-4 {
-                display: flex !important;
-                flex-direction: column !important;
+                height: auto !important;
+            }
+
+            #parking-content-row-3 .parking-qr-option,
+            #parking-content-row-4 .parking-qr-option {
+                margin-top: 14px !important;
             }
         }
 
@@ -2548,14 +2587,14 @@
 </div>
 </div>
 </div>
-<div class="info-item guide-full-width info-item-highlight">
+<div class="info-item guide-code guide-full-width info-item-highlight">
 <strong>
 <svg class="info-item-icon" viewbox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path></svg>
 <span id="ci-q1-title">Jak získáte kód?</span>
 </strong>
 <span id="ci-q1-text">Pro získání kódu použijte tlačítko CHECK-IN v hlavním menu. Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</span>
 </div>
-<div class="info-item">
+<div class="info-item guide-alt-luggage">
 <strong>
 <svg class="info-item-icon" viewbox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
 <span id="ci-alt-luggage-title">Alternativní úschova zavazadel</span>
@@ -2582,7 +2621,7 @@
 </strong>
 <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
 </div>
-<div class="info-item">
+<div class="info-item guide-luggage">
 <strong>
 <svg class="info-item-icon" viewbox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
 <span id="ci-q3-title">Zavazadla</span>
@@ -2603,7 +2642,7 @@
 </strong>
 <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
 </div>
-<div class="info-item guide-housekeeping-v3 guide-housekeeping">
+<div class="info-item guide-housekeeping-v4 guide-housekeeping">
 <strong>
 <svg aria-hidden="true" class="info-item-icon" viewbox="0 0 24 24"><path d="M9 2h6v2h-1v4.17A5.001 5.001 0 0 1 17 13v7H7v-7a5.001 5.001 0 0 1 3-4.83V4H9V2zm3 8a3 3 0 0 0-3 3v5h6v-5a3 3 0 0 0-3-3zm-5 3h2v7H7v-7zm8 0h2v7h-2v-7z"></path></svg>
 <span id="ci-housekeeping-title">Úklid pokoje</span>
