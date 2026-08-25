@@ -2153,6 +2153,7 @@
             grid-template-areas:
                 "wifi wifi"
                 "code code"
+                "luggage luggage"
                 "alt alt"
                 "breakfast luggage"
                 "architecture luggage"
@@ -2389,6 +2390,17 @@
         #screen-taxi .keyboard-help-box,
         #screen-self-checkin .keyboard-help-box {
             font-size: 1.025em;
+        }
+
+
+
+        /* v8 — correct visual order of luggage cards only */
+        #screen-checkin .guide-luggage {
+            grid-area: luggage !important;
+        }
+
+        #screen-checkin .guide-alt-luggage {
+            grid-area: alt !important;
         }
 
 </style>
