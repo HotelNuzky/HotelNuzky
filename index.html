@@ -3272,6 +3272,14 @@
         }
 
 
+        function formatDateForNtfy(value) {
+            if (!value) return '';
+            const parts = String(value).split('-');
+            return parts.length === 3
+                ? `${parts[2]}.${parts[1]}.${parts[0]}`
+                : String(value);
+        }
+
         function renderCheckinRooms(rooms) {
             const list = document.getElementById('sci-rooms-list');
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
@@ -3371,6 +3379,35 @@
                     renderCheckinRooms(rooms);
                     document.getElementById('sci-main-code-value').innerText = '2018';
                     document.getElementById('screen-checkin-result').classList.remove('hidden');
+
+                    // Informujeme recepci až poté, co byly přístupové údaje
+                    // skutečně zobrazeny hostovi. Kódy pokojů se do ntfy neposílají.
+                    try {
+                        const roomLines = rooms
+                            .map(item => `Pokoj: ${item.room || '—'}`)
+                            .join('\n');
+
+                        const ntfyMessage =
+                            `🟢 CHECK-IN\n\n` +
+                            `Jméno: ${name}\n` +
+                            `Příjezd: ${formatDateForNtfy(arrival)}\n` +
+                            `Odjezd: ${formatDateForNtfy(departure)}\n` +
+                            roomLines;
+
+                        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Title': 'Check-in',
+                                'Priority': 'high'
+                            },
+                            body: ntfyMessage
+                        }).catch(error => {
+                            console.error('Check-in ntfy failed:', error);
+                        });
+                    } catch (error) {
+                        console.error('Check-in ntfy failed:', error);
+                    }
                 } else if (result.status === 'WAITING') {
                     document.getElementById('screen-checkin-waiting').classList.remove('hidden');
                 } else if (result.status === 'NOT_FOUND') {
