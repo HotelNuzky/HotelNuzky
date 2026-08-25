@@ -1919,6 +1919,152 @@
             }
         }
 
+
+
+        /* =========================================================
+           FINAL READABILITY REFINEMENT
+           Guide: two-column cards
+           Parking: faster side-by-side comparison
+           Checkout: stronger task hierarchy
+           ========================================================= */
+
+        /* STAY GUIDE — compact two-column information board */
+        #screen-checkin .info-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        #screen-checkin .info-item {
+            height: 100%;
+            text-align: center;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+        #screen-checkin .info-item > strong {
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 9px;
+        }
+
+        #screen-checkin .info-item > span {
+            display: block;
+            text-align: center;
+        }
+
+        /* PARKING — cards can be compared without one very long column */
+        #screen-parking .info-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        #screen-parking .info-item {
+            height: 100%;
+            padding: 18px;
+            border-left-width: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.14);
+        }
+
+        #screen-parking .info-item > strong {
+            min-height: 48px;
+            align-items: center;
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        #screen-parking .info-item > span,
+        #screen-parking .parking-content-row > span {
+            line-height: 1.62;
+        }
+
+        #screen-parking .parking-content-row {
+            display: flex !important;
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 14px !important;
+            height: calc(100% - 58px);
+        }
+
+        #screen-parking .parking-qr-option {
+            margin: auto auto 0;
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
+        }
+
+        #screen-parking .info-item span strong {
+            color: #9bd3ff;
+            font-weight: 800;
+        }
+
+        #screen-parking .info-item em {
+            color: #aeb8c2;
+            font-size: 12.5px;
+        }
+
+        /* CHECK-OUT — visually separate “information” from “what to do now” */
+        #screen-checkout .checkout-info-column {
+            opacity: .94;
+        }
+
+        #screen-checkout .checkout-form-column {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(66,165,245,.055);
+            border: 1px solid rgba(66,165,245,.24);
+            box-shadow: 0 6px 18px rgba(0,0,0,.16);
+        }
+
+        #screen-checkout .checkout-form-column > .luggage-box:has(.instructions) {
+            margin-bottom: 16px;
+        }
+
+        #screen-checkout .instructions {
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 800;
+        }
+
+        #screen-checkout .keyboard-help-box {
+            margin-top: 0;
+            margin-bottom: 18px;
+            grid-template-columns: minmax(0, 1fr) 150px;
+            padding: 12px 14px;
+        }
+
+        #screen-checkout .ios-keyboard-demo {
+            transform: scale(.82);
+            transform-origin: center right;
+            margin-left: -20px;
+            margin-right: -15px;
+        }
+
+        #screen-checkout .input-group {
+            margin-bottom: 15px;
+        }
+
+        #screen-checkout .button-row {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 760px) {
+            #screen-checkin .info-list,
+            #screen-parking .info-list {
+                grid-template-columns: 1fr;
+            }
+
+            #screen-checkout .checkout-form-column {
+                padding: 14px;
+            }
+        }
+
 </style>
 </head>
 <body>
