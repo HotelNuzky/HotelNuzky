@@ -3540,9 +3540,8 @@ Cena: ${taxiPrice(taxiData)}`;
                     mode: 'no-cors',
                     body: taxiMessage,
                     headers: {
-                        'Title': `Taxi/Transfer: ${taxiData.name}`,
-                        'Priority': 'high',
-                        'Tags': 'black_circle,taxi'
+                        'Title': 'Taxi / Transfer',
+                        'Priority': 'high'
                     }
                 }));
             }
