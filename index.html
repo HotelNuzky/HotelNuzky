@@ -1658,6 +1658,89 @@
             color: var(--green-light);
         }
 
+        .guest-room-occupancy {
+            grid-column: 1 / -1;
+            margin-top: -3px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.075);
+            text-align: center;
+        }
+
+        .guest-room-occupancy-label {
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            font-size: 11px;
+            font-weight: 750;
+            margin-bottom: 8px;
+        }
+
+        .guest-room-occupancy-groups {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 18px;
+        }
+
+        .occupancy-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            min-height: 26px;
+        }
+
+        .occupancy-group-label {
+            color: #c5cdd7;
+            font-size: 11px;
+            font-weight: 650;
+            white-space: nowrap;
+            margin-right: 2px;
+        }
+
+        .occupancy-icon {
+            width: 22px;
+            height: 22px;
+            color: #dbe3ec;
+            flex: 0 0 auto;
+        }
+
+        .occupancy-icon.child {
+            width: 19px;
+            height: 19px;
+            color: #b9d6ec;
+        }
+
+        .occupancy-icon.infant {
+            width: 22px;
+            height: 22px;
+            color: #c5dfc7;
+        }
+
+        .guest-occupancy-note {
+            margin: 14px 0 18px;
+            padding: 13px 16px;
+            border-radius: 12px;
+            background: rgba(255,193,7,.085);
+            border: 1px solid rgba(255,213,79,.28);
+            color: #e5e9ee;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .guest-occupancy-note strong {
+            color: #ffe082;
+        }
+
+        @media (max-width: 600px) {
+            .guest-room-occupancy-groups {
+                gap: 8px 12px;
+            }
+        }
+
         @media (max-width: 600px) {
             .guest-room-entry {
                 grid-template-columns: 1fr;
@@ -1798,6 +1881,9 @@
 <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
 <div class="checkin-result-box">
 <div id="sci-rooms-list" class="guest-rooms-list"></div>
+<div class="guest-occupancy-note hidden" id="sci-occupancy-note">
+<strong>*</strong> <span id="sci-occupancy-note-text"></span>
+</div>
 
                 <div class="main-entrance-code-box">
 <div aria-hidden="true" class="main-entrance-icon">
@@ -2255,6 +2341,8 @@
         let idleCountdownTimer = null;
         let confirmationCountdownTimer = null;
         let idleRemaining = 90;
+
+        const occupancyI18n = {"cs":{"preparedFor":"Připraveno pro*","adults":"Dospělí 18+","children":"Děti 4–17","infants":"Děti 0–3","note":"Pokoj je připraven podle počtu osob zadaného při rezervaci. Systém tyto údaje přebírá automaticky. Případné další osoby nám prosím nahlaste nejpozději do 16:00; jsou zpoplatněny dle ceníku. Dětskou postýlku (0–3 roky) je nutné objednat předem."},"en":{"preparedFor":"Prepared for*","adults":"Adults 18+","children":"Children 4–17","infants":"Children 0–3","note":"The room is prepared for the number of guests entered when the reservation was made. The system imports these details automatically. Please let us know about any additional guests no later than 16:00; additional guests are charged according to the price list. A baby cot (0–3 years) must be requested in advance."},"de":{"preparedFor":"Vorbereitet für*","adults":"Erwachsene 18+","children":"Kinder 4–17","infants":"Kinder 0–3","note":"Das Zimmer wird für die bei der Reservierung angegebene Personenzahl vorbereitet. Das System übernimmt diese Angaben automatisch. Bitte teilen Sie uns zusätzliche Gäste spätestens bis 16:00 Uhr mit; zusätzliche Personen werden gemäß Preisliste berechnet. Ein Babybett (0–3 Jahre) muss im Voraus bestellt werden."},"sk":{"preparedFor":"Pripravené pre*","adults":"Dospelí 18+","children":"Deti 4–17","infants":"Deti 0–3","note":"Izba je pripravená podľa počtu osôb zadaného pri rezervácii. Systém tieto údaje preberá automaticky. Prípadné ďalšie osoby nám, prosím, nahláste najneskôr do 16:00; sú spoplatnené podľa cenníka. Detskú postieľku (0–3 roky) je potrebné objednať vopred."},"it":{"preparedFor":"Preparata per*","adults":"Adulti 18+","children":"Bambini 4–17","infants":"Bambini 0–3","note":"La camera viene preparata in base al numero di ospiti indicato al momento della prenotazione. Il sistema acquisisce automaticamente questi dati. Eventuali ospiti aggiuntivi devono essere comunicati entro le 16:00 e sono soggetti a supplemento secondo il listino prezzi. La culla per bambini (0–3 anni) deve essere richiesta in anticipo."},"es":{"preparedFor":"Preparada para*","adults":"Adultos 18+","children":"Niños 4–17","infants":"Niños 0–3","note":"La habitación se prepara según el número de huéspedes indicado al realizar la reserva. El sistema importa estos datos automáticamente. Rogamos comunicar cualquier huésped adicional a más tardar a las 16:00; las personas adicionales se cobran según la lista de precios. La cuna para niños de 0–3 años debe solicitarse con antelación."},"fr":{"preparedFor":"Préparée pour*","adults":"Adultes 18+","children":"Enfants 4–17","infants":"Enfants 0–3","note":"La chambre est préparée selon le nombre de personnes indiqué lors de la réservation. Le système reprend automatiquement ces informations. Merci de nous signaler toute personne supplémentaire au plus tard à 16:00 ; les personnes supplémentaires sont facturées selon le tarif en vigueur. Le lit bébé (0–3 ans) doit être demandé à l’avance."},"pl":{"preparedFor":"Przygotowano dla*","adults":"Dorośli 18+","children":"Dzieci 4–17","infants":"Dzieci 0–3","note":"Pokój jest przygotowywany dla liczby osób podanej podczas rezerwacji. System pobiera te dane automatycznie. Dodatkowe osoby prosimy zgłosić najpóźniej do godziny 16:00; obowiązuje za nie opłata zgodnie z cennikiem. Łóżeczko dziecięce (0–3 lata) należy zamówić z wyprzedzeniem."},"ua":{"preparedFor":"Підготовлено для*","adults":"Дорослі 18+","children":"Діти 4–17","infants":"Діти 0–3","note":"Номер готується відповідно до кількості гостей, зазначеної під час бронювання. Система автоматично отримує ці дані з бронювання. Про додаткових гостей, будь ласка, повідомте нас не пізніше 16:00; за додаткових осіб стягується плата згідно з прейскурантом. Дитяче ліжечко (0–3 роки) необхідно замовити заздалегідь."},"tr":{"preparedFor":"Şu kişiler için hazırlandı*","adults":"Yetişkin 18+","children":"Çocuk 4–17","infants":"Çocuk 0–3","note":"Oda, rezervasyon sırasında belirtilen misafir sayısına göre hazırlanır. Sistem bu bilgileri rezervasyondan otomatik olarak alır. İlave misafirleri lütfen en geç 16:00’ya kadar bize bildirin; ilave kişiler fiyat listesine göre ücretlendirilir. Bebek yatağı (0–3 yaş) önceden talep edilmelidir."},"da":{"preparedFor":"Klargjort til*","adults":"Voksne 18+","children":"Børn 4–17","infants":"Børn 0–3","note":"Værelset klargøres til det antal gæster, der blev angivet ved reservationen. Systemet henter automatisk disse oplysninger fra reservationen. Eventuelle ekstra gæster bedes meddelt senest kl. 16:00; ekstra personer opkræves i henhold til prislisten. Barneseng til børn 0–3 år skal bestilles på forhånd."},"ja":{"preparedFor":"ご利用人数*","adults":"大人 18歳以上","children":"お子様 4–17歳","infants":"お子様 0–3歳","note":"お部屋は、ご予約時に入力された人数に基づいて準備されています。これらの情報は予約データから自動的に反映されます。追加のお客様がいらっしゃる場合は、16:00までにお知らせください。追加料金は料金表に基づきます。0～3歳のお子様用ベビーベッドは事前予約が必要です。"},"he":{"preparedFor":"מוכן עבור*","adults":"מבוגרים 18+","children":"ילדים 4–17","infants":"ילדים 0–3","note":"החדר מוכן לפי מספר האורחים שהוזן בעת ביצוע ההזמנה. המערכת מעבירה את הנתונים מההזמנה באופן אוטומטי. אם מגיעים אורחים נוספים, אנא הודיעו לנו עד השעה 16:00 לכל המאוחר; אורחים נוספים מחויבים לפי המחירון. יש להזמין מראש מיטת תינוק לילדים בגיל 0–3."},"el":{"preparedFor":"Προετοιμασμένο για*","adults":"Ενήλικες 18+","children":"Παιδιά 4–17","infants":"Παιδιά 0–3","note":"Το δωμάτιο προετοιμάζεται για τον αριθμό ατόμων που δηλώθηκε κατά την κράτηση. Το σύστημα μεταφέρει αυτόματα αυτά τα στοιχεία από την κράτηση. Παρακαλούμε ενημερώστε μας για τυχόν επιπλέον άτομα το αργότερο έως τις 16:00· τα επιπλέον άτομα χρεώνονται σύμφωνα με τον τιμοκατάλογο. Η βρεφική κούνια (0–3 ετών) πρέπει να ζητηθεί εκ των προτέρων."}};
 
         const selfCheckinI18n = {
             cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Jan Novák',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
@@ -3280,19 +3368,68 @@
                 : String(value);
         }
 
+        function occupancySvg(type) {
+            if (type === 'adult') {
+                return `<svg class="occupancy-icon adult" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="5.2" r="3" fill="currentColor"></circle>
+                    <path d="M7.2 21v-6.1h-2l2.2-7.1c.3-1 1.3-1.7 2.4-1.7h4.4c1.1 0 2.1.7 2.4 1.7l2.2 7.1h-2V21h-2v-5.7H9.2V21h-2z" fill="currentColor"></path>
+                </svg>`;
+            }
+            if (type === 'child') {
+                return `<svg class="occupancy-icon child" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="6.2" r="2.6" fill="currentColor"></circle>
+                    <path d="M8.3 20.5v-5.2H6.5l2-6.2c.3-.9 1.1-1.5 2.1-1.5h2.8c1 0 1.8.6 2.1 1.5l2 6.2h-1.8v5.2h-1.9v-4.8h-3.6v4.8H8.3z" fill="currentColor"></path>
+                </svg>`;
+            }
+            return `<svg class="occupancy-icon infant" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 7.5h13.8c.7 0 1.2.5 1.2 1.2v5.8H4V8.5c0-.6.4-1 1-1zm-1 8.3h16v2H4v-2zm2 2h2v2.2H6v-2.2zm10 0h2v2.2h-2v-2.2z" fill="currentColor"></path>
+                <path d="M8 7.5V5.8c0-1.4 1.1-2.5 2.5-2.5h1.2v1.8h-1.2c-.4 0-.7.3-.7.7v1.7H8z" fill="currentColor"></path>
+            </svg>`;
+        }
+
+        function createOccupancyGroup(label, count, type) {
+            if (!Number.isInteger(count) || count <= 0) return null;
+
+            const group = document.createElement('div');
+            group.className = 'occupancy-group';
+
+            const labelEl = document.createElement('span');
+            labelEl.className = 'occupancy-group-label';
+            labelEl.innerText = label;
+            group.appendChild(labelEl);
+
+            for (let i = 0; i < count; i++) {
+                const holder = document.createElement('span');
+                holder.innerHTML = occupancySvg(type);
+                group.appendChild(holder.firstElementChild);
+            }
+
+            return group;
+        }
+
         function renderCheckinRooms(rooms) {
             const list = document.getElementById('sci-rooms-list');
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
+            const occ = occupancyI18n[currentLang] || occupancyI18n.en;
+            const note = document.getElementById('sci-occupancy-note');
+            const noteText = document.getElementById('sci-occupancy-note-text');
+
             list.innerHTML = '';
 
             const normalizedRooms = Array.isArray(rooms) && rooms.length
-                ? rooms
+                ? rooms.map(item => ({
+                    room: item.room || '—',
+                    roomCode: item.roomCode || '—',
+                    adults: Number.isInteger(Number(item.adults)) && Number(item.adults) >= 0 ? Number(item.adults) : 0,
+                    children: Number.isInteger(Number(item.children)) && Number(item.children) >= 0 ? Number(item.children) : 0,
+                    infants: Number.isInteger(Number(item.infants)) && Number(item.infants) >= 0 ? Number(item.infants) : 0
+                }))
                 : [];
 
-            currentCheckinRooms = normalizedRooms.map(item => ({
-                room: item.room || '—',
-                roomCode: item.roomCode || '—'
-            }));
+            // Uchováváme i počty osob, aby nezmizely při změně jazyka.
+            currentCheckinRooms = normalizedRooms.map(item => ({ ...item }));
+
+            let hasOccupancy = false;
 
             normalizedRooms.forEach((item) => {
                 const row = document.createElement('div');
@@ -3307,7 +3444,7 @@
 
                 const roomValue = document.createElement('div');
                 roomValue.className = 'checkin-result-value guest-room-value';
-                roomValue.innerText = item.room || '—';
+                roomValue.innerText = item.room;
 
                 roomBlock.appendChild(roomLabel);
                 roomBlock.appendChild(roomValue);
@@ -3321,15 +3458,52 @@
 
                 const codeValue = document.createElement('div');
                 codeValue.className = 'checkin-result-value guest-room-code-value';
-                codeValue.innerText = item.roomCode || '—';
+                codeValue.innerText = item.roomCode;
 
                 codeBlock.appendChild(codeLabel);
                 codeBlock.appendChild(codeValue);
 
                 row.appendChild(roomBlock);
                 row.appendChild(codeBlock);
+
+                const totalGuests = item.adults + item.children + item.infants;
+
+                if (totalGuests > 0) {
+                    hasOccupancy = true;
+
+                    const occupancy = document.createElement('div');
+                    occupancy.className = 'guest-room-occupancy';
+
+                    const occupancyLabel = document.createElement('div');
+                    occupancyLabel.className = 'guest-room-occupancy-label';
+                    occupancyLabel.innerText = occ.preparedFor;
+
+                    const groups = document.createElement('div');
+                    groups.className = 'guest-room-occupancy-groups';
+
+                    [
+                        createOccupancyGroup(occ.adults, item.adults, 'adult'),
+                        createOccupancyGroup(occ.children, item.children, 'child'),
+                        createOccupancyGroup(occ.infants, item.infants, 'infant')
+                    ].forEach(group => {
+                        if (group) groups.appendChild(group);
+                    });
+
+                    occupancy.appendChild(occupancyLabel);
+                    occupancy.appendChild(groups);
+                    row.appendChild(occupancy);
+                }
+
                 list.appendChild(row);
             });
+
+            if (hasOccupancy) {
+                noteText.innerText = occ.note;
+                note.classList.remove('hidden');
+            } else {
+                noteText.innerText = '';
+                note.classList.add('hidden');
+            }
         }
 
         async function submitSelfCheckin() {
@@ -3373,7 +3547,10 @@
                         ? result.rooms
                         : [{
                             room: result.room || '—',
-                            roomCode: result.roomCode || '—'
+                            roomCode: result.roomCode || '—',
+                            adults: Number(result.adults || 0),
+                            children: Number(result.children || 0),
+                            infants: Number(result.infants || 0)
                         }];
 
                     renderCheckinRooms(rooms);
