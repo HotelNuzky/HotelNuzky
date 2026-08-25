@@ -3435,6 +3435,25 @@
                 : String(value);
         }
 
+
+        function makeGuestInitials(value) {
+            const parts = String(value || '')
+                .trim()
+                .replace(/\s+/g, ' ')
+                .split(' ')
+                .filter(Boolean);
+
+            if (!parts.length) return '—';
+
+            return parts
+                .map(part => {
+                    const first = Array.from(part)[0];
+                    return first ? first.toLocaleUpperCase() + '.' : '';
+                })
+                .filter(Boolean)
+                .join(' ');
+        }
+
         function occupancySvg(type) {
             if (type === 'adult') {
                 return `<svg class="occupancy-icon adult" viewBox="0 0 24 24" aria-hidden="true">
@@ -3636,9 +3655,11 @@
                             .map(item => `Pokoj: ${item.room || '—'}`)
                             .join('\n');
 
+                        const guestInitials = makeGuestInitials(name);
+
                         const ntfyMessage =
                             `🟢 CHECK-IN\n\n` +
-                            `Jméno: ${name}\n` +
+                            `Host: ${guestInitials}\n` +
                             `Příjezd: ${formatDateForNtfy(from)}\n` +
                             `Odjezd: ${formatDateForNtfy(to)}\n` +
                             roomLines;
