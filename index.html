@@ -647,6 +647,148 @@
             flex-shrink: 0;
         }
 
+
+        .keyboard-help-box {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 184px;
+            gap: 16px;
+            align-items: center;
+            margin: 14px 0 18px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(66,165,245,.48);
+            background: linear-gradient(135deg, rgba(30,136,229,.15), rgba(18,64,103,.19));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+        }
+        .keyboard-help-copy { min-width: 0; }
+        .keyboard-help-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8ecbff;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .keyboard-help-globe-badge {
+            display: inline-grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12);
+            font-size: 18px;
+            line-height: 1;
+            flex: 0 0 auto;
+        }
+        .keyboard-help-text {
+            color: #eef3f8;
+            font-size: 13px;
+            line-height: 1.47;
+            font-weight: 650;
+        }
+        .keyboard-name-hint {
+            margin-top: 8px;
+            color: #c8d2dd;
+            font-size: 12px;
+            line-height: 1.45;
+            font-weight: 600;
+        }
+        .ios-keyboard-demo {
+            position: relative;
+            width: 184px;
+            height: 108px;
+            justify-self: end;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .ios-keyboard-popover {
+            position: absolute;
+            right: 2px;
+            top: 0;
+            width: 142px;
+            padding: 6px;
+            border-radius: 13px;
+            background: rgba(245,245,247,.97);
+            box-shadow: 0 9px 24px rgba(0,0,0,.34), 0 0 0 1px rgba(0,0,0,.13);
+            color: #111;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+            z-index: 2;
+        }
+        .ios-keyboard-option {
+            height: 23px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .ios-keyboard-option.active {
+            background: rgba(0,122,255,.12);
+            color: #006ee6;
+        }
+        .ios-keyboard-option + .ios-keyboard-option { margin-top: 1px; }
+        .ios-keyboard-menu-tail {
+            position: absolute;
+            left: 27px;
+            bottom: -6px;
+            width: 12px;
+            height: 12px;
+            background: rgba(245,245,247,.97);
+            transform: rotate(45deg);
+            border-radius: 2px;
+        }
+        .ios-keyboard-strip {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 37px;
+            padding: 5px 6px;
+            border-radius: 10px;
+            background: #aeb4bc;
+            display: grid;
+            grid-template-columns: 34px 34px 1fr 34px;
+            gap: 5px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+        }
+        .ios-key {
+            display: grid;
+            place-items: center;
+            border-radius: 6px;
+            background: #f6f7f8;
+            color: #202124;
+            font-size: 10px;
+            font-weight: 650;
+            box-shadow: 0 1px 0 rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.8);
+        }
+        .ios-key.globe {
+            position: relative;
+            background: #fff;
+            font-size: 18px;
+            outline: 2px solid rgba(0,122,255,.65);
+            outline-offset: 1px;
+        }
+        .ios-key.globe::after {
+            content: "";
+            position: absolute;
+            top: -26px;
+            left: 50%;
+            width: 2px;
+            height: 23px;
+            background: rgba(0,122,255,.7);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .ios-key.space { color: #555; font-size: 8px; }
+        @media (max-width: 700px) {
+            .keyboard-help-box { grid-template-columns: 1fr; }
+            .ios-keyboard-demo { justify-self: center; margin-top: 2px; }
+        }
+
         /* FORM INPUTS & LABELS */
         .input-group {
             margin-bottom: 16px;
@@ -1886,6 +2028,32 @@
 </div>
 </div>
 </div>
+
+<div class="keyboard-help-box" id="sci-keyboard-help">
+  <div class="keyboard-help-copy">
+    <div class="keyboard-help-title">
+      <span class="keyboard-help-globe-badge">🌐</span>
+      <span class="keyboard-help-title-text">Změna klávesnice</span>
+    </div>
+    <div class="keyboard-help-text">Pokud je nastavena jiná klávesnice, podržte symbol 🌐 vlevo dole a vyberte požadovaný jazyk.</div>
+    <div class="keyboard-name-hint" id="sci-keyboard-name-hint">Jméno napište stejným písmem jako v rezervaci. Na diakritice, interpunkci a nadbytečných mezerách nezáleží.</div>
+  </div>
+  
+<div class="ios-keyboard-demo" aria-hidden="true">
+  <div class="ios-keyboard-popover">
+    <div class="ios-keyboard-option active">English</div>
+    <div class="ios-keyboard-option">Čeština</div>
+    <div class="ios-keyboard-option">Українська</div>
+    <div class="ios-keyboard-menu-tail"></div>
+  </div>
+  <div class="ios-keyboard-strip">
+    <div class="ios-key">123</div>
+    <div class="ios-key globe">🌐</div>
+    <div class="ios-key space">space</div>
+    <div class="ios-key">⌫</div>
+  </div>
+</div>
+</div>
 <div class="input-group">
 <label class="input-label" id="sci-name-label">Jméno uvedené na rezervaci</label>
 <input autocomplete="off" id="sciNameInput" placeholder="např. Jan Novák" type="text"/>
@@ -2132,7 +2300,33 @@
 <div class="instructions" id="co-instructions">
                     Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT.
                 </div>
-</div><div class="input-group">
+</div>
+<div class="keyboard-help-box" id="co-keyboard-help">
+  <div class="keyboard-help-copy">
+    <div class="keyboard-help-title">
+      <span class="keyboard-help-globe-badge">🌐</span>
+      <span class="keyboard-help-title-text">Změna klávesnice</span>
+    </div>
+    <div class="keyboard-help-text">Pokud je nastavena jiná klávesnice, podržte symbol 🌐 vlevo dole a vyberte požadovaný jazyk.</div>
+    
+  </div>
+  
+<div class="ios-keyboard-demo" aria-hidden="true">
+  <div class="ios-keyboard-popover">
+    <div class="ios-keyboard-option active">English</div>
+    <div class="ios-keyboard-option">Čeština</div>
+    <div class="ios-keyboard-option">Українська</div>
+    <div class="ios-keyboard-menu-tail"></div>
+  </div>
+  <div class="ios-keyboard-strip">
+    <div class="ios-key">123</div>
+    <div class="ios-key globe">🌐</div>
+    <div class="ios-key space">space</div>
+    <div class="ios-key">⌫</div>
+  </div>
+</div>
+</div>
+<div class="input-group">
 <label class="input-label" id="label-co-room">Číslo pokoje</label>
 <input id="coRoomInput" inputmode="numeric" placeholder="e.g. 102" type="text"/>
 </div><div class="input-group">
@@ -2157,6 +2351,32 @@
 <div class="instructions" id="srv-instructions">
                         Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
                     </div>
+
+<div class="keyboard-help-box" id="srv-keyboard-help">
+  <div class="keyboard-help-copy">
+    <div class="keyboard-help-title">
+      <span class="keyboard-help-globe-badge">🌐</span>
+      <span class="keyboard-help-title-text">Změna klávesnice</span>
+    </div>
+    <div class="keyboard-help-text">Pokud je nastavena jiná klávesnice, podržte symbol 🌐 vlevo dole a vyberte požadovaný jazyk.</div>
+    
+  </div>
+  
+<div class="ios-keyboard-demo" aria-hidden="true">
+  <div class="ios-keyboard-popover">
+    <div class="ios-keyboard-option active">English</div>
+    <div class="ios-keyboard-option">Čeština</div>
+    <div class="ios-keyboard-option">Українська</div>
+    <div class="ios-keyboard-menu-tail"></div>
+  </div>
+  <div class="ios-keyboard-strip">
+    <div class="ios-key">123</div>
+    <div class="ios-key globe">🌐</div>
+    <div class="ios-key space">space</div>
+    <div class="ios-key">⌫</div>
+  </div>
+</div>
+</div>
 <div class="input-group">
 <label class="input-label" id="label-srv-room">Číslo pokoje</label>
 <input id="srvRoomInput" inputmode="numeric" placeholder="e.g. 102" type="text"/>
@@ -2186,6 +2406,32 @@
 <span id="taxi-order-label">Chci si objednat transfer</span>
 </label>
 <div class="taxi-order-form hidden" id="taxiOrderForm">
+
+<div class="keyboard-help-box" id="taxi-keyboard-help">
+  <div class="keyboard-help-copy">
+    <div class="keyboard-help-title">
+      <span class="keyboard-help-globe-badge">🌐</span>
+      <span class="keyboard-help-title-text">Změna klávesnice</span>
+    </div>
+    <div class="keyboard-help-text">Pokud je nastavena jiná klávesnice, podržte symbol 🌐 vlevo dole a vyberte požadovaný jazyk.</div>
+    
+  </div>
+  
+<div class="ios-keyboard-demo" aria-hidden="true">
+  <div class="ios-keyboard-popover">
+    <div class="ios-keyboard-option active">English</div>
+    <div class="ios-keyboard-option">Čeština</div>
+    <div class="ios-keyboard-option">Українська</div>
+    <div class="ios-keyboard-menu-tail"></div>
+  </div>
+  <div class="ios-keyboard-strip">
+    <div class="ios-key">123</div>
+    <div class="ios-key globe">🌐</div>
+    <div class="ios-key space">space</div>
+    <div class="ios-key">⌫</div>
+  </div>
+</div>
+</div>
 <div class="input-group">
 <label class="input-label" id="taxi-name-label">Jméno hosta</label>
 <input autocomplete="off" id="taxiNameInput" placeholder="např. Jan Novák" type="text"/>
@@ -2408,6 +2654,8 @@
         let idleRemaining = 90;
 
         const occupancyI18n = {"cs":{"preparedFor":"Připraveno pro*","adults":"Dospělí 18+","children":"Děti 4–17","infants":"Děti 0–3","note":"Pokoj je připraven podle počtu osob zadaného při rezervaci. Systém tyto údaje přebírá automaticky. Případné další osoby nám prosím nahlaste nejpozději do 16:00; jsou zpoplatněny dle ceníku. Dětskou postýlku (0–3 roky) je nutné objednat předem."},"en":{"preparedFor":"Prepared for*","adults":"Adults 18+","children":"Children 4–17","infants":"Children 0–3","note":"The room is prepared for the number of guests entered when the reservation was made. The system imports these details automatically. Please let us know about any additional guests no later than 16:00; additional guests are charged according to the price list. A baby cot (0–3 years) must be requested in advance."},"de":{"preparedFor":"Vorbereitet für*","adults":"Erwachsene 18+","children":"Kinder 4–17","infants":"Kinder 0–3","note":"Das Zimmer wird für die bei der Reservierung angegebene Personenzahl vorbereitet. Das System übernimmt diese Angaben automatisch. Bitte teilen Sie uns zusätzliche Gäste spätestens bis 16:00 Uhr mit; zusätzliche Personen werden gemäß Preisliste berechnet. Ein Babybett (0–3 Jahre) muss im Voraus bestellt werden."},"sk":{"preparedFor":"Pripravené pre*","adults":"Dospelí 18+","children":"Deti 4–17","infants":"Deti 0–3","note":"Izba je pripravená podľa počtu osôb zadaného pri rezervácii. Systém tieto údaje preberá automaticky. Prípadné ďalšie osoby nám, prosím, nahláste najneskôr do 16:00; sú spoplatnené podľa cenníka. Detskú postieľku (0–3 roky) je potrebné objednať vopred."},"it":{"preparedFor":"Preparata per*","adults":"Adulti 18+","children":"Bambini 4–17","infants":"Bambini 0–3","note":"La camera viene preparata in base al numero di ospiti indicato al momento della prenotazione. Il sistema acquisisce automaticamente questi dati. Eventuali ospiti aggiuntivi devono essere comunicati entro le 16:00 e sono soggetti a supplemento secondo il listino prezzi. La culla per bambini (0–3 anni) deve essere richiesta in anticipo."},"es":{"preparedFor":"Preparada para*","adults":"Adultos 18+","children":"Niños 4–17","infants":"Niños 0–3","note":"La habitación se prepara según el número de huéspedes indicado al realizar la reserva. El sistema importa estos datos automáticamente. Rogamos comunicar cualquier huésped adicional a más tardar a las 16:00; las personas adicionales se cobran según la lista de precios. La cuna para niños de 0–3 años debe solicitarse con antelación."},"fr":{"preparedFor":"Préparée pour*","adults":"Adultes 18+","children":"Enfants 4–17","infants":"Enfants 0–3","note":"La chambre est préparée selon le nombre de personnes indiqué lors de la réservation. Le système reprend automatiquement ces informations. Merci de nous signaler toute personne supplémentaire au plus tard à 16:00 ; les personnes supplémentaires sont facturées selon le tarif en vigueur. Le lit bébé (0–3 ans) doit être demandé à l’avance."},"pl":{"preparedFor":"Przygotowano dla*","adults":"Dorośli 18+","children":"Dzieci 4–17","infants":"Dzieci 0–3","note":"Pokój jest przygotowywany dla liczby osób podanej podczas rezerwacji. System pobiera te dane automatycznie. Dodatkowe osoby prosimy zgłosić najpóźniej do godziny 16:00; obowiązuje za nie opłata zgodnie z cennikiem. Łóżeczko dziecięce (0–3 lata) należy zamówić z wyprzedzeniem."},"ua":{"preparedFor":"Підготовлено для*","adults":"Дорослі 18+","children":"Діти 4–17","infants":"Діти 0–3","note":"Номер готується відповідно до кількості гостей, зазначеної під час бронювання. Система автоматично отримує ці дані з бронювання. Про додаткових гостей, будь ласка, повідомте нас не пізніше 16:00; за додаткових осіб стягується плата згідно з прейскурантом. Дитяче ліжечко (0–3 роки) необхідно замовити заздалегідь."},"tr":{"preparedFor":"Şu kişiler için hazırlandı*","adults":"Yetişkin 18+","children":"Çocuk 4–17","infants":"Çocuk 0–3","note":"Oda, rezervasyon sırasında belirtilen misafir sayısına göre hazırlanır. Sistem bu bilgileri rezervasyondan otomatik olarak alır. İlave misafirleri lütfen en geç 16:00’ya kadar bize bildirin; ilave kişiler fiyat listesine göre ücretlendirilir. Bebek yatağı (0–3 yaş) önceden talep edilmelidir."},"da":{"preparedFor":"Klargjort til*","adults":"Voksne 18+","children":"Børn 4–17","infants":"Børn 0–3","note":"Værelset klargøres til det antal gæster, der blev angivet ved reservationen. Systemet henter automatisk disse oplysninger fra reservationen. Eventuelle ekstra gæster bedes meddelt senest kl. 16:00; ekstra personer opkræves i henhold til prislisten. Barneseng til børn 0–3 år skal bestilles på forhånd."},"ja":{"preparedFor":"ご利用人数*","adults":"大人 18歳以上","children":"お子様 4–17歳","infants":"お子様 0–3歳","note":"お部屋は、ご予約時に入力された人数に基づいて準備されています。これらの情報は予約データから自動的に反映されます。追加のお客様がいらっしゃる場合は、16:00までにお知らせください。追加料金は料金表に基づきます。0～3歳のお子様用ベビーベッドは事前予約が必要です。"},"he":{"preparedFor":"מוכן עבור*","adults":"מבוגרים 18+","children":"ילדים 4–17","infants":"ילדים 0–3","note":"החדר מוכן לפי מספר האורחים שהוזן בעת ביצוע ההזמנה. המערכת מעבירה את הנתונים מההזמנה באופן אוטומטי. אם מגיעים אורחים נוספים, אנא הודיעו לנו עד השעה 16:00 לכל המאוחר; אורחים נוספים מחויבים לפי המחירון. יש להזמין מראש מיטת תינוק לילדים בגיל 0–3."},"el":{"preparedFor":"Προετοιμασμένο για*","adults":"Ενήλικες 18+","children":"Παιδιά 4–17","infants":"Παιδιά 0–3","note":"Το δωμάτιο προετοιμάζεται για τον αριθμό ατόμων που δηλώθηκε κατά την κράτηση. Το σύστημα μεταφέρει αυτόματα αυτά τα στοιχεία από την κράτηση. Παρακαλούμε ενημερώστε μας για τυχόν επιπλέον άτομα το αργότερο έως τις 16:00· τα επιπλέον άτομα χρεώνονται σύμφωνα με τον τιμοκατάλογο. Η βρεφική κούνια (0–3 ετών) πρέπει να ζητηθεί εκ των προτέρων."}};
+
+        const keyboardHelpI18n = {"cs":{"title":"Změna klávesnice","text":"Pokud je nastavena jiná klávesnice, podržte symbol 🌐 vlevo dole a vyberte požadovaný jazyk.","nameHint":"Jméno napište stejným písmem jako v rezervaci. Na diakritice, interpunkci a nadbytečných mezerách nezáleží."},"en":{"title":"Change keyboard","text":"If a different keyboard is active, touch and hold the 🌐 symbol at the bottom left, then choose the keyboard you need.","nameHint":"Enter the name using the same writing system as on the reservation. Accents, punctuation and extra spaces do not matter."},"de":{"title":"Tastatur wechseln","text":"Falls eine andere Tastatur aktiv ist, halten Sie das Symbol 🌐 unten links gedrückt und wählen Sie die gewünschte Tastatur aus.","nameHint":"Geben Sie den Namen in derselben Schrift wie in der Reservierung ein. Akzente, Satzzeichen und zusätzliche Leerzeichen spielen keine Rolle."},"sk":{"title":"Zmena klávesnice","text":"Ak je nastavená iná klávesnica, podržte symbol 🌐 vľavo dole a vyberte požadovaný jazyk.","nameHint":"Meno napíšte rovnakým písmom ako v rezervácii. Na diakritike, interpunkcii a nadbytočných medzerách nezáleží."},"it":{"title":"Cambia tastiera","text":"Se è attiva un’altra tastiera, tenete premuto il simbolo 🌐 in basso a sinistra e scegliete la tastiera desiderata.","nameHint":"Inserite il nome usando lo stesso sistema di scrittura della prenotazione. Accenti, punteggiatura e spazi aggiuntivi non sono rilevanti."},"es":{"title":"Cambiar teclado","text":"Si hay otro teclado activo, mantenga pulsado el símbolo 🌐 en la esquina inferior izquierda y elija el teclado que necesite.","nameHint":"Escriba el nombre con el mismo sistema de escritura que figura en la reserva. Los acentos, la puntuación y los espacios adicionales no importan."},"fr":{"title":"Changer de clavier","text":"Si un autre clavier est actif, maintenez le symbole 🌐 en bas à gauche, puis choisissez le clavier souhaité.","nameHint":"Saisissez le nom avec le même système d’écriture que sur la réservation. Les accents, la ponctuation et les espaces supplémentaires n’ont pas d’importance."},"pl":{"title":"Zmiana klawiatury","text":"Jeśli włączona jest inna klawiatura, przytrzymaj symbol 🌐 w lewym dolnym rogu i wybierz potrzebną klawiaturę.","nameHint":"Wpisz imię i nazwisko tym samym alfabetem co w rezerwacji. Znaki diakrytyczne, interpunkcja i dodatkowe spacje nie mają znaczenia."},"ua":{"title":"Зміна клавіатури","text":"Якщо ввімкнено іншу клавіатуру, натисніть і утримуйте символ 🌐 внизу ліворуч, а потім виберіть потрібну клавіатуру.","nameHint":"Введіть ім’я тією самою системою письма, що й у бронюванні. Діакритика, розділові знаки та зайві пробіли не мають значення."},"tr":{"title":"Klavyeyi değiştirme","text":"Farklı bir klavye açıksa sol alttaki 🌐 simgesine basılı tutun ve istediğiniz klavyeyi seçin.","nameHint":"Adı rezervasyonda kullanılan yazı sistemiyle girin. Aksanlar, noktalama işaretleri ve fazla boşluklar önemli değildir."},"da":{"title":"Skift tastatur","text":"Hvis et andet tastatur er aktivt, skal du trykke og holde på 🌐-symbolet nederst til venstre og vælge det ønskede tastatur.","nameHint":"Indtast navnet med samme skriftsystem som i reservationen. Accenter, tegnsætning og ekstra mellemrum har ingen betydning."},"ja":{"title":"キーボードの切り替え","text":"別のキーボードが表示されている場合は、左下の 🌐 を長押しして、使用するキーボードを選択してください。","nameHint":"予約に記載されているものと同じ文字体系でお名前を入力してください。アクセント記号、句読点、余分なスペースは照合に影響しません。"},"he":{"title":"החלפת מקלדת","text":"אם מופעלת מקלדת אחרת, לחצו לחיצה ממושכת על הסמל 🌐 בפינה השמאלית התחתונה ובחרו את המקלדת הרצויה.","nameHint":"הקלידו את השם באותה מערכת כתב שבה הוא מופיע בהזמנה. סימני ניקוד, פיסוק ורווחים מיותרים אינם משפיעים על ההתאמה."},"el":{"title":"Αλλαγή πληκτρολογίου","text":"Αν είναι ενεργό διαφορετικό πληκτρολόγιο, πατήστε παρατεταμένα το σύμβολο 🌐 κάτω αριστερά και επιλέξτε το πληκτρολόγιο που θέλετε.","nameHint":"Πληκτρολογήστε το όνομα με το ίδιο σύστημα γραφής που χρησιμοποιείται στην κράτηση. Οι τόνοι, η στίξη και τα επιπλέον κενά δεν επηρεάζουν την αντιστοίχιση."}};
 
         const selfCheckinI18n = {
             cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Jan Novák',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
@@ -4018,6 +4266,21 @@ Cena: ${taxiPrice(taxiData)}`;
             }
 
             const dict = i18n[lang] || i18n['en'];
+            const kb = keyboardHelpI18n[lang] || keyboardHelpI18n.en;
+
+            document.querySelectorAll('.keyboard-help-title-text').forEach(el => {
+                el.innerText = kb.title;
+            });
+
+            document.querySelectorAll('.keyboard-help-text').forEach(el => {
+                el.innerText = kb.text;
+            });
+
+            const keyboardNameHint = document.getElementById('sci-keyboard-name-hint');
+            if (keyboardNameHint) {
+                keyboardNameHint.innerText = kb.nameHint;
+            }
+
             const luggageDict = checkoutLuggageI18n[lang] || checkoutLuggageI18n.en;
 
             // Main UI
