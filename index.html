@@ -1,16 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Kiosk">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <title>Kiosk - Samoobslužný Terminál / Self-Service Terminal</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="Kiosk" name="apple-mobile-web-app-title"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<title>Kiosk - Samoobslužný Terminál / Self-Service Terminal</title>
+<style>
         /* BASE & RESET STYLES */
         * { 
             box-sizing: border-box; 
@@ -1604,687 +1603,617 @@
             font-size: 15px;
         }
 
-
+    
+        #screen-checkout .checkout-layout {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+            gap: 22px !important;
+            align-items: start !important;
+            width: 100%;
+        }
+        #screen-checkout .checkout-info-column,
+        #screen-checkout .checkout-form-column { min-width: 0; }
         #screen-checkout .checkout-form-column > .fees-box {
+            margin-top: 0;
             margin-bottom: 18px;
         }
         #screen-checkout .checkout-form-column > .checkout-form-instructions {
             margin-top: 0;
             margin-bottom: 24px;
         }
+        @media (max-width: 560px) {
+            #screen-checkout .checkout-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
 
-    </style>
+</style>
 </head>
 <body>
-
-    <div class="container">
-        
-        <!-- LANGUAGE SELECTION BAR -->
-        <div class="language-bar">
-            <span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
-            <span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
-            <span class="flag-btn" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
-            <span class="flag-btn" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
-            <span class="flag-btn" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
-            <span class="flag-btn" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
-            <span class="flag-btn" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
-            <span class="flag-btn" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
-            <span class="flag-btn" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
-            <span class="flag-btn" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
-            <span class="flag-btn" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
-            <span class="flag-btn" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
-            <span class="flag-btn" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
-            <span class="flag-btn" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
-        </div>
-
-        <!-- SCREEN 1: MAIN MENU -->
-        <div id="screen-1">
-            <div class="header-title" id="main-title">Kiosk</div>
-
-            <div class="kiosk-grid">
-                <button class="btn-kiosk btn-checkin" onclick="openSelfCheckin()">
-                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-                        <path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"/>
-                    </svg>
-                    <span class="btn-title" id="btn-self-checkin-text">Check-in</span>
-                </button>
-
-                <button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
-                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/>
-                        <path d="M12 10.5H17V7.5l4.5 4.5-4.5 4.5v-3H12z"/>
-                    </svg>
-                    <span class="btn-title checkout-title-stack"><span id="btn-checkout-text">Check-out</span><span class="checkout-time" id="btn-checkout-time">do 11:00</span></span>
-                </button>
-            </div>
-
-            <div class="primary-guide-row">
-                <button class="btn-kiosk btn-guide" onclick="openCheckinInfo()">
-                    <svg class="btn-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M21 4H14c-.77 0-1.47.3-2 .78A2.98 2.98 0 0 0 10 4H3c-1.1 0-2 .9-2 2v13c0 .55.45 1 1 1h8c.55 0 1 .45 1 1h2c0-.55.45-1 1-1h8c.55 0 1-.45 1-1V6c0-1.1-.9-2-2-2zm-10 14.05A5.04 5.04 0 0 0 9 18H3V6h7c.55 0 1 .45 1 1v11.05zm10-.05h-6c-.7 0-1.37.14-2 .4V7c0-.55.45-1 1-1h7v12z"/>
-                    </svg>
-                    <span class="btn-title" id="btn-checkin-text">Průvodce pobytem</span>
-                </button>
-            </div>
-
-            <div class="kiosk-grid">
-                <button class="btn-kiosk btn-service-taxi" onclick="openServiceForm()">
-                    <span class="split-half split-service">
-                        <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                            <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"/>
-                        </svg>
-                        <span class="btn-title split-title" id="btn-service-text">Oprava / Pomoc</span>
-                        <span class="btn-subtitle">8:00 – 16:00</span>
-                    </span>
-                    <span class="split-half split-taxi">
-                        <svg class="btn-svg-icon taxi-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M5.5 11 7 7h2V5h6v2h2l1.5 4H20a2 2 0 0 1 2 2v5h-2v1.5a1.5 1.5 0 0 1-3 0V18H7v1.5a1.5 1.5 0 0 1-3 0V18H2v-5a2 2 0 0 1 2-2h1.5zM8 9l-.75 2h9.5L16 9H8zm-2 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm12 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-                            <rect class="taxi-checker" x="9.2" y="5.7" width="1.4" height="1.4" rx=".15"/>
-                            <rect class="taxi-checker" x="12" y="5.7" width="1.4" height="1.4" rx=".15"/>
-                            <rect class="taxi-checker" x="10.6" y="7.1" width="1.4" height="1.4" rx=".15"/>
-                            <rect class="taxi-checker" x="13.4" y="7.1" width="1.4" height="1.4" rx=".15"/>
-                        </svg>
-                        <span class="btn-title split-title" id="btn-taxi-text">Taxi</span>
-                    </span>
-                </button>
-
-                <button class="btn-kiosk btn-parking" onclick="openParkingInfo()">
-                    <svg class="btn-svg-icon" viewBox="0 0 24 24">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
-                        <path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"/>
-                    </svg>
-                    <span class="btn-title" id="btn-parking-text">Parkování</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- SCREEN SELF CHECK-IN -->
-        <div id="screen-self-checkin" class="card hidden">
-            <div class="card-title-welcome" id="sci-welcome-title">Vítejte v našem hotelu!</div>
-            <div class="checkin-instructions" id="sci-instructions">Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
-            <div class="checkin-arrival-note" id="sci-arrival-note-wrap">
-                <div id="sci-arrival-note">Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</div>
-                <div class="sci-arrival-lower-grid">
-                    <div class="sci-arrival-half sci-arrival-storage">
-                        <div class="sci-easylocker-extra">
-                    <div id="sci-easylocker-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</div>
-                    <div class="parking-qr-option luggage-qr-option">
-                    <img id="sci-easylocker-qr" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII=" alt="QR kód – EasyLocker">
-                    <div class="parking-qr-text" id="sci-easylocker-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
-                </div>
-            </div>
-                    </div>
-                    <div class="sci-arrival-half sci-arrival-wifi">
-                        <div class="wifi-box sci-wifi-box">
-                <div class="wifi-title" id="sci-wifi-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="sci-wifi-net-label">Název / SSID</span>
-                        <strong>Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="sci-wifi-pass-label">Heslo / Password</span>
-                        <strong>Hotel2017</strong>
-                    </div>
-                </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" id="sci-name-label">Jméno uvedené na rezervaci</label>
-                <input type="text" id="sciNameInput" placeholder="např. Jan Novák" autocomplete="off">
-            </div>
-            <div class="date-row">
-                <div class="input-group">
-                    <label class="input-label" id="sci-from-label">Datum příjezdu</label>
-                    <input type="date" id="sciFromInput" class="native-date-storage"><input type="text" id="sciFromDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('sciFromInput', 'sciFromDisplay')">
-                </div>
-                <div class="input-group">
-                    <label class="input-label" id="sci-to-label">Datum odjezdu</label>
-                    <input type="date" id="sciToInput" class="native-date-storage"><input type="text" id="sciToDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('sciToInput', 'sciToDisplay')">
-                </div>
-            </div>
-
-            <div class="button-row">
-                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-sci-back">ZPĚT</button>
-                <button class="btn-form-submit btn-self-checkin-submit" onclick="submitSelfCheckin()" id="btn-sci-submit">CHECK-IN</button>
-            </div>
-
-            
-            </div>
-        </div>
-
-        <!-- SCREEN SELF CHECK-IN RESULT -->
-        <div id="screen-checkin-result" class="card hidden">
-            <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
-            <div class="checkin-result-box">
-                <div class="guest-access-main">
-                    <div class="guest-room-block">
-                        <div class="checkin-result-label" id="sci-room-label">Číslo pokoje</div>
-                        <div class="checkin-result-value guest-room-value" id="sci-room-value">—</div>
-                    </div>
-                    <div class="guest-room-code-block">
-                        <div class="checkin-result-label" id="sci-code-label">Kód k pokoji a mezidveřím</div>
-                        <div class="checkin-result-value guest-room-code-value" id="sci-code-value">—</div>
-                    </div>
-                </div>
-
-                <div class="main-entrance-code-box">
-                    <div class="main-entrance-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="25" height="25">
-                            <path fill="currentColor" d="M4 21V5l8-3 8 3v16h-2V7H6v14H4zm4 0V8h8v13h-2v-5h-4v5H8zm2-7h4v-4h-4v4z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="checkin-result-label main-entrance-label" id="sci-main-code-label">Kód hlavního vchodu do hotelu</div>
-                        <div class="checkin-result-value main-entrance-code" id="sci-main-code-value">2018</div>
-                    </div>
-                </div>
-
-                <div class="checkin-result-direction" id="sci-result-direction">Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.</div>
-            </div>
-            <div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
-            <div class="checkin-countdown"><span id="sci-countdown-label">Návrat na hlavní obrazovku za</span> <strong id="sci-countdown">1:30</strong></div>
-            <div class="result-ok-row">
-                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-ok">OK</button>
-            </div>
-        </div>
-
-        <!-- SCREEN SELF CHECK-IN: ROOM NOT READY -->
-        <div id="screen-checkin-waiting" class="card hidden">
-            <div class="card-title-welcome" id="sci-waiting-title">Váš pokoj ještě není připraven</div>
-            <div class="checkin-status-box waiting-status-box">
-                <div class="checkin-status-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M14 7h20M14 41h20M16 7c0 8 2.5 11.5 8 17-5.5 5.5-8 9-8 17M32 7c0 8-2.5 11.5-8 17 5.5 5.5 8 9 8 17M18.5 35.5h11L24 30z"/></svg></div>
-                <div id="sci-waiting-text">Váš pokoj ještě není připraven. Pokoj bude připraven nejpozději v 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.</div>
-            </div>
-            <div class="result-ok-row">
-                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-waiting-ok">OK</button>
-            </div>
-        </div>
-
-        <!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED -->
-        <div id="screen-checkin-unverified" class="card hidden">
-            <div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
-            <div class="checkin-status-box unverified-status-box">
-                <div class="checkin-status-icon unverified-icon" aria-hidden="true">
-                    <svg viewBox="0 0 64 64" role="img">
-                        <path transform="translate(-6 0)" d="M23.5 19.8c1.4-7.3 7.2-11.6 15.4-11.6 9.4 0 16.3 5.7 16.3 13.9 0 6.8-3.8 10.6-9.4 13.8 -4.8 2.8-6.8 4.8-6.8 9.2v2.3h-7.1v-3.2 c0-6.4 3.2-9.6 8.8-12.9 4.3-2.5 6.6-4.8 6.6-8.7 0-4.2-3.2-6.8-8-6.8 -4.9 0-7.8 2.5-8.8 6.8l-7-0.8z M31.9 56.7c0-2.4 1.9-4.3 4.3-4.3s4.3 1.9 4.3 4.3 -1.9 4.3-4.3 4.3-4.3-1.9-4.3-4.3z"/>
-                    </svg>
-                </div>
-                <div id="sci-unverified-text">Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
-            </div>
-            <div class="result-ok-row">
-                <button class="btn-form-submit btn-self-checkin-submit" onclick="resetToStart()" id="btn-sci-unverified-ok">OK</button>
-            </div>
-        </div>
-
-        <!-- SCREEN CHECK-IN INFO -->
-        <div id="screen-checkin" class="card hidden">
-            <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
-            <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Rezervace přijímáme pouze online.</div>
-
-            <div class="info-item info-item-highlight ci-access-info">
-                <span id="ci-access-info-text">Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu restaurace. Děkujeme.</span>
-            </div>
-
-            <div class="info-list">
-
-                <div class="wifi-box wifi-box-compact">
-                <div class="wifi-title" id="ci-wifi-top-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-top-net-label">Název / SSID</span>
-                        <strong id="ci-wifi-top-net-val">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-top-pass-label">Heslo / Password</span>
-                        <strong id="ci-wifi-top-pass-val">Hotel2017</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-item info-item-highlight">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                        <span id="ci-q1-title">Jak získáte kód?</span>
-                    </strong>
-                    <span id="ci-q1-text">Pro získání kódu použijte tlačítko CHECK-IN v hlavním menu. Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</span>
-                </div>
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
-                        <span id="ci-alt-luggage-title">Alternativní úschova zavazadel</span>
-                    </strong>
-                    <div class="luggage-service-row">
-                        <span id="ci-alt-luggage-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</span>
-                        <div class="parking-qr-option luggage-qr-option">
-                            <img id="ci-alt-luggage-qr" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII=" alt="QR kód – EasyLocker">
-                            <div class="parking-qr-text" id="ci-alt-luggage-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 19h20v2H2v-2z"/></svg>
-                        <span id="ci-bf-title">Snídaně</span>
-                    </strong>
-                    <span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
-                </div>
-
-                <div class="info-item info-item-highlight">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                        <span id="ci-reg-title">Registrace</span>
-                    </strong>
-                    <span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
-                </div>
-
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
-                        <span id="ci-q3-title">Zavazadla</span>
-                    </strong>
-                    <span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
-                </div>
-
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-                        <span id="ci-q4-title">Parkování</span>
-                    </strong>
-                    <span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku. Tato informace je zmíněna na našich webových stránkách vč. všech profilů třetích stran jako je Booking.com, Expedia aj.</span>
-                </div>
-
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
-                        <span id="ci-q5-title">Architektura</span>
-                    </strong>
-                    <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
-                </div>
-
-                <div class="info-item">
-                    <strong>
-                        <svg class="info-item-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6v2h-1v4.17A5.001 5.001 0 0 1 17 13v7H7v-7a5.001 5.001 0 0 1 3-4.83V4H9V2zm3 8a3 3 0 0 0-3 3v5h6v-5a3 3 0 0 0-3-3zm-5 3h2v7H7v-7zm8 0h2v7h-2v-7z"/></svg>
-                        <span id="ci-housekeeping-title">Úklid pokoje</span>
-                    </strong>
-                    <span id="ci-housekeeping-text">Pokoje pro vás uklízíme od 8:00 do 15:00. Pokud si přejete ručníky vyměnit, nechte je prosím na zemi v koupelně.</span>
-                </div>
-            </div>
-
-            <div class="info-stand-box">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                <span id="ci-info-stand-text">Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.</span>
-            </div>
-
-            <div class="wifi-box">
-                <div class="wifi-title" id="ci-wifi-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-net-label">Název / SSID</span>
-                        <strong id="ci-wifi-net-val">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="ci-wifi-pass-label">Heslo / Password</span>
-                        <strong id="ci-wifi-pass-val">Hotel2017</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="wish-text" id="ci-wish-text">Přejeme vám nádherný a ničím nerušený pobyt!</div>
-
-            <div class="button-row">
-                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-back-ci" style="flex:1;">ZPĚT / BACK</button>
-            </div>
-        </div>
-
-        <!-- SCREEN CHECKOUT FORM -->
-        <div id="screen-checkout" class="card hidden">
-            <div class="checkout-layout">
-                <div class="checkout-info-column">
-                    <div class="luggage-box">
-                <div class="luggage-header">
-                    <svg viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
-                    <strong id="co-luggage-title">Úschova zavazadel</strong>
-                </div>
-                <span id="co-luggage-text">Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost;</span>
-
-                <div class="luggage-service-row">
-                    <span id="co-luggage-station-text">Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.</span>
-                    <div class="parking-qr-option luggage-qr-option">
-                        <img id="co-luggage-station-qr" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXAQAAAAChBvkYAAACc0lEQVR4nO2YQY7cRgxFH0cNVO/YN6i+iKX2sQIokMYawMdyyycp3aB6VwLU+llokGxiZzWuLMztX7DA//lJlokfhV5+CMFv7NdhaAdofSPs9ARlKAdQ4Z0uFctNWptMXC1KdFKqU7NXA16vfLp8TbS8gez0gfn+A5NtsZhGNC9/2sfn+ynmJ87fHyPMl1+S719Du0ulpUmlyz1SblLppFRFuw+zMz6CYkhrF0eYza41ODJJuj/W7gw9/oXnNUhSJY5SAaJ2V5I0JWCowBGSNoI0QqcxlhbQTh9rvGWnjwXfKKYtFnyMBZ9UQ7uWIdz5msI3Oy0+5yZh+XmtM4/6WDh6eki0vkVMY5V5ZLmZfff1ync/xTBllvC0Sn1Ek+jyICwPSXcfI9BU0MuxM2jOQwo7UFqfpLvX4AhJI8UyMUiTSuuT6HKtuvRRc25S2H0jKPdo962Ov/hGaWlS2BmSlHvAVakuQ9KcBwXlRmH3SeHuY6W6jBzOf6cHDn+p4btIGcKch1Q4KtSjexW9nMDFeva8gJ8w6ON6I2w1vE65Sdp9Uum0xTBrUrj7VGdnyH3E8qCCb2j3SVhuquyYiiFpd7ueu/wW7fZYLXyLY6zCkTZo6dGciWHWGItV8l1pjEHaKNATZklBquEvL8i25WGX5vA6dHnaapdmrsORpJ1B4e6Twny0VY0Z8ILMzG5+4vF52ZaCb6y3D8z3kzjuxk5jpMvE95OROj0Nr4ZMc/jiI8Ab9sKzq3bbW4byybbFXy9/dJimCtr9558hrjeaVGwJc2mhite960WpdLlRmDXGsNfaX+Bv3+3hfUDW2L3t9//u/x77C1OS0fJHFJ6AAAAAAElFTkSuQmCC" alt="QR kód – úschovna Hlavní nádraží">
-                        <div class="parking-qr-text" id="co-luggage-station-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
-                    </div>
-                </div>
-
-                <div class="luggage-service-row">
-                    <span id="co-luggage-easy-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</span>
-                    <div class="parking-qr-option luggage-qr-option">
-                        <img id="co-luggage-easy-qr" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII=" alt="QR kód – EasyLocker">
-                        <div class="parking-qr-text" id="co-luggage-easy-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
-                    </div>
-                </div>
-            </div>
-                <div class="checkout-form-column">
-                    <div class="luggage-box fees-box">
-                <div class="luggage-header">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
-                    <strong id="co-fees-title">Poplatky a doklad</strong>
-                </div>
-                <span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
-            </div>
-
-                    <div class="luggage-box checkout-form-instructions">
-                <div class="instructions" id="co-instructions">
+<div class="container">
+<!-- LANGUAGE SELECTION BAR -->
+<div class="language-bar">
+<span class="flag-btn active" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+<span class="flag-btn" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+<span class="flag-btn" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+<span class="flag-btn" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+<span class="flag-btn" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
+<span class="flag-btn" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+<span class="flag-btn" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+<span class="flag-btn" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
+<span class="flag-btn" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
+<span class="flag-btn" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
+<span class="flag-btn" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
+<span class="flag-btn" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
+<span class="flag-btn" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
+<span class="flag-btn" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
+</div>
+<!-- SCREEN 1: MAIN MENU -->
+<div id="screen-1">
+<div class="header-title" id="main-title">Kiosk</div>
+<div class="kiosk-grid">
+<button class="btn-kiosk btn-checkin" onclick="openSelfCheckin()">
+<svg class="btn-svg-icon" viewbox="0 0 24 24">
+<path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+<path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"></path>
+</svg>
+<span class="btn-title" id="btn-self-checkin-text">Check-in</span>
+</button>
+<button class="btn-kiosk btn-checkout" onclick="openCheckoutForm()">
+<svg class="btn-svg-icon" viewbox="0 0 24 24">
+<path d="M5 3h8c1.1 0 2 .9 2 2v4h-2V5H5v14h8v-4h2v4c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"></path>
+<path d="M12 10.5H17V7.5l4.5 4.5-4.5 4.5v-3H12z"></path>
+</svg>
+<span class="btn-title checkout-title-stack"><span id="btn-checkout-text">Check-out</span><span class="checkout-time" id="btn-checkout-time">do 11:00</span></span>
+</button>
+</div>
+<div class="primary-guide-row">
+<button class="btn-kiosk btn-guide" onclick="openCheckinInfo()">
+<svg aria-hidden="true" class="btn-svg-icon" viewbox="0 0 24 24">
+<path d="M21 4H14c-.77 0-1.47.3-2 .78A2.98 2.98 0 0 0 10 4H3c-1.1 0-2 .9-2 2v13c0 .55.45 1 1 1h8c.55 0 1 .45 1 1h2c0-.55.45-1 1-1h8c.55 0 1-.45 1-1V6c0-1.1-.9-2-2-2zm-10 14.05A5.04 5.04 0 0 0 9 18H3V6h7c.55 0 1 .45 1 1v11.05zm10-.05h-6c-.7 0-1.37.14-2 .4V7c0-.55.45-1 1-1h7v12z"></path>
+</svg>
+<span class="btn-title" id="btn-checkin-text">Průvodce pobytem</span>
+</button>
+</div>
+<div class="kiosk-grid">
+<button class="btn-kiosk btn-service-taxi" onclick="openServiceForm()">
+<span class="split-half split-service">
+<svg class="btn-svg-icon" viewbox="0 0 24 24">
+<path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.7 4.7C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4z"></path>
+</svg>
+<span class="btn-title split-title" id="btn-service-text">Oprava / Pomoc</span>
+<span class="btn-subtitle">8:00 – 16:00</span>
+</span>
+<span class="split-half split-taxi">
+<svg aria-hidden="true" class="btn-svg-icon taxi-icon" viewbox="0 0 24 24">
+<path d="M5.5 11 7 7h2V5h6v2h2l1.5 4H20a2 2 0 0 1 2 2v5h-2v1.5a1.5 1.5 0 0 1-3 0V18H7v1.5a1.5 1.5 0 0 1-3 0V18H2v-5a2 2 0 0 1 2-2h1.5zM8 9l-.75 2h9.5L16 9H8zm-2 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm12 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"></path>
+<rect class="taxi-checker" height="1.4" rx=".15" width="1.4" x="9.2" y="5.7"></rect>
+<rect class="taxi-checker" height="1.4" rx=".15" width="1.4" x="12" y="5.7"></rect>
+<rect class="taxi-checker" height="1.4" rx=".15" width="1.4" x="10.6" y="7.1"></rect>
+<rect class="taxi-checker" height="1.4" rx=".15" width="1.4" x="13.4" y="7.1"></rect>
+</svg>
+<span class="btn-title split-title" id="btn-taxi-text">Taxi</span>
+</span>
+</button>
+<button class="btn-kiosk btn-parking" onclick="openParkingInfo()">
+<svg class="btn-svg-icon" viewbox="0 0 24 24">
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"></path>
+<path d="M9 7h4.5c1.93 0 3.5 1.57 3.5 3.5S15.43 14 13.5 14H11v3H9V7zm2 5h2.5c.83 0 1.5-.67 1.5-1.5S14.33 9 13.5 9H11v3z"></path>
+</svg>
+<span class="btn-title" id="btn-parking-text">Parkování</span>
+</button>
+</div>
+</div>
+<!-- SCREEN SELF CHECK-IN -->
+<div class="card hidden" id="screen-self-checkin">
+<div class="card-title-welcome" id="sci-welcome-title">Vítejte v našem hotelu!</div>
+<div class="checkin-instructions" id="sci-instructions">Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
+<div class="checkin-arrival-note" id="sci-arrival-note-wrap">
+<div id="sci-arrival-note">Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</div>
+<div class="sci-arrival-lower-grid">
+<div class="sci-arrival-half sci-arrival-storage">
+<div class="sci-easylocker-extra">
+<div id="sci-easylocker-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</div>
+<div class="parking-qr-option luggage-qr-option">
+<img alt="QR kód – EasyLocker" class="parking-qr-code" id="sci-easylocker-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII="/>
+<div class="parking-qr-text" id="sci-easylocker-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
+</div>
+</div>
+</div>
+<div class="sci-arrival-half sci-arrival-wifi">
+<div class="wifi-box sci-wifi-box">
+<div class="wifi-title" id="sci-wifi-title">📶 Wi-Fi Připojení</div>
+<div class="wifi-details">
+<div class="wifi-detail-item">
+<span id="sci-wifi-net-label">Název / SSID</span>
+<strong>Nuzky</strong>
+</div>
+<div class="wifi-detail-item">
+<span id="sci-wifi-pass-label">Heslo / Password</span>
+<strong>Hotel2017</strong>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="input-group">
+<label class="input-label" id="sci-name-label">Jméno uvedené na rezervaci</label>
+<input autocomplete="off" id="sciNameInput" placeholder="např. Jan Novák" type="text"/>
+</div>
+<div class="date-row">
+<div class="input-group">
+<label class="input-label" id="sci-from-label">Datum příjezdu</label>
+<input class="native-date-storage" id="sciFromInput" type="date"/><input class="localized-date-display" id="sciFromDisplay" onclick="openLocalizedCalendar('sciFromInput', 'sciFromDisplay')" readonly="" type="text"/>
+</div>
+<div class="input-group">
+<label class="input-label" id="sci-to-label">Datum odjezdu</label>
+<input class="native-date-storage" id="sciToInput" type="date"/><input class="localized-date-display" id="sciToDisplay" onclick="openLocalizedCalendar('sciToInput', 'sciToDisplay')" readonly="" type="text"/>
+</div>
+</div>
+<div class="button-row">
+<button class="btn-form-cancel" id="btn-sci-back" onclick="resetToStart()">ZPĚT</button>
+<button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-submit" onclick="submitSelfCheckin()">CHECK-IN</button>
+</div>
+</div>
+</div>
+<!-- SCREEN SELF CHECK-IN RESULT -->
+<div class="card hidden" id="screen-checkin-result">
+<div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
+<div class="checkin-result-box">
+<div class="guest-access-main">
+<div class="guest-room-block">
+<div class="checkin-result-label" id="sci-room-label">Číslo pokoje</div>
+<div class="checkin-result-value guest-room-value" id="sci-room-value">—</div>
+</div>
+<div class="guest-room-code-block">
+<div class="checkin-result-label" id="sci-code-label">Kód k pokoji a mezidveřím</div>
+<div class="checkin-result-value guest-room-code-value" id="sci-code-value">—</div>
+</div>
+</div>
+<div class="main-entrance-code-box">
+<div aria-hidden="true" class="main-entrance-icon">
+<svg height="25" viewbox="0 0 24 24" width="25">
+<path d="M4 21V5l8-3 8 3v16h-2V7H6v14H4zm4 0V8h8v13h-2v-5h-4v5H8zm2-7h4v-4h-4v4z" fill="currentColor"></path>
+</svg>
+</div>
+<div>
+<div class="checkin-result-label main-entrance-label" id="sci-main-code-label">Kód hlavního vchodu do hotelu</div>
+<div class="checkin-result-value main-entrance-code" id="sci-main-code-value">2018</div>
+</div>
+</div>
+<div class="checkin-result-direction" id="sci-result-direction">Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.</div>
+</div>
+<div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
+<div class="checkin-countdown"><span id="sci-countdown-label">Návrat na hlavní obrazovku za</span> <strong id="sci-countdown">1:30</strong></div>
+<div class="result-ok-row">
+<button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-ok" onclick="resetToStart()">OK</button>
+</div>
+</div>
+<!-- SCREEN SELF CHECK-IN: ROOM NOT READY -->
+<div class="card hidden" id="screen-checkin-waiting">
+<div class="card-title-welcome" id="sci-waiting-title">Váš pokoj ještě není připraven</div>
+<div class="checkin-status-box waiting-status-box">
+<div aria-hidden="true" class="checkin-status-icon"><svg viewbox="0 0 48 48"><path d="M14 7h20M14 41h20M16 7c0 8 2.5 11.5 8 17-5.5 5.5-8 9-8 17M32 7c0 8-2.5 11.5-8 17 5.5 5.5 8 9 8 17M18.5 35.5h11L24 30z"></path></svg></div>
+<div id="sci-waiting-text">Váš pokoj ještě není připraven. Pokoj bude připraven nejpozději v 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.</div>
+</div>
+<div class="result-ok-row">
+<button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-waiting-ok" onclick="resetToStart()">OK</button>
+</div>
+</div>
+<!-- SCREEN SELF CHECK-IN: RESERVATION NOT VERIFIED -->
+<div class="card hidden" id="screen-checkin-unverified">
+<div class="card-title-welcome" id="sci-unverified-title">Rezervaci se nepodařilo ověřit</div>
+<div class="checkin-status-box unverified-status-box">
+<div aria-hidden="true" class="checkin-status-icon unverified-icon">
+<svg role="img" viewbox="0 0 64 64">
+<path d="M23.5 19.8c1.4-7.3 7.2-11.6 15.4-11.6 9.4 0 16.3 5.7 16.3 13.9 0 6.8-3.8 10.6-9.4 13.8 -4.8 2.8-6.8 4.8-6.8 9.2v2.3h-7.1v-3.2 c0-6.4 3.2-9.6 8.8-12.9 4.3-2.5 6.6-4.8 6.6-8.7 0-4.2-3.2-6.8-8-6.8 -4.9 0-7.8 2.5-8.8 6.8l-7-0.8z M31.9 56.7c0-2.4 1.9-4.3 4.3-4.3s4.3 1.9 4.3 4.3 -1.9 4.3-4.3 4.3-4.3-1.9-4.3-4.3z" transform="translate(-6 0)"></path>
+</svg>
+</div>
+<div id="sci-unverified-text">Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
+</div>
+<div class="result-ok-row">
+<button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-unverified-ok" onclick="resetToStart()">OK</button>
+</div>
+</div>
+<!-- SCREEN CHECK-IN INFO -->
+<div class="card hidden" id="screen-checkin">
+<div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
+<div class="card-subtitle-welcome" id="ci-welcome-subtitle">Rezervace přijímáme pouze online.</div>
+<div class="info-item info-item-highlight ci-access-info">
+<span id="ci-access-info-text">Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu restaurace. Děkujeme.</span>
+</div>
+<div class="info-list">
+<div class="wifi-box wifi-box-compact">
+<div class="wifi-title" id="ci-wifi-top-title">📶 Wi-Fi Připojení</div>
+<div class="wifi-details">
+<div class="wifi-detail-item">
+<span id="ci-wifi-top-net-label">Název / SSID</span>
+<strong id="ci-wifi-top-net-val">Nuzky</strong>
+</div>
+<div class="wifi-detail-item">
+<span id="ci-wifi-top-pass-label">Heslo / Password</span>
+<strong id="ci-wifi-top-pass-val">Hotel2017</strong>
+</div>
+</div>
+</div>
+<div class="info-item info-item-highlight">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path></svg>
+<span id="ci-q1-title">Jak získáte kód?</span>
+</strong>
+<span id="ci-q1-text">Pro získání kódu použijte tlačítko CHECK-IN v hlavním menu. Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</span>
+</div>
+<div class="info-item">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
+<span id="ci-alt-luggage-title">Alternativní úschova zavazadel</span>
+</strong>
+<div class="luggage-service-row">
+<span id="ci-alt-luggage-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</span>
+<div class="parking-qr-option luggage-qr-option">
+<img alt="QR kód – EasyLocker" class="parking-qr-code" id="ci-alt-luggage-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII="/>
+<div class="parking-qr-text" id="ci-alt-luggage-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
+</div>
+</div>
+</div>
+<div class="info-item">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM2 19h20v2H2v-2z"></path></svg>
+<span id="ci-bf-title">Snídaně</span>
+</strong>
+<span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
+</div>
+<div class="info-item info-item-highlight">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"></path></svg>
+<span id="ci-reg-title">Registrace</span>
+</strong>
+<span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
+</div>
+<div class="info-item">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
+<span id="ci-q3-title">Zavazadla</span>
+</strong>
+<span id="ci-q3-text">Pokud váš pokoj ještě není připraven, personál naší restaurace vám zavazadla rád schová. Protože jsme ale v historické budově, naše prostory jsou malé a za věci nemůžeme právně odpovídat.</span>
+</div>
+<div class="info-item">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"></path></svg>
+<span id="ci-q4-title">Parkování</span>
+</strong>
+<span id="ci-q4-text">Vzhledem k historickému centru vlastní parkoviště nemáme. Kompletní tipy na parkování v okolí najdete pod tlačítkem „Parkování“ na hlavní obrazovce tohoto kiosku. Tato informace je zmíněna na našich webových stránkách vč. všech profilů třetích stran jako je Booking.com, Expedia aj.</span>
+</div>
+<div class="info-item">
+<strong>
+<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"></path></svg>
+<span id="ci-q5-title">Architektura</span>
+</strong>
+<span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
+</div>
+<div class="info-item">
+<strong>
+<svg aria-hidden="true" class="info-item-icon" viewbox="0 0 24 24"><path d="M9 2h6v2h-1v4.17A5.001 5.001 0 0 1 17 13v7H7v-7a5.001 5.001 0 0 1 3-4.83V4H9V2zm3 8a3 3 0 0 0-3 3v5h6v-5a3 3 0 0 0-3-3zm-5 3h2v7H7v-7zm8 0h2v7h-2v-7z"></path></svg>
+<span id="ci-housekeeping-title">Úklid pokoje</span>
+</strong>
+<span id="ci-housekeeping-text">Pokoje pro vás uklízíme od 8:00 do 15:00. Pokud si přejete ručníky vyměnit, nechte je prosím na zemi v koupelně.</span>
+</div>
+</div>
+<div class="info-stand-box">
+<svg viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>
+<span id="ci-info-stand-text">Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.</span>
+</div>
+<div class="wifi-box">
+<div class="wifi-title" id="ci-wifi-title">📶 Wi-Fi Připojení</div>
+<div class="wifi-details">
+<div class="wifi-detail-item">
+<span id="ci-wifi-net-label">Název / SSID</span>
+<strong id="ci-wifi-net-val">Nuzky</strong>
+</div>
+<div class="wifi-detail-item">
+<span id="ci-wifi-pass-label">Heslo / Password</span>
+<strong id="ci-wifi-pass-val">Hotel2017</strong>
+</div>
+</div>
+</div>
+<div class="wish-text" id="ci-wish-text">Přejeme vám nádherný a ničím nerušený pobyt!</div>
+<div class="button-row">
+<button class="btn-form-cancel" id="btn-back-ci" onclick="resetToStart()" style="flex:1;">ZPĚT / BACK</button>
+</div>
+</div>
+<!-- SCREEN CHECKOUT FORM -->
+<div class="card hidden" id="screen-checkout"><div class="checkout-layout"><div class="checkout-info-column"><div class="luggage-box">
+<div class="luggage-header">
+<svg viewbox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
+<strong id="co-luggage-title">Úschova zavazadel</strong>
+</div>
+<span id="co-luggage-text">Pokud si přejete uložit svá zavazadla, prosím, obraťte se na personál hotelové restaurace. Vzhledem k historickému charakteru budovy jsou naše skladovací prostory omezené a hotel za uložená zavazadla nenese odpovědnost;</span>
+<div class="luggage-service-row">
+<span id="co-luggage-station-text">Alternativně můžete využít placenou úschovnu na Hlavním nádraží. Dostanete se tam tramvají číslo 15 z Malostranského náměstí – vystupte na zastávce „Hlavní nádraží“.</span>
+<div class="parking-qr-option luggage-qr-option">
+<img alt="QR kód – úschovna Hlavní nádraží" class="parking-qr-code" id="co-luggage-station-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAADXAQAAAAChBvkYAAACc0lEQVR4nO2YQY7cRgxFH0cNVO/YN6i+iKX2sQIokMYawMdyyycp3aB6VwLU+llokGxiZzWuLMztX7DA//lJlokfhV5+CMFv7NdhaAdofSPs9ARlKAdQ4Z0uFctNWptMXC1KdFKqU7NXA16vfLp8TbS8gez0gfn+A5NtsZhGNC9/2sfn+ynmJ87fHyPMl1+S719Du0ulpUmlyz1SblLppFRFuw+zMz6CYkhrF0eYza41ODJJuj/W7gw9/oXnNUhSJY5SAaJ2V5I0JWCowBGSNoI0QqcxlhbQTh9rvGWnjwXfKKYtFnyMBZ9UQ7uWIdz5msI3Oy0+5yZh+XmtM4/6WDh6eki0vkVMY5V5ZLmZfff1ync/xTBllvC0Sn1Ek+jyICwPSXcfI9BU0MuxM2jOQwo7UFqfpLvX4AhJI8UyMUiTSuuT6HKtuvRRc25S2H0jKPdo962Ov/hGaWlS2BmSlHvAVakuQ9KcBwXlRmH3SeHuY6W6jBzOf6cHDn+p4btIGcKch1Q4KtSjexW9nMDFeva8gJ8w6ON6I2w1vE65Sdp9Uum0xTBrUrj7VGdnyH3E8qCCb2j3SVhuquyYiiFpd7ueu/wW7fZYLXyLY6zCkTZo6dGciWHWGItV8l1pjEHaKNATZklBquEvL8i25WGX5vA6dHnaapdmrsORpJ1B4e6Twny0VY0Z8ILMzG5+4vF52ZaCb6y3D8z3kzjuxk5jpMvE95OROj0Nr4ZMc/jiI8Ab9sKzq3bbW4byybbFXy9/dJimCtr9558hrjeaVGwJc2mhite960WpdLlRmDXGsNfaX+Bv3+3hfUDW2L3t9//u/x77C1OS0fJHFJ6AAAAAAElFTkSuQmCC"/>
+<div class="parking-qr-text" id="co-luggage-station-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
+</div>
+</div>
+<div class="luggage-service-row">
+<span id="co-luggage-easy-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</span>
+<div class="parking-qr-option luggage-qr-option">
+<img alt="QR kód – EasyLocker" class="parking-qr-code" id="co-luggage-easy-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII="/>
+<div class="parking-qr-text" id="co-luggage-easy-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
+</div>
+</div>
+</div></div><div class="checkout-form-column"><div class="luggage-box fees-box">
+<div class="luggage-header">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"></path></svg>
+<strong id="co-fees-title">Poplatky a doklad</strong>
+</div>
+<span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
+</div><div class="luggage-box">
+<div class="instructions" id="co-instructions">
                     Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT.
                 </div>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" id="label-co-room">Číslo pokoje</label>
-                <input type="text" id="coRoomInput" placeholder="e.g. 102" inputmode="numeric">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" id="label-co-name">Jméno a příjmení</label>
-                <input type="text" id="coNameInput" placeholder="např. Jan Novák">
-            </div>
-
-            <div class="input-group">
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; text-transform:none; letter-spacing:0; font-size:15px; color:#e0e6ed; line-height:1.4;">
-                    <input type="checkbox" id="coElectronicReceipt" onchange="toggleElectronicReceipt()" style="width:22px; height:22px; flex-shrink:0; margin:0; accent-color:var(--green-light);">
-                    <span id="co-electronic-label">Zaškrtněte, pokud chcete zaslat doklad elektronicky</span>
-                </label>
-            </div>
-
-            <div class="input-group hidden" id="coEmailGroup">
-                <label class="input-label" id="co-email-label">E-mailová adresa</label>
-                <input type="email" id="coEmailInput" placeholder="e.g. email@example.com">
-            </div>
-
-            <div class="button-row">
-                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-1">ZPĚT</button>
-                <button class="btn-form-submit" onclick="submitCheckout()" id="btn-submit-1">POTVRDIT</button>
-            </div>
-                </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SCREEN SERVICE / TAXI FORM -->
-        <div id="screen-service" class="card hidden">
-            <div class="service-taxi-form-grid">
-                <section class="service-panel">
-                    <div class="instructions" id="srv-instructions">
+</div><div class="input-group">
+<label class="input-label" id="label-co-room">Číslo pokoje</label>
+<input id="coRoomInput" inputmode="numeric" placeholder="e.g. 102" type="text"/>
+</div><div class="input-group">
+<label class="input-label" id="label-co-name">Jméno a příjmení</label>
+<input id="coNameInput" placeholder="např. Jan Novák" type="text"/>
+</div><div class="input-group">
+<label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; text-transform:none; letter-spacing:0; font-size:15px; color:#e0e6ed; line-height:1.4;">
+<input id="coElectronicReceipt" onchange="toggleElectronicReceipt()" style="width:22px; height:22px; flex-shrink:0; margin:0; accent-color:var(--green-light);" type="checkbox"/>
+<span id="co-electronic-label">Zaškrtněte, pokud chcete zaslat doklad elektronicky</span>
+</label>
+</div><div class="input-group hidden" id="coEmailGroup">
+<label class="input-label" id="co-email-label">E-mailová adresa</label>
+<input id="coEmailInput" placeholder="e.g. email@example.com" type="email"/>
+</div><div class="button-row">
+<button class="btn-form-cancel" id="btn-cancel-1" onclick="resetToStart()">ZPĚT</button>
+<button class="btn-form-submit" id="btn-submit-1" onclick="submitCheckout()">POTVRDIT</button>
+</div></div></div></div>
+<!-- SCREEN SERVICE / TAXI FORM -->
+<div class="card hidden" id="screen-service">
+<div class="service-taxi-form-grid">
+<section class="service-panel">
+<div class="instructions" id="srv-instructions">
                         Vyplňte formulář níže a my se vašemu požadavku budeme co nejdříve věnovat. Pokud je věc neodkladná, využijte pevnou linku vedle kiosku – v čase 8:00–16:00 vás spojí se vzdálenou recepcí, mimo tuto dobu je k dispozici nouzový kontakt.
                     </div>
-
-                    <div class="input-group">
-                        <label class="input-label" id="label-srv-room">Číslo pokoje</label>
-                        <input type="text" id="srvRoomInput" placeholder="e.g. 102" inputmode="numeric">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
-                        <textarea id="srvIssueInput" placeholder="..."></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
-                        <input type="text" id="srvNameInput" placeholder="např. Jan Novák">
-                    </div>
-                </section>
-
-                <section class="taxi-panel">
-                    <div class="taxi-instructions" id="taxi-instructions">
+<div class="input-group">
+<label class="input-label" id="label-srv-room">Číslo pokoje</label>
+<input id="srvRoomInput" inputmode="numeric" placeholder="e.g. 102" type="text"/>
+</div>
+<div class="input-group">
+<label class="input-label" id="label-srv-issue">Popis závady / požadavek</label>
+<textarea id="srvIssueInput" placeholder="..."></textarea>
+</div>
+<div class="input-group">
+<label class="input-label" id="label-srv-name">Jméno a příjmení</label>
+<input id="srvNameInput" placeholder="např. Jan Novák" type="text"/>
+</div>
+</section>
+<section class="taxi-panel">
+<div class="taxi-instructions" id="taxi-instructions">
                         Pro objednání vozu zaškrtněte políčko níže a vyplňte potřebné údaje. V případě, že chcete přistavit hotelový vůz co nejdříve, použijte telefonní linku vedle tohoto kiosku, která je k dispozici od 8:00 do 16:00. Mimo tyto hodiny volejte na telefonní číslo +420 724 212 121.
                     </div>
-
-                    <div class="taxi-prices">
-                        <div class="taxi-price-title" id="taxi-prices-title">Transfery a ceny</div>
-                        <div class="taxi-price-row"><span id="taxi-airport-label">Letiště Václava Havla</span><strong>900 CZK</strong><small id="taxi-airport-car-info">jednosměrně · osobní vůz · max. 4 osoby</small></div>
-                        <div class="taxi-price-row"><span id="taxi-airport-mini-label">Letiště Václava Havla</span><strong id="taxi-airport-mini-price">1 300 CZK</strong><small id="taxi-airport-mini-info">jednosměrně · minibus · max. 8 osob</small></div>
-                        <div class="taxi-price-row"><span id="taxi-station-label">Praha hlavní nádraží / centrum</span><strong>450 CZK</strong><small id="taxi-station-car-info">osobní vůz · max. 4 osoby</small></div>
-                        <div class="taxi-price-row"><span id="taxi-station-mini-label">Praha hlavní nádraží / centrum</span><strong>700 CZK</strong><small id="taxi-station-mini-info">minibus · max. 8 osob</small></div>
-                    </div>
-
-                    <label class="transfer-toggle">
-                        <input type="checkbox" id="taxiOrderToggle" onchange="toggleTaxiForm()">
-                        <span id="taxi-order-label">Chci si objednat transfer</span>
-                    </label>
-
-                    <div id="taxiOrderForm" class="taxi-order-form hidden">
-                        <div class="input-group">
-                            <label class="input-label" id="taxi-name-label">Jméno hosta</label>
-                            <input type="text" id="taxiNameInput" placeholder="např. Jan Novák" autocomplete="off">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
-                            <input type="date" id="taxiDateInput" class="native-date-storage"><input type="text" id="taxiDateDisplay" class="localized-date-display" readonly onclick="openLocalizedCalendar('taxiDateInput', 'taxiDateDisplay')">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label" id="taxi-time-label">Čas vyzvednutí</label>
-                            <input type="time" id="taxiTimeInput">
-                        </div>
-
-                        <div class="phone-row">
-                            <div class="input-group">
-                                <label class="input-label" id="taxi-prefix-label">Mezinárodní předvolba</label>
-                                <select id="taxiPrefixInput">
-                                    <option value="+420" selected>🇨🇿 +420</option><option value="+421">🇸🇰 +421</option>
-                                    <option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option>
-                                    <option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option>
-                                    <option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option>
-                                    <option value="+48">🇵🇱 +48</option><option value="+380">🇺🇦 +380</option>
-                                    <option value="+45">🇩🇰 +45</option><option value="+30">🇬🇷 +30</option>
-                                    <option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option>
-                                    <option value="+81">🇯🇵 +81</option><option value="+31">🇳🇱 +31</option>
-                                    <option value="+32">🇧🇪 +32</option><option value="+41">🇨🇭 +41</option>
-                                    <option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option>
-                                    <option value="+358">🇫🇮 +358</option><option value="+351">🇵🇹 +351</option>
-                                    <option value="+353">🇮🇪 +353</option><option value="+1">🇺🇸/🇨🇦 +1</option>
-                                    <option value="+61">🇦🇺 +61</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label" id="taxi-phone-label">Telefonní číslo</label>
-                                <input type="tel" id="taxiPhoneInput" inputmode="tel" placeholder="123 456 789">
-                            </div>
-                        </div>
-
-                        <fieldset class="taxi-choice-group">
-                            <legend id="taxi-destination-title">Cíl cesty</legend>
-                            <label><input type="radio" name="taxiDestination" value="airport" onchange="updateTaxiDestination()"><span id="taxi-dest-airport">Letiště Václava Havla</span></label>
-                            <label><input type="radio" name="taxiDestination" value="station" onchange="updateTaxiDestination()"><span id="taxi-dest-station">Praha hlavní nádraží</span></label>
-                            <label><input type="radio" name="taxiDestination" value="center" onchange="updateTaxiDestination()"><span id="taxi-dest-center">Centrum Prahy</span></label>
-                        </fieldset>
-
-                        <div class="input-group hidden" id="taxiCenterAddressGroup">
-                            <label class="input-label" id="taxi-center-address-label">Adresa nebo název místa</label>
-                            <input type="text" id="taxiCenterAddressInput" placeholder="e.g. Old Town Square">
-                        </div>
-
-                        <fieldset class="taxi-choice-group">
-                            <legend id="taxi-vehicle-title">Typ vozu</legend>
-                            <label><input type="radio" name="taxiVehicle" value="car"><span id="taxi-vehicle-car">Osobní vůz · max. 4 osoby · max. 3 velká zavazadla a 2 malá zavazadla</span></label>
-                            <label><input type="radio" name="taxiVehicle" value="minibus"><span id="taxi-vehicle-minibus">Minibus · max. 8 osob</span></label>
-                        </fieldset>
-                    </div>
-                </section>
-            </div>
-
-            <div class="button-row">
-                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-2">ZPĚT</button>
-                <button class="btn-form-submit" onclick="submitService()" id="btn-submit-2">POTVRDIT</button>
-            </div>
-        </div>
-
-        <!-- SCREEN PARKING INFO -->
-        <div id="screen-parking" class="card hidden">
-            <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
-            <div class="card-subtitle-welcome parking-historical-highlight" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
-
-
-            <div class="wifi-box-blue">
-                <div class="wifi-title-blue" id="pk-top-wifi-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="pk-top-wifi-net-label">Název / SSID</span>
-                        <strong id="pk-top-wifi-net-val">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="pk-top-wifi-pass-label">Heslo / Password</span>
-                        <strong id="pk-top-wifi-pass-val">Hotel2017</strong>
-                    </div>
-                </div></div>
-
-            <div class="info-list">
-                <!-- PARKING OPTION 1 -->
-                <div class="info-item" style="border-left-color: #42a5f5;">
-                    <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">1</text></svg>
-                        <span id="pk-opt1-title">Hlídané podzemní garáže</span>
-                    </strong>
-                    <div class="parking-content-row" id="parking-content-row-1" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt1-text">
-                        <strong>www.oldtownparking.cz</strong><br>
-                        <strong>Adresa:</strong> Alšovo nábřeží, 110 00<br>
-                        <strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br>
-                        <strong>Výška vozidla:</strong> max. 2 metry<br>
-                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
-                        <strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br>
-                        <strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br>
-                        <strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.
+<div class="taxi-prices">
+<div class="taxi-price-title" id="taxi-prices-title">Transfery a ceny</div>
+<div class="taxi-price-row"><span id="taxi-airport-label">Letiště Václava Havla</span><strong>900 CZK</strong><small id="taxi-airport-car-info">jednosměrně · osobní vůz · max. 4 osoby</small></div>
+<div class="taxi-price-row"><span id="taxi-airport-mini-label">Letiště Václava Havla</span><strong id="taxi-airport-mini-price">1 300 CZK</strong><small id="taxi-airport-mini-info">jednosměrně · minibus · max. 8 osob</small></div>
+<div class="taxi-price-row"><span id="taxi-station-label">Praha hlavní nádraží / centrum</span><strong>450 CZK</strong><small id="taxi-station-car-info">osobní vůz · max. 4 osoby</small></div>
+<div class="taxi-price-row"><span id="taxi-station-mini-label">Praha hlavní nádraží / centrum</span><strong>700 CZK</strong><small id="taxi-station-mini-info">minibus · max. 8 osob</small></div>
+</div>
+<label class="transfer-toggle">
+<input id="taxiOrderToggle" onchange="toggleTaxiForm()" type="checkbox"/>
+<span id="taxi-order-label">Chci si objednat transfer</span>
+</label>
+<div class="taxi-order-form hidden" id="taxiOrderForm">
+<div class="input-group">
+<label class="input-label" id="taxi-name-label">Jméno hosta</label>
+<input autocomplete="off" id="taxiNameInput" placeholder="např. Jan Novák" type="text"/>
+</div>
+<div class="input-group">
+<label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
+<input class="native-date-storage" id="taxiDateInput" type="date"/><input class="localized-date-display" id="taxiDateDisplay" onclick="openLocalizedCalendar('taxiDateInput', 'taxiDateDisplay')" readonly="" type="text"/>
+</div>
+<div class="input-group">
+<label class="input-label" id="taxi-time-label">Čas vyzvednutí</label>
+<input id="taxiTimeInput" type="time"/>
+</div>
+<div class="phone-row">
+<div class="input-group">
+<label class="input-label" id="taxi-prefix-label">Mezinárodní předvolba</label>
+<select id="taxiPrefixInput">
+<option selected="" value="+420">🇨🇿 +420</option><option value="+421">🇸🇰 +421</option>
+<option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option>
+<option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option>
+<option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option>
+<option value="+48">🇵🇱 +48</option><option value="+380">🇺🇦 +380</option>
+<option value="+45">🇩🇰 +45</option><option value="+30">🇬🇷 +30</option>
+<option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option>
+<option value="+81">🇯🇵 +81</option><option value="+31">🇳🇱 +31</option>
+<option value="+32">🇧🇪 +32</option><option value="+41">🇨🇭 +41</option>
+<option value="+46">🇸🇪 +46</option><option value="+47">🇳🇴 +47</option>
+<option value="+358">🇫🇮 +358</option><option value="+351">🇵🇹 +351</option>
+<option value="+353">🇮🇪 +353</option><option value="+1">🇺🇸/🇨🇦 +1</option>
+<option value="+61">🇦🇺 +61</option>
+</select>
+</div>
+<div class="input-group">
+<label class="input-label" id="taxi-phone-label">Telefonní číslo</label>
+<input id="taxiPhoneInput" inputmode="tel" placeholder="123 456 789" type="tel"/>
+</div>
+</div>
+<fieldset class="taxi-choice-group">
+<legend id="taxi-destination-title">Cíl cesty</legend>
+<label><input name="taxiDestination" onchange="updateTaxiDestination()" type="radio" value="airport"/><span id="taxi-dest-airport">Letiště Václava Havla</span></label>
+<label><input name="taxiDestination" onchange="updateTaxiDestination()" type="radio" value="station"/><span id="taxi-dest-station">Praha hlavní nádraží</span></label>
+<label><input name="taxiDestination" onchange="updateTaxiDestination()" type="radio" value="center"/><span id="taxi-dest-center">Centrum Prahy</span></label>
+</fieldset>
+<div class="input-group hidden" id="taxiCenterAddressGroup">
+<label class="input-label" id="taxi-center-address-label">Adresa nebo název místa</label>
+<input id="taxiCenterAddressInput" placeholder="e.g. Old Town Square" type="text"/>
+</div>
+<fieldset class="taxi-choice-group">
+<legend id="taxi-vehicle-title">Typ vozu</legend>
+<label><input name="taxiVehicle" type="radio" value="car"/><span id="taxi-vehicle-car">Osobní vůz · max. 4 osoby · max. 3 velká zavazadla a 2 malá zavazadla</span></label>
+<label><input name="taxiVehicle" type="radio" value="minibus"/><span id="taxi-vehicle-minibus">Minibus · max. 8 osob</span></label>
+</fieldset>
+</div>
+</section>
+</div>
+<div class="button-row">
+<button class="btn-form-cancel" id="btn-cancel-2" onclick="resetToStart()">ZPĚT</button>
+<button class="btn-form-submit" id="btn-submit-2" onclick="submitService()">POTVRDIT</button>
+</div>
+</div>
+<!-- SCREEN PARKING INFO -->
+<div class="card hidden" id="screen-parking">
+<div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
+<div class="card-subtitle-welcome parking-historical-highlight" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
+<div class="wifi-box-blue">
+<div class="wifi-title-blue" id="pk-top-wifi-title">📶 Wi-Fi Připojení</div>
+<div class="wifi-details">
+<div class="wifi-detail-item">
+<span id="pk-top-wifi-net-label">Název / SSID</span>
+<strong id="pk-top-wifi-net-val">Nuzky</strong>
+</div>
+<div class="wifi-detail-item">
+<span id="pk-top-wifi-pass-label">Heslo / Password</span>
+<strong id="pk-top-wifi-pass-val">Hotel2017</strong>
+</div>
+</div></div>
+<div class="info-list">
+<!-- PARKING OPTION 1 -->
+<div class="info-item" style="border-left-color: #42a5f5;">
+<strong>
+<svg class="info-item-icon" style="fill: #42a5f5;" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="12" y="12">1</text></svg>
+<span id="pk-opt1-title">Hlídané podzemní garáže</span>
+</strong>
+<div class="parking-content-row" id="parking-content-row-1" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt1-text">
+<strong>www.oldtownparking.cz</strong><br/>
+<strong>Adresa:</strong> Alšovo nábřeží, 110 00<br/>
+<strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br/>
+<strong>Výška vozidla:</strong> max. 2 metry<br/>
+<strong>Platba:</strong> Kartou nebo hotovostí v automatu<br/>
+<strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br/>
+<strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br/>
+<strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.
                     </span>
-                    <div class="parking-qr-option">
-                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADHElEQVR42u3dS27rMBAF0ceH7H/LztwDAUx/+NGpaSJbVqEbF6RIjs/n8w+v4b9HwDf4Bt/gG3yDb/ANvpHKz/Ofxxg99/E1zPf8vc9jgl/XRgYQI7exyZNU3/o5+AbfuD2vRRLKqihUF9ASf0Lbk1Tf+jn4Bt94WV6LJIXEGJWY5hKHvdpyYuSL1Ld+Dr7BN16W1+qoi1GRZDQV/fZcyKG+9XPwDb4hr9UQyVxTs5Zf/9w27KW+wTf4Bt+oyWttCSUxoD3/89RKhsQBtbYnqb71c/ANvnF7Xmtb5PgcZyLzkolzmpFrVz1J9a2fg2/wjevy2tt200182W3PJ6m+9XPwDb5xXV47YmFmJHMlLj9oS5ERR+pbPwff4BvX5bUp2iYTpzJX4jYbdTdZd6361s/BN/jG8Yy6jVsTX+BqexfsgpMTjK+Bb77BN+S1DTJX5KPq3lBLjLqRe5bXwDff4Bu3UXh+aGSsKvF7E48ijfyEutUIU9eqb/0cfINvnMeoS1V12//XjUbVnWCwybFY6ls/B9/gG+dRuF/uqhG0Pc+FSryNyJNU3/o5+AbfuD2vJc4trhpger6Nur1Anm+ybamp+tbPwTf4xu15LRJJpo7mbFsFsepFuVVnWalv/Rx8g2+cx1h1bFLiGs/Cp1O260ZbMFTf+jn4Bt84nszzqNoO0GxLkZHp0cTtghOnktW3fg6+wTfOI3P/tQsWhE6lubrNThKfhvrWz8E3+MbxZO6/Fhlfq8t6kdxUN5AXyYnG18A3+Abf72Jsst3FVJxp2xpkk93ZEq9V3/o5+AbfOI/C8w0iuWmTj0rMiYkv90V+oPrWz8E3+MZ1ea0uCrWNoE3lplW7wk39c2QwTn3r5+AbfOP2vDaVuSKBpW0ZQOKizshPiNyV+VDwDb75hry2gsTpwrqlC5ssqDC+Br7BN9+Q1zYgcfJ06qPq3jJLXJdqfA18g2++Ia/9NXQkUrfD2qrDRtv2jFPf+jn4Bt94WV5rWy4aCUptZzJElhAkrgA1Hwq+wTffuJxN91+D+gbf4Bt8g2++wTf4Bt84gl99iClleTnWdQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
-                        <span class="parking-qr-text" id="pk-qr-text-1">Naskenujte QR kód pro otevření webové stránky.</span>
-                    </div></div>
-                </div>
-
-                <!-- PARKING OPTION 2 -->
-                <div class="info-item" style="border-left-color: #42a5f5;">
-                    <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">2</text></svg>
-                        <span id="pk-opt2-title">Nehlídané venkovní parkoviště</span>
-                    </strong>
-                    <span id="pk-opt2-text">
-                        <strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br>
-                        <strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br>
-                        <em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br>
-                        <strong>Platba:</strong> Pouze kartou v automatu<br>
-                        <strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br>
-                        <strong>Značka:</strong> Nejbližší, ale velice drahé.
+<div class="parking-qr-option">
+<img alt="QR kód pro otevření webové stránky" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAClCAIAAACySaqNAAADHElEQVR42u3dS27rMBAF0ceH7H/LztwDAUx/+NGpaSJbVqEbF6RIjs/n8w+v4b9HwDf4Bt/gG3yDb/ANvpHKz/Ofxxg99/E1zPf8vc9jgl/XRgYQI7exyZNU3/o5+AbfuD2vRRLKqihUF9ASf0Lbk1Tf+jn4Bt94WV6LJIXEGJWY5hKHvdpyYuSL1Ld+Dr7BN16W1+qoi1GRZDQV/fZcyKG+9XPwDb4hr9UQyVxTs5Zf/9w27KW+wTf4Bt+oyWttCSUxoD3/89RKhsQBtbYnqb71c/ANvnF7Xmtb5PgcZyLzkolzmpFrVz1J9a2fg2/wjevy2tt200182W3PJ6m+9XPwDb5xXV47YmFmJHMlLj9oS5ERR+pbPwff4BvX5bUp2iYTpzJX4jYbdTdZd6361s/BN/jG8Yy6jVsTX+BqexfsgpMTjK+Bb77BN+S1DTJX5KPq3lBLjLqRe5bXwDff4Bu3UXh+aGSsKvF7E48ijfyEutUIU9eqb/0cfINvnMeoS1V12//XjUbVnWCwybFY6ls/B9/gG+dRuF/uqhG0Pc+FSryNyJNU3/o5+AbfuD2vJc4trhpger6Nur1Anm+ybamp+tbPwTf4xu15LRJJpo7mbFsFsepFuVVnWalv/Rx8g2+cx1h1bFLiGs/Cp1O260ZbMFTf+jn4Bt84nszzqNoO0GxLkZHp0cTtghOnktW3fg6+wTfOI3P/tQsWhE6lubrNThKfhvrWz8E3+MbxZO6/Fhlfq8t6kdxUN5AXyYnG18A3+Abf72Jsst3FVJxp2xpkk93ZEq9V3/o5+AbfOI/C8w0iuWmTj0rMiYkv90V+oPrWz8E3+MZ1ea0uCrWNoE3lplW7wk39c2QwTn3r5+AbfOP2vDaVuSKBpW0ZQOKizshPiNyV+VDwDb75hry2gsTpwrqlC5ssqDC+Br7BN9+Q1zYgcfJ06qPq3jJLXJdqfA18g2++Ia/9NXQkUrfD2qrDRtv2jFPf+jn4Bt94WV5rWy4aCUptZzJElhAkrgA1Hwq+wTffuJxN91+D+gbf4Bt8g2++wTf4Bt84gl99iClleTnWdQAAAABJRU5ErkJggg=="/>
+<span class="parking-qr-text" id="pk-qr-text-1">Naskenujte QR kód pro otevření webové stránky.</span>
+</div></div>
+</div>
+<!-- PARKING OPTION 2 -->
+<div class="info-item" style="border-left-color: #42a5f5;">
+<strong>
+<svg class="info-item-icon" style="fill: #42a5f5;" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="12" y="12">2</text></svg>
+<span id="pk-opt2-title">Nehlídané venkovní parkoviště</span>
+</strong>
+<span id="pk-opt2-text">
+<strong>Adresa vjezdu:</strong> Nosticova 634 (výjezd je na opačné straně, tam najdete i automat)<br/>
+<strong>Cena:</strong> 75 Kč/hod. (6:00–23:00) | 100 Kč/hod. (23:00–6:00)<br/>
+<em>(aktuální cenu si zkontrolujte na místě u vjezdu a automatu)</em><br/>
+<strong>Platba:</strong> Pouze kartou v automatu<br/>
+<strong>Vzdálenost zpět k hotelu:</strong> 5 minut chůze přes park Kampa<br/>
+<strong>Značka:</strong> Nejbližší, ale velice drahé.
                     </span>
-                </div>
-
-                <!-- PARKING OPTION 3 -->
-                <div class="info-item" style="border-left-color: #42a5f5;">
-                    <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">3</text></svg>
-                        <span id="pk-opt3-title">Hlídané venkovní i garážové parkoviště The Cloud One</span>
-                    </strong>
-                    <div class="parking-content-row" id="parking-content-row-3" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt3-text">
-                        <strong>www.aprecoparking.cz/praha-1-hybernska</strong><br>
-                        <strong>Adresa:</strong> Hybernská 2140/17<br>
-                        <strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br>
-                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
-                        <strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br>
-                        <strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br>
-                        <strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.
+</div>
+<!-- PARKING OPTION 3 -->
+<div class="info-item" style="border-left-color: #42a5f5;">
+<strong>
+<svg class="info-item-icon" style="fill: #42a5f5;" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="12" y="12">3</text></svg>
+<span id="pk-opt3-title">Hlídané venkovní i garážové parkoviště The Cloud One</span>
+</strong>
+<div class="parking-content-row" id="parking-content-row-3" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt3-text">
+<strong>www.aprecoparking.cz/praha-1-hybernska</strong><br/>
+<strong>Adresa:</strong> Hybernská 2140/17<br/>
+<strong>Cena:</strong> při rezervaci online 750 Kč / 24 h, na místě 1 200 Kč / 24 h<br/>
+<em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br/>
+<strong>Platba:</strong> Kartou přes webové stránky, nebo na místě<br/>
+<strong>Vzdálenost zpět k hotelu:</strong> 20 minut pomocí pražské hromadné dopravy<br/>
+<strong>Značka:</strong> Dobrá možnost, pokud je Old Town Parking plný.
                     </span>
-                    <div class="parking-qr-option">
-                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAADyklEQVR42u3dwW6kMBBF0WGU///lzGZWWaCU6pXthnO3rYChr8ovblNc39/ff4Bf8NctAFfAFXAFXAFXwBWAK+AKlvB1//F1XWvGcb98fD+MH39bGnPnb4NH7lz+sm9BXYE5CFwBV/Dh2baUfUoEE2gn+nWGsevW7foW1BVwBVwBV/CsbLssGHYWakufls4bXD7uDHJXPFdXwBVwBVzBo7PtmQSjbidjzu12UFfAFXAFXAFek23v6az53h9qbjVZXYE5CFwBV4D5bLsrkXWey+ocOfi3Z26/VVfAFXAFXMGbsu2uH9aDS6LBT5eN+ZBvQV0BV8AVcAWnc535a/iyn+znThTc7aCuwBwEroArwK+o9bdd1g22tHA5t8rZOVFwRXjuPqsrMAeBK+AKHsU1lyKXPVt1ZretYOQ8pPeYugJzELgCruDDs+3gicdWhIONu4Jj3vVvQXDzg7oCroAr4Ao+PNsuy5jB894PY9dO3rlBencDzEHgCrgC/CfZA2zZptHOMIKJu3SoXa9yCO45UVdgDgJXwBU8OtuW4tuyna3LHnibC++lO7lsVOoKuAKugCs4nWvZOmbwGaddDbTOfGdEsAmvugJzELgCruBN2XZXN9hDMnUnkM69JCJ4ReoKzEHgCriCz6a1JyHYGWBZiJ7L8sHrLcXVzvXabwtzELgCrkC2HciYwXXMudTcOfLcFS3bsKGugCvgCriC0xncbxuMq3OvJ1jWQCu4Er0r6qor4Aq4Aq7gTdk2GAx3/UbfGcZc1N31PjR1BeYgcAVcwYcxuCdh1/NRuxZqd61EBy9BXQFXwBVwBY/Otp3OqsuSb2cbbLDZWDCAly6hE7E9SwZzELgCruBN2bYTKjsPU801Rgj2K5iL2MG7Yb8tzEHgCriCF3F1VgwP+X0/mEB3rZ8G0/rc8rG6AnMQuAKu4HS29QALrif+OFQwVAZ3DhzS5Kxzc9QVcAVcAVdwOtfcG2rnkm+JXc+hlYYRjPbWbWEOAlfAFbyX2rNkc5SeUivltWC468TVYNLf1WZXXQFXwBVwBR+ebe/TXDCvLcvUnag7t5EgeNuDL7ZQV2AOAlfAFTw623by2rKGYcueJQvGxrktw/fntW4LcxC4Aq5Atj2MUooMdrAtJd9ludh+W5iDwBVwBbLtJzPXmWxur25pofaQt5apK+AKuAKu4NHZdq7HwrJ3fJXCbCmuzl1vJ4CrKzAHgSvgCmTbgaB0yIlKGbOT9IPPzgX3YFi3hTkIXAFX8CgO7W8LdQVcAVcAroAr4Aq4Aq6AK3gt/wB8We+hbEJbUQAAAABJRU5ErkJggg==" alt="QR kód pro otevření webové stránky">
-                        <span class="parking-qr-text" id="pk-qr-text-3">Naskenujte QR kód pro otevření webové stránky.</span>
-                    </div></div>
-                </div>
-
-                <!-- PARKING OPTION 4 -->
-                <div class="info-item" style="border-left-color: #42a5f5;">
-                    <strong>
-                        <svg class="info-item-icon" style="fill: #42a5f5;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">4</text></svg>
-                        <span id="pk-opt4-title">P+R Kotlářka – levné venkovní parkování zřizované městem Prahou</span>
-                    </strong>
-                    <div class="parking-content-row" id="parking-content-row-4" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt4-text">
-                        <strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br>
-                        <strong>Adresa:</strong> Plzeňská<br>
-                        <strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br>
-                        <strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br>
-                        <em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br>
-                        <strong>Platba:</strong> Kartou nebo hotovostí v automatu<br>
-                        <strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br>
-                        <strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze.
+<div class="parking-qr-option">
+<img alt="QR kód pro otevření webové stránky" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAIAAAD7zwkLAAADyklEQVR42u3dwW6kMBBF0WGU///lzGZWWaCU6pXthnO3rYChr8ovblNc39/ff4Bf8NctAFfAFXAFXAFXwBWAK+AKlvB1//F1XWvGcb98fD+MH39bGnPnb4NH7lz+sm9BXYE5CFwBV/Dh2baUfUoEE2gn+nWGsevW7foW1BVwBVwBV/CsbLssGHYWakufls4bXD7uDHJXPFdXwBVwBVzBo7PtmQSjbidjzu12UFfAFXAFXAFek23v6az53h9qbjVZXYE5CFwBV4D5bLsrkXWey+ocOfi3Z26/VVfAFXAFXMGbsu2uH9aDS6LBT5eN+ZBvQV0BV8AVcAWnc535a/iyn+znThTc7aCuwBwEroArwK+o9bdd1g22tHA5t8rZOVFwRXjuPqsrMAeBK+AKHsU1lyKXPVt1ZretYOQ8pPeYugJzELgCruDDs+3gicdWhIONu4Jj3vVvQXDzg7oCroAr4Ao+PNsuy5jB894PY9dO3rlBencDzEHgCrgC/CfZA2zZptHOMIKJu3SoXa9yCO45UVdgDgJXwBU8OtuW4tuyna3LHnibC++lO7lsVOoKuAKugCs4nWvZOmbwGaddDbTOfGdEsAmvugJzELgCruBN2XZXN9hDMnUnkM69JCJ4ReoKzEHgCriCz6a1JyHYGWBZiJ7L8sHrLcXVzvXabwtzELgCrkC2HciYwXXMudTcOfLcFS3bsKGugCvgCriC0xncbxuMq3OvJ1jWQCu4Er0r6qor4Aq4Aq7gTdk2GAx3/UbfGcZc1N31PjR1BeYgcAVcwYcxuCdh1/NRuxZqd61EBy9BXQFXwBVwBY/Otp3OqsuSb2cbbLDZWDCAly6hE7E9SwZzELgCruBN2bYTKjsPU801Rgj2K5iL2MG7Yb8tzEHgCriCF3F1VgwP+X0/mEB3rZ8G0/rc8rG6AnMQuAKu4HS29QALrif+OFQwVAZ3DhzS5Kxzc9QVcAVcAVdwOtfcG2rnkm+JXc+hlYYRjPbWbWEOAlfAFbyX2rNkc5SeUivltWC468TVYNLf1WZXXQFXwBVwBR+ebe/TXDCvLcvUnag7t5EgeNuDL7ZQV2AOAlfAFTw623by2rKGYcueJQvGxrktw/fntW4LcxC4Aq5Atj2MUooMdrAtJd9ludh+W5iDwBVwBbLtJzPXmWxur25pofaQt5apK+AKuAKu4NHZdq7HwrJ3fJXCbCmuzl1vJ4CrKzAHgSvgCmTbgaB0yIlKGbOT9IPPzgX3YFi3hTkIXAFX8CgO7W8LdQVcAVcAroAr4Aq4Aq6AK3gt/wB8We+hbEJbUQAAAABJRU5ErkJggg=="/>
+<span class="parking-qr-text" id="pk-qr-text-3">Naskenujte QR kód pro otevření webové stránky.</span>
+</div></div>
+</div>
+<!-- PARKING OPTION 4 -->
+<div class="info-item" style="border-left-color: #42a5f5;">
+<strong>
+<svg class="info-item-icon" style="fill: #42a5f5;" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><text dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="12" y="12">4</text></svg>
+<span id="pk-opt4-title">P+R Kotlářka – levné venkovní parkování zřizované městem Prahou</span>
+</strong>
+<div class="parking-content-row" id="parking-content-row-4" style="display:flex; align-items:flex-start; justify-content:space-between; gap:18px;"><span id="pk-opt4-text">
+<strong>https://parking.praha.eu/cs/moznosti-parkovani-v-praze/pr-park-ride/kotlarka/</strong><br/>
+<strong>Adresa:</strong> Plzeňská<br/>
+<strong>GPS vjezdu na P+R:</strong> 50.0685878N, 14.3580586E<br/>
+<strong>Cena:</strong> 50 Kč za prvních 24 hodin, každá další započatá hodina 10 Kč<br/>
+<em>(aktuální cenu si zkontrolujte na webových stránkách)</em><br/>
+<strong>Platba:</strong> Kartou nebo hotovostí v automatu<br/>
+<strong>Vzdálenost zpět k hotelu:</strong> 30 minut pomocí pražské hromadné dopravy<br/>
+<strong>Značka:</strong> Opravdu nejlevnější možné parkování v Praze.
                     </span>
-                    <div class="parking-qr-option">
-                        <img class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEi0lEQVR42u3dy47jMAxE0XiQ///lzL4XBgQ+RNnnbjtRO3aBZMmUdP1+vw9QzD+3AHQGOgPoDHQGOgPoDHQG0Bm28r3/83VdPddx/1pi6TL+DHX/3fsPR4aqu7GJ19z2BMUzyJugM4DOcJQPiJS6uxzGfV2ceJGRejziexI9RNsTFM8gb4LOADrDyT4gUglGpssj310aKlImJ07EJ74d2fUExTPIm6AzgM7wXB9wBEs1deIk/pItaKvHxTPImwCdgc6Ah/qAtgb5XasWxDOAzkBnoDNgqw8YMjHd1vkTqdYjnU51y5XbnqB4BjoDnQF0hpN9wJCJ6UgzT91fh/yimU9QPAOdgc4AOsMsrpnN5rv65RN39Zl5zeIZ5E2AzkBnwOezen5AXd/6n5ETt9VMbKqp++4RmwvZLwjyJkBnoDM8h2vI9vpLtXzm7+9ar9vWYhQxdom+RzyDvAk6A+gMJ/uAxEpwSEE6pMROvBt1u5lGjI54BnkTdAbQGUYTOk94VzdL5DLqqubIh3dt8lP3Nkg8g7wJOgPoDKO52lpuEhtjdnUNtXU61Z1MUIf3AZA3QWcAneFBPmBmtV63m1Bdn0ziGuMjFl6IZ5A3QWcAneFBPiBSCLeNPMRSFD6zTZubRqyMeAZ5E3QG0Blm8Y1Ugm09/m3rZu8/vGsPziFrfcUzyJsAnYHO8BofEGkjqXMJkUW2ib830RUNOai5zn+IZ5A3QWcAnWFYqTeke2fmPv5tywV27WJUt/OSeAZ5E3QG0BlO9gGhocu289xV6j5+n6JEryaeQd4EnQF0htGE+oISu4aWOn8iBWnkJyQajjqHEXmHkfgUxDPIm6AzgM4wmqttgrhtOWvby4Nd1XrkPrc1AolnkDdBZwCdYTTfxLHqVhEnTuIn2oJEl7CrXaet8Uk8g7wJOgPoDEf5gMTCMDIT3XZwWF3xXtdEFDFYbYZDPIO8CToD6AyzuGYet9t2VYkT8W0tN3X3yvkBkDcBOgOdgQ8IV9xt62ZnTqbv2oJ018jeB0DeBJ0BdIaTyOwLqtuSs20We+bK58Sh2vqgxDPIm6AzgM5wsg9IdAlL35256U3dZdT5rboz15ZurHgGeRN0BtAZHuQDEl3CrkagRGez9H8TrypyN9pORhPPIG+CzgA6w4N8QN1ul4lT/HUrgSPVemRH0siNTRxq6caKZ5A3QWcAnWEWV90UcFsFmliutvUjta24rvu9fADkTdAZQGd4rg9InFxeKnUj5WrdT6hbJn0/VNt7CPsFQd4E6Ax0hrew1hfUtjNPpD5t66av8xCJE/F1i7e9D4C8CToD6Ayv8QFLtXyih4gU/pFKv23WPnGavm2DIPEM8iboDKAzvNUHtBFpyKlr16mr9Ouq9bpT1fQFQd4EnQF0Bj4gm6USO1IIR14tLJmGXSMnWgrxDPIm6AygM7zVB9TtNXREN/1Seb7LM0UK/8R10eIZ5E3QGUBnONkHtJW6iS8A2g49Xqqa63Yxajs/QDyDvAk6A+gMBzP0/ACIZwCdgc5AZwCdgc4AOgOdgc6ARP4Da7avs4qZ0IEAAAAASUVORK5CYII=" alt="QR kód pro otevření webové stránky">
-                        <span class="parking-qr-text" id="pk-qr-text-4">Naskenujte QR kód pro otevření webové stránky.</span>
-                    </div></div>
-                </div>
-            </div>
-
-            <!-- BLUE WIFI BOX FOR PARKING SCREEN -->
-            <div class="wifi-box-blue">
-                <div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="pk-wifi-net-label">Název / SSID</span>
-                        <strong id="pk-wifi-net-val">Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="pk-wifi-pass-label">Heslo / Password</span>
-                        <strong id="pk-wifi-pass-val">Hotel2017</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="button-row">
-                <button class="btn-form-cancel" onclick="resetToStart()" id="btn-back-pk" style="flex:1;">ZPĚT / BACK</button>
-            </div>
-        </div>
-
-        <!-- SCREEN THANKS -->
-        <div id="screen-thanks" class="card hidden thanks-box">
-            <div class="thanks-icon">✓</div>
-            <div class="thanks-msg" id="thanks-message">
+<div class="parking-qr-option">
+<img alt="QR kód pro otevření webové stránky" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAEi0lEQVR42u3dy47jMAxE0XiQ///lzL4XBgQ+RNnnbjtRO3aBZMmUdP1+vw9QzD+3AHQGOgPoDHQGOgPoDHQG0Bm28r3/83VdPddx/1pi6TL+DHX/3fsPR4aqu7GJ19z2BMUzyJugM4DOcJQPiJS6uxzGfV2ceJGRejziexI9RNsTFM8gb4LOADrDyT4gUglGpssj310aKlImJ07EJ74d2fUExTPIm6AzgM7wXB9wBEs1deIk/pItaKvHxTPImwCdgc6Ah/qAtgb5XasWxDOAzkBnoDNgqw8YMjHd1vkTqdYjnU51y5XbnqB4BjoDnQF0hpN9wJCJ6UgzT91fh/yimU9QPAOdgc4AOsMsrpnN5rv65RN39Zl5zeIZ5E2AzkBnwOezen5AXd/6n5ETt9VMbKqp++4RmwvZLwjyJkBnoDM8h2vI9vpLtXzm7+9ar9vWYhQxdom+RzyDvAk6A+gMJ/uAxEpwSEE6pMROvBt1u5lGjI54BnkTdAbQGUYTOk94VzdL5DLqqubIh3dt8lP3Nkg8g7wJOgPoDKO52lpuEhtjdnUNtXU61Z1MUIf3AZA3QWcAneFBPmBmtV63m1Bdn0ziGuMjFl6IZ5A3QWcAneFBPiBSCLeNPMRSFD6zTZubRqyMeAZ5E3QG0Blm8Y1Ugm09/m3rZu8/vGsPziFrfcUzyJsAnYHO8BofEGkjqXMJkUW2ib830RUNOai5zn+IZ5A3QWcAnWFYqTeke2fmPv5tywV27WJUt/OSeAZ5E3QG0BlO9gGhocu289xV6j5+n6JEryaeQd4EnQF0htGE+oISu4aWOn8iBWnkJyQajjqHEXmHkfgUxDPIm6AzgM4wmqttgrhtOWvby4Nd1XrkPrc1AolnkDdBZwCdYTTfxLHqVhEnTuIn2oJEl7CrXaet8Uk8g7wJOgPoDEf5gMTCMDIT3XZwWF3xXtdEFDFYbYZDPIO8CToD6AyzuGYet9t2VYkT8W0tN3X3yvkBkDcBOgOdgQ8IV9xt62ZnTqbv2oJ018jeB0DeBJ0BdIaTyOwLqtuSs20We+bK58Sh2vqgxDPIm6AzgM5wsg9IdAlL35256U3dZdT5rboz15ZurHgGeRN0BtAZHuQDEl3CrkagRGez9H8TrypyN9pORhPPIG+CzgA6w4N8QN1ul4lT/HUrgSPVemRH0siNTRxq6caKZ5A3QWcAnWEWV90UcFsFmliutvUjta24rvu9fADkTdAZQGd4rg9InFxeKnUj5WrdT6hbJn0/VNt7CPsFQd4E6Ax0hrew1hfUtjNPpD5t66av8xCJE/F1i7e9D4C8CToD6Ayv8QFLtXyih4gU/pFKv23WPnGavm2DIPEM8iboDKAzvNUHtBFpyKlr16mr9Ouq9bpT1fQFQd4EnQF0Bj4gm6USO1IIR14tLJmGXSMnWgrxDPIm6AygM7zVB9TtNXREN/1Seb7LM0UK/8R10eIZ5E3QGUBnONkHtJW6iS8A2g49Xqqa63Yxajs/QDyDvAk6A+gMBzP0/ACIZwCdgc5AZwCdgc4AOgOdgc6ARP4Da7avs4qZ0IEAAAAASUVORK5CYII="/>
+<span class="parking-qr-text" id="pk-qr-text-4">Naskenujte QR kód pro otevření webové stránky.</span>
+</div></div>
+</div>
+</div>
+<!-- BLUE WIFI BOX FOR PARKING SCREEN -->
+<div class="wifi-box-blue">
+<div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
+<div class="wifi-details">
+<div class="wifi-detail-item">
+<span id="pk-wifi-net-label">Název / SSID</span>
+<strong id="pk-wifi-net-val">Nuzky</strong>
+</div>
+<div class="wifi-detail-item">
+<span id="pk-wifi-pass-label">Heslo / Password</span>
+<strong id="pk-wifi-pass-val">Hotel2017</strong>
+</div>
+</div>
+</div>
+<div class="button-row">
+<button class="btn-form-cancel" id="btn-back-pk" onclick="resetToStart()" style="flex:1;">ZPĚT / BACK</button>
+</div>
+</div>
+<!-- SCREEN THANKS -->
+<div class="card hidden thanks-box" id="screen-thanks">
+<div class="thanks-icon">✓</div>
+<div class="thanks-msg" id="thanks-message">
                 Děkujeme! Váš požadavek byl úspěšně odeslán.
             </div>
-            <div class="checkin-countdown">
-                <span id="thanks-countdown-label">Návrat na hlavní obrazovku za</span>
-                <strong id="thanks-countdown">0:10</strong>
-            </div>
-            <div class="result-ok-row">
-                <button class="btn-form-submit" onclick="resetToStart()" id="thanks-ok-btn">OK</button>
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <div id="localized-calendar-overlay" class="localized-calendar-overlay hidden" onclick="calendarOverlayClick(event)">
-        <div class="localized-calendar-card" role="dialog" aria-modal="true">
-            <div class="localized-calendar-header">
-                <button type="button" class="calendar-nav-btn" onclick="calendarMoveMonth(-1)" aria-label="Previous month">‹</button>
-                <div id="localized-calendar-title" class="localized-calendar-title"></div>
-                <button type="button" class="calendar-nav-btn" onclick="calendarMoveMonth(1)" aria-label="Next month">›</button>
-            </div>
-            <div id="localized-calendar-weekdays" class="localized-calendar-weekdays"></div>
-            <div id="localized-calendar-days" class="localized-calendar-days"></div>
-            <div class="localized-calendar-actions">
-                <button type="button" class="calendar-secondary-btn" id="calendar-today-btn" onclick="calendarChooseToday()">Dnes</button>
-                <button type="button" class="calendar-secondary-btn" id="calendar-close-btn" onclick="closeLocalizedCalendar()">Zavřít</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="global-idle-timer" class="global-idle-timer hidden">
-        <span id="global-idle-label">Návrat za</span>
-        <strong id="global-idle-countdown">1:30</strong>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
-    <script>
+<div class="checkin-countdown">
+<span id="thanks-countdown-label">Návrat na hlavní obrazovku za</span>
+<strong id="thanks-countdown">0:10</strong>
+</div>
+<div class="result-ok-row">
+<button class="btn-form-submit" id="thanks-ok-btn" onclick="resetToStart()">OK</button>
+</div>
+</div>
+</div>
+<div class="localized-calendar-overlay hidden" id="localized-calendar-overlay" onclick="calendarOverlayClick(event)">
+<div aria-modal="true" class="localized-calendar-card" role="dialog">
+<div class="localized-calendar-header">
+<button aria-label="Previous month" class="calendar-nav-btn" onclick="calendarMoveMonth(-1)" type="button">‹</button>
+<div class="localized-calendar-title" id="localized-calendar-title"></div>
+<button aria-label="Next month" class="calendar-nav-btn" onclick="calendarMoveMonth(1)" type="button">›</button>
+</div>
+<div class="localized-calendar-weekdays" id="localized-calendar-weekdays"></div>
+<div class="localized-calendar-days" id="localized-calendar-days"></div>
+<div class="localized-calendar-actions">
+<button class="calendar-secondary-btn" id="calendar-today-btn" onclick="calendarChooseToday()" type="button">Dnes</button>
+<button class="calendar-secondary-btn" id="calendar-close-btn" onclick="closeLocalizedCalendar()" type="button">Zavřít</button>
+</div>
+</div>
+</div>
+<div class="global-idle-timer hidden" id="global-idle-timer">
+<span id="global-idle-label">Návrat za</span>
+<strong id="global-idle-countdown">1:30</strong>
+</div>
+<!-- JAVASCRIPT LOGIC & DICTIONARIES -->
+<script>
         // CONFIGURATION
         const NTFY_TOPIC = "HotelNuzky";
         const CHECKIN_API_URL = "https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/";
