@@ -1507,6 +1507,84 @@
             margin-top: 24px;
         }
 
+
+        /* Layout refinement: self check-in info + Wi-Fi */
+        #sci-arrival-note-wrap {
+            text-align: left;
+        }
+        #sci-arrival-note {
+            text-align: center;
+        }
+        .sci-arrival-lower-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,.09);
+        }
+        .sci-arrival-half {
+            min-width: 0;
+        }
+        .sci-arrival-half + .sci-arrival-half {
+            border-left: 1px solid rgba(255,255,255,.09);
+            padding-left: 14px;
+        }
+        .sci-arrival-storage .sci-easylocker-extra {
+            margin: 0;
+            padding: 0;
+            border-top: 0;
+        }
+        .sci-arrival-wifi .sci-wifi-box {
+            margin: 0;
+            height: 100%;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sci-arrival-wifi .wifi-details {
+            gap: 14px;
+        }
+
+        /* Layout refinement: checkout information left / form right */
+        #screen-checkout {
+            max-width: 960px;
+        }
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+            gap: 22px;
+            align-items: start;
+        }
+        .checkout-info-column,
+        .checkout-form-column {
+            min-width: 0;
+        }
+        .checkout-info-column .luggage-box:last-child,
+        .checkout-form-column .button-row:last-child {
+            margin-bottom: 0;
+        }
+        .checkout-form-column .luggage-box:has(.instructions) {
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 760px) {
+            .sci-arrival-lower-grid,
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+            .sci-arrival-half + .sci-arrival-half {
+                border-left: 0;
+                border-top: 1px solid rgba(255,255,255,.09);
+                padding-left: 0;
+                padding-top: 14px;
+            }
+            #screen-checkout {
+                max-width: 750px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1597,14 +1675,33 @@
         <div id="screen-self-checkin" class="card hidden">
             <div class="card-title-welcome" id="sci-welcome-title">Vítejte v našem hotelu!</div>
             <div class="checkin-instructions" id="sci-instructions">Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.</div>
-            <div class="checkin-arrival-note" id="sci-arrival-note-wrap"><div id="sci-arrival-note">Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</div>
-                <div class="sci-easylocker-extra">
+            <div class="checkin-arrival-note" id="sci-arrival-note-wrap">
+                <div id="sci-arrival-note">Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud ještě připraven není, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.</div>
+                <div class="sci-arrival-lower-grid">
+                    <div class="sci-arrival-half sci-arrival-storage">
+                        <div class="sci-easylocker-extra">
                     <div id="sci-easylocker-text">Případně můžete využít placených služeb EasyLocker blízko hotelu na adrese Prokopská 625/3, která je otevřena každý den od 9:00 do 20:00.</div>
                     <div class="parking-qr-option luggage-qr-option">
                     <img id="sci-easylocker-qr" class="parking-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII=" alt="QR kód – EasyLocker">
                     <div class="parking-qr-text" id="sci-easylocker-qr-text">Naskenujte QR kód pro otevření webové stránky.</div>
                 </div>
             </div>
+                    </div>
+                    <div class="sci-arrival-half sci-arrival-wifi">
+                        <div class="wifi-box sci-wifi-box">
+                <div class="wifi-title" id="sci-wifi-title">📶 Wi-Fi Připojení</div>
+                <div class="wifi-details">
+                    <div class="wifi-detail-item">
+                        <span id="sci-wifi-net-label">Název / SSID</span>
+                        <strong>Nuzky</strong>
+                    </div>
+                    <div class="wifi-detail-item">
+                        <span id="sci-wifi-pass-label">Heslo / Password</span>
+                        <strong>Hotel2017</strong>
+                    </div>
+                </div>
+                    </div>
+                </div>
             </div>
 
             <div class="input-group">
@@ -1627,18 +1724,7 @@
                 <button class="btn-form-submit btn-self-checkin-submit" onclick="submitSelfCheckin()" id="btn-sci-submit">CHECK-IN</button>
             </div>
 
-            <div class="wifi-box sci-wifi-box">
-                <div class="wifi-title" id="sci-wifi-title">📶 Wi-Fi Připojení</div>
-                <div class="wifi-details">
-                    <div class="wifi-detail-item">
-                        <span id="sci-wifi-net-label">Název / SSID</span>
-                        <strong>Nuzky</strong>
-                    </div>
-                    <div class="wifi-detail-item">
-                        <span id="sci-wifi-pass-label">Heslo / Password</span>
-                        <strong>Hotel2017</strong>
-                    </div>
-                </div>
+            
             </div>
         </div>
 
@@ -1822,7 +1908,9 @@
 
         <!-- SCREEN CHECKOUT FORM -->
         <div id="screen-checkout" class="card hidden">
-            <div class="luggage-box">
+            <div class="checkout-layout">
+                <div class="checkout-info-column">
+                    <div class="luggage-box">
                 <div class="luggage-header">
                     <svg viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"/></svg>
                     <strong id="co-luggage-title">Úschova zavazadel</strong>
@@ -1853,8 +1941,9 @@
                 </div>
                 <span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
             </div>
-
-            <div class="luggage-box">
+                </div>
+                <div class="checkout-form-column">
+                    <div class="luggage-box">
                 <div class="instructions" id="co-instructions">
                     Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT.
                 </div>
@@ -1885,6 +1974,8 @@
             <div class="button-row">
                 <button class="btn-form-cancel" onclick="resetToStart()" id="btn-cancel-1">ZPĚT</button>
                 <button class="btn-form-submit" onclick="submitCheckout()" id="btn-submit-1">POTVRDIT</button>
+            </div>
+                </div>
             </div>
         </div>
 
