@@ -2065,6 +2065,80 @@
             }
         }
 
+
+
+        /* =========================================================
+           FINAL ALIGNMENT TWEAKS v2
+           ========================================================= */
+
+        /* GUIDE: selected blocks span both columns */
+        #screen-checkin .info-list .guide-full-width,
+        #screen-checkin .info-list .guide-housekeeping {
+            grid-column: 1 / -1;
+        }
+
+        #screen-checkin .info-list .guide-housekeeping {
+            max-width: 620px;
+            width: 100%;
+            justify-self: center;
+        }
+
+        /* Keep guide Wi-Fi full width, like before */
+        #screen-checkin .wifi-box {
+            width: 100%;
+        }
+
+        /* The arrival / code section should read horizontally again */
+        #screen-checkin .sci-arrival-lower-grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+
+        /* Center alternative luggage QR area in guide */
+        #screen-checkin .sci-arrival-half .parking-qr-option,
+        #screen-checkin .luggage-qr-option {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            justify-content: center;
+        }
+
+        /* CHECK-OUT: center both luggage QR blocks */
+        #screen-checkout .luggage-service-row .parking-qr-option,
+        #screen-checkout .luggage-qr-option {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            justify-content: center;
+        }
+
+        #screen-checkout .luggage-service-row {
+            align-items: center;
+        }
+
+        /* PARKING: keep every QR comfortably inside its card */
+        #screen-parking .parking-content-row {
+            padding-bottom: 8px;
+        }
+
+        #screen-parking .parking-qr-option {
+            margin-top: 12px !important;
+            margin-bottom: 8px !important;
+        }
+
+        /* Kotlářka specifically: don't push QR to the bottom edge */
+        #parking-content-row-4 {
+            justify-content: flex-start !important;
+        }
+
+        #parking-content-row-4 .parking-qr-option {
+            margin-top: 14px !important;
+            margin-bottom: 14px !important;
+        }
+
+        @media (max-width: 760px) {
+            #screen-checkin .sci-arrival-lower-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -2330,7 +2404,7 @@
 </div>
 </div>
 </div>
-<div class="info-item info-item-highlight">
+<div class="info-item guide-full-width info-item-highlight">
 <strong>
 <svg class="info-item-icon" viewbox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path></svg>
 <span id="ci-q1-title">Jak získáte kód?</span>
@@ -2385,7 +2459,7 @@
 </strong>
 <span id="ci-q5-text">Naše budova je historický unikát, proto v ní bohužel není výtah. Pokud potřebujete s něčím pomoci, jsme tu pro vás.</span>
 </div>
-<div class="info-item">
+<div class="info-item guide-housekeeping">
 <strong>
 <svg aria-hidden="true" class="info-item-icon" viewbox="0 0 24 24"><path d="M9 2h6v2h-1v4.17A5.001 5.001 0 0 1 17 13v7H7v-7a5.001 5.001 0 0 1 3-4.83V4H9V2zm3 8a3 3 0 0 0-3 3v5h6v-5a3 3 0 0 0-3-3zm-5 3h2v7H7v-7zm8 0h2v7h-2v-7z"></path></svg>
 <span id="ci-housekeeping-title">Úklid pokoje</span>
