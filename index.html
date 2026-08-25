@@ -2215,7 +2215,7 @@
             </div>
 <div class="checkin-countdown">
 <span id="thanks-countdown-label">Návrat na hlavní obrazovku za</span>
-<strong id="thanks-countdown">0:10</strong>
+<strong id="thanks-countdown">0:30</strong>
 </div>
 <div class="result-ok-row">
 <button class="btn-form-submit" id="thanks-ok-btn" onclick="resetToStart()">OK</button>
@@ -3704,7 +3704,7 @@ Cena: ${taxiPrice(taxiData)}`;
             const sci = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
             document.getElementById('thanks-countdown-label').innerText = sci.count;
 
-            let remaining = 10;
+            let remaining = 30;
             const countdown = document.getElementById('thanks-countdown');
             const render = () => {
                 countdown.innerText = `0:${String(remaining).padStart(2, '0')}`;
