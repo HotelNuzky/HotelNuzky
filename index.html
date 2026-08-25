@@ -3390,8 +3390,8 @@
                         const ntfyMessage =
                             `🟢 CHECK-IN\n\n` +
                             `Jméno: ${name}\n` +
-                            `Příjezd: ${formatDateForNtfy(arrival)}\n` +
-                            `Odjezd: ${formatDateForNtfy(departure)}\n` +
+                            `Příjezd: ${formatDateForNtfy(from)}\n` +
+                            `Odjezd: ${formatDateForNtfy(to)}\n` +
                             roomLines;
 
                         fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
