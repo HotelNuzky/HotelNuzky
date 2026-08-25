@@ -1627,6 +1627,43 @@
             }
         }
 
+
+        .guest-rooms-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .guest-room-entry {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 16px;
+        }
+
+        .guest-room-entry .guest-room-block,
+        .guest-room-entry .guest-room-code-block {
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+            text-align: center;
+        }
+
+        .guest-room-entry .guest-room-value {
+            color: #ffffff;
+        }
+
+        .guest-room-entry .guest-room-code-value {
+            color: var(--green-light);
+        }
+
+        @media (max-width: 600px) {
+            .guest-room-entry {
+                grid-template-columns: 1fr;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -1760,17 +1797,9 @@
 <div class="card hidden" id="screen-checkin-result">
 <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
 <div class="checkin-result-box">
-<div class="guest-access-main">
-<div class="guest-room-block">
-<div class="checkin-result-label" id="sci-room-label">Číslo pokoje</div>
-<div class="checkin-result-value guest-room-value" id="sci-room-value">—</div>
-</div>
-<div class="guest-room-code-block">
-<div class="checkin-result-label" id="sci-code-label">Kód k pokoji a mezidveřím</div>
-<div class="checkin-result-value guest-room-code-value" id="sci-code-value">—</div>
-</div>
-</div>
-<div class="main-entrance-code-box">
+<div id="sci-rooms-list" class="guest-rooms-list"></div>
+
+                <div class="main-entrance-code-box">
 <div aria-hidden="true" class="main-entrance-icon">
 <svg height="25" viewbox="0 0 24 24" width="25">
 <path d="M4 21V5l8-3 8 3v16h-2V7H6v14H4zm4 0V8h8v13h-2v-5h-4v5H8zm2-7h4v-4h-4v4z" fill="currentColor"></path>
@@ -3241,6 +3270,54 @@
             startAutoResetTimer();
         }
 
+
+        function renderCheckinRooms(rooms) {
+            const list = document.getElementById('sci-rooms-list');
+            const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
+            list.innerHTML = '';
+
+            const normalizedRooms = Array.isArray(rooms) && rooms.length
+                ? rooms
+                : [];
+
+            normalizedRooms.forEach((item) => {
+                const row = document.createElement('div');
+                row.className = 'guest-room-entry';
+
+                const roomBlock = document.createElement('div');
+                roomBlock.className = 'guest-room-block';
+
+                const roomLabel = document.createElement('div');
+                roomLabel.className = 'checkin-result-label';
+                roomLabel.innerText = t.room;
+
+                const roomValue = document.createElement('div');
+                roomValue.className = 'checkin-result-value guest-room-value';
+                roomValue.innerText = item.room || '—';
+
+                roomBlock.appendChild(roomLabel);
+                roomBlock.appendChild(roomValue);
+
+                const codeBlock = document.createElement('div');
+                codeBlock.className = 'guest-room-code-block';
+
+                const codeLabel = document.createElement('div');
+                codeLabel.className = 'checkin-result-label';
+                codeLabel.innerText = t.roomDoorCode || t.code;
+
+                const codeValue = document.createElement('div');
+                codeValue.className = 'checkin-result-value guest-room-code-value';
+                codeValue.innerText = item.roomCode || '—';
+
+                codeBlock.appendChild(codeLabel);
+                codeBlock.appendChild(codeValue);
+
+                row.appendChild(roomBlock);
+                row.appendChild(codeBlock);
+                list.appendChild(row);
+            });
+        }
+
         async function submitSelfCheckin() {
             const name = document.getElementById('sciNameInput').value.trim();
             const from = document.getElementById('sciFromInput').value;
@@ -3278,8 +3355,14 @@
                 hideAllScreens();
 
                 if (result.status === 'READY') {
-                    document.getElementById('sci-room-value').innerText = result.room || '—';
-                    document.getElementById('sci-code-value').innerText = result.roomCode || '—';
+                    const rooms = Array.isArray(result.rooms) && result.rooms.length
+                        ? result.rooms
+                        : [{
+                            room: result.room || '—',
+                            roomCode: result.roomCode || '—'
+                        }];
+
+                    renderCheckinRooms(rooms);
                     document.getElementById('sci-main-code-value').innerText = '2018';
                     document.getElementById('screen-checkin-result').classList.remove('hidden');
                 } else if (result.status === 'WAITING') {
@@ -3644,7 +3727,6 @@ Cena: ${taxiPrice(taxiData)}`;
             document.getElementById('btn-sci-back').innerText = sci.back;
             document.getElementById('btn-sci-submit').innerText = sci.submit;
             document.getElementById('sci-result-title').innerText = sci.result;
-            document.getElementById('sci-room-label').innerText = sci.room;
             document.getElementById('sci-code-label').innerText = sci.code;
             document.getElementById('sci-code-label').innerText = sci.roomDoorCode;
             document.getElementById('sci-main-code-label').innerText = sci.mainDoorCode;
