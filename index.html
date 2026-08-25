@@ -2249,6 +2249,7 @@
         const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
 
         let currentLang = 'cs';
+        let currentCheckinRooms = [];
         let autoResetTimer = null;
         let checkinCountdownTimer = null;
         let idleCountdownTimer = null;
@@ -3280,6 +3281,11 @@
                 ? rooms
                 : [];
 
+            currentCheckinRooms = normalizedRooms.map(item => ({
+                room: item.room || '—',
+                roomCode: item.roomCode || '—'
+            }));
+
             normalizedRooms.forEach((item) => {
                 const row = document.createElement('div');
                 row.className = 'guest-room-entry';
@@ -3727,9 +3733,10 @@ Cena: ${taxiPrice(taxiData)}`;
             document.getElementById('btn-sci-back').innerText = sci.back;
             document.getElementById('btn-sci-submit').innerText = sci.submit;
             document.getElementById('sci-result-title').innerText = sci.result;
-            document.getElementById('sci-code-label').innerText = sci.code;
-            document.getElementById('sci-code-label').innerText = sci.roomDoorCode;
             document.getElementById('sci-main-code-label').innerText = sci.mainDoorCode;
+            if (currentCheckinRooms.length) {
+                renderCheckinRooms(currentCheckinRooms);
+            }
             document.getElementById('sci-main-code-value').innerText = '2018';
             document.getElementById('sci-result-direction').innerText = sci.direction;
             document.getElementById('sci-result-note').innerText = sci.note;
