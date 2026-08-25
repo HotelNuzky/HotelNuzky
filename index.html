@@ -2153,9 +2153,9 @@
             grid-template-areas:
                 "wifi wifi"
                 "code code"
-                "luggage luggage"
                 "alt alt"
-                "breakfast architecture"
+                "breakfast luggage"
+                "architecture luggage"
                 "registration registration"
                 "parking housekeeping" !important;
             gap: 16px !important;
@@ -2302,10 +2302,10 @@
                 grid-template-areas:
                     "wifi"
                     "code"
-                    "luggage"
                     "alt"
                     "breakfast"
                     "architecture"
+                    "luggage"
                     "registration"
                     "parking"
                     "housekeeping" !important;
@@ -2345,50 +2345,25 @@
 
 
         /* =========================================================
-           iPad 11" WIDE CONTENT MODE
-           Main menu unchanged. Inner pages only.
+           FINAL TYPOGRAPHY TWEAK v6
+           Slightly larger text only — layout unchanged.
            ========================================================= */
 
-        /* Use more of the 11-inch iPad width on inner screens */
-        #screen-checkin,
-        #screen-checkout,
-        #screen-service,
-        #screen-parking,
-        #screen-taxi,
-        #screen-self-checkin,
-        #screen-checkin-ready,
-        #screen-checkin-waiting,
-        #screen-checkin-not-found,
-        #screen-checkin-too-early,
-        #screen-checkin-expired {
-            width: min(96vw, 1320px) !important;
-            max-width: 1320px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-        }
-
-        /* Slightly larger, easier-to-read inner-page typography */
+        /* Information pages */
         #screen-checkin .info-item,
-        #screen-checkout,
-        #screen-service,
-        #screen-parking,
-        #screen-taxi,
-        #screen-self-checkin {
-            font-size: 1.04em;
+        #screen-parking .info-item,
+        #screen-checkout .luggage-box,
+        #screen-service .luggage-box,
+        #screen-taxi .luggage-box {
+            font-size: 1.035em;
         }
 
         #screen-checkin .info-item > strong,
         #screen-parking .info-item > strong {
-            font-size: 1.08em;
+            font-size: 1.045em;
         }
 
-        #screen-checkin .info-item > span,
-        #screen-parking .info-item > span,
-        #screen-parking .parking-content-row > span {
-            line-height: 1.66;
-        }
-
-        /* Forms: slightly larger touch/readability targets */
+        /* Form labels and entered text */
         #screen-checkout input,
         #screen-checkout textarea,
         #screen-service input,
@@ -2398,52 +2373,22 @@
         #screen-self-checkin input,
         #screen-self-checkin textarea {
             font-size: 17px !important;
-            min-height: 50px;
         }
 
-        #screen-checkout .input-label,
-        #screen-service .input-label,
-        #screen-taxi .input-label,
-        #screen-self-checkin .input-label {
-            font-size: 13px;
+        #screen-checkout label,
+        #screen-service label,
+        #screen-taxi label,
+        #screen-self-checkin label {
+            font-size: 1.03em;
         }
 
-        /* Give two-column content more breathing room without changing shapes */
-        #screen-checkin .info-list,
-        #screen-parking .info-list {
-            gap: 18px !important;
-        }
-
-        #screen-checkin .info-item,
-        #screen-parking .info-item {
-            padding-left: 21px !important;
-            padding-right: 21px !important;
-        }
-
-        #screen-checkout .checkout-layout {
-            gap: 22px !important;
-        }
-
-        /* Keep Wi-Fi compact even on the wider canvas */
-        #screen-checkin .info-list > .wifi-box-compact {
-            max-width: 860px !important;
-        }
-
-        /* Preserve sensible margins if iPad is rotated / narrower */
-        @media (max-width: 900px) {
-            #screen-checkin,
-            #screen-checkout,
-            #screen-service,
-            #screen-parking,
-            #screen-taxi,
-            #screen-self-checkin,
-            #screen-checkin-ready,
-            #screen-checkin-waiting,
-            #screen-checkin-not-found,
-            #screen-checkin-too-early,
-            #screen-checkin-expired {
-                width: calc(100% - 28px) !important;
-            }
+        /* Keep compact/helper text visually secondary, just a touch clearer */
+        #screen-checkin .wifi-box-compact,
+        #screen-checkout .keyboard-help-box,
+        #screen-service .keyboard-help-box,
+        #screen-taxi .keyboard-help-box,
+        #screen-self-checkin .keyboard-help-box {
+            font-size: 1.025em;
         }
 
 </style>
