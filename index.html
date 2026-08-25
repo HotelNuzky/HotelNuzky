@@ -3135,9 +3135,154 @@
 <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
 <script>
         // CONFIGURATION
-        const NTFY_TOPIC = "HotelNuzky";
         const CHECKIN_API_URL = "https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/";
+        const NOTIFY_API_URL = CHECKIN_API_URL + "notify";
         const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
+
+
+        const NOTIFICATION_QUEUE_KEY = "hotelNuzkyNotificationQueueV1";
+        const NOTIFICATION_QUEUE_MAX_AGE = 72 * 60 * 60 * 1000; // 72 hours
+        const offlineQueueI18n = {"cs":"Internetové připojení je momentálně nedostupné. Váš požadavek byl bezpečně uložen v tomto kiosku a odešle se automaticky po obnovení připojení. U naléhavého požadavku prosím použijte pevnou linku vedle kiosku.","en":"The internet connection is currently unavailable. Your request has been safely stored on this kiosk and will be sent automatically when the connection is restored. For an urgent request, please use the landline next to the kiosk.","de":"Die Internetverbindung ist derzeit nicht verfügbar. Ihre Anfrage wurde sicher auf diesem Kiosk gespeichert und wird automatisch gesendet, sobald die Verbindung wiederhergestellt ist. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk.","it":"La connessione Internet non è al momento disponibile. La richiesta è stata salvata in modo sicuro su questo chiosco e verrà inviata automaticamente quando la connessione sarà ripristinata. In caso di urgenza, utilizzate il telefono fisso accanto al chiosco.","es":"La conexión a Internet no está disponible en este momento. Su solicitud se ha guardado de forma segura en este quiosco y se enviará automáticamente cuando se restablezca la conexión. Si es urgente, utilice el teléfono fijo situado junto al quiosco.","fr":"La connexion Internet est actuellement indisponible. Votre demande a été enregistrée en toute sécurité sur ce kiosque et sera envoyée automatiquement dès que la connexion sera rétablie. En cas d’urgence, veuillez utiliser le téléphone fixe situé à côté du kiosque.","pl":"Połączenie z Internetem jest obecnie niedostępne. Twoje zgłoszenie zostało bezpiecznie zapisane na tym kiosku i zostanie wysłane automatycznie po przywróceniu połączenia. W pilnej sprawie skorzystaj z telefonu stacjonarnego obok kiosku.","ua":"Наразі немає підключення до Інтернету. Ваш запит безпечно збережено на цьому кіоску й буде автоматично надіслано після відновлення з’єднання. У терміновому випадку скористайтеся стаціонарним телефоном біля кіоску.","sk":"Internetové pripojenie momentálne nie je dostupné. Vaša požiadavka bola bezpečne uložená v tomto kiosku a automaticky sa odošle po obnovení pripojenia. V naliehavom prípade použite pevnú linku vedľa kiosku.","tr":"İnternet bağlantısı şu anda kullanılamıyor. Talebiniz bu kioska güvenli şekilde kaydedildi ve bağlantı yeniden sağlandığında otomatik olarak gönderilecektir. Acil bir durumda lütfen kioskun yanındaki sabit telefonu kullanın.","da":"Internetforbindelsen er ikke tilgængelig i øjeblikket. Din anmodning er gemt sikkert på denne kiosk og bliver sendt automatisk, når forbindelsen er genoprettet. Ved hastende behov bedes du bruge fastnettelefonen ved siden af kiosken.","ja":"現在インターネット接続を利用できません。ご依頼はこのキオスクに安全に保存され、接続が復旧すると自動的に送信されます。緊急の場合は、キオスク横の固定電話をご利用ください。","he":"החיבור לאינטרנט אינו זמין כרגע. הבקשה נשמרה באופן מאובטח בקיוסק ותישלח אוטומטית כאשר החיבור יחזור. במקרה דחוף, אנא השתמשו בטלפון הקווי שליד הקיוסק.","el":"Η σύνδεση στο διαδίκτυο δεν είναι διαθέσιμη αυτή τη στιγμή. Το αίτημά σας αποθηκεύτηκε με ασφάλεια σε αυτό το kiosk και θα σταλεί αυτόματα όταν αποκατασταθεί η σύνδεση. Σε επείγουσα περίπτωση, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο kiosk."};
+
+        function createNotificationId(type) {
+            if (crypto && typeof crypto.randomUUID === "function") {
+                return `${type}_${crypto.randomUUID()}`;
+            }
+
+            return `${type}_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
+        }
+
+        function loadNotificationQueue() {
+            try {
+                const raw = localStorage.getItem(NOTIFICATION_QUEUE_KEY);
+                const items = raw ? JSON.parse(raw) : [];
+                const now = Date.now();
+
+                return Array.isArray(items)
+                    ? items.filter(item =>
+                        item &&
+                        item.eventId &&
+                        item.type &&
+                        item.payload &&
+                        (!item.createdAt || now - item.createdAt < NOTIFICATION_QUEUE_MAX_AGE)
+                    )
+                    : [];
+            } catch (error) {
+                console.error("Unable to read notification queue:", error);
+                return [];
+            }
+        }
+
+        function saveNotificationQueue(items) {
+            try {
+                if (!items.length) {
+                    localStorage.removeItem(NOTIFICATION_QUEUE_KEY);
+                    return;
+                }
+
+                localStorage.setItem(
+                    NOTIFICATION_QUEUE_KEY,
+                    JSON.stringify(items)
+                );
+            } catch (error) {
+                console.error("Unable to save notification queue:", error);
+            }
+        }
+
+        function enqueueNotification(item) {
+            const queue = loadNotificationQueue();
+
+            if (!queue.some(existing => existing.eventId === item.eventId)) {
+                queue.push(item);
+                saveNotificationQueue(queue);
+            }
+        }
+
+        async function sendNotificationToWorker(item) {
+            const response = await fetch(NOTIFY_API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Notify HTTP ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (
+                result.status !== "SENT" &&
+                result.status !== "DUPLICATE"
+            ) {
+                throw new Error(`Unexpected notify status: ${result.status}`);
+            }
+
+            return result;
+        }
+
+        async function deliverOrQueueNotification(type, payload) {
+            const item = {
+                eventId: createNotificationId(type),
+                type,
+                payload,
+                createdAt: Date.now()
+            };
+
+            try {
+                await sendNotificationToWorker(item);
+                return { delivered: true, queued: false };
+            } catch (error) {
+                console.error("Notification delivery failed; queued locally:", error);
+                enqueueNotification(item);
+                return { delivered: false, queued: true };
+            }
+        }
+
+        let notificationQueueProcessing = false;
+
+        async function processNotificationQueue() {
+            if (notificationQueueProcessing) return;
+
+            const originalQueue = loadNotificationQueue();
+
+            if (!originalQueue.length) return;
+
+            notificationQueueProcessing = true;
+
+            try {
+                const remaining = [];
+
+                for (let i = 0; i < originalQueue.length; i += 1) {
+                    const item = originalQueue[i];
+
+                    try {
+                        await sendNotificationToWorker(item);
+                    } catch (error) {
+                        remaining.push(item);
+
+                        // Keep later items too; do not hammer the network
+                        // when connectivity is clearly still unavailable.
+                        remaining.push(...originalQueue.slice(i + 1));
+                        break;
+                    }
+                }
+
+                saveNotificationQueue(remaining);
+            } finally {
+                notificationQueueProcessing = false;
+            }
+        }
+
+        window.addEventListener("online", () => {
+            setTimeout(processNotificationQueue, 500);
+        });
+
+        setInterval(processNotificationQueue, 30000);
+        setTimeout(processNotificationQueue, 1500);
+
 
         let currentLang = 'cs';
         let currentCheckinRooms = [];
@@ -4391,35 +4536,18 @@
                     document.getElementById('screen-checkin-result').classList.remove('hidden');
 
                     // Informujeme recepci až poté, co byly přístupové údaje
-                    // skutečně zobrazeny hostovi. Kódy pokojů se do ntfy neposílají.
-                    try {
-                        const roomLines = rooms
-                            .map(item => `Pokoj: ${item.room || '—'}`)
-                            .join('\n');
+                    // skutečně zobrazeny hostovi. Pokojové kódy se nikdy neposílají.
+                    // Pokud spojení právě vypadne, zpráva se uloží do lokální fronty.
+                    const roomNumbers = rooms.map(item => String(item.room || "—"));
 
-                        const guestInitials = makeGuestInitials(name);
-
-                        const ntfyMessage =
-                            `🟢 CHECK-IN\n\n` +
-                            `Host: ${guestInitials}\n` +
-                            `Příjezd: ${formatDateForNtfy(from)}\n` +
-                            `Odjezd: ${formatDateForNtfy(to)}\n` +
-                            roomLines;
-
-                        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: {
-                                'Title': 'Check-in',
-                                'Priority': 'high'
-                            },
-                            body: ntfyMessage
-                        }).catch(error => {
-                            console.error('Check-in ntfy failed:', error);
-                        });
-                    } catch (error) {
-                        console.error('Check-in ntfy failed:', error);
-                    }
+                    deliverOrQueueNotification("checkin", {
+                        guestName: name,
+                        arrivalDate: from,
+                        departureDate: to,
+                        rooms: roomNumbers
+                    }).catch(error => {
+                        console.error("Check-in notification queue error:", error);
+                    });
                 } else if (result.status === 'WAITING') {
                     document.getElementById('screen-checkin-waiting').classList.remove('hidden');
                 } else if (result.status === 'TOO_EARLY') {
@@ -4585,7 +4713,7 @@
         }
 
         // FORM SUBMISSION (NTFY INTEGRATION)
-        function submitCheckout() {
+        async function submitCheckout() {
             const room = document.getElementById('coRoomInput').value.trim();
             const name = document.getElementById('coNameInput').value.trim();
             const electronicReceipt = document.getElementById('coElectronicReceipt').checked;
@@ -4602,23 +4730,24 @@
                 return;
             }
 
-            const message = `🔴 CHECK-OUT\n\nPokoj: ${room}\nJméno: ${name}${electronicReceipt ? `\nDoklad elektronicky: ${email}` : ''}`;
-
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: message,
-                headers: {
-                    'Title': `Check-out: Pokoj ${room}`,
-                    'Priority': 'high',
-                    'Tags': 'red_circle,checkout'
-                }
-            }).then(() => {
-                showThanks("Vše vyřízeno. Děkujeme za pobyt a přejeme štastnou cestu.", "checkout");
-            }).catch(err => {
-                console.error("NTFY Push failed:", err);
-                showThanks("Vše vyřízeno. Děkujeme za pobyt a přejeme štastnou cestu.", "checkout"); // Show thanks anyway to keep UX smooth
+            const delivery = await deliverOrQueueNotification("checkout", {
+                room,
+                guestName: name,
+                electronicReceipt,
+                email: electronicReceipt ? email : ""
             });
+
+            if (delivery.queued) {
+                showThanks(
+                    offlineQueueI18n[currentLang] || offlineQueueI18n.en,
+                    "checkout"
+                );
+            } else {
+                showThanks(
+                    "Vše vyřízeno. Děkujeme za pobyt a přejeme štastnou cestu.",
+                    "checkout"
+                );
+            }
         }
 
         function formatDateForReception(value) {
@@ -4628,11 +4757,10 @@
             return `${parts[2]}.${parts[1]}.${parts[0]}`;
         }
 
-        function submitService() {
+        async function submitService() {
             const room = document.getElementById('srvRoomInput').value.trim();
             const issue = document.getElementById('srvIssueInput').value.trim();
             const name = document.getElementById('srvNameInput').value.trim();
-            const serviceAny = !!(room || issue || name);
             const serviceComplete = !!(room && issue && name);
 
             const taxiData = getTaxiData();
@@ -4649,53 +4777,49 @@
                 return;
             }
 
-            const requests = [];
+            const results = [];
 
             if (serviceComplete) {
-                const serviceMessage = `🟡 OPRAVA / POMOC\n\nPokoj: ${room}\nJméno: ${name}\nZávada / požadavek: ${issue}`;
-                requests.push(fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: serviceMessage,
-                    headers: {
-                        'Title': `Oprava/Pomoc: Pokoj ${room}`,
-                        'Priority': 'urgent',
-                        'Tags': 'orange_circle,service'
-                    }
-                }));
+                results.push(
+                    await deliverOrQueueNotification("service", {
+                        room,
+                        guestName: name,
+                        issue
+                    })
+                );
             }
 
             if (taxiComplete) {
-                const taxiMessage =
-`⚫ TAXI / TRANSFER
-
-Jméno hosta: ${taxiData.name}
-Datum vyzvednutí: ${formatDateForReception(taxiData.date)}
-Čas vyzvednutí: ${taxiData.time}
-Telefon: ${taxiData.prefix} ${taxiData.phone}
-Cíl: ${taxiDestinationCz(taxiData)}
-Vozidlo: ${taxiVehicleCz(taxiData)}
-Cena: ${taxiPrice(taxiData)}`;
-
-                requests.push(fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: taxiMessage,
-                    headers: {
-                        'Title': 'Taxi / Transfer',
-                        'Priority': 'high'
-                    }
-                }));
+                results.push(
+                    await deliverOrQueueNotification("taxi", {
+                        guestName: taxiData.name,
+                        pickupDate: taxiData.date,
+                        pickupTime: taxiData.time,
+                        prefix: taxiData.prefix,
+                        phone: taxiData.phone,
+                        destination: taxiDestinationCz(taxiData),
+                        vehicle: taxiVehicleCz(taxiData),
+                        price: taxiPrice(taxiData)
+                    })
+                );
             }
 
-            Promise.allSettled(requests).then(() => {
-                if (taxiComplete) {
-                    const td = taxiI18n[currentLang] || taxiI18n.en;
-                    showThanks(td.taxiThanks, "taxi");
-                } else {
-                    showThanks(null, "service");
-                }
-            });
+            const anythingQueued = results.some(result => result.queued);
+
+            if (anythingQueued) {
+                showThanks(
+                    offlineQueueI18n[currentLang] || offlineQueueI18n.en,
+                    taxiComplete ? "taxi" : "service"
+                );
+                return;
+            }
+
+            if (taxiComplete) {
+                const td = taxiI18n[currentLang] || taxiI18n.en;
+                showThanks(td.taxiThanks, "taxi");
+            } else {
+                showThanks(null, "service");
+            }
         }
 
         function showThanks(message, type = "service") {
