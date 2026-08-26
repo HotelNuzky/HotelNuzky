@@ -2555,7 +2555,7 @@
 </div>
 <div class="input-group">
 <label class="input-label" id="sci-name-label">Jméno uvedené na rezervaci</label>
-<input autocomplete="off" id="sciNameInput" placeholder="např. Jan Novák" type="text"/>
+<input autocomplete="new-password" id="sciNameInput" placeholder="např. Jan Novák" type="text"/>
 </div>
 <div class="date-row">
 <div class="input-group">
@@ -2830,7 +2830,7 @@
 <input id="coRoomInput" inputmode="numeric" placeholder="e.g. 102" type="text"/>
 </div><div class="input-group">
 <label class="input-label" id="label-co-name">Jméno a příjmení</label>
-<input id="coNameInput" placeholder="např. Jan Novák" type="text"/>
+<input autocomplete="new-password" id="coNameInput" placeholder="např. Jan Novák" type="text"/>
 </div><div class="input-group">
 <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; text-transform:none; letter-spacing:0; font-size:15px; color:#e0e6ed; line-height:1.4;">
 <input id="coElectronicReceipt" onchange="toggleElectronicReceipt()" style="width:22px; height:22px; flex-shrink:0; margin:0; accent-color:var(--green-light);" type="checkbox"/>
@@ -2886,7 +2886,7 @@
 </div>
 <div class="input-group">
 <label class="input-label" id="label-srv-name">Jméno a příjmení</label>
-<input id="srvNameInput" placeholder="např. Jan Novák" type="text"/>
+<input autocomplete="new-password" id="srvNameInput" placeholder="např. Jan Novák" type="text"/>
 </div>
 </section>
 <section class="taxi-panel">
@@ -2933,7 +2933,7 @@
 </div>
 <div class="input-group">
 <label class="input-label" id="taxi-name-label">Jméno hosta</label>
-<input autocomplete="off" id="taxiNameInput" placeholder="např. Jan Novák" type="text"/>
+<input autocomplete="new-password" id="taxiNameInput" placeholder="např. Jan Novák" type="text"/>
 </div>
 <div class="input-group">
 <label class="input-label" id="taxi-date-label">Datum vyzvednutí od hotelu</label>
@@ -3142,7 +3142,7 @@
         // CONFIGURATION
         const CHECKIN_API_URL = "https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/";
         const NOTIFY_API_URL = CHECKIN_API_URL + "notify";
-        const AUTO_RESET_TIMEOUT = 90000; // 90 seconds idle reset
+        const AUTO_RESET_TIMEOUT = 120000; // 120 seconds idle reset
 
 
         const NOTIFICATION_QUEUE_KEY = "hotelNuzkyNotificationQueueV1";
@@ -3297,7 +3297,7 @@
         let idleCountdownTimer = null;
         let confirmationCountdownTimer = null;
         let currentConfirmationKind = null;
-        let idleRemaining = 90;
+        let idleRemaining = 120;
 
         const occupancyI18n = {"cs":{"preparedFor":"Připraveno pro*","adults":"Dospělí 18+","children":"Děti 4–17","infants":"Děti 0–3","note":"Pokoj je připraven podle počtu osob zadaného při rezervaci. Systém tyto údaje přebírá automaticky. Případné další osoby nám prosím nahlaste nejpozději do 16:00; jsou zpoplatněny dle ceníku. Dětskou postýlku (0–3 roky) je nutné objednat předem."},"en":{"preparedFor":"Prepared for*","adults":"Adults 18+","children":"Children 4–17","infants":"Children 0–3","note":"The room is prepared for the number of guests entered when the reservation was made. The system imports these details automatically. Please let us know about any additional guests no later than 16:00; additional guests are charged according to the price list. A baby cot (0–3 years) must be requested in advance."},"de":{"preparedFor":"Vorbereitet für*","adults":"Erwachsene 18+","children":"Kinder 4–17","infants":"Kinder 0–3","note":"Das Zimmer wird für die bei der Reservierung angegebene Personenzahl vorbereitet. Das System übernimmt diese Angaben automatisch. Bitte teilen Sie uns zusätzliche Gäste spätestens bis 16:00 Uhr mit; zusätzliche Personen werden gemäß Preisliste berechnet. Ein Babybett (0–3 Jahre) muss im Voraus bestellt werden."},"sk":{"preparedFor":"Pripravené pre*","adults":"Dospelí 18+","children":"Deti 4–17","infants":"Deti 0–3","note":"Izba je pripravená podľa počtu osôb zadaného pri rezervácii. Systém tieto údaje preberá automaticky. Prípadné ďalšie osoby nám, prosím, nahláste najneskôr do 16:00; sú spoplatnené podľa cenníka. Detskú postieľku (0–3 roky) je potrebné objednať vopred."},"it":{"preparedFor":"Preparata per*","adults":"Adulti 18+","children":"Bambini 4–17","infants":"Bambini 0–3","note":"La camera viene preparata in base al numero di ospiti indicato al momento della prenotazione. Il sistema acquisisce automaticamente questi dati. Eventuali ospiti aggiuntivi devono essere comunicati entro le 16:00 e sono soggetti a supplemento secondo il listino prezzi. La culla per bambini (0–3 anni) deve essere richiesta in anticipo."},"es":{"preparedFor":"Preparada para*","adults":"Adultos 18+","children":"Niños 4–17","infants":"Niños 0–3","note":"La habitación se prepara según el número de huéspedes indicado al realizar la reserva. El sistema importa estos datos automáticamente. Rogamos comunicar cualquier huésped adicional a más tardar a las 16:00; las personas adicionales se cobran según la lista de precios. La cuna para niños de 0–3 años debe solicitarse con antelación."},"fr":{"preparedFor":"Préparée pour*","adults":"Adultes 18+","children":"Enfants 4–17","infants":"Enfants 0–3","note":"La chambre est préparée selon le nombre de personnes indiqué lors de la réservation. Le système reprend automatiquement ces informations. Merci de nous signaler toute personne supplémentaire au plus tard à 16:00 ; les personnes supplémentaires sont facturées selon le tarif en vigueur. Le lit bébé (0–3 ans) doit être demandé à l’avance."},"pl":{"preparedFor":"Przygotowano dla*","adults":"Dorośli 18+","children":"Dzieci 4–17","infants":"Dzieci 0–3","note":"Pokój jest przygotowywany dla liczby osób podanej podczas rezerwacji. System pobiera te dane automatycznie. Dodatkowe osoby prosimy zgłosić najpóźniej do godziny 16:00; obowiązuje za nie opłata zgodnie z cennikiem. Łóżeczko dziecięce (0–3 lata) należy zamówić z wyprzedzeniem."},"ua":{"preparedFor":"Підготовлено для*","adults":"Дорослі 18+","children":"Діти 4–17","infants":"Діти 0–3","note":"Номер готується відповідно до кількості гостей, зазначеної під час бронювання. Система автоматично отримує ці дані з бронювання. Про додаткових гостей, будь ласка, повідомте нас не пізніше 16:00; за додаткових осіб стягується плата згідно з прейскурантом. Дитяче ліжечко (0–3 роки) необхідно замовити заздалегідь."},"tr":{"preparedFor":"Şu kişiler için hazırlandı*","adults":"Yetişkin 18+","children":"Çocuk 4–17","infants":"Çocuk 0–3","note":"Oda, rezervasyon sırasında belirtilen misafir sayısına göre hazırlanır. Sistem bu bilgileri rezervasyondan otomatik olarak alır. İlave misafirleri lütfen en geç 16:00’ya kadar bize bildirin; ilave kişiler fiyat listesine göre ücretlendirilir. Bebek yatağı (0–3 yaş) önceden talep edilmelidir."},"da":{"preparedFor":"Klargjort til*","adults":"Voksne 18+","children":"Børn 4–17","infants":"Børn 0–3","note":"Værelset klargøres til det antal gæster, der blev angivet ved reservationen. Systemet henter automatisk disse oplysninger fra reservationen. Eventuelle ekstra gæster bedes meddelt senest kl. 16:00; ekstra personer opkræves i henhold til prislisten. Barneseng til børn 0–3 år skal bestilles på forhånd."},"ja":{"preparedFor":"ご利用人数*","adults":"大人 18歳以上","children":"お子様 4–17歳","infants":"お子様 0–3歳","note":"お部屋は、ご予約時に入力された人数に基づいて準備されています。これらの情報は予約データから自動的に反映されます。追加のお客様がいらっしゃる場合は、16:00までにお知らせください。追加料金は料金表に基づきます。0～3歳のお子様用ベビーベッドは事前予約が必要です。"},"he":{"preparedFor":"מוכן עבור*","adults":"מבוגרים 18+","children":"ילדים 4–17","infants":"ילדים 0–3","note":"החדר מוכן לפי מספר האורחים שהוזן בעת ביצוע ההזמנה. המערכת מעבירה את הנתונים מההזמנה באופן אוטומטי. אם מגיעים אורחים נוספים, אנא הודיעו לנו עד השעה 16:00 לכל המאוחר; אורחים נוספים מחויבים לפי המחירון. יש להזמין מראש מיטת תינוק לילדים בגיל 0–3."},"el":{"preparedFor":"Προετοιμασμένο για*","adults":"Ενήλικες 18+","children":"Παιδιά 4–17","infants":"Παιδιά 0–3","note":"Το δωμάτιο προετοιμάζεται για τον αριθμό ατόμων που δηλώθηκε κατά την κράτηση. Το σύστημα μεταφέρει αυτόματα αυτά τα στοιχεία από την κράτηση. Παρακαλούμε ενημερώστε μας για τυχόν επιπλέον άτομα το αργότερο έως τις 16:00· τα επιπλέον άτομα χρεώνονται σύμφωνα με τον τιμοκατάλογο. Η βρεφική κούνια (0–3 ετών) πρέπει να ζητηθεί εκ των προτέρων."}};
 
@@ -4304,21 +4304,38 @@
             }
         }
 
+        let idleDeadline = 0;
+
         function startAutoResetTimer() {
             clearTimeout(autoResetTimer);
             clearInterval(idleCountdownTimer);
             clearInterval(checkinCountdownTimer);
-            idleRemaining = 90;
+
+            idleDeadline = Date.now() + AUTO_RESET_TIMEOUT;
+            idleRemaining = 120;
+
             const timer = document.getElementById('global-idle-timer');
             timer.classList.remove('hidden');
             renderIdleCountdown();
 
-            autoResetTimer = setTimeout(autoResetToStart, AUTO_RESET_TIMEOUT);
-            idleCountdownTimer = setInterval(() => {
-                idleRemaining = Math.max(0, idleRemaining - 1);
+            const checkIdleDeadline = () => {
+                const remainingMs = idleDeadline - Date.now();
+
+                if (remainingMs <= 0) {
+                    clearTimeout(autoResetTimer);
+                    clearInterval(idleCountdownTimer);
+                    idleRemaining = 0;
+                    renderIdleCountdown();
+                    autoResetToStart();
+                    return;
+                }
+
+                idleRemaining = Math.ceil(remainingMs / 1000);
                 renderIdleCountdown();
-                if (idleRemaining <= 0) clearInterval(idleCountdownTimer);
-            }, 1000);
+            };
+
+            autoResetTimer = setTimeout(autoResetToStart, AUTO_RESET_TIMEOUT);
+            idleCountdownTimer = setInterval(checkIdleDeadline, 500);
         }
 
         function registerUserActivity() {
@@ -4327,7 +4344,10 @@
             startAutoResetTimer();
         }
 
-        ['click','input','change','touchstart','touchmove','pointerdown','keydown','scroll'].forEach(evt => {
+        // Real guest interaction resets the 90 s timeout.
+        // Scroll/touchmove are intentionally excluded because iPadOS can emit
+        // them automatically while the software keyboard adjusts the viewport.
+        ['click','input','change','touchstart','pointerdown','keydown'].forEach(evt => {
             document.addEventListener(evt, registerUserActivity, {passive:true});
         });
 
@@ -4636,6 +4656,10 @@
         }
 
         function autoResetToStart() {
+            const active = document.activeElement;
+            if (active && typeof active.blur === 'function') {
+                active.blur();
+            }
             resetToStart(false);
         }
 
@@ -4644,6 +4668,7 @@
             clearInterval(checkinCountdownTimer);
             clearInterval(idleCountdownTimer);
             clearInterval(confirmationCountdownTimer);
+            idleDeadline = 0;
             document.getElementById('global-idle-timer').classList.add('hidden');
             hideAllScreens();
             document.getElementById('screen-1').classList.remove('hidden');
