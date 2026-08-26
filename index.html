@@ -4200,12 +4200,14 @@
         }
 
         function closeLocalizedCalendar() {
+            if (!enforceIdleDeadlineBeforeInteraction()) return;
             document.getElementById('localized-calendar-overlay').classList.add('hidden');
             calendarTargetInputId = null;
             calendarTargetDisplayId = null;
         }
 
         function calendarOverlayClick(event) {
+            if (!enforceIdleDeadlineBeforeInteraction()) return;
             if (event.target.id === 'localized-calendar-overlay') closeLocalizedCalendar();
         }
 
@@ -4374,6 +4376,18 @@
             idleCountdownTimer = setInterval(checkIdleDeadline, 500);
         }
 
+        function enforceIdleDeadlineBeforeInteraction() {
+            if (!isSubpageOpen()) return true;
+            if (!idleDeadline) return true;
+
+            if (Date.now() >= idleDeadline) {
+                autoResetToStart();
+                return false;
+            }
+
+            return true;
+        }
+
         function registerUserActivity() {
             if (!isSubpageOpen()) return;
             if (!document.getElementById('screen-thanks').classList.contains('hidden')) return;
@@ -4385,6 +4399,23 @@
         // them automatically while the software keyboard adjusts the viewport.
         ['click','input','change','touchstart','pointerdown','keydown'].forEach(evt => {
             document.addEventListener(evt, registerUserActivity, {passive:true});
+        });
+
+        // iOS date/time pickers may stay open as a system overlay.
+        // Before their input/change event can refresh the idle timeout,
+        // verify that the original 2-minute deadline has not already expired.
+        ['input','change'].forEach(evt => {
+            document.addEventListener(evt, event => {
+                const target = event.target;
+                if (!target || !target.matches) return;
+
+                if (
+                    target.matches('input[type="date"]') ||
+                    target.matches('input[type="time"]')
+                ) {
+                    enforceIdleDeadlineBeforeInteraction();
+                }
+            }, {capture:true});
         });
 
         function openSelfCheckin() {
