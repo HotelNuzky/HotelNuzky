@@ -3214,6 +3214,7 @@
             const result = await response.json();
 
             if (
+                result.status !== "RECEIVED" &&
                 result.status !== "SENT" &&
                 result.status !== "DUPLICATE"
             ) {
@@ -4737,17 +4738,13 @@
                 email: electronicReceipt ? email : ""
             });
 
-            if (delivery.queued) {
-                showThanks(
-                    offlineQueueI18n[currentLang] || offlineQueueI18n.en,
-                    "checkout"
-                );
-            } else {
-                showThanks(
-                    "Vše vyřízeno. Děkujeme za pobyt a přejeme štastnou cestu.",
-                    "checkout"
-                );
-            }
+            // Check-out does not need to expose delivery details to the guest.
+            // If the Worker is temporarily unreachable, the request stays in the local queue
+            // and will be retried automatically.
+            showThanks(
+                "Vše vyřízeno. Děkujeme za pobyt a přejeme štastnou cestu.",
+                "checkout"
+            );
         }
 
         function formatDateForReception(value) {
@@ -4807,8 +4804,11 @@
             const anythingQueued = results.some(result => result.queued);
 
             if (anythingQueued) {
+                const queuedMessage = taxiComplete
+                    ? "Váš požadavek byl uložen a bude předán recepci co nejdříve. Pokud potřebujete taxi co nejdříve, prosím využijte pevnou linku vedle kiosku."
+                    : "Váš požadavek byl uložen a bude předán recepci co nejdříve. V naléhavém případě prosím využijte pevnou linku vedle kiosku.";
                 showThanks(
-                    offlineQueueI18n[currentLang] || offlineQueueI18n.en,
+                    queuedMessage,
                     taxiComplete ? "taxi" : "service"
                 );
                 return;
