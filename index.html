@@ -2418,6 +2418,13 @@
             justify-content: center !important;
         }
 
+
+        /* iPadOS: keep the idle timer inside the currently visible viewport
+           when the software keyboard changes Safari's visual viewport. */
+        .global-idle-timer.keyboard-viewport-adjust {
+            will-change: transform;
+        }
+
 </style>
 </head>
 <body>
@@ -4294,6 +4301,29 @@
             return document.getElementById('screen-1').classList.contains('hidden');
         }
 
+        function updateIdleTimerVisualViewport() {
+            const timer = document.getElementById('global-idle-timer');
+            if (!timer) return;
+
+            const viewport = window.visualViewport;
+
+            if (!viewport) {
+                timer.style.transform = '';
+                timer.classList.remove('keyboard-viewport-adjust');
+                return;
+            }
+
+            const offsetTop = Math.max(0, viewport.offsetTop || 0);
+
+            if (offsetTop > 0) {
+                timer.style.transform = `translateY(${offsetTop}px)`;
+                timer.classList.add('keyboard-viewport-adjust');
+            } else {
+                timer.style.transform = '';
+                timer.classList.remove('keyboard-viewport-adjust');
+            }
+        }
+
         function renderIdleCountdown() {
             const m = Math.floor(idleRemaining / 60);
             const s = String(idleRemaining % 60).padStart(2, '0');
@@ -4302,9 +4332,15 @@
             if (!document.getElementById('screen-checkin-result').classList.contains('hidden')) {
                 document.getElementById('sci-countdown').innerText = value;
             }
+            updateIdleTimerVisualViewport();
         }
 
         let idleDeadline = 0;
+
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', updateIdleTimerVisualViewport);
+            window.visualViewport.addEventListener('scroll', updateIdleTimerVisualViewport);
+        }
 
         function startAutoResetTimer() {
             clearTimeout(autoResetTimer);
@@ -4669,7 +4705,10 @@
             clearInterval(idleCountdownTimer);
             clearInterval(confirmationCountdownTimer);
             idleDeadline = 0;
-            document.getElementById('global-idle-timer').classList.add('hidden');
+            const idleTimer = document.getElementById('global-idle-timer');
+            idleTimer.style.transform = '';
+            idleTimer.classList.remove('keyboard-viewport-adjust');
+            idleTimer.classList.add('hidden');
             hideAllScreens();
             document.getElementById('screen-1').classList.remove('hidden');
             if (!preserveLanguage) setDefaultEnglish();
@@ -4877,7 +4916,10 @@
             clearInterval(idleCountdownTimer);
             clearInterval(checkinCountdownTimer);
             clearInterval(confirmationCountdownTimer);
-            document.getElementById('global-idle-timer').classList.add('hidden');
+            const idleTimer = document.getElementById('global-idle-timer');
+            idleTimer.style.transform = '';
+            idleTimer.classList.remove('keyboard-viewport-adjust');
+            idleTimer.classList.add('hidden');
             hideAllScreens();
 
             const thanksScreen = document.getElementById('screen-thanks');
