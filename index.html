@@ -2996,7 +2996,7 @@
 <div class="phone-row">
 <div class="input-group">
 <label class="input-label" id="taxi-prefix-label">Mezinárodní předvolba</label>
-<select id="taxiPrefixInput">
+<select id="taxiPrefixInput" onchange="markTaxiPrefixManual()">
 <option selected="" value="+420">🇨🇿 +420</option><option value="+421">🇸🇰 +421</option>
 <option value="+49">🇩🇪 +49</option><option value="+43">🇦🇹 +43</option>
 <option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option>
@@ -3341,6 +3341,23 @@
 
 
         let currentLang = 'cs';
+        let taxiPrefixManuallyChanged = false;
+        const taxiPrefixByLanguage = {
+            cs: '+420',
+            en: '+44',
+            de: '+49',
+            sk: '+421',
+            it: '+39',
+            es: '+34',
+            fr: '+33',
+            pl: '+48',
+            ua: '+380',
+            tr: '+90',
+            da: '+45',
+            ja: '+81',
+            he: '+972',
+            el: '+30'
+        };
         let currentCheckinRooms = [];
         let autoResetTimer = null;
         let checkinCountdownTimer = null;
@@ -4791,6 +4808,7 @@
         }
 
         function resetToStart(preserveLanguage = true) {
+            taxiPrefixManuallyChanged = false;
             clearTimeout(autoResetTimer);
             clearInterval(checkinCountdownTimer);
             clearInterval(idleCountdownTimer);
@@ -4824,7 +4842,7 @@
             document.getElementById('taxiDateInput').value = '';
             document.getElementById('taxiDateDisplay').value = '';
             document.getElementById('taxiTimeInput').value = '';
-            document.getElementById('taxiPrefixInput').value = '+420';
+            applyAutomaticTaxiPrefix(currentLang);
             document.getElementById('taxiPhoneInput').value = '';
             document.querySelectorAll('input[name="taxiDestination"], input[name="taxiVehicle"]').forEach(el => el.checked = false);
             document.getElementById('taxiCenterAddressInput').value = '';
@@ -5056,8 +5074,24 @@
         const easyLockerQr = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQAAAACj6bPYAAABoElEQVR4nO1XMW7jQAwcWgI2Hf2D9Uci5Zr70wGGtYbyMMv3EfoBAVbdChA0V8hJlQRXmKqy3U5BajnkcCTEJ4e7z1DgB/5vGFwAoNEUIeytrJjzlyhZMNKAcTqgJc3/8WcBVA5oNBCU+pGxv4blRivXcfaI/QXMWN/0gvNho5QdIbcZ00n7AcLZP+Uo8sRYo3APYBA5eA/JejJiaTnH9eY6JOCiH02DYwyLJv+5BBAGJpQ2A+UKRG8uJb/G6WVMADQYJFfmLniaEJiBIhkRbe7Mn0tyHY2WvRUh3VMyA2HBMZK5YmngL+vcdza9aLBphz/y9Je9+XNJ4wWdodEZgPYbFLYi2nwEB/ZG5m4TKQhD7uzOqqboLgVjHaeTSittTHH6dePgb0Qq44KK4aIkgMq/sKisAJUFsjcAcC7sfZMsmhDu7/Vun3q1yc04A1d9q8vvx8X+VvBKo7T73tLZv2NxFmCUFtdxhuzG9MjY38CaMJ20XjfnRqZyBi+orHD/etuEy5YphoEkh1w5a+y7w5MZeBYRPO+PzkZEfv4vfeB/k3sXouNmgGUAAAAASUVORK5CYII=";
 
         // LANGUAGE SWITCHING LOGIC
+        function applyAutomaticTaxiPrefix(lang) {
+            if (taxiPrefixManuallyChanged) return;
+
+            const prefix = taxiPrefixByLanguage[lang] || '+420';
+            const prefixSelect = document.getElementById('taxiPrefixInput');
+
+            if (prefixSelect) {
+                prefixSelect.value = prefix;
+            }
+        }
+
+        function markTaxiPrefixManual() {
+            taxiPrefixManuallyChanged = true;
+        }
+
         function setLanguage(lang, event) {
             currentLang = lang;
+            applyAutomaticTaxiPrefix(lang);
 
             // Highlight active flag
             const flags = document.querySelectorAll('.flag-btn');
