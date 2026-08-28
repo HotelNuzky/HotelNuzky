@@ -3340,6 +3340,373 @@
             .sci-summary-name { grid-column: auto; }
         }
 
+
+
+        /* =========================================================
+           CHECK-IN RESULT — přehlednější finální obrazovka
+           Zachovává původní barevnost a vizuální jazyk kiosku.
+           ========================================================= */
+        #screen-checkin-result {
+            max-width: 820px;
+            padding: 28px 30px 26px;
+            border-color: rgba(255,255,255,.12);
+            background: rgba(36, 41, 49, .94);
+        }
+
+        #screen-checkin-result .card-title-welcome {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 0 22px;
+            color: #fff;
+            font-size: 29px;
+            line-height: 1.2;
+            letter-spacing: .1px;
+        }
+
+        #screen-checkin-result .card-title-welcome::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            flex: 0 0 42px;
+            color: #fff;
+            font-size: 27px;
+            font-weight: 850;
+            background: linear-gradient(180deg, var(--green-light), var(--green-main));
+            border: 1px solid rgba(255,255,255,.25);
+            box-shadow: 0 5px 14px rgba(0,0,0,.28);
+        }
+
+        #screen-checkin-result .checkin-result-box {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            text-align: left;
+        }
+
+        #screen-checkin-result .main-entrance-code-box {
+            display: grid;
+            grid-template-columns: 58px minmax(0, 1fr);
+            align-items: center;
+            justify-content: initial;
+            gap: 17px;
+            margin: 0 0 15px;
+            padding: 18px 21px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(66,165,245,.11), rgba(0,140,149,.14));
+            border: 1px solid rgba(128,223,227,.30);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 7px 18px rgba(0,0,0,.14);
+        }
+
+        #screen-checkin-result .main-entrance-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            color: var(--turquoise-border);
+            background: rgba(0,140,149,.12);
+            border-color: rgba(128,223,227,.28);
+        }
+
+        #screen-checkin-result .main-entrance-icon svg {
+            width: 29px;
+            height: 29px;
+        }
+
+        #screen-checkin-result .main-entrance-copy {
+            min-width: 0;
+        }
+
+        #screen-checkin-result .main-entrance-label {
+            margin: 0 0 5px;
+            color: #b9c9d4;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 760;
+            letter-spacing: .85px;
+        }
+
+        #screen-checkin-result .main-entrance-code {
+            color: #fff;
+            text-align: left;
+            font-size: 39px;
+            line-height: 1;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 6px rgba(0,0,0,.28);
+        }
+
+        #screen-checkin-result .guest-occupancy-important {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin: -2px 0 15px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            background: rgba(76,175,80,.085);
+            border: 1px solid rgba(139,211,142,.22);
+            color: #e7efe8;
+            font-size: 13px;
+            line-height: 1.42;
+            font-weight: 690;
+        }
+
+        #screen-checkin-result .guest-occupancy-important::before {
+            content: "!";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            flex: 0 0 25px;
+            border-radius: 50%;
+            color: #17221a;
+            background: #9bd79d;
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        #screen-checkin-result .guest-rooms-list {
+            gap: 15px;
+            margin: 0 0 15px;
+        }
+
+        #screen-checkin-result .guest-room-entry {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(150px, .78fr) minmax(210px, 1.22fr);
+            gap: 0;
+            overflow: hidden;
+            padding: 0;
+            border-radius: 17px;
+            background: rgba(255,255,255,.042);
+            border: 1px solid rgba(255,255,255,.105);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 8px 18px rgba(0,0,0,.13);
+        }
+
+        #screen-checkin-result .guest-room-entry::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--green-light), var(--green-main));
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-block,
+        #screen-checkin-result .guest-room-entry .guest-room-code-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            min-height: 105px;
+            padding: 19px 23px 17px;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            text-align: left;
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-code-block {
+            border-left: 1px solid rgba(255,255,255,.085);
+            background: rgba(76,175,80,.035);
+        }
+
+        #screen-checkin-result .guest-room-entry .checkin-result-label {
+            margin: 0 0 7px;
+            color: #abb5c1;
+            font-size: 11px;
+            font-weight: 760;
+            letter-spacing: .9px;
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-value {
+            color: #fff;
+            font-size: 37px;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-code-value {
+            color: #8bd38e;
+            font-size: 42px;
+            line-height: 1;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 5px rgba(0,0,0,.24);
+        }
+
+        #screen-checkin-result .guest-room-occupancy {
+            grid-column: 1 / -1;
+            margin: 0;
+            padding: 13px 18px 15px;
+            border: 0;
+            border-top: 1px solid rgba(255,255,255,.085);
+            border-radius: 0;
+            background: rgba(0,0,0,.10);
+            text-align: left;
+        }
+
+        #screen-checkin-result .guest-room-occupancy-label {
+            margin: 0 0 9px;
+            color: #c8d0d8;
+            font-size: 11px;
+            font-weight: 760;
+            letter-spacing: .75px;
+            text-transform: uppercase;
+        }
+
+        #screen-checkin-result .guest-room-occupancy-groups {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 9px;
+            justify-content: stretch;
+            align-items: stretch;
+        }
+
+        #screen-checkin-result .occupancy-group {
+            display: grid;
+            grid-template-columns: 25px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 8px;
+            min-height: 45px;
+            padding: 8px 10px;
+            border-radius: 11px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.085);
+        }
+
+        #screen-checkin-result .occupancy-group-label {
+            margin: 0;
+            color: #d0d6dd;
+            font-size: 11px;
+            font-weight: 650;
+            line-height: 1.15;
+            white-space: normal;
+        }
+
+        #screen-checkin-result .occupancy-count {
+            min-width: 20px;
+            color: #fff;
+            font-size: 23px;
+            line-height: 1;
+            font-weight: 820;
+            text-align: right;
+        }
+
+        #screen-checkin-result .occupancy-icon,
+        #screen-checkin-result .occupancy-icon.child,
+        #screen-checkin-result .occupancy-icon.infant {
+            width: 23px;
+            height: 23px;
+            color: #dce4eb;
+        }
+
+        #screen-checkin-result .guest-occupancy-note {
+            margin: 0 0 14px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            background: rgba(255,193,7,.055);
+            border: 1px solid rgba(255,213,79,.18);
+            color: #cfd6de;
+            font-size: 12px;
+            line-height: 1.48;
+        }
+
+        #screen-checkin-result .guest-occupancy-note strong {
+            color: #ffd86a;
+        }
+
+        #screen-checkin-result .checkin-result-direction {
+            margin: 0;
+            padding: 12px 15px;
+            border-radius: 12px;
+            color: #dce3e9;
+            background: rgba(0,140,149,.075);
+            border: 1px solid rgba(128,223,227,.15);
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        #screen-checkin-result .checkin-result-note {
+            position: relative;
+            margin: 16px auto 0;
+            padding: 0 12px;
+            max-width: 650px;
+            color: #bcc5cf;
+            font-size: 13px;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        #screen-checkin-result .result-ok-row {
+            margin-top: 18px;
+        }
+
+        #screen-checkin-result .result-ok-row .btn-self-checkin-submit {
+            flex: 0 1 340px;
+            width: 340px;
+            max-width: 100%;
+            min-height: 52px;
+            font-size: 18px;
+        }
+
+        #screen-checkin-result .checkin-countdown {
+            margin-top: 14px;
+            color: #8f99a6;
+            font-size: 13px;
+        }
+
+        #screen-checkin-result .checkin-countdown strong {
+            color: #9bd79d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 680px) {
+            #screen-checkin-result {
+                padding: 23px 18px 22px;
+            }
+
+            #screen-checkin-result .card-title-welcome {
+                font-size: 24px;
+            }
+
+            #screen-checkin-result .card-title-welcome::before {
+                width: 37px;
+                height: 37px;
+                flex-basis: 37px;
+                font-size: 23px;
+            }
+
+            #screen-checkin-result .guest-room-entry {
+                grid-template-columns: .8fr 1.2fr;
+            }
+
+            #screen-checkin-result .guest-room-entry .guest-room-block,
+            #screen-checkin-result .guest-room-entry .guest-room-code-block {
+                min-height: 92px;
+                padding: 16px 16px 15px;
+            }
+
+            #screen-checkin-result .guest-room-entry .guest-room-value {
+                font-size: 32px;
+            }
+
+            #screen-checkin-result .guest-room-entry .guest-room-code-value {
+                font-size: 36px;
+            }
+
+            #screen-checkin-result .guest-room-occupancy-groups {
+                grid-template-columns: 1fr;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -3603,29 +3970,31 @@
 <div class="card hidden" id="screen-checkin-result">
 <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
 <div class="checkin-result-box">
-<div id="sci-rooms-list" class="guest-rooms-list"></div>
-<div class="guest-occupancy-note hidden" id="sci-occupancy-note">
-<strong>*</strong> <span id="sci-occupancy-note-text"></span>
-</div>
-
-                <div class="main-entrance-code-box">
+<div class="main-entrance-code-box">
 <div aria-hidden="true" class="main-entrance-icon">
 <svg height="25" viewbox="0 0 24 24" width="25">
 <path d="M4 21V5l8-3 8 3v16h-2V7H6v14H4zm4 0V8h8v13h-2v-5h-4v5H8zm2-7h4v-4h-4v4z" fill="currentColor"></path>
 </svg>
 </div>
-<div>
+<div class="main-entrance-copy">
 <div class="checkin-result-label main-entrance-label" id="sci-main-code-label">Kód hlavního vchodu do hotelu</div>
 <div class="checkin-result-value main-entrance-code" id="sci-main-code-value">2018</div>
 </div>
 </div>
+<div class="guest-occupancy-important hidden" id="sci-occupancy-important">
+<span id="sci-occupancy-important-text"></span>
+</div>
+<div id="sci-rooms-list" class="guest-rooms-list"></div>
+<div class="guest-occupancy-note hidden" id="sci-occupancy-note">
+<strong>*</strong> <span id="sci-occupancy-note-text"></span>
+</div>
 <div class="checkin-result-direction" id="sci-result-direction">Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.</div>
 </div>
 <div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
-<div class="checkin-countdown"><span id="sci-countdown-label">Návrat na hlavní obrazovku za</span> <strong id="sci-countdown">1:30</strong></div>
 <div class="result-ok-row">
 <button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-ok" onclick="resetToStart()">OK</button>
 </div>
+<div class="checkin-countdown"><span id="sci-countdown-label">Návrat na hlavní obrazovku za</span> <strong id="sci-countdown">1:30</strong></div>
 </div>
 <!-- SCREEN SELF CHECK-IN: ROOM NOT READY -->
 <div class="card hidden" id="screen-checkin-waiting">
@@ -5523,6 +5892,11 @@
         function registerUserActivity() {
             if (!isSubpageOpen()) return;
             if (!document.getElementById('screen-thanks').classList.contains('hidden')) return;
+
+            // Na finální obrazovce s přístupovými kódy běží pevný odpočet.
+            // Změna jazyka ani jiný dotyk nesmí prodloužit dobu zobrazení kódů.
+            if (!document.getElementById('screen-checkin-result').classList.contains('hidden')) return;
+
             startAutoResetTimer();
         }
 
@@ -5609,44 +5983,52 @@
 
         function occupancySvg(type) {
             if (type === 'adult') {
+                // Dospělý: zřetelná ikona hlavy a ramen / poprsí.
                 return `<svg class="occupancy-icon adult" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="7" r="3.2" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
-                    <path d="M5.5 20c.5-4.4 3-7 6.5-7s6 2.6 6.5 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+                    <circle cx="12" cy="6.7" r="3.25" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
+                    <path d="M5.2 20c.35-4.55 2.95-7.15 6.8-7.15s6.45 2.6 6.8 7.15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+                    <path d="M8.2 14.3c1.05.95 2.3 1.4 3.8 1.4s2.75-.45 3.8-1.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" opacity=".78"></path>
                 </svg>`;
             }
 
             if (type === 'child') {
+                // Dítě: menší celá postava s rukama a nohama, aby se nepletla s dospělým.
                 return `<svg class="occupancy-icon child" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="7.5" r="2.8" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
-                    <path d="M7 20c.4-3.9 2.3-6.2 5-6.2s4.6 2.3 5 6.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
-                    <path d="M9.2 14.7l-1.7 2M14.8 14.7l1.7 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+                    <circle cx="12" cy="5.4" r="2.35" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
+                    <path d="M12 8.1v6.15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+                    <path d="M12 10.25 7.8 12.5M12 10.25l4.2 2.25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                    <path d="M12 14.25 8.75 20M12 14.25 15.25 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
                 </svg>`;
             }
 
+            // Kojenec: obličej miminka s typickou kadeří.
             return `<svg class="occupancy-icon infant" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
-                <path d="M9.3 10.6h.01M14.7 10.6h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
-                <path d="M9.8 14.2c.6.8 1.3 1.2 2.2 1.2s1.6-.4 2.2-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
-                <path d="M10.6 5.3c.3-1.2 1-2 2.1-2 1 0 1.7.6 1.9 1.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                <circle cx="12" cy="12.3" r="6.7" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                <path d="M9.2 10.9h.01M14.8 10.9h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+                <path d="M9.8 14.25c.65.8 1.38 1.2 2.2 1.2s1.55-.4 2.2-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                <path d="M10.2 5.9c.15-1.65 1.1-2.8 2.55-2.8 1.15 0 2.05.75 2.35 1.85-.7-.3-1.35-.15-1.85.45" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>`;
         }
 
         function createOccupancyGroup(label, count, type) {
-            if (!Number.isInteger(count) || count <= 0) return null;
+            if (!Number.isInteger(count) || count < 0) return null;
 
             const group = document.createElement('div');
             group.className = 'occupancy-group';
+
+            const iconHolder = document.createElement('span');
+            iconHolder.innerHTML = occupancySvg(type);
+            group.appendChild(iconHolder.firstElementChild);
 
             const labelEl = document.createElement('span');
             labelEl.className = 'occupancy-group-label';
             labelEl.innerText = label;
             group.appendChild(labelEl);
 
-            for (let i = 0; i < count; i++) {
-                const holder = document.createElement('span');
-                holder.innerHTML = occupancySvg(type);
-                group.appendChild(holder.firstElementChild);
-            }
+            const countEl = document.createElement('strong');
+            countEl.className = 'occupancy-count';
+            countEl.innerText = String(count);
+            group.appendChild(countEl);
 
             return group;
         }
@@ -5657,6 +6039,8 @@
             const occ = occupancyI18n[currentLang] || occupancyI18n.en;
             const note = document.getElementById('sci-occupancy-note');
             const noteText = document.getElementById('sci-occupancy-note-text');
+            const important = document.getElementById('sci-occupancy-important');
+            const importantText = document.getElementById('sci-occupancy-important-text');
 
             list.innerHTML = '';
 
@@ -5672,6 +6056,15 @@
 
             // Uchováváme i počty osob, aby nezmizely při změně jazyka.
             currentCheckinRooms = normalizedRooms.map(item => ({ ...item }));
+
+            // Finální obrazovka používá stejné jednotné / množné číslo jako registrační krok.
+            const resultTitle = document.getElementById('sci-result-title');
+            const regCopy = registrationI18n[currentLang] || registrationI18n.en;
+            if (resultTitle && regCopy) {
+                resultTitle.innerText = normalizedRooms.length > 1
+                    ? regCopy.readyTitleMany
+                    : regCopy.readyTitle;
+            }
 
             let hasOccupancy = false;
 
@@ -5742,9 +6135,16 @@
             });
 
             if (hasOccupancy) {
-                noteText.innerText = occ.note;
-                note.classList.remove('hidden');
+                // Celé vysvětlení o počtu osob zůstává pohromadě a je
+                // zobrazené jako důležitá informace hned pod hlavním kódem.
+                importantText.innerText = occ.note;
+                important.classList.remove('hidden');
+
+                noteText.innerText = '';
+                note.classList.add('hidden');
             } else {
+                importantText.innerText = '';
+                important.classList.add('hidden');
                 noteText.innerText = '';
                 note.classList.add('hidden');
             }
