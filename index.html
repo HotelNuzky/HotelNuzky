@@ -4500,6 +4500,7 @@
         const CHECKIN_API_URL = "https://hotel-kiosk-nuzky-api.hotel-manager.workers.dev/";
         const NOTIFY_API_URL = CHECKIN_API_URL + "notify";
         const HEARTBEAT_API_URL = CHECKIN_API_URL + "heartbeat";
+        const ANALYTICS_API_URL = CHECKIN_API_URL + "analytics";
         let activeCheckinReservation = null;
         const AUTO_RESET_TIMEOUT = 120000; // 120 seconds idle reset
 
@@ -4575,6 +4576,24 @@
             }
 
             return `${type}_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
+        }
+
+        function trackKioskOpen(feature) {
+            const eventId = createNotificationId(`open_${feature}`);
+
+            fetch(ANALYTICS_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    eventId,
+                    event: feature
+                }),
+                cache: "no-store",
+                keepalive: true
+            }).catch(error => {
+                // Statistiky nesmí nikdy blokovat hosta ani funkci kiosku.
+                console.error("Analytics delivery failed:", error);
+            });
         }
 
         function loadNotificationQueue() {
@@ -5925,6 +5944,7 @@
         });
 
         function openSelfCheckin() {
+            trackKioskOpen("checkin");
             hideAllScreens();
             const selfCheckinScreen = document.getElementById('screen-self-checkin');
             selfCheckinScreen.classList.remove('selfcheck-panel-wifi', 'selfcheck-panel-luggage');
@@ -6481,12 +6501,14 @@
         }
 
         function openCheckinInfo() {
+            trackKioskOpen("guide");
             hideAllScreens();
             document.getElementById('screen-checkin').classList.remove('hidden');
             startAutoResetTimer();
         }
 
         function openCheckoutForm() {
+            trackKioskOpen("checkout");
             hideAllScreens();
             const checkoutScreen = document.getElementById('screen-checkout');
             checkoutScreen.classList.remove('checkout-panel-receipt', 'checkout-panel-luggage');
@@ -6509,6 +6531,7 @@
         }
 
         function openServiceForm() {
+            trackKioskOpen("service");
             hideAllScreens();
             const serviceScreen = document.getElementById('screen-service');
             serviceScreen.dataset.mode = 'service';
@@ -6517,6 +6540,7 @@
         }
 
         function openTaxiForm() {
+            trackKioskOpen("taxi");
             hideAllScreens();
             const serviceScreen = document.getElementById('screen-service');
             serviceScreen.dataset.mode = 'taxi';
@@ -6525,6 +6549,7 @@
         }
 
         function openParkingInfo() {
+            trackKioskOpen("parking");
             hideAllScreens();
             document.getElementById('screen-parking').classList.remove('hidden');
             startAutoResetTimer();
