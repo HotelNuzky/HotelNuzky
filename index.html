@@ -87,7 +87,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px 12px;
             margin-bottom: 20px;
             background: rgba(0, 0, 0, 0.25);
             padding: 12px 18px;
@@ -100,11 +100,20 @@
             font-size: 28px;
             cursor: pointer;
             filter: grayscale(50%);
-            transition: transform 0.2s ease, filter 0.2s ease, background 0.2s ease;
+            transition: transform 0.16s ease, filter 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
             line-height: 1;
             padding: 6px 8px;
+            min-width: 48px;
+            min-height: 48px;
+            box-sizing: border-box;
             border-radius: 10px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .language-bar-bottom {
@@ -112,10 +121,22 @@
             margin-bottom: 0;
         }
 
-        .flag-btn:hover, .flag-btn.active {
+        /* Active language is explicit. On touch devices we deliberately do not
+           use :hover, because iPad Safari can keep a tapped item in a sticky
+           hover state and make two flags look selected at once. */
+        .flag-btn.active {
             filter: grayscale(0%);
-            transform: scale(1.25);
-            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .flag-btn:hover {
+                filter: grayscale(0%);
+                transform: scale(1.12);
+                background: rgba(255, 255, 255, 0.12);
+            }
         }
 
         /* HEADER */
@@ -4416,20 +4437,20 @@
 <div class="container">
 <!-- LANGUAGE SELECTION BAR -->
 <div class="language-bar">
-<span class="flag-btn active" data-lang="cs" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
-<span class="flag-btn" data-lang="en" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
-<span class="flag-btn" data-lang="de" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
-<span class="flag-btn" data-lang="it" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
-<span class="flag-btn" data-lang="es" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
-<span class="flag-btn" data-lang="fr" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
-<span class="flag-btn" data-lang="pl" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
-<span class="flag-btn" data-lang="ua" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
-<span class="flag-btn" data-lang="sk" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
-<span class="flag-btn" data-lang="tr" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
-<span class="flag-btn" data-lang="da" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
-<span class="flag-btn" data-lang="ja" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
-<span class="flag-btn" data-lang="he" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
-<span class="flag-btn" data-lang="el" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
+<span role="button" aria-pressed="true" class="flag-btn active" data-lang="cs" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="en" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="de" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="it" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="es" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="fr" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="pl" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="ua" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="sk" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="tr" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="da" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="ja" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="he" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="el" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
 </div>
 <!-- SCREEN 1: MAIN MENU -->
 <div id="screen-1">
@@ -5220,20 +5241,20 @@
 </div>
 <!-- MIRRORED BOTTOM LANGUAGE SELECTION BAR -->
 <div class="language-bar language-bar-bottom" aria-label="Výběr jazyka">
-<span class="flag-btn active" data-lang="cs" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
-<span class="flag-btn" data-lang="en" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
-<span class="flag-btn" data-lang="de" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
-<span class="flag-btn" data-lang="it" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
-<span class="flag-btn" data-lang="es" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
-<span class="flag-btn" data-lang="fr" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
-<span class="flag-btn" data-lang="pl" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
-<span class="flag-btn" data-lang="ua" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
-<span class="flag-btn" data-lang="sk" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
-<span class="flag-btn" data-lang="tr" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
-<span class="flag-btn" data-lang="da" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
-<span class="flag-btn" data-lang="ja" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
-<span class="flag-btn" data-lang="he" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
-<span class="flag-btn" data-lang="el" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
+<span role="button" aria-pressed="true" class="flag-btn active" data-lang="cs" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="en" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="de" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="it" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="es" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="fr" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="pl" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="ua" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="sk" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="tr" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="da" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="ja" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="he" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
+<span role="button" aria-pressed="false" class="flag-btn" data-lang="el" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
 </div>
 </div>
 <div class="localized-calendar-overlay hidden" id="localized-calendar-overlay" onclick="calendarOverlayClick(event)">
@@ -7773,10 +7794,8 @@
         }
 
         function setDefaultEnglish() {
+            // setLanguage already synchronizes both mirrored language bars.
             setLanguage('en');
-            document.querySelectorAll('.flag-btn').forEach(f => f.classList.remove('active'));
-            const englishFlag = document.querySelector('.flag-btn[title="English"]');
-            if (englishFlag) englishFlag.classList.add('active');
         }
 
         function autoResetToStart() {
@@ -8088,10 +8107,16 @@
             updateLatinEntryNotes(lang);
             applyAutomaticTaxiPrefix(lang);
 
-            // Highlight the selected language in both mirrored language bars.
+            // Highlight exactly the selected language in both mirrored language bars.
+            // Explicit reset avoids stale visual state after fast taps on iPad Safari.
             const flags = document.querySelectorAll('.flag-btn');
             flags.forEach(f => {
-                f.classList.toggle('active', f.dataset.lang === lang);
+                f.classList.remove('active');
+                f.setAttribute('aria-pressed', 'false');
+            });
+            document.querySelectorAll(`.flag-btn[data-lang="${lang}"]`).forEach(f => {
+                f.classList.add('active');
+                f.setAttribute('aria-pressed', 'true');
             });
 
             const dict = i18n[lang] || i18n['en'];
