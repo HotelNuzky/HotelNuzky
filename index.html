@@ -3427,6 +3427,70 @@
             grid-template-columns: .9fr 1.1fr;
             gap: 10px;
         }
+        .sci-address-block {
+            margin: 8px 0 10px;
+            padding: 10px;
+            border: 1px solid rgba(89,194,109,.28);
+            border-radius: 11px;
+            background: rgba(23,74,36,.16);
+        }
+        .sci-address-grid { grid-template-columns: 1.15fr .85fr; }
+        .sci-country-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            min-height: 43px;
+            padding: 8px 10px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 9px;
+            background: rgba(7,12,16,.42);
+        }
+        .sci-country-result.hidden { display: none !important; }
+        .sci-country-result > div { min-width: 0; }
+        .sci-country-result span {
+            display: block;
+            color: rgba(222,230,224,.68);
+            font-size: 9px;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+        }
+        .sci-country-result strong {
+            display: block;
+            margin-top: 2px;
+            color: #d9f8df;
+            font-size: 14px;
+            line-height: 1.15;
+        }
+        .sci-country-result small {
+            display: block;
+            margin-top: 2px;
+            color: #91aa98;
+            font-size: 9px;
+            line-height: 1.2;
+        }
+        .sci-country-change {
+            flex: 0 0 auto;
+            min-width: 66px;
+            min-height: 31px;
+            padding: 5px 9px;
+            border: 1px solid rgba(111,211,130,.45);
+            border-radius: 8px;
+            background: rgba(47,129,64,.34);
+            color: #e7ffec;
+            font-size: 10px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .sci-country-status-error { color: #ffc3c3 !important; }
+        .sci-osm-credit {
+            margin-top: 5px;
+            color: rgba(210,220,213,.46);
+            font-size: 7.5px;
+            text-align: right;
+        }
         .sci-date-selects {
             display: grid;
             grid-template-columns: .75fr .9fr 1.15fr;
@@ -3501,7 +3565,7 @@
         #sciSignatureCanvas {
             display: block;
             width: 100%;
-            height: 112px;
+            height: 150px;
             background: #fff;
             touch-action: none;
             cursor: crosshair;
@@ -3558,7 +3622,7 @@
         }
 
         @media (max-width: 760px) {
-            .sci-reg-two-col, .sci-visa-grid, .sci-visa-validity-grid { grid-template-columns: 1fr; }
+            .sci-reg-two-col, .sci-address-grid, .sci-visa-grid, .sci-visa-validity-grid { grid-template-columns: 1fr; }
             .sci-verified-summary { grid-template-columns: 1fr; }
             .sci-summary-name { grid-column: auto; }
         }
@@ -4131,6 +4195,221 @@
             }
         }
 
+
+
+        /* =========================================================
+           v23 PARKING — CHECK-IN TAB ALIGNMENT + PHOTO ZOOM
+           ========================================================= */
+        .selfcheck-parking-card .parking-content-row {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) 190px !important;
+            grid-template-rows: auto !important;
+            column-gap: 16px !important;
+            row-gap: 0 !important;
+            align-items: start !important;
+            height: auto !important;
+        }
+
+        .selfcheck-parking-card .parking-content-row > span {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            min-width: 0 !important;
+            align-self: start !important;
+        }
+
+        .selfcheck-parking-card .parking-visual-stack {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            width: 190px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            justify-self: end;
+            align-self: start;
+        }
+
+        /* Options 3 and 4 have longer copy: start the visual column a little lower. */
+        .selfcheck-parking-card .parking-option-3 .parking-visual-stack,
+        .selfcheck-parking-card .parking-option-4 .parking-visual-stack {
+            margin-top: 16px;
+        }
+
+        .selfcheck-parking-card .parking-visual-stack .parking-photo-wrap {
+            width: 100% !important;
+            margin: 0 !important;
+            justify-self: auto !important;
+        }
+
+        .selfcheck-parking-card .parking-visual-stack .parking-photo {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+            max-height: 150px !important;
+            object-fit: contain !important;
+            object-position: center !important;
+        }
+
+        .selfcheck-parking-card .parking-option-2 .parking-visual-stack .parking-photo-map {
+            max-height: 185px !important;
+        }
+
+        /* QR belongs directly below its photo, never at the bottom of the whole card. */
+        .selfcheck-parking-card .parking-visual-stack .parking-qr-option {
+            width: 100% !important;
+            max-width: 190px !important;
+            margin: 0 !important;
+            padding: 7px 8px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 5px !important;
+            text-align: center !important;
+        }
+
+        .selfcheck-parking-card .parking-visual-stack .parking-qr-code {
+            width: 92px !important;
+            height: 92px !important;
+            flex: 0 0 auto;
+        }
+
+        .selfcheck-parking-card .parking-visual-stack .parking-qr-text {
+            max-width: 170px !important;
+            margin: 0 !important;
+            font-size: 10px !important;
+            line-height: 1.25 !important;
+        }
+
+        /* Parking images are zoomable in both Parking and the Check-in Parking tab. */
+        #screen-parking .parking-photo,
+        .selfcheck-parking-card .parking-photo {
+            cursor: zoom-in;
+            transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+        }
+
+        #screen-parking .parking-photo:active,
+        .selfcheck-parking-card .parking-photo:active {
+            transform: scale(.985);
+            opacity: .92;
+        }
+
+        .parking-photo-zoom-hint {
+            margin-top: 7px;
+            color: rgba(214,229,241,.74);
+            font-size: 10.5px;
+            line-height: 1.25;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: .05px;
+        }
+
+        #screen-parking .parking-photo-wrap {
+            flex-direction: column;
+        }
+
+        .selfcheck-parking-card .parking-photo-zoom-hint {
+            margin-top: 6px;
+            font-size: 9.5px;
+            color: rgba(205,224,239,.70);
+        }
+
+        /* v26: Long parking URLs must wrap inside the text column.
+           This is especially important for options 3 and 4 in the compact
+           Check-in Parking tab, where an unbroken URL could run under the photo. */
+        .selfcheck-parking-card .parking-content-row > span,
+        .selfcheck-parking-card .parking-content-row > span strong,
+        .selfcheck-parking-card .parking-content-row > span em {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
+        }
+
+        .selfcheck-parking-card .parking-option-3 .parking-visual-stack,
+        .selfcheck-parking-card .parking-option-4 .parking-visual-stack {
+            margin-top: 24px;
+        }
+
+        .parking-photo-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            background: rgba(0,0,0,.86);
+            backdrop-filter: blur(6px);
+        }
+
+        .parking-photo-modal.hidden { display: none !important; }
+
+        .parking-photo-modal-card {
+            width: min(94vw, 1040px);
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid rgba(117,191,255,.36);
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(18,37,56,.98), rgba(8,20,31,.99));
+            box-shadow: 0 24px 70px rgba(0,0,0,.65);
+        }
+
+        .parking-photo-modal-card img {
+            display: block;
+            max-width: 100%;
+            max-height: calc(92vh - 92px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #111820;
+        }
+
+        .parking-photo-modal-ok {
+            min-width: 150px;
+            min-height: 48px;
+            padding: 11px 28px;
+            border: 1px solid var(--blue-light) !important;
+            border-top: 2px solid var(--blue-light) !important;
+            border-radius: 12px;
+            background: linear-gradient(180deg, var(--blue-main) 0%, var(--blue-dark) 100%) !important;
+            color: #fff !important;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--blue-shadow), 0 8px 18px rgba(0,0,0,.35) !important;
+        }
+
+        body.parking-photo-modal-open { overflow: hidden; }
+
+        @media (max-width: 760px) {
+            .selfcheck-parking-card .parking-content-row {
+                grid-template-columns: 1fr !important;
+                row-gap: 12px !important;
+            }
+            .selfcheck-parking-card .parking-content-row > span {
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+            }
+            .selfcheck-parking-card .parking-visual-stack {
+                grid-column: 1 !important;
+                grid-row: 2 !important;
+                width: min(100%, 320px) !important;
+                justify-self: center !important;
+                margin-top: 0 !important;
+            }
+            .selfcheck-parking-card .parking-visual-stack .parking-photo {
+                max-height: 210px !important;
+            }
+            .parking-photo-modal { padding: 14px; }
+            .parking-photo-modal-card { width: 96vw; padding: 12px; }
+        }
 </style>
 </head>
 <body>
@@ -4282,6 +4561,7 @@
       <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v12h16V6H4zm2 2h5v5H6V8zm1.5 1.5v2H9v-2H7.5zM13 9h5v1.5h-5V9zm0 3h5v1.5h-5V12zm-7 3h12v1.5H6V15z"></path></svg>
       <span id="sci-reg-title">Registrační údaje</span>
     </div>
+    <div class="sci-police-notice" id="sci-reg-police-notice">Údaje hostů z tohoto formuláře jsou ze zákona předávány Policii Č⁠R.</div>
     <div class="latin-entry-note hidden" id="sci-reg-latin-entry-note"><strong>ABC</strong><span class="latin-entry-note-text"></span></div>
 
     <label class="sci-reg-check-row" for="sciDifferentGuest">
@@ -4306,6 +4586,23 @@
     <div class="sci-reg-field">
       <label id="sci-reg-nationality-label" for="sciNationality">Národnost</label>
       <select id="sciNationality"></select>
+    </div>
+
+    <div class="sci-address-block">
+      <div class="sci-reg-two-col sci-address-grid">
+        <div class="sci-reg-field">
+          <label id="sci-reg-street-label" for="sciResidenceStreet">Ulice a číslo</label>
+          <input id="sciResidenceStreet" autocomplete="street-address" type="text" inputmode="text" spellcheck="false"/>
+        </div>
+        <div class="sci-reg-field">
+          <label id="sci-reg-city-label" for="sciResidenceCity">Město</label>
+          <input id="sciResidenceCity" autocomplete="address-level2" type="text" inputmode="text" spellcheck="false"/>
+        </div>
+      </div>
+      <div class="sci-reg-field" id="sciResidenceCountryManualGroup">
+        <label id="sci-reg-country-manual-label" for="sciResidenceCountryManual">Země bydliště</label>
+        <select id="sciResidenceCountryManual" onchange="applyManualResidenceCountry()"></select>
+      </div>
     </div>
 
     <div class="sci-doc-warning" id="sci-reg-doc-warning">Řidičský průkaz není platný doklad.</div>
@@ -4352,15 +4649,13 @@
       </div>
     </div>
 
-    <div class="sci-police-notice" id="sci-reg-police-notice">Údaje hostů z tohoto formuláře jsou ze zákona předávány Policii Č⁠R.</div>
-
     <div class="sci-signature-block">
       <div class="sci-signature-heading">
         <strong id="sci-reg-signature-title">Podepište se prosím prstem do pole níže.</strong>
         <button class="sci-signature-clear" id="sci-reg-signature-clear" type="button" onclick="clearGuestSignature()">VYMAZAT PODPIS</button>
       </div>
       <div class="sci-signature-canvas-wrap">
-        <canvas id="sciSignatureCanvas" width="720" height="220" aria-label="Podpis hosta"></canvas>
+        <canvas id="sciSignatureCanvas" width="720" height="300" aria-label="Podpis hosta"></canvas>
       </div>
       <details class="sci-signature-terms" id="sci-reg-terms-details">
         <summary>
@@ -4792,7 +5087,7 @@
 </div>
 <!-- SCREEN PARKING INFO -->
 <div class="card hidden" id="screen-parking">
-<div class="top-return-row"><button class="btn-top-return" id="btn-back-pk-top" onclick="resetToStart()">ZPĚT / BACK</button></div>
+<div class="top-return-row"><button class="btn-top-return" id="btn-back-pk-top" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button></div>
 <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
 <div class="card-subtitle-welcome parking-historical-highlight" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
 <div class="wifi-box-blue">
@@ -4906,7 +5201,7 @@
 </div>
 </div>
 <div class="button-row">
-<button class="btn-form-cancel" id="btn-back-pk" onclick="resetToStart()" style="flex:1;">ZPĚT / BACK</button>
+<button class="btn-form-cancel" id="btn-back-pk" onclick="resetToStart()" style="flex:1;">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
 </div>
 </div>
 <!-- SCREEN THANKS -->
@@ -4960,6 +5255,14 @@
 <span id="global-idle-label">Návrat za</span>
 <strong id="global-idle-countdown">1:30</strong>
 </div>
+
+<div class="parking-photo-modal hidden" id="parking-photo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Zvětšený obrázek parkování">
+  <div class="parking-photo-modal-card" onclick="event.stopPropagation()">
+    <img id="parking-photo-modal-image" alt="Zvětšený obrázek parkování"/>
+    <button class="parking-photo-modal-ok" type="button" onclick="closeParkingPhotoZoom()">OK</button>
+  </div>
+</div>
+
 <!-- JAVASCRIPT LOGIC & DICTIONARIES -->
 <script>
         // CONFIGURATION
@@ -4968,6 +5271,7 @@
         const HEARTBEAT_API_URL = CHECKIN_API_URL + "heartbeat";
         const ANALYTICS_API_URL = CHECKIN_API_URL + "analytics";
         let activeCheckinReservation = null;
+        let selfCheckinVerificationMode = 'unverified';
         const AUTO_RESET_TIMEOUT = 120000; // 120 seconds idle reset
 
 
@@ -5293,7 +5597,7 @@
 
         const selfCheckinDateStatusI18n = {"cs":{"tooEarlyTitle":"Check-in ještě není dostupný","tooEarlyText":"Přístupové údaje budou k dispozici od data vašeho příjezdu.","expiredTitle":"Tento pobyt již skončil","expiredText":"Přístupové údaje již nelze zobrazit. Pokud potřebujete pomoc, obraťte se prosím na hotelový personál."},"en":{"tooEarlyTitle":"Check-in is not available yet","tooEarlyText":"Your access details will be available from your arrival date.","expiredTitle":"This stay has already ended","expiredText":"Access details can no longer be displayed. If you need assistance, please contact the hotel staff."},"de":{"tooEarlyTitle":"Check-in ist noch nicht verfügbar","tooEarlyText":"Ihre Zugangsdaten sind ab Ihrem Anreisedatum verfügbar.","expiredTitle":"Dieser Aufenthalt ist bereits beendet","expiredText":"Die Zugangsdaten können nicht mehr angezeigt werden. Wenn Sie Hilfe benötigen, wenden Sie sich bitte an das Hotelpersonal."},"it":{"tooEarlyTitle":"Il check-in non è ancora disponibile","tooEarlyText":"I dati di accesso saranno disponibili dalla data di arrivo.","expiredTitle":"Questo soggiorno è già terminato","expiredText":"I dati di accesso non possono più essere visualizzati. Se avete bisogno di assistenza, rivolgetevi al personale dell’hotel."},"es":{"tooEarlyTitle":"El check-in aún no está disponible","tooEarlyText":"Los datos de acceso estarán disponibles a partir de la fecha de llegada.","expiredTitle":"Esta estancia ya ha finalizado","expiredText":"Los datos de acceso ya no pueden mostrarse. Si necesita ayuda, póngase en contacto con el personal del hotel."},"fr":{"tooEarlyTitle":"Le check-in n’est pas encore disponible","tooEarlyText":"Vos informations d’accès seront disponibles à partir de votre date d’arrivée.","expiredTitle":"Ce séjour est déjà terminé","expiredText":"Les informations d’accès ne peuvent plus être affichées. Si vous avez besoin d’aide, veuillez vous adresser au personnel de l’hôtel."},"pl":{"tooEarlyTitle":"Check-in nie jest jeszcze dostępny","tooEarlyText":"Dane dostępowe będą dostępne od dnia przyjazdu.","expiredTitle":"Ten pobyt już się zakończył","expiredText":"Dane dostępowe nie mogą już zostać wyświetlone. Jeśli potrzebujesz pomocy, skontaktuj się z personelem hotelu."},"ua":{"tooEarlyTitle":"Check-in ще недоступний","tooEarlyText":"Дані для доступу будуть доступні з дати вашого заїзду.","expiredTitle":"Це проживання вже завершилося","expiredText":"Дані для доступу більше не можуть бути показані. Якщо вам потрібна допомога, зверніться, будь ласка, до персоналу готелю."},"sk":{"tooEarlyTitle":"Check-in ešte nie je dostupný","tooEarlyText":"Prístupové údaje budú k dispozícii od dátumu vášho príchodu.","expiredTitle":"Tento pobyt sa už skončil","expiredText":"Prístupové údaje už nie je možné zobraziť. Ak potrebujete pomoc, obráťte sa, prosím, na hotelový personál."},"tr":{"tooEarlyTitle":"Check-in henüz kullanılamıyor","tooEarlyText":"Giriş bilgileriniz varış tarihinizden itibaren kullanılabilir olacaktır.","expiredTitle":"Bu konaklama sona erdi","expiredText":"Giriş bilgileri artık görüntülenemez. Yardıma ihtiyacınız varsa lütfen otel personeliyle iletişime geçin."},"da":{"tooEarlyTitle":"Check-in er ikke tilgængelig endnu","tooEarlyText":"Dine adgangsoplysninger vil være tilgængelige fra din ankomstdato.","expiredTitle":"Dette ophold er allerede afsluttet","expiredText":"Adgangsoplysningerne kan ikke længere vises. Hvis du har brug for hjælp, bedes du kontakte hotellets personale."},"ja":{"tooEarlyTitle":"チェックインはまだご利用いただけません","tooEarlyText":"アクセス情報はご到着日から表示できるようになります。","expiredTitle":"このご宿泊期間は終了しています","expiredText":"アクセス情報は表示できません。お手伝いが必要な場合は、ホテルスタッフまでお声がけください。"},"he":{"tooEarlyTitle":"הצ'ק-אין עדיין אינו זמין","tooEarlyText":"פרטי הכניסה יהיו זמינים החל מתאריך ההגעה שלכם.","expiredTitle":"השהייה הזו כבר הסתיימה","expiredText":"לא ניתן עוד להציג את פרטי הכניסה. אם אתם זקוקים לעזרה, אנא פנו לצוות המלון."},"el":{"tooEarlyTitle":"Το check-in δεν είναι ακόμη διαθέσιμο","tooEarlyText":"Τα στοιχεία πρόσβασης θα είναι διαθέσιμα από την ημερομηνία άφιξής σας.","expiredTitle":"Αυτή η διαμονή έχει ήδη ολοκληρωθεί","expiredText":"Τα στοιχεία πρόσβασης δεν μπορούν πλέον να εμφανιστούν. Αν χρειάζεστε βοήθεια, παρακαλούμε απευθυνθείτε στο προσωπικό του ξενοδοχείου."}};
 
-        const selfCheckinStatusI18n = {"cs":{"waitingTitle":"Váš pokoj ještě není připraven","waitingText":"Váš pokoj ještě není připraven. Pokoj bude připraven nejpozději v 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.","unverifiedTitle":"Rezervaci se nepodařilo ověřit","unverifiedText":"Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.\n\nTento kiosk neslouží ke kontrole budoucích rezervací."},"en":{"waitingTitle":"Your room is not ready yet","waitingText":"Your room is not ready yet. Your room will be ready by 15:00 at the latest. After speaking with the restaurant staff, you may leave your luggage on the ground floor. Due to the limited space in our historic building, however, we cannot accept responsibility for stored luggage. More information is available under the “Welcome Guide” button.","unverifiedTitle":"We could not verify the reservation","unverifiedText":"We could not verify a reservation with the details entered. Please check the name shown on the reservation and both your arrival and departure dates.\n\nThis kiosk is not intended for checking future reservations."},"de":{"waitingTitle":"Ihr Zimmer ist noch nicht bereit","waitingText":"Ihr Zimmer ist noch nicht bereit. Ihr Zimmer ist spätestens ab 15:00 bezugsbereit. Nach Rücksprache mit dem Restaurantpersonal können Sie Ihr Gepäck im Erdgeschoss abstellen. Aufgrund der begrenzten Räume in unserem historischen Gebäude können wir jedoch keine Haftung für aufbewahrtes Gepäck übernehmen. Weitere Informationen finden Sie unter der Schaltfläche „Gästeführer“.","unverifiedTitle":"Die Reservierung konnte nicht verifiziert werden","unverifiedText":"Mit den eingegebenen Angaben konnte keine Reservierung verifiziert werden. Bitte prüfen Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum.\n\nDieser Kiosk ist nicht zur Überprüfung zukünftiger Reservierungen bestimmt."},"sk":{"waitingTitle":"Vaša izba ešte nie je pripravená","waitingText":"Vaša izba ešte nie je pripravená. Ubytovanie je garantované najneskôr od 15:00. Po dohode s personálom reštaurácie si môžete nechať batožinu na prízemí. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť. Ďalšie informácie nájdete pod tlačidlom „Sprievodca pobytom“.","unverifiedTitle":"Rezerváciu sa nepodarilo overiť","unverifiedText":"Rezerváciu so zadanými údajmi sa nepodarilo overiť. Skontrolujte, prosím, meno uvedené na rezervácii a dátum príchodu aj odchodu.\n\nTento kiosk neslúži na kontrolu budúcich rezervácií."},"it":{"waitingTitle":"La vostra camera non è ancora pronta","waitingText":"La vostra camera non è ancora pronta. L’accesso alla camera è garantito entro le 15:00. Dopo aver parlato con il personale del ristorante, potete lasciare i bagagli al piano terra. A causa degli spazi limitati del nostro edificio storico, tuttavia, non possiamo assumerci la responsabilità per i bagagli depositati. Ulteriori informazioni sono disponibili sotto il pulsante “Guida al soggiorno”.","unverifiedTitle":"Non è stato possibile verificare la prenotazione","unverifiedText":"Non è stato possibile verificare una prenotazione con i dati inseriti. Controllate il nome indicato sulla prenotazione e le date di arrivo e partenza.\n\nQuesto chiosco non è destinato al controllo delle prenotazioni future."},"es":{"waitingTitle":"Su habitación todavía no está lista","waitingText":"Su habitación todavía no está lista. El acceso a la habitación está garantizado, como muy tarde, a partir de las 15:00. Tras consultarlo con el personal del restaurante, puede dejar su equipaje en la planta baja. Debido al espacio limitado de nuestro edificio histórico, no podemos asumir responsabilidad por el equipaje depositado. Encontrará más información en el botón “Guía de estancia”.","unverifiedTitle":"No se ha podido verificar la reserva","unverifiedText":"No se ha podido verificar una reserva con los datos introducidos. Compruebe el nombre que figura en la reserva y las fechas de llegada y salida.\n\nEste quiosco no está destinado a consultar reservas futuras."},"fr":{"waitingTitle":"Votre chambre n’est pas encore prête","waitingText":"Votre chambre n’est pas encore prête. L’accès à la chambre est garanti au plus tard à partir de 15:00. Après en avoir parlé au personnel du restaurant, vous pouvez laisser vos bagages au rez-de-chaussée. En raison de l’espace limité dans notre bâtiment historique, nous ne pouvons toutefois pas être responsables des bagages déposés. Vous trouverez plus d’informations sous le bouton « Guide du séjour ».","unverifiedTitle":"La réservation n’a pas pu être vérifiée","unverifiedText":"Aucune réservation n’a pu être vérifiée avec les informations saisies. Veuillez vérifier le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.\n\nCe kiosque n’est pas destiné à consulter les réservations futures."},"pl":{"waitingTitle":"Twój pokój nie jest jeszcze gotowy","waitingText":"Twój pokój nie jest jeszcze gotowy. Możliwość zameldowania jest gwarantowana najpóźniej od godziny 15:00. Po uzgodnieniu z personelem restauracji możesz zostawić bagaż na parterze. Ze względu na ograniczoną przestrzeń w naszym zabytkowym budynku nie możemy jednak przyjąć odpowiedzialności za pozostawiony bagaż. Więcej informacji znajdziesz pod przyciskiem „Przewodnik pobytu”.","unverifiedTitle":"Nie udało się zweryfikować rezerwacji","unverifiedText":"Nie udało się zweryfikować rezerwacji na podstawie podanych danych. Sprawdź imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.\n\nTen kiosk nie służy do sprawdzania przyszłych rezerwacji."},"ua":{"waitingTitle":"Ваш номер ще не готовий","waitingText":"Ваш номер ще не готовий. Заселення гарантоване не пізніше 15:00. Після узгодження з персоналом ресторану ви можете залишити багаж на першому поверсі. Через обмежений простір у нашій історичній будівлі ми не можемо нести відповідальність за залишений багаж. Додаткову інформацію ви знайдете під кнопкою «Путівник гостя».","unverifiedTitle":"Не вдалося перевірити бронювання","unverifiedText":"Не вдалося перевірити бронювання за введеними даними. Перевірте ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.\n\nЦей кіоск не призначений для перевірки майбутніх бронювань."},"tr":{"waitingTitle":"Odanız henüz hazır değil","waitingText":"Odanız henüz hazır değil. Odaya giriş en geç saat 15:00 itibarıyla garanti edilmektedir. Restoran personeliyle görüştükten sonra bagajınızı giriş katında bırakabilirsiniz. Tarihi binamızdaki sınırlı alan nedeniyle bırakılan bagajlardan sorumluluk kabul edemiyoruz. Daha fazla bilgiyi “Konaklama Rehberi” düğmesinde bulabilirsiniz.","unverifiedTitle":"Rezervasyon doğrulanamadı","unverifiedText":"Girilen bilgilerle bir rezervasyon doğrulanamadı. Lütfen rezervasyondaki adı ve giriş-çıkış tarihlerini kontrol edin.\n\nBu kiosk gelecekteki rezervasyonları kontrol etmek için kullanılmaz."},"da":{"waitingTitle":"Dit værelse er ikke klar endnu","waitingText":"Dit værelse er ikke klar endnu. Adgang til værelset er garanteret senest fra kl. 15:00. Efter aftale med restaurantens personale kan du efterlade din bagage i stueetagen. På grund af den begrænsede plads i vores historiske bygning kan vi dog ikke påtage os ansvar for opbevaret bagage. Du finder flere oplysninger under knappen “Opholdsguide”.","unverifiedTitle":"Reservationen kunne ikke bekræftes","unverifiedText":"Vi kunne ikke bekræfte en reservation med de indtastede oplysninger. Kontrollér navnet på reservationen samt ankomst- og afrejsedatoen.\n\nDenne kiosk er ikke beregnet til at kontrollere fremtidige reservationer."},"ja":{"waitingTitle":"お部屋はまだ準備中です","waitingText":"お部屋はまだ準備中です。チェックインは遅くとも15:00から保証されています。レストランスタッフにお声がけいただければ、1階にお荷物を置いていただけます。ただし、歴史的建物のため保管スペースが限られており、お預かりした荷物について責任を負うことはできません。詳しい情報は「ご滞在ガイド」ボタンをご覧ください。","unverifiedTitle":"予約を確認できませんでした","unverifiedText":"入力された情報では予約を確認できませんでした。予約名義のお名前と到着日・出発日をご確認ください。このキオスクは将来の予約を確認するためのものではありません。"},"he":{"waitingTitle":"החדר שלכם עדיין אינו מוכן","waitingText":"החדר שלכם עדיין אינו מוכן. הצ'ק-אין מובטח לכל המאוחר החל מהשעה 15:00. לאחר תיאום עם צוות המסעדה תוכלו להשאיר את המזוודות בקומת הכניסה. בשל המקום המוגבל בבניין ההיסטורי שלנו, איננו יכולים לקבל אחריות על מזוודות שהושארו. מידע נוסף נמצא תחת הכפתור „מדריך השהייה“.","unverifiedTitle":"לא ניתן היה לאמת את ההזמנה","unverifiedText":"לא ניתן היה לאמת הזמנה לפי הפרטים שהוזנו. אנא בדקו את השם המופיע בהזמנה ואת תאריכי ההגעה והעזיבה.\n\nקיוסק זה אינו מיועד לבדיקת הזמנות עתידיות."},"el":{"waitingTitle":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο","waitingText":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο. Η πρόσβαση στο δωμάτιο είναι εγγυημένη το αργότερο από τις 15:00. Μετά από συνεννόηση με το προσωπικό του εστιατορίου, μπορείτε να αφήσετε τις αποσκευές σας στο ισόγειο. Λόγω του περιορισμένου χώρου στο ιστορικό μας κτίριο, δεν μπορούμε να αναλάβουμε ευθύνη για αποθηκευμένες αποσκευές. Περισσότερες πληροφορίες θα βρείτε στο κουμπί «Οδηγός διαμονής».","unverifiedTitle":"Δεν ήταν δυνατή η επαλήθευση της κράτησης","unverifiedText":"Δεν ήταν δυνατή η επαλήθευση κράτησης με τα στοιχεία που εισαγάγατε. Ελέγξτε το όνομα της κράτησης καθώς και τις ημερομηνίες άφιξης και αναχώρησης.\n\nΑυτό το kiosk δεν προορίζεται για τον έλεγχο μελλοντικών κρατήσεων."}};
+        const selfCheckinStatusI18n = {"cs":{"waitingTitle":"Váš pokoj ještě není připraven","waitingText":"Váš pokoj ještě není připraven. Pokoj bude připraven nejpozději v 15:00. Po domluvě s personálem restaurace si můžete ponechat zavazadla v přízemí. Vzhledem k omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost. Další informace naleznete pod tlačítkem „Průvodce pobytem“.","unverifiedTitle":"Rezervaci se nepodařilo ověřit","unverifiedText":"Rezervaci se zadanými údaji se nepodařilo ověřit. Zkontrolujte prosím jméno uvedené na rezervaci a datum příjezdu i odjezdu.\n\nTento kiosk neslouží ke kontrole budoucích rezervací.","ambiguousTitle":"Bylo nalezeno více odpovídajících rezervací","ambiguousText":"Našli jsme více rezervací, které odpovídají zadaným údajům. Zadejte prosím úplnější jméno uvedené v rezervaci, například i prostřední jméno nebo část „von / de / van“. Tituly jako Dr. nebo Ph.D. uvádět nemusíte."},"en":{"waitingTitle":"Your room is not ready yet","waitingText":"Your room is not ready yet. Your room will be ready by 15:00 at the latest. After speaking with the restaurant staff, you may leave your luggage on the ground floor. Due to the limited space in our historic building, however, we cannot accept responsibility for stored luggage. More information is available under the “Welcome Guide” button.","unverifiedTitle":"We could not verify the reservation","unverifiedText":"We could not verify a reservation with the details entered. Please check the name shown on the reservation and both your arrival and departure dates.\n\nThis kiosk is not intended for checking future reservations.","ambiguousTitle":"More than one matching reservation was found","ambiguousText":"We found more than one reservation matching the details entered. Please enter a more complete version of the name shown on the reservation, for example including a middle name or a part such as “von / de / van”. Titles such as Dr. or Ph.D. are not required."},"de":{"waitingTitle":"Ihr Zimmer ist noch nicht bereit","waitingText":"Ihr Zimmer ist noch nicht bereit. Ihr Zimmer ist spätestens ab 15:00 bezugsbereit. Nach Rücksprache mit dem Restaurantpersonal können Sie Ihr Gepäck im Erdgeschoss abstellen. Aufgrund der begrenzten Räume in unserem historischen Gebäude können wir jedoch keine Haftung für aufbewahrtes Gepäck übernehmen. Weitere Informationen finden Sie unter der Schaltfläche „Gästeführer“.","unverifiedTitle":"Die Reservierung konnte nicht verifiziert werden","unverifiedText":"Mit den eingegebenen Angaben konnte keine Reservierung verifiziert werden. Bitte prüfen Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum.\n\nDieser Kiosk ist nicht zur Überprüfung zukünftiger Reservierungen bestimmt.","ambiguousTitle":"Mehrere passende Reservierungen wurden gefunden","ambiguousText":"Es wurden mehrere Reservierungen gefunden, die zu den eingegebenen Angaben passen. Bitte geben Sie den Namen aus der Reservierung vollständiger ein, zum Beispiel auch einen zweiten Vornamen oder einen Bestandteil wie „von / de / van“. Titel wie Dr. oder Ph.D. müssen nicht angegeben werden."},"sk":{"waitingTitle":"Vaša izba ešte nie je pripravená","waitingText":"Vaša izba ešte nie je pripravená. Ubytovanie je garantované najneskôr od 15:00. Po dohode s personálom reštaurácie si môžete nechať batožinu na prízemí. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť. Ďalšie informácie nájdete pod tlačidlom „Sprievodca pobytom“.","unverifiedTitle":"Rezerváciu sa nepodarilo overiť","unverifiedText":"Rezerváciu so zadanými údajmi sa nepodarilo overiť. Skontrolujte, prosím, meno uvedené na rezervácii a dátum príchodu aj odchodu.\n\nTento kiosk neslúži na kontrolu budúcich rezervácií.","ambiguousTitle":"Našlo sa viac zodpovedajúcich rezervácií","ambiguousText":"Našli sme viac rezervácií, ktoré zodpovedajú zadaným údajom. Zadajte, prosím, úplnejšie meno uvedené v rezervácii, napríklad aj prostredné meno alebo časť „von / de / van“. Tituly ako Dr. alebo Ph.D. uvádzať nemusíte."},"it":{"waitingTitle":"La vostra camera non è ancora pronta","waitingText":"La vostra camera non è ancora pronta. L’accesso alla camera è garantito entro le 15:00. Dopo aver parlato con il personale del ristorante, potete lasciare i bagagli al piano terra. A causa degli spazi limitati del nostro edificio storico, tuttavia, non possiamo assumerci la responsabilità per i bagagli depositati. Ulteriori informazioni sono disponibili sotto il pulsante “Guida al soggiorno”.","unverifiedTitle":"Non è stato possibile verificare la prenotazione","unverifiedText":"Non è stato possibile verificare una prenotazione con i dati inseriti. Controllate il nome indicato sulla prenotazione e le date di arrivo e partenza.\n\nQuesto chiosco non è destinato al controllo delle prenotazioni future.","ambiguousTitle":"Sono state trovate più prenotazioni corrispondenti","ambiguousText":"Abbiamo trovato più prenotazioni che corrispondono ai dati inseriti. Inserite il nome riportato nella prenotazione in modo più completo, ad esempio includendo anche un secondo nome o una parte come “von / de / van”. Non è necessario inserire titoli come Dr. o Ph.D."},"es":{"waitingTitle":"Su habitación todavía no está lista","waitingText":"Su habitación todavía no está lista. El acceso a la habitación está garantizado, como muy tarde, a partir de las 15:00. Tras consultarlo con el personal del restaurante, puede dejar su equipaje en la planta baja. Debido al espacio limitado de nuestro edificio histórico, no podemos asumir responsabilidad por el equipaje depositado. Encontrará más información en el botón “Guía de estancia”.","unverifiedTitle":"No se ha podido verificar la reserva","unverifiedText":"No se ha podido verificar una reserva con los datos introducidos. Compruebe el nombre que figura en la reserva y las fechas de llegada y salida.\n\nEste quiosco no está destinado a consultar reservas futuras.","ambiguousTitle":"Se encontraron varias reservas coincidentes","ambiguousText":"Hemos encontrado más de una reserva que coincide con los datos introducidos. Introduzca el nombre de la reserva de forma más completa, por ejemplo incluyendo un segundo nombre o una partícula como “von / de / van”. No es necesario introducir títulos como Dr. o Ph.D."},"fr":{"waitingTitle":"Votre chambre n’est pas encore prête","waitingText":"Votre chambre n’est pas encore prête. L’accès à la chambre est garanti au plus tard à partir de 15:00. Après en avoir parlé au personnel du restaurant, vous pouvez laisser vos bagages au rez-de-chaussée. En raison de l’espace limité dans notre bâtiment historique, nous ne pouvons toutefois pas être responsables des bagages déposés. Vous trouverez plus d’informations sous le bouton « Guide du séjour ».","unverifiedTitle":"La réservation n’a pas pu être vérifiée","unverifiedText":"Aucune réservation n’a pu être vérifiée avec les informations saisies. Veuillez vérifier le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.\n\nCe kiosque n’est pas destiné à consulter les réservations futures.","ambiguousTitle":"Plusieurs réservations correspondantes ont été trouvées","ambiguousText":"Plusieurs réservations correspondent aux informations saisies. Veuillez saisir le nom figurant sur la réservation de manière plus complète, par exemple avec un deuxième prénom ou une particule telle que « von / de / van ». Les titres comme Dr ou Ph.D. ne sont pas nécessaires."},"pl":{"waitingTitle":"Twój pokój nie jest jeszcze gotowy","waitingText":"Twój pokój nie jest jeszcze gotowy. Możliwość zameldowania jest gwarantowana najpóźniej od godziny 15:00. Po uzgodnieniu z personelem restauracji możesz zostawić bagaż na parterze. Ze względu na ograniczoną przestrzeń w naszym zabytkowym budynku nie możemy jednak przyjąć odpowiedzialności za pozostawiony bagaż. Więcej informacji znajdziesz pod przyciskiem „Przewodnik pobytu”.","unverifiedTitle":"Nie udało się zweryfikować rezerwacji","unverifiedText":"Nie udało się zweryfikować rezerwacji na podstawie podanych danych. Sprawdź imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.\n\nTen kiosk nie służy do sprawdzania przyszłych rezerwacji.","ambiguousTitle":"Znaleziono kilka pasujących rezerwacji","ambiguousText":"Znaleźliśmy więcej niż jedną rezerwację pasującą do podanych danych. Wpisz proszę pełniejsze imię i nazwisko z rezerwacji, na przykład także drugie imię lub człon „von / de / van”. Tytułów takich jak Dr. lub Ph.D. nie trzeba wpisywać."},"ua":{"waitingTitle":"Ваш номер ще не готовий","waitingText":"Ваш номер ще не готовий. Заселення гарантоване не пізніше 15:00. Після узгодження з персоналом ресторану ви можете залишити багаж на першому поверсі. Через обмежений простір у нашій історичній будівлі ми не можемо нести відповідальність за залишений багаж. Додаткову інформацію ви знайдете під кнопкою «Путівник гостя».","unverifiedTitle":"Не вдалося перевірити бронювання","unverifiedText":"Не вдалося перевірити бронювання за введеними даними. Перевірте ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.\n\nЦей кіоск не призначений для перевірки майбутніх бронювань.","ambiguousTitle":"Знайдено кілька відповідних бронювань","ambiguousText":"Ми знайшли більше одного бронювання, що відповідає введеним даним. Введіть, будь ласка, повніше ім’я з бронювання, наприклад також друге ім’я або частину «von / de / van». Титули на кшталт Dr. або Ph.D. вводити не потрібно."},"tr":{"waitingTitle":"Odanız henüz hazır değil","waitingText":"Odanız henüz hazır değil. Odaya giriş en geç saat 15:00 itibarıyla garanti edilmektedir. Restoran personeliyle görüştükten sonra bagajınızı giriş katında bırakabilirsiniz. Tarihi binamızdaki sınırlı alan nedeniyle bırakılan bagajlardan sorumluluk kabul edemiyoruz. Daha fazla bilgiyi “Konaklama Rehberi” düğmesinde bulabilirsiniz.","unverifiedTitle":"Rezervasyon doğrulanamadı","unverifiedText":"Girilen bilgilerle bir rezervasyon doğrulanamadı. Lütfen rezervasyondaki adı ve giriş-çıkış tarihlerini kontrol edin.\n\nBu kiosk gelecekteki rezervasyonları kontrol etmek için kullanılmaz.","ambiguousTitle":"Birden fazla eşleşen rezervasyon bulundu","ambiguousText":"Girilen bilgilerle eşleşen birden fazla rezervasyon bulundu. Lütfen rezervasyonda yer alan adı daha eksiksiz girin; örneğin ikinci ad veya “von / de / van” gibi bir bölüm varsa ekleyin. Dr. veya Ph.D. gibi unvanları yazmanız gerekmez."},"da":{"waitingTitle":"Dit værelse er ikke klar endnu","waitingText":"Dit værelse er ikke klar endnu. Adgang til værelset er garanteret senest fra kl. 15:00. Efter aftale med restaurantens personale kan du efterlade din bagage i stueetagen. På grund af den begrænsede plads i vores historiske bygning kan vi dog ikke påtage os ansvar for opbevaret bagage. Du finder flere oplysninger under knappen “Opholdsguide”.","unverifiedTitle":"Reservationen kunne ikke bekræftes","unverifiedText":"Vi kunne ikke bekræfte en reservation med de indtastede oplysninger. Kontrollér navnet på reservationen samt ankomst- og afrejsedatoen.\n\nDenne kiosk er ikke beregnet til at kontrollere fremtidige reservationer.","ambiguousTitle":"Der blev fundet flere matchende reservationer","ambiguousText":"Vi fandt mere end én reservation, der matcher de indtastede oplysninger. Indtast venligst navnet fra reservationen mere fuldstændigt, f.eks. også et mellemnavn eller en del som “von / de / van”. Titler som Dr. eller Ph.D. er ikke nødvendige."},"ja":{"waitingTitle":"お部屋はまだ準備中です","waitingText":"お部屋はまだ準備中です。チェックインは遅くとも15:00から保証されています。レストランスタッフにお声がけいただければ、1階にお荷物を置いていただけます。ただし、歴史的建物のため保管スペースが限られており、お預かりした荷物について責任を負うことはできません。詳しい情報は「ご滞在ガイド」ボタンをご覧ください。","unverifiedTitle":"予約を確認できませんでした","unverifiedText":"入力された情報では予約を確認できませんでした。予約名義のお名前と到着日・出発日をご確認ください。このキオスクは将来の予約を確認するためのものではありません。","ambiguousTitle":"一致する予約が複数見つかりました","ambiguousText":"入力された情報に一致する予約が複数見つかりました。予約に記載されているお名前を、ミドルネームや「von / de / van」などの部分も含めて、より詳しく入力してください。Dr. や Ph.D. などの肩書きは入力不要です。"},"he":{"waitingTitle":"החדר שלכם עדיין אינו מוכן","waitingText":"החדר שלכם עדיין אינו מוכן. הצ'ק-אין מובטח לכל המאוחר החל מהשעה 15:00. לאחר תיאום עם צוות המסעדה תוכלו להשאיר את המזוודות בקומת הכניסה. בשל המקום המוגבל בבניין ההיסטורי שלנו, איננו יכולים לקבל אחריות על מזוודות שהושארו. מידע נוסף נמצא תחת הכפתור „מדריך השהייה“.","unverifiedTitle":"לא ניתן היה לאמת את ההזמנה","unverifiedText":"לא ניתן היה לאמת הזמנה לפי הפרטים שהוזנו. אנא בדקו את השם המופיע בהזמנה ואת תאריכי ההגעה והעזיבה.\n\nקיוסק זה אינו מיועד לבדיקת הזמנות עתידיות.","ambiguousTitle":"נמצאו כמה הזמנות תואמות","ambiguousText":"נמצאה יותר מהזמנה אחת התואמת לפרטים שהוזנו. אנא הזינו את השם המופיע בהזמנה בצורה מלאה יותר, למשל גם שם אמצעי או חלק כגון „von / de / van“. אין צורך להזין תארים כגון Dr. או Ph.D."},"el":{"waitingTitle":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο","waitingText":"Το δωμάτιό σας δεν είναι ακόμη έτοιμο. Η πρόσβαση στο δωμάτιο είναι εγγυημένη το αργότερο από τις 15:00. Μετά από συνεννόηση με το προσωπικό του εστιατορίου, μπορείτε να αφήσετε τις αποσκευές σας στο ισόγειο. Λόγω του περιορισμένου χώρου στο ιστορικό μας κτίριο, δεν μπορούμε να αναλάβουμε ευθύνη για αποθηκευμένες αποσκευές. Περισσότερες πληροφορίες θα βρείτε στο κουμπί «Οδηγός διαμονής».","unverifiedTitle":"Δεν ήταν δυνατή η επαλήθευση της κράτησης","unverifiedText":"Δεν ήταν δυνατή η επαλήθευση κράτησης με τα στοιχεία που εισαγάγατε. Ελέγξτε το όνομα της κράτησης καθώς και τις ημερομηνίες άφιξης και αναχώρησης.\n\nΑυτό το kiosk δεν προορίζεται για τον έλεγχο μελλοντικών κρατήσεων.","ambiguousTitle":"Βρέθηκαν περισσότερες από μία αντίστοιχες κρατήσεις","ambiguousText":"Βρέθηκαν περισσότερες από μία κρατήσεις που αντιστοιχούν στα στοιχεία που εισαγάγατε. Παρακαλούμε εισαγάγετε πιο πλήρες το όνομα της κράτησης, για παράδειγμα και δεύτερο όνομα ή μέρος όπως «von / de / van». Τίτλοι όπως Dr. ή Ph.D. δεν χρειάζεται να αναγράφονται."}};
 
         const checkoutThanksI18n = {
             cs: "Vše vyřízeno. Děkujeme za pobyt a přejeme šťastnou cestu.",
@@ -5396,6 +5700,7 @@
                 pkWelcomeTitle: "Možnosti parkování",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran.<br><br>Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span>",
                 pkQrText: "Naskenujte QR kód pro otevření webové stránky.",
+                pkPhotoZoomHint: "Klepněte na obrázek pro zvětšení.",
                 pkOpt1Title: "Hlídané podzemní garáže",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodin (aktuální cenu si zkontrolujte na webových stránkách)<br><strong>Výška vozidla:</strong> max. 2 metry<br><strong>Platba:</strong> Kartou nebo hotovostí v automatu<br><strong>Důležité:</strong> Zákaz vjezdu pro vozidla na LPG a CNG<br><strong>Vzdálenost zpět k hotelu:</strong> 10 minut chůze přes Mánesův most<br><strong>Značka:</strong> Zlatá střední cesta. Možnost zarezervovat si místo a zaplatit předem přes webové stránky.",
                 pkOpt2Title: "Nehlídané venkovní parkoviště",
@@ -5450,6 +5755,7 @@
                 pkWelcomeTitle: "Možnosti parkovania",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Vzhľadom na umiestnenie v historickom centre Prahy hotel nemá vlastné parkovisko. Táto informácia je uvedená aj na našich webových stránkach vrátane všetkých profilov tretích strán.<br><br>Pred hotelom však môžete na niekoľko minút zastaviť za účelom vyloženia alebo naloženia batožiny.</span>",
                 pkQrText: "Naskenujte QR kód a otvorte webovú stránku.",
+                pkPhotoZoomHint: "Klepnite na obrázok pre zväčšenie.",
                 pkOpt1Title: "Strážené podzemné garáže",
                 pkOpt1Text: "<strong>www.oldtownparking.cz</strong><br><strong>Adresa:</strong> Alšovo nábrežie, 110 00<br><strong>Cena:</strong> 750 Kč za 11–24 hodín (aktuálnu cenu si skontrolujte na webovej stránke)<br><strong>Výška vozidla:</strong> max. 2 metre<br><strong>Platba:</strong> Kartou alebo v hotovosti v automate<br><strong>Dôležité:</strong> Zákaz vjazdu pre vozidlá na LPG a CNG<br><strong>Vzdialenosť späť k hotelu:</strong> 10 minút chôdze cez Mánesov most<br><strong>Označenie:</strong> Zlatá stredná cesta. Miesto je možné rezervovať a zaplatiť vopred cez webovú stránku.",
                 pkOpt2Title: "Nestrážené vonkajšie parkovisko",
@@ -5506,6 +5812,7 @@
                 pkWelcomeTitle: "Parking Options",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Due to our location in Prague's historic city center, the hotel does not have private parking. This information is also mentioned on our websites, including all third-party profiles.<br><br>You may, however, stop in front of the hotel for a few minutes to unload or load your luggage.</span>",
                 pkQrText: "Scan the QR code to open the website.",
+                pkPhotoZoomHint: "Tap the image to enlarge.",
                 pkOpt1Title: "Guarded Underground Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Address:</strong> Alšovo nábřeží, 110 00<br><strong>Price:</strong> 750 CZK for 11–24 hours (check current price on website)<br><strong>Vehicle Height:</strong> max. 2 meters<br><strong>Payment:</strong> Card or cash at automated machine<br><strong>Important:</strong> No entry for LPG / CNG vehicles<br><strong>Distance to hotel:</strong> 10-minute walk via Mánes Bridge<br><strong>Note:</strong> Great balance of price and safety. Advance booking and payment available online.",
                 pkOpt2Title: "Unguarded Outdoor Parking",
@@ -5562,6 +5869,7 @@
                 pkWelcomeTitle: "Parkmöglichkeiten",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Aufgrund unserer Lage im historischen Zentrum von Prag verfügt das Hotel über keinen eigenen Parkplatz. Diese Information ist auch auf unseren Websites einschließlich aller Drittanbieterprofile angegeben.<br><br>Sie können jedoch für einige Minuten vor dem Hotel halten, um Ihr Gepäck aus- oder einzuladen.</span>",
                 pkQrText: "Scannen Sie den QR-Code, um die Website zu öffnen.",
+                pkPhotoZoomHint: "Tippen Sie auf das Bild zum Vergrößern.",
                 pkOpt1Title: "Bewachte Tiefgarage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Preis:</strong> 750 CZK für 11–24 Std. (Preise online prüfen)<br><strong>Fahrzeughöhe:</strong> max. 2 Meter<br><strong>Zahlung:</strong> Karte oder Bar am Automaten<br><strong>Wichtig:</strong> Keine Einfahrt für LPG/CNG Fahrzeuge<br><strong>Entfernung zum Hotel:</strong> 10 Minuten zu Fuß über die Mánes-Brücke<br><strong>Hinweis:</strong> Goldene Mitte. Online-Reservierung und Vorabzahlung möglich.",
                 pkOpt2Title: "Unbewachter Außenparkplatz",
@@ -5618,6 +5926,7 @@
                 pkWelcomeTitle: "Opzioni di Parcheggio",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">A causa della nostra posizione nel centro storico di Praga, l'hotel non dispone di un parcheggio privato. Questa informazione è riportata anche sui nostri siti web, inclusi tutti i profili di terze parti.<br><br>È tuttavia possibile fermarsi per alcuni minuti davanti all'hotel per scaricare o caricare i bagagli.</span>",
                 pkQrText: "Scansiona il codice QR per aprire il sito web.",
+                pkPhotoZoomHint: "Tocca l'immagine per ingrandirla.",
                 pkOpt1Title: "Garage Sotterraneo Custodito",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Indirizzo:</strong> Alšovo nábřeží, 110 00<br><strong>Prezzo:</strong> 750 CZK per 11–24 ore (verifica prezzo sul sito)<br><strong>Altezza veicolo:</strong> max. 2 metri<br><strong>Pagamento:</strong> Carta o contanti alla cassa automatica<br><strong>Importante:</strong> Divieto di ingresso per veicoli GPL / Metano<br><strong>Distanza dall'hotel:</strong> 10 minuti a piedi attraverso il Ponte Mánes<br><strong>Nota:</strong> Ottimo rapporto qualità/prezzo. Prenotazione e pagamento online.",
                 pkOpt2Title: "Parcheggio Esterno Non Custodito",
@@ -5674,6 +5983,7 @@
                 pkWelcomeTitle: "Opciones de Aparcamiento",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Debido a nuestra ubicación en el centro histórico de Praga, el hotel no dispone de aparcamiento privado. Esta información también aparece en nuestros sitios web, incluidos todos los perfiles de terceros.<br><br>No obstante, puede detenerse unos minutos frente al hotel para descargar o cargar su equipaje.</span>",
                 pkQrText: "Escanee el código QR para abrir el sitio web.",
+                pkPhotoZoomHint: "Toque la imagen para ampliarla.",
                 pkOpt1Title: "Garaje Subterráneo Vigilado",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Dirección:</strong> Alšovo nábřeží, 110 00<br><strong>Precio:</strong> 750 CZK por 11–24 horas (consultar precio en web)<br><strong>Altura de vehículo:</strong> máx. 2 metros<br><strong>Pago:</strong> Tarjeta o efectivo en cajero automático<br><strong>Importante:</strong> Prohibida la entrada a vehículos GLP / GNC<br><strong>Distancia al hotel:</strong> 10 minutos a pie por el puente Mánes<br><strong>Nota:</strong> Opción muy equilibrada. Reserva y pago previo en la web.",
                 pkOpt2Title: "Aparcamiento Exterior No Vigilado",
@@ -5730,6 +6040,7 @@
                 pkWelcomeTitle: "Options de Stationnement",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">En raison de notre emplacement dans le centre historique de Prague, l'hôtel ne dispose pas de parking privé. Cette information figure également sur nos sites web, y compris sur tous les profils de tiers.<br><br>Vous pouvez toutefois vous arrêter quelques minutes devant l'hôtel pour décharger ou charger vos bagages.</span>",
                 pkQrText: "Scannez le code QR pour ouvrir le site web.",
+                pkPhotoZoomHint: "Touchez l’image pour l’agrandir.",
                 pkOpt1Title: "Parking Souterrain Sécurisé",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse :</strong> Alšovo nábřeží, 110 00<br><strong>Prix :</strong> 750 CZK pour 11–24h (vérifier les prix sur le site)<br><strong>Hauteur max :</strong> 2 mètres<br><strong>Paiement :</strong> Carte ou espèces au borner automatique<br><strong>Important :</strong> Interdit aux véhicules GPL / GNC<br><strong>Distance de l'hôtel :</strong> 10 min à pied via le pont Mánes<br><strong>Note :</strong> Excellent compromis. Réservation et paiement en ligne.",
                 pkOpt2Title: "Parking Extérieur Non Surveillé",
@@ -5786,6 +6097,7 @@
                 pkWelcomeTitle: "Opcje Parkowania",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Ze względu na położenie w zabytkowym centrum Pragi hotel nie posiada własnego parkingu. Informacja ta znajduje się również na naszych stronach internetowych, w tym na wszystkich profilach stron trzecich.<br><br>Można jednak zatrzymać się na kilka minut przed hotelem, aby rozładować lub załadować bagaż.</span>",
                 pkQrText: "Zeskanuj kod QR, aby otworzyć stronę internetową.",
+                pkPhotoZoomHint: "Dotknij obrazu, aby go powiększyć.",
                 pkOpt1Title: "Strzeżony Garaż Podziemny",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Cena:</strong> 750 CZK za 11–24 godz. (sprawdź aktualne ceny na stronie)<br><strong>Wysokość pojazdu:</strong> max. 2 metry<br><strong>Płatność:</strong> Kartą lub gotówką w automacie<br><strong>Ważne:</strong> Zakaz wjazdu dla pojazdów LPG / CNG<br><strong>Odległość do hotelu:</strong> 10 minut pieszo przez Most Mánesa<br><strong>Wskazówka:</strong> Złoty środek. Možliwość rezerwacji i płatności online.",
                 pkOpt2Title: "Niestrzeżony Parking Zewnętrzny",
@@ -5842,6 +6154,7 @@
                 pkWelcomeTitle: "Варіанти паркування",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Через розташування в історичному центрі Праги готель не має власної парковки. Ця інформація також зазначена на наших вебсайтах, включно з усіма профілями третіх сторін.<br><br>Однак перед готелем можна на кілька хвилин зупинитися, щоб висадити або завантажити багаж.</span>",
                 pkQrText: "Відскануйте QR-код, щоб відкрити вебсайт.",
+                pkPhotoZoomHint: "Торкніться зображення, щоб збільшити.",
                 pkOpt1Title: "Підземний гараж під охороною",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Адреса:</strong> Alšovo nábřeží, 110 00<br><strong>Ціна:</strong> 750 CZK за 11–24 год (перевіряйте актуальну ціну на сайті)<br><strong>Висота авто:</strong> макс. 2 метри<br><strong>Оплата:</strong> Карткою або готівкою в автоматі<br><strong>Важливо:</strong> Заборонено в'їзд для авто на LPG / CNG<br><strong>Відстань до готелю:</strong> 10 хвилин пішки через міст Манеса<br><strong>Примітка:</strong> Золота середина. Можливість бронювання та оплати онлайн.",
                 pkOpt2Title: "Відкритий паркінг без охорони",
@@ -5898,6 +6211,7 @@
                 pkWelcomeTitle: "Otopark Seçenekleri",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Prag'ın tarihi merkezindeki konumumuz nedeniyle otelin özel otoparkı yoktur. Bu bilgi web sitelerimizde ve tüm üçüncü taraf profillerinde de yer almaktadır.<br><br>Ancak bagajınızı indirip yüklemek için otelin önünde birkaç dakikalığına durabilirsiniz.</span>",
                 pkQrText: "Web sitesini açmak için QR kodunu tarayın.",
+                pkPhotoZoomHint: "Büyütmek için görsele dokunun.",
                 pkOpt1Title: "Güvenlikli Kapalı Yeraltı Otoparkı",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adres:</strong> Alšovo nábřeží, 110 00<br><strong>Fiyat:</strong> 11–24 saat için 750 CZK (güncel fiyatı web sitesinden kontrol edin)<br><strong>Araç Yüksekliği:</strong> maks. 2 metre<br><strong>Ödeme:</strong> Otomatta kart veya nakit<br><strong>Önemli:</strong> LPG ve CNG'li araçlar giremez<br><strong>Otele Dönüş Mesafesi:</strong> Mánes Köprüsü üzerinden yürüyerek 10 dakika<br><strong>Not:</strong> İdeal seçim. Web sitesinden önceden rezerve edilebilir ve ödenebilir.",
                 pkOpt2Title: "Güvenliksiz Açık Otopark",
@@ -5954,6 +6268,7 @@
                 pkWelcomeTitle: "Parkeringsmuligheder",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">På grund af vores beliggenhed i Prags historiske centrum har hotellet ingen egen parkering. Denne information findes også på vores hjemmesider, herunder alle tredjepartsprofiler.<br><br>Du kan dog holde foran hotellet i et par minutter for at læsse bagage af eller på.</span>",
                 pkQrText: "Scan QR-koden for at åbne hjemmesiden.",
+                pkPhotoZoomHint: "Tryk på billedet for at forstørre.",
                 pkOpt1Title: "Overvåget Underjordisk Garage",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Adresse:</strong> Alšovo nábřeží, 110 00<br><strong>Pris:</strong> 750 CZK for 11–24 timer (tjek aktuel pris på hjemmesiden)<br><strong>Køretøjshøjde:</strong> max. 2 meter<br><strong>Betaling:</strong> Kort eller kontanter i automaten<br><strong>Vigtigt:</strong> Ingen adgang for LPG / CNG køretøjer<br><strong>Afstand til hotel:</strong> 10 minutters gang over Mánes-broen<br><strong>Bemærkning:</strong> Den gyldne middelvej. Kan reserveres og betales på forhånd online.",
                 pkOpt2Title: "Uovervåget Udendørs Parkering",
@@ -6010,6 +6325,7 @@
                 pkWelcomeTitle: "駐車場のご案内",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">プラハの歴史地区に位置しているため、ホテルには専用駐車場がありません。この情報は、第三者のすべてのプロフィールを含む当ホテルのウェブサイトにも掲載されています。<br><br>ただし、荷物の積み下ろしのためにホテル前に数分間停車することは可能です。</span>",
                 pkQrText: "QRコードをスキャンしてウェブサイトを開いてください。",
+                pkPhotoZoomHint: "画像をタップして拡大。",
                 pkOpt1Title: "監視付き地下駐車場",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>住所:</strong> Alšovo nábřeží, 110 00<br><strong>料金:</strong> 11〜24時間で750 CZK（最新料金はWebサイトでご確認ください）<br><strong>車両制限:</strong> 高さ最大2メートル<br><strong>支払い:</strong> 精算機にてカードまたは現金<br><strong>重要:</strong> LPG / CNG車は入場不可<br><strong>ホテルまでの距離:</strong> マーネス橋経由で徒歩10分<br><strong>特徴:</strong> 一番おすすめの駐車場。Webサイトから事前予約・事前決済が可能です。",
                 pkOpt2Title: "屋屋外駐車場（監視なし）",
@@ -6066,6 +6382,7 @@
                 pkWelcomeTitle: "אפשרויות חנייה",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">בשל מיקומנו במרכז ההיסטורי של פראג, למלון אין חניה פרטית. מידע זה מופיע גם באתרי האינטרנט שלנו, כולל בכל הפרופילים של צדדים שלישיים.<br><br>עם זאת, ניתן לעצור למספר דקות מול המלון כדי לפרוק או להעמיס את המזוודות.</span>",
                 pkQrText: "סרקו את קוד ה-QR כדי לפתוח את אתר האינטרנט.",
+                pkPhotoZoomHint: "הקישו על התמונה כדי להגדיל.",
                 pkOpt1Title: "חניון תת-קרקעי שמור",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>כתובת:</strong> Alšovo nábřeží, 110 00<br><strong>מחיר:</strong> 750 CZK ל-11–24 שעות (בדקו מחיר עדכני באתר)<br><strong>גובה רכב:</strong> מקסימום 2 מטרים<br><strong>תשלום:</strong> בכרטיס או במזומן במכונה<br><strong>חשוב:</strong> איסור כניסה לרכבי גז (LPG / CNG)<br><strong>מרחק בחזרה למלון:</strong> 10 דקות הליכה דרך גשר Mánes<br><strong>הערה:</strong> השילוב המנצח. ניתן להזמין מקום ולשלם מראש באתר.",
                 pkOpt2Title: "חניון חיצוני לא שמור",
@@ -6122,6 +6439,7 @@
                 pkWelcomeTitle: "Επιλογές Στάθμευσης",
                 pkWelcomeSubtitle: "<span class=\"parking-main-highlight\">Λόγω της τοποθεσίας μας στο ιστορικό κέντρο της Πράγας, το ξενοδοχείο δεν διαθέτει ιδιωτικό χώρο στάθμευσης. Η πληροφορία הזו αναφέρεται גם στις ιστοσελίδες μας, συμπεριλαμβανομένων όλων των προφίλ τρίτων.<br><br>Ωστόσο, μπορείτε να σταματήσετε για λίγα λεπτά μπροστά από το ξενοδοχείο για να ξεφορτώσετε ή να φορτώσετε τις αποσκευές σας.</span>",
                 pkQrText: "Σαρώστε τον κωδικό QR για να ανοίξετε τον ιστότοπο.",
+                pkPhotoZoomHint: "Πατήστε την εικόνα για μεγέθυνση.",
                 pkOpt1Title: "Φυλασσόμενο Υπόγειο Γκαράζ",
                 pkOpt1Text: "<strong>www.oldtownparking.cz/en/</strong><br><strong>Διεύθυνση:</strong> Alšovo nábřeží, 110 00<br><strong>Τιμή:</strong> 750 CZK για 11–24 ώρες (ελέγξτε τις τρέχουσες τιμές στον ιστότοπο)<br><strong>Ύψος οχήματος:</strong> μέγιστο 2 μέτρα<br><strong>Πληρωμή:</strong> Με κάρτα ή μετρητά στο μηχάνημα<br><strong>Σημαντικό:</strong> Απαγορεύεται η είσοδος σε οχήματα LPG / CNG<br><strong>Απόσταση επιστροφής στο ξενοδοχείο:</strong> 10 λεπτά με τα πόδια μέσω της γέφυρας Mánes<br><strong>Σημείωση:</strong> Η χρυσή τομή. Δυνατότητα κράτησης και προπληρωμής online.",
                 pkOpt2Title: "Μη Φυλασσόμενος Εξωτερικός Χώρος Στάθμευσης",
@@ -6428,6 +6746,80 @@
             startAutoResetTimer();
         }
 
+
+
+        function prepareParkingPhotoZoom(root) {
+            const scope = root || document;
+            const dict = i18n[currentLang] || i18n.en;
+            const hintText = dict.pkPhotoZoomHint || i18n.en.pkPhotoZoomHint || 'Tap the image to enlarge.';
+            scope.querySelectorAll('.parking-photo').forEach(img => {
+                img.setAttribute('role', 'button');
+                img.setAttribute('tabindex', '0');
+                img.setAttribute('aria-label', (img.alt || 'Parking') + ' – ' + hintText);
+
+                const wrap = img.closest('.parking-photo-wrap');
+                if (!wrap) return;
+                let hint = wrap.querySelector('.parking-photo-zoom-hint');
+                if (!hint) {
+                    hint = document.createElement('div');
+                    hint.className = 'parking-photo-zoom-hint';
+                    wrap.appendChild(hint);
+                }
+                hint.textContent = hintText;
+            });
+        }
+
+        function openParkingPhotoZoom(img) {
+            if (!img || !img.src) return;
+            const modal = document.getElementById('parking-photo-modal');
+            const modalImage = document.getElementById('parking-photo-modal-image');
+            if (!modal || !modalImage) return;
+            modalImage.src = img.src;
+            modalImage.alt = img.alt || 'Zvětšený obrázek parkování';
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('parking-photo-modal-open');
+            const ok = modal.querySelector('.parking-photo-modal-ok');
+            if (ok) setTimeout(() => ok.focus(), 0);
+            startAutoResetTimer();
+        }
+
+        function closeParkingPhotoZoom() {
+            const modal = document.getElementById('parking-photo-modal');
+            const modalImage = document.getElementById('parking-photo-modal-image');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('parking-photo-modal-open');
+            if (modalImage) modalImage.removeAttribute('src');
+            startAutoResetTimer();
+        }
+
+        document.addEventListener('click', event => {
+            const photo = event.target && event.target.closest ? event.target.closest('.parking-photo') : null;
+            if (photo) {
+                event.preventDefault();
+                openParkingPhotoZoom(photo);
+                return;
+            }
+            if (event.target && event.target.id === 'parking-photo-modal') {
+                closeParkingPhotoZoom();
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            const modal = document.getElementById('parking-photo-modal');
+            if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                closeParkingPhotoZoom();
+                return;
+            }
+            const target = event.target;
+            if ((event.key === 'Enter' || event.key === ' ') && target && target.classList && target.classList.contains('parking-photo')) {
+                event.preventDefault();
+                openParkingPhotoZoom(target);
+            }
+        });
+
         function refreshSelfCheckinParkingPanel() {
             const source = document.getElementById('screen-parking');
             const target = document.getElementById('sci-parking-content');
@@ -6446,6 +6838,26 @@
                 clone.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
                 target.appendChild(clone);
             });
+
+            /* In the compact Check-in tab, keep photo + QR together in one
+               right-hand visual column. This prevents the QR from falling to
+               the bottom of the card and keeps long text clear of the image. */
+            target.querySelectorAll('.info-item').forEach((item, index) => {
+                item.classList.add('parking-option-' + (index + 1));
+                const row = item.querySelector('.parking-content-row');
+                if (!row) return;
+                const photoWrap = row.querySelector('.parking-photo-wrap');
+                const qr = row.querySelector('.parking-qr-option');
+                if (!photoWrap && !qr) return;
+
+                const stack = document.createElement('div');
+                stack.className = 'parking-visual-stack';
+                if (photoWrap) stack.appendChild(photoWrap);
+                if (qr) stack.appendChild(qr);
+                row.appendChild(stack);
+            });
+
+            prepareParkingPhotoZoom(target);
         }
 
         function showSelfCheckinPanel(panel) {
@@ -6677,6 +7089,23 @@
             el: { readyTitle:"Το δωμάτιό σας είναι έτοιμο.", readyTitleMany:"Τα δωμάτιά σας είναι έτοιμα.", readyText:"Παρακαλούμε συμπληρώστε τα πρόσθετα στοιχεία εγγραφής.", reservationName:"Όνομα στην κράτηση", arrival:"Ημερομηνία άφιξης", departure:"Ημερομηνία αναχώρησης", regTitle:"Στοιχεία εγγραφής", different:"Αν στο δωμάτιο μένει άλλο άτομο από αυτό της κράτησης, επιλέξτε το πλαίσιο.", guestName:"Όνομα φιλοξενούμενου", birth:"Ημερομηνία γέννησης", nationality:"Υπηκοότητα", nationalityChoose:"Επιλέξτε υπηκοότητα", day:"Ημέρα", month:"Μήνας", year:"Έτος", docType:"Τύπος εγγράφου", docNumber:"Αριθμός εγγράφου", docWarning:"Η άδεια οδήγησης δεν είναι έγκυρο έγγραφο.", passport:"Διαβατήριο", idCard:"Ταυτότητα", other:"Κάρτα διαμονής", visa:"Η βίζα είναι άδεια παραμονής σε μια χώρα. Αν έχετε βίζα, επιλέξτε αυτό το πλαίσιο. Αν έχετε κάρτα διαμονής, μην συμπληρώσετε την ενότητα της βίζας.", visaBadge:"ΒΙΖΑ", visaNumber:"Αριθμός βίζας", visaValidFrom:"Βίζα σε ισχύ από", visaValidTo:"Βίζα σε ισχύ έως", policeNotice:"Τα στοιχεία των επισκεπτών από αυτή τη φόρμα διαβιβάζονται στην Τσεχική Αστυνομία όπως απαιτεί ο νόμος.", signatureTitle:"Υπογραφή επισκέπτη", signatureText:"Παρακαλούμε υπογράψτε με το δάχτυλό σας στο παρακάτω πεδίο.", signatureClear:"ΔΙΑΓΡΑΦΗ ΥΠΟΓΡΑΦΗΣ", termsBefore:"Με την υπογραφή σας αποδέχεστε τους ", termsLink:"όρους", termsAfter:".", termsBody:"Με την υπογραφή της παρούσας φόρμας, ο επισκέπτης επιβεβαιώνει ότι τα στοιχεία που παρείχε είναι ακριβή και αποδέχεται τον κανονισμό διαμονής, αναλαμβάνει την ευθύνη για τυχόν ζημιές στην περιουσία του ξενοδοχείου, συναινεί στην επεξεργασία προσωπικών δεδομένων για νόμιμους σκοπούς, αναγνωρίζει ότι το ξενοδοχείο δεν φέρει καμία ευθύνη για αποσκευές που φυλάσσονται στο ισόγειο και συμφωνεί να καταβάλει το κόστος όλων των υπηρεσιών που χρησιμοποίησε.", back:"ΠΙΣΩ", confirm:"ΕΠΙΒΕΒΑΙΩΣΗ", fill:"Συμπληρώστε όλα τα ορατά πεδία εγγραφής και προσθέστε την υπογραφή σας." }
         };
 
+        const registrationAddressI18n = {
+            cs:{street:"Ulice a číslo",city:"Město",country:"Země bydliště",auto:"Země bude doplněna automaticky podle města.",checking:"Ověřuji adresu…",verified:"Země doplněna podle města.",manual:"Vyberte zemi bydliště",change:"Změnit",failed:"Zemi se nepodařilo spolehlivě určit. Vyberte ji prosím ručně.",need:"Vyplňte ulici a město.",recommended:"Doporučeno",europe:"Evropa",asia:"Asie",africa:"Afrika",northAmerica:"Severní Amerika",southAmerica:"Jižní Amerika",oceania:"Oceánie",other:"Ostatní"},
+            sk:{street:"Ulica a číslo",city:"Mesto",country:"Krajina bydliska",auto:"Krajina sa doplní automaticky podľa adresy.",checking:"Overujem adresu…",verified:"Krajina doplnená podľa adresy.",manual:"Vyberte krajinu bydliska",change:"Zmeniť",failed:"Krajinu sa nepodarilo spoľahlivo určiť. Vyberte ju ručne.",need:"Vyplňte ulicu a mesto.",recommended:"Odporúčané",europe:"Európa",asia:"Ázia",africa:"Afrika",northAmerica:"Severná Amerika",southAmerica:"Južná Amerika",oceania:"Oceánia",other:"Ostatné"},
+            en:{street:"Street and number",city:"City",country:"Country of residence",auto:"The country will be filled in automatically from the city.",checking:"Checking address…",verified:"Country filled in from the city.",manual:"Select country of residence",change:"Change",failed:"The country could not be determined reliably. Please select it manually.",need:"Please enter the street and city.",recommended:"Recommended",europe:"Europe",asia:"Asia",africa:"Africa",northAmerica:"North America",southAmerica:"South America",oceania:"Oceania",other:"Other"},
+            de:{street:"Straße und Hausnummer",city:"Stadt",country:"Wohnsitzland",auto:"Das Land wird automatisch anhand der Stadt ergänzt.",checking:"Adresse wird geprüft…",verified:"Land anhand der Stadt ergänzt.",manual:"Wohnsitzland auswählen",change:"Ändern",failed:"Das Land konnte nicht zuverlässig ermittelt werden. Bitte wählen Sie es manuell aus.",need:"Bitte Straße und Stadt eingeben.",recommended:"Empfohlen",europe:"Europa",asia:"Asien",africa:"Afrika",northAmerica:"Nordamerika",southAmerica:"Südamerika",oceania:"Ozeanien",other:"Andere"},
+            it:{street:"Via e numero civico",city:"Città",country:"Paese di residenza",auto:"Il Paese verrà compilato automaticamente dalla città.",checking:"Verifica dell'indirizzo…",verified:"Paese compilato dalla città.",manual:"Seleziona il Paese di residenza",change:"Modifica",failed:"Non è stato possibile determinare il Paese con certezza. Selezionalo manualmente.",need:"Inserisci via e città.",recommended:"Consigliati",europe:"Europa",asia:"Asia",africa:"Africa",northAmerica:"Nord America",southAmerica:"Sud America",oceania:"Oceania",other:"Altro"},
+            es:{street:"Calle y número",city:"Ciudad",country:"País de residencia",auto:"El país se completará automáticamente a partir de la ciudad.",checking:"Comprobando la dirección…",verified:"País completado a partir de la ciudad.",manual:"Seleccione el país de residencia",change:"Cambiar",failed:"No se pudo determinar el país con fiabilidad. Selecciónelo manualmente.",need:"Introduzca la calle y la ciudad.",recommended:"Recomendado",europe:"Europa",asia:"Asia",africa:"África",northAmerica:"América del Norte",southAmerica:"América del Sur",oceania:"Oceanía",other:"Otros"},
+            fr:{street:"Rue et numéro",city:"Ville",country:"Pays de résidence",auto:"Le pays sera complété automatiquement à partir de la ville.",checking:"Vérification de l'adresse…",verified:"Pays complété à partir de la ville.",manual:"Sélectionnez le pays de résidence",change:"Modifier",failed:"Le pays n'a pas pu être déterminé avec certitude. Veuillez le sélectionner manuellement.",need:"Saisissez la rue et la ville.",recommended:"Recommandé",europe:"Europe",asia:"Asie",africa:"Afrique",northAmerica:"Amérique du Nord",southAmerica:"Amérique du Sud",oceania:"Océanie",other:"Autres"},
+            pl:{street:"Ulica i numer",city:"Miasto",country:"Kraj zamieszkania",auto:"Kraj zostanie uzupełniony automatycznie na podstawie miasta.",checking:"Sprawdzanie adresu…",verified:"Kraj uzupełniony na podstawie miasta.",manual:"Wybierz kraj zamieszkania",change:"Zmień",failed:"Nie udało się wiarygodnie ustalić kraju. Wybierz go ręcznie.",need:"Wpisz ulicę i miasto.",recommended:"Polecane",europe:"Europa",asia:"Azja",africa:"Afryka",northAmerica:"Ameryka Północna",southAmerica:"Ameryka Południowa",oceania:"Oceania",other:"Pozostałe"},
+            ua:{street:"Вулиця і номер",city:"Місто",country:"Країна проживання",auto:"Країну буде визначено автоматично за містом.",checking:"Перевірка адреси…",verified:"Країну визначено за містом.",manual:"Оберіть країну проживання",change:"Змінити",failed:"Не вдалося надійно визначити країну. Оберіть її вручну.",need:"Вкажіть вулицю та місто.",recommended:"Рекомендовано",europe:"Європа",asia:"Азія",africa:"Африка",northAmerica:"Північна Америка",southAmerica:"Південна Америка",oceania:"Океанія",other:"Інші"},
+            tr:{street:"Sokak ve numara",city:"Şehir",country:"İkamet ülkesi",auto:"Ülke şehirden otomatik olarak doldurulacaktır.",checking:"Adres kontrol ediliyor…",verified:"Ülke şehirden dolduruldu.",manual:"İkamet ülkesini seçin",change:"Değiştir",failed:"Ülke güvenilir biçimde belirlenemedi. Lütfen manuel seçin.",need:"Sokak ve şehri girin.",recommended:"Önerilen",europe:"Avrupa",asia:"Asya",africa:"Afrika",northAmerica:"Kuzey Amerika",southAmerica:"Güney Amerika",oceania:"Okyanusya",other:"Diğer"},
+            da:{street:"Gade og nummer",city:"By",country:"Bopælsland",auto:"Landet udfyldes automatisk ud fra byen.",checking:"Kontrollerer adresse…",verified:"Land udfyldt ud fra byen.",manual:"Vælg bopælsland",change:"Skift",failed:"Landet kunne ikke bestemmes sikkert. Vælg det manuelt.",need:"Indtast gade og by.",recommended:"Anbefalet",europe:"Europa",asia:"Asien",africa:"Afrika",northAmerica:"Nordamerika",southAmerica:"Sydamerika",oceania:"Oceanien",other:"Andre"},
+            ja:{street:"番地・通り",city:"市区町村",country:"居住国",auto:"市区町村から国を自動入力します。",checking:"住所を確認しています…",verified:"市区町村から国を入力しました。",manual:"居住国を選択",change:"変更",failed:"国を確実に特定できませんでした。手動で選択してください。",need:"番地・通りと市区町村を入力してください。",recommended:"おすすめ",europe:"ヨーロッパ",asia:"アジア",africa:"アフリカ",northAmerica:"北アメリカ",southAmerica:"南アメリカ",oceania:"オセアニア",other:"その他"},
+            he:{street:"רחוב ומספר",city:"עיר",country:"מדינת מגורים",auto:"המדינה תושלם אוטומטית לפי העיר.",checking:"בודק כתובת…",verified:"המדינה הושלמה לפי העיר.",manual:"בחר מדינת מגורים",change:"שינוי",failed:"לא ניתן היה לזהות את המדינה בוודאות. יש לבחור אותה ידנית.",need:"יש להזין רחוב ועיר.",recommended:"מומלץ",europe:"אירופה",asia:"אסיה",africa:"אפריקה",northAmerica:"צפון אמריקה",southAmerica:"דרום אמריקה",oceania:"אוקיאניה",other:"אחר"},
+            el:{street:"Οδός και αριθμός",city:"Πόλη",country:"Χώρα κατοικίας",auto:"Η χώρα θα συμπληρωθεί αυτόματα από την πόλη.",checking:"Έλεγχος διεύθυνσης…",verified:"Η χώρα συμπληρώθηκε από την πόλη.",manual:"Επιλέξτε χώρα κατοικίας",change:"Αλλαγή",failed:"Δεν ήταν δυνατός ο αξιόπιστος προσδιορισμός της χώρας. Επιλέξτε τη χειροκίνητα.",need:"Συμπληρώστε οδό και πόλη.",recommended:"Προτεινόμενα",europe:"Ευρώπη",asia:"Ασία",africa:"Αφρική",northAmerica:"Βόρεια Αμερική",southAmerica:"Νότια Αμερική",oceania:"Ωκεανία",other:"Άλλα"}
+        };
+
         function formatRegistrationDate(iso) {
             if (!iso) return '—';
             const [y,m,d] = iso.split('-');
@@ -6700,45 +7129,112 @@
 
         const NATIONALITY_REGION_CODES = ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BV","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA","ZM","ZW"];
 
-        function populateNationalitySelect(lang, placeholder) {
-            const select = document.getElementById('sciNationality');
-            if (!select) return;
+        const COUNTRY_GROUP_CODES = {
+            europe: new Set("AD AL AT AX BA BE BG BY CH CY CZ DE DK EE ES FI FO FR GB GG GI GR HR HU IE IM IS IT JE LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS RU SE SI SJ SK SM UA VA".split(' ')),
+            asia: new Set("AE AF AM AZ BD BH BN BT CN GE HK ID IL IN IO IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO MV MY NP OM PH PK PS QA SA SG SY TH TJ TL TM TR TW UZ VN YE".split(' ')),
+            africa: new Set("AO BF BI BJ BW CD CF CG CI CM CV DJ DZ EG EH ER ET GA GH GM GN GQ GW KE KM LR LS LY MA MG ML MR MU MW MZ NA NE NG RE RW SC SD SH SL SN SO SS ST SZ TD TG TN TZ UG YT ZA ZM ZW".split(' ')),
+            northAmerica: new Set("AG AI AW BB BL BM BQ BS BZ CA CR CU CW DM DO GD GL GP GT HN HT JM KN KY LC MF MQ MS MX NI PA PM PR SV SX TC TT US VC VG VI".split(' ')),
+            southAmerica: new Set("AR BO BR CL CO EC FK GF GS GY PE PY SR UY VE".split(' ')),
+            oceania: new Set("AS AU CC CK CX FJ FM GU HM KI MH MP NC NF NR NU NZ PF PG PN PW SB TK TO TV UM VU WF WS".split(' '))
+        };
 
-            const currentValue = select.value;
+        const LANGUAGE_COUNTRY_RECOMMENDATIONS = {
+            cs:["CZ","SK","DE","AT","PL"], sk:["SK","CZ","AT","DE","PL"],
+            en:["GB","US","IE","CA","AU","NZ"], de:["DE","AT","CH"],
+            it:["IT","SM","CH"], es:["ES","MX","AR","CL"], fr:["FR","BE","CH","CA"],
+            pl:["PL","CZ","DE","SK","UA"], ua:["UA","PL","CZ","SK","DE"], tr:["TR","DE","AT"],
+            da:["DK","NO","SE"], ja:["JP"], he:["IL"], el:["GR","CY"]
+        };
+
+        function countryGroupForCode(code) {
+            for (const key of ["europe","asia","africa","northAmerica","southAmerica","oceania"]) {
+                if (COUNTRY_GROUP_CODES[key].has(code)) return key;
+            }
+            return "other";
+        }
+
+        function countryDisplayItems(lang) {
             const uiLocale = lang === 'ua' ? 'uk' : lang;
-
             let localNames = null;
             let englishNames = null;
             try {
                 localNames = new Intl.DisplayNames([uiLocale], { type: 'region' });
                 englishNames = new Intl.DisplayNames(['en'], { type: 'region' });
             } catch (_) {}
+            return NATIONALITY_REGION_CODES.map(code => ({
+                code,
+                display: (localNames && localNames.of(code)) || code,
+                canonical: (englishNames && englishNames.of(code)) || code,
+                group: countryGroupForCode(code)
+            }));
+        }
 
-            const items = NATIONALITY_REGION_CODES.map(code => {
-                const display = localNames ? localNames.of(code) : code;
-                const canonical = englishNames ? englishNames.of(code) : code;
-                return { code, display: display || code, canonical: canonical || code };
-            }).sort((a, b) => a.display.localeCompare(b.display, uiLocale, { sensitivity: 'base' }));
+        function populateGroupedCountrySelect(select, lang, placeholder, currentValue, preferredCodes) {
+            if (!select) return;
+            const t = registrationAddressI18n[lang] || registrationAddressI18n.en;
+            const uiLocale = lang === 'ua' ? 'uk' : lang;
+            const items = countryDisplayItems(lang);
+            const preferred = new Set((preferredCodes || []).filter(Boolean));
+            const groupOrder = ["europe","asia","africa","northAmerica","southAmerica","oceania","other"];
 
             select.innerHTML = '';
             const first = document.createElement('option');
             first.value = '';
-            first.textContent = placeholder || 'Select nationality';
+            first.textContent = placeholder || t.manual;
             first.disabled = true;
             first.selected = !currentValue;
             select.appendChild(first);
 
-            for (const item of items) {
-                const option = document.createElement('option');
-                option.value = item.canonical;
-                option.textContent = item.display;
-                option.dataset.code = item.code;
-                select.appendChild(option);
-            }
+            const addGroup = (label, groupItems) => {
+                if (!groupItems.length) return;
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = label;
+                groupItems.sort((a,b) => a.display.localeCompare(b.display, uiLocale, {sensitivity:'base'}));
+                groupItems.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.canonical;
+                    option.textContent = item.display;
+                    option.dataset.code = item.code;
+                    optgroup.appendChild(option);
+                });
+                select.appendChild(optgroup);
+            };
+
+            addGroup(t.recommended, items.filter(item => preferred.has(item.code)));
+            groupOrder.forEach(group => {
+                addGroup(t[group], items.filter(item => item.group === group && !preferred.has(item.code)));
+            });
 
             if (currentValue && Array.from(select.options).some(option => option.value === currentValue)) {
                 select.value = currentValue;
             }
+        }
+
+        function populateNationalitySelect(lang, placeholder) {
+            const select = document.getElementById('sciNationality');
+            if (!select) return;
+            const currentValue = select.value;
+            populateGroupedCountrySelect(
+                select,
+                lang,
+                placeholder || 'Select nationality',
+                currentValue,
+                LANGUAGE_COUNTRY_RECOMMENDATIONS[lang] || []
+            );
+        }
+
+        function populateResidenceCountryManual(lang) {
+            const select = document.getElementById('sciResidenceCountryManual');
+            if (!select) return;
+            const t = registrationAddressI18n[lang] || registrationAddressI18n.en;
+            const currentValue = residenceCountryState.canonical || select.value;
+            populateGroupedCountrySelect(
+                select,
+                lang,
+                t.manual,
+                currentValue,
+                LANGUAGE_COUNTRY_RECOMMENDATIONS[lang] || []
+            );
         }
 
         function populateRegistrationControls() {
@@ -6767,6 +7263,11 @@
             byId('sci-reg-birth-label', t.birth);
             byId('sci-reg-nationality-label', t.nationality || 'Nationality');
             populateNationalitySelect(lang, t.nationalityChoose || 'Select nationality');
+            const at = registrationAddressI18n[lang] || registrationAddressI18n.en;
+            byId('sci-reg-street-label', at.street);
+            byId('sci-reg-city-label', at.city);
+            byId('sci-reg-country-manual-label', at.country);
+            populateResidenceCountryManual(lang);
             byId('sci-reg-day-1', t.day); byId('sci-reg-day-2', t.day); byId('sci-reg-day-3', t.day);
             byId('sci-reg-month-1', t.month); byId('sci-reg-month-2', t.month); byId('sci-reg-month-3', t.month);
             byId('sci-reg-year-1', t.year); byId('sci-reg-year-2', t.year); byId('sci-reg-year-3', t.year);
@@ -6815,6 +7316,36 @@
         function toggleVisa() {
             const checked = document.getElementById('sciHasVisa').checked;
             document.getElementById('sciVisaExtra').classList.toggle('hidden', !checked);
+            startAutoResetTimer();
+        }
+
+        let residenceCountryState = { code:'', canonical:'', matchedAddress:'', source:'manual', checking:false, error:false };
+
+        function resetResidenceCountryState(clearInputs) {
+            residenceCountryState = { code:'', canonical:'', matchedAddress:'', source:'manual', checking:false, error:false };
+            const manual = document.getElementById('sciResidenceCountryManual');
+            if (manual) manual.value = '';
+            if (clearInputs) {
+                const street = document.getElementById('sciResidenceStreet');
+                const city = document.getElementById('sciResidenceCity');
+                if (street) street.value = '';
+                if (city) city.value = '';
+            }
+        }
+
+        function applyManualResidenceCountry() {
+            const select = document.getElementById('sciResidenceCountryManual');
+            if (!select || !select.value) {
+                residenceCountryState = { code:'', canonical:'', matchedAddress:'', source:'manual', checking:false, error:false };
+                return;
+            }
+            const option = select.options[select.selectedIndex];
+            residenceCountryState = {
+                code: option?.dataset?.code || '',
+                canonical: select.value,
+                matchedAddress: '',
+                source: 'manual', checking:false, error:false
+            };
             startAutoResetTimer();
         }
 
@@ -6932,6 +7463,7 @@
             if (nationality) nationality.value = '';
             if (docNum) docNum.value = '';
             if (visaNum) visaNum.value = '';
+            resetResidenceCountryState(true);
             if (document.getElementById('sciDifferentGuestNameGroup')) document.getElementById('sciDifferentGuestNameGroup').classList.add('hidden');
             if (document.getElementById('sciVisaExtra')) document.getElementById('sciVisaExtra').classList.add('hidden');
             clearGuestSignature(false);
@@ -6978,6 +7510,9 @@
             if (document.getElementById('sciDifferentGuest').checked && !document.getElementById('sciGuestNameInput').value.trim()) return false;
             if (!document.getElementById('sciBirthDay').value || !document.getElementById('sciBirthMonth').value || !document.getElementById('sciBirthYear').value) return false;
             if (!document.getElementById('sciNationality').value.trim()) return false;
+            if (!document.getElementById('sciResidenceStreet').value.trim()) return false;
+            if (!document.getElementById('sciResidenceCity').value.trim()) return false;
+            if (!residenceCountryState.canonical) return false;
             if (!document.getElementById('sciDocumentType').value || !document.getElementById('sciDocumentNumber').value.trim()) return false;
             if (document.getElementById('sciHasVisa').checked) {
                 if (!document.getElementById('sciVisaNumber').value.trim()) return false;
@@ -7004,6 +7539,18 @@
                 return;
             }
 
+            const at = registrationAddressI18n[currentLang] || registrationAddressI18n.en;
+            const residenceStreet = document.getElementById('sciResidenceStreet').value.trim();
+            const residenceCity = document.getElementById('sciResidenceCity').value.trim();
+            if (!residenceStreet || !residenceCity) {
+                alert(at.need);
+                return;
+            }
+            if (!residenceCountryState.canonical) {
+                alert(at.manual);
+                return;
+            }
+
             // Do not reveal room/access codes until the complete registration
             // (including the guest signature) has been provided.
             if (!registrationFieldsComplete()) {
@@ -7017,11 +7564,21 @@
                 ? document.getElementById('sciGuestNameInput').value.trim()
                 : reservation.guestName;
 
+            const nationalitySelect = document.getElementById('sciNationality');
+            const nationalityOption = nationalitySelect.options[nationalitySelect.selectedIndex];
             const registration = {
+                registrationSchemaVersion: 2,
                 differentGuest,
                 stayingGuestName,
                 birthDate: buildIsoDate('sciBirthYear', 'sciBirthMonth', 'sciBirthDay'),
-                nationality: document.getElementById('sciNationality').value.trim(),
+                nationality: nationalitySelect.value.trim(),
+                nationalityCountryCode: nationalityOption?.dataset?.code || null,
+                residenceStreet,
+                residenceCity,
+                residenceCountry: residenceCountryState.canonical,
+                residenceCountryCode: residenceCountryState.code || null,
+                residenceAddressVerified: false,
+                residenceMatchedAddress: null,
                 documentType: document.getElementById('sciDocumentType').value,
                 documentNumber: document.getElementById('sciDocumentNumber').value.trim(),
                 hasVisa,
@@ -7059,6 +7616,7 @@
             const to = document.getElementById('sciToInput').value;
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
             const submitButton = document.getElementById('btn-sci-submit');
+            selfCheckinVerificationMode = 'unverified';
 
             if (!name || !from || !to) {
                 alert(t.fill);
@@ -7125,6 +7683,17 @@
                     document.getElementById('screen-checkin-expired').classList.remove('hidden');
                     startCheckinResultCountdown();
                 } else if (result.status === 'NOT_FOUND') {
+                    selfCheckinVerificationMode = 'unverified';
+                    const statusCopy = selfCheckinStatusI18n[currentLang] || selfCheckinStatusI18n.en;
+                    document.getElementById('sci-unverified-title').innerText = statusCopy.unverifiedTitle;
+                    document.getElementById('sci-unverified-text').innerText = statusCopy.unverifiedText;
+                    document.getElementById('screen-checkin-unverified').classList.remove('hidden');
+                    startCheckinResultCountdown();
+                } else if (result.status === 'AMBIGUOUS') {
+                    selfCheckinVerificationMode = 'ambiguous';
+                    const statusCopy = selfCheckinStatusI18n[currentLang] || selfCheckinStatusI18n.en;
+                    document.getElementById('sci-unverified-title').innerText = statusCopy.ambiguousTitle || statusCopy.unverifiedTitle;
+                    document.getElementById('sci-unverified-text').innerText = statusCopy.ambiguousText || statusCopy.unverifiedText;
                     document.getElementById('screen-checkin-unverified').classList.remove('hidden');
                     startCheckinResultCountdown();
                 } else {
@@ -7219,6 +7788,15 @@
         }
 
         function resetToStart(preserveLanguage = true) {
+            const parkingPhotoModal = document.getElementById('parking-photo-modal');
+            const parkingPhotoModalImage = document.getElementById('parking-photo-modal-image');
+            if (parkingPhotoModal) {
+                parkingPhotoModal.classList.add('hidden');
+                parkingPhotoModal.setAttribute('aria-hidden', 'true');
+            }
+            if (parkingPhotoModalImage) parkingPhotoModalImage.removeAttribute('src');
+            document.body.classList.remove('parking-photo-modal-open');
+
             taxiPrefixManuallyChanged = false;
             clearTimeout(autoResetTimer);
             clearInterval(checkinCountdownTimer);
@@ -7573,8 +8151,9 @@
             const sciStatus = selfCheckinStatusI18n[lang] || selfCheckinStatusI18n.en;
             document.getElementById('sci-waiting-title').innerText = sciStatus.waitingTitle;
             document.getElementById('sci-waiting-text').innerText = sciStatus.waitingText;
-            document.getElementById('sci-unverified-title').innerText = sciStatus.unverifiedTitle;
-            document.getElementById('sci-unverified-text').innerText = sciStatus.unverifiedText;
+            const ambiguousReservation = selfCheckinVerificationMode === 'ambiguous';
+            document.getElementById('sci-unverified-title').innerText = ambiguousReservation ? (sciStatus.ambiguousTitle || sciStatus.unverifiedTitle) : sciStatus.unverifiedTitle;
+            document.getElementById('sci-unverified-text').innerText = ambiguousReservation ? (sciStatus.ambiguousText || sciStatus.unverifiedText) : sciStatus.unverifiedText;
             const dateStatus = selfCheckinDateStatusI18n[lang] || selfCheckinDateStatusI18n.en;
             document.getElementById('sci-too-early-title').innerText = dateStatus.tooEarlyTitle;
             document.getElementById('sci-too-early-text').innerText = dateStatus.tooEarlyText;
@@ -7721,6 +8300,7 @@
             document.getElementById('pk-opt3-text').innerHTML = dict.pkOpt3Text;
             document.getElementById('pk-opt4-title').innerText = dict.pkOpt4Title;
             document.getElementById('pk-opt4-text').innerHTML = dict.pkOpt4Text;
+            prepareParkingPhotoZoom(document.getElementById('screen-parking'));
             document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
             document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
@@ -7752,6 +8332,7 @@
         }
         populateRegistrationControls();
         initializeSignaturePad();
+        prepareParkingPhotoZoom(document);
     </script>
 </body>
 </html>
