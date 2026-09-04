@@ -121,6 +121,13 @@
             margin-bottom: 0;
         }
 
+        /* v44 — The main menu already has the primary language selector at the top.
+           Hide only the mirrored bottom selector while screen 1 is active;
+           it remains available on every other kiosk screen. */
+        #screen-1:not(.hidden) ~ .language-bar-bottom {
+            display: none !important;
+        }
+
         /* Active language is explicit. On touch devices we deliberately do not
            use :hover, because iPad Safari can keep a tapped item in a sticky
            hover state and make two flags look selected at once. */
