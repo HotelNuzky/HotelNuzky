@@ -2877,7 +2877,7 @@
         .selfcheck-tab-main { color: #e3f5e8; border-left-color: var(--green-light); }
         .selfcheck-tab-wifi { color: #eef1f3; border-left-color: #aab4bd; }
         .selfcheck-tab-luggage { color: #eef1f3; border-left-color: #9aa4ad; }
-        .selfcheck-tab-parking { color: #e7f3ff; border-left-color: var(--blue-light); }
+        .selfcheck-tab-parking { color: #eef1f3; border-left-color: #9aa4ad; }
         #screen-self-checkin.selfcheck-panel-main .selfcheck-layout {
             box-shadow: inset -5px 0 0 rgba(70,173,102,.88), inset 0 1px 0 rgba(255,255,255,.04), 0 12px 24px rgba(0,0,0,.10);
         }
@@ -2888,7 +2888,7 @@
             box-shadow: inset -5px 0 0 rgba(132,142,152,.90), inset 0 1px 0 rgba(255,255,255,.04), 0 12px 24px rgba(0,0,0,.10);
         }
         #screen-self-checkin.selfcheck-panel-parking .selfcheck-layout {
-            box-shadow: inset -5px 0 0 rgba(66,165,245,.90), inset 0 1px 0 rgba(255,255,255,.04), 0 12px 24px rgba(0,0,0,.10);
+            box-shadow: inset -5px 0 0 rgba(132,142,152,.90), inset 0 1px 0 rgba(255,255,255,.04), 0 12px 24px rgba(0,0,0,.10);
         }
         #screen-self-checkin.selfcheck-panel-main .selfcheck-tab-main,
         #screen-self-checkin.selfcheck-panel-wifi .selfcheck-tab-wifi,
@@ -2925,7 +2925,7 @@
             background: linear-gradient(180deg, rgba(104,113,123,.98) 0%, rgba(79,87,96,.98) 100%);
         }
         #screen-self-checkin.selfcheck-panel-parking .selfcheck-tab-parking {
-            background: linear-gradient(180deg, rgba(46,126,196,.98) 0%, rgba(31,92,151,.98) 100%);
+            background: linear-gradient(180deg, rgba(104,113,123,.98) 0%, rgba(79,87,96,.98) 100%);
         }
         #screen-self-checkin.selfcheck-panel-wifi .selfcheck-main-column,
         #screen-self-checkin.selfcheck-panel-luggage .selfcheck-main-column,
@@ -5249,6 +5249,199 @@
             }
         }
 
+
+
+        /* =========================================================
+           v37 — CHECK-IN FLOATING NAVIGATION + WI-FI
+           - Same external Safari-safe rail pattern as Guide/Parking
+           - Wi-Fi tab removed from Self Check-in
+           - Redundant back-to-main buttons removed from Check-in panels
+           ========================================================= */
+        .selfcheck-sticky-rail .screen-rail-back {
+            background: linear-gradient(180deg, var(--green-main), var(--green-dark)) !important;
+            border-top-color: var(--green-light) !important;
+            box-shadow: 0 7px 0 var(--green-shadow), 0 10px 22px rgba(0,0,0,.34) !important;
+        }
+        .selfcheck-sticky-rail .screen-rail-back:active {
+            transform: translateY(4px) !important;
+            box-shadow: 0 3px 0 var(--green-shadow), 0 5px 10px rgba(0,0,0,.30) !important;
+        }
+        .selfcheck-rail-wifi {
+            border-color: rgba(76,175,80,.46) !important;
+            background: linear-gradient(180deg, rgba(46,125,50,.22), rgba(27,94,32,.14)) !important;
+        }
+        .sci-lookup-submit-row {
+            justify-content: center !important;
+        }
+        .sci-lookup-submit-row #btn-sci-submit {
+            flex: 1 1 auto !important;
+        }
+
+        @media (min-width: 1101px) {
+            .selfcheck-sticky-rail {
+                left: calc(50vw - 375px - 148px - 14px) !important;
+            }
+        }
+
+        @media (min-width: 761px) and (max-width: 1100px) {
+            #screen-self-checkin {
+                width: calc(100% - 172px) !important;
+                max-width: 750px !important;
+                margin-left: 172px !important;
+                margin-right: 0 !important;
+            }
+            .selfcheck-sticky-rail { left: 10px !important; }
+        }
+
+        @media (max-width: 760px) {
+            #screen-self-checkin { padding-bottom: 154px !important; }
+        }
+
+
+        /* =========================================================
+           v39 — CHECK-IN PARKING: NEUTRAL GRAY + LANGUAGE-SAFE VIEW
+           Only the Parking tab inside Check-in is neutralised.
+           Standalone Parking keeps its blue visual identity.
+           ========================================================= */
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card {
+            background: linear-gradient(180deg, rgba(50,56,63,.94) 0%, rgba(31,36,42,.94) 100%) !important;
+            border-color: rgba(171,181,190,.34) !important;
+            color: #f0f3f5 !important;
+            box-shadow: 0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.045) !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .card-title-welcome {
+            color: #e1e6ea !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .parking-historical-highlight {
+            background: rgba(18,22,26,.58) !important;
+            border-color: rgba(177,186,194,.25) !important;
+            color: #e2e7eb !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .parking-dropoff-highlight {
+            color: #eef1f3 !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .info-item {
+            border-color: rgba(177,186,194,.20) !important;
+            border-left-color: #98a3ad !important;
+            background: rgba(15,18,22,.66) !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .info-item > strong {
+            border-bottom-color: rgba(177,186,194,.15) !important;
+            color: #f1f4f6 !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .info-item-icon {
+            fill: #aeb7bf !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .parking-photo-wrap,
+        #screen-self-checkin.selfcheck-panel-parking .selfcheck-parking-card .parking-qr-option {
+            background: rgba(255,255,255,.035) !important;
+            border-color: rgba(177,186,194,.20) !important;
+        }
+
+        /* The compact Check-in copy is cloned from the structured standalone
+           Parking cards. Give those cloned fact rows the same hierarchy but
+           in neutral gray rather than the standalone blue palette. */
+        #screen-self-checkin.selfcheck-panel-parking .parking-facts {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+            gap: 8px !important;
+            min-width: 0;
+            align-content: start;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-row {
+            display: block !important;
+            min-width: 0;
+            min-height: 62px;
+            padding: 9px 10px !important;
+            border-radius: 10px !important;
+            background: rgba(255,255,255,.045) !important;
+            border: 1px solid rgba(177,186,194,.14) !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-label {
+            display: block;
+            margin: 0 0 5px;
+            color: #aeb8c1 !important;
+            font-size: 9.5px !important;
+            line-height: 1.2 !important;
+            font-weight: 900 !important;
+            letter-spacing: .58px;
+            text-transform: uppercase;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-value {
+            display: block;
+            min-width: 0;
+            color: #edf1f4 !important;
+            font-size: 12px !important;
+            line-height: 1.38 !important;
+            font-weight: 650 !important;
+            overflow-wrap: anywhere;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-link,
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-note,
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-summary,
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-warning {
+            grid-column: 1 / -1;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-link {
+            padding: 9px 10px !important;
+            border-radius: 10px !important;
+            background: rgba(255,255,255,.055) !important;
+            border: 1px solid rgba(177,186,194,.18) !important;
+            color: #e0e5e9 !important;
+            font-size: 11.5px !important;
+            line-height: 1.32 !important;
+            font-weight: 850 !important;
+            overflow-wrap: anywhere;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-link::before {
+            content: "WEB";
+            display: inline-block;
+            margin-right: 8px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            background: rgba(255,255,255,.075);
+            color: #b9c2ca;
+            font-size: 8px;
+            font-weight: 950;
+            letter-spacing: .7px;
+            vertical-align: 1px;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-note {
+            padding: 5px 8px 3px !important;
+            color: rgba(215,221,226,.68) !important;
+            font-size: 9.5px !important;
+            line-height: 1.3 !important;
+            font-style: italic;
+            text-align: center;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-summary {
+            min-height: 0;
+            background: rgba(255,255,255,.035) !important;
+        }
+        /* Safety warning remains warm for meaning, not as a section colour. */
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-warning {
+            min-height: 0;
+            background: rgba(255,193,7,.07) !important;
+            border-color: rgba(255,213,79,.18) !important;
+        }
+        #screen-self-checkin.selfcheck-panel-parking .parking-fact-warning .parking-fact-label {
+            color: #e7c85e !important;
+        }
+        @media (max-width: 760px) {
+            #screen-self-checkin.selfcheck-panel-parking .parking-facts {
+                grid-template-columns: 1fr !important;
+            }
+            #screen-self-checkin.selfcheck-panel-parking .parking-fact-link,
+            #screen-self-checkin.selfcheck-panel-parking .parking-fact-note,
+            #screen-self-checkin.selfcheck-panel-parking .parking-fact-summary,
+            #screen-self-checkin.selfcheck-panel-parking .parking-fact-warning {
+                grid-column: 1 !important;
+            }
+            #screen-self-checkin.selfcheck-panel-parking .parking-fact-row {
+                min-height: 0;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -5322,6 +5515,15 @@
 </button>
 </div>
 </div>
+<!-- SCREEN SELF CHECK-IN: FLOATING NAVIGATION + WI-FI -->
+<div class="screen-sticky-rail selfcheck-sticky-rail hidden" id="selfcheck-floating-rail" aria-label="Rychlé informace">
+<button class="screen-rail-back" id="btn-back-sci-rail" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
+<div class="screen-rail-wifi selfcheck-rail-wifi">
+<div class="screen-rail-wifi-title" id="sci-rail-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-row"><span id="sci-rail-wifi-net-label">Název / SSID</span><strong>Nuzky</strong></div>
+<div class="screen-rail-wifi-row"><span id="sci-rail-wifi-pass-label">Heslo / Password</span><strong>Hotel2017</strong></div>
+</div>
+</div>
 <!-- SCREEN SELF CHECK-IN -->
 <div class="card hidden selfcheck-panel-main" id="screen-self-checkin">
 <div class="card-title-welcome" id="sci-welcome-title">Vítejte v našem hotelu!</div>
@@ -5330,10 +5532,6 @@
 <button type="button" class="selfcheck-tab selfcheck-tab-main" id="selfcheck-tab-main" onclick="showSelfCheckinPanel('main')" aria-label="Check-in" title="Check-in">
 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3H11c-1.1 0-2 .9-2 2v4h2V5h8v14h-8v-4H9v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path><path d="M12 7.5V10.5H7v3h5v3l4.5-4.5z"></path></svg>
 <span class="selfcheck-tab-label" id="selfcheck-tab-main-label">Check-in</span>
-</button>
-<button type="button" class="selfcheck-tab selfcheck-tab-wifi" id="selfcheck-tab-wifi" onclick="showSelfCheckinPanel('wifi')" aria-label="Wi-Fi připojení" title="Wi-Fi připojení">
-<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 18.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm0-3.5c-1.66 0-3.16.67-4.24 1.76l1.41 1.41A4.96 4.96 0 0 1 12 17c1.1 0 2.1.45 2.83 1.17l1.41-1.41A6.96 6.96 0 0 0 12 15zm0-4c-2.76 0-5.26 1.12-7.07 2.93l1.41 1.41A8.96 8.96 0 0 1 12 13c2.21 0 4.21.9 5.66 2.34l1.41-1.41A10.96 10.96 0 0 0 12 11zm0-4c-3.87 0-7.37 1.57-9.9 4.1l1.41 1.41A11.96 11.96 0 0 1 12 9c3.31 0 6.31 1.34 8.49 3.51l1.41-1.41A13.96 13.96 0 0 0 12 7z"></path></svg>
-<span class="selfcheck-tab-label" id="selfcheck-tab-wifi-label">Wi-Fi připojení</span>
 </button>
 <button type="button" class="selfcheck-tab selfcheck-tab-luggage" id="selfcheck-tab-luggage" onclick="showSelfCheckinPanel('luggage')" aria-label="Úschova zavazadel" title="Úschova zavazadel">
 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-3h2v3h-2V3zm7 16H6V8h12v11z"></path></svg>
@@ -5365,8 +5563,7 @@
 <input class="native-date-storage" id="sciToInput" type="date"/><input class="localized-date-display" id="sciToDisplay" onclick="openLocalizedCalendar('sciToInput', 'sciToDisplay')" readonly="" type="text" lang="en" inputmode="text" spellcheck="false"/>
 </div>
 </div>
-<div class="button-row">
-<button class="btn-form-cancel" id="btn-sci-back" onclick="resetToStart()">ZPĚT</button>
+<div class="button-row sci-lookup-submit-row">
 <button class="btn-form-submit btn-self-checkin-submit" id="btn-sci-submit" onclick="submitSelfCheckin()">CHECK-IN</button>
 </div>
 </div>
@@ -5520,27 +5717,6 @@
   </div>
 </div>
 </div>
-<div class="selfcheck-wifi-column">
-<div class="selfcheck-wifi-card">
-<div class="selfcheck-panel-heading">
-<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 18.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm0-3.5c-1.66 0-3.16.67-4.24 1.76l1.41 1.41A4.96 4.96 0 0 1 12 17c1.1 0 2.1.45 2.83 1.17l1.41-1.41A6.96 6.96 0 0 0 12 15zm0-4c-2.76 0-5.26 1.12-7.07 2.93l1.41 1.41A8.96 8.96 0 0 1 12 13c2.21 0 4.21.9 5.66 2.34l1.41-1.41A10.96 10.96 0 0 0 12 11zm0-4c-3.87 0-7.37 1.57-9.9 4.1l1.41 1.41A11.96 11.96 0 0 1 12 9c3.31 0 6.31 1.34 8.49 3.51l1.41-1.41A13.96 13.96 0 0 0 12 7z"></path></svg>
-<strong id="sci-wifi-panel-title">Wi‑Fi připojení</strong>
-</div>
-<div class="wifi-details">
-<div class="wifi-detail-item">
-<span id="sci-wifi-net-label">Název / SSID</span>
-<strong>Nuzky</strong>
-</div>
-<div class="wifi-detail-item">
-<span id="sci-wifi-pass-label">Heslo / Password</span>
-<strong>Hotel2017</strong>
-</div>
-</div>
-</div>
-<div class="button-row tab-panel-actions">
-<button class="btn-form-cancel" id="btn-back-sci-wifi" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-</div>
-</div>
 <div class="selfcheck-luggage-column">
 <div class="selfcheck-luggage-card">
 <div class="selfcheck-panel-heading">
@@ -5556,16 +5732,10 @@
 </div>
 </div>
 </div>
-<div class="button-row tab-panel-actions">
-<button class="btn-form-cancel" id="btn-back-sci-luggage" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-</div>
 </div>
 <div class="selfcheck-parking-column">
 <div class="selfcheck-parking-card">
 <div class="selfcheck-parking-scroll" id="sci-parking-content"></div>
-</div>
-<div class="button-row tab-panel-actions">
-<button class="btn-form-cancel" id="btn-back-sci-parking" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
 </div>
 </div>
 </div>
@@ -8708,6 +8878,7 @@
         function hideAllScreens() {
             document.getElementById('guide-floating-rail')?.classList.add('hidden');
             document.getElementById('parking-floating-rail')?.classList.add('hidden');
+            document.getElementById('selfcheck-floating-rail')?.classList.add('hidden');
             document.getElementById('screen-1').classList.add('hidden');
             document.getElementById('screen-self-checkin').classList.add('hidden');
             document.getElementById('screen-checkin-result').classList.add('hidden');
@@ -8851,6 +9022,7 @@
             selfCheckinScreen.classList.remove('selfcheck-panel-wifi', 'selfcheck-panel-luggage', 'selfcheck-panel-parking');
             selfCheckinScreen.classList.add('selfcheck-panel-main');
             selfCheckinScreen.classList.remove('hidden');
+            document.getElementById('selfcheck-floating-rail')?.classList.remove('hidden');
             startAutoResetTimer();
         }
 
@@ -9034,12 +9206,81 @@
             prepareParkingPhotoZoom(target);
         }
 
+        /* Keep every Parking surface language-synchronised even if a later
+           unrelated UI update fails in Safari. The Check-in Parking panel is
+           a DOM clone of the standalone Parking content, so it must be rebuilt
+           after the source text changes. */
+        function updateParkingLanguage(lang) {
+            const dict = i18n[lang] || i18n.en;
+
+            const setText = (id, value) => {
+                const node = document.getElementById(id);
+                if (node && value !== undefined && value !== null) node.innerText = value;
+            };
+            const setHtml = (id, value) => {
+                const node = document.getElementById(id);
+                if (node && value !== undefined && value !== null) node.innerHTML = value;
+            };
+
+            /* Floating Parking rail first: it must always follow the flag. */
+            setText('pk-wifi-title', dict.ciWifiTitle);
+            setText('pk-wifi-net-label', dict.ciWifiNetLabel);
+            setText('pk-wifi-pass-label', dict.ciWifiPassLabel);
+            setText('btn-back-pk', dict.back);
+
+            /* Standalone Parking source. */
+            setText('pk-welcome-title', dict.pkWelcomeTitle);
+            setHtml('pk-welcome-subtitle', dict.pkWelcomeSubtitle);
+            setText('pk-qr-text-1', dict.pkQrText);
+            setText('pk-qr-text-3', dict.pkQrText);
+            setText('pk-qr-text-4', dict.pkQrText);
+            setText('pk-opt1-title', dict.pkOpt1Title);
+            setHtml('pk-opt1-text', dict.pkOpt1Text);
+            setText('pk-opt2-title', dict.pkOpt2Title);
+            setHtml('pk-opt2-text', dict.pkOpt2Text);
+            setText('pk-opt3-title', dict.pkOpt3Title);
+            setHtml('pk-opt3-text', dict.pkOpt3Text);
+            setText('pk-opt4-title', dict.pkOpt4Title);
+            setHtml('pk-opt4-text', dict.pkOpt4Text);
+
+            if (parkingQrByLang[lang]) {
+                const qr1 = document.querySelector('#parking-content-row-1 .parking-qr-code');
+                const qr3 = document.querySelector('#parking-content-row-3 .parking-qr-code');
+                const qr4 = document.querySelector('#parking-content-row-4 .parking-qr-code');
+                if (qr1 && parkingQrByLang[lang][1]) qr1.src = parkingQrByLang[lang][1];
+                if (qr3 && parkingQrByLang[lang][3]) qr3.src = parkingQrByLang[lang][3];
+                if (qr4 && parkingQrByLang[lang][4]) qr4.src = parkingQrByLang[lang][4];
+            }
+
+            /* Structural beautification and image zoom are non-critical.
+               Never allow either to prevent the live language switch. */
+            try {
+                structureParkingOptions();
+            } catch (error) {
+                console.error('Parking structure refresh failed:', error);
+            }
+
+            const selfCheckinScreen = document.getElementById('screen-self-checkin');
+            if (selfCheckinScreen && selfCheckinScreen.classList.contains('selfcheck-panel-parking')) {
+                try {
+                    refreshSelfCheckinParkingPanel();
+                } catch (error) {
+                    console.error('Check-in parking language refresh failed:', error);
+                }
+            }
+
+            try {
+                prepareParkingPhotoZoom(document.getElementById('screen-parking'));
+            } catch (error) {
+                console.error('Parking photo zoom refresh failed:', error);
+            }
+        }
+
+
         function showSelfCheckinPanel(panel) {
             const selfCheckinScreen = document.getElementById('screen-self-checkin');
             selfCheckinScreen.classList.remove('selfcheck-panel-main', 'selfcheck-panel-wifi', 'selfcheck-panel-luggage', 'selfcheck-panel-parking');
-            if (panel === 'wifi') {
-                selfCheckinScreen.classList.add('selfcheck-panel-wifi');
-            } else if (panel === 'luggage') {
+            if (panel === 'luggage') {
                 selfCheckinScreen.classList.add('selfcheck-panel-luggage');
             } else if (panel === 'parking') {
                 trackKioskOpen('parking');
@@ -9280,10 +9521,17 @@
             el:{street:"Οδός και αριθμός",city:"Πόλη",country:"Χώρα κατοικίας",auto:"Η χώρα θα συμπληρωθεί αυτόματα από την πόλη.",checking:"Έλεγχος διεύθυνσης…",verified:"Η χώρα συμπληρώθηκε από την πόλη.",manual:"Επιλέξτε χώρα κατοικίας",change:"Αλλαγή",failed:"Δεν ήταν δυνατός ο αξιόπιστος προσδιορισμός της χώρας. Επιλέξτε τη χειροκίνητα.",need:"Συμπληρώστε οδό και πόλη.",recommended:"Προτεινόμενα",europe:"Ευρώπη",asia:"Ασία",africa:"Αφρική",northAmerica:"Βόρεια Αμερική",southAmerica:"Νότια Αμερική",oceania:"Ωκεανία",other:"Άλλα"}
         };
 
-        function formatRegistrationDate(iso) {
+        function formatRegistrationDate(iso, lang = currentLang || 'cs') {
             if (!iso) return '—';
-            const [y,m,d] = iso.split('-');
-            return `${d}.${m}.${y}`;
+            const [y,m,d] = String(iso).split('-').map(Number);
+            if (!y || !m || !d) return String(iso);
+            try {
+                const locale = kioskLocales[lang] || kioskLocales.en || 'en-GB';
+                return new Intl.DateTimeFormat(locale, { day:'2-digit', month:'2-digit', year:'numeric' })
+                    .format(new Date(y, m - 1, d));
+            } catch (_) {
+                return `${String(d).padStart(2,'0')}.${String(m).padStart(2,'0')}.${y}`;
+            }
         }
 
         function populateRegistrationSelect(select, values, placeholder) {
@@ -9453,6 +9701,17 @@
             const t = registrationI18n[lang] || registrationI18n.en;
             const byId = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
             const roomCount = activeCheckinReservation && Array.isArray(activeCheckinReservation.rooms) ? activeCheckinReservation.rooms.length : 1;
+
+            // When the registration step is already open, changing a flag must refresh
+            // the whole visible registration card immediately, including the verified
+            // reservation summary. This is intentionally independent from the rest of
+            // setLanguage(), so a later UI refresh cannot leave this step in the old language.
+            if (activeCheckinReservation) {
+                byId('sci-reg-res-name', activeCheckinReservation.guestName || '—');
+                byId('sci-reg-arrival', formatRegistrationDate(activeCheckinReservation.arrivalDate, lang));
+                byId('sci-reg-departure', formatRegistrationDate(activeCheckinReservation.departureDate, lang));
+            }
+
             byId('sci-reg-ready-title', roomCount > 1 ? (t.readyTitleMany || t.readyTitle) : t.readyTitle);
             byId('sci-reg-ready-text', t.readyText);
             byId('sci-reg-res-name-label', t.reservationName);
@@ -9679,6 +9938,7 @@
             activeCheckinReservation = reservation;
             const screen = document.getElementById('screen-self-checkin');
             screen.classList.add('sci-registration-active');
+            document.getElementById('selfcheck-floating-rail')?.classList.remove('hidden');
             document.getElementById('sci-lookup-intro').classList.add('hidden');
             document.getElementById('sci-lookup-form').classList.add('hidden');
             document.getElementById('sci-registration-stage').classList.remove('hidden');
@@ -10332,6 +10592,18 @@
             currentLang = lang;
             document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
             document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+
+            // Registration can be open while the guest changes language. Refresh it
+            // FIRST, before any unrelated page component is touched. In Safari a later
+            // UI exception must never leave the already-open registration in the old language.
+            if (typeof updateRegistrationLanguage === 'function') {
+                try {
+                    updateRegistrationLanguage(lang);
+                } catch (error) {
+                    console.error('Registration language refresh failed:', error);
+                }
+            }
+
             updateLatinEntryNotes(lang);
             applyAutomaticTaxiPrefix(lang);
 
@@ -10350,6 +10622,10 @@
             const dict = i18n[lang] || i18n['en'];
             const luggageDict = checkoutLuggageI18n[lang] || checkoutLuggageI18n.en;
 
+            // Parking is a dynamic cloned view. Refresh it early so the currently
+            // open Parking tab and its floating Back/Wi-Fi rail change immediately.
+            updateParkingLanguage(lang);
+
             // Main UI
             document.getElementById('main-title').innerText = '';
             const sci = selfCheckinI18n[lang] || selfCheckinI18n.en;
@@ -10363,22 +10639,24 @@
             document.getElementById('sci-easylocker-qr').src = easyLockerQr;
             document.getElementById('sci-easylocker-qr-text').innerText = dict.pkQrText;
             document.getElementById('sci-luggage-title').innerText = dict.coLuggageTitle;
-            document.getElementById('sci-wifi-panel-title').innerText = String(dict.ciWifiTitle || '').replace(/^📶\s*/, '');
-            document.getElementById('sci-wifi-net-label').innerText = dict.ciWifiNetLabel;
-            document.getElementById('sci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
             const selfTabs = selfCheckinTabsI18n[lang] || selfCheckinTabsI18n.en;
             document.getElementById('selfcheck-tab-main-label').innerText = selfTabs.main;
-            document.getElementById('selfcheck-tab-wifi-label').innerText = selfTabs.wifi;
             document.getElementById('selfcheck-tab-luggage-label').innerText = selfTabs.luggage;
             document.getElementById('selfcheck-tab-parking-label').innerText = selfTabs.parking;
             document.getElementById('selfcheck-tab-main').setAttribute('aria-label', selfTabs.main);
             document.getElementById('selfcheck-tab-main').title = selfTabs.main;
-            document.getElementById('selfcheck-tab-wifi').setAttribute('aria-label', selfTabs.wifi);
-            document.getElementById('selfcheck-tab-wifi').title = selfTabs.wifi;
             document.getElementById('selfcheck-tab-luggage').setAttribute('aria-label', selfTabs.luggage);
             document.getElementById('selfcheck-tab-luggage').title = selfTabs.luggage;
             document.getElementById('selfcheck-tab-parking').setAttribute('aria-label', selfTabs.parking);
             document.getElementById('selfcheck-tab-parking').title = selfTabs.parking;
+            const sciRailBack = document.getElementById('btn-back-sci-rail');
+            if (sciRailBack) sciRailBack.innerText = dict.back;
+            const sciRailWifiTitle = document.getElementById('sci-rail-wifi-title');
+            if (sciRailWifiTitle) sciRailWifiTitle.innerText = dict.ciWifiTitle;
+            const sciRailWifiNet = document.getElementById('sci-rail-wifi-net-label');
+            if (sciRailWifiNet) sciRailWifiNet.innerText = dict.ciWifiNetLabel;
+            const sciRailWifiPass = document.getElementById('sci-rail-wifi-pass-label');
+            if (sciRailWifiPass) sciRailWifiPass.innerText = dict.ciWifiPassLabel;
             document.getElementById('sci-name-label').innerText = sci.name;
             const sciNameHint = document.getElementById('sci-name-entry-hint');
             if (sciNameHint) sciNameHint.innerText = sci.nameHint || '';
@@ -10388,7 +10666,6 @@
             document.getElementById('taxiNameInput').placeholder = sci.namePlaceholder;
             document.getElementById('sci-from-label').innerText = sci.from;
             document.getElementById('sci-to-label').innerText = sci.to;
-            document.getElementById('btn-sci-back').innerText = sci.back;
             document.getElementById('btn-sci-submit').innerText = sci.submit;
             document.getElementById('sci-result-title').innerText = sci.result;
             document.getElementById('sci-main-code-label').innerText = sci.mainDoorCode;
@@ -10513,52 +10790,18 @@
             document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
             document.getElementById('ci-wish-text').innerText = dict.ciWishText;
             document.getElementById('btn-back-ci').innerText = dict.back;
-            document.getElementById('btn-back-sci-wifi').innerText = dict.back;
-            document.getElementById('btn-back-sci-luggage').innerText = dict.back;
-            document.getElementById('btn-back-sci-parking').innerText = dict.back;
             document.getElementById('btn-back-co-receipt').innerText = dict.back;
             document.getElementById('btn-back-co-luggage').innerText = dict.back;
 
-            // Parking Info
-            document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
-            document.getElementById('pk-welcome-subtitle').innerHTML = dict.pkWelcomeSubtitle;
-        
-        
-            document.getElementById('pk-qr-text-1').innerText = dict.pkQrText;
-            document.getElementById('pk-qr-text-3').innerText = dict.pkQrText;
-            document.getElementById('pk-qr-text-4').innerText = dict.pkQrText;
-            if (parkingQrByLang[lang]) {
-                document.querySelector('#parking-content-row-1 .parking-qr-code').src = parkingQrByLang[lang][1];
-                document.querySelector('#parking-content-row-3 .parking-qr-code').src = parkingQrByLang[lang][3];
-                document.querySelector('#parking-content-row-4 .parking-qr-code').src = parkingQrByLang[lang][4];
-            }
-            document.getElementById('pk-opt1-title').innerText = dict.pkOpt1Title;
-            document.getElementById('pk-opt1-text').innerHTML = dict.pkOpt1Text;
-            document.getElementById('pk-opt2-title').innerText = dict.pkOpt2Title;
-            document.getElementById('pk-opt2-text').innerHTML = dict.pkOpt2Text;
-            document.getElementById('pk-opt3-title').innerText = dict.pkOpt3Title;
-            document.getElementById('pk-opt3-text').innerHTML = dict.pkOpt3Text;
-            document.getElementById('pk-opt4-title').innerText = dict.pkOpt4Title;
-            document.getElementById('pk-opt4-text').innerHTML = dict.pkOpt4Text;
-            structureParkingOptions();
-            prepareParkingPhotoZoom(document.getElementById('screen-parking'));
-            document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
-            document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
-            document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
-            document.getElementById('btn-back-pk').innerText = dict.back;
-            if (document.getElementById('screen-self-checkin').classList.contains('selfcheck-panel-parking')) {
-                refreshSelfCheckinParkingPanel();
-            }
+            // Parking Info is synchronised near the start of setLanguage() by
+            // updateParkingLanguage(lang), so the active cloned tab and the
+            // standalone floating Back/Wi-Fi rail cannot be left in the old language.
 
             // Confirmation screen:
             // Keep the meaning of the currently displayed confirmation when language changes.
             // Taxi remains the SMS-confirmation message; Service remains the service confirmation.
             // Literal messages (e.g. checkout/offline fallback) are intentionally not overwritten.
             const thanksScreen = document.getElementById('screen-thanks');
-            if (typeof updateRegistrationLanguage === 'function') {
-                updateRegistrationLanguage(lang);
-            }
-
             if (!thanksScreen.classList.contains('hidden')) {
                 if (currentConfirmationKind === "taxi") {
                     document.getElementById('thanks-message').innerText = taxiDict.taxiThanks;
