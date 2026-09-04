@@ -4431,6 +4431,697 @@
             .parking-photo-modal { padding: 14px; }
             .parking-photo-modal-card { width: 96vw; padding: 12px; }
         }
+
+
+        /* =========================================================
+           v29 UX POLISH — Guide / Parking / Registration form
+           ========================================================= */
+
+        /* Guide and standalone Parking: one persistent rail replaces
+           duplicated top/bottom back buttons and duplicated Wi-Fi boxes. */
+        #screen-checkin,
+        #screen-parking { position: relative; }
+
+        .screen-sticky-rail {
+            position: fixed;
+            left: max(10px, calc(50vw - 500px));
+            top: 50%;
+            transform: translateY(-50%);
+            width: 126px;
+            z-index: 45;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 9px;
+            border-radius: 16px;
+            background: rgba(11,15,20,.91);
+            border: 1px solid rgba(255,255,255,.14);
+            box-shadow: 0 12px 32px rgba(0,0,0,.36);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .screen-rail-back {
+            width: 100%;
+            min-height: 66px;
+            padding: 10px 8px;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 11px;
+            background: linear-gradient(180deg, var(--gray-main), var(--gray-dark));
+            color: #f2f4f6;
+            font-size: 10.5px;
+            line-height: 1.25;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--gray-shadow), 0 6px 12px rgba(0,0,0,.22);
+        }
+        .screen-rail-back:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--gray-shadow); }
+        .screen-rail-wifi {
+            padding: 10px 8px;
+            border-radius: 11px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,.13);
+            background: rgba(255,255,255,.045);
+        }
+        .guide-rail-wifi {
+            border-color: rgba(53,198,204,.42);
+            background: linear-gradient(180deg, rgba(0,140,149,.18), rgba(0,102,109,.12));
+        }
+        .parking-rail-wifi {
+            border-color: rgba(66,165,245,.42);
+            background: linear-gradient(180deg, rgba(21,101,192,.20), rgba(0,60,143,.12));
+        }
+        .screen-rail-wifi-title {
+            margin-bottom: 8px;
+            color: #e8f5ff;
+            font-size: 12px;
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: .25px;
+        }
+        .screen-rail-wifi-row + .screen-rail-wifi-row {
+            margin-top: 7px;
+            padding-top: 7px;
+            border-top: 1px solid rgba(255,255,255,.09);
+        }
+        .screen-rail-wifi-row span {
+            display: block;
+            margin-bottom: 2px;
+            color: rgba(215,225,234,.66);
+            font-size: 7.5px;
+            line-height: 1.15;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .35px;
+        }
+        .screen-rail-wifi-row strong {
+            display: block;
+            color: #fff;
+            font-size: 12px;
+            line-height: 1.2;
+            font-weight: 900;
+            overflow-wrap: anywhere;
+        }
+
+        /* Guide: remove the empty grid rows left by the obsolete paper
+           registration card and the moved Wi-Fi block. */
+        #screen-checkin .info-list {
+            grid-template-areas:
+                "code code"
+                "alt alt"
+                "breakfast luggage"
+                "architecture luggage"
+                "parking housekeeping" !important;
+        }
+
+        /* Registration form: clear visual grouping without adding more text. */
+        .sci-registration-box {
+            display: grid;
+            gap: 11px;
+            padding: 11px 13px 13px;
+        }
+        .sci-registration-box > .sci-registration-title,
+        .sci-registration-box > .sci-police-notice,
+        .sci-registration-box > .latin-entry-note { margin-bottom: 0; }
+        .sci-reg-section {
+            min-width: 0;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.10);
+            background: rgba(5,12,9,.24);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+        .sci-reg-section-person { border-left: 3px solid rgba(91,202,113,.68); }
+        .sci-reg-section-address { border-left: 3px solid rgba(85,183,154,.64); }
+        .sci-reg-section-document { border-left: 3px solid rgba(226,181,64,.68); }
+        .sci-reg-section-signature { border-left: 3px solid rgba(125,203,141,.58); }
+        .sci-reg-section .sci-reg-field:last-child { margin-bottom: 0; }
+        .sci-reg-section .sci-address-block {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+        }
+        .sci-reg-section .sci-signature-block {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+        .sci-reg-section-document .sci-doc-warning { margin-top: 0; }
+        .sci-reg-section-document .sci-visa-row { margin-bottom: 0; }
+
+
+        /* =========================================================
+           v32 — Registration cards: stronger visual separation
+           Same kiosk design, only clearer depth, spacing and hierarchy.
+           ========================================================= */
+        .sci-registration-box {
+            gap: 16px;
+            padding: 14px 15px 16px;
+            background: linear-gradient(180deg, rgba(22,63,36,.38) 0%, rgba(12,35,22,.31) 100%);
+        }
+        .sci-reg-section {
+            position: relative;
+            overflow: hidden;
+            padding: 16px 16px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,.14);
+            border-left-width: 5px;
+            background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(4,10,7,.29));
+            box-shadow:
+                0 9px 20px rgba(0,0,0,.20),
+                inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        .sci-reg-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            pointer-events: none;
+            opacity: .72;
+        }
+        /* v33: colored perimeter outlines. The residence/address card is green as well. */
+        .sci-reg-section-person {
+            border-color: rgba(91,202,113,.48);
+            border-left-color: rgba(91,202,113,.96);
+            background: linear-gradient(135deg, rgba(42,119,59,.20), rgba(5,15,9,.31) 58%);
+            box-shadow: 0 9px 20px rgba(0,0,0,.20), 0 0 0 1px rgba(91,202,113,.12), inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        .sci-reg-section-person::before { background: linear-gradient(90deg, rgba(91,202,113,.82), rgba(91,202,113,.20) 66%, transparent 92%); }
+        .sci-reg-section-address {
+            border-color: rgba(91,202,113,.48);
+            border-left-color: rgba(91,202,113,.96);
+            background: linear-gradient(135deg, rgba(42,119,59,.18), rgba(5,15,9,.31) 58%);
+            box-shadow: 0 9px 20px rgba(0,0,0,.20), 0 0 0 1px rgba(91,202,113,.12), inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        .sci-reg-section-address::before { background: linear-gradient(90deg, rgba(91,202,113,.82), rgba(91,202,113,.20) 66%, transparent 92%); }
+        .sci-reg-section-document {
+            border-color: rgba(226,181,64,.50);
+            border-left-color: rgba(226,181,64,.96);
+            background: linear-gradient(135deg, rgba(139,103,28,.16), rgba(16,13,5,.32) 58%);
+            box-shadow: 0 9px 20px rgba(0,0,0,.20), 0 0 0 1px rgba(226,181,64,.12), inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        .sci-reg-section-document::before { background: linear-gradient(90deg, rgba(226,181,64,.82), rgba(226,181,64,.18) 66%, transparent 92%); }
+        .sci-reg-section-signature {
+            border-color: rgba(125,203,141,.46);
+            border-left-color: rgba(125,203,141,.94);
+            background: linear-gradient(135deg, rgba(49,123,66,.17), rgba(5,15,9,.31) 58%);
+            box-shadow: 0 9px 20px rgba(0,0,0,.20), 0 0 0 1px rgba(125,203,141,.11), inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        .sci-reg-section-signature::before { background: linear-gradient(90deg, rgba(125,203,141,.78), rgba(125,203,141,.18) 66%, transparent 92%); }
+
+        /* Give controls inside each card a little more breathing room. */
+        .sci-reg-section .sci-reg-field { margin-bottom: 10px; }
+        .sci-reg-section .sci-reg-field > label { margin-bottom: 6px; }
+        .sci-reg-section .sci-reg-check-row {
+            padding: 7px 9px;
+            border-radius: 10px;
+            background: rgba(0,0,0,.11);
+            border: 1px solid rgba(255,255,255,.055);
+        }
+        .sci-reg-section .sci-birth-divider {
+            margin-top: 9px;
+            padding-top: 12px;
+        }
+        .sci-reg-section-document .sci-doc-warning {
+            margin-bottom: 11px;
+            padding: 6px 9px;
+        }
+        .sci-reg-section-document .sci-visa-row {
+            margin-top: 8px;
+            padding-top: 10px;
+        }
+        .sci-reg-section-signature .sci-signature-canvas-wrap {
+            box-shadow: 0 5px 13px rgba(0,0,0,.20), inset 0 1px 3px rgba(0,0,0,.12);
+        }
+
+        @media (max-width: 760px) {
+            .sci-registration-box { gap: 13px; padding: 12px; }
+            .sci-reg-section { padding: 13px 12px 12px; border-left-width: 4px; }
+        }
+
+        /* Standalone Parking: turn line-by-line prose into a compact fact sheet. */
+        #screen-parking .parking-facts {
+            display: grid;
+            gap: 5px;
+            min-width: 0;
+        }
+        #screen-parking .parking-fact-row {
+            display: grid;
+            grid-template-columns: minmax(112px, .42fr) minmax(0, 1fr);
+            gap: 8px;
+            align-items: start;
+            padding: 7px 9px;
+            border-radius: 8px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.055);
+        }
+        #screen-parking .parking-fact-label {
+            color: #90caf9;
+            font-size: 11px;
+            line-height: 1.28;
+            font-weight: 850;
+        }
+        #screen-parking .parking-fact-value {
+            min-width: 0;
+            color: #e1e7ed;
+            font-size: 11.5px;
+            line-height: 1.38;
+            font-weight: 560;
+            overflow-wrap: anywhere;
+        }
+        #screen-parking .parking-fact-full { grid-template-columns: 1fr; }
+        #screen-parking .parking-fact-link {
+            padding: 8px 9px;
+            border-radius: 8px;
+            background: rgba(66,165,245,.10);
+            border: 1px solid rgba(66,165,245,.20);
+            color: #b9ddff;
+            font-size: 11.5px;
+            line-height: 1.35;
+            font-weight: 850;
+            overflow-wrap: anywhere;
+        }
+        #screen-parking .parking-fact-link strong { color: inherit; }
+        #screen-parking .parking-fact-note {
+            padding: 5px 9px 2px;
+            color: rgba(207,216,224,.72);
+            font-size: 10px;
+            line-height: 1.3;
+            font-style: italic;
+        }
+        #screen-parking .parking-content-row > span { align-self: start; }
+
+        /* On narrower displays there is not enough physical side space.
+           Keep the same controls persistent as a compact sticky bar. */
+        @media (max-width: 990px) {
+            .screen-sticky-rail {
+                position: sticky;
+                left: auto;
+                top: 8px;
+                transform: none;
+                width: 100%;
+                z-index: 45;
+                flex-direction: row;
+                align-items: stretch;
+                margin: -6px 0 16px;
+                padding: 7px;
+            }
+            .screen-rail-back { flex: 0 0 38%; min-height: 58px; }
+            .screen-rail-wifi {
+                flex: 1 1 auto;
+                display: grid;
+                grid-template-columns: auto 1fr 1fr;
+                gap: 7px;
+                align-items: center;
+                padding: 7px 9px;
+            }
+            .screen-rail-wifi-title { margin: 0; }
+            .screen-rail-wifi-row + .screen-rail-wifi-row {
+                margin: 0;
+                padding: 0 0 0 7px;
+                border-top: 0;
+                border-left: 1px solid rgba(255,255,255,.09);
+            }
+        }
+
+        @media (max-width: 760px) {
+            #screen-checkin .info-list {
+                grid-template-columns: 1fr !important;
+                grid-template-areas:
+                    "code"
+                    "alt"
+                    "breakfast"
+                    "architecture"
+                    "luggage"
+                    "parking"
+                    "housekeeping" !important;
+            }
+            .screen-sticky-rail { flex-direction: column; }
+            .screen-rail-back { flex-basis: auto; min-height: 48px; }
+            .screen-rail-wifi { grid-template-columns: 1fr 1fr; }
+            .screen-rail-wifi-title { grid-column: 1 / -1; }
+            #screen-parking .parking-fact-row { grid-template-columns: 1fr; gap: 2px; }
+            .sci-reg-section { padding: 10px; }
+        }
+
+
+        /* =========================================================
+           v30 — true floating side controls + Guide spacing
+           The rail stays OUTSIDE the content and follows the viewport.
+           ========================================================= */
+
+        /* Give the first Guide action card more breathing room from the
+           highlighted access-information box above it. */
+        #screen-checkin .ci-access-info {
+            margin-bottom: 28px !important;
+        }
+
+        /* The floating controls are two independent cards rather than one
+           heavy dark block. This keeps them visually lighter and clearly
+           separate from the page content. */
+        .screen-sticky-rail {
+            position: fixed !important;
+            left: 10px !important;
+            top: 50% !important;
+            right: auto !important;
+            bottom: auto !important;
+            transform: translateY(-50%) !important;
+            width: 122px !important;
+            z-index: 70 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .screen-rail-back {
+            width: 100% !important;
+            min-height: 96px !important;
+            padding: 12px 9px 13px !important;
+            border-radius: 16px !important;
+            border: 2px solid rgba(255,255,255,.25) !important;
+            color: #fff !important;
+            font-size: 12.5px !important;
+            line-height: 1.22 !important;
+            font-weight: 950 !important;
+            letter-spacing: .15px !important;
+            text-align: center !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,.35) !important;
+            cursor: pointer !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+        .screen-rail-back::before {
+            content: "←";
+            display: block;
+            margin-bottom: 8px;
+            font-size: 31px;
+            line-height: .9;
+            font-weight: 800;
+        }
+        .guide-sticky-rail .screen-rail-back {
+            background: linear-gradient(180deg, var(--turquoise-main), var(--turquoise-dark)) !important;
+            border-top-color: var(--turquoise-light) !important;
+            box-shadow: 0 7px 0 var(--turquoise-shadow), 0 10px 22px rgba(0,0,0,.34) !important;
+        }
+        .parking-sticky-rail .screen-rail-back {
+            background: linear-gradient(180deg, var(--blue-main), var(--blue-dark)) !important;
+            border-top-color: var(--blue-light) !important;
+            box-shadow: 0 7px 0 var(--blue-shadow), 0 10px 22px rgba(0,0,0,.34) !important;
+        }
+        .guide-sticky-rail .screen-rail-back:active {
+            transform: translateY(4px) !important;
+            box-shadow: 0 3px 0 var(--turquoise-shadow), 0 5px 10px rgba(0,0,0,.30) !important;
+        }
+        .parking-sticky-rail .screen-rail-back:active {
+            transform: translateY(4px) !important;
+            box-shadow: 0 3px 0 var(--blue-shadow), 0 5px 10px rgba(0,0,0,.30) !important;
+        }
+
+        .screen-rail-wifi {
+            width: 100% !important;
+            display: block !important;
+            padding: 11px 8px 12px !important;
+            border-radius: 15px !important;
+            box-shadow: 0 9px 24px rgba(0,0,0,.30) !important;
+            backdrop-filter: blur(9px) !important;
+            -webkit-backdrop-filter: blur(9px) !important;
+        }
+        .screen-rail-wifi-title {
+            margin: 0 0 9px !important;
+            font-size: 13px !important;
+            line-height: 1.1 !important;
+        }
+        .screen-rail-wifi-row span { font-size: 8px !important; }
+        .screen-rail-wifi-row strong { font-size: 13px !important; }
+        .screen-rail-wifi-row + .screen-rail-wifi-row {
+            margin-top: 8px !important;
+            padding: 8px 0 0 !important;
+            border-left: 0 !important;
+            border-top: 1px solid rgba(255,255,255,.10) !important;
+        }
+
+        /* If the viewport is slightly narrower than landscape iPad, reserve a
+           real left gutter instead of pushing the controls into the text. */
+        @media (min-width: 761px) and (max-width: 1010px) {
+            #screen-checkin,
+            #screen-parking {
+                width: calc(100% - 142px) !important;
+                max-width: 750px !important;
+                margin-left: 142px !important;
+                margin-right: 0 !important;
+            }
+            .screen-sticky-rail { left: 10px !important; }
+        }
+
+        /* Phones do not have a usable side gutter. Keep the controls fixed to
+           the viewport as a compact bottom dock rather than inserting them
+           between content blocks. */
+        @media (max-width: 760px) {
+            #screen-checkin,
+            #screen-parking { padding-bottom: 154px !important; }
+            .screen-sticky-rail {
+                left: 8px !important;
+                right: 8px !important;
+                top: auto !important;
+                bottom: 8px !important;
+                transform: none !important;
+                width: auto !important;
+                flex-direction: row !important;
+                gap: 8px !important;
+                padding: 8px !important;
+                border-radius: 17px !important;
+                background: rgba(8,12,16,.91) !important;
+                border: 1px solid rgba(255,255,255,.14) !important;
+                box-shadow: 0 12px 30px rgba(0,0,0,.42) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+            }
+            .screen-rail-back {
+                flex: 0 0 44% !important;
+                min-height: 74px !important;
+                font-size: 11px !important;
+                padding: 9px 7px !important;
+            }
+            .screen-rail-back::before {
+                display: inline-block;
+                margin: 0 6px 0 0;
+                font-size: 22px;
+                vertical-align: -2px;
+            }
+            .screen-rail-wifi {
+                flex: 1 1 auto !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 4px 7px !important;
+                align-items: center !important;
+                padding: 8px !important;
+            }
+            .screen-rail-wifi-title {
+                grid-column: 1 / -1 !important;
+                margin-bottom: 2px !important;
+                font-size: 11px !important;
+            }
+            .screen-rail-wifi-row + .screen-rail-wifi-row {
+                margin: 0 !important;
+                padding: 0 0 0 7px !important;
+                border-top: 0 !important;
+                border-left: 1px solid rgba(255,255,255,.10) !important;
+            }
+            .screen-rail-wifi-row span { font-size: 7px !important; }
+            .screen-rail-wifi-row strong { font-size: 11px !important; }
+        }
+
+        /* =========================================================
+           v31 — Safari floating rail containment fix
+           The rails are DOM siblings of the frosted .card elements.
+           Safari can otherwise treat position:fixed as card-relative
+           when the ancestor uses backdrop-filter / animation.
+           ========================================================= */
+        .screen-sticky-rail.hidden { display: none !important; }
+
+
+
+        /* =========================================================
+           v34 — PARKING FACT CARDS
+           Standalone Parking only: clearer 2×2 information hierarchy.
+           Existing content, photos, QR codes and translations are preserved.
+           ========================================================= */
+        #screen-parking .info-list {
+            gap: 19px !important;
+        }
+
+        #screen-parking .info-item {
+            border: 1px solid rgba(66,165,245,.28) !important;
+            border-left: 5px solid #42a5f5 !important;
+            background: linear-gradient(145deg, rgba(18,29,40,.92), rgba(9,16,23,.90)) !important;
+            box-shadow: 0 10px 24px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035) !important;
+            border-radius: 15px !important;
+            padding: 18px 19px 19px !important;
+        }
+
+        #screen-parking .info-item > strong {
+            margin-bottom: 15px !important;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(66,165,245,.18);
+            font-size: 17px !important;
+            line-height: 1.25 !important;
+        }
+
+        #screen-parking .info-item > strong .info-item-icon {
+            width: 31px !important;
+            height: 31px !important;
+            flex: 0 0 31px;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,.25));
+        }
+
+        #screen-parking .parking-facts {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+            gap: 8px !important;
+            min-width: 0;
+            align-content: start;
+        }
+
+        #screen-parking .parking-fact-row {
+            display: block !important;
+            min-width: 0;
+            min-height: 66px;
+            padding: 10px 11px !important;
+            border-radius: 10px !important;
+            background: rgba(66,165,245,.055) !important;
+            border: 1px solid rgba(100,181,246,.17) !important;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+
+        #screen-parking .parking-fact-label {
+            display: block;
+            margin: 0 0 5px;
+            color: #75baff !important;
+            font-size: 9.5px !important;
+            line-height: 1.2 !important;
+            font-weight: 900 !important;
+            letter-spacing: .62px;
+            text-transform: uppercase;
+        }
+
+        #screen-parking .parking-fact-value {
+            display: block;
+            min-width: 0;
+            color: #eef5fb !important;
+            font-size: 12.5px !important;
+            line-height: 1.38 !important;
+            font-weight: 650 !important;
+            overflow-wrap: anywhere;
+        }
+
+        #screen-parking .parking-fact-link {
+            grid-column: 1 / -1;
+            padding: 9px 11px !important;
+            border-radius: 10px !important;
+            background: linear-gradient(135deg, rgba(21,101,192,.20), rgba(66,165,245,.10)) !important;
+            border: 1px solid rgba(100,181,246,.31) !important;
+            color: #c8e6ff !important;
+            font-size: 11.5px !important;
+            line-height: 1.32 !important;
+            font-weight: 850 !important;
+            overflow-wrap: anywhere;
+        }
+
+        #screen-parking .parking-fact-link::before {
+            content: "WEB";
+            display: inline-block;
+            margin-right: 8px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            background: rgba(66,165,245,.16);
+            color: #8ecbff;
+            font-size: 8px;
+            font-weight: 950;
+            letter-spacing: .7px;
+            vertical-align: 1px;
+        }
+
+        #screen-parking .parking-fact-note {
+            grid-column: 1 / -1;
+            margin-top: -1px;
+            padding: 5px 8px 3px !important;
+            color: rgba(207,222,234,.68) !important;
+            font-size: 9.5px !important;
+            line-height: 1.3 !important;
+            font-style: italic;
+            text-align: center;
+        }
+
+        #screen-parking .parking-fact-summary {
+            grid-column: 1 / -1;
+            min-height: 0;
+            padding: 9px 11px !important;
+            background: rgba(255,255,255,.035) !important;
+            border-color: rgba(255,255,255,.085) !important;
+        }
+
+        #screen-parking .parking-fact-summary .parking-fact-label {
+            color: #9aa9b7 !important;
+        }
+
+        #screen-parking .parking-fact-warning {
+            grid-column: 1 / -1;
+            min-height: 0;
+            background: rgba(255,193,7,.075) !important;
+            border-color: rgba(255,213,79,.20) !important;
+        }
+
+        #screen-parking .parking-fact-warning .parking-fact-label {
+            color: #ffd96a !important;
+        }
+
+        #screen-parking .parking-fact-warning .parking-fact-value {
+            color: #fff3bd !important;
+        }
+
+        #screen-parking .parking-content-row > span {
+            min-width: 0 !important;
+            align-self: start !important;
+        }
+
+        #screen-parking .parking-photo-wrap {
+            margin-top: 0 !important;
+            border-color: rgba(66,165,245,.28) !important;
+            background: rgba(66,165,245,.055) !important;
+        }
+
+        #screen-parking .parking-qr-option {
+            border-color: rgba(66,165,245,.25) !important;
+            background: rgba(66,165,245,.065) !important;
+        }
+
+        @media (max-width: 760px) {
+            #screen-parking .parking-facts {
+                grid-template-columns: 1fr !important;
+            }
+            #screen-parking .parking-fact-link,
+            #screen-parking .parking-fact-note,
+            #screen-parking .parking-fact-summary,
+            #screen-parking .parking-fact-warning {
+                grid-column: 1 !important;
+            }
+            #screen-parking .parking-fact-row {
+                min-height: 0;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -4585,6 +5276,7 @@
     <div class="sci-police-notice" id="sci-reg-police-notice">Údaje hostů z tohoto formuláře jsou ze zákona předávány Policii Č⁠R.</div>
     <div class="latin-entry-note hidden" id="sci-reg-latin-entry-note"><strong>ABC</strong><span class="latin-entry-note-text"></span></div>
 
+    <div class="sci-reg-section sci-reg-section-person">
     <label class="sci-reg-check-row" for="sciDifferentGuest">
       <input id="sciDifferentGuest" type="checkbox" onchange="toggleDifferentGuest()"/>
       <span id="sci-reg-different-text">Pokud na pokoji nebydlí osoba uvedená na rezervaci, zaškrtněte políčko.</span>
@@ -4608,7 +5300,9 @@
       <label id="sci-reg-nationality-label" for="sciNationality">Národnost</label>
       <select id="sciNationality"></select>
     </div>
+    </div>
 
+    <div class="sci-reg-section sci-reg-section-address">
     <div class="sci-address-block">
       <div class="sci-reg-two-col sci-address-grid">
         <div class="sci-reg-field">
@@ -4625,7 +5319,9 @@
         <select id="sciResidenceCountryManual" onchange="applyManualResidenceCountry()"></select>
       </div>
     </div>
+    </div>
 
+    <div class="sci-reg-section sci-reg-section-document">
     <div class="sci-doc-warning" id="sci-reg-doc-warning">Řidičský průkaz není platný doklad.</div>
 
     <div class="sci-reg-two-col">
@@ -4670,6 +5366,9 @@
       </div>
     </div>
 
+    </div>
+
+    <div class="sci-reg-section sci-reg-section-signature">
     <div class="sci-signature-block">
       <div class="sci-signature-heading">
         <strong id="sci-reg-signature-title">Podepište se prosím prstem do pole níže.</strong>
@@ -4684,6 +5383,7 @@
         </summary>
         <div class="sci-signature-terms-body" id="sci-reg-terms-body">Podpisem tohoto formuláře host potvrzuje, že poskytnuté údaje jsou přesné, a souhlasí s ubytovacím řádem, přebírá odpovědnost za případné škody způsobené na majetku hotelu, souhlasí se zpracováním osobních údajů pro zákonné účely, bere na vědomí, že hotel nenese žádnou odpovědnost za zavazadla uložená v přízemí, a souhlasí s úhradou všech využitých služeb.</div>
       </details>
+    </div>
     </div>
   </div>
 
@@ -4835,27 +5535,22 @@
 </div>
 
 <!-- SCREEN CHECK-IN INFO -->
+<div class="screen-sticky-rail guide-sticky-rail hidden" id="guide-floating-rail" aria-label="Rychlé informace">
+<button class="screen-rail-back" id="btn-back-ci" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
+<div class="screen-rail-wifi guide-rail-wifi">
+<div class="screen-rail-wifi-title" id="ci-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-row"><span id="ci-wifi-net-label">Název / SSID</span><strong id="ci-wifi-net-val">Nuzky</strong></div>
+<div class="screen-rail-wifi-row"><span id="ci-wifi-pass-label">Heslo / Password</span><strong id="ci-wifi-pass-val">Hotel2017</strong></div>
+</div>
+</div>
 <div class="card hidden" id="screen-checkin">
-<div class="top-return-row"><button class="btn-top-return" id="btn-back-ci-top" onclick="resetToStart()">ZPĚT / BACK</button></div>
 <div class="card-title-welcome" id="ci-welcome-title">Vítejte v našem hotelu!</div>
 <div class="card-subtitle-welcome" id="ci-welcome-subtitle">Rezervace přijímáme pouze online.</div>
 <div class="info-item info-item-highlight ci-access-info">
-<span id="ci-access-info-text">Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu restaurace. Děkujeme.</span>
+<span id="ci-access-info-text">Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tedy pokračovat chodbou rovně po schodech nahoru do svého pokoje.</span>
 </div>
 <div class="info-list">
-<div class="wifi-box wifi-box-compact">
-<div class="wifi-title" id="ci-wifi-top-title">📶 Wi-Fi Připojení</div>
-<div class="wifi-details">
-<div class="wifi-detail-item">
-<span id="ci-wifi-top-net-label">Název / SSID</span>
-<strong id="ci-wifi-top-net-val">Nuzky</strong>
-</div>
-<div class="wifi-detail-item">
-<span id="ci-wifi-top-pass-label">Heslo / Password</span>
-<strong id="ci-wifi-top-pass-val">Hotel2017</strong>
-</div>
-</div>
-</div>
+
 <div class="info-item guide-code guide-full-width info-item-highlight">
 <strong>
 <svg class="info-item-icon" viewbox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v2h2v-2h2v-2H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path></svg>
@@ -4882,13 +5577,6 @@
 <span id="ci-bf-title">Snídaně</span>
 </strong>
 <span id="ci-bf-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</span>
-</div>
-<div class="info-item guide-registration info-item-highlight">
-<strong>
-<svg class="info-item-icon" viewbox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"></path></svg>
-<span id="ci-reg-title">Registrace</span>
-</strong>
-<span id="ci-reg-text">Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.</span>
 </div>
 <div class="info-item guide-luggage">
 <strong>
@@ -4923,23 +5611,7 @@
 <svg viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>
 <span id="ci-info-stand-text">Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.</span>
 </div>
-<div class="wifi-box">
-<div class="wifi-title" id="ci-wifi-title">📶 Wi-Fi Připojení</div>
-<div class="wifi-details">
-<div class="wifi-detail-item">
-<span id="ci-wifi-net-label">Název / SSID</span>
-<strong id="ci-wifi-net-val">Nuzky</strong>
-</div>
-<div class="wifi-detail-item">
-<span id="ci-wifi-pass-label">Heslo / Password</span>
-<strong id="ci-wifi-pass-val">Hotel2017</strong>
-</div>
-</div>
-</div>
 <div class="wish-text" id="ci-wish-text">Přejeme vám nádherný a ničím nerušený pobyt!</div>
-<div class="button-row">
-<button class="btn-form-cancel" id="btn-back-ci" onclick="resetToStart()" style="flex:1;">ZPĚT / BACK</button>
-</div>
 </div>
 <!-- SCREEN CHECKOUT FORM -->
 <div class="card hidden" id="screen-checkout">
@@ -4982,7 +5654,7 @@
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h10V5H7zm2 2h6v2H9V7zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"></path></svg>
 <strong id="co-fees-title">Poplatky a doklad</strong>
 </div>
-<span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, prosím, kontaktujte nás na hotelovém emailu, který naleznete na hotelové vizitce vedle tohoto kiosku.</span>
+<span id="co-fees-text">Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, kontaktujte nás prosím na e-mailu hotel@uzlatychnuzek.cz.</span>
 </div><div class="button-row checkout-panel-actions"><button class="btn-form-cancel" id="btn-back-co-receipt" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button></div><div class="luggage-box">
 <div class="instructions" id="co-instructions">
                     Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT.
@@ -5107,22 +5779,18 @@
 </div>
 </div>
 <!-- SCREEN PARKING INFO -->
+<div class="screen-sticky-rail parking-sticky-rail hidden" id="parking-floating-rail" aria-label="Rychlé informace">
+<button class="screen-rail-back" id="btn-back-pk" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
+<div class="screen-rail-wifi parking-rail-wifi">
+<div class="screen-rail-wifi-title" id="pk-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-row"><span id="pk-wifi-net-label">Název / SSID</span><strong id="pk-wifi-net-val">Nuzky</strong></div>
+<div class="screen-rail-wifi-row"><span id="pk-wifi-pass-label">Heslo / Password</span><strong id="pk-wifi-pass-val">Hotel2017</strong></div>
+</div>
+</div>
 <div class="card hidden" id="screen-parking">
-<div class="top-return-row"><button class="btn-top-return" id="btn-back-pk-top" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button></div>
 <div class="card-title-welcome" id="pk-welcome-title" style="color: #42a5f5;">Možnosti parkování</div>
 <div class="card-subtitle-welcome parking-historical-highlight" id="pk-welcome-subtitle">Vzhledem k umístění v historickém centru Prahy nemá hotel vlastní parkoviště. Tato informace je zmíněna na našich webových stránkách včetně všech profilů třetích stran. <span class="parking-dropoff-highlight">Před hotelem se však můžete na několik minut zastavit za účelem vyložení nebo naložení zavazadel.</span></div>
-<div class="wifi-box-blue">
-<div class="wifi-title-blue" id="pk-top-wifi-title">📶 Wi-Fi Připojení</div>
-<div class="wifi-details">
-<div class="wifi-detail-item">
-<span id="pk-top-wifi-net-label">Název / SSID</span>
-<strong id="pk-top-wifi-net-val">Nuzky</strong>
-</div>
-<div class="wifi-detail-item">
-<span id="pk-top-wifi-pass-label">Heslo / Password</span>
-<strong id="pk-top-wifi-pass-val">Hotel2017</strong>
-</div>
-</div></div>
+
 <div class="info-list">
 <!-- PARKING OPTION 1 -->
 <div class="info-item" style="border-left-color: #42a5f5;">
@@ -5207,23 +5875,7 @@
 </div></div>
 </div>
 </div>
-<!-- BLUE WIFI BOX FOR PARKING SCREEN -->
-<div class="wifi-box-blue">
-<div class="wifi-title-blue" id="pk-wifi-title">📶 Wi-Fi Připojení</div>
-<div class="wifi-details">
-<div class="wifi-detail-item">
-<span id="pk-wifi-net-label">Název / SSID</span>
-<strong id="pk-wifi-net-val">Nuzky</strong>
-</div>
-<div class="wifi-detail-item">
-<span id="pk-wifi-pass-label">Heslo / Password</span>
-<strong id="pk-wifi-pass-val">Hotel2017</strong>
-</div>
-</div>
-</div>
-<div class="button-row">
-<button class="btn-form-cancel" id="btn-back-pk" onclick="resetToStart()" style="flex:1;">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-</div>
+
 </div>
 <!-- SCREEN THANKS -->
 <div class="card hidden thanks-box" id="screen-thanks">
@@ -5291,6 +5943,14 @@
         const REQUEST_API_URL = CHECKIN_API_URL + "request";
         const HEARTBEAT_API_URL = CHECKIN_API_URL + "heartbeat";
         const ANALYTICS_API_URL = CHECKIN_API_URL + "analytics";
+        const OFFLINE_SNAPSHOT_API_URL = CHECKIN_API_URL + "offline-snapshot";
+        const OFFLINE_SYNC_TOKEN_KEY = "hotelNuzkyOfflineSyncTokenV1";
+        const OFFLINE_CHECKIN_DB_NAME = "hotelNuzkyOfflineCheckinV1";
+        const OFFLINE_CHECKIN_DB_VERSION = 1;
+        const OFFLINE_CHECKIN_STORE = "snapshots";
+        const OFFLINE_SNAPSHOT_KEY = "latest";
+        const OFFLINE_SNAPSHOT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+        const OFFLINE_SNAPSHOT_SYNC_INTERVAL_MS = 5 * 60 * 1000;
         let activeCheckinReservation = null;
         let selfCheckinVerificationMode = 'unverified';
         const AUTO_RESET_TIMEOUT = 120000; // 120 seconds idle reset
@@ -5302,6 +5962,1330 @@
         const CONNECTION_OUTAGE_SINCE_KEY = "hotelNuzkyConnectionOutageSinceV1";
         const CONNECTION_NOTICE_AFTER_MS = 15 * 60 * 1000; // 15 minutes
         const HEARTBEAT_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+        const CYRILLIC_TRANSLIT_STANDARD =
+
+          Object.freeze({
+
+            "а":"a",
+
+            "б":"b",
+
+            "в":"v",
+
+            "г":"g",
+
+            "ґ":"g",
+
+            "д":"d",
+
+            "е":"e",
+
+            "ё":"yo",
+
+            "є":"ye",
+
+            "ж":"zh",
+
+            "з":"z",
+
+            "и":"i",
+
+            "і":"i",
+
+            "ї":"yi",
+
+            "й":"y",
+
+            "к":"k",
+
+            "л":"l",
+
+            "м":"m",
+
+            "н":"n",
+
+            "о":"o",
+
+            "п":"p",
+
+            "р":"r",
+
+            "с":"s",
+
+            "т":"t",
+
+            "у":"u",
+
+            "ф":"f",
+
+            "х":"kh",
+
+            "ц":"ts",
+
+            "ч":"ch",
+
+            "ш":"sh",
+
+            "щ":"shch",
+
+            "ъ":"",
+
+            "ы":"y",
+
+            "ь":"",
+
+            "э":"e",
+
+            "ю":"yu",
+
+            "я":"ya",
+
+            "ј":"j",
+
+            "љ":"lj",
+
+            "њ":"nj",
+
+            "ћ":"c",
+
+            "ђ":"dj",
+
+            "џ":"dz",
+
+            "ѕ":"dz",
+
+            "ќ":"k",
+
+            "ѓ":"g",
+
+            "ў":"u"
+
+          });
+
+        const CYRILLIC_TRANSLIT_UA_COMMON =
+
+          Object.freeze({
+
+            ...CYRILLIC_TRANSLIT_STANDARD,
+
+            "г":"h",
+
+            "и":"y",
+
+            "і":"i",
+
+            "ї":"yi",
+
+            "й":"y",
+
+            "є":"ye"
+
+          });
+
+        const CYRILLIC_TRANSLIT_UA_PASSPORT =
+
+          Object.freeze({
+
+            ...CYRILLIC_TRANSLIT_STANDARD,
+
+            "г":"h",
+
+            "и":"y",
+
+            "і":"i",
+
+            "ї":"i",
+
+            "й":"i",
+
+            "є":"ie",
+
+            "ю":"iu",
+
+            "я":"ia"
+
+          });
+
+        const GREEK_TRANSLIT_MAP =
+
+          Object.freeze({
+
+            "α":"a",
+
+            "β":"v",
+
+            "γ":"g",
+
+            "δ":"d",
+
+            "ε":"e",
+
+            "ζ":"z",
+
+            "η":"i",
+
+            "θ":"th",
+
+            "ι":"i",
+
+            "κ":"k",
+
+            "λ":"l",
+
+            "μ":"m",
+
+            "ν":"n",
+
+            "ξ":"x",
+
+            "ο":"o",
+
+            "π":"p",
+
+            "ρ":"r",
+
+            "σ":"s",
+
+            "ς":"s",
+
+            "τ":"t",
+
+            "υ":"y",
+
+            "φ":"f",
+
+            "χ":"ch",
+
+            "ψ":"ps",
+
+            "ω":"o"
+
+          });
+
+        function normalizeName(value) {
+
+          return String(value || "")
+
+            .trim()
+
+            .normalize("NFKD")
+
+            .replace(
+
+              /[\u0300-\u036f]/g,
+
+              ""
+
+            )
+
+            .replace(
+
+              /[łŁ]/g,
+
+              "l"
+
+            )
+
+            .replace(
+
+              /[đĐðÐ]/g,
+
+              "d"
+
+            )
+
+            .replace(
+
+              /[øØ]/g,
+
+              "o"
+
+            )
+
+            .replace(
+
+              /[æÆ]/g,
+
+              "ae"
+
+            )
+
+            .replace(
+
+              /[œŒ]/g,
+
+              "oe"
+
+            )
+
+            .replace(
+
+              /ß/g,
+
+              "ss"
+
+            )
+
+            .replace(
+
+              /[þÞ]/g,
+
+              "th"
+
+            )
+
+            .toLocaleLowerCase()
+
+            .replace(
+
+              /[^\p{L}\p{N}]+/gu,
+
+              " "
+
+            )
+
+            .replace(
+
+              /\s+/g,
+
+              " "
+
+            )
+
+            .trim();
+
+        }
+
+        function transliterateByMap(
+
+          value,
+
+          map
+
+        ) {
+
+          return Array.from(
+
+            String(value || "")
+
+          )
+
+            .map(
+
+              char =>
+
+                Object.prototype
+
+                  .hasOwnProperty
+
+                  .call(
+
+                    map,
+
+                    char
+
+                  )
+
+                  ? map[char]
+
+                  : char
+
+            )
+
+            .join("");
+
+        }
+
+        function stripNameDiacritics(value) {
+
+          return String(value || "")
+
+            .normalize("NFKD")
+
+            .replace(
+
+              /[\u0300-\u036f]/g,
+
+              ""
+
+            );
+
+        }
+
+        function transliterateGreek(value) {
+
+          let text =
+
+            stripNameDiacritics(value)
+
+              .toLocaleLowerCase();
+
+          const digraphs = [
+
+            ["ευ", "ev"],
+
+            ["αυ", "av"],
+
+            ["ηυ", "iv"],
+
+            ["ου", "ou"],
+
+            ["αι", "ai"],
+
+            ["ει", "ei"],
+
+            ["οι", "oi"],
+
+            ["μπ", "b"],
+
+            ["ντ", "d"],
+
+            ["γκ", "g"],
+
+            ["γγ", "ng"],
+
+            ["τσ", "ts"],
+
+            ["τζ", "tz"]
+
+          ];
+
+          for (
+
+            const [from, to]
+
+            of digraphs
+
+          ) {
+
+            text =
+
+              text
+
+                .split(from)
+
+                .join(to);
+
+          }
+
+          return transliterateByMap(
+
+            text,
+
+            GREEK_TRANSLIT_MAP
+
+          );
+
+        }
+
+        function nameMatchKeys(value) {
+
+          const raw =
+
+            String(value || "")
+
+              .trim()
+
+              .toLocaleLowerCase();
+
+          const keys =
+
+            new Set();
+
+          const direct =
+
+            normalizeName(raw);
+
+          if (direct) {
+
+            keys.add(direct);
+
+          }
+
+          if (
+
+            /[\u0400-\u052F]/u
+
+              .test(raw)
+
+          ) {
+
+            [
+
+              CYRILLIC_TRANSLIT_STANDARD,
+
+              CYRILLIC_TRANSLIT_UA_COMMON,
+
+              CYRILLIC_TRANSLIT_UA_PASSPORT
+
+            ].forEach(
+
+              map => {
+
+                const key =
+
+                  normalizeName(
+
+                    transliterateByMap(
+
+                      raw,
+
+                      map
+
+                    )
+
+                  );
+
+                if (key) {
+
+                  keys.add(key);
+
+                }
+
+              }
+
+            );
+
+          }
+
+          if (
+
+            /[\u0370-\u03FF\u1F00-\u1FFF]/u
+
+              .test(raw)
+
+          ) {
+
+            const simpleGreek =
+
+              normalizeName(
+
+                transliterateByMap(
+
+                  stripNameDiacritics(raw)
+
+                    .toLocaleLowerCase(),
+
+                  GREEK_TRANSLIT_MAP
+
+                )
+
+              );
+
+            const digraphGreek =
+
+              normalizeName(
+
+                transliterateGreek(raw)
+
+              );
+
+            if (simpleGreek) {
+
+              keys.add(simpleGreek);
+
+            }
+
+            if (digraphGreek) {
+
+              keys.add(digraphGreek);
+
+            }
+
+          }
+
+          return keys;
+
+        }
+
+
+
+        // ============================================================
+
+        // ČESKÉ DOMÁCKÉ VARIANTY JMÉNA
+
+        // ============================================================
+
+        const CZECH_NAME_ALIAS_GROUPS =
+
+          Object.freeze([
+
+            [
+
+              "jan",
+
+              "honza",
+
+              "honzik"
+
+            ],
+
+            [
+
+              "katerina",
+
+              "katka",
+
+              "kata"
+
+            ],
+
+            [
+
+              "josef",
+
+              "pepa"
+
+            ],
+
+            [
+
+              "jiri",
+
+              "jirka"
+
+            ],
+
+            [
+
+              "vaclav",
+
+              "vasek"
+
+            ],
+
+            [
+
+              "frantisek",
+
+              "franta"
+
+            ],
+
+            [
+
+              "jakub",
+
+              "kuba"
+
+            ],
+
+            [
+
+              "barbora",
+
+              "bara"
+
+            ],
+
+            [
+
+              "tereza",
+
+              "terka"
+
+            ],
+
+            [
+
+              "veronika",
+
+              "verca"
+
+            ],
+
+            [
+
+              "lucie",
+
+              "lucka"
+
+            ]
+
+          ]);
+
+        function areCzechNameAliases(
+
+          leftToken,
+
+          rightToken
+
+        ) {
+
+          if (
+
+            !leftToken ||
+
+            !rightToken ||
+
+            leftToken === rightToken
+
+          ) {
+
+            return false;
+
+          }
+
+          return CZECH_NAME_ALIAS_GROUPS
+
+            .some(
+
+              group =>
+
+                group.includes(
+
+                  leftToken
+
+                ) &&
+
+                group.includes(
+
+                  rightToken
+
+                )
+
+            );
+
+        }
+
+        function aliasAwareKeyMatch(
+
+          leftKey,
+
+          rightKey
+
+        ) {
+
+          const leftTokens =
+
+            String(leftKey || "")
+
+              .split(" ")
+
+              .filter(Boolean);
+
+          const rightTokens =
+
+            String(rightKey || "")
+
+              .split(" ")
+
+              .filter(Boolean);
+
+        /**
+
+            * Počet slov musí zůstat stejný.
+
+            * Samotné "Katka" tedy neodemkne
+
+            * rezervaci "Kateřina Nováková".
+
+            */
+
+          if (
+
+            !leftTokens.length ||
+
+            leftTokens.length !==
+
+              rightTokens.length
+
+          ) {
+
+            return false;
+
+          }
+
+          const remainingRight =
+
+            [...rightTokens];
+
+          const unmatchedLeft = [];
+
+        /**
+
+            * Nejdřív odebereme přesně
+
+            * shodné části jména.
+
+            *
+
+            * Tím zároveň nezáleží
+
+            * na pořadí jména a příjmení.
+
+            */
+
+          for (
+
+            const token
+
+            of leftTokens
+
+          ) {
+
+            const index =
+
+              remainingRight
+
+                .indexOf(token);
+
+            if (index >= 0) {
+
+              remainingRight
+
+                .splice(
+
+                  index,
+
+                  1
+
+                );
+
+            } else {
+
+              unmatchedLeft
+
+                .push(token);
+
+            }
+
+          }
+
+          if (
+
+            unmatchedLeft.length === 0 &&
+
+            remainingRight.length === 0
+
+          ) {
+
+            return true;
+
+          }
+
+        /**
+
+            * Povolíme maximálně jednu
+
+            * rozdílnou část a pouze známou
+
+            * domáckou variantu.
+
+            */
+
+          return (
+
+            unmatchedLeft.length === 1 &&
+
+            remainingRight.length === 1 &&
+
+            areCzechNameAliases(
+
+              unmatchedLeft[0],
+
+              remainingRight[0]
+
+            )
+
+          );
+
+        }
+
+        const NAME_TITLE_TOKENS = new Set([
+          "dr", "prof", "doc", "ing", "mgr", "bc", "mudr", "judr",
+          "rndr", "phdr", "thdr", "pharmdr", "paeddr", "phd", "mba",
+          "msc", "bsc", "llm", "csc", "dsc", "md", "dds", "dvm", "jd",
+          "esq", "dipl", "arch", "akad", "mr", "mrs", "ms", "miss",
+          "sir", "dame", "herr", "frau", "jr", "sr"
+        ]);
+
+        const NAME_TITLE_SEQUENCES = Object.freeze([
+          ["ph", "d"],
+          ["m", "d"],
+          ["m", "sc"],
+          ["b", "sc"],
+          ["ll", "m"],
+          ["d", "sc"],
+          ["c", "sc"]
+        ]);
+
+        const NAME_PARTICLE_TOKENS = new Set([
+          "von", "van", "der", "den", "de", "del", "della", "delle",
+          "di", "da", "das", "do", "dos", "du", "la", "le", "el", "al",
+          "bin", "ibn", "ben", "af", "av", "zu", "zum", "zur", "ten",
+          "ter", "op"
+        ]);
+
+        function stripKnownTitleSequences(tokens) {
+          const result = [];
+
+          for (let index = 0; index < tokens.length;) {
+            let skipped = false;
+
+            for (const sequence of NAME_TITLE_SEQUENCES) {
+              if (
+                sequence.every(
+                  (token, offset) => tokens[index + offset] === token
+                )
+              ) {
+                index += sequence.length;
+                skipped = true;
+                break;
+              }
+            }
+
+            if (!skipped) {
+              result.push(tokens[index]);
+              index += 1;
+            }
+          }
+
+          return result;
+        }
+
+        function meaningfulNameTokens(key) {
+          let tokens = String(key || "")
+            .split(" ")
+            .filter(Boolean);
+
+          tokens = stripKnownTitleSequences(tokens)
+            .filter(token => !NAME_TITLE_TOKENS.has(token));
+
+          const withoutParticles = tokens.filter(
+            token => !NAME_PARTICLE_TOKENS.has(token)
+          );
+
+          // Částice ignorujeme jen tehdy, když po jejich odebrání zůstane
+          // dost jména k bezpečnému porovnání. Mononym tedy nezmizí na prázdno.
+          if (withoutParticles.length >= 2) {
+            tokens = withoutParticles;
+          }
+
+          return tokens;
+        }
+
+        function sameTokenMultiset(leftTokens, rightTokens) {
+          if (leftTokens.length !== rightTokens.length) return false;
+
+          const remaining = [...rightTokens];
+
+          for (const token of leftTokens) {
+            const index = remaining.indexOf(token);
+            if (index < 0) return false;
+            remaining.splice(index, 1);
+          }
+
+          return remaining.length === 0;
+        }
+
+        function tokenEqualsOrAlias(leftToken, rightToken) {
+          if (leftToken === rightToken) {
+            return { matched: true, alias: false };
+          }
+
+          if (areCzechNameAliases(leftToken, rightToken)) {
+            return { matched: true, alias: true };
+          }
+
+          return { matched: false, alias: false };
+        }
+
+        function anchoredMiddleNameMatch(shorterTokens, longerTokens) {
+          if (shorterTokens.length < 2 || longerTokens.length < 2) {
+            return { matched: false, aliases: 0 };
+          }
+
+          const orientations = [
+            { first: longerTokens[0], last: longerTokens[longerTokens.length - 1] },
+            { first: longerTokens[longerTokens.length - 1], last: longerTokens[0] }
+          ];
+
+          for (const orientation of orientations) {
+            const firstMatch = tokenEqualsOrAlias(shorterTokens[0], orientation.first);
+            const lastMatch = tokenEqualsOrAlias(
+              shorterTokens[shorterTokens.length - 1],
+              orientation.last
+            );
+
+            if (!firstMatch.matched || !lastMatch.matched) continue;
+
+            let aliases = Number(firstMatch.alias) + Number(lastMatch.alias);
+            if (aliases > 1) continue;
+
+            // Vnitřní části kratšího jména musí být opravdu obsažené v delším jméně.
+            // Vynechat lze pouze prostřední jméno/jména na delší straně.
+            const remaining = [...longerTokens];
+            for (const edgeToken of [orientation.first, orientation.last]) {
+              const index = remaining.indexOf(edgeToken);
+              if (index >= 0) remaining.splice(index, 1);
+            }
+
+            let valid = true;
+            for (const token of shorterTokens.slice(1, -1)) {
+              let index = remaining.indexOf(token);
+              if (index >= 0) {
+                remaining.splice(index, 1);
+                continue;
+              }
+
+              index = remaining.findIndex(candidate => areCzechNameAliases(token, candidate));
+              if (index >= 0 && aliases === 0) {
+                aliases += 1;
+                remaining.splice(index, 1);
+                continue;
+              }
+
+              valid = false;
+              break;
+            }
+
+            if (valid) {
+              return { matched: true, aliases };
+            }
+          }
+
+          return { matched: false, aliases: 0 };
+        }
+
+        function simplifiedKeyMatchScore(leftKey, rightKey) {
+          const leftTokens = meaningfulNameTokens(leftKey);
+          const rightTokens = meaningfulNameTokens(rightKey);
+
+          if (!leftTokens.length || !rightTokens.length) return 0;
+
+          // Po odstranění titulů a částic je celé jméno stejné.
+          if (sameTokenMultiset(leftTokens, rightTokens)) {
+            return 900;
+          }
+
+          // Jednoslovná jména nepovolujeme jako částečnou shodu.
+          // Pokud jsou opravdu totožná, zachytí je pravidlo výše.
+          if (leftTokens.length < 2 || rightTokens.length < 2) {
+            return 0;
+          }
+
+          const shorter =
+            leftTokens.length <= rightTokens.length
+              ? leftTokens
+              : rightTokens;
+          const longer =
+            leftTokens.length <= rightTokens.length
+              ? rightTokens
+              : leftTokens;
+
+          const subset = anchoredMiddleNameMatch(shorter, longer);
+
+          if (!subset.matched) return 0;
+
+          // Prostřední jméno může na jedné straně chybět. Čím více významových
+          // částí host zadal, tím je shoda silnější. Domácká varianta má nižší skóre.
+          const specificity = Math.min(40, shorter.length * 10);
+          return (subset.aliases ? 760 : 800) + specificity;
+        }
+
+        function nameMatchScore(left, right) {
+          const leftKeys = nameMatchKeys(left);
+          const rightKeys = nameMatchKeys(right);
+
+          if (!leftKeys.size || !rightKeys.size) return 0;
+
+          let bestScore = 0;
+
+          for (const leftKey of leftKeys) {
+            for (const rightKey of rightKeys) {
+              // Nejsilnější je přesná normalizovaná / transliterovaná shoda.
+              if (leftKey === rightKey) {
+                bestScore = Math.max(bestScore, 1000);
+                continue;
+              }
+
+              // Zachováme dosavadní bezpečné české domácké varianty.
+              if (aliasAwareKeyMatch(leftKey, rightKey)) {
+                bestScore = Math.max(bestScore, 930);
+              }
+
+              // Tituly (Dr., Prof., Ph.D. atd.), částice (von/de/van...) a
+              // prostřední jména nesmí hostovi zbytečně zabránit v check-inu.
+              bestScore = Math.max(
+                bestScore,
+                simplifiedKeyMatchScore(leftKey, rightKey)
+              );
+            }
+          }
+
+          return bestScore;
+        }
+
+        function namesMatch(left, right) {
+          return nameMatchScore(left, right) > 0;
+        }
+
+        // ============================================================
+        // OFFLINE SELF CHECK-IN BACKUP
+        // ============================================================
+        let offlineSnapshotSyncInFlight = null;
+
+        const offlineCheckinI18n = {
+            cs: 'Self check-in se nyní nemůže spojit se systémem a pro tuto rezervaci není k dispozici čerstvá offline záloha. Použijte prosím pevnou linku vedle kiosku.',
+            en: 'Self check-in cannot currently connect to the system and no fresh offline backup is available for this reservation. Please use the landline next to the kiosk.',
+            de: 'Der Self-Check-in kann derzeit keine Verbindung zum System herstellen und für diese Reservierung ist keine aktuelle Offline-Sicherung verfügbar. Bitte benutzen Sie das Festnetztelefon neben dem Kiosk.',
+            it: 'Il self check-in non riesce a connettersi al sistema e non è disponibile una copia offline aggiornata per questa prenotazione. Utilizzate il telefono fisso accanto al chiosco.',
+            es: 'El self check-in no puede conectarse al sistema y no hay una copia offline reciente disponible para esta reserva. Utilice el teléfono fijo junto al quiosco.',
+            fr: 'Le self check-in ne peut pas se connecter au système et aucune sauvegarde hors ligne récente n’est disponible pour cette réservation. Veuillez utiliser le téléphone fixe à côté de la borne.',
+            pl: 'Self check-in nie może obecnie połączyć się z systemem, a dla tej rezerwacji nie ma aktualnej kopii offline. Prosimy skorzystać z telefonu stacjonarnego obok kiosku.',
+            ua: 'Self check-in зараз не може з’єднатися із системою, а для цього бронювання немає актуальної офлайн-копії. Скористайтеся стаціонарним телефоном біля кіоску.',
+            sk: 'Self check-in sa momentálne nemôže spojiť so systémom a pre túto rezerváciu nie je k dispozícii aktuálna offline záloha. Použite pevnú linku vedľa kiosku.',
+            tr: 'Self check-in şu anda sisteme bağlanamıyor ve bu rezervasyon için güncel bir çevrimdışı yedek bulunmuyor. Lütfen kioskun yanındaki sabit telefonu kullanın.',
+            da: 'Self check-in kan ikke oprette forbindelse til systemet, og der findes ingen frisk offline-backup for denne reservation. Brug venligst fastnettelefonen ved siden af kiosken.',
+            ja: '現在セルフチェックインシステムに接続できず、この予約に利用できる最新のオフラインバックアップもありません。キオスク横の固定電話をご利用ください。',
+            he: 'הצ׳ק-אין העצמי אינו מצליח כרגע להתחבר למערכת, ואין גיבוי לא מקוון עדכני להזמנה זו. אנא השתמשו בטלפון הקווי שליד הקיוסק.',
+            el: 'Το self check-in δεν μπορεί αυτή τη στιγμή να συνδεθεί με το σύστημα και δεν υπάρχει πρόσφατο offline αντίγραφο για αυτή την κράτηση. Χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο kiosk.'
+        };
+
+        function getOfflineSyncToken() {
+            try {
+                return String(localStorage.getItem(OFFLINE_SYNC_TOKEN_KEY) || '').trim();
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function openOfflineCheckinDb() {
+            return new Promise((resolve, reject) => {
+                if (!window.indexedDB) {
+                    reject(new Error('IndexedDB unavailable'));
+                    return;
+                }
+                const request = indexedDB.open(OFFLINE_CHECKIN_DB_NAME, OFFLINE_CHECKIN_DB_VERSION);
+                request.onupgradeneeded = () => {
+                    const db = request.result;
+                    if (!db.objectStoreNames.contains(OFFLINE_CHECKIN_STORE)) {
+                        db.createObjectStore(OFFLINE_CHECKIN_STORE, { keyPath: 'id' });
+                    }
+                };
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error || new Error('IndexedDB open failed'));
+            });
+        }
+
+        async function saveOfflineCheckinSnapshot(snapshot) {
+            const db = await openOfflineCheckinDb();
+            try {
+                await new Promise((resolve, reject) => {
+                    const tx = db.transaction(OFFLINE_CHECKIN_STORE, 'readwrite');
+                    tx.objectStore(OFFLINE_CHECKIN_STORE).put({
+                        id: OFFLINE_SNAPSHOT_KEY,
+                        savedAt: Date.now(),
+                        snapshot
+                    });
+                    tx.oncomplete = () => resolve();
+                    tx.onerror = () => reject(tx.error || new Error('Snapshot save failed'));
+                    tx.onabort = () => reject(tx.error || new Error('Snapshot save aborted'));
+                });
+            } finally {
+                db.close();
+            }
+        }
+
+        async function clearOfflineCheckinSnapshot() {
+            try {
+                const db = await openOfflineCheckinDb();
+                try {
+                    await new Promise((resolve, reject) => {
+                        const tx = db.transaction(OFFLINE_CHECKIN_STORE, 'readwrite');
+                        tx.objectStore(OFFLINE_CHECKIN_STORE).delete(OFFLINE_SNAPSHOT_KEY);
+                        tx.oncomplete = () => resolve();
+                        tx.onerror = () => reject(tx.error || new Error('Snapshot delete failed'));
+                    });
+                } finally {
+                    db.close();
+                }
+            } catch (error) {
+                console.error('Offline snapshot cleanup failed:', error);
+            }
+        }
+
+        async function readOfflineCheckinSnapshot() {
+            try {
+                const db = await openOfflineCheckinDb();
+                let record;
+                try {
+                    record = await new Promise((resolve, reject) => {
+                        const tx = db.transaction(OFFLINE_CHECKIN_STORE, 'readonly');
+                        const request = tx.objectStore(OFFLINE_CHECKIN_STORE).get(OFFLINE_SNAPSHOT_KEY);
+                        request.onsuccess = () => resolve(request.result || null);
+                        request.onerror = () => reject(request.error || new Error('Snapshot read failed'));
+                    });
+                } finally {
+                    db.close();
+                }
+
+                if (!record || !record.snapshot) return null;
+                const snapshot = record.snapshot;
+                const generatedAt = Number(snapshot.generatedAt || record.savedAt || 0);
+                const validUntil = Number(snapshot.validUntil || 0);
+                const now = Date.now();
+                const stale = !generatedAt ||
+                    now - generatedAt > OFFLINE_SNAPSHOT_MAX_AGE_MS ||
+                    (validUntil && now > validUntil);
+
+                if (stale) {
+                    await clearOfflineCheckinSnapshot();
+                    return null;
+                }
+
+                return snapshot;
+            } catch (error) {
+                console.error('Offline snapshot read failed:', error);
+                return null;
+            }
+        }
+
+        function captureOfflineSyncTokenFromUrl() {
+            try {
+                const url = new URL(window.location.href);
+                if (!url.searchParams.has('offlineKey')) return 'none';
+                const value = String(url.searchParams.get('offlineKey') || '').trim();
+                url.searchParams.delete('offlineKey');
+                history.replaceState(null, '', url.pathname + (url.search ? url.search : '') + url.hash);
+
+                if (value.toLowerCase() === 'clear') {
+                    localStorage.removeItem(OFFLINE_SYNC_TOKEN_KEY);
+                    clearOfflineCheckinSnapshot();
+                    return 'cleared';
+                }
+
+                if (value.length < 24) {
+                    return 'invalid';
+                }
+
+                localStorage.setItem(OFFLINE_SYNC_TOKEN_KEY, value);
+                return 'set';
+            } catch (error) {
+                console.error('Offline pairing parameter failed:', error);
+                return 'invalid';
+            }
+        }
+
+        async function syncOfflineCheckinSnapshot(options = {}) {
+            const token = getOfflineSyncToken();
+            if (!token) return { status: 'UNPAIRED' };
+            if (offlineSnapshotSyncInFlight) return offlineSnapshotSyncInFlight;
+
+            offlineSnapshotSyncInFlight = (async () => {
+                try {
+                    const response = await fetch(OFFLINE_SNAPSHOT_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Kiosk-Offline-Token': token
+                        },
+                        body: '{}',
+                        cache: 'no-store'
+                    });
+
+                    if (response.status === 401 || response.status === 403) {
+                        try { localStorage.removeItem(OFFLINE_SYNC_TOKEN_KEY); } catch (error) {}
+                        await clearOfflineCheckinSnapshot();
+                        throw new Error('Offline sync token rejected');
+                    }
+                    if (!response.ok) {
+                        throw new Error(`Offline snapshot HTTP ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    if (result.status !== 'OK' || !Array.isArray(result.reservations)) {
+                        throw new Error(`Unexpected offline snapshot status: ${result.status}`);
+                    }
+
+                    await saveOfflineCheckinSnapshot(result);
+                    markConnectionSuccess();
+                    console.info(`Offline check-in snapshot saved: ${result.reservations.length} ready reservation(s).`);
+                    if (options.showSetupResult) {
+                        alert('Offline záloha check-inu byla na tomto iPadu aktivována.');
+                    }
+                    return { status: 'OK', count: result.reservations.length };
+                } catch (error) {
+                    console.error('Offline check-in snapshot sync failed:', error);
+                    if (options.showSetupResult) {
+                        alert('Offline zálohu check-inu se nepodařilo aktivovat. Zkontrolujte párovací klíč a nastavení Workeru.');
+                    }
+                    return { status: 'ERROR' };
+                } finally {
+                    offlineSnapshotSyncInFlight = null;
+                }
+            })();
+
+            return offlineSnapshotSyncInFlight;
+        }
+
+        function getClientPragueDate() {
+            try {
+                const parts = new Intl.DateTimeFormat('en-CA', {
+                    timeZone: 'Europe/Prague',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                }).formatToParts(new Date());
+                const year = parts.find(part => part.type === 'year')?.value;
+                const month = parts.find(part => part.type === 'month')?.value;
+                const day = parts.find(part => part.type === 'day')?.value;
+                return `${year}-${month}-${day}`;
+            } catch (error) {
+                return new Date().toISOString().slice(0, 10);
+            }
+        }
+
+        async function lookupOfflineCheckin(guestName, arrivalDate, departureDate) {
+            const snapshot = await readOfflineCheckinSnapshot();
+            if (!snapshot || !Array.isArray(snapshot.reservations)) {
+                return { status: 'UNAVAILABLE' };
+            }
+
+            const candidates = snapshot.reservations
+                .filter(item =>
+                    item &&
+                    item.arrivalDate === arrivalDate &&
+                    item.departureDate === departureDate &&
+                    Array.isArray(item.rooms) &&
+                    item.rooms.length
+                )
+                .map(item => ({
+                    item,
+                    score: nameMatchScore(item.guestName, guestName)
+                }))
+                .filter(candidate => candidate.score > 0);
+
+            if (!candidates.length) {
+                // Never claim NOT_FOUND from an offline cache. A reservation may have
+                // been created or changed after the last successful snapshot.
+                return { status: 'UNAVAILABLE' };
+            }
+
+            const bestScore = Math.max(...candidates.map(candidate => candidate.score));
+            const best = candidates.filter(candidate => candidate.score === bestScore);
+            if (best.length !== 1) {
+                return { status: 'AMBIGUOUS' };
+            }
+
+            const reservation = best[0].item;
+            const todayPrague = getClientPragueDate();
+            if (todayPrague < reservation.arrivalDate) return { status: 'TOO_EARLY' };
+            if (todayPrague > reservation.departureDate) return { status: 'EXPIRED' };
+
+            return {
+                status: 'READY',
+                reservationId: reservation.reservationId || null,
+                registrationCompleted: Boolean(reservation.registrationCompleted),
+                rooms: reservation.rooms,
+                mainEntranceCode: reservation.mainEntranceCode || '2018',
+                offlineFallback: true,
+                snapshotGeneratedAt: Number(snapshot.generatedAt || 0)
+            };
+        }
+
+
         const deferredDeliveryI18n = {"cs":"Váš požadavek byl uložen. Kiosk jej automaticky odešle, jakmile bude spojení se systémem znovu dostupné. V naléhavém případě prosím použijte pevnou linku vedle kiosku.","en":"Your request has been saved. The kiosk will send it automatically as soon as the connection to the system is available again. For an urgent request, please use the landline next to the kiosk.","de":"Ihre Anfrage wurde gespeichert. Der Kiosk sendet sie automatisch, sobald die Verbindung zum System wieder verfügbar ist. In dringenden Fällen nutzen Sie bitte das Festnetztelefon neben dem Kiosk.","it":"La richiesta è stata salvata. Il chiosco la invierà automaticamente non appena la connessione al sistema sarà nuovamente disponibile. In caso di urgenza, utilizzate il telefono fisso accanto al chiosco.","es":"Su solicitud se ha guardado. El quiosco la enviará automáticamente en cuanto vuelva a estar disponible la conexión con el sistema. Si es urgente, utilice el teléfono fijo situado junto al quiosco.","fr":"Votre demande a été enregistrée. Le kiosque l’enverra automatiquement dès que la connexion au système sera de nouveau disponible. En cas d’urgence, veuillez utiliser le téléphone fixe situé à côté du kiosque.","pl":"Twoje zgłoszenie zostało zapisane. Kiosk wyśle je automatycznie, gdy połączenie z systemem będzie ponownie dostępne. W pilnej sprawie skorzystaj z telefonu stacjonarnego obok kiosku.","ua":"Ваш запит збережено. Кіоск автоматично надішле його, щойно з’єднання із системою знову стане доступним. У терміновому випадку скористайтеся стаціонарним телефоном біля кіоску.","sk":"Vaša požiadavka bola uložená. Kiosk ju automaticky odošle, keď bude spojenie so systémom opäť dostupné. V naliehavom prípade použite pevnú linku vedľa kiosku.","tr":"Talebiniz kaydedildi. Sistem bağlantısı yeniden kullanılabilir olduğunda kiosk talebinizi otomatik olarak gönderecektir. Acil bir durumda lütfen kioskun yanındaki sabit telefonu kullanın.","da":"Din anmodning er gemt. Kiosken sender den automatisk, så snart forbindelsen til systemet er tilgængelig igen. Ved hastende behov bedes du bruge fastnettelefonen ved siden af kiosken.","ja":"ご依頼は保存されました。システムへの接続が再び利用可能になり次第、キオスクから自動的に送信されます。お急ぎの場合は、キオスク横の固定電話をご利用ください。","he":"הבקשה נשמרה. הקיוסק ישלח אותה אוטומטית ברגע שהחיבור למערכת יהיה זמין שוב. במקרה דחוף, אנא השתמשו בטלפון הקווי שליד הקיוסק.","el":"Το αίτημά σας αποθηκεύτηκε. Το kiosk θα το στείλει αυτόματα μόλις η σύνδεση με το σύστημα γίνει ξανά διαθέσιμη. Σε επείγουσα περίπτωση, χρησιμοποιήστε το σταθερό τηλέφωνο δίπλα στο kiosk."};
         function readConnectionOutageSince() {
             try {
@@ -5527,12 +7511,14 @@
         window.addEventListener("online", () => {
             setTimeout(sendKioskHeartbeat, 250);
             setTimeout(processRequestQueue, 500);
+            setTimeout(syncOfflineCheckinSnapshot, 900);
         });
 
         setInterval(processRequestQueue, 30000);
         setTimeout(processRequestQueue, 1500);
         setInterval(sendKioskHeartbeat, HEARTBEAT_INTERVAL_MS);
         setTimeout(sendKioskHeartbeat, 1000);
+        setInterval(syncOfflineCheckinSnapshot, OFFLINE_SNAPSHOT_SYNC_INTERVAL_MS);
 
 
         let currentLang = 'cs';
@@ -5694,10 +7680,8 @@
                 thanks: "Děkujeme! Váš požadavek byl úspěšně odeslán.",
                 
                 ciWelcomeTitle: "Vítejte v našem hotelu!",
-                ciAccessInfoText: "Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tudíž pokračovat chodbou rovně po schodech nahoru. Na pokoji prosím vyplňte registrační formulář a předejte jej personálu. Děkujeme.",
+                ciAccessInfoText: "Máte-li již vstupní kód, informace níže najdete také na pokoji v listovacím stojanu. Můžete tedy pokračovat chodbou rovně po schodech nahoru do svého pokoje.",
                 ciWelcomeSubtitle: "Rezervace přijímáme pouze online.",
-                ciRegTitle: "Registrace",
-                ciRegText: "Registrační formulář najdete na pokoji. Prosíme o jeho vyplnění, abychom vás mohli zaregistrovat na cizinecké policii, jak nám ukládá zákon. Vyplněný formulář stačí odevzdat personálu restaurace. Děkujeme.",
                 ciQ1Title: "Kdy a jak dostanete kód?",
                 ciQ1Text: "Jakmile je Váš pokoj připraven, odešleme Vám přístupový kód ke všem dveřím v SMS, e-mailu nebo přes interní chat vašeho poskytovatele rezervace, nejpozději v 15:00, kdy oficiálně začíná check-in. Prosím, zkontrolujte všechny možnosti, kterými jsme vás mohli kontaktovat.",
                 ciBfTitle: "Snídaně",
@@ -5750,10 +7734,8 @@
                 fillAll: "Prosím, vyplňte všetky polia.",
                 thanks: "Ďakujeme! Vaša požiadavka bola úspešne odoslaná.",
                 ciWelcomeTitle: "Vitajte v našom hoteli!",
-                ciAccessInfoText: "Ak už máte vstupný kód, informácie nižšie nájdete aj na izbe na stojane s informačnými materiálmi. Môžete teda pokračovať chodbou rovno a po schodoch nahor. Na izbe, prosím, vyplňte registračný formulár a odovzdajte ho personálu. Ďakujeme.",
+                ciAccessInfoText: "Ak už máte vstupný kód, informácie nižšie nájdete aj na izbe na stojane s informačnými materiálmi. Môžete teda pokračovať chodbou rovno a po schodoch nahor do svojej izby.",
                 ciWelcomeSubtitle: "Rezervácie prijímame iba online.",
-                ciRegTitle: "Registrácia",
-                ciRegText: "Registračný formulár nájdete na izbe. Prosíme o jeho vyplnenie, aby sme vás mohli zaregistrovať na cudzineckej polícii, ako nám ukladá zákon. Vyplnený formulár stačí odovzdať personálu reštaurácie. Ďakujeme.",
                 ciQ1Title: "Kedy a ako dostanete kód?",
                 ciQ1Text: "Hneď ako bude vaša izba pripravená, pošleme vám prístupový kód ku všetkým dverám prostredníctvom SMS, e-mailu alebo interného chatu vášho poskytovateľa rezervácie, najneskôr o 15:00, keď sa oficiálne začína check-in. Prosím, skontrolujte všetky možnosti, ktorými sme vás mohli kontaktovať.",
                 ciBfTitle: "Raňajky",
@@ -5806,10 +7788,8 @@
                 thanks: "Thank you! Your request has been sent successfully.",
 
                 ciWelcomeTitle: "Welcome to our hotel!",
-                ciAccessInfoText: "If you already have an access code, you can also find the information below in your room on the information stand. You can therefore continue straight down the corridor and up the stairs. In your room, please fill out the registration form and hand it to the staff. Thank you.",
+                ciAccessInfoText: "If you already have an access code, you can also find the information below in your room on the information stand. You can therefore continue straight down the corridor and up the stairs to your room.",
                 ciWelcomeSubtitle: "We accept reservations online only.",
-                ciRegTitle: "Registration",
-                ciRegText: "You will find the registration form in your room. Please fill it out so we can register you with the Foreign Police, as required by law. Simply hand the completed form to the restaurant staff. Thank you.",
                 ciQ1Title: "When and how will you receive your code?",
                 ciQ1Text: "As soon as your room is ready, we will send your door access code via SMS, email, or the internal chat of your booking provider, no later than 3:00 PM, when official check-in begins. Please check all the ways we may have tried to contact you.",
                 ciBfTitle: "Breakfast",
@@ -5863,10 +7843,8 @@
                 thanks: "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.",
 
                 ciWelcomeTitle: "Willkommen in unserem Hotel!",
-                ciAccessInfoText: "Wenn Sie bereits einen Zugangscode haben, finden Sie die untenstehenden Informationen auch in Ihrem Zimmer auf dem Informationsständer. Sie können daher den Flur geradeaus weitergehen und die Treppe hinaufgehen. Bitte füllen Sie in Ihrem Zimmer das Anmeldeformular aus und übergeben Sie es dem Personal. Vielen Dank.",
+                ciAccessInfoText: "Wenn Sie bereits einen Zugangscode haben, finden Sie die untenstehenden Informationen auch in Ihrem Zimmer auf dem Informationsständer. Sie können daher den Flur geradeaus weitergehen und die Treppe zu Ihrem Zimmer hinaufgehen.",
                 ciWelcomeSubtitle: "Reservierungen nehmen wir ausschließlich online entgegen.",
-                ciRegTitle: "Registrierung",
-                ciRegText: "Das Anmeldeformular finden Sie auf Ihrem Zimmer. Bitte füllen Sie es aus, damit wir Sie gesetzlich vorgeschrieben bei der Ausländerpolizei anmelden können. Übergeben Sie das ausgefüllte Formular einfach dem Restaurantpersonal. Vielen Dank.",
                 ciQ1Title: "Wann und wie erhalten Sie Ihren Zugangscode?",
                 ciQ1Text: "Sobald Ihr Zimmer bereit ist, senden wir Ihnen den Zugangscode für alle Türen per SMS, E-Mail oder über den internen Chat Ihres Buchungsanbieters, spätestens um 15:00 Uhr, wenn der Check-in offiziell beginnt. Bitte prüfen Sie alle Möglichkeiten, über die wir versucht haben könnten, Sie zu kontaktieren.",
                 ciBfTitle: "Frühstück",
@@ -5920,10 +7898,8 @@
                 thanks: "Grazie! La tua richiesta è stata inviata con successo.",
 
                 ciWelcomeTitle: "Benvenuti nel nostro hotel!",
-                ciAccessInfoText: "Se avete già il codice di accesso, le informazioni riportate di seguito sono disponibili anche in camera sul supporto informativo. Potete quindi proseguire dritto lungo il corridoio e salire le scale. In camera, compilate il modulo di registrazione e consegnatelo al personale. Grazie.",
+                ciAccessInfoText: "Se avete già il codice di accesso, le informazioni riportate di seguito sono disponibili anche in camera sul supporto informativo. Potete quindi proseguire dritto lungo il corridoio e salire le scale fino alla vostra camera.",
                 ciWelcomeSubtitle: "Accettiamo prenotazioni esclusivamente online.",
-                ciRegTitle: "Registrazione",
-                ciRegText: "Troverai il modulo di registrazione in camera. Ti preghiamo di compilarlo per permetterci di registrarti presso la Polizia dello Straniero come richiesto dalla legge. Basta consegnare il modulo compilato al personale del ristorante. Grazie.",
                 ciQ1Title: "Quando e come riceverai il codice?",
                 ciQ1Text: "Non appena la vostra camera sarà pronta, vi invieremo il codice di accesso a tutte le porte tramite SMS, e-mail o la chat interna del vostro fornitore di prenotazione, entro le 15:00, quando inizia ufficialmente il check-in. Controllate tutti i possibili canali attraverso i quali potremmo aver cercato di contattarvi.",
                 ciBfTitle: "Colazione",
@@ -5977,10 +7953,8 @@
                 thanks: "¡Gracias! Su solicitud ha sido enviada con éxito.",
 
                 ciWelcomeTitle: "¡Bienvenido a nuestro hotel!",
-                ciAccessInfoText: "Si ya tiene el código de acceso, también encontrará la información siguiente en su habitación, en el expositor informativo. Por lo tanto, puede continuar recto por el pasillo y subir las escaleras. En la habitación, rellene el formulario de registro y entréguelo al personal. Gracias.",
+                ciAccessInfoText: "Si ya tiene el código de acceso, también encontrará la información siguiente en su habitación, en el expositor informativo. Puede continuar recto por el pasillo y subir las escaleras hasta su habitación.",
                 ciWelcomeSubtitle: "Aceptamos reservas únicamente en línea.",
-                ciRegTitle: "Registro de huéspedes",
-                ciRegText: "Encontrará el formulario de registro en su habitación. Le rogamos que lo rellene para que podamos registrarle ante la Policía de Extranjería según exige la ley. Simplemente entregue el formulario cumplimentado al personal del restaurante. Gracias.",
                 ciQ1Title: "¿Cuándo y cómo recibirá el código?",
                 ciQ1Text: "En cuanto su habitación esté preparada, le enviaremos el código de acceso a todas las puertas por SMS, correo electrónico o el chat interno de su proveedor de reservas, como muy tarde a las 15:00, cuando comienza oficialmente el check-in. Compruebe todas las vías por las que podríamos haber intentado ponernos en contacto con usted.",
                 ciBfTitle: "Desayuno",
@@ -6034,10 +8008,8 @@
                 thanks: "Merci ! Votre demande a été envoyée avec succès.",
 
                 ciWelcomeTitle: "Bienvenue dans notre hôtel !",
-                ciAccessInfoText: "Si vous avez déjà le code d’accès, vous trouverez également les informations ci-dessous dans votre chambre, sur le présentoir d’information. Vous pouvez donc continuer tout droit dans le couloir et monter les escaliers. Dans votre chambre, veuillez remplir le formulaire d’enregistrement et le remettre au personnel. Merci.",
+                ciAccessInfoText: "Si vous avez déjà le code d’accès, vous trouverez également les informations ci-dessous dans votre chambre, sur le présentoir d’information. Vous pouvez donc continuer tout droit dans le couloir et monter les escaliers jusqu’à votre chambre.",
                 ciWelcomeSubtitle: "Nous acceptons les réservations uniquement en ligne.",
-                ciRegTitle: "Enregistrement",
-                ciRegText: "Vous trouverez le formulaire d'enregistrement dans votre chambre. Veuillez le remplir afin que nous puissions vous enregistrer auprès de la police des étrangers, conformément à la loi. Il vous suffit de remettre le formulaire rempli au personnel du restaurant. Merci.",
                 ciQ1Title: "Quand et comment recevrez-vous votre code ?",
                 ciQ1Text: "Dès que votre chambre est prête, nous vous enverrons le code d’accès à toutes les portes par SMS, e-mail ou via le chat interne de votre prestataire de réservation, au plus tard à 15 h, heure officielle du début du check-in. Veuillez vérifier tous les moyens par lesquels nous avons pu essayer de vous contacter.",
                 ciBfTitle: "Petit-déjeuner",
@@ -6091,10 +8063,8 @@
                 thanks: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie.",
 
                 ciWelcomeTitle: "Witamy w naszym hotelu!",
-                ciAccessInfoText: "Jeśli masz już kod dostępu, poniższe informacje znajdziesz również w swoim pokoju na stojaku informacyjnym. Możesz więc kontynuować korytarzem prosto i wejść po schodach na górę. W pokoju prosimy wypełnić formularz rejestracyjny i przekazać go personelowi. Dziękujemy.",
+                ciAccessInfoText: "Jeśli masz już kod dostępu, poniższe informacje znajdziesz również w swoim pokoju na stojaku informacyjnym. Możesz więc iść prosto korytarzem i wejść po schodach do swojego pokoju.",
                 ciWelcomeSubtitle: "Rezerwacje przyjmujemy wyłącznie online.",
-                ciRegTitle: "Rejestracja",
-                ciRegText: "Formularz rejestracyjny znajdziesz w pokoju. Prosimy o jego wypełnienie, abyśmy mogli zarejestrować Cię w policji ds. cudzoziemców, zgodnie z wymogami prawa. Wypełniony formularz wystarczy przekazać personelowi restauracji. Dziękujemy.",
                 ciQ1Title: "Kiedy i jak otrzymasz kod?",
                 ciQ1Text: "Gdy tylko pokój będzie gotowy, wyślemy kod dostępu do wszystkich drzwi SMS-em, e-mailem lub przez wewnętrzny czat dostawcy rezerwacji, najpóźniej o 15:00, kiedy oficjalnie rozpoczyna się zameldowanie. Proszę sprawdzić wszystkie możliwe sposoby, za pomocą których mogliśmy próbować się z Państwem skontaktować.",
                 ciBfTitle: "Śniadanie",
@@ -6148,10 +8118,8 @@
                 thanks: "Дякуємо! Ваш запит успішно надіслано.",
 
                 ciWelcomeTitle: "Ласкаво просимо до нашого готелю!",
-                ciAccessInfoText: "Якщо ви вже маєте код доступу, наведену нижче інформацію ви також знайдете у своєму номері на інформаційному стенді. Тож можете продовжити прямо коридором і піднятися сходами нагору. У номері, будь ласка, заповніть реєстраційну форму та передайте її персоналу. Дякуємо.",
+                ciAccessInfoText: "Якщо ви вже маєте код доступу, наведену нижче інформацію ви також знайдете у своєму номері на інформаційному стенді. Тож можете пройти прямо коридором і піднятися сходами до свого номера.",
                 ciWelcomeSubtitle: "Ми приймаємо бронювання лише онлайн.",
-                ciRegTitle: "Реєстрація",
-                ciRegText: "Реєстраційну форму ви знайдете в номері. Будь ласка, заповніть її, щоб ми могли зареєструвати вас у поліції у справах іноземців, як цього вимагає закон. Заповнену форму достатньо передати персоналу ресторану. Дякуємо.",
                 ciQ1Title: "Коли та як ви отримаєте код?",
                 ciQ1Text: "Щойно ваш номер буде готовий, ми надішлемо вам код доступу до всіх дверей через SMS, електронну пошту або внутрішній чат вашого сервісу бронювання, не пізніше 15:00, коли офіційно починається заселення. Будь ласка, перевірте всі способи, якими ми могли намагатися з вами зв’язатися.",
                 ciBfTitle: "Сніданок",
@@ -6205,10 +8173,8 @@
                 thanks: "Teşekkürler! Talebiniz başarıyla gönderildi.",
 
                 ciWelcomeTitle: "Otelimize hoş geldiniz!",
-                ciAccessInfoText: "Giriş kodunuz zaten varsa, aşağıdaki bilgileri odanızdaki bilgi standında da bulabilirsiniz. Bu nedenle koridordan düz devam edip merdivenlerden yukarı çıkabilirsiniz. Odanızda lütfen kayıt formunu doldurun ve personele teslim edin. Teşekkür ederiz.",
+                ciAccessInfoText: "Giriş kodunuz zaten varsa, aşağıdaki bilgileri odanızdaki bilgi standında da bulabilirsiniz. Koridordan düz devam edip merdivenlerden odanıza çıkabilirsiniz.",
                 ciWelcomeSubtitle: "Rezervasyonları yalnızca çevrim içi kabul ediyoruz.",
-                ciRegTitle: "Kayıt",
-                ciRegText: "Kayıt formunu odanızda bulacaksınız. Kanunun gerektirdiği şekilde sizi Yabancılar Polisi'ne kaydetmemiz için lütfen formu doldurun. Doldurulmuş formu restoran personeline teslim etmeniz yeterlidir. Teşekkür ederiz.",
                 ciQ1Title: "Kodu ne zaman ve nasıl alacaksınız?",
                 ciQ1Text: "Odanız hazır olduğunda, en geç check-in'in resmi olarak başladığı 15:00'e kadar tüm kapılara giriş kodunu SMS, e-posta veya rezervasyon sağlayıcınızın dahili sohbeti üzerinden göndereceğiz. Lütfen sizinle iletişime geçmiş olabileceğimiz tüm kanalları kontrol edin.",
                 ciBfTitle: "Kahvaltı",
@@ -6262,10 +8228,8 @@
                 thanks: "Tak! Din anmodning er blevet sendt med succes.",
 
                 ciWelcomeTitle: "Velkommen til vores hotel!",
-                ciAccessInfoText: "Hvis du allerede har en adgangskode, finder du også oplysningerne nedenfor på dit værelse på informationsstanden. Du kan derfor fortsætte ligeud ad gangen og gå op ad trapperne. Udfyld venligst registreringsformularen på værelset, og aflever den til personalet. Tak.",
+                ciAccessInfoText: "Hvis du allerede har en adgangskode, finder du også oplysningerne nedenfor på dit værelse på informationsstanden. Du kan derfor fortsætte ligeud ad gangen og gå op ad trapperne til dit værelse.",
                 ciWelcomeSubtitle: "Vi modtager kun reservationer online.",
-                ciRegTitle: "Registrering",
-                ciRegText: "Du finder registreringsformularen på dit værelse. Udfyld den venligst, så vi kan registrere dig hos Udlændingepolitiet som krævet ved lov. Aflever blot den udfyldte formular til restaurantpersonalet. Tak.",
                 ciQ1Title: "Hvornår og hvordan modtager du din kode?",
                 ciQ1Text: "Så snart dit værelse er klar, sender vi dig adgangskoden til alle døre via SMS, e-mail eller din reservationsudbyders interne chat, senest kl. 15.00, hvor check-in officielt begynder. Tjek venligst alle de måder, vi kan have forsøgt at kontakte dig på.",
                 ciBfTitle: "Morgenmad",
@@ -6319,10 +8283,8 @@
                 thanks: "ありがとうございます！リクエストが正常に送信されました。",
 
                 ciWelcomeTitle: "当ホテルへようこそ！",
-                ciAccessInfoText: "すでに入室コードをお持ちの場合は、以下の情報をお部屋の案内スタンドでもご確認いただけます。そのまま廊下をまっすぐ進み、階段を上ってください。お部屋で登録フォームにご記入のうえ、スタッフにお渡しください。ありがとうございます。",
+                ciAccessInfoText: "すでに入室コードをお持ちの場合は、以下の情報をお部屋の案内スタンドでもご確認いただけます。そのまま廊下をまっすぐ進み、階段を上ってお部屋へお進みください。",
                 ciWelcomeSubtitle: "ご予約はオンラインでのみ受け付けています。",
-                ciRegTitle: "宿泊者登録",
-                ciRegText: "客室内に宿泊登録用紙がございます。法律に基づき外国人警察への登録が必要となりますので、ご記入のうえレストランスタッフにお渡しください。ご協力ありがとうございます。",
                 ciQ1Title: "暗証番号の受け取り方法と時間",
                 ciQ1Text: "お部屋の準備が整い次第、チェックインが正式に開始される15:00までに、SMS、メール、または予約サイトの内部チャットで、すべてのドアのアクセスコードをお送りします。ご連絡した可能性のあるすべての方法をご確認ください。",
                 ciBfTitle: "朝食",
@@ -6376,10 +8338,8 @@
                 thanks: "תודה! פנייתך נשלחה בהצלחה.",
 
                 ciWelcomeTitle: "ברוכים הבאים למלון שלנו!",
-                ciAccessInfoText: "אם כבר יש ברשותכם קוד כניסה, תוכלו למצוא את המידע שלהלן גם בחדרכם על גבי מעמד המידע. לכן תוכלו להמשיך ישר במסדרון ולעלות במדרגות. בחדר, אנא מלאו את טופס הרישום ומסרו אותו לצוות. תודה.",
+                ciAccessInfoText: "אם כבר יש ברשותכם קוד כניסה, תוכלו למצוא את המידע שלהלן גם בחדרכם על גבי מעמד המידע. תוכלו להמשיך ישר במסדרון ולעלות במדרגות אל חדרכם.",
                 ciWelcomeSubtitle: "אנו מקבלים הזמנות באופן מקוון בלבד.",
-                ciRegTitle: "הרשמה",
-                ciRegText: "טופס ההרשמה נמצא בחדרכם. אנא מלאו אותו כדי שנוכל לרשום אתכם במשטרת ההגירה על פי חוק. את הטופס המלא יש להגיש לצוות המסעדה. תודה.",
                 ciQ1Title: "מתי ואיך תקבלו את הקוד?",
                 ciQ1Text: "ברגע שהחדר שלכם יהיה מוכן, נשלח לכם את קוד הגישה לכל הדלתות באמצעות SMS, דוא״ל או הצ׳אט הפנימי של ספק ההזמנה שלכם, לא יאוחר מהשעה 15:00, שבה מתחיל הצ׳ק-אין באופן רשמי. אנא בדקו את כל הדרכים שבהן ייתכן שניסינו ליצור איתכם קשר.",
                 ciBfTitle: "ארוחת בוקר",
@@ -6433,10 +8393,8 @@
                 thanks: "Ευχαριστούμε! Το αίτημά σας στάλθηκε με επιτυχία.",
 
                 ciWelcomeTitle: "Καλώς ήρθατε στο ξενοδοχείο μας!",
-                ciAccessInfoText: "Εάν έχετε ήδη κωδικό πρόσβασης, θα βρείτε επίσης τις παρακάτω πληροφορίες στο δωμάτιό σας, στο ενημερωτικό σταντ. Μπορείτε επομένως να συνεχίσετε ευθεία στον διάδρομο και να ανεβείτε τις σκάλες. Στο δωμάτιο, παρακαλούμε συμπληρώστε τη φόρμα εγγραφής και παραδώστε την στο προσωπικό. Ευχαριστούμε.",
+                ciAccessInfoText: "Εάν έχετε ήδη κωδικό πρόσβασης, θα βρείτε επίσης τις παρακάτω πληροφορίες στο δωμάτιό σας, στο ενημερωτικό σταντ. Μπορείτε να συνεχίσετε ευθεία στον διάδρομο και να ανεβείτε τις σκάλες μέχρι το δωμάτιό σας.",
                 ciWelcomeSubtitle: "Δεχόμαστε κρατήσεις فقط online.",
-                ciRegTitle: "Εγγραφή",
-                ciRegText: "Θα βρείτε τη φόρμα εγγραφής στο δωμάτιό σας. Παρακαλούμε συμπληρώστε τη για να μπορέσουμε να σας δηλώσουμε στην Αστυνομία Αλλοδαπών όπως ορίζει ο νόμος. Αρκεί να παραδώσετε τη συμπληρωμένη φόρμα στο προσωπικό του εστιατορίου. Ευχαριστούμε.",
                 ciQ1Title: "Πότε και πώς θα λάβετε τον κωδικό σας;",
                 ciQ1Text: "Μόλις το δωμάτιό σας είναι έτοιμο, θα σας στείλουμε τον κωδικό πρόσβασης για όλες τις πόρτες μέσω SMS, e-mail ή της εσωτερικής συνομιλίας του παρόχου κράτησής σας, το αργότερο στις 15:00, όταν ξεκινά επίσημα το check-in. Παρακαλούμε ελέγξτε όλους τους τρόπους με τους οποίους μπορεί να προσπαθήσαμε να επικοινωνήσουμε μαζί σας.",
                 ciBfTitle: "Πρωινό",
@@ -6474,7 +8432,7 @@
 
 
 
-        const checkoutExtraI18n = {"cs": {"feesTitle": "Poplatky a doklad", "feesText": "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, kontaktujte nás prosím na hotelovém e-mailu uvedeném na vizitce vedle kiosku.", "electronic": "Zaškrtněte, pokud chcete zaslat doklad elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím vyplňte e-mailovou adresu."}, "en": {"feesTitle": "Fees and receipt", "feesText": "All fees are already included in the accommodation price. If you need a company invoice, please contact us at the hotel e-mail shown on the business card next to the kiosk.", "electronic": "Tick if you would like the receipt sent electronically", "email": "E-mail address", "emailRequired": "Please enter an e-mail address."}, "de": {"feesTitle": "Gebühren und Beleg", "feesText": "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Firmenrechnung benötigen, kontaktieren Sie uns bitte über die Hotel-E-Mail-Adresse auf der Visitenkarte neben dem Kiosk.", "electronic": "Ankreuzen, wenn Sie den Beleg elektronisch erhalten möchten", "email": "E-Mail-Adresse", "emailRequired": "Bitte geben Sie eine E-Mail-Adresse ein."}, "sk": {"feesTitle": "Poplatky a doklad", "feesText": "Všetky poplatky sú už zahrnuté v cene ubytovania. Ak potrebujete faktúru na firmu, kontaktujte nás prosím na hotelovom e-maile uvedenom na vizitke vedľa kiosku.", "electronic": "Zaškrtnite, ak chcete doklad zaslať elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím, zadajte e-mailovú adresu."}, "it": {"feesTitle": "Costi e ricevuta", "feesText": "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desiderate una fattura intestata a un’azienda, contattateci all’e-mail dell’hotel indicata sul biglietto da visita accanto al chiosco.", "electronic": "Selezionate se desiderate ricevere la ricevuta in formato elettronico", "email": "Indirizzo e-mail", "emailRequired": "Inserite un indirizzo e-mail."}, "es": {"feesTitle": "Cargos y recibo", "feesText": "Todos los cargos están incluidos en el precio del alojamiento. Si necesita una factura a nombre de una empresa, contáctenos en el e-mail del hotel indicado en la tarjeta junto al quiosco.", "electronic": "Marque esta opción si desea recibir el recibo electrónicamente", "email": "Dirección de e-mail", "emailRequired": "Introduzca una dirección de e-mail."}, "fr": {"feesTitle": "Frais et reçu", "feesText": "Tous les frais sont déjà inclus dans le prix de l’hébergement. Pour une facture au nom d’une entreprise, contactez-nous à l’adresse e-mail de l’hôtel indiquée sur la carte près du kiosque.", "electronic": "Cochez cette case pour recevoir le reçu par voie électronique", "email": "Adresse e-mail", "emailRequired": "Veuillez saisir une adresse e-mail."}, "pl": {"feesTitle": "Opłaty i dokument", "feesText": "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli potrzebujesz faktury na firmę, skontaktuj się z nami przez hotelowy adres e-mail podany na wizytówce obok kiosku.", "electronic": "Zaznacz, jeśli chcesz otrzymać dokument elektronicznie", "email": "Adres e-mail", "emailRequired": "Proszę podać adres e-mail."}, "ua": {"feesTitle": "Оплати та квитанція", "feesText": "Усі платежі вже включені у вартість проживання. Якщо вам потрібен рахунок на компанію, зв’яжіться з нами за електронною адресою готелю, вказаною на візитівці біля кіоску.", "electronic": "Позначте, якщо бажаєте отримати квитанцію електронною поштою", "email": "Електронна адреса", "emailRequired": "Будь ласка, введіть електронну адресу."}, "tr": {"feesTitle": "Ücretler ve makbuz", "feesText": "Tüm ücretler konaklama fiyatına dahildir. Şirket adına fatura istiyorsanız, kiosk yanındaki kartvizitte bulunan otel e-posta adresinden bizimle iletişime geçin.", "electronic": "Makbuzu elektronik olarak almak istiyorsanız işaretleyin", "email": "E-posta adresi", "emailRequired": "Lütfen bir e-posta adresi girin."}, "da": {"feesTitle": "Gebyrer og kvittering", "feesText": "Alle gebyrer er allerede inkluderet i overnatningsprisen. Hvis du ønsker en faktura til en virksomhed, bedes du kontakte os på hotellets e-mailadresse på visitkortet ved siden af kiosken.", "electronic": "Markér, hvis du ønsker kvitteringen sendt elektronisk", "email": "E-mailadresse", "emailRequired": "Indtast venligst en e-mailadresse."}, "ja": {"feesTitle": "料金と領収書", "feesText": "すべての料金は宿泊料金に含まれています。会社名義の請求書が必要な場合は、キオスク横のホテルのカードに記載されたメールアドレスまでご連絡ください。", "electronic": "領収書の電子送付を希望する場合はチェックしてください", "email": "メールアドレス", "emailRequired": "メールアドレスを入力してください。"}, "he": {"feesTitle": "חיובים וקבלה", "feesText": "כל החיובים כבר כלולים במחיר האירוח. אם דרושה לכם חשבונית על שם חברה, אנא צרו קשר בדוא״ל המלון המופיע בכרטיס שליד הקיוסק.", "electronic": "סמנו אם ברצונכם לקבל את הקבלה באופן אלקטרוני", "email": "כתובת דוא״ל", "emailRequired": "נא להזין כתובת דוא״ל."}, "el": {"feesTitle": "Χρεώσεις και απόδειξη", "feesText": "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Αν χρειάζεστε τιμολόγιο για εταιρεία, επικοινωνήστε μαζί μας στο e-mail του ξενοδοχείου που αναγράφεται στην κάρτα δίπλα στο κιόσκι.", "electronic": "Επιλέξτε αν θέλετε να λάβετε την απόδειξη ηλεκτρονικά", "email": "Διεύθυνση e-mail", "emailRequired": "Παρακαλώ εισαγάγετε μια διεύθυνση e-mail."}};
+        const checkoutExtraI18n = {"cs": {"feesTitle": "Poplatky a doklad", "feesText": "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, kontaktujte nás prosím na e-mailu hotel@uzlatychnuzek.cz.", "electronic": "Zaškrtněte, pokud chcete zaslat doklad elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím vyplňte e-mailovou adresu."}, "en": {"feesTitle": "Fees and receipt", "feesText": "All fees are already included in the accommodation price. If you need a company invoice, please contact us at hotel@uzlatychnuzek.cz.", "electronic": "Tick if you would like the receipt sent electronically", "email": "E-mail address", "emailRequired": "Please enter an e-mail address."}, "de": {"feesTitle": "Gebühren und Beleg", "feesText": "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Firmenrechnung benötigen, kontaktieren Sie uns bitte unter hotel@uzlatychnuzek.cz.", "electronic": "Ankreuzen, wenn Sie den Beleg elektronisch erhalten möchten", "email": "E-Mail-Adresse", "emailRequired": "Bitte geben Sie eine E-Mail-Adresse ein."}, "sk": {"feesTitle": "Poplatky a doklad", "feesText": "Všetky poplatky sú už zahrnuté v cene ubytovania. Ak potrebujete faktúru na firmu, kontaktujte nás prosím na e-maile hotel@uzlatychnuzek.cz.", "electronic": "Zaškrtnite, ak chcete doklad zaslať elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím, zadajte e-mailovú adresu."}, "it": {"feesTitle": "Costi e ricevuta", "feesText": "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desiderate una fattura intestata a un’azienda, contattateci all’indirizzo hotel@uzlatychnuzek.cz.", "electronic": "Selezionate se desiderate ricevere la ricevuta in formato elettronico", "email": "Indirizzo e-mail", "emailRequired": "Inserite un indirizzo e-mail."}, "es": {"feesTitle": "Cargos y recibo", "feesText": "Todos los cargos están incluidos en el precio del alojamiento. Si necesita una factura a nombre de una empresa, contáctenos en hotel@uzlatychnuzek.cz.", "electronic": "Marque esta opción si desea recibir el recibo electrónicamente", "email": "Dirección de e-mail", "emailRequired": "Introduzca una dirección de e-mail."}, "fr": {"feesTitle": "Frais et reçu", "feesText": "Tous les frais sont déjà inclus dans le prix de l’hébergement. Pour une facture au nom d’une entreprise, contactez-nous à hotel@uzlatychnuzek.cz.", "electronic": "Cochez cette case pour recevoir le reçu par voie électronique", "email": "Adresse e-mail", "emailRequired": "Veuillez saisir une adresse e-mail."}, "pl": {"feesTitle": "Opłaty i dokument", "feesText": "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli potrzebujesz faktury na firmę, skontaktuj się z nami pod adresem hotel@uzlatychnuzek.cz.", "electronic": "Zaznacz, jeśli chcesz otrzymać dokument elektronicznie", "email": "Adres e-mail", "emailRequired": "Proszę podać adres e-mail."}, "ua": {"feesTitle": "Оплати та квитанція", "feesText": "Усі платежі вже включені у вартість проживання. Якщо вам потрібен рахунок на компанію, зв’яжіться з нами за адресою hotel@uzlatychnuzek.cz.", "electronic": "Позначте, якщо бажаєте отримати квитанцію електронною поштою", "email": "Електронна адреса", "emailRequired": "Будь ласка, введіть електронну адресу."}, "tr": {"feesTitle": "Ücretler ve makbuz", "feesText": "Tüm ücretler konaklama fiyatına dahildir. Şirket adına fatura istiyorsanız, hotel@uzlatychnuzek.cz adresinden bizimle iletişime geçin.", "electronic": "Makbuzu elektronik olarak almak istiyorsanız işaretleyin", "email": "E-posta adresi", "emailRequired": "Lütfen bir e-posta adresi girin."}, "da": {"feesTitle": "Gebyrer og kvittering", "feesText": "Alle gebyrer er allerede inkluderet i overnatningsprisen. Hvis du ønsker en faktura til en virksomhed, bedes du kontakte os på hotel@uzlatychnuzek.cz.", "electronic": "Markér, hvis du ønsker kvitteringen sendt elektronisk", "email": "E-mailadresse", "emailRequired": "Indtast venligst en e-mailadresse."}, "ja": {"feesTitle": "料金と領収書", "feesText": "すべての料金は宿泊料金に含まれています。会社名義の請求書が必要な場合は、hotel@uzlatychnuzek.cz までご連絡ください。", "electronic": "領収書の電子送付を希望する場合はチェックしてください", "email": "メールアドレス", "emailRequired": "メールアドレスを入力してください。"}, "he": {"feesTitle": "חיובים וקבלה", "feesText": "כל החיובים כבר כלולים במחיר האירוח. אם דרושה לכם חשבונית על שם חברה, אנא צרו קשר בכתובת hotel@uzlatychnuzek.cz.", "electronic": "סמנו אם ברצונכם לקבל את הקבלה באופן אלקטרוני", "email": "כתובת דוא״ל", "emailRequired": "נא להזין כתובת דוא״ל."}, "el": {"feesTitle": "Χρεώσεις και απόδειξη", "feesText": "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Αν χρειάζεστε τιμολόγιο για εταιρεία, επικοινωνήστε μαζί μας στο hotel@uzlatychnuzek.cz.", "electronic": "Επιλέξτε αν θέλετε να λάβετε την απόδειξη ηλεκτρονικά", "email": "Διεύθυνση e-mail", "emailRequired": "Παρακαλώ εισαγάγετε μια διεύθυνση e-mail."}};
 
         const checkoutTimeI18n = {"cs": "do 11:00", "en": "by 11:00", "de": "bis 11:00", "sk": "do 11:00", "it": "entro le 11:00", "es": "hasta las 11:00", "fr": "avant 11:00", "pl": "do 11:00", "ua": "до 11:00", "tr": "11:00’e kadar", "da": "senest kl. 11.00", "ja": "11:00まで", "he": "עד 11:00", "el": "έως τις 11:00"};
 
@@ -6621,6 +8579,8 @@
 
         // NAVIGATION LOGIC
         function hideAllScreens() {
+            document.getElementById('guide-floating-rail')?.classList.add('hidden');
+            document.getElementById('parking-floating-rail')?.classList.add('hidden');
             document.getElementById('screen-1').classList.add('hidden');
             document.getElementById('screen-self-checkin').classList.add('hidden');
             document.getElementById('screen-checkin-result').classList.add('hidden');
@@ -6841,6 +8801,68 @@
             }
         });
 
+        function structureParkingOptionText(element, optionNumber) {
+            if (!element) return;
+            const sourceHtml = String(element.innerHTML || '').trim();
+            if (!sourceHtml) return;
+            const parts = sourceHtml
+                .split(/<br\s*\/?\s*>/i)
+                .map(part => part.trim())
+                .filter(Boolean);
+
+            const parsed = parts.map((part, index) => {
+                const holder = document.createElement('div');
+                holder.innerHTML = part;
+                const strong = holder.querySelector('strong');
+                const em = holder.querySelector('em');
+
+                if (em && holder.textContent.trim() === em.textContent.trim()) {
+                    return { type: 'note', html: part };
+                }
+
+                if (strong) {
+                    const strongText = String(strong.textContent || '').trim();
+                    if (/[:：]$/.test(strongText)) {
+                        const label = strongText.replace(/[:：]\s*$/, '');
+                        strong.remove();
+                        return { type: 'fact', label, value: holder.innerHTML.trim() };
+                    }
+                    if (index === 0) {
+                        return { type: 'link', html: part };
+                    }
+                }
+
+                return { type: 'full', html: part };
+            });
+
+            const factTotal = parsed.filter(item => item.type === 'fact').length;
+            let factIndex = 0;
+            const rows = parsed.map(item => {
+                if (item.type === 'note') {
+                    return '<div class="parking-fact-note">' + item.html + '</div>';
+                }
+                if (item.type === 'link') {
+                    return '<div class="parking-fact-link">' + item.html + '</div>';
+                }
+                if (item.type === 'fact') {
+                    factIndex += 1;
+                    const classes = ['parking-fact-row', 'parking-fact-index-' + factIndex];
+                    if (factIndex === factTotal) classes.push('parking-fact-summary');
+                    if (Number(optionNumber) === 1 && factIndex === 5) classes.push('parking-fact-warning');
+                    return '<div class="' + classes.join(' ') + '"><span class="parking-fact-label">' + escapeHtml(item.label) + '</span><span class="parking-fact-value">' + item.value + '</span></div>';
+                }
+                return '<div class="parking-fact-row parking-fact-full"><span class="parking-fact-value">' + item.html + '</span></div>';
+            });
+
+            element.innerHTML = '<div class="parking-facts">' + rows.join('') + '</div>';
+        }
+
+        function structureParkingOptions() {
+            [1,2,3,4].forEach(number => {
+                structureParkingOptionText(document.getElementById('pk-opt' + number + '-text'), number);
+            });
+        }
+
         function refreshSelfCheckinParkingPanel() {
             const source = document.getElementById('screen-parking');
             const target = document.getElementById('sci-parking-content');
@@ -6863,8 +8885,12 @@
             /* In the compact Check-in tab, keep photo + QR together in one
                right-hand visual column. This prevents the QR from falling to
                the bottom of the card and keeps long text clear of the image. */
+            const parkingDict = i18n[currentLang] || i18n.en;
             target.querySelectorAll('.info-item').forEach((item, index) => {
                 item.classList.add('parking-option-' + (index + 1));
+                const rawText = parkingDict['pkOpt' + (index + 1) + 'Text'];
+                const textNode = item.querySelector('.parking-content-row > span');
+                if (textNode && rawText) textNode.innerHTML = rawText;
                 const row = item.querySelector('.parking-content-row');
                 if (!row) return;
                 const photoWrap = row.querySelector('.parking-photo-wrap');
@@ -7619,6 +9645,8 @@
                 arrivalDate: reservation.arrivalDate,
                 departureDate: reservation.departureDate,
                 rooms: roomNumbers,
+                offlineFallback: Boolean(reservation.offlineFallback),
+                offlineSnapshotGeneratedAt: reservation.offlineSnapshotGeneratedAt || null,
                 registration
             }).catch(error => {
                 console.error('Check-in request queue error:', error);
@@ -7721,13 +9749,53 @@
                     throw new Error(`Unexpected API status: ${result.status}`);
                 }
             } catch (error) {
-                console.error('Check-in API error:', error);
-                alert(
-                    currentLang === 'cs'
-                        ? 'Nepodařilo se spojit se systémem check-inu. Zkuste to prosím znovu za chvíli.'
-                        : 'Unable to connect to the check-in system. Please try again in a moment.'
-                );
-                startAutoResetTimer();
+                console.error('Check-in API error; trying offline snapshot:', error);
+                markConnectionFailure();
+
+                const offlineResult = await lookupOfflineCheckin(name, from, to);
+                if (offlineResult.status === 'READY') {
+                    hideAllScreens();
+                    const rooms = Array.isArray(offlineResult.rooms) ? offlineResult.rooms : [];
+                    activeCheckinReservation = {
+                        reservationId: offlineResult.reservationId || null,
+                        guestName: name,
+                        arrivalDate: from,
+                        departureDate: to,
+                        mainEntranceCode: offlineResult.mainEntranceCode || '2018',
+                        rooms,
+                        offlineFallback: true,
+                        offlineSnapshotGeneratedAt: offlineResult.snapshotGeneratedAt || null
+                    };
+
+                    if (offlineResult.registrationCompleted) {
+                        renderCheckinRooms(rooms);
+                        document.getElementById('sci-main-code-value').innerText = activeCheckinReservation.mainEntranceCode;
+                        document.getElementById('screen-checkin-result').classList.remove('hidden');
+                        startCheckinResultCountdown();
+                    } else {
+                        document.getElementById('screen-self-checkin').classList.remove('hidden');
+                        showRegistrationStage(activeCheckinReservation);
+                    }
+                } else if (offlineResult.status === 'AMBIGUOUS') {
+                    hideAllScreens();
+                    selfCheckinVerificationMode = 'ambiguous';
+                    const statusCopy = selfCheckinStatusI18n[currentLang] || selfCheckinStatusI18n.en;
+                    document.getElementById('sci-unverified-title').innerText = statusCopy.ambiguousTitle || statusCopy.unverifiedTitle;
+                    document.getElementById('sci-unverified-text').innerText = statusCopy.ambiguousText || statusCopy.unverifiedText;
+                    document.getElementById('screen-checkin-unverified').classList.remove('hidden');
+                    startCheckinResultCountdown();
+                } else if (offlineResult.status === 'TOO_EARLY') {
+                    hideAllScreens();
+                    document.getElementById('screen-checkin-too-early').classList.remove('hidden');
+                    startCheckinResultCountdown();
+                } else if (offlineResult.status === 'EXPIRED') {
+                    hideAllScreens();
+                    document.getElementById('screen-checkin-expired').classList.remove('hidden');
+                    startCheckinResultCountdown();
+                } else {
+                    alert(offlineCheckinI18n[currentLang] || offlineCheckinI18n.en);
+                    startAutoResetTimer();
+                }
             } finally {
                 submitButton.disabled = false;
                 submitButton.style.opacity = '';
@@ -7742,6 +9810,7 @@
             trackKioskOpen("guide");
             hideAllScreens();
             document.getElementById('screen-checkin').classList.remove('hidden');
+            document.getElementById('guide-floating-rail')?.classList.remove('hidden');
             startAutoResetTimer();
         }
 
@@ -7790,6 +9859,7 @@
             trackKioskOpen("parking");
             hideAllScreens();
             document.getElementById('screen-parking').classList.remove('hidden');
+            document.getElementById('parking-floating-rail')?.classList.remove('hidden');
             startAutoResetTimer();
         }
 
@@ -8263,8 +10333,6 @@
             document.getElementById('ci-welcome-title').innerText = dict.ciWelcomeTitle;
             document.getElementById('ci-welcome-subtitle').innerText = dict.ciWelcomeSubtitle;
             document.getElementById('ci-access-info-text').innerText = dict.ciAccessInfoText;
-            document.getElementById('ci-reg-title').innerText = dict.ciRegTitle;
-            document.getElementById('ci-reg-text').innerText = dict.ciRegText;
             const guideCheckin = guideCheckinUpdateI18n[lang] || guideCheckinUpdateI18n.en;
             document.getElementById('ci-q1-title').innerText = guideCheckin.title;
             document.getElementById('ci-q1-text').innerText = guideCheckin.prompt + ' ' + guideCheckin.earlyRoom;
@@ -8287,7 +10355,6 @@
             document.getElementById('ci-wifi-pass-label').innerText = dict.ciWifiPassLabel;
             document.getElementById('ci-wish-text').innerText = dict.ciWishText;
             document.getElementById('btn-back-ci').innerText = dict.back;
-            document.getElementById('btn-back-ci-top').innerText = dict.back;
             document.getElementById('btn-back-sci-wifi').innerText = dict.back;
             document.getElementById('btn-back-sci-luggage').innerText = dict.back;
             document.getElementById('btn-back-sci-parking').innerText = dict.back;
@@ -8297,16 +10364,6 @@
             // Parking Info
             document.getElementById('pk-welcome-title').innerText = dict.pkWelcomeTitle;
             document.getElementById('pk-welcome-subtitle').innerHTML = dict.pkWelcomeSubtitle;
-            document.getElementById('pk-top-wifi-title').innerText = dict.ciWifiTitle;
-            document.getElementById('pk-top-wifi-net-label').innerText = dict.ciWifiNetLabel;
-            document.getElementById('pk-top-wifi-net-val').innerText = document.getElementById('pk-wifi-net-val').innerText;
-            document.getElementById('pk-top-wifi-pass-label').innerText = dict.ciWifiPassLabel;
-            document.getElementById('pk-top-wifi-pass-val').innerText = document.getElementById('pk-wifi-pass-val').innerText;
-            document.getElementById('ci-wifi-top-title').innerText = dict.ciWifiTitle;
-            document.getElementById('ci-wifi-top-net-label').innerText = dict.ciWifiNetLabel;
-            document.getElementById('ci-wifi-top-pass-label').innerText = dict.ciWifiPassLabel;
-            document.getElementById('ci-wifi-top-net-val').innerText = document.getElementById('ci-wifi-net-val').innerText;
-            document.getElementById('ci-wifi-top-pass-val').innerText = document.getElementById('ci-wifi-pass-val').innerText;
         
         
             document.getElementById('pk-qr-text-1').innerText = dict.pkQrText;
@@ -8325,12 +10382,12 @@
             document.getElementById('pk-opt3-text').innerHTML = dict.pkOpt3Text;
             document.getElementById('pk-opt4-title').innerText = dict.pkOpt4Title;
             document.getElementById('pk-opt4-text').innerHTML = dict.pkOpt4Text;
+            structureParkingOptions();
             prepareParkingPhotoZoom(document.getElementById('screen-parking'));
             document.getElementById('pk-wifi-title').innerText = dict.ciWifiTitle;
             document.getElementById('pk-wifi-net-label').innerText = dict.ciWifiNetLabel;
             document.getElementById('pk-wifi-pass-label').innerText = dict.ciWifiPassLabel;
             document.getElementById('btn-back-pk').innerText = dict.back;
-            document.getElementById('btn-back-pk-top').innerText = dict.back;
             if (document.getElementById('screen-self-checkin').classList.contains('selfcheck-panel-parking')) {
                 refreshSelfCheckinParkingPanel();
             }
@@ -8357,7 +10414,13 @@
         }
         populateRegistrationControls();
         initializeSignaturePad();
+        structureParkingOptions();
         prepareParkingPhotoZoom(document);
+        const offlinePairingAction = captureOfflineSyncTokenFromUrl();
+        setTimeout(() => syncOfflineCheckinSnapshot({ showSetupResult: offlinePairingAction === 'set' }), 1600);
+        if (offlinePairingAction === 'invalid') {
+            setTimeout(() => alert('Neplatný párovací klíč pro offline zálohu check-inu.'), 300);
+        }
     </script>
 </body>
 </html>
