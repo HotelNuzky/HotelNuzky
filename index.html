@@ -5442,6 +5442,232 @@
             }
         }
 
+
+
+        /* =========================================================
+           v40 — Main-menu Wi-Fi + neutral Check-in Parking photo zoom
+           ========================================================= */
+
+        /* A compact Wi-Fi strip replaces the intentionally empty former kiosk title.
+           It is prominent enough to be noticed, but stays visually secondary to the
+           large action buttons and does not change their grid geometry. */
+        .main-wifi-banner {
+            width: min(620px, 88%);
+            margin: 0 auto 24px;
+            min-height: 64px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+            align-items: stretch;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(184,195,205,.25);
+            background: linear-gradient(180deg, rgba(43,49,56,.88) 0%, rgba(25,29,34,.92) 100%);
+            box-shadow: 0 8px 20px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
+            color: #f2f5f7;
+        }
+        .main-wifi-banner-title {
+            min-width: 112px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-right: 1px solid rgba(255,255,255,.10);
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: .35px;
+            white-space: nowrap;
+            color: #f2f5f7;
+            background: rgba(255,255,255,.035);
+        }
+        .main-wifi-banner-item {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+            padding: 9px 18px;
+            text-align: left;
+        }
+        .main-wifi-banner-item + .main-wifi-banner-item {
+            border-left: 1px solid rgba(255,255,255,.10);
+        }
+        .main-wifi-banner-item span {
+            display: block;
+            color: rgba(220,226,232,.68);
+            font-size: 9px;
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: .65px;
+            text-transform: uppercase;
+        }
+        .main-wifi-banner-item strong {
+            display: block;
+            overflow-wrap: anywhere;
+            color: #fff;
+            font-size: 18px;
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: .2px;
+        }
+
+        @media (max-width: 760px) {
+            .main-wifi-banner {
+                width: min(640px, 96%);
+                margin-bottom: 18px;
+                min-height: 58px;
+                grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+            }
+            .main-wifi-banner-title { min-width: 88px; padding: 8px 11px; font-size: 15px; }
+            .main-wifi-banner-item { padding: 8px 10px; }
+            .main-wifi-banner-item span { font-size: 8px; }
+            .main-wifi-banner-item strong { font-size: 15px; }
+        }
+
+        /* v41 — Pure Wi-Fi signal icon across the kiosk.
+           Replaces the platform emoji (which Safari/iPad can draw with a gray tile)
+           with a clean monochrome vector signal. No background, no badge. */
+        .wifi-signal-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .wifi-signal-title::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 19px;
+            flex: 0 0 auto;
+            background: currentColor;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath fill='black' d='M12 14.35a2.35 2.35 0 1 1 0 4.7 2.35 2.35 0 0 1 0-4.7Zm0-5.2c2.88 0 5.57 1.12 7.6 3.15l-1.78 1.78A8.22 8.22 0 0 0 12 11.67a8.22 8.22 0 0 0-5.82 2.41L4.4 12.3A10.7 10.7 0 0 1 12 9.15Zm0-5.35c4.31 0 8.36 1.68 11.4 4.72l-1.78 1.78A13.48 13.48 0 0 0 12 6.32 13.48 13.48 0 0 0 2.38 10.3L.6 8.52A16.02 16.02 0 0 1 12 3.8Z'/%3E%3C/svg%3E");
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            -webkit-mask-size: contain;
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath fill='black' d='M12 14.35a2.35 2.35 0 1 1 0 4.7 2.35 2.35 0 0 1 0-4.7Zm0-5.2c2.88 0 5.57 1.12 7.6 3.15l-1.78 1.78A8.22 8.22 0 0 0 12 11.67a8.22 8.22 0 0 0-5.82 2.41L4.4 12.3A10.7 10.7 0 0 1 12 9.15Zm0-5.35c4.31 0 8.36 1.68 11.4 4.72l-1.78 1.78A13.48 13.48 0 0 0 12 6.32 13.48 13.48 0 0 0 2.38 10.3L.6 8.52A16.02 16.02 0 0 1 12 3.8Z'/%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: contain;
+        }
+        .main-wifi-banner-title.wifi-signal-title::before {
+            width: 26px;
+            height: 20px;
+        }
+        @media (max-width: 760px) {
+            .wifi-signal-title { gap: 6px; }
+            .wifi-signal-title::before { width: 21px; height: 17px; }
+            .main-wifi-banner-title.wifi-signal-title::before { width: 22px; height: 18px; }
+        }
+
+        /* The same zoom modal is shared by standalone Parking and the Parking tab
+           inside Check-in. Only the latter receives this neutral gray skin. */
+        .parking-photo-modal.selfcheck-parking-modal-gray .parking-photo-modal-card {
+            border-color: rgba(184,195,205,.34) !important;
+            background: linear-gradient(180deg, rgba(47,53,60,.99) 0%, rgba(24,28,33,.995) 100%) !important;
+            box-shadow: 0 24px 70px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.055) !important;
+        }
+        .parking-photo-modal.selfcheck-parking-modal-gray .parking-photo-modal-card img {
+            background: #171a1e !important;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.075);
+        }
+        .parking-photo-modal.selfcheck-parking-modal-gray .parking-photo-modal-ok {
+            border-color: #aeb7bf !important;
+            border-top-color: #c8d0d6 !important;
+            background: linear-gradient(180deg, #707a84 0%, #535b63 100%) !important;
+            box-shadow: 0 5px 0 #30363c, 0 8px 18px rgba(0,0,0,.35) !important;
+            color: #fff !important;
+        }
+        .parking-photo-modal.selfcheck-parking-modal-gray .parking-photo-modal-ok:active {
+            box-shadow: 0 2px 0 #30363c, 0 4px 9px rgba(0,0,0,.34) !important;
+            transform: translateY(3px);
+        }
+
+
+        /* =========================================================
+           v43 — Compact main-menu Wi-Fi strip for 11-inch iPad
+           =========================================================
+           The main menu is already vertically dense. Wi-Fi remains clearly
+           visible under the language flags, but behaves as a slim utility strip
+           rather than another large content card. */
+        #screen-1 .main-wifi-banner {
+            width: min(520px, 78%);
+            min-height: 48px;
+            margin: -2px auto 16px;
+            grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(38,43,49,.80) 0%, rgba(24,28,33,.86) 100%);
+            border-color: rgba(184,195,205,.20);
+            box-shadow: 0 5px 14px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.055);
+        }
+        #screen-1 .main-wifi-banner-title {
+            min-width: 0;
+            padding: 7px 10px;
+            font-size: 15px;
+            gap: 6px;
+            background: transparent;
+        }
+        #screen-1 .main-wifi-banner-title.wifi-signal-title::before {
+            width: 21px;
+            height: 17px;
+        }
+        #screen-1 .main-wifi-banner-item {
+            padding: 6px 12px;
+            gap: 2px;
+        }
+        #screen-1 .main-wifi-banner-item span {
+            font-size: 8px;
+            letter-spacing: .55px;
+        }
+        #screen-1 .main-wifi-banner-item strong {
+            font-size: 16px;
+            line-height: 1.08;
+        }
+
+        /* Typical 11-inch iPad portrait / narrower Safari widths:
+           keep the strip compact without forcing another tall block. */
+        @media (max-width: 900px) {
+            #screen-1 .main-wifi-banner {
+                width: min(500px, 86%);
+                min-height: 46px;
+                margin-bottom: 14px;
+                grid-template-columns: 88px minmax(0, 1fr) minmax(0, 1fr);
+            }
+            #screen-1 .main-wifi-banner-title {
+                padding: 6px 8px;
+                font-size: 14px;
+            }
+            #screen-1 .main-wifi-banner-title.wifi-signal-title::before {
+                width: 20px;
+                height: 16px;
+            }
+            #screen-1 .main-wifi-banner-item {
+                padding: 6px 9px;
+            }
+            #screen-1 .main-wifi-banner-item span { font-size: 7.5px; }
+            #screen-1 .main-wifi-banner-item strong { font-size: 15px; }
+        }
+
+        @media (max-width: 620px) {
+            #screen-1 .main-wifi-banner {
+                width: 94%;
+                grid-template-columns: 76px minmax(0, 1fr) minmax(0, 1fr);
+            }
+            #screen-1 .main-wifi-banner-title {
+                font-size: 13px;
+                gap: 5px;
+            }
+            #screen-1 .main-wifi-banner-title.wifi-signal-title::before {
+                width: 18px;
+                height: 15px;
+            }
+            #screen-1 .main-wifi-banner-item {
+                padding-left: 7px;
+                padding-right: 7px;
+            }
+            #screen-1 .main-wifi-banner-item strong { font-size: 14px; }
+        }
+
 </style>
 </head>
 <body>
@@ -5465,7 +5691,12 @@
 </div>
 <!-- SCREEN 1: MAIN MENU -->
 <div id="screen-1">
-<div class="header-title" id="main-title"></div>
+<div class="header-title" id="main-title" style="display:none;"></div>
+<div class="main-wifi-banner" id="main-wifi-banner" aria-label="Wi-Fi">
+<div class="main-wifi-banner-title wifi-signal-title">Wi‑Fi</div>
+<div class="main-wifi-banner-item"><span id="main-wifi-net-label">Název / SSID</span><strong>Nuzky</strong></div>
+<div class="main-wifi-banner-item"><span id="main-wifi-pass-label">Heslo / Password</span><strong>Hotel2017</strong></div>
+</div>
 <div class="kiosk-grid main-primary-actions">
 <button class="btn-kiosk btn-checkin" onclick="openSelfCheckin()">
 <svg class="btn-svg-icon" viewbox="0 0 24 24">
@@ -5519,7 +5750,7 @@
 <div class="screen-sticky-rail selfcheck-sticky-rail hidden" id="selfcheck-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-sci-rail" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
 <div class="screen-rail-wifi selfcheck-rail-wifi">
-<div class="screen-rail-wifi-title" id="sci-rail-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-title wifi-signal-title" id="sci-rail-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="sci-rail-wifi-net-label">Název / SSID</span><strong>Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="sci-rail-wifi-pass-label">Heslo / Password</span><strong>Hotel2017</strong></div>
 </div>
@@ -5835,7 +6066,7 @@
 <div class="screen-sticky-rail guide-sticky-rail hidden" id="guide-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-ci" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
 <div class="screen-rail-wifi guide-rail-wifi">
-<div class="screen-rail-wifi-title" id="ci-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-title wifi-signal-title" id="ci-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="ci-wifi-net-label">Název / SSID</span><strong id="ci-wifi-net-val">Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="ci-wifi-pass-label">Heslo / Password</span><strong id="ci-wifi-pass-val">Hotel2017</strong></div>
 </div>
@@ -6079,7 +6310,7 @@
 <div class="screen-sticky-rail parking-sticky-rail hidden" id="parking-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-pk" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
 <div class="screen-rail-wifi parking-rail-wifi">
-<div class="screen-rail-wifi-title" id="pk-wifi-title">📶 Wi‑Fi</div>
+<div class="screen-rail-wifi-title wifi-signal-title" id="pk-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="pk-wifi-net-label">Název / SSID</span><strong id="pk-wifi-net-val">Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="pk-wifi-pass-label">Heslo / Password</span><strong id="pk-wifi-pass-val">Hotel2017</strong></div>
 </div>
@@ -6251,6 +6482,7 @@
         let activeCheckinReservation = null;
         let selfCheckinVerificationMode = 'unverified';
         const AUTO_RESET_TIMEOUT = 120000; // 120 seconds idle reset
+        const LANGUAGE_IDLE_RESET_TIMEOUT = 5 * 60 * 1000; // 5 minutes, silent reset to English
 
 
         const REQUEST_QUEUE_KEY = "hotelNuzkyRequestQueueV2";
@@ -7840,6 +8072,7 @@
         let autoResetTimer = null;
         let checkinCountdownTimer = null;
         let idleCountdownTimer = null;
+        let languageIdleResetTimer = null;
         let confirmationCountdownTimer = null;
         let currentConfirmationKind = null;
         let idleRemaining = 120;
@@ -7994,7 +8227,7 @@
                 ciHousekeepingTitle: "Úklid pokoje",
                 ciHousekeepingText: "Pokoje pro vás uklízíme od 8:00 do 15:00. Pokud si přejete ručníky vyměnit, nechte je prosím na zemi v koupelně.",
                 ciInfoStandText: "Další užitečné informace a tipy naleznete přímo na svém pokoji na listovacím stojanu.",
-                ciWifiTitle: "📶 Wi-Fi Připojení",
+                ciWifiTitle: "Wi-Fi Připojení",
                 ciWifiNetLabel: "Název / SSID",
                 ciWifiPassLabel: "Heslo / Password",
                 ciWishText: "Přejeme vám nádherný a ničím nerušený pobyt!",
@@ -8048,7 +8281,7 @@
                 ciHousekeepingTitle: "Upratovanie izby",
                 ciHousekeepingText: "Izby pre vás upratujeme od 8:00 do 15:00. Ak si želáte vymeniť uteráky, nechajte ich, prosím, na podlahe v kúpeľni.",
                 ciInfoStandText: "Ďalšie užitočné informácie a tipy nájdete priamo vo svojej izbe na stojane s informačnými materiálmi.",
-                ciWifiTitle: "📶 Wi-Fi pripojenie",
+                ciWifiTitle: "Wi-Fi pripojenie",
                 ciWifiNetLabel: "Názov / SSID",
                 ciWifiPassLabel: "Heslo",
                 ciWishText: "Prajeme vám nádherný a ničím nerušený pobyt!",
@@ -8102,7 +8335,7 @@
                 ciHousekeepingTitle: "Room cleaning",
                 ciHousekeepingText: "We clean your room between 8:00 and 15:00. If you would like fresh towels, please leave the used ones on the bathroom floor.",
                 ciInfoStandText: "You can find further useful information and recommendations on the information stand in your room.",
-                ciWifiTitle: "📶 Wi-Fi Connection",
+                ciWifiTitle: "Wi-Fi Connection",
                 ciWifiNetLabel: "Network Name / SSID",
                 ciWifiPassLabel: "Password",
                 ciWishText: "We wish you a wonderful and pleasant stay!",
@@ -8157,7 +8390,7 @@
                 ciHousekeepingTitle: "Zimmerreinigung",
                 ciHousekeepingText: "Wir reinigen Ihr Zimmer zwischen 8:00 und 15:00. Wenn Sie frische Handtücher wünschen, legen Sie die benutzten bitte auf den Badezimmerboden.",
                 ciInfoStandText: "Weitere nützliche Informationen finden Sie auf dem Aufsteller in Ihrem Zimmer.",
-                ciWifiTitle: "📶 Wi-Fi Verbindung",
+                ciWifiTitle: "Wi-Fi Verbindung",
                 ciWifiNetLabel: "Netzwerkname / SSID",
                 ciWifiPassLabel: "Passwort",
                 ciWishText: "Wir wünschen Ihnen einen wunderschönen und ungestörten Aufenthalt!",
@@ -8212,7 +8445,7 @@
                 ciHousekeepingTitle: "Pulizia della camera",
                 ciHousekeepingText: "Puliamo la vostra camera dalle 8:00 alle 15:00. Se desiderate cambiare gli asciugamani, lasciate quelli usati sul pavimento del bagno.",
                 ciInfoStandText: "Troverai ulteriori informazioni e consigli utili sull'espositore informativo presente nella tua camera.",
-                ciWifiTitle: "📶 Connessione Wi-Fi",
+                ciWifiTitle: "Connessione Wi-Fi",
                 ciWifiNetLabel: "Nome rete / SSID",
                 ciWifiPassLabel: "Password",
                 ciWishText: "Ti auguriamo un soggiorno splendido e sereno!",
@@ -8267,7 +8500,7 @@
                 ciHousekeepingTitle: "Limpieza de la habitación",
                 ciHousekeepingText: "Limpiamos su habitación entre las 8:00 y las 15:00. Si desea cambiar las toallas, deje las usadas en el suelo del baño.",
                 ciInfoStandText: "Encontrará más información útil y consejos en el expositor informativo de su habitación.",
-                ciWifiTitle: "📶 Conexión Wi-Fi",
+                ciWifiTitle: "Conexión Wi-Fi",
                 ciWifiNetLabel: "Nombre de red / SSID",
                 ciWifiPassLabel: "Contraseña / Password",
                 ciWishText: "¡Le deseamos una estancia maravillosa y placentera!",
@@ -8322,7 +8555,7 @@
                 ciHousekeepingTitle: "Ménage de la chambre",
                 ciHousekeepingText: "Nous nettoyons votre chambre entre 8:00 et 15:00. Si vous souhaitez changer les serviettes, laissez les serviettes utilisées sur le sol de la salle de bains.",
                 ciInfoStandText: "Vous trouverez d'autres informations utiles sur le présentoir d'information situé dans votre chambre.",
-                ciWifiTitle: "📶 Connexion Wi-Fi",
+                ciWifiTitle: "Connexion Wi-Fi",
                 ciWifiNetLabel: "Nom du réseau / SSID",
                 ciWifiPassLabel: "Mot de passe",
                 ciWishText: "Nous vous souhaitons un d'un séjour agréable et paisible !",
@@ -8377,7 +8610,7 @@
                 ciHousekeepingTitle: "Sprzątanie pokoju",
                 ciHousekeepingText: "Sprzątamy pokoje w godzinach 8:00–15:00. Jeśli chcesz wymienić ręczniki, zostaw używane na podłodze w łazience.",
                 ciInfoStandText: "Dalsze przydatne informacje znajdziesz w swoim pokoju na stojaku informacyjnym.",
-                ciWifiTitle: "📶 Połączenie Wi-Fi",
+                ciWifiTitle: "Połączenie Wi-Fi",
                 ciWifiNetLabel: "Nazwa sieci / SSID",
                 ciWifiPassLabel: "Hasło / Password",
                 ciWishText: "Życzymy wspaniałego i udanego pobytu!",
@@ -8432,7 +8665,7 @@
                 ciHousekeepingTitle: "Прибирання номера",
                 ciHousekeepingText: "Ми прибираємо номери з 8:00 до 15:00. Якщо ви бажаєте замінити рушники, залиште використані рушники на підлозі у ванній кімнаті.",
                 ciInfoStandText: "Додаткову корисну інформацію ви знайдете у вашому номері на інформаційній стійці.",
-                ciWifiTitle: "📶 Підключення Wi-Fi",
+                ciWifiTitle: "Підключення Wi-Fi",
                 ciWifiNetLabel: "Назва мережі / SSID",
                 ciWifiPassLabel: "Пароль / Password",
                 ciWishText: "Бажаємо вам чудового та приємного відпочинку!",
@@ -8487,7 +8720,7 @@
                 ciHousekeepingTitle: "Oda temizliği",
                 ciHousekeepingText: "Odanızı 8:00–15:00 saatleri arasında temizliyoruz. Havlularınızın değiştirilmesini istiyorsanız, kullanılan havluları banyo zeminine bırakın.",
                 ciInfoStandText: "Daha fazla yararlı bilgi ve ipucunu odanızdaki bilgi standında bulabilirsiniz.",
-                ciWifiTitle: "📶 Wi-Fi Bağlantısı",
+                ciWifiTitle: "Wi-Fi Bağlantısı",
                 ciWifiNetLabel: "Ağ Adı / SSID",
                 ciWifiPassLabel: "Şifre / Password",
                 ciWishText: "Harika ve huzurlu bir konaklama dileriz!",
@@ -8542,7 +8775,7 @@
                 ciHousekeepingTitle: "Rengøring af værelset",
                 ciHousekeepingText: "Vi rengør dit værelse mellem 8:00 og 15:00. Hvis du ønsker nye håndklæder, bedes du lægge de brugte på gulvet i badeværelset.",
                 ciInfoStandText: "Du kan finde flere nyttige oplysninger og tips på informationsstanderen på dit værelse.",
-                ciWifiTitle: "📶 Wi-Fi Forbindelse",
+                ciWifiTitle: "Wi-Fi Forbindelse",
                 ciWifiNetLabel: "Netværksnavn / SSID",
                 ciWifiPassLabel: "Adgangskode / Password",
                 ciWishText: "Vi ønsker dig et vidunderligt og behageligt ophold!",
@@ -8597,7 +8830,7 @@
                 ciHousekeepingTitle: "客室清掃",
                 ciHousekeepingText: "客室清掃は8:00～15:00の間に行います。タオルの交換をご希望の場合は、使用済みのタオルをバスルームの床に置いてください。",
                 ciInfoStandText: "その他の役立つ情報やガイドは、お部屋に設置されているインフォメーションスタンドをご覧ください。",
-                ciWifiTitle: "📶 Wi-Fi 接続",
+                ciWifiTitle: "Wi-Fi 接続",
                 ciWifiNetLabel: "ネットワーク名 / SSID",
                 ciWifiPassLabel: "パスワード",
                 ciWishText: "快適で素晴らしい滞在になりますように！",
@@ -8652,7 +8885,7 @@
                 ciHousekeepingTitle: "ניקיון החדר",
                 ciHousekeepingText: "אנו מנקים את החדר בין 8:00 ל-15:00. אם תרצו להחליף מגבות, אנא השאירו את המגבות המשומשות על רצפת חדר הרחצה.",
                 ciInfoStandText: "מידע שימושי נוסף והמלצות תמצאו על מעמד המידע בחדרכם.",
-                ciWifiTitle: "📶 חיבור Wi-Fi",
+                ciWifiTitle: "חיבור Wi-Fi",
                 ciWifiNetLabel: "שם רשת / SSID",
                 ciWifiPassLabel: "סיסמה / Password",
                 ciWishText: "מאחלים לכם שהייה נפלאה ונעימה!",
@@ -8707,7 +8940,7 @@
                 ciHousekeepingTitle: "Καθαρισμός δωματίου",
                 ciHousekeepingText: "Καθαρίζουμε το δωμάτιό σας από τις 8:00 έως τις 15:00. Αν θέλετε αλλαγή πετσετών, αφήστε τις χρησιμοποιημένες πετσέτες στο πάτωμα του μπάνιου.",
                 ciInfoStandText: "Περισσότερες χρήσιμες πληροφορίες και συμβουλές θα βρείτε στο ειδικό stand πληροφοριών στο δωμάτιό σας.",
-                ciWifiTitle: "📶 Σύνδεση Wi-Fi",
+                ciWifiTitle: "Σύνδεση Wi-Fi",
                 ciWifiNetLabel: "Όνομα δικτύου / SSID",
                 ciWifiPassLabel: "Κωδικός / Password",
                 ciWishText: "Σας ευχόμαστε μια υπέροχη και ευχάριστη διαμονή!",
@@ -8875,6 +9108,26 @@
         }
 
         // NAVIGATION LOGIC
+        // Always start a newly opened screen at its top. iPad Safari can preserve the
+        // document scroll offset when one full-screen card is hidden and another is shown.
+        // Reset immediately and again on the next two animation frames so the correction
+        // also applies after the newly selected screen has completed layout.
+        function resetPageScrollPosition() {
+            const jumpToTop = () => {
+                try { window.scrollTo(0, 0); } catch (_) {}
+                const scrollingElement = document.scrollingElement;
+                if (scrollingElement) scrollingElement.scrollTop = 0;
+                if (document.documentElement) document.documentElement.scrollTop = 0;
+                if (document.body) document.body.scrollTop = 0;
+            };
+
+            jumpToTop();
+            requestAnimationFrame(() => {
+                jumpToTop();
+                requestAnimationFrame(jumpToTop);
+            });
+        }
+
         function hideAllScreens() {
             document.getElementById('guide-floating-rail')?.classList.add('hidden');
             document.getElementById('parking-floating-rail')?.classList.add('hidden');
@@ -8889,6 +9142,7 @@
             document.getElementById('screen-service').classList.add('hidden');
             document.getElementById('screen-parking').classList.add('hidden');
             document.getElementById('screen-thanks').classList.add('hidden');
+            resetPageScrollPosition();
         }
 
         function isSubpageOpen() {
@@ -8980,6 +9234,41 @@
             return true;
         }
 
+
+        /* v43 — Silent language reset.
+           This is intentionally separate from the visible 2-minute subpage timer:
+           - the visible timer still handles abandoned subpages;
+           - this 5-minute timer also covers the MAIN MENU;
+           - it is never rendered on screen;
+           - any real interaction restarts it while a non-English language is active. */
+        function restartLanguageIdleResetTimer() {
+            clearTimeout(languageIdleResetTimer);
+            languageIdleResetTimer = null;
+
+            if (currentLang === 'en') return;
+
+            languageIdleResetTimer = setTimeout(() => {
+                if (currentLang === 'en') return;
+
+                const active = document.activeElement;
+                if (active && typeof active.blur === 'function') {
+                    active.blur();
+                }
+
+                // Return to a clean home screen and make English the neutral default.
+                resetToStart(false);
+            }, LANGUAGE_IDLE_RESET_TIMEOUT);
+        }
+
+        function registerLanguageIdleActivity() {
+            if (currentLang === 'en') {
+                clearTimeout(languageIdleResetTimer);
+                languageIdleResetTimer = null;
+                return;
+            }
+            restartLanguageIdleResetTimer();
+        }
+
         function registerUserActivity() {
             if (!isSubpageOpen()) return;
             if (!document.getElementById('screen-thanks').classList.contains('hidden')) return;
@@ -8997,6 +9286,14 @@
         ['click','input','change','touchstart','pointerdown','keydown'].forEach(evt => {
             document.addEventListener(evt, registerUserActivity, {passive:true});
         });
+
+        // The silent 5-minute language timer also watches the main menu.
+        // Window scroll is included explicitly because scroll events do not
+        // reliably bubble to document in iPad Safari.
+        ['click','input','change','touchstart','pointerdown','keydown'].forEach(evt => {
+            document.addEventListener(evt, registerLanguageIdleActivity, {passive:true});
+        });
+        window.addEventListener('scroll', registerLanguageIdleActivity, {passive:true});
 
         // iOS date/time pickers may stay open as a system overlay.
         // Before their input/change event can refresh the idle timeout,
@@ -9054,6 +9351,13 @@
             const modal = document.getElementById('parking-photo-modal');
             const modalImage = document.getElementById('parking-photo-modal-image');
             if (!modal || !modalImage) return;
+
+            // One modal serves two differently styled parking surfaces. Keep the
+            // standalone Parking modal blue, but match the Check-in Parking tab
+            // to its neutral gray palette.
+            const openedFromCheckinParking = Boolean(img.closest && img.closest('#screen-self-checkin .selfcheck-parking-card'));
+            modal.classList.toggle('selfcheck-parking-modal-gray', openedFromCheckinParking);
+
             modalImage.src = img.src;
             modalImage.alt = img.alt || 'Zvětšený obrázek parkování';
             modal.classList.remove('hidden');
@@ -9069,6 +9373,7 @@
             const modalImage = document.getElementById('parking-photo-modal-image');
             if (!modal) return;
             modal.classList.add('hidden');
+            modal.classList.remove('selfcheck-parking-modal-gray');
             modal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('parking-photo-modal-open');
             if (modalImage) modalImage.removeAttribute('src');
@@ -10304,6 +10609,8 @@
 
             taxiPrefixManuallyChanged = false;
             clearTimeout(autoResetTimer);
+            clearTimeout(languageIdleResetTimer);
+            languageIdleResetTimer = null;
             clearInterval(checkinCountdownTimer);
             clearInterval(idleCountdownTimer);
             clearInterval(confirmationCountdownTimer);
@@ -10593,6 +10900,10 @@
             document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
             document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
 
+            // Keep the silent five-minute language timeout in sync immediately.
+            // English clears it; every other language starts/restarts it.
+            restartLanguageIdleResetTimer();
+
             // Registration can be open while the guest changes language. Refresh it
             // FIRST, before any unrelated page component is touched. In Safari a later
             // UI exception must never leave the already-open registration in the old language.
@@ -10628,6 +10939,10 @@
 
             // Main UI
             document.getElementById('main-title').innerText = '';
+            const mainWifiNet = document.getElementById('main-wifi-net-label');
+            const mainWifiPass = document.getElementById('main-wifi-pass-label');
+            if (mainWifiNet) mainWifiNet.innerText = dict.ciWifiNetLabel;
+            if (mainWifiPass) mainWifiPass.innerText = dict.ciWifiPassLabel;
             const sci = selfCheckinI18n[lang] || selfCheckinI18n.en;
             document.getElementById('btn-checkin-text').innerText = sci.guide;
             document.getElementById('btn-self-checkin-text').innerText = sci.submit;
@@ -10817,6 +11132,7 @@
         initializeSignaturePad();
         structureParkingOptions();
         prepareParkingPhotoZoom(document);
+        restartLanguageIdleResetTimer();
         const offlinePairingAction = captureOfflineSyncTokenFromUrl();
         setTimeout(() => syncOfflineCheckinSnapshot({ showSetupResult: offlinePairingAction === 'set' }), 1600);
         if (offlinePairingAction === 'invalid') {
