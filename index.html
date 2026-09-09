@@ -4489,6 +4489,15 @@
             text-align: center;
             border: 1px solid rgba(255,255,255,.13);
             background: rgba(255,255,255,.045);
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform .10s ease, filter .10s ease, box-shadow .10s ease;
+        }
+        .screen-rail-wifi:active {
+            transform: translateY(2px);
+            filter: brightness(.90);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.18);
         }
         .guide-rail-wifi {
             border-color: rgba(53,198,204,.42);
@@ -5675,6 +5684,188 @@
             #screen-1 .main-wifi-banner-item strong { font-size: 14px; }
         }
 
+
+
+        /* =========================================================
+           v45 — CONNECTED FLOATING BACK + WI-FI CONTROL
+           The two clickable areas read as one compact control group.
+           ========================================================= */
+        .screen-sticky-rail {
+            gap: 0 !important;
+            border-radius: 19px !important;
+            overflow: hidden !important;
+            border: 1px solid rgba(255,255,255,.18) !important;
+            background: rgba(10,14,18,.30) !important;
+            box-shadow: 0 12px 28px rgba(0,0,0,.34) !important;
+        }
+        .screen-rail-back {
+            border-radius: 18px 18px 0 0 !important;
+            border-left: 0 !important;
+            border-right: 0 !important;
+            border-top-width: 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,.14) !important;
+            box-shadow: none !important;
+        }
+        .screen-rail-wifi {
+            border-radius: 0 0 18px 18px !important;
+            border-left: 0 !important;
+            border-right: 0 !important;
+            border-bottom: 0 !important;
+            border-top: 0 !important;
+            box-shadow: none !important;
+        }
+        .guide-sticky-rail .screen-rail-back:active,
+        .parking-sticky-rail .screen-rail-back:active,
+        .selfcheck-sticky-rail .screen-rail-back:active,
+        .screen-rail-wifi:active {
+            transform: none !important;
+            box-shadow: inset 0 0 0 999px rgba(255,255,255,.055) !important;
+        }
+
+        @media (max-width: 760px) {
+            .screen-sticky-rail {
+                gap: 0 !important;
+                padding: 0 !important;
+                border-radius: 17px !important;
+            }
+            .screen-rail-back {
+                border-radius: 16px 0 0 16px !important;
+                border-bottom: 0 !important;
+                border-right: 1px solid rgba(255,255,255,.14) !important;
+            }
+            .screen-rail-wifi {
+                border-radius: 0 16px 16px 0 !important;
+            }
+        }
+
+        /* =========================================================
+           v46 — iPad Safari dynamic-toolbar stable MAIN MENU
+           Uses the actual Visual Viewport height. Only the main menu
+           is locked to the visible screen; subpages keep normal scroll.
+           ========================================================= */
+        :root {
+            --kiosk-visual-height: 100dvh;
+        }
+
+        body.main-screen-viewport {
+            height: var(--kiosk-visual-height) !important;
+            min-height: var(--kiosk-visual-height) !important;
+            max-height: var(--kiosk-visual-height) !important;
+            overflow-y: hidden !important;
+            padding-top: max(6px, env(safe-area-inset-top)) !important;
+            padding-bottom: max(6px, env(safe-area-inset-bottom)) !important;
+            align-items: stretch !important;
+        }
+
+        body.main-screen-viewport > .container {
+            height: 100% !important;
+            min-height: 0 !important;
+            max-height: 100% !important;
+            padding-top: 7px !important;
+            padding-bottom: 7px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+
+        body.main-screen-viewport #screen-1 {
+            flex: 0 0 auto;
+            min-height: 0;
+        }
+
+        /* Medium compact mode: Safari toolbar visible / smaller visual viewport. */
+        body.main-screen-viewport.main-viewport-compact .language-bar {
+            margin-bottom: 11px !important;
+            padding: 8px 15px !important;
+            gap: 7px 10px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact .flag-btn {
+            font-size: 25px !important;
+            min-width: 42px !important;
+            min-height: 42px !important;
+            padding: 4px 6px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .main-wifi-banner {
+            min-height: 42px !important;
+            margin-top: 0 !important;
+            margin-bottom: 10px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .main-primary-actions {
+            margin-bottom: 32px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .main-primary-actions::after {
+            bottom: -18px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact .kiosk-grid,
+        body.main-screen-viewport.main-viewport-compact .secondary-actions-grid {
+            gap: 14px 18px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-kiosk,
+        body.main-screen-viewport.main-viewport-compact .secondary-actions-grid .btn-kiosk {
+            min-height: 145px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+            gap: 7px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-svg-icon {
+            width: 58px !important;
+            height: 58px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-title {
+            font-size: 21px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-service .btn-title {
+            font-size: 20px !important;
+        }
+        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-subtitle,
+        body.main-screen-viewport.main-viewport-compact #screen-1 .checkout-time {
+            font-size: 13px !important;
+        }
+
+        /* Extra compact mode for the smallest visible Safari viewport. */
+        body.main-screen-viewport.main-viewport-tight .language-bar {
+            margin-bottom: 8px !important;
+            padding: 6px 13px !important;
+            gap: 5px 9px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight .flag-btn {
+            font-size: 23px !important;
+            min-width: 39px !important;
+            min-height: 39px !important;
+            padding: 3px 5px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .main-wifi-banner {
+            min-height: 39px !important;
+            margin-bottom: 8px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .main-primary-actions {
+            margin-bottom: 27px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .main-primary-actions::after {
+            bottom: -15px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight .kiosk-grid,
+        body.main-screen-viewport.main-viewport-tight .secondary-actions-grid {
+            gap: 11px 16px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-kiosk,
+        body.main-screen-viewport.main-viewport-tight .secondary-actions-grid .btn-kiosk {
+            min-height: 132px !important;
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            gap: 6px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-svg-icon {
+            width: 52px !important;
+            height: 52px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-title {
+            font-size: 20px !important;
+        }
+        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-service .btn-title {
+            font-size: 19px !important;
+        }
+
 </style>
 </head>
 <body>
@@ -5756,7 +5947,7 @@
 <!-- SCREEN SELF CHECK-IN: FLOATING NAVIGATION + WI-FI -->
 <div class="screen-sticky-rail selfcheck-sticky-rail hidden" id="selfcheck-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-sci-rail" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-<div class="screen-rail-wifi selfcheck-rail-wifi">
+<div class="screen-rail-wifi selfcheck-rail-wifi" role="button" tabindex="0" aria-label="Wi-Fi – zpět na hlavní obrazovku" onclick="resetToStart()" onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();resetToStart();}">
 <div class="screen-rail-wifi-title wifi-signal-title" id="sci-rail-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="sci-rail-wifi-net-label">Název / SSID</span><strong>Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="sci-rail-wifi-pass-label">Heslo / Password</span><strong>Hotel2017</strong></div>
@@ -6072,7 +6263,7 @@
 <!-- SCREEN CHECK-IN INFO -->
 <div class="screen-sticky-rail guide-sticky-rail hidden" id="guide-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-ci" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-<div class="screen-rail-wifi guide-rail-wifi">
+<div class="screen-rail-wifi guide-rail-wifi" role="button" tabindex="0" aria-label="Wi-Fi – zpět na hlavní obrazovku" onclick="resetToStart()" onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();resetToStart();}">
 <div class="screen-rail-wifi-title wifi-signal-title" id="ci-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="ci-wifi-net-label">Název / SSID</span><strong id="ci-wifi-net-val">Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="ci-wifi-pass-label">Heslo / Password</span><strong id="ci-wifi-pass-val">Hotel2017</strong></div>
@@ -6316,7 +6507,7 @@
 <!-- SCREEN PARKING INFO -->
 <div class="screen-sticky-rail parking-sticky-rail hidden" id="parking-floating-rail" aria-label="Rychlé informace">
 <button class="screen-rail-back" id="btn-back-pk" onclick="resetToStart()">ZPĚT NA HLAVNÍ OBRAZOVKU</button>
-<div class="screen-rail-wifi parking-rail-wifi">
+<div class="screen-rail-wifi parking-rail-wifi" role="button" tabindex="0" aria-label="Wi-Fi – zpět na hlavní obrazovku" onclick="resetToStart()" onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();resetToStart();}">
 <div class="screen-rail-wifi-title wifi-signal-title" id="pk-wifi-title">Wi‑Fi</div>
 <div class="screen-rail-wifi-row"><span id="pk-wifi-net-label">Název / SSID</span><strong id="pk-wifi-net-val">Nuzky</strong></div>
 <div class="screen-rail-wifi-row"><span id="pk-wifi-pass-label">Heslo / Password</span><strong id="pk-wifi-pass-val">Hotel2017</strong></div>
@@ -8200,7 +8391,7 @@
             cs: {
                 title: "Kiosk",
                 checkin: "Check-in info",
-                checkout: "Odhlášení",
+                checkout: "Check-out",
                 service: "Oprava / Pomoc",
                 parking: "Parkování",
                 coInstructions: "Prosím, vyplňte číslo svého pokoje a jméno registrované osoby. Poté stiskněte tlačítko POTVRDIT.",
@@ -8255,7 +8446,7 @@
             sk: {
                 title: "Kiosk",
                 checkin: "Check-in info",
-                checkout: "Odhlásenie",
+                checkout: "Check-out",
                 service: "Oprava / Pomoc",
                 parking: "Parkovanie",
                 coInstructions: "Prosím, vyplňte číslo svojej izby a meno registrovanej osoby. Potom stlačte tlačidlo POTVRDIŤ.",
@@ -8363,7 +8554,7 @@
             de: {
                 title: "Kiosk",
                 checkin: "Check-in-Info",
-                checkout: "Abreise",
+                checkout: "Check-out",
                 service: "Reparatur / Hilfe",
                 parking: "Parken",
                 coInstructions: "Bitte geben Sie Ihre Zimmernummer und den Namen der registrierten Person ein. Drücken Sie anschließend die Taste BESTÄTIGEN.",
@@ -8418,7 +8609,7 @@
             it: {
                 title: "Kiosk",
                 checkin: "Informazioni sul check-in",
-                checkout: "Partenza",
+                checkout: "Check-out",
                 service: "Riparazione / Aiuto",
                 parking: "Parcheggio",
                 coInstructions: "Inserisci il numero della tua camera e il nome della persona registrata. Quindi premi il pulsante CONFERMA.",
@@ -8473,7 +8664,7 @@
             es: {
                 title: "Quiosco",
                 checkin: "Información sobre el check-in",
-                checkout: "Salida",
+                checkout: "Check-out",
                 service: "Reparación / Ayuda",
                 parking: "Aparcamiento",
                 coInstructions: "Por favor, introduzca el número de su habitación y el nombre de la persona registrada. A continuación, pulse el botón CONFIRMAR.",
@@ -8528,7 +8719,7 @@
             fr: {
                 title: "Kiosk",
                 checkin: "Informations sur l’arrivée",
-                checkout: "Départ",
+                checkout: "Check-out",
                 service: "Réparation / Aide",
                 parking: "Parking",
                 coInstructions: "Veuillez saisir le numéro de votre chambre et le nom de la personne enregistrée. Appuyez ensuite sur le bouton CONFIRMER.",
@@ -8583,7 +8774,7 @@
             pl: {
                 title: "Kiosk",
                 checkin: "Informacje dotyczące zameldowania",
-                checkout: "Wymeldowanie",
+                checkout: "Check-out",
                 service: "Naprawa / Pomoc",
                 parking: "Parking",
                 coInstructions: "Proszę wpisać numer swojego pokoju i imię i nazwisko zarejestrowanej osoby. Następnie naciśnij przycisk POTWIERDŹ.",
@@ -8638,7 +8829,7 @@
             ua: {
                 title: "Кіоск",
                 checkin: "Інформація про заселення",
-                checkout: "Виселення",
+                checkout: "Check-out",
                 service: "Ремонт / Допомога",
                 parking: "Паркування",
                 coInstructions: "Будь ласка, введіть номер вашої кімнати та ім’я зареєстрованої особи. Потім натисніть кнопку ПІДТВЕРДИТИ.",
@@ -8693,7 +8884,7 @@
             tr: {
                 title: "Kiosk",
                 checkin: "Giriş Bilgileri",
-                checkout: "Çıkış",
+                checkout: "Check-out",
                 service: "Tamir / Yardım",
                 parking: "Otopark",
                 coInstructions: "Lütfen oda numaranızı ve kayıtlı kişinin adını girin. Ardından ONAYLA düğmesine basın.",
@@ -8748,7 +8939,7 @@
             da: {
                 title: "Kiosk",
                 checkin: "Check-in info",
-                checkout: "Udtjekning",
+                checkout: "Check-out",
                 service: "Reparation / Hjælp",
                 parking: "Parkering",
                 coInstructions: "Indtast venligst dit værelsesnummer og navnet på den registrerede person. Tryk derefter på knappen BEKRÆFT.",
@@ -8803,7 +8994,7 @@
             ja: {
                 title: "キオスク",
                 checkin: "チェックイン案内",
-                checkout: "チェックアウト",
+                checkout: "Check-out",
                 service: "修理 / お問い合わせ",
                 parking: "駐車場",
                 coInstructions: "お部屋番号と登録者名を入力してください。その後、「確認」ボタンを押してください。",
@@ -8858,7 +9049,7 @@
             he: {
                 title: "קיוסק",
                 checkin: "מידע על צ'ק-אין",
-                checkout: "עזיבה",
+                checkout: "Check-out",
                 service: "תיקונים / עזרה",
                 parking: "חנייה",
                 coInstructions: "נא להזין את מספר החדר ואת שם האורח הרשום. לאחר מכן לחצו על כפתור אישור.",
@@ -8913,7 +9104,7 @@
             el: {
                 title: "Kiosk",
                 checkin: "Πληροφορίες άφιξης",
-                checkout: "Αναχώρηση",
+                checkout: "Check-out",
                 service: "Επισκευή / Βοήθεια",
                 parking: "Στάθμευση",
                 coInstructions: "Παρακαλώ εισαγάγετε τον αριθμό του δωματίου σας και το όνομα του εγγεγραμμένου επισκέπτη. Στη συνέχεια πατήστε το κουμπί ΕΠΙΒΕΒΑΙΩΣΗ.",
@@ -11145,6 +11336,66 @@
         if (offlinePairingAction === 'invalid') {
             setTimeout(() => alert('Neplatný párovací klíč pro offline zálohu check-inu.'), 300);
         }
-    </script>
+    
+
+        // =========================================================
+        // v46 — iPad Safari dynamic-toolbar stable MAIN MENU
+        // =========================================================
+        (function initMainMenuVisualViewport() {
+            const root = document.documentElement;
+            const body = document.body;
+            const mainScreen = document.getElementById('screen-1');
+
+            if (!body || !mainScreen) return;
+
+            let rafId = 0;
+
+            function refreshMainViewportLayout() {
+                if (rafId) cancelAnimationFrame(rafId);
+
+                rafId = requestAnimationFrame(() => {
+                    const viewportHeight = Math.round(
+                        (window.visualViewport && window.visualViewport.height) ||
+                        window.innerHeight ||
+                        document.documentElement.clientHeight
+                    );
+
+                    root.style.setProperty('--kiosk-visual-height', viewportHeight + 'px');
+
+                    const mainVisible = !mainScreen.classList.contains('hidden');
+
+                    body.classList.toggle('main-screen-viewport', mainVisible);
+                    body.classList.toggle(
+                        'main-viewport-compact',
+                        mainVisible && viewportHeight < 760
+                    );
+                    body.classList.toggle(
+                        'main-viewport-tight',
+                        mainVisible && viewportHeight < 690
+                    );
+
+                    if (mainVisible && window.scrollY !== 0) {
+                        window.scrollTo(0, 0);
+                    }
+                });
+            }
+
+            const observer = new MutationObserver(refreshMainViewportLayout);
+            observer.observe(mainScreen, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+
+            window.addEventListener('resize', refreshMainViewportLayout, { passive: true });
+            window.addEventListener('orientationchange', refreshMainViewportLayout, { passive: true });
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', refreshMainViewportLayout, { passive: true });
+            }
+
+            refreshMainViewportLayout();
+        })();
+
+</script>
 </body>
 </html>
