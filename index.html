@@ -5738,290 +5738,66 @@
             }
         }
 
+
         /* =========================================================
-           v46 — iPad Safari dynamic-toolbar stable MAIN MENU
-           Uses the actual Visual Viewport height. Only the main menu
-           is locked to the visible screen; subpages keep normal scroll.
+           MAIN MENU — HIERARCHY / PROPORTIONS
+           Clean visual-only adjustment for the physical kiosk.
+           No viewport locking, no dynamic compact modes.
            ========================================================= */
-        :root {
-            --kiosk-visual-height: 100dvh;
+
+        /* Primary actions: keep the original height, make the pair
+           slightly narrower and centred so it visually stands out. */
+        #screen-1 .main-primary-actions {
+            width: 92% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 40px !important;
+            gap: 18px !important;
         }
 
-        body.main-screen-viewport {
-            height: var(--kiosk-visual-height) !important;
-            min-height: var(--kiosk-visual-height) !important;
-            max-height: var(--kiosk-visual-height) !important;
-            overflow-y: hidden !important;
-            padding-top: max(6px, env(safe-area-inset-top)) !important;
-            padding-bottom: max(6px, env(safe-area-inset-bottom)) !important;
-            align-items: stretch !important;
+        #screen-1 .main-primary-actions .btn-kiosk {
+            min-height: 170px !important;
         }
 
-        body.main-screen-viewport > .container {
-            height: 100% !important;
-            min-height: 0 !important;
-            max-height: 100% !important;
-            padding-top: 7px !important;
-            padding-bottom: 7px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
+        #screen-1 .main-primary-actions::after {
+            left: 6% !important;
+            right: 6% !important;
+            bottom: -22px !important;
         }
 
-        body.main-screen-viewport #screen-1 {
-            flex: 0 0 auto;
-            min-height: 0;
+        /* Secondary actions: deliberately more compact than Check-in /
+           Check-out. This creates dark breathing room around the grid
+           and below the last row. */
+        #screen-1 .secondary-actions-grid {
+            width: 84% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            gap: 15px 18px !important;
         }
 
-        /* Medium compact mode: Safari toolbar visible / smaller visual viewport. */
-        body.main-screen-viewport.main-viewport-compact .language-bar {
-            margin-bottom: 11px !important;
-            padding: 8px 15px !important;
-            gap: 7px 10px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact .flag-btn {
-            font-size: 25px !important;
-            min-width: 42px !important;
-            min-height: 42px !important;
-            padding: 4px 6px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .main-wifi-banner {
-            min-height: 42px !important;
-            margin-top: 0 !important;
-            margin-bottom: 10px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .main-primary-actions {
-            margin-bottom: 32px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .main-primary-actions::after {
-            bottom: -18px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact .kiosk-grid,
-        body.main-screen-viewport.main-viewport-compact .secondary-actions-grid {
-            gap: 14px 18px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-kiosk,
-        body.main-screen-viewport.main-viewport-compact .secondary-actions-grid .btn-kiosk {
+        #screen-1 .secondary-actions-grid .btn-kiosk {
             min-height: 145px !important;
-            padding-top: 15px !important;
-            padding-bottom: 15px !important;
-            gap: 7px !important;
+            padding-top: 16px !important;
+            padding-bottom: 16px !important;
         }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-svg-icon {
-            width: 58px !important;
-            height: 58px !important;
+
+        #screen-1 .secondary-actions-grid .btn-svg-icon {
+            width: 60px !important;
+            height: 60px !important;
         }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-title {
+
+        #screen-1 .secondary-actions-grid .btn-title {
+            font-size: 22px !important;
+        }
+
+        #screen-1 .secondary-actions-grid .btn-service .btn-title {
             font-size: 21px !important;
         }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-service .btn-title {
-            font-size: 20px !important;
-        }
-        body.main-screen-viewport.main-viewport-compact #screen-1 .btn-subtitle,
-        body.main-screen-viewport.main-viewport-compact #screen-1 .checkout-time {
-            font-size: 13px !important;
-        }
 
-        /* Extra compact mode for the smallest visible Safari viewport. */
-        body.main-screen-viewport.main-viewport-tight .language-bar {
-            margin-bottom: 8px !important;
-            padding: 6px 13px !important;
-            gap: 5px 9px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight .flag-btn {
-            font-size: 23px !important;
-            min-width: 39px !important;
-            min-height: 39px !important;
-            padding: 3px 5px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .main-wifi-banner {
-            min-height: 39px !important;
-            margin-bottom: 8px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .main-primary-actions {
-            margin-bottom: 27px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .main-primary-actions::after {
-            bottom: -15px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight .kiosk-grid,
-        body.main-screen-viewport.main-viewport-tight .secondary-actions-grid {
-            gap: 11px 16px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-kiosk,
-        body.main-screen-viewport.main-viewport-tight .secondary-actions-grid .btn-kiosk {
-            min-height: 132px !important;
-            padding-top: 12px !important;
-            padding-bottom: 12px !important;
-            gap: 6px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-svg-icon {
-            width: 52px !important;
-            height: 52px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-title {
-            font-size: 20px !important;
-        }
-        body.main-screen-viewport.main-viewport-tight #screen-1 .btn-service .btn-title {
-            font-size: 19px !important;
-        }
-
-
-
-        /* =========================================================
-           v47 — FLUID ONE-SCREEN MAIN MENU FOR iPAD
-           - Main menu always fits the actually visible viewport.
-           - No vertical scrolling on the main menu.
-           - Three button rows share the remaining height fluidly.
-           - Subpages keep their existing scrolling/layout unchanged.
-           ========================================================= */
-
-        body.main-screen-viewport {
-            overflow-y: hidden !important;
-        }
-
-        body.main-screen-viewport > .container {
-            justify-content: flex-start !important;
-            gap: 0 !important;
-            padding-top: clamp(5px, 1vh, 10px) !important;
-            padding-bottom: clamp(5px, 1vh, 10px) !important;
-        }
-
-        /* Language strip stays compact but fully readable. */
-        body.main-screen-viewport > .container > .language-bar {
-            flex: 0 0 auto !important;
-            margin-bottom: clamp(7px, 1.4vh, 13px) !important;
-            padding: clamp(6px, 1vh, 10px) 16px !important;
-            gap: 5px 10px !important;
-        }
-
-        body.main-screen-viewport > .container > .language-bar .flag-btn {
-            font-size: clamp(23px, 3.5vh, 28px) !important;
-            min-width: clamp(39px, 5.8vh, 48px) !important;
-            min-height: clamp(39px, 5.8vh, 48px) !important;
-            padding: 4px 6px !important;
-        }
-
-        /* Screen 1 receives all remaining viewport height. */
-        body.main-screen-viewport #screen-1 {
-            flex: 1 1 auto !important;
-            min-height: 0 !important;
-            height: auto !important;
-            display: flex !important;
-            flex-direction: column !important;
-            overflow: hidden !important;
-        }
-
-        body.main-screen-viewport #screen-1 .header-title {
-            display: none !important;
-        }
-
-        /* Wi-Fi stays fixed/compact; buttons receive the rest. */
-        body.main-screen-viewport #screen-1 .main-wifi-banner {
-            flex: 0 0 auto !important;
-            width: min(620px, 88%) !important;
-            min-height: clamp(42px, 7.5vh, 58px) !important;
-            margin: 0 auto clamp(7px, 1.4vh, 13px) !important;
-            border-radius: clamp(13px, 2vh, 18px) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .main-wifi-banner-title {
-            min-width: 100px !important;
-            padding-top: 7px !important;
-            padding-bottom: 7px !important;
-            font-size: clamp(15px, 2.35vh, 18px) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .main-wifi-banner-item {
-            padding-top: 6px !important;
-            padding-bottom: 6px !important;
-        }
-
-        body.main-screen-viewport #screen-1 .main-wifi-banner-item strong {
-            font-size: clamp(15px, 2.35vh, 18px) !important;
-        }
-
-        /*
-         * There are three visual button rows:
-         * 1x primary + 2x secondary.
-         * Primary receives one share; secondary grid receives two shares.
-         */
-        body.main-screen-viewport #screen-1 .main-primary-actions {
-            flex: 1 1 0 !important;
-            min-height: 0 !important;
-            margin-bottom: clamp(25px, 4.4vh, 38px) !important;
-            gap: clamp(12px, 2vh, 20px) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .main-primary-actions::after {
-            bottom: calc(clamp(25px, 4.4vh, 38px) * -0.55) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .secondary-actions-grid {
-            flex: 2 1 0 !important;
-            min-height: 0 !important;
-            grid-template-columns: 1fr 1fr !important;
-            grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-            gap: clamp(10px, 1.8vh, 18px) clamp(12px, 2vh, 20px) !important;
-        }
-
-        /* Every main-menu button fills its row instead of forcing 170 px. */
-        body.main-screen-viewport #screen-1 .btn-kiosk,
-        body.main-screen-viewport #screen-1 .secondary-actions-grid .btn-kiosk {
-            height: 100% !important;
-            min-height: 0 !important;
-            padding: clamp(9px, 1.8vh, 18px) 14px !important;
-            gap: clamp(5px, 0.9vh, 9px) !important;
-            border-radius: clamp(15px, 2.4vh, 20px) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .btn-svg-icon {
-            width: clamp(47px, 7.7vh, 66px) !important;
-            height: clamp(47px, 7.7vh, 66px) !important;
-            margin-bottom: 0 !important;
-        }
-
-        body.main-screen-viewport #screen-1 .btn-title {
-            font-size: clamp(18px, 2.8vh, 24px) !important;
-            line-height: 1.08 !important;
-        }
-
-        body.main-screen-viewport #screen-1 .btn-service .btn-title {
-            font-size: clamp(17px, 2.65vh, 23px) !important;
-        }
-
-        body.main-screen-viewport #screen-1 .btn-subtitle,
-        body.main-screen-viewport #screen-1 .checkout-time {
-            font-size: clamp(11px, 1.8vh, 14px) !important;
-        }
-
-        /*
-         * Landscape iPad safety net: if the usable viewport is unusually short
-         * (Guided Access / browser controls), keep a little more breathing room.
-         */
-        @media (orientation: landscape) and (max-height: 700px) {
-            body.main-screen-viewport > .container > .language-bar {
-                margin-bottom: 6px !important;
-                padding-top: 5px !important;
-                padding-bottom: 5px !important;
-            }
-
-            body.main-screen-viewport #screen-1 .main-wifi-banner {
-                margin-bottom: 6px !important;
-                min-height: 40px !important;
-            }
-
-            body.main-screen-viewport #screen-1 .main-primary-actions {
-                margin-bottom: 23px !important;
-            }
-
-            body.main-screen-viewport #screen-1 .secondary-actions-grid {
-                gap: 9px 15px !important;
-            }
-
-            body.main-screen-viewport #screen-1 .btn-kiosk {
-                padding-top: 8px !important;
-                padding-bottom: 8px !important;
+        /* Preserve the established two-column kiosk layout on the iPad. */
+        @media (min-width: 761px) {
+            #screen-1 .secondary-actions-grid {
+                grid-template-columns: 1fr 1fr !important;
             }
         }
 
@@ -11495,66 +11271,6 @@
         if (offlinePairingAction === 'invalid') {
             setTimeout(() => alert('Neplatný párovací klíč pro offline zálohu check-inu.'), 300);
         }
-    
-
-        // =========================================================
-        // v46 — iPad Safari dynamic-toolbar stable MAIN MENU
-        // =========================================================
-        (function initMainMenuVisualViewport() {
-            const root = document.documentElement;
-            const body = document.body;
-            const mainScreen = document.getElementById('screen-1');
-
-            if (!body || !mainScreen) return;
-
-            let rafId = 0;
-
-            function refreshMainViewportLayout() {
-                if (rafId) cancelAnimationFrame(rafId);
-
-                rafId = requestAnimationFrame(() => {
-                    const viewportHeight = Math.round(
-                        (window.visualViewport && window.visualViewport.height) ||
-                        window.innerHeight ||
-                        document.documentElement.clientHeight
-                    );
-
-                    root.style.setProperty('--kiosk-visual-height', viewportHeight + 'px');
-
-                    const mainVisible = !mainScreen.classList.contains('hidden');
-
-                    body.classList.toggle('main-screen-viewport', mainVisible);
-                    body.classList.toggle(
-                        'main-viewport-compact',
-                        mainVisible && viewportHeight < 760
-                    );
-                    body.classList.toggle(
-                        'main-viewport-tight',
-                        mainVisible && viewportHeight < 690
-                    );
-
-                    if (mainVisible && window.scrollY !== 0) {
-                        window.scrollTo(0, 0);
-                    }
-                });
-            }
-
-            const observer = new MutationObserver(refreshMainViewportLayout);
-            observer.observe(mainScreen, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-
-            window.addEventListener('resize', refreshMainViewportLayout, { passive: true });
-            window.addEventListener('orientationchange', refreshMainViewportLayout, { passive: true });
-
-            if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', refreshMainViewportLayout, { passive: true });
-            }
-
-            refreshMainViewportLayout();
-        })();
-
-</script>
+    </script>
 </body>
 </html>
