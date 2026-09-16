@@ -7366,6 +7366,40 @@ function anchoredMiddleNameMatch(shorterTokens, longerTokens) {
   return { matched: false, aliases: 0, initials: 0 };
 }
 
+
+function extraInitialOmissionMatch(leftTokens, rightTokens) {
+  // Povolíme právě jednu samostatnou iniciálu navíc na libovolné pozici.
+  // Řeší např. "Paul Blamey P" <-> "Paul Blamey" a
+  // "Paul P Blamey" <-> "Paul Blamey".
+  // Samotné "P Blamey" <-> "Paul Blamey" se tímto pravidlem nepovolí.
+  if (Math.abs(leftTokens.length - rightTokens.length) !== 1) {
+    return { matched: false, alias: false };
+  }
+
+  const shorter = leftTokens.length < rightTokens.length ? leftTokens : rightTokens;
+  const longer = leftTokens.length < rightTokens.length ? rightTokens : leftTokens;
+
+  if (shorter.length < 2) {
+    return { matched: false, alias: false };
+  }
+
+  for (let i = 0; i < longer.length; i += 1) {
+    if (longer[i].length !== 1) continue;
+
+    const withoutInitial = longer.slice(0, i).concat(longer.slice(i + 1));
+
+    if (sameTokenMultiset(shorter, withoutInitial)) {
+      return { matched: true, alias: false };
+    }
+
+    if (aliasAwareKeyMatch(shorter.join(' '), withoutInitial.join(' '))) {
+      return { matched: true, alias: true };
+    }
+  }
+
+  return { matched: false, alias: false };
+}
+
 function simplifiedKeyMatchScore(leftKey, rightKey) {
   const leftTokens = meaningfulNameTokens(leftKey);
   const rightTokens = meaningfulNameTokens(rightKey);
@@ -7375,6 +7409,13 @@ function simplifiedKeyMatchScore(leftKey, rightKey) {
   // Po odstranění titulů, suffixů a částic je celé jméno stejné.
   if (sameTokenMultiset(leftTokens, rightTokens)) {
     return 900;
+  }
+
+  // Jedna samostatná iniciála smí být navíc i na kraji jména.
+  // Některé rezervační systémy totiž uloží např. "Paul Blamey P".
+  const extraInitial = extraInitialOmissionMatch(leftTokens, rightTokens);
+  if (extraInitial.matched) {
+    return extraInitial.alias ? 790 : 820;
   }
 
   // Jednoslovná jména nepovolujeme jako částečnou shodu.
