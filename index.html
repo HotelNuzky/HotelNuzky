@@ -115,19 +115,6 @@
             -webkit-user-select: none;
             user-select: none;
         }
-
-        .language-bar-bottom {
-            margin-top: 22px;
-            margin-bottom: 0;
-        }
-
-        /* v44 — The main menu already has the primary language selector at the top.
-           Hide only the mirrored bottom selector while screen 1 is active;
-           it remains available on every other kiosk screen. */
-        #screen-1:not(.hidden) ~ .language-bar-bottom {
-            display: none !important;
-        }
-
         /* Active language is explicit. On touch devices we deliberately do not
            use :hover, because iPad Safari can keep a tapped item in a sticky
            hover state and make two flags look selected at once. */
@@ -6551,23 +6538,6 @@
 <div class="result-ok-row">
 <button class="btn-form-submit" id="thanks-ok-btn" onclick="resetToStart()">OK</button>
 </div>
-</div>
-<!-- MIRRORED BOTTOM LANGUAGE SELECTION BAR -->
-<div class="language-bar language-bar-bottom" aria-label="Výběr jazyka">
-<span role="button" aria-pressed="true" class="flag-btn active" data-lang="cs" onclick="setLanguage('cs', event)" title="Čeština">🇨🇿</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="en" onclick="setLanguage('en', event)" title="English">🇬🇧</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="de" onclick="setLanguage('de', event)" title="Deutsch">🇩🇪</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="it" onclick="setLanguage('it', event)" title="Italiano">🇮🇹</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="es" onclick="setLanguage('es', event)" title="Español">🇪🇸</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="fr" onclick="setLanguage('fr', event)" title="Français">🇫🇷</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="pl" onclick="setLanguage('pl', event)" title="Polski">🇵🇱</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="ua" onclick="setLanguage('ua', event)" title="Українська">🇺🇦</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="sk" onclick="setLanguage('sk', event)" title="Slovenčina">🇸🇰</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="tr" onclick="setLanguage('tr', event)" title="Türkçe">🇹🇷</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="da" onclick="setLanguage('da', event)" title="Dansk">🇩🇰</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="ja" onclick="setLanguage('ja', event)" title="日本語">🇯🇵</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="he" onclick="setLanguage('he', event)" title="עברית">🇮🇱</span>
-<span role="button" aria-pressed="false" class="flag-btn" data-lang="el" onclick="setLanguage('el', event)" title="Ελληνικά">🇬🇷</span>
 </div>
 </div>
 <div class="localized-calendar-overlay hidden" id="localized-calendar-overlay" onclick="calendarOverlayClick(event)">
