@@ -7040,650 +7040,401 @@
 
         }
 
-        function nameMatchKeys(value) {
-
-          const raw =
-
-            String(value || "")
-
-              .trim()
-
-              .toLocaleLowerCase();
-
-          const keys =
-
-            new Set();
-
-          const direct =
-
-            normalizeName(raw);
-
-          if (direct) {
-
-            keys.add(direct);
-
-          }
-
-          if (
-
-            /[\u0400-\u052F]/u
-
-              .test(raw)
-
-          ) {
-
-            [
-
-              CYRILLIC_TRANSLIT_STANDARD,
-
-              CYRILLIC_TRANSLIT_UA_COMMON,
-
-              CYRILLIC_TRANSLIT_UA_PASSPORT
-
-            ].forEach(
-
-              map => {
-
-                const key =
-
-                  normalizeName(
-
-                    transliterateByMap(
-
-                      raw,
-
-                      map
-
-                    )
-
-                  );
-
-                if (key) {
-
-                  keys.add(key);
-
-                }
-
-              }
-
-            );
-
-          }
-
-          if (
-
-            /[\u0370-\u03FF\u1F00-\u1FFF]/u
-
-              .test(raw)
-
-          ) {
-
-            const simpleGreek =
-
-              normalizeName(
-
-                transliterateByMap(
-
-                  stripNameDiacritics(raw)
-
-                    .toLocaleLowerCase(),
-
-                  GREEK_TRANSLIT_MAP
-
-                )
-
-              );
-
-            const digraphGreek =
-
-              normalizeName(
-
-                transliterateGreek(raw)
-
-              );
-
-            if (simpleGreek) {
-
-              keys.add(simpleGreek);
-
-            }
-
-            if (digraphGreek) {
-
-              keys.add(digraphGreek);
-
-            }
-
-          }
-
-          return keys;
-
-        }
-
-
-
-        // ============================================================
-
-        // ČESKÉ DOMÁCKÉ VARIANTY JMÉNA
-
-        // ============================================================
-
-        const CZECH_NAME_ALIAS_GROUPS =
-
-          Object.freeze([
-
-            [
-
-              "jan",
-
-              "honza",
-
-              "honzik"
-
-            ],
-
-            [
-
-              "katerina",
-
-              "katka",
-
-              "kata"
-
-            ],
-
-            [
-
-              "josef",
-
-              "pepa"
-
-            ],
-
-            [
-
-              "jiri",
-
-              "jirka"
-
-            ],
-
-            [
-
-              "vaclav",
-
-              "vasek"
-
-            ],
-
-            [
-
-              "frantisek",
-
-              "franta"
-
-            ],
-
-            [
-
-              "jakub",
-
-              "kuba"
-
-            ],
-
-            [
-
-              "barbora",
-
-              "bara"
-
-            ],
-
-            [
-
-              "tereza",
-
-              "terka"
-
-            ],
-
-            [
-
-              "veronika",
-
-              "verca"
-
-            ],
-
-            [
-
-              "lucie",
-
-              "lucka"
-
-            ]
-
-          ]);
-
-        function areCzechNameAliases(
-
-          leftToken,
-
-          rightToken
-
-        ) {
-
-          if (
-
-            !leftToken ||
-
-            !rightToken ||
-
-            leftToken === rightToken
-
-          ) {
-
-            return false;
-
-          }
-
-          return CZECH_NAME_ALIAS_GROUPS
-
-            .some(
-
-              group =>
-
-                group.includes(
-
-                  leftToken
-
-                ) &&
-
-                group.includes(
-
-                  rightToken
-
-                )
-
-            );
-
-        }
-
-        function aliasAwareKeyMatch(
-
-          leftKey,
-
-          rightKey
-
-        ) {
-
-          const leftTokens =
-
-            String(leftKey || "")
-
-              .split(" ")
-
-              .filter(Boolean);
-
-          const rightTokens =
-
-            String(rightKey || "")
-
-              .split(" ")
-
-              .filter(Boolean);
-
-        /**
-
-            * Počet slov musí zůstat stejný.
-
-            * Samotné "Katka" tedy neodemkne
-
-            * rezervaci "Kateřina Nováková".
-
-            */
-
-          if (
-
-            !leftTokens.length ||
-
-            leftTokens.length !==
-
-              rightTokens.length
-
-          ) {
-
-            return false;
-
-          }
-
-          const remainingRight =
-
-            [...rightTokens];
-
-          const unmatchedLeft = [];
-
-        /**
-
-            * Nejdřív odebereme přesně
-
-            * shodné části jména.
-
-            *
-
-            * Tím zároveň nezáleží
-
-            * na pořadí jména a příjmení.
-
-            */
-
-          for (
-
-            const token
-
-            of leftTokens
-
-          ) {
-
-            const index =
-
-              remainingRight
-
-                .indexOf(token);
-
-            if (index >= 0) {
-
-              remainingRight
-
-                .splice(
-
-                  index,
-
-                  1
-
-                );
-
-            } else {
-
-              unmatchedLeft
-
-                .push(token);
-
-            }
-
-          }
-
-          if (
-
-            unmatchedLeft.length === 0 &&
-
-            remainingRight.length === 0
-
-          ) {
-
-            return true;
-
-          }
-
-        /**
-
-            * Povolíme maximálně jednu
-
-            * rozdílnou část a pouze známou
-
-            * domáckou variantu.
-
-            */
-
-          return (
-
-            unmatchedLeft.length === 1 &&
-
-            remainingRight.length === 1 &&
-
-            areCzechNameAliases(
-
-              unmatchedLeft[0],
-
-              remainingRight[0]
-
-            )
-
-          );
-
-        }
-
-        const NAME_TITLE_TOKENS = new Set([
-          "dr", "prof", "doc", "ing", "mgr", "bc", "mudr", "judr",
-          "rndr", "phdr", "thdr", "pharmdr", "paeddr", "phd", "mba",
-          "msc", "bsc", "llm", "csc", "dsc", "md", "dds", "dvm", "jd",
-          "esq", "dipl", "arch", "akad", "mr", "mrs", "ms", "miss",
-          "sir", "dame", "herr", "frau", "jr", "sr"
-        ]);
-
-        const NAME_TITLE_SEQUENCES = Object.freeze([
-          ["ph", "d"],
-          ["m", "d"],
-          ["m", "sc"],
-          ["b", "sc"],
-          ["ll", "m"],
-          ["d", "sc"],
-          ["c", "sc"]
-        ]);
-
-        const NAME_PARTICLE_TOKENS = new Set([
-          "von", "van", "der", "den", "de", "del", "della", "delle",
-          "di", "da", "das", "do", "dos", "du", "la", "le", "el", "al",
-          "bin", "ibn", "ben", "af", "av", "zu", "zum", "zur", "ten",
-          "ter", "op"
-        ]);
-
-        function stripKnownTitleSequences(tokens) {
-          const result = [];
-
-          for (let index = 0; index < tokens.length;) {
-            let skipped = false;
-
-            for (const sequence of NAME_TITLE_SEQUENCES) {
-              if (
-                sequence.every(
-                  (token, offset) => tokens[index + offset] === token
-                )
-              ) {
-                index += sequence.length;
-                skipped = true;
-                break;
-              }
-            }
-
-            if (!skipped) {
-              result.push(tokens[index]);
-              index += 1;
-            }
-          }
-
-          return result;
-        }
-
-        function meaningfulNameTokens(key) {
-          let tokens = String(key || "")
-            .split(" ")
-            .filter(Boolean);
-
-          tokens = stripKnownTitleSequences(tokens)
-            .filter(token => !NAME_TITLE_TOKENS.has(token));
-
-          const withoutParticles = tokens.filter(
-            token => !NAME_PARTICLE_TOKENS.has(token)
-          );
-
-          // Částice ignorujeme jen tehdy, když po jejich odebrání zůstane
-          // dost jména k bezpečnému porovnání. Mononym tedy nezmizí na prázdno.
-          if (withoutParticles.length >= 2) {
-            tokens = withoutParticles;
-          }
-
-          return tokens;
-        }
-
-        function sameTokenMultiset(leftTokens, rightTokens) {
-          if (leftTokens.length !== rightTokens.length) return false;
-
-          const remaining = [...rightTokens];
-
-          for (const token of leftTokens) {
-            const index = remaining.indexOf(token);
-            if (index < 0) return false;
-            remaining.splice(index, 1);
-          }
-
-          return remaining.length === 0;
-        }
-
-        function tokenEqualsOrAlias(leftToken, rightToken) {
-          if (leftToken === rightToken) {
-            return { matched: true, alias: false };
-          }
-
-          if (areCzechNameAliases(leftToken, rightToken)) {
-            return { matched: true, alias: true };
-          }
-
-          return { matched: false, alias: false };
-        }
-
-        function anchoredMiddleNameMatch(shorterTokens, longerTokens) {
-          if (shorterTokens.length < 2 || longerTokens.length < 2) {
-            return { matched: false, aliases: 0 };
-          }
-
-          const orientations = [
-            { first: longerTokens[0], last: longerTokens[longerTokens.length - 1] },
-            { first: longerTokens[longerTokens.length - 1], last: longerTokens[0] }
-          ];
-
-          for (const orientation of orientations) {
-            const firstMatch = tokenEqualsOrAlias(shorterTokens[0], orientation.first);
-            const lastMatch = tokenEqualsOrAlias(
-              shorterTokens[shorterTokens.length - 1],
-              orientation.last
-            );
-
-            if (!firstMatch.matched || !lastMatch.matched) continue;
-
-            let aliases = Number(firstMatch.alias) + Number(lastMatch.alias);
-            if (aliases > 1) continue;
-
-            // Vnitřní části kratšího jména musí být opravdu obsažené v delším jméně.
-            // Vynechat lze pouze prostřední jméno/jména na delší straně.
-            const remaining = [...longerTokens];
-            for (const edgeToken of [orientation.first, orientation.last]) {
-              const index = remaining.indexOf(edgeToken);
-              if (index >= 0) remaining.splice(index, 1);
-            }
-
-            let valid = true;
-            for (const token of shorterTokens.slice(1, -1)) {
-              let index = remaining.indexOf(token);
-              if (index >= 0) {
-                remaining.splice(index, 1);
-                continue;
-              }
-
-              index = remaining.findIndex(candidate => areCzechNameAliases(token, candidate));
-              if (index >= 0 && aliases === 0) {
-                aliases += 1;
-                remaining.splice(index, 1);
-                continue;
-              }
-
-              valid = false;
-              break;
-            }
-
-            if (valid) {
-              return { matched: true, aliases };
-            }
-          }
-
-          return { matched: false, aliases: 0 };
-        }
-
-        function simplifiedKeyMatchScore(leftKey, rightKey) {
-          const leftTokens = meaningfulNameTokens(leftKey);
-          const rightTokens = meaningfulNameTokens(rightKey);
-
-          if (!leftTokens.length || !rightTokens.length) return 0;
-
-          // Po odstranění titulů a částic je celé jméno stejné.
-          if (sameTokenMultiset(leftTokens, rightTokens)) {
-            return 900;
-          }
-
-          // Jednoslovná jména nepovolujeme jako částečnou shodu.
-          // Pokud jsou opravdu totožná, zachytí je pravidlo výše.
-          if (leftTokens.length < 2 || rightTokens.length < 2) {
-            return 0;
-          }
-
-          const shorter =
-            leftTokens.length <= rightTokens.length
-              ? leftTokens
-              : rightTokens;
-          const longer =
-            leftTokens.length <= rightTokens.length
-              ? rightTokens
-              : leftTokens;
-
-          const subset = anchoredMiddleNameMatch(shorter, longer);
-
-          if (!subset.matched) return 0;
-
-          // Prostřední jméno může na jedné straně chybět. Čím více významových
-          // částí host zadal, tím je shoda silnější. Domácká varianta má nižší skóre.
-          const specificity = Math.min(40, shorter.length * 10);
-          return (subset.aliases ? 760 : 800) + specificity;
-        }
-
-        function nameMatchScore(left, right) {
-          const leftKeys = nameMatchKeys(left);
-          const rightKeys = nameMatchKeys(right);
-
-          if (!leftKeys.size || !rightKeys.size) return 0;
-
-          let bestScore = 0;
-
-          for (const leftKey of leftKeys) {
-            for (const rightKey of rightKeys) {
-              // Nejsilnější je přesná normalizovaná / transliterovaná shoda.
-              if (leftKey === rightKey) {
-                bestScore = Math.max(bestScore, 1000);
-                continue;
-              }
-
-              // Zachováme dosavadní bezpečné české domácké varianty.
-              if (aliasAwareKeyMatch(leftKey, rightKey)) {
-                bestScore = Math.max(bestScore, 930);
-              }
-
-              // Tituly (Dr., Prof., Ph.D. atd.), částice (von/de/van...) a
-              // prostřední jména nesmí hostovi zbytečně zabránit v check-inu.
-              bestScore = Math.max(
-                bestScore,
-                simplifiedKeyMatchScore(leftKey, rightKey)
-              );
-            }
-          }
-
-          return bestScore;
-        }
-
-        function namesMatch(left, right) {
-          return nameMatchScore(left, right) > 0;
-        }
-
-        // ============================================================
+        function addNormalizedNameVariants(keys, value) {
+  const rawValue = String(value || "");
+  const direct = normalizeName(rawValue);
+  if (direct) keys.add(direct);
+
+  // Apostrofy a spojovníky mohou být v rezervaci zapsané, ale host je často
+  // vynechá (O'Connor -> OConnor, Jean-Pierre -> JeanPierre).
+  const collapsedPunctuation = rawValue.replace(/[\u0027\u2018\u2019\u02BC\u02BB`\-\u2010-\u2015]/g, "");
+  if (collapsedPunctuation !== rawValue) {
+    const collapsed = normalizeName(collapsedPunctuation);
+    if (collapsed) keys.add(collapsed);
+  }
+}
+
+function nameMatchKeys(value) {
+  const raw = String(value || "").trim().toLocaleLowerCase();
+  const keys = new Set();
+
+  addNormalizedNameVariants(keys, raw);
+
+  if (/[\u0400-\u052F]/u.test(raw)) {
+    [
+      CYRILLIC_TRANSLIT_STANDARD,
+      CYRILLIC_TRANSLIT_UA_COMMON,
+      CYRILLIC_TRANSLIT_UA_PASSPORT
+    ].forEach(map => {
+      addNormalizedNameVariants(keys, transliterateByMap(raw, map));
+    });
+  }
+
+  if (/[\u0370-\u03FF\u1F00-\u1FFF]/u.test(raw)) {
+    addNormalizedNameVariants(
+      keys,
+      transliterateByMap(
+        stripNameDiacritics(raw).toLocaleLowerCase(),
+        GREEK_TRANSLIT_MAP
+      )
+    );
+    addNormalizedNameVariants(keys, transliterateGreek(raw));
+  }
+
+  return keys;
+}
+
+
+// ============================================================
+// BEZPEČNÉ DOMÁCKÉ / MEZINÁRODNÍ VARIANTY JMÉNA
+// ============================================================
+
+const NAME_ALIAS_GROUPS = Object.freeze([
+  ["jan", "honza", "honzik"],
+  ["katerina", "katka", "kata"],
+  ["josef", "pepa"],
+  ["jiri", "jirka"],
+  ["vaclav", "vasek"],
+  ["frantisek", "franta"],
+  ["jakub", "kuba"],
+  ["barbora", "bara"],
+  ["tereza", "terka"],
+  ["veronika", "verca"],
+  ["lucie", "lucka"],
+
+  // Běžné anglické / mezinárodní varianty. Matcher je použije jen jako
+  // jednu část celého víceslovného jména, takže samotná přezdívka nestačí.
+  ["william", "bill", "will"],
+  ["robert", "bob", "rob"],
+  ["richard", "rick", "dick"],
+  ["elizabeth", "liz", "beth", "lizzy", "lizzie"],
+  ["alexander", "alex"],
+  ["alexandra", "alex"],
+  ["katherine", "catherine", "kathryn", "kate", "kathy"],
+  ["christopher", "chris"],
+  ["michael", "mike"],
+  ["matthew", "matt"],
+  ["nicholas", "nick"],
+  ["jonathan", "jon"],
+  ["benjamin", "ben"],
+  ["daniel", "dan"],
+  ["anthony", "tony"],
+  ["edward", "ed"],
+  ["theodore", "ted"],
+  ["margaret", "maggie", "peggy"],
+  ["patricia", "pat"],
+  ["jennifer", "jenny", "jen"],
+  ["rebecca", "becky"],
+  ["susan", "sue"],
+  ["deborah", "debbie"],
+  ["barbara", "barb"]
+]);
+
+function areKnownNameAliases(leftToken, rightToken) {
+  if (!leftToken || !rightToken || leftToken === rightToken) {
+    return false;
+  }
+
+  return NAME_ALIAS_GROUPS.some(
+    group => group.includes(leftToken) && group.includes(rightToken)
+  );
+}
+
+function aliasAwareKeyMatch(leftKey, rightKey) {
+  const leftTokens = String(leftKey || "").split(" ").filter(Boolean);
+  const rightTokens = String(rightKey || "").split(" ").filter(Boolean);
+
+  // Počet slov musí zůstat stejný. Samotné "Katka" tedy neodemkne
+  // rezervaci "Kateřina Nováková".
+  if (!leftTokens.length || leftTokens.length !== rightTokens.length) {
+    return false;
+  }
+
+  const remainingRight = [...rightTokens];
+  const unmatchedLeft = [];
+
+  // Nejdřív odebereme přesně shodné části jména. Díky tomu nezáleží
+  // na pořadí jména a příjmení.
+  for (const token of leftTokens) {
+    const index = remainingRight.indexOf(token);
+    if (index >= 0) {
+      remainingRight.splice(index, 1);
+    } else {
+      unmatchedLeft.push(token);
+    }
+  }
+
+  if (unmatchedLeft.length === 0 && remainingRight.length === 0) {
+    return true;
+  }
+
+  // Povolíme maximálně jednu rozdílnou část a pouze známou variantu.
+  return (
+    unmatchedLeft.length === 1 &&
+    remainingRight.length === 1 &&
+    areKnownNameAliases(unmatchedLeft[0], remainingRight[0])
+  );
+}
+
+const NAME_TITLE_TOKENS = new Set([
+  "dr", "prof", "doc", "ing", "mgr", "bc", "mudr", "judr",
+  "rndr", "phdr", "thdr", "pharmdr", "paeddr", "phd", "mba",
+  "msc", "bsc", "llm", "csc", "dsc", "md", "dds", "dvm", "jd",
+  "esq", "dipl", "arch", "akad", "mr", "mrs", "ms", "miss",
+  "sir", "dame", "herr", "frau", "jr", "sr", "ii", "iii", "iv"
+]);
+
+const NAME_TITLE_SEQUENCES = Object.freeze([
+  ["ph", "d"],
+  ["m", "d"],
+  ["m", "sc"],
+  ["b", "sc"],
+  ["ll", "m"],
+  ["d", "sc"],
+  ["c", "sc"]
+]);
+
+const NAME_PARTICLE_TOKENS = new Set([
+  "von", "van", "der", "den", "de", "del", "della", "delle",
+  "di", "da", "das", "do", "dos", "du", "la", "le", "el", "al",
+  "bin", "ibn", "ben", "af", "av", "zu", "zum", "zur", "ten",
+  "ter", "op"
+]);
+
+function stripKnownTitleSequences(tokens) {
+  const result = [];
+
+  for (let index = 0; index < tokens.length;) {
+    let skipped = false;
+
+    for (const sequence of NAME_TITLE_SEQUENCES) {
+      if (
+        sequence.every(
+          (token, offset) => tokens[index + offset] === token
+        )
+      ) {
+        index += sequence.length;
+        skipped = true;
+        break;
+      }
+    }
+
+    if (!skipped) {
+      result.push(tokens[index]);
+      index += 1;
+    }
+  }
+
+  return result;
+}
+
+function meaningfulNameTokens(key) {
+  let tokens = String(key || "")
+    .split(" ")
+    .filter(Boolean);
+
+  tokens = stripKnownTitleSequences(tokens)
+    .filter(token => !NAME_TITLE_TOKENS.has(token));
+
+  const withoutParticles = tokens.filter(
+    token => !NAME_PARTICLE_TOKENS.has(token)
+  );
+
+  // Částice ignorujeme jen tehdy, když po jejich odebrání zůstane
+  // dost jména k bezpečnému porovnání. Mononym tedy nezmizí na prázdno.
+  if (withoutParticles.length >= 2) {
+    tokens = withoutParticles;
+  }
+
+  return tokens;
+}
+
+function sameTokenMultiset(leftTokens, rightTokens) {
+  if (leftTokens.length !== rightTokens.length) return false;
+
+  const remaining = [...rightTokens];
+
+  for (const token of leftTokens) {
+    const index = remaining.indexOf(token);
+    if (index < 0) return false;
+    remaining.splice(index, 1);
+  }
+
+  return remaining.length === 0;
+}
+
+function tokenEqualsOrAlias(leftToken, rightToken) {
+  if (leftToken === rightToken) {
+    return { matched: true, alias: false };
+  }
+
+  if (areKnownNameAliases(leftToken, rightToken)) {
+    return { matched: true, alias: true };
+  }
+
+  return { matched: false, alias: false };
+}
+
+function middleTokenMatch(leftToken, rightToken) {
+  if (leftToken === rightToken) {
+    return { matched: true, alias: false, initial: false };
+  }
+
+  if (areKnownNameAliases(leftToken, rightToken)) {
+    return { matched: true, alias: true, initial: false };
+  }
+
+  // Prostřední iniciála se smí rovnat celému prostřednímu jménu,
+  // ale nikdy tuto toleranci nepoužíváme na prvním nebo posledním tokenu.
+  // Paul P Blamey <-> Paul Peter Blamey ano; P Blamey <-> Paul Blamey ne.
+  const leftIsInitial = leftToken.length === 1;
+  const rightIsInitial = rightToken.length === 1;
+  if (leftIsInitial !== rightIsInitial) {
+    const initial = leftIsInitial ? leftToken : rightToken;
+    const full = leftIsInitial ? rightToken : leftToken;
+    if (full.length > 1 && full.startsWith(initial)) {
+      return { matched: true, alias: false, initial: true };
+    }
+  }
+
+  return { matched: false, alias: false, initial: false };
+}
+
+function anchoredMiddleNameMatch(shorterTokens, longerTokens) {
+  if (shorterTokens.length < 2 || longerTokens.length < 2) {
+    return { matched: false, aliases: 0, initials: 0 };
+  }
+
+  const orientations = [
+    { first: longerTokens[0], last: longerTokens[longerTokens.length - 1] },
+    { first: longerTokens[longerTokens.length - 1], last: longerTokens[0] }
+  ];
+
+  for (const orientation of orientations) {
+    // První a poslední část musí být skutečné jméno/příjmení nebo bezpečný
+    // alias. Iniciálu na krajích záměrně nepovolujeme.
+    const firstMatch = tokenEqualsOrAlias(shorterTokens[0], orientation.first);
+    const lastMatch = tokenEqualsOrAlias(
+      shorterTokens[shorterTokens.length - 1],
+      orientation.last
+    );
+
+    if (!firstMatch.matched || !lastMatch.matched) continue;
+
+    let aliases = Number(firstMatch.alias) + Number(lastMatch.alias);
+    let initials = 0;
+    if (aliases > 1) continue;
+
+    // Vnitřní části kratšího jména musí být obsažené v delším jméně.
+    // Na delší straně mohou chybět/přebývat jen prostřední jména.
+    const remaining = [...longerTokens];
+    for (const edgeToken of [orientation.first, orientation.last]) {
+      const index = remaining.indexOf(edgeToken);
+      if (index >= 0) remaining.splice(index, 1);
+    }
+
+    let valid = true;
+    for (const token of shorterTokens.slice(1, -1)) {
+      let index = remaining.indexOf(token);
+      if (index >= 0) {
+        remaining.splice(index, 1);
+        continue;
+      }
+
+      index = remaining.findIndex(candidate => {
+        const match = middleTokenMatch(token, candidate);
+        return match.matched && !(match.alias && aliases > 0);
+      });
+
+      if (index >= 0) {
+        const match = middleTokenMatch(token, remaining[index]);
+        if (match.alias) aliases += 1;
+        if (match.initial) initials += 1;
+        remaining.splice(index, 1);
+        continue;
+      }
+
+      valid = false;
+      break;
+    }
+
+    if (valid) {
+      return { matched: true, aliases, initials };
+    }
+  }
+
+  return { matched: false, aliases: 0, initials: 0 };
+}
+
+function simplifiedKeyMatchScore(leftKey, rightKey) {
+  const leftTokens = meaningfulNameTokens(leftKey);
+  const rightTokens = meaningfulNameTokens(rightKey);
+
+  if (!leftTokens.length || !rightTokens.length) return 0;
+
+  // Po odstranění titulů, suffixů a částic je celé jméno stejné.
+  if (sameTokenMultiset(leftTokens, rightTokens)) {
+    return 900;
+  }
+
+  // Jednoslovná jména nepovolujeme jako částečnou shodu.
+  if (leftTokens.length < 2 || rightTokens.length < 2) {
+    return 0;
+  }
+
+  const shorter = leftTokens.length <= rightTokens.length ? leftTokens : rightTokens;
+  const longer = leftTokens.length <= rightTokens.length ? rightTokens : leftTokens;
+  const subset = anchoredMiddleNameMatch(shorter, longer);
+
+  if (!subset.matched) return 0;
+
+  // Prostřední jméno může chybět nebo být jen iniciálou. Čím více částí
+  // host zadal, tím je shoda silnější. Alias a iniciála snižují skóre.
+  const specificity = Math.min(40, shorter.length * 10);
+  let base = 800;
+  if (subset.initials) base -= 20;
+  if (subset.aliases) base -= 40;
+  return base + specificity;
+}
+
+function nameMatchScore(left, right) {
+  const leftKeys = nameMatchKeys(left);
+  const rightKeys = nameMatchKeys(right);
+
+  if (!leftKeys.size || !rightKeys.size) return 0;
+
+  let bestScore = 0;
+
+  for (const leftKey of leftKeys) {
+    for (const rightKey of rightKeys) {
+      // Nejsilnější je přesná normalizovaná / transliterovaná shoda.
+      if (leftKey === rightKey) {
+        bestScore = Math.max(bestScore, 1000);
+        continue;
+      }
+
+      // Zachováme bezpečné známé domácké / mezinárodní varianty.
+      if (aliasAwareKeyMatch(leftKey, rightKey)) {
+        bestScore = Math.max(bestScore, 930);
+      }
+
+      // Tituly (Dr., Prof., Ph.D. atd.), částice (von/de/van...) a
+      // prostřední jména nesmí hostovi zbytečně zabránit v check-inu.
+      bestScore = Math.max(
+        bestScore,
+        simplifiedKeyMatchScore(leftKey, rightKey)
+      );
+    }
+  }
+
+  return bestScore;
+}
+
+function namesMatch(left, right) {
+  return nameMatchScore(left, right) > 0;
+}
+
+// ============================================================
         // OFFLINE SELF CHECK-IN BACKUP
         // ============================================================
         let offlineSnapshotSyncInFlight = null;
