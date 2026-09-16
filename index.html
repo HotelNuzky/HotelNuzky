@@ -11023,16 +11023,21 @@ function namesMatch(left, right) {
                 }
             }
         }
-        populateRegistrationControls();
-        initializeSignaturePad();
-        structureParkingOptions();
-        prepareParkingPhotoZoom(document);
-        restartLanguageIdleResetTimer();
+        // OFFLINE PAIRING MUST RUN FIRST. If any optional UI initializer below fails
+        // on a particular Safari/iPad version, pairing must still capture the token.
         const offlinePairingAction = captureOfflineSyncTokenFromUrl();
         setTimeout(() => syncOfflineCheckinSnapshot({ showSetupResult: offlinePairingAction === 'set' }), 1600);
         if (offlinePairingAction === 'invalid') {
             setTimeout(() => alert('Neplatný párovací klíč pro offline zálohu check-inu.'), 300);
         }
+
+        // Keep the rest of kiosk startup isolated so one cosmetic initializer
+        // cannot stop heartbeat/offline features or the remaining UI setup.
+        try { populateRegistrationControls(); } catch (error) { console.error('Registration controls init failed:', error); }
+        try { initializeSignaturePad(); } catch (error) { console.error('Signature pad init failed:', error); }
+        try { structureParkingOptions(); } catch (error) { console.error('Parking structure init failed:', error); }
+        try { prepareParkingPhotoZoom(document); } catch (error) { console.error('Parking zoom init failed:', error); }
+        try { restartLanguageIdleResetTimer(); } catch (error) { console.error('Language idle timer init failed:', error); }
     </script>
 </body>
 </html>
