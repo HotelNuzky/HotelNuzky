@@ -5756,6 +5756,179 @@
             }
         }
 
+
+
+        /* =========================================================
+           CHECK-IN RESULT V2 — clearer hierarchy + system colours
+           ========================================================= */
+        #screen-checkin-result {
+            max-width: 860px;
+            padding: 26px 28px 24px;
+        }
+
+        #screen-checkin-result .card-title-welcome {
+            margin-bottom: 17px;
+            font-size: 28px;
+        }
+
+        /* Compact reservation/occupancy notice: orange = attention. */
+        #screen-checkin-result .guest-occupancy-important {
+            gap: 10px;
+            margin: 0 0 13px;
+            padding: 10px 13px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, rgba(245,127,23,.105), rgba(188,81,0,.075));
+            border: 1px solid rgba(255,235,59,.22);
+            border-left: 4px solid var(--orange-main);
+            color: #e4e8ed;
+            font-size: 12px;
+            line-height: 1.38;
+            font-weight: 620;
+        }
+
+        #screen-checkin-result .guest-occupancy-important::before {
+            content: "!";
+            width: 23px;
+            height: 23px;
+            flex-basis: 23px;
+            color: #2b2107;
+            background: var(--orange-light);
+            font-size: 14px;
+            box-shadow: 0 0 0 3px rgba(245,127,23,.11);
+        }
+
+        #screen-checkin-result .guest-room-entry {
+            grid-template-columns: minmax(135px, .56fr) minmax(320px, 1.44fr);
+            border-color: rgba(129,199,132,.22);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 9px 22px rgba(0,0,0,.15);
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-block {
+            background: linear-gradient(145deg, rgba(0,140,149,.065), rgba(0,102,109,.025));
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-code-block {
+            min-height: 116px;
+            padding: 17px 22px 15px;
+            border-left-color: rgba(129,199,132,.26);
+            background: linear-gradient(135deg, rgba(46,125,50,.17), rgba(0,140,149,.105));
+        }
+
+        #screen-checkin-result .guest-room-entry .hotel-code-label {
+            margin-bottom: 7px;
+            color: #eef9ef;
+            background: rgba(46,125,50,.22);
+            border-color: rgba(129,199,132,.48);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        }
+
+        #screen-checkin-result .guest-room-entry .guest-room-code-value {
+            color: var(--green-border);
+            font-size: 48px;
+            letter-spacing: 6px;
+        }
+
+        /* Access targets under the code: one icon + one label per door. */
+        #screen-checkin-result .hotel-access-scope {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        #screen-checkin-result .hotel-access-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 29px;
+            padding: 5px 9px 5px 7px;
+            border-radius: 9px;
+            font-size: 10.5px;
+            line-height: 1;
+            font-weight: 760;
+            letter-spacing: .1px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        #screen-checkin-result .hotel-access-chip-icon {
+            display: inline-flex;
+            width: 18px;
+            height: 18px;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 18px;
+        }
+
+        #screen-checkin-result .hotel-access-chip-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        #screen-checkin-result .hotel-access-chip-room {
+            color: #e9f7ea;
+            background: rgba(46,125,50,.20);
+            border-color: rgba(129,199,132,.36);
+        }
+
+        #screen-checkin-result .hotel-access-chip-mezzanine {
+            color: #e5fbfc;
+            background: rgba(0,140,149,.18);
+            border-color: rgba(128,223,227,.34);
+        }
+
+        #screen-checkin-result .hotel-access-chip-entrance {
+            color: #fff6d8;
+            background: rgba(245,127,23,.16);
+            border-color: rgba(255,235,59,.26);
+        }
+
+        #screen-checkin-result .guest-room-occupancy {
+            background: rgba(0,0,0,.085);
+        }
+
+        #screen-checkin-result .occupancy-group {
+            background: rgba(255,255,255,.038);
+            border-color: rgba(128,223,227,.12);
+        }
+
+        #screen-checkin-result .occupancy-count {
+            color: var(--green-border);
+        }
+
+        #screen-checkin-result .checkin-result-direction {
+            color: #e8f7f8;
+            background: linear-gradient(135deg, rgba(0,140,149,.11), rgba(0,102,109,.08));
+            border-color: rgba(128,223,227,.23);
+            border-left: 4px solid var(--turquoise-main);
+        }
+
+        #screen-checkin-result .checkin-result-note {
+            margin-top: 13px;
+            color: var(--text-sub);
+            font-size: 12.5px;
+        }
+
+        @media (max-width: 680px) {
+            #screen-checkin-result .guest-room-entry {
+                grid-template-columns: .72fr 1.28fr;
+            }
+
+            #screen-checkin-result .guest-room-entry .guest-room-code-block {
+                padding: 15px 15px 14px;
+            }
+
+            #screen-checkin-result .guest-room-entry .guest-room-code-value {
+                font-size: 40px;
+                letter-spacing: 4px;
+            }
+
+            #screen-checkin-result .hotel-access-chip {
+                font-size: 10px;
+                padding-right: 7px;
+            }
+        }
 </style>
 </head>
 <body>
@@ -7968,13 +8141,21 @@ function namesMatch(left, right) {
         let currentConfirmationKind = null;
         let idleRemaining = 120;
 
-        const occupancyI18n = {"cs":{"preparedFor":"Připraveno pro*","adults":"Dospělí 18+","children":"Děti 4–17","infants":"Děti 0–3","note":"Pokoj je připraven podle počtu osob zadaného při rezervaci. Systém tyto údaje přebírá automaticky. Případné další osoby nám prosím nahlaste nejpozději do 16:00; jsou zpoplatněny dle ceníku. Dětskou postýlku (0–3 roky) je nutné objednat předem."},"en":{"preparedFor":"Prepared for*","adults":"Adults 18+","children":"Children 4–17","infants":"Children 0–3","note":"The room is prepared for the number of guests entered when the reservation was made. The system imports these details automatically. Please let us know about any additional guests no later than 16:00; additional guests are charged according to the price list. A baby cot (0–3 years) must be requested in advance."},"de":{"preparedFor":"Vorbereitet für*","adults":"Erwachsene 18+","children":"Kinder 4–17","infants":"Kinder 0–3","note":"Das Zimmer wird für die bei der Reservierung angegebene Personenzahl vorbereitet. Das System übernimmt diese Angaben automatisch. Bitte teilen Sie uns zusätzliche Gäste spätestens bis 16:00 Uhr mit; zusätzliche Personen werden gemäß Preisliste berechnet. Ein Babybett (0–3 Jahre) muss im Voraus bestellt werden."},"sk":{"preparedFor":"Pripravené pre*","adults":"Dospelí 18+","children":"Deti 4–17","infants":"Deti 0–3","note":"Izba je pripravená podľa počtu osôb zadaného pri rezervácii. Systém tieto údaje preberá automaticky. Prípadné ďalšie osoby nám, prosím, nahláste najneskôr do 16:00; sú spoplatnené podľa cenníka. Detskú postieľku (0–3 roky) je potrebné objednať vopred."},"it":{"preparedFor":"Preparata per*","adults":"Adulti 18+","children":"Bambini 4–17","infants":"Bambini 0–3","note":"La camera viene preparata in base al numero di ospiti indicato al momento della prenotazione. Il sistema acquisisce automaticamente questi dati. Eventuali ospiti aggiuntivi devono essere comunicati entro le 16:00 e sono soggetti a supplemento secondo il listino prezzi. La culla per bambini (0–3 anni) deve essere richiesta in anticipo."},"es":{"preparedFor":"Preparada para*","adults":"Adultos 18+","children":"Niños 4–17","infants":"Niños 0–3","note":"La habitación se prepara según el número de huéspedes indicado al realizar la reserva. El sistema importa estos datos automáticamente. Rogamos comunicar cualquier huésped adicional a más tardar a las 16:00; las personas adicionales se cobran según la lista de precios. La cuna para niños de 0–3 años debe solicitarse con antelación."},"fr":{"preparedFor":"Préparée pour*","adults":"Adultes 18+","children":"Enfants 4–17","infants":"Enfants 0–3","note":"La chambre est préparée selon le nombre de personnes indiqué lors de la réservation. Le système reprend automatiquement ces informations. Merci de nous signaler toute personne supplémentaire au plus tard à 16:00 ; les personnes supplémentaires sont facturées selon le tarif en vigueur. Le lit bébé (0–3 ans) doit être demandé à l’avance."},"pl":{"preparedFor":"Przygotowano dla*","adults":"Dorośli 18+","children":"Dzieci 4–17","infants":"Dzieci 0–3","note":"Pokój jest przygotowywany dla liczby osób podanej podczas rezerwacji. System pobiera te dane automatycznie. Dodatkowe osoby prosimy zgłosić najpóźniej do godziny 16:00; obowiązuje za nie opłata zgodnie z cennikiem. Łóżeczko dziecięce (0–3 lata) należy zamówić z wyprzedzeniem."},"ua":{"preparedFor":"Підготовлено для*","adults":"Дорослі 18+","children":"Діти 4–17","infants":"Діти 0–3","note":"Номер готується відповідно до кількості гостей, зазначеної під час бронювання. Система автоматично отримує ці дані з бронювання. Про додаткових гостей, будь ласка, повідомте нас не пізніше 16:00; за додаткових осіб стягується плата згідно з прейскурантом. Дитяче ліжечко (0–3 роки) необхідно замовити заздалегідь."},"tr":{"preparedFor":"Şu kişiler için hazırlandı*","adults":"Yetişkin 18+","children":"Çocuk 4–17","infants":"Çocuk 0–3","note":"Oda, rezervasyon sırasında belirtilen misafir sayısına göre hazırlanır. Sistem bu bilgileri rezervasyondan otomatik olarak alır. İlave misafirleri lütfen en geç 16:00’ya kadar bize bildirin; ilave kişiler fiyat listesine göre ücretlendirilir. Bebek yatağı (0–3 yaş) önceden talep edilmelidir."},"da":{"preparedFor":"Klargjort til*","adults":"Voksne 18+","children":"Børn 4–17","infants":"Børn 0–3","note":"Værelset klargøres til det antal gæster, der blev angivet ved reservationen. Systemet henter automatisk disse oplysninger fra reservationen. Eventuelle ekstra gæster bedes meddelt senest kl. 16:00; ekstra personer opkræves i henhold til prislisten. Barneseng til børn 0–3 år skal bestilles på forhånd."},"ja":{"preparedFor":"ご利用人数*","adults":"大人 18歳以上","children":"お子様 4–17歳","infants":"お子様 0–3歳","note":"お部屋は、ご予約時に入力された人数に基づいて準備されています。これらの情報は予約データから自動的に反映されます。追加のお客様がいらっしゃる場合は、16:00までにお知らせください。追加料金は料金表に基づきます。0～3歳のお子様用ベビーベッドは事前予約が必要です。"},"he":{"preparedFor":"מוכן עבור*","adults":"מבוגרים 18+","children":"ילדים 4–17","infants":"ילדים 0–3","note":"החדר מוכן לפי מספר האורחים שהוזן בעת ביצוע ההזמנה. המערכת מעבירה את הנתונים מההזמנה באופן אוטומטי. אם מגיעים אורחים נוספים, אנא הודיעו לנו עד השעה 16:00 לכל המאוחר; אורחים נוספים מחויבים לפי המחירון. יש להזמין מראש מיטת תינוק לילדים בגיל 0–3."},"el":{"preparedFor":"Προετοιμασμένο για*","adults":"Ενήλικες 18+","children":"Παιδιά 4–17","infants":"Παιδιά 0–3","note":"Το δωμάτιο προετοιμάζεται για τον αριθμό ατόμων που δηλώθηκε κατά την κράτηση. Το σύστημα μεταφέρει αυτόματα αυτά τα στοιχεία από την κράτηση. Παρακαλούμε ενημερώστε μας για τυχόν επιπλέον άτομα το αργότερο έως τις 16:00· τα επιπλέον άτομα χρεώνονται σύμφωνα με τον τιμοκατάλογο. Η βρεφική κούνια (0–3 ετών) πρέπει να ζητηθεί εκ των προτέρων."}};
-
-        const latinEntryNoteI18n = {
-            ua: "Будь ласка, вводьте імена та всі текстові дані латиницею (англійськими літерами).",
-            ja: "氏名やその他の文字入力は、すべてラテン文字（英字）で入力してください。",
-            he: "נא להזין שמות וכל טקסט באותיות לטיניות (אנגלית).",
-            el: "Παρακαλούμε εισάγετε τα ονόματα και όλα τα πεδία κειμένου με λατινικούς (αγγλικούς) χαρακτήρες."
+        const occupancyI18n = {
+            cs:{preparedFor:"Připraveno pro",adults:"Dospělí 18+",children:"Děti 4–17",infants:"Děti 0–3",note:"Počet hostů je převzat automaticky z rezervace. Další osobu nám prosím nahlaste nejpozději do 15:30; je účtována dle ceníku. Dětskou postýlku (0–3 roky) je nutné objednat předem."},
+            en:{preparedFor:"Prepared for",adults:"Adults 18+",children:"Children 4–17",infants:"Children 0–3",note:"Guest numbers are taken automatically from the reservation. Please report any additional guest by 15:30; extra guests are charged according to the price list. A baby cot (0–3 years) must be requested in advance."},
+            de:{preparedFor:"Vorbereitet für",adults:"Erwachsene 18+",children:"Kinder 4–17",infants:"Kinder 0–3",note:"Die Personenzahl wird automatisch aus der Reservierung übernommen. Zusätzliche Gäste bitte spätestens bis 15:30 Uhr melden; sie werden gemäß Preisliste berechnet. Ein Babybett (0–3 Jahre) muss im Voraus bestellt werden."},
+            sk:{preparedFor:"Pripravené pre",adults:"Dospelí 18+",children:"Deti 4–17",infants:"Deti 0–3",note:"Počet hostí sa automaticky preberá z rezervácie. Ďalšiu osobu nám, prosím, nahláste najneskôr do 15:30; účtuje sa podľa cenníka. Detskú postieľku (0–3 roky) je potrebné objednať vopred."},
+            it:{preparedFor:"Preparata per",adults:"Adulti 18+",children:"Bambini 4–17",infants:"Bambini 0–3",note:"Il numero degli ospiti viene acquisito automaticamente dalla prenotazione. Eventuali ospiti aggiuntivi devono essere comunicati entro le 15:30 e sono soggetti a supplemento secondo il listino. La culla (0–3 anni) deve essere richiesta in anticipo."},
+            es:{preparedFor:"Preparada para",adults:"Adultos 18+",children:"Niños 4–17",infants:"Niños 0–3",note:"El número de huéspedes se toma automáticamente de la reserva. Rogamos comunicar cualquier huésped adicional antes de las 15:30; se cobrará según la lista de precios. La cuna para niños de 0–3 años debe solicitarse con antelación."},
+            fr:{preparedFor:"Préparée pour",adults:"Adultes 18+",children:"Enfants 4–17",infants:"Enfants 0–3",note:"Le nombre de personnes est repris automatiquement depuis la réservation. Merci de signaler toute personne supplémentaire avant 15:30 ; elle sera facturée selon le tarif en vigueur. Le lit bébé (0–3 ans) doit être demandé à l’avance."},
+            pl:{preparedFor:"Przygotowano dla",adults:"Dorośli 18+",children:"Dzieci 4–17",infants:"Dzieci 0–3",note:"Liczba gości jest pobierana automatycznie z rezerwacji. Dodatkową osobę prosimy zgłosić najpóźniej do 15:30; obowiązuje opłata zgodnie z cennikiem. Łóżeczko dziecięce (0–3 lata) należy zamówić z wyprzedzeniem."},
+            ua:{preparedFor:"Підготовлено для",adults:"Дорослі 18+",children:"Діти 4–17",infants:"Діти 0–3",note:"Кількість гостей автоматично береться з бронювання. Про додаткового гостя, будь ласка, повідомте нас не пізніше 15:30; оплата стягується згідно з прейскурантом. Дитяче ліжечко (0–3 роки) необхідно замовити заздалегідь."},
+            tr:{preparedFor:"Şu kişiler için hazırlandı",adults:"Yetişkin 18+",children:"Çocuk 4–17",infants:"Çocuk 0–3",note:"Misafir sayısı rezervasyondan otomatik olarak alınır. İlave misafiri lütfen en geç 15:30’a kadar bildirin; ücret fiyat listesine göre alınır. Bebek yatağı (0–3 yaş) önceden talep edilmelidir."},
+            da:{preparedFor:"Klargjort til",adults:"Voksne 18+",children:"Børn 4–17",infants:"Børn 0–3",note:"Antallet af gæster hentes automatisk fra reservationen. Ekstra gæster skal meddeles senest kl. 15:30 og opkræves efter prislisten. Barneseng til børn 0–3 år skal bestilles på forhånd."},
+            ja:{preparedFor:"ご利用人数",adults:"大人 18歳以上",children:"お子様 4–17歳",infants:"お子様 0–3歳",note:"宿泊人数は予約情報から自動的に反映されます。追加のお客様がいる場合は15:30までにお知らせください。追加料金は料金表に基づきます。0～3歳用のベビーベッドは事前予約が必要です。"},
+            he:{preparedFor:"מוכן עבור",adults:"מבוגרים 18+",children:"ילדים 4–17",infants:"ילדים 0–3",note:"מספר האורחים נלקח אוטומטית מההזמנה. יש לדווח על אורח נוסף עד 15:30 לכל המאוחר; החיוב יהיה לפי המחירון. יש להזמין מראש מיטת תינוק לגילאי 0–3."},
+            el:{preparedFor:"Προετοιμασμένο για",adults:"Ενήλικες 18+",children:"Παιδιά 4–17",infants:"Παιδιά 0–3",note:"Ο αριθμός των επισκεπτών λαμβάνεται αυτόματα από την κράτηση. Παρακαλούμε δηλώστε τυχόν επιπλέον άτομο έως τις 15:30· η χρέωση γίνεται σύμφωνα με τον τιμοκατάλογο. Η βρεφική κούνια (0–3 ετών) πρέπει να ζητηθεί εκ των προτέρων."}
         };
 
         function updateLatinEntryNotes(lang) {
@@ -9564,6 +9745,44 @@ function namesMatch(left, right) {
             return group;
         }
 
+        function renderHotelAccessScope(container, scopeText) {
+            if (!container) return;
+            container.innerHTML = '';
+
+            const labels = String(scopeText || '')
+                .split('·')
+                .map(part => part.trim())
+                .filter(Boolean)
+                .slice(0, 3);
+
+            const accessTypes = ['room', 'mezzanine', 'entrance'];
+            const iconSvg = {
+                room: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 21V4.8L16.5 2v19H14v-3H7.5v3H5zm2.5-5H14V5.2L7.5 6.8V16zm3.9-4.8a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>',
+                mezzanine: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20v-3.2h4.1v-3.6h4.1V9.6h4.1V6H21v3.2h-2.5v3.6h-4.1v3.6h-4.1V20H3z"/></svg>',
+                entrance: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 21V5.2L12 2l8 3.2V21h-3V8H7v13H4zm5 0v-8h6v8h-2v-3h-2v3H9z"/></svg>'
+            };
+
+            if (!labels.length) return;
+
+            labels.forEach((label, index) => {
+                const type = accessTypes[index] || 'room';
+                const chip = document.createElement('span');
+                chip.className = `hotel-access-chip hotel-access-chip-${type}`;
+
+                const icon = document.createElement('span');
+                icon.className = 'hotel-access-chip-icon';
+                icon.innerHTML = iconSvg[type] || iconSvg.room;
+
+                const text = document.createElement('span');
+                text.className = 'hotel-access-chip-text';
+                text.innerText = label;
+
+                chip.appendChild(icon);
+                chip.appendChild(text);
+                container.appendChild(chip);
+            });
+        }
+
         function renderCheckinRooms(rooms) {
             const list = document.getElementById('sci-rooms-list');
             const t = selfCheckinI18n[currentLang] || selfCheckinI18n.en;
@@ -9630,7 +9849,7 @@ function namesMatch(left, right) {
 
                 const accessScope = document.createElement('div');
                 accessScope.className = 'hotel-access-scope';
-                accessScope.innerText = t.hotelAccessScope || '';
+                renderHotelAccessScope(accessScope, t.hotelAccessScope || '');
 
                 codeBlock.appendChild(codeLabel);
                 codeBlock.appendChild(codeValue);
