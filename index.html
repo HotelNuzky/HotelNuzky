@@ -2041,7 +2041,6 @@
         }
 
 
-
         /* =========================================================
            FINAL READABILITY REFINEMENT
            Guide: two-column cards
@@ -2187,7 +2186,6 @@
         }
 
 
-
         /* =========================================================
            FINAL ALIGNMENT TWEAKS v2
            ========================================================= */
@@ -2259,7 +2257,6 @@
                 grid-template-columns: 1fr !important;
             }
         }
-
 
 
         /* =========================================================
@@ -2444,7 +2441,6 @@
         }
 
 
-
         /* FINAL Wi-Fi spacing tweak v5 */
         #screen-checkin .info-list > .wifi-box-compact {
             width: calc(100% - 80px) !important;
@@ -2462,7 +2458,6 @@
                 margin-top: 14px !important;
             }
         }
-
 
 
         /* =========================================================
@@ -2513,7 +2508,6 @@
         }
 
 
-
         /* =========================================================
            v9 FIX — luggage cards swapped safely
            Grid geometry/proportions remain exactly as in stable v6.
@@ -2540,7 +2534,6 @@
         .global-idle-timer.keyboard-viewport-adjust {
             will-change: transform;
         }
-
 
 
         /* ============================================================
@@ -3125,7 +3118,6 @@
         }
 
 
-
         /* FINAL: keyboard help moved into the unused right sidebar on the main Check-in / Check-out forms. */
         @media (min-width: 761px) {
             #screen-self-checkin.selfcheck-panel-main #sci-keyboard-help,
@@ -3229,7 +3221,6 @@
                 border-radius: 14px;
             }
         }
-
 
 
         /* CHECK-IN REGISTRATION STAGE */
@@ -3643,7 +3634,6 @@
         }
 
 
-
         /* =========================================================
            CHECK-IN RESULT — přehlednější finální obrazovka
            Zachovává původní barevnost a vizuální jazyk kiosku.
@@ -3693,56 +3683,6 @@
             text-align: left;
         }
 
-        #screen-checkin-result .main-entrance-code-box {
-            display: grid;
-            grid-template-columns: 58px minmax(0, 1fr);
-            align-items: center;
-            justify-content: initial;
-            gap: 17px;
-            margin: 0 0 15px;
-            padding: 18px 21px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(66,165,245,.11), rgba(0,140,149,.14));
-            border: 1px solid rgba(128,223,227,.30);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 7px 18px rgba(0,0,0,.14);
-        }
-
-        #screen-checkin-result .main-entrance-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            color: var(--turquoise-border);
-            background: rgba(0,140,149,.12);
-            border-color: rgba(128,223,227,.28);
-        }
-
-        #screen-checkin-result .main-entrance-icon svg {
-            width: 29px;
-            height: 29px;
-        }
-
-        #screen-checkin-result .main-entrance-copy {
-            min-width: 0;
-        }
-
-        #screen-checkin-result .main-entrance-label {
-            margin: 0 0 5px;
-            color: #b9c9d4;
-            text-align: left;
-            font-size: 12px;
-            font-weight: 760;
-            letter-spacing: .85px;
-        }
-
-        #screen-checkin-result .main-entrance-code {
-            color: #fff;
-            text-align: left;
-            font-size: 39px;
-            line-height: 1;
-            letter-spacing: 4px;
-            text-shadow: 0 2px 6px rgba(0,0,0,.28);
-        }
-
         #screen-checkin-result .guest-occupancy-important {
             display: flex;
             align-items: center;
@@ -3781,14 +3721,14 @@
         #screen-checkin-result .guest-room-entry {
             position: relative;
             display: grid;
-            grid-template-columns: minmax(150px, .78fr) minmax(210px, 1.22fr);
+            grid-template-columns: minmax(145px, .68fr) minmax(250px, 1.32fr);
             gap: 0;
             overflow: hidden;
             padding: 0;
-            border-radius: 17px;
+            border-radius: 18px;
             background: rgba(255,255,255,.042);
-            border: 1px solid rgba(255,255,255,.105);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 8px 18px rgba(0,0,0,.13);
+            border: 1px solid rgba(255,255,255,.11);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 10px 24px rgba(0,0,0,.16);
         }
 
         #screen-checkin-result .guest-room-entry::before {
@@ -3816,8 +3756,8 @@
         }
 
         #screen-checkin-result .guest-room-entry .guest-room-code-block {
-            border-left: 1px solid rgba(255,255,255,.085);
-            background: rgba(76,175,80,.035);
+            border-left: 1px solid rgba(139,211,142,.18);
+            background: linear-gradient(135deg, rgba(76,175,80,.075), rgba(0,140,149,.085));
         }
 
         #screen-checkin-result .guest-room-entry .checkin-result-label {
@@ -3835,12 +3775,38 @@
             letter-spacing: 1px;
         }
 
+        #screen-checkin-result .guest-room-entry .hotel-code-label {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            margin: 0 0 9px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            color: #dff6e1;
+            background: rgba(76,175,80,.13);
+            border: 1px solid rgba(139,211,142,.24);
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         #screen-checkin-result .guest-room-entry .guest-room-code-value {
-            color: #8bd38e;
-            font-size: 42px;
+            color: #9de2a0;
+            font-size: 46px;
             line-height: 1;
-            letter-spacing: 4px;
+            font-weight: 850;
+            letter-spacing: 5px;
             text-shadow: 0 2px 5px rgba(0,0,0,.24);
+        }
+
+        #screen-checkin-result .hotel-access-scope {
+            margin-top: 9px;
+            color: #d9e4e5;
+            font-size: 12px;
+            line-height: 1.35;
+            font-weight: 650;
+            letter-spacing: .15px;
         }
 
         #screen-checkin-result .guest-room-occupancy {
@@ -3987,7 +3953,7 @@
             }
 
             #screen-checkin-result .guest-room-entry {
-                grid-template-columns: .8fr 1.2fr;
+                grid-template-columns: .72fr 1.28fr;
             }
 
             #screen-checkin-result .guest-room-entry .guest-room-block,
@@ -4001,14 +3967,23 @@
             }
 
             #screen-checkin-result .guest-room-entry .guest-room-code-value {
-                font-size: 36px;
+                font-size: 38px;
+                letter-spacing: 4px;
+            }
+
+            #screen-checkin-result .guest-room-entry .hotel-code-label {
+                font-size: 10px;
+                letter-spacing: .65px;
+            }
+
+            #screen-checkin-result .hotel-access-scope {
+                font-size: 11px;
             }
 
             #screen-checkin-result .guest-room-occupancy-groups {
                 grid-template-columns: 1fr;
             }
         }
-
 
 
         /* =========================================================
@@ -4140,7 +4115,6 @@
         }
 
 
-
         /* =========================================================
            v14 PARKING — QR CENTERED BELOW PHOTO
            Text remains left; photo + QR form one aligned visual column.
@@ -4209,7 +4183,6 @@
                 grid-row: auto !important;
             }
         }
-
 
 
         /* =========================================================
@@ -4955,7 +4928,6 @@
         .screen-sticky-rail.hidden { display: none !important; }
 
 
-
         /* =========================================================
            v34 — PARKING FACT CARDS
            Standalone Parking only: clearer 2×2 information hierarchy.
@@ -5126,7 +5098,6 @@
         }
 
 
-
         /* =========================================================
            v35 — iPad side rails + registration alignment
            - Larger side controls, visually anchored to their card
@@ -5251,7 +5222,6 @@
                 grid-template-rows: auto 39px !important;
             }
         }
-
 
 
         /* =========================================================
@@ -5444,7 +5414,6 @@
                 min-height: 0;
             }
         }
-
 
 
         /* =========================================================
@@ -5670,7 +5639,6 @@
             }
             #screen-1 .main-wifi-banner-item strong { font-size: 14px; }
         }
-
 
 
         /* =========================================================
@@ -6095,17 +6063,6 @@
 <div class="card hidden" id="screen-checkin-result">
 <div class="card-title-welcome" id="sci-result-title">Váš pokoj je připraven</div>
 <div class="checkin-result-box">
-<div class="main-entrance-code-box">
-<div aria-hidden="true" class="main-entrance-icon">
-<svg height="25" viewbox="0 0 24 24" width="25">
-<path d="M4 21V5l8-3 8 3v16h-2V7H6v14H4zm4 0V8h8v13h-2v-5h-4v5H8zm2-7h4v-4h-4v4z" fill="currentColor"></path>
-</svg>
-</div>
-<div class="main-entrance-copy">
-<div class="checkin-result-label main-entrance-label" id="sci-main-code-label">Kód hlavního vchodu do hotelu</div>
-<div class="checkin-result-value main-entrance-code" id="sci-main-code-value">2018</div>
-</div>
-</div>
 <div class="guest-occupancy-important hidden" id="sci-occupancy-important">
 <span id="sci-occupancy-important-text"></span>
 </div>
@@ -7592,6 +7549,45 @@ function namesMatch(left, right) {
             }
         }
 
+        function isStandaloneKioskMode() {
+            try {
+                return window.navigator.standalone === true ||
+                    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function pairStandaloneOfflineIfNeeded() {
+            if (!isStandaloneKioskMode() || getOfflineSyncToken()) {
+                return { status: 'NOT_NEEDED' };
+            }
+
+            const entered = window.prompt(
+                'Jednorázové nastavení offline zálohy\n\nVložte párovací klíč pro tento kiosk:'
+            );
+
+            if (entered === null) {
+                return { status: 'CANCELLED' };
+            }
+
+            const token = String(entered || '').trim();
+            if (token.length < 24) {
+                alert('Neplatný párovací klíč pro offline zálohu check-inu.');
+                return { status: 'INVALID' };
+            }
+
+            try {
+                localStorage.setItem(OFFLINE_SYNC_TOKEN_KEY, token);
+            } catch (error) {
+                console.error('Standalone offline pairing storage failed:', error);
+                alert('Párovací klíč se na tomto iPadu nepodařilo uložit.');
+                return { status: 'ERROR' };
+            }
+
+            return await syncOfflineCheckinSnapshot({ showSetupResult: true });
+        }
+
         async function syncOfflineCheckinSnapshot(options = {}) {
             const token = getOfflineSyncToken();
             if (!token) return { status: 'UNPAIRED' };
@@ -7627,7 +7623,7 @@ function namesMatch(left, right) {
                     markConnectionSuccess();
                     console.info(`Offline check-in snapshot saved: ${result.reservations.length} ready reservation(s).`);
                     if (options.showSetupResult) {
-                        alert('Offline záloha check-inu byla na tomto iPadu aktivována.');
+                        alert(`Offline záloha check-inu byla na tomto iPadu aktivována: ${result.reservations.length} rezervací.`);
                     }
                     return { status: 'OK', count: result.reservations.length };
                 } catch (error) {
@@ -7703,7 +7699,7 @@ function namesMatch(left, right) {
                 reservationId: reservation.reservationId || null,
                 registrationCompleted: Boolean(reservation.registrationCompleted),
                 rooms: reservation.rooms,
-                mainEntranceCode: reservation.mainEntranceCode || '2018',
+
                 offlineFallback: true,
                 snapshotGeneratedAt: Number(snapshot.generatedAt || 0)
             };
@@ -8008,20 +8004,20 @@ function namesMatch(left, right) {
         };
 
         const selfCheckinI18n = {
-            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud váš pokoj ještě není připraven, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Petr Svoboda',nameHint:'Na velikosti písmen, diakritice ani speciálních znacích nezáleží.',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
-            en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',arrivalNote:'Your room may be ready before the official 15:00 check-in time. If your room is not ready yet, please ask the restaurant staff to store your luggage. Due to the limited space in our historic building, we cannot accept responsibility for stored luggage.',name:'Name on the reservation',namePlaceholder:'e.g. John Smith',nameHint:'Capitalization, accents and special characters do not matter.',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',roomDoorCode:'Room & mezzanine door code',mainDoorCode:'Hotel main entrance code',direction:'Now continue straight down the corridor and upstairs to your room.',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
-            de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',arrivalNote:'Ihr Zimmer kann bereits vor der offiziellen Check-in-Zeit um 15:00 Uhr bereit sein. Falls Ihr Zimmer noch nicht bereit ist, bitten Sie das Restaurantpersonal um die Aufbewahrung Ihres Gepäcks. Aufgrund der begrenzten Räumlichkeiten in unserem historischen Gebäude können wir dafür jedoch keine Haftung übernehmen.',name:'Name auf der Reservierung',namePlaceholder:'z. B. Max Mustermann',nameHint:'Groß-/Kleinschreibung, Akzente und Sonderzeichen spielen keine Rolle.',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',roomDoorCode:'Code für Zimmer & Zwischentüren',mainDoorCode:'Code für den Haupteingang des Hotels',direction:'Gehen Sie nun den Flur geradeaus und die Treppe hinauf zu Ihrem Zimmer.',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
-            sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',arrivalNote:'Vaša izba môže byť pripravená aj pred oficiálnym check-inom o 15:00. Ak vaša izba ešte nie je pripravená, požiadajte personál reštaurácie o uloženie batožiny. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť.',name:'Meno uvedené na rezervácii',namePlaceholder:'napr. Ján Novák',nameHint:'Na veľkosti písmen, diakritike ani špeciálnych znakoch nezáleží.',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',roomDoorCode:'Kód k izbe a medzidverám',mainDoorCode:'Kód hlavného vchodu do hotela',direction:'Teraz pokračujte chodbou rovno a po schodoch hore k svojej izbe.',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
-            it:{guide:'Guida al soggiorno',welcome:'Benvenuti nel nostro hotel!',instructions:'Per visualizzare il codice di accesso, inserite il nome indicato sulla prenotazione e le date di arrivo e partenza.',arrivalNote:'La camera potrebbe essere pronta prima dell’orario ufficiale di check-in delle 15:00. Se la vostra camera non è ancora pronta, chiedete al personale del ristorante di custodire i bagagli. A causa degli spazi limitati dell’edificio storico, non possiamo assumerci la responsabilità dei bagagli depositati.',name:'Nome sulla prenotazione',namePlaceholder:'es. Mario Rossi',nameHint:'Maiuscole, accenti e caratteri speciali non fanno differenza.',from:'Data di arrivo',to:'Data di partenza',back:'INDIETRO',submit:'CHECK-IN',result:'La vostra camera è pronta',room:'Numero della camera',code:'Codice di accesso',roomDoorCode:'Codice camera e porte intermedie',mainDoorCode:'Codice dell’ingresso principale dell’hotel',direction:'Ora proseguite dritto lungo il corridoio e salite le scale fino alla vostra camera.',note:'Fotografate questa schermata oppure annotate i dati sul foglio accanto al chiosco. Poi premete OK.',count:'Ritorno alla schermata principale tra',fill:'Inserite il nome sulla prenotazione e le date di arrivo e partenza.'},
-            es:{guide:'Guía de estancia',welcome:'¡Bienvenidos a nuestro hotel!',instructions:'Para ver el código de acceso, introduzca el nombre que figura en la reserva y las fechas de llegada y salida.',arrivalNote:'Su habitación puede estar lista antes de la hora oficial de check-in, a las 15:00. Si su habitación aún no está lista, solicite al personal del restaurante que guarde su equipaje. Debido al espacio limitado de nuestro edificio histórico, no podemos responsabilizarnos del equipaje depositado.',name:'Nombre en la reserva',namePlaceholder:'p. ej. Juan García',nameHint:'Las mayúsculas, los acentos y los caracteres especiales no importan.',from:'Fecha de llegada',to:'Fecha de salida',back:'VOLVER',submit:'CHECK-IN',result:'Su habitación está lista',room:'Número de habitación',code:'Código de acceso',roomDoorCode:'Código de habitación y puertas intermedias',mainDoorCode:'Código de la entrada principal del hotel',direction:'Ahora continúe recto por el pasillo y suba las escaleras hasta su habitación.',note:'Haga una foto de esta pantalla o anote los datos en el papel junto al quiosco. Después pulse OK.',count:'Regreso a la pantalla principal en',fill:'Introduzca el nombre que figura en la reserva y las fechas de llegada y salida.'},
-            fr:{guide:'Guide du séjour',welcome:'Bienvenue dans notre hôtel !',instructions:'Pour afficher votre code d’accès, saisissez le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.',arrivalNote:'Votre chambre peut être prête avant l’heure officielle du check-in à 15:00. Si votre chambre n’est pas encore prête, demandez au personnel du restaurant de garder vos bagages. En raison de l’espace limité de notre bâtiment historique, nous ne pouvons toutefois pas être responsables des bagages déposés.',name:'Nom sur la réservation',namePlaceholder:'p. ex. Jean Dupont',nameHint:'Les majuscules, les accents et les caractères spéciaux n’ont pas d’importance.',from:'Date d’arrivée',to:'Date de départ',back:'RETOUR',submit:'CHECK-IN',result:'Votre chambre est prête',room:'Numéro de chambre',code:'Code d’accès',roomDoorCode:'Code chambre et portes intermédiaires',mainDoorCode:'Code de l’entrée principale de l’hôtel',direction:'Continuez maintenant tout droit dans le couloir, puis montez les escaliers jusqu’à votre chambre.',note:'Prenez cette page en photo ou notez les informations sur le papier à côté de la borne. Appuyez ensuite sur OK.',count:'Retour à l’écran principal dans',fill:'Veuillez saisir le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.'},
-            pl:{guide:'Przewodnik pobytu',welcome:'Witamy w naszym hotelu!',instructions:'Aby wyświetlić kod dostępu, wpisz imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.',arrivalNote:'Pokój może być gotowy przed oficjalną godziną zameldowania o 15:00. Jeśli Twój pokój nie jest jeszcze gotowy, poproś personel restauracji o przechowanie bagażu. Ze względu na ograniczoną przestrzeń w zabytkowym budynku nie możemy jednak ponosić odpowiedzialności za pozostawiony bagaż.',name:'Imię i nazwisko z rezerwacji',namePlaceholder:'np. Jan Kowalski',nameHint:'Wielkość liter, znaki diakrytyczne i znaki specjalne nie mają znaczenia.',from:'Data przyjazdu',to:'Data wyjazdu',back:'WSTECZ',submit:'CHECK-IN',result:'Twój pokój jest gotowy',room:'Numer pokoju',code:'Kod dostępu',roomDoorCode:'Kod do pokoju i drzwi pośrednich',mainDoorCode:'Kod głównego wejścia do hotelu',direction:'Teraz idź prosto korytarzem i schodami na górę do swojego pokoju.',note:'Zrób zdjęcie tego ekranu lub zapisz dane na kartce obok kiosku. Następnie naciśnij OK.',count:'Powrót do ekranu głównego za',fill:'Wpisz imię i nazwisko z rezerwacji oraz datę przyjazdu i wyjazdu.'},
-            ua:{guide:'Путівник гостя',welcome:'Ласкаво просимо до нашого готелю!',instructions:'Щоб побачити код доступу, введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.',arrivalNote:'Ваш номер може бути готовий раніше офіційного часу заселення о 15:00. Якщо ваш номер ще не готовий, попросіть персонал ресторану залишити багаж на зберігання. Через обмежений простір в історичній будівлі ми не можемо нести відповідальність за залишений багаж.',name:'Ім’я у бронюванні',namePlaceholder:'напр. Ivan Petrenko',nameHint:'Регістр літер, діакритичні та спеціальні символи не мають значення.',from:'Дата заїзду',to:'Дата виїзду',back:'НАЗАД',submit:'CHECK-IN',result:'Ваш номер готовий',room:'Номер кімнати',code:'Код доступу',roomDoorCode:'Код номера та проміжних дверей',mainDoorCode:'Код головного входу до готелю',direction:'Тепер пройдіть прямо коридором і підніміться сходами до свого номера.',note:'Сфотографуйте цей екран або запишіть дані на папері поруч із кіоском. Потім натисніть OK.',count:'Повернення на головний екран через',fill:'Введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.'},
-            tr:{guide:'Konaklama Rehberi',welcome:'Otelimize hoş geldiniz!',instructions:'Erişim kodunuzu görüntülemek için rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.',arrivalNote:'Odanız resmi check-in saati olan 15:00’ten önce hazır olabilir. Odanız henüz hazır değilse, bagajınızı bırakmak için restoran personeline başvurun. Tarihi binamızdaki sınırlı alan nedeniyle bırakılan bagajların sorumluluğunu kabul edemiyoruz.',name:'Rezervasyondaki ad',namePlaceholder:'örn. Ahmet Yılmaz',nameHint:'Büyük/küçük harf, aksan ve özel karakterler önemli değildir.',from:'Giriş tarihi',to:'Çıkış tarihi',back:'GERİ',submit:'CHECK-IN',result:'Odanız hazır',room:'Oda numarası',code:'Erişim kodu',roomDoorCode:'Oda ve ara kapı kodu',mainDoorCode:'Otel ana giriş kodu',direction:'Şimdi koridorda düz ilerleyin ve merdivenlerden yukarı çıkarak odanıza gidin.',note:'Bu ekranın fotoğrafını çekin veya bilgileri kioskun yanındaki kâğıda yazın. Ardından OK düğmesine basın.',count:'Ana ekrana dönüş',fill:'Lütfen rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.'},
-            da:{guide:'Opholdsguide',welcome:'Velkommen til vores hotel!',instructions:'For at se din adgangskode skal du indtaste navnet på reservationen samt ankomst- og afrejsedato.',arrivalNote:'Dit værelse kan være klar før den officielle check-in kl. 15.00. Hvis dit værelse endnu ikke er klar, kan du bede restaurantpersonalet om at opbevare din bagage. På grund af den begrænsede plads i vores historiske bygning kan vi dog ikke påtage os ansvaret for opbevaret bagage.',name:'Navn på reservationen',namePlaceholder:'f.eks. Jens Jensen',nameHint:'Store/små bogstaver, accenter og specialtegn er uden betydning.',from:'Ankomstdato',to:'Afrejsedato',back:'TILBAGE',submit:'CHECK-IN',result:'Dit værelse er klar',room:'Værelsesnummer',code:'Adgangskode',roomDoorCode:'Kode til værelse og mellemdøre',mainDoorCode:'Kode til hotellets hovedindgang',direction:'Fortsæt nu ligeud ad gangen og op ad trappen til dit værelse.',note:'Tag et billede af denne skærm, eller skriv oplysningerne på papiret ved siden af kiosken. Tryk derefter OK.',count:'Tilbage til hovedskærmen om',fill:'Indtast navnet på reservationen samt ankomst- og afrejsedato.'},
-            ja:{guide:'ご滞在ガイド',welcome:'当ホテルへようこそ！',instructions:'アクセスコードを表示するには、予約名義とチェックイン日・チェックアウト日を入力してください。',arrivalNote:'お部屋は通常のチェックイン時刻15:00より早くご用意できる場合があります。お部屋がまだ準備できていない場合は、レストランスタッフに荷物のお預かりをお申し付けください。歴史的建造物のため保管スペースが限られており、お預かりした荷物について責任を負いかねます。',name:'予約名義',namePlaceholder:'例: Taro Yamada',nameHint:'大文字・小文字、アクセント記号、特殊文字は区別されません。',from:'チェックイン日',to:'チェックアウト日',back:'戻る',submit:'CHECK-IN',result:'お部屋の準備ができました',room:'部屋番号',code:'アクセスコード',roomDoorCode:'客室・中間ドアのコード',mainDoorCode:'ホテル正面玄関コード',direction:'廊下をまっすぐ進み、階段を上がってお部屋へお進みください。',note:'この画面を撮影するか、キオスク横の用紙に情報をメモしてください。その後、OKを押してください。',count:'メイン画面に戻るまで',fill:'予約名義とチェックイン日・チェックアウト日を入力してください。'},
-            he:{guide:'מדריך השהייה',welcome:'ברוכים הבאים למלון שלנו!',instructions:'כדי להציג את קוד הכניסה, הזינו את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.',arrivalNote:'ייתכן שהחדר יהיה מוכן לפני שעת הצ׳ק-אין הרשמית, 15:00. אם החדר שלכם עדיין אינו מוכן, ניתן לבקש מצוות המסעדה לשמור את המזוודות. בשל המקום המוגבל בבניין ההיסטורי, איננו יכולים לקבל אחריות על כבודה שהושארה לאחסון.',name:'השם בהזמנה',namePlaceholder:'לדוגמה: David Cohen',nameHint:'אין חשיבות לאותיות גדולות/קטנות, לסימני ניקוד או לתווים מיוחדים.',from:'תאריך הגעה',to:'תאריך עזיבה',back:'חזרה',submit:'CHECK-IN',result:'החדר שלכם מוכן',room:'מספר חדר',code:'קוד כניסה',roomDoorCode:'קוד לחדר ולדלתות הביניים',mainDoorCode:'קוד הכניסה הראשית למלון',direction:'כעת המשיכו ישר במסדרון ועלו במדרגות אל החדר שלכם.',note:'צלמו את המסך או רשמו את הפרטים על הדף שליד הקיוסק. לאחר מכן לחצו OK.',count:'חזרה למסך הראשי בעוד',fill:'נא להזין את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.'},
-            el:{guide:'Οδηγός διαμονής',welcome:'Καλώς ήρθατε στο ξενοδοχείο μας!',instructions:'Για να εμφανίσετε τον κωδικό πρόσβασης, εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.',arrivalNote:'Το δωμάτιό σας μπορεί να είναι έτοιμο πριν από την επίσημη ώρα check-in στις 15:00. Αν το δωμάτιό σας δεν είναι ακόμη έτοιμο, ζητήστε από το προσωπικό του εστιατορίου να φυλάξει τις αποσκευές σας. Λόγω του περιορισμένου χώρου στο ιστορικό κτίριο, δεν μπορούμε να αναλάβουμε ευθύνη για τις αποσκευές που φυλάσσονται.',name:'Όνομα στην κράτηση',namePlaceholder:'π.χ. Giannis Papadopoulos',nameHint:'Δεν έχει σημασία η χρήση κεφαλαίων/πεζών, διακριτικών ή ειδικών χαρακτήρων.',from:'Ημερομηνία άφιξης',to:'Ημερομηνία αναχώρησης',back:'ΠΙΣΩ',submit:'CHECK-IN',result:'Το δωμάτιό σας είναι έτοιμο',room:'Αριθμός δωματίου',code:'Κωδικός πρόσβασης',roomDoorCode:'Κωδικός δωματίου και ενδιάμεσων θυρών',mainDoorCode:'Κωδικός κύριας εισόδου του ξενοδοχείου',direction:'Τώρα συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες προς το δωμάτιό σας.',note:'Φωτογραφίστε αυτή την οθόνη ή σημειώστε τα στοιχεία στο χαρτί δίπλα στο κιόσκι. Στη συνέχεια πατήστε OK.',count:'Επιστροφή στην αρχική οθόνη σε',fill:'Εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.'}
+            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud váš pokoj ještě není připraven, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Petr Svoboda',nameHint:'Na velikosti písmen, diakritice ani speciálních znacích nezáleží.',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',hotelCode:'KÓD PRO CELÝ HOTEL',hotelAccessScope:'Pokoj · mezanin · hlavní vchod',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
+            en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',arrivalNote:'Your room may be ready before the official 15:00 check-in time. If your room is not ready yet, please ask the restaurant staff to store your luggage. Due to the limited space in our historic building, we cannot accept responsibility for stored luggage.',name:'Name on the reservation',namePlaceholder:'e.g. John Smith',nameHint:'Capitalization, accents and special characters do not matter.',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',roomDoorCode:'Room & mezzanine door code',mainDoorCode:'Hotel main entrance code',hotelCode:'CODE FOR THE ENTIRE HOTEL',hotelAccessScope:'Room · mezzanine · main entrance',direction:'Now continue straight down the corridor and upstairs to your room.',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
+            de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',arrivalNote:'Ihr Zimmer kann bereits vor der offiziellen Check-in-Zeit um 15:00 Uhr bereit sein. Falls Ihr Zimmer noch nicht bereit ist, bitten Sie das Restaurantpersonal um die Aufbewahrung Ihres Gepäcks. Aufgrund der begrenzten Räumlichkeiten in unserem historischen Gebäude können wir dafür jedoch keine Haftung übernehmen.',name:'Name auf der Reservierung',namePlaceholder:'z. B. Max Mustermann',nameHint:'Groß-/Kleinschreibung, Akzente und Sonderzeichen spielen keine Rolle.',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',roomDoorCode:'Code für Zimmer & Zwischentüren',mainDoorCode:'Code für den Haupteingang des Hotels',hotelCode:'CODE FÜR DAS GESAMTE HOTEL',hotelAccessScope:'Zimmer · Zwischentür · Haupteingang',direction:'Gehen Sie nun den Flur geradeaus und die Treppe hinauf zu Ihrem Zimmer.',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
+            sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',arrivalNote:'Vaša izba môže byť pripravená aj pred oficiálnym check-inom o 15:00. Ak vaša izba ešte nie je pripravená, požiadajte personál reštaurácie o uloženie batožiny. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť.',name:'Meno uvedené na rezervácii',namePlaceholder:'napr. Ján Novák',nameHint:'Na veľkosti písmen, diakritike ani špeciálnych znakoch nezáleží.',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',roomDoorCode:'Kód k izbe a medzidverám',mainDoorCode:'Kód hlavného vchodu do hotela',hotelCode:'KÓD PRE CELÝ HOTEL',hotelAccessScope:'Izba · medziposchodie · hlavný vchod',direction:'Teraz pokračujte chodbou rovno a po schodoch hore k svojej izbe.',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
+            it:{guide:'Guida al soggiorno',welcome:'Benvenuti nel nostro hotel!',instructions:'Per visualizzare il codice di accesso, inserite il nome indicato sulla prenotazione e le date di arrivo e partenza.',arrivalNote:'La camera potrebbe essere pronta prima dell’orario ufficiale di check-in delle 15:00. Se la vostra camera non è ancora pronta, chiedete al personale del ristorante di custodire i bagagli. A causa degli spazi limitati dell’edificio storico, non possiamo assumerci la responsabilità dei bagagli depositati.',name:'Nome sulla prenotazione',namePlaceholder:'es. Mario Rossi',nameHint:'Maiuscole, accenti e caratteri speciali non fanno differenza.',from:'Data di arrivo',to:'Data di partenza',back:'INDIETRO',submit:'CHECK-IN',result:'La vostra camera è pronta',room:'Numero della camera',code:'Codice di accesso',roomDoorCode:'Codice camera e porte intermedie',mainDoorCode:'Codice dell’ingresso principale dell’hotel',hotelCode:'CODICE PER TUTTO L’HOTEL',hotelAccessScope:'Camera · mezzanino · ingresso principale',direction:'Ora proseguite dritto lungo il corridoio e salite le scale fino alla vostra camera.',note:'Fotografate questa schermata oppure annotate i dati sul foglio accanto al chiosco. Poi premete OK.',count:'Ritorno alla schermata principale tra',fill:'Inserite il nome sulla prenotazione e le date di arrivo e partenza.'},
+            es:{guide:'Guía de estancia',welcome:'¡Bienvenidos a nuestro hotel!',instructions:'Para ver el código de acceso, introduzca el nombre que figura en la reserva y las fechas de llegada y salida.',arrivalNote:'Su habitación puede estar lista antes de la hora oficial de check-in, a las 15:00. Si su habitación aún no está lista, solicite al personal del restaurante que guarde su equipaje. Debido al espacio limitado de nuestro edificio histórico, no podemos responsabilizarnos del equipaje depositado.',name:'Nombre en la reserva',namePlaceholder:'p. ej. Juan García',nameHint:'Las mayúsculas, los acentos y los caracteres especiales no importan.',from:'Fecha de llegada',to:'Fecha de salida',back:'VOLVER',submit:'CHECK-IN',result:'Su habitación está lista',room:'Número de habitación',code:'Código de acceso',roomDoorCode:'Código de habitación y puertas intermedias',mainDoorCode:'Código de la entrada principal del hotel',hotelCode:'CÓDIGO PARA TODO EL HOTEL',hotelAccessScope:'Habitación · entreplanta · entrada principal',direction:'Ahora continúe recto por el pasillo y suba las escaleras hasta su habitación.',note:'Haga una foto de esta pantalla o anote los datos en el papel junto al quiosco. Después pulse OK.',count:'Regreso a la pantalla principal en',fill:'Introduzca el nombre que figura en la reserva y las fechas de llegada y salida.'},
+            fr:{guide:'Guide du séjour',welcome:'Bienvenue dans notre hôtel !',instructions:'Pour afficher votre code d’accès, saisissez le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.',arrivalNote:'Votre chambre peut être prête avant l’heure officielle du check-in à 15:00. Si votre chambre n’est pas encore prête, demandez au personnel du restaurant de garder vos bagages. En raison de l’espace limité de notre bâtiment historique, nous ne pouvons toutefois pas être responsables des bagages déposés.',name:'Nom sur la réservation',namePlaceholder:'p. ex. Jean Dupont',nameHint:'Les majuscules, les accents et les caractères spéciaux n’ont pas d’importance.',from:'Date d’arrivée',to:'Date de départ',back:'RETOUR',submit:'CHECK-IN',result:'Votre chambre est prête',room:'Numéro de chambre',code:'Code d’accès',roomDoorCode:'Code chambre et portes intermédiaires',mainDoorCode:'Code de l’entrée principale de l’hôtel',hotelCode:'CODE POUR TOUT L’HÔTEL',hotelAccessScope:'Chambre · mezzanine · entrée principale',direction:'Continuez maintenant tout droit dans le couloir, puis montez les escaliers jusqu’à votre chambre.',note:'Prenez cette page en photo ou notez les informations sur le papier à côté de la borne. Appuyez ensuite sur OK.',count:'Retour à l’écran principal dans',fill:'Veuillez saisir le nom figurant sur la réservation ainsi que les dates d’arrivée et de départ.'},
+            pl:{guide:'Przewodnik pobytu',welcome:'Witamy w naszym hotelu!',instructions:'Aby wyświetlić kod dostępu, wpisz imię i nazwisko podane w rezerwacji oraz datę przyjazdu i wyjazdu.',arrivalNote:'Pokój może być gotowy przed oficjalną godziną zameldowania o 15:00. Jeśli Twój pokój nie jest jeszcze gotowy, poproś personel restauracji o przechowanie bagażu. Ze względu na ograniczoną przestrzeń w zabytkowym budynku nie możemy jednak ponosić odpowiedzialności za pozostawiony bagaż.',name:'Imię i nazwisko z rezerwacji',namePlaceholder:'np. Jan Kowalski',nameHint:'Wielkość liter, znaki diakrytyczne i znaki specjalne nie mają znaczenia.',from:'Data przyjazdu',to:'Data wyjazdu',back:'WSTECZ',submit:'CHECK-IN',result:'Twój pokój jest gotowy',room:'Numer pokoju',code:'Kod dostępu',roomDoorCode:'Kod do pokoju i drzwi pośrednich',mainDoorCode:'Kod głównego wejścia do hotelu',hotelCode:'KOD DO CAŁEGO HOTELU',hotelAccessScope:'Pokój · antresola · główne wejście',direction:'Teraz idź prosto korytarzem i schodami na górę do swojego pokoju.',note:'Zrób zdjęcie tego ekranu lub zapisz dane na kartce obok kiosku. Następnie naciśnij OK.',count:'Powrót do ekranu głównego za',fill:'Wpisz imię i nazwisko z rezerwacji oraz datę przyjazdu i wyjazdu.'},
+            ua:{guide:'Путівник гостя',welcome:'Ласкаво просимо до нашого готелю!',instructions:'Щоб побачити код доступу, введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.',arrivalNote:'Ваш номер може бути готовий раніше офіційного часу заселення о 15:00. Якщо ваш номер ще не готовий, попросіть персонал ресторану залишити багаж на зберігання. Через обмежений простір в історичній будівлі ми не можемо нести відповідальність за залишений багаж.',name:'Ім’я у бронюванні',namePlaceholder:'напр. Ivan Petrenko',nameHint:'Регістр літер, діакритичні та спеціальні символи не мають значення.',from:'Дата заїзду',to:'Дата виїзду',back:'НАЗАД',submit:'CHECK-IN',result:'Ваш номер готовий',room:'Номер кімнати',code:'Код доступу',roomDoorCode:'Код номера та проміжних дверей',mainDoorCode:'Код головного входу до готелю',hotelCode:'КОД ДЛЯ ВСЬОГО ГОТЕЛЮ',hotelAccessScope:'Номер · мезонін · головний вхід',direction:'Тепер пройдіть прямо коридором і підніміться сходами до свого номера.',note:'Сфотографуйте цей екран або запишіть дані на папері поруч із кіоском. Потім натисніть OK.',count:'Повернення на головний екран через',fill:'Введіть ім’я, зазначене в бронюванні, а також дати заїзду та виїзду.'},
+            tr:{guide:'Konaklama Rehberi',welcome:'Otelimize hoş geldiniz!',instructions:'Erişim kodunuzu görüntülemek için rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.',arrivalNote:'Odanız resmi check-in saati olan 15:00’ten önce hazır olabilir. Odanız henüz hazır değilse, bagajınızı bırakmak için restoran personeline başvurun. Tarihi binamızdaki sınırlı alan nedeniyle bırakılan bagajların sorumluluğunu kabul edemiyoruz.',name:'Rezervasyondaki ad',namePlaceholder:'örn. Ahmet Yılmaz',nameHint:'Büyük/küçük harf, aksan ve özel karakterler önemli değildir.',from:'Giriş tarihi',to:'Çıkış tarihi',back:'GERİ',submit:'CHECK-IN',result:'Odanız hazır',room:'Oda numarası',code:'Erişim kodu',roomDoorCode:'Oda ve ara kapı kodu',mainDoorCode:'Otel ana giriş kodu',hotelCode:'TÜM OTEL İÇİN KOD',hotelAccessScope:'Oda · asma kat · ana giriş',direction:'Şimdi koridorda düz ilerleyin ve merdivenlerden yukarı çıkarak odanıza gidin.',note:'Bu ekranın fotoğrafını çekin veya bilgileri kioskun yanındaki kâğıda yazın. Ardından OK düğmesine basın.',count:'Ana ekrana dönüş',fill:'Lütfen rezervasyonda yer alan adı ve giriş-çıkış tarihlerini girin.'},
+            da:{guide:'Opholdsguide',welcome:'Velkommen til vores hotel!',instructions:'For at se din adgangskode skal du indtaste navnet på reservationen samt ankomst- og afrejsedato.',arrivalNote:'Dit værelse kan være klar før den officielle check-in kl. 15.00. Hvis dit værelse endnu ikke er klar, kan du bede restaurantpersonalet om at opbevare din bagage. På grund af den begrænsede plads i vores historiske bygning kan vi dog ikke påtage os ansvaret for opbevaret bagage.',name:'Navn på reservationen',namePlaceholder:'f.eks. Jens Jensen',nameHint:'Store/små bogstaver, accenter og specialtegn er uden betydning.',from:'Ankomstdato',to:'Afrejsedato',back:'TILBAGE',submit:'CHECK-IN',result:'Dit værelse er klar',room:'Værelsesnummer',code:'Adgangskode',roomDoorCode:'Kode til værelse og mellemdøre',mainDoorCode:'Kode til hotellets hovedindgang',hotelCode:'KODE TIL HELE HOTELLET',hotelAccessScope:'Værelse · mezzanin · hovedindgang',direction:'Fortsæt nu ligeud ad gangen og op ad trappen til dit værelse.',note:'Tag et billede af denne skærm, eller skriv oplysningerne på papiret ved siden af kiosken. Tryk derefter OK.',count:'Tilbage til hovedskærmen om',fill:'Indtast navnet på reservationen samt ankomst- og afrejsedato.'},
+            ja:{guide:'ご滞在ガイド',welcome:'当ホテルへようこそ！',instructions:'アクセスコードを表示するには、予約名義とチェックイン日・チェックアウト日を入力してください。',arrivalNote:'お部屋は通常のチェックイン時刻15:00より早くご用意できる場合があります。お部屋がまだ準備できていない場合は、レストランスタッフに荷物のお預かりをお申し付けください。歴史的建造物のため保管スペースが限られており、お預かりした荷物について責任を負いかねます。',name:'予約名義',namePlaceholder:'例: Taro Yamada',nameHint:'大文字・小文字、アクセント記号、特殊文字は区別されません。',from:'チェックイン日',to:'チェックアウト日',back:'戻る',submit:'CHECK-IN',result:'お部屋の準備ができました',room:'部屋番号',code:'アクセスコード',roomDoorCode:'客室・中間ドアのコード',mainDoorCode:'ホテル正面玄関コード',hotelCode:'ホテル全館共通コード',hotelAccessScope:'客室 · 中二階 · 正面玄関',direction:'廊下をまっすぐ進み、階段を上がってお部屋へお進みください。',note:'この画面を撮影するか、キオスク横の用紙に情報をメモしてください。その後、OKを押してください。',count:'メイン画面に戻るまで',fill:'予約名義とチェックイン日・チェックアウト日を入力してください。'},
+            he:{guide:'מדריך השהייה',welcome:'ברוכים הבאים למלון שלנו!',instructions:'כדי להציג את קוד הכניסה, הזינו את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.',arrivalNote:'ייתכן שהחדר יהיה מוכן לפני שעת הצ׳ק-אין הרשמית, 15:00. אם החדר שלכם עדיין אינו מוכן, ניתן לבקש מצוות המסעדה לשמור את המזוודות. בשל המקום המוגבל בבניין ההיסטורי, איננו יכולים לקבל אחריות על כבודה שהושארה לאחסון.',name:'השם בהזמנה',namePlaceholder:'לדוגמה: David Cohen',nameHint:'אין חשיבות לאותיות גדולות/קטנות, לסימני ניקוד או לתווים מיוחדים.',from:'תאריך הגעה',to:'תאריך עזיבה',back:'חזרה',submit:'CHECK-IN',result:'החדר שלכם מוכן',room:'מספר חדר',code:'קוד כניסה',roomDoorCode:'קוד לחדר ולדלתות הביניים',mainDoorCode:'קוד הכניסה הראשית למלון',hotelCode:'קוד לכל המלון',hotelAccessScope:'חדר · קומת ביניים · כניסה ראשית',direction:'כעת המשיכו ישר במסדרון ועלו במדרגות אל החדר שלכם.',note:'צלמו את המסך או רשמו את הפרטים על הדף שליד הקיוסק. לאחר מכן לחצו OK.',count:'חזרה למסך הראשי בעוד',fill:'נא להזין את השם שמופיע בהזמנה ואת תאריכי ההגעה והעזיבה.'},
+            el:{guide:'Οδηγός διαμονής',welcome:'Καλώς ήρθατε στο ξενοδοχείο μας!',instructions:'Για να εμφανίσετε τον κωδικό πρόσβασης, εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.',arrivalNote:'Το δωμάτιό σας μπορεί να είναι έτοιμο πριν από την επίσημη ώρα check-in στις 15:00. Αν το δωμάτιό σας δεν είναι ακόμη έτοιμο, ζητήστε από το προσωπικό του εστιατορίου να φυλάξει τις αποσκευές σας. Λόγω του περιορισμένου χώρου στο ιστορικό κτίριο, δεν μπορούμε να αναλάβουμε ευθύνη για τις αποσκευές που φυλάσσονται.',name:'Όνομα στην κράτηση',namePlaceholder:'π.χ. Giannis Papadopoulos',nameHint:'Δεν έχει σημασία η χρήση κεφαλαίων/πεζών, διακριτικών ή ειδικών χαρακτήρων.',from:'Ημερομηνία άφιξης',to:'Ημερομηνία αναχώρησης',back:'ΠΙΣΩ',submit:'CHECK-IN',result:'Το δωμάτιό σας είναι έτοιμο',room:'Αριθμός δωματίου',code:'Κωδικός πρόσβασης',roomDoorCode:'Κωδικός δωματίου και ενδιάμεσων θυρών',mainDoorCode:'Κωδικός κύριας εισόδου του ξενοδοχείου',hotelCode:'ΚΩΔΙΚΟΣ ΓΙΑ ΟΛΟ ΤΟ ΞΕΝΟΔΟΧΕΙΟ',hotelAccessScope:'Δωμάτιο · ημιώροφος · κύρια είσοδος',direction:'Τώρα συνεχίστε ευθεία στον διάδρομο και ανεβείτε τις σκάλες προς το δωμάτιό σας.',note:'Φωτογραφίστε αυτή την οθόνη ή σημειώστε τα στοιχεία στο χαρτί δίπλα στο κιόσκι. Στη συνέχεια πατήστε OK.',count:'Επιστροφή στην αρχική οθόνη σε',fill:'Εισαγάγετε το όνομα που αναγράφεται στην κράτηση και τις ημερομηνίες άφιξης και αναχώρησης.'}
         };
 
         // INTERNATIONALIZATION DATA
@@ -8856,7 +8852,6 @@ function namesMatch(left, right) {
         };
 
 
-
         const checkoutExtraI18n = {"cs": {"feesTitle": "Poplatky a doklad", "feesText": "Veškeré poplatky jsou již zahrnuty v ceně ubytování. Pokud si přejete vystavit účet na firmu, kontaktujte nás prosím na e-mailu hotel@uzlatychnuzek.cz.", "electronic": "Zaškrtněte, pokud chcete zaslat doklad elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím vyplňte e-mailovou adresu."}, "en": {"feesTitle": "Fees and receipt", "feesText": "All fees are already included in the accommodation price. If you need a company invoice, please contact us at hotel@uzlatychnuzek.cz.", "electronic": "Tick if you would like the receipt sent electronically", "email": "E-mail address", "emailRequired": "Please enter an e-mail address."}, "de": {"feesTitle": "Gebühren und Beleg", "feesText": "Alle Gebühren sind bereits im Übernachtungspreis enthalten. Wenn Sie eine Firmenrechnung benötigen, kontaktieren Sie uns bitte unter hotel@uzlatychnuzek.cz.", "electronic": "Ankreuzen, wenn Sie den Beleg elektronisch erhalten möchten", "email": "E-Mail-Adresse", "emailRequired": "Bitte geben Sie eine E-Mail-Adresse ein."}, "sk": {"feesTitle": "Poplatky a doklad", "feesText": "Všetky poplatky sú už zahrnuté v cene ubytovania. Ak potrebujete faktúru na firmu, kontaktujte nás prosím na e-maile hotel@uzlatychnuzek.cz.", "electronic": "Zaškrtnite, ak chcete doklad zaslať elektronicky", "email": "E-mailová adresa", "emailRequired": "Prosím, zadajte e-mailovú adresu."}, "it": {"feesTitle": "Costi e ricevuta", "feesText": "Tutti i costi sono già inclusi nel prezzo del soggiorno. Se desiderate una fattura intestata a un’azienda, contattateci all’indirizzo hotel@uzlatychnuzek.cz.", "electronic": "Selezionate se desiderate ricevere la ricevuta in formato elettronico", "email": "Indirizzo e-mail", "emailRequired": "Inserite un indirizzo e-mail."}, "es": {"feesTitle": "Cargos y recibo", "feesText": "Todos los cargos están incluidos en el precio del alojamiento. Si necesita una factura a nombre de una empresa, contáctenos en hotel@uzlatychnuzek.cz.", "electronic": "Marque esta opción si desea recibir el recibo electrónicamente", "email": "Dirección de e-mail", "emailRequired": "Introduzca una dirección de e-mail."}, "fr": {"feesTitle": "Frais et reçu", "feesText": "Tous les frais sont déjà inclus dans le prix de l’hébergement. Pour une facture au nom d’une entreprise, contactez-nous à hotel@uzlatychnuzek.cz.", "electronic": "Cochez cette case pour recevoir le reçu par voie électronique", "email": "Adresse e-mail", "emailRequired": "Veuillez saisir une adresse e-mail."}, "pl": {"feesTitle": "Opłaty i dokument", "feesText": "Wszystkie opłaty są już wliczone w cenę pobytu. Jeśli potrzebujesz faktury na firmę, skontaktuj się z nami pod adresem hotel@uzlatychnuzek.cz.", "electronic": "Zaznacz, jeśli chcesz otrzymać dokument elektronicznie", "email": "Adres e-mail", "emailRequired": "Proszę podać adres e-mail."}, "ua": {"feesTitle": "Оплати та квитанція", "feesText": "Усі платежі вже включені у вартість проживання. Якщо вам потрібен рахунок на компанію, зв’яжіться з нами за адресою hotel@uzlatychnuzek.cz.", "electronic": "Позначте, якщо бажаєте отримати квитанцію електронною поштою", "email": "Електронна адреса", "emailRequired": "Будь ласка, введіть електронну адресу."}, "tr": {"feesTitle": "Ücretler ve makbuz", "feesText": "Tüm ücretler konaklama fiyatına dahildir. Şirket adına fatura istiyorsanız, hotel@uzlatychnuzek.cz adresinden bizimle iletişime geçin.", "electronic": "Makbuzu elektronik olarak almak istiyorsanız işaretleyin", "email": "E-posta adresi", "emailRequired": "Lütfen bir e-posta adresi girin."}, "da": {"feesTitle": "Gebyrer og kvittering", "feesText": "Alle gebyrer er allerede inkluderet i overnatningsprisen. Hvis du ønsker en faktura til en virksomhed, bedes du kontakte os på hotel@uzlatychnuzek.cz.", "electronic": "Markér, hvis du ønsker kvitteringen sendt elektronisk", "email": "E-mailadresse", "emailRequired": "Indtast venligst en e-mailadresse."}, "ja": {"feesTitle": "料金と領収書", "feesText": "すべての料金は宿泊料金に含まれています。会社名義の請求書が必要な場合は、hotel@uzlatychnuzek.cz までご連絡ください。", "electronic": "領収書の電子送付を希望する場合はチェックしてください", "email": "メールアドレス", "emailRequired": "メールアドレスを入力してください。"}, "he": {"feesTitle": "חיובים וקבלה", "feesText": "כל החיובים כבר כלולים במחיר האירוח. אם דרושה לכם חשבונית על שם חברה, אנא צרו קשר בכתובת hotel@uzlatychnuzek.cz.", "electronic": "סמנו אם ברצונכם לקבל את הקבלה באופן אלקטרוני", "email": "כתובת דוא״ל", "emailRequired": "נא להזין כתובת דוא״ל."}, "el": {"feesTitle": "Χρεώσεις και απόδειξη", "feesText": "Όλες οι χρεώσεις περιλαμβάνονται ήδη στην τιμή διαμονής. Αν χρειάζεστε τιμολόγιο για εταιρεία, επικοινωνήστε μαζί μας στο hotel@uzlatychnuzek.cz.", "electronic": "Επιλέξτε αν θέλετε να λάβετε την απόδειξη ηλεκτρονικά", "email": "Διεύθυνση e-mail", "emailRequired": "Παρακαλώ εισαγάγετε μια διεύθυνση e-mail."}};
 
         const checkoutTimeI18n = {"cs": "do 11:00", "en": "by 11:00", "de": "bis 11:00", "sk": "do 11:00", "it": "entro le 11:00", "es": "hasta las 11:00", "fr": "avant 11:00", "pl": "do 11:00", "ua": "до 11:00", "tr": "11:00’e kadar", "da": "senest kl. 11.00", "ja": "11:00まで", "he": "עד 11:00", "el": "έως τις 11:00"};
@@ -9217,7 +9212,6 @@ function namesMatch(left, right) {
             document.getElementById('selfcheck-floating-rail')?.classList.remove('hidden');
             startAutoResetTimer();
         }
-
 
 
         function prepareParkingPhotoZoom(root) {
@@ -9627,15 +9621,20 @@ function namesMatch(left, right) {
                 codeBlock.className = 'guest-room-code-block';
 
                 const codeLabel = document.createElement('div');
-                codeLabel.className = 'checkin-result-label';
-                codeLabel.innerText = t.roomDoorCode || t.code;
+                codeLabel.className = 'checkin-result-label hotel-code-label';
+                codeLabel.innerText = t.hotelCode || t.roomDoorCode || t.code;
 
                 const codeValue = document.createElement('div');
                 codeValue.className = 'checkin-result-value guest-room-code-value';
                 codeValue.innerText = item.roomCode;
 
+                const accessScope = document.createElement('div');
+                accessScope.className = 'hotel-access-scope';
+                accessScope.innerText = t.hotelAccessScope || '';
+
                 codeBlock.appendChild(codeLabel);
                 codeBlock.appendChild(codeValue);
+                codeBlock.appendChild(accessScope);
 
                 row.appendChild(roomBlock);
                 row.appendChild(codeBlock);
@@ -10270,7 +10269,7 @@ function namesMatch(left, right) {
 
             hideAllScreens();
             renderCheckinRooms(reservation.rooms || []);
-            document.getElementById('sci-main-code-value').innerText = reservation.mainEntranceCode || '2018';
+
             document.getElementById('screen-checkin-result').classList.remove('hidden');
             startCheckinResultCountdown();
         }
@@ -10325,13 +10324,13 @@ function namesMatch(left, right) {
                         guestName: name,
                         arrivalDate: from,
                         departureDate: to,
-                        mainEntranceCode: result.mainEntranceCode || '2018',
+
                         rooms
                     };
 
                     if (result.registrationCompleted) {
                         renderCheckinRooms(rooms);
-                        document.getElementById('sci-main-code-value').innerText = activeCheckinReservation.mainEntranceCode;
+
                         document.getElementById('screen-checkin-result').classList.remove('hidden');
                         startCheckinResultCountdown();
                     } else {
@@ -10377,7 +10376,7 @@ function namesMatch(left, right) {
                         guestName: name,
                         arrivalDate: from,
                         departureDate: to,
-                        mainEntranceCode: offlineResult.mainEntranceCode || '2018',
+
                         rooms,
                         offlineFallback: true,
                         offlineSnapshotGeneratedAt: offlineResult.snapshotGeneratedAt || null
@@ -10385,7 +10384,7 @@ function namesMatch(left, right) {
 
                     if (offlineResult.registrationCompleted) {
                         renderCheckinRooms(rooms);
-                        document.getElementById('sci-main-code-value').innerText = activeCheckinReservation.mainEntranceCode;
+
                         document.getElementById('screen-checkin-result').classList.remove('hidden');
                         startCheckinResultCountdown();
                     } else {
@@ -10878,11 +10877,11 @@ function namesMatch(left, right) {
             document.getElementById('sci-to-label').innerText = sci.to;
             document.getElementById('btn-sci-submit').innerText = sci.submit;
             document.getElementById('sci-result-title').innerText = sci.result;
-            document.getElementById('sci-main-code-label').innerText = sci.mainDoorCode;
+
             if (currentCheckinRooms.length) {
                 renderCheckinRooms(currentCheckinRooms);
             }
-            document.getElementById('sci-main-code-value').innerText = '2018';
+
             document.getElementById('sci-result-direction').innerText = sci.direction;
             document.getElementById('sci-result-note').innerText = sci.note;
             const returnToMainText = returnToMainI18n[lang] || returnToMainI18n.en;
@@ -11026,10 +11025,27 @@ function namesMatch(left, right) {
         // OFFLINE PAIRING MUST RUN FIRST. If any optional UI initializer below fails
         // on a particular Safari/iPad version, pairing must still capture the token.
         const offlinePairingAction = captureOfflineSyncTokenFromUrl();
-        setTimeout(() => syncOfflineCheckinSnapshot({ showSetupResult: offlinePairingAction === 'set' }), 1600);
         if (offlinePairingAction === 'invalid') {
             setTimeout(() => alert('Neplatný párovací klíč pro offline zálohu check-inu.'), 300);
         }
+
+        setTimeout(async () => {
+            // URL pairing still works in normal Safari and remains useful for service setup.
+            if (offlinePairingAction === 'set') {
+                await syncOfflineCheckinSnapshot({ showSetupResult: true });
+                return;
+            }
+
+            // Home-screen / standalone web apps have their own local storage on iPadOS.
+            // On their first launch ask for the pairing key once, then keep it locally.
+            if (offlinePairingAction === 'none' && isStandaloneKioskMode() && !getOfflineSyncToken()) {
+                await pairStandaloneOfflineIfNeeded();
+                return;
+            }
+
+            // Already paired kiosk: silently refresh the local snapshot on every launch.
+            await syncOfflineCheckinSnapshot();
+        }, 1600);
 
         // Keep the rest of kiosk startup isolated so one cosmetic initializer
         // cannot stop heartbeat/offline features or the remaining UI setup.
