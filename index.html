@@ -6813,6 +6813,65 @@
             unicode-bidi: plaintext;
         }
 
+
+        /* v48 — move the access icons/text group left and slightly closer together,
+           while keeping a safe dedicated gap from the hotel code. */
+        #screen-checkin-result .guest-room-entry .guest-room-code-block {
+            grid-template-columns: 245px minmax(0, 1fr) !important;
+            column-gap: 14px !important;
+            padding-left: 20px !important;
+            padding-right: 16px !important;
+        }
+
+        #screen-checkin-result .hotel-access-scope {
+            display: grid !important;
+            grid-template-columns: max-content max-content max-content !important;
+            justify-content: start !important;
+            align-items: start !important;
+            column-gap: 22px !important;
+
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding-left: 6px !important;
+            overflow: visible !important;
+            direction: ltr !important;
+        }
+
+        #screen-checkin-result .hotel-access-chip {
+            width: max-content !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        #screen-checkin-result .hotel-access-chip-text {
+            width: max-content !important;
+            max-width: 145px !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        @media (max-width: 900px) and (min-width: 681px) {
+            #screen-checkin-result .guest-room-entry .guest-room-code-block {
+                grid-template-columns: 220px minmax(0, 1fr) !important;
+                column-gap: 12px !important;
+            }
+
+            #screen-checkin-result .hotel-access-scope {
+                column-gap: 16px !important;
+                padding-left: 4px !important;
+            }
+
+            #screen-checkin-result .hotel-access-chip-text {
+                max-width: 132px !important;
+            }
+        }
+
 </style>
 </head>
 <body>
