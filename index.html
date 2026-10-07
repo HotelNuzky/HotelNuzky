@@ -6920,20 +6920,21 @@
         }
 
 
-        /* v53 — compact staircase crop + higher OK button */
+        /* v56 — staircase image fills the full height of the lower information block */
         #screen-checkin-result .checkin-result-lower-grid {
-            align-items: start;
+            align-items: stretch;
         }
 
         #screen-checkin-result .checkin-stairs-photo {
-            align-self: start;
-            height: 154px;
-            min-height: 154px;
+            align-self: stretch;
+            height: auto;
+            min-height: 0;
         }
 
         #screen-checkin-result .checkin-stairs-photo img {
-            height: 154px;
-            min-height: 154px;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
             object-fit: cover;
             object-position: center center;
         }
@@ -6951,6 +6952,85 @@
             #screen-checkin-result .checkin-stairs-photo img {
                 height: 168px;
                 min-height: 168px;
+            }
+        }
+
+        /* v57 — split the lower guidance row into directions + breakfast */
+        #screen-checkin-result .checkin-result-info-pair {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 14px;
+            align-items: stretch;
+            min-width: 0;
+        }
+
+        #screen-checkin-result .checkin-result-info-pair .checkin-result-guidance {
+            height: 100%;
+        }
+
+        #screen-checkin-result .checkin-breakfast-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            height: 100%;
+            margin: 0;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,216,77,.105), rgba(245,127,23,.07));
+            border: 1px solid rgba(255,216,77,.30);
+            border-left: 4px solid #ffd84d;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+
+        #screen-checkin-result .checkin-breakfast-icon {
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd84d;
+        }
+
+        #screen-checkin-result .checkin-breakfast-icon svg {
+            width: 42px;
+            height: 42px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.9;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,.28));
+        }
+
+        #screen-checkin-result .checkin-breakfast-copy {
+            min-width: 0;
+            text-align: left;
+        }
+
+        #screen-checkin-result .checkin-breakfast-title {
+            margin: 0 0 4px;
+            color: #ffd86a;
+            font-size: 12.5px;
+            line-height: 1.25;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .45px;
+        }
+
+        #screen-checkin-result .checkin-breakfast-text {
+            margin: 0;
+            color: #f2f4f6;
+            font-size: 12.5px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        @media (max-width: 760px) {
+            #screen-checkin-result .checkin-result-info-pair {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -7270,6 +7350,7 @@
 <div class="guest-occupancy-important hidden" id="sci-occupancy-important">
 <span id="sci-occupancy-important-text"></span>
 </div>
+<div class="checkin-result-info-pair">
 <div class="checkin-result-guidance">
 <div class="checkin-result-guidance-icon" aria-hidden="true">
 <svg viewBox="0 0 40 40">
@@ -7280,8 +7361,23 @@
   <path d="M5 33h7v-7h7v-7h7v-7h8"/>
 </svg>
 </div>
-<div class="checkin-result-note" id="sci-result-note">Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.</div>
-<div class="checkin-result-direction" id="sci-result-direction">Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.</div>
+<div class="checkin-result-note" id="sci-result-note">Vyfoťte si prosím přístupové údaje nebo si je poznamenejte na papírek vedle kiosku.</div>
+<div class="checkin-result-direction" id="sci-result-direction">Poté stiskněte OK a pokračujte rovně chodbou a po schodech nahoru ke svému pokoji.</div>
+</div>
+<div class="checkin-breakfast-card">
+<div class="checkin-breakfast-icon" aria-hidden="true">
+<svg viewBox="0 0 40 40">
+  <path d="M8 14h19v10.5A7.5 7.5 0 0 1 19.5 32h-4A7.5 7.5 0 0 1 8 24.5V14z"/>
+  <path d="M27 17h2.6a4.4 4.4 0 0 1 0 8.8H27"/>
+  <path d="M11 35h20"/>
+  <path d="M14 5.5c2 1.7 2 3.3 0 5M20 5.5c2 1.7 2 3.3 0 5"/>
+</svg>
+</div>
+<div class="checkin-breakfast-copy">
+<div class="checkin-breakfast-title" id="sci-breakfast-title">Snídaně</div>
+<div class="checkin-breakfast-text" id="sci-breakfast-text">Snídaně se podává formou bufetu v přízemí restaurace od 8:00 do 10:00.</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -9237,7 +9333,7 @@ function namesMatch(left, right) {
         };
 
         const selfCheckinI18n = {
-            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud váš pokoj ještě není připraven, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Petr Svoboda',nameHint:'Na velikosti písmen, diakritice ani speciálních znacích nezáleží.',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',hotelCode:'KÓD PRO CELÝ HOTEL',hotelAccessScope:'Pokoj · mezanin · hlavní vchod',direction:'Nyní pokračujte chodbou rovně a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si tuto stránku nebo si údaje zapište na papírek vedle kiosku. Poté stiskněte OK.',luggageHelp:'Pokud potřebujete pomoc se zavazadly, požádejte prosím personál restaurace.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
+            cs:{guide:'Průvodce pobytem',welcome:'Vítejte v našem hotelu!',instructions:'Pro zobrazení přístupového kódu zadejte jméno uvedené na rezervaci a datum příjezdu i odjezdu.',arrivalNote:'Váš pokoj může být připraven i před oficiálním check-inem v 15:00. Pokud váš pokoj ještě není připraven, požádejte personál restaurace o uložení zavazadel. Kvůli omezeným prostorám historické budovy však za uložená zavazadla nemůžeme převzít odpovědnost.',name:'Jméno uvedené na rezervaci',namePlaceholder:'např. Petr Svoboda',nameHint:'Na velikosti písmen, diakritice ani speciálních znacích nezáleží.',from:'Datum příjezdu',to:'Datum odjezdu',back:'ZPĚT',submit:'CHECK-IN',result:'Váš pokoj je připraven',room:'Číslo pokoje',code:'Přístupový kód',roomDoorCode:'Kód k pokoji a mezidveřím',mainDoorCode:'Kód hlavního vchodu do hotelu',hotelCode:'KÓD PRO CELÝ HOTEL',hotelAccessScope:'Pokoj · mezanin · hlavní vchod',direction:'Poté stiskněte OK a pokračujte rovně chodbou a po schodech nahoru ke svému pokoji.',note:'Vyfoťte si prosím přístupové údaje nebo si je poznamenejte na papírek vedle kiosku.',luggageHelp:'Pokud potřebujete pomoc se zavazadly, požádejte prosím personál restaurace.',count:'Návrat na hlavní obrazovku za',fill:'Prosím, vyplňte jméno uvedené na rezervaci a obě data pobytu.'},
             en:{guide:'Welcome Guide',welcome:'Welcome to our hotel!',instructions:'To display your access code, enter the name shown on the reservation and your arrival and departure dates.',arrivalNote:'Your room may be ready before the official 15:00 check-in time. If your room is not ready yet, please ask the restaurant staff to store your luggage. Due to the limited space in our historic building, we cannot accept responsibility for stored luggage.',name:'Name on the reservation',namePlaceholder:'e.g. John Smith',nameHint:'Capitalization, accents and special characters do not matter.',from:'Arrival date',to:'Departure date',back:'BACK',submit:'CHECK-IN',result:'Your room is ready',room:'Room number',code:'Access code',roomDoorCode:'Room & mezzanine door code',mainDoorCode:'Hotel main entrance code',hotelCode:'CODE FOR THE ENTIRE HOTEL',hotelAccessScope:'Room · mezzanine · main entrance',direction:'Now continue straight down the corridor and upstairs to your room.',note:'Take a photo of this screen or write the details on the paper provided next to the kiosk. Then press OK.',luggageHelp:'If you need help with your luggage, please ask the restaurant staff.',count:'Returning to the main screen in',fill:'Please enter the name on the reservation and both stay dates.'},
             de:{guide:'Gästeführer',welcome:'Willkommen in unserem Hotel!',instructions:'Geben Sie den Namen auf der Reservierung sowie Ihr Anreise- und Abreisedatum ein, um den Zugangscode anzuzeigen.',arrivalNote:'Ihr Zimmer kann bereits vor der offiziellen Check-in-Zeit um 15:00 Uhr bereit sein. Falls Ihr Zimmer noch nicht bereit ist, bitten Sie das Restaurantpersonal um die Aufbewahrung Ihres Gepäcks. Aufgrund der begrenzten Räumlichkeiten in unserem historischen Gebäude können wir dafür jedoch keine Haftung übernehmen.',name:'Name auf der Reservierung',namePlaceholder:'z. B. Max Mustermann',nameHint:'Groß-/Kleinschreibung, Akzente und Sonderzeichen spielen keine Rolle.',from:'Anreisedatum',to:'Abreisedatum',back:'ZURÜCK',submit:'CHECK-IN',result:'Ihr Zimmer ist bereit',room:'Zimmernummer',code:'Zugangscode',roomDoorCode:'Code für Zimmer & Zwischentüren',mainDoorCode:'Code für den Haupteingang des Hotels',hotelCode:'CODE FÜR DAS GESAMTE HOTEL',hotelAccessScope:'Zimmer · Zwischentür · Haupteingang',direction:'Gehen Sie nun den Flur geradeaus und die Treppe hinauf zu Ihrem Zimmer.',note:'Fotografieren Sie diese Seite oder notieren Sie die Angaben auf dem bereitliegenden Zettel neben dem Kiosk. Drücken Sie anschließend OK.',luggageHelp:'Wenn Sie Hilfe mit Ihrem Gepäck benötigen, wenden Sie sich bitte an das Restaurantpersonal.',count:'Rückkehr zum Hauptbildschirm in',fill:'Bitte geben Sie den Namen auf der Reservierung sowie Anreise- und Abreisedatum ein.'},
             sk:{guide:'Sprievodca pobytom',welcome:'Vitajte v našom hoteli!',instructions:'Na zobrazenie prístupového kódu zadajte meno uvedené na rezervácii a dátum príchodu aj odchodu.',arrivalNote:'Vaša izba môže byť pripravená aj pred oficiálnym check-inom o 15:00. Ak vaša izba ešte nie je pripravená, požiadajte personál reštaurácie o uloženie batožiny. Vzhľadom na obmedzené priestory historickej budovy však za uloženú batožinu nemôžeme prevziať zodpovednosť.',name:'Meno uvedené na rezervácii',namePlaceholder:'napr. Ján Novák',nameHint:'Na veľkosti písmen, diakritike ani špeciálnych znakoch nezáleží.',from:'Dátum príchodu',to:'Dátum odchodu',back:'SPÄŤ',submit:'CHECK-IN',result:'Vaša izba je pripravená',room:'Číslo izby',code:'Prístupový kód',roomDoorCode:'Kód k izbe a medzidverám',mainDoorCode:'Kód hlavného vchodu do hotela',hotelCode:'KÓD PRE CELÝ HOTEL',hotelAccessScope:'Izba · medziposchodie · hlavný vchod',direction:'Teraz pokračujte chodbou rovno a po schodoch hore k svojej izbe.',note:'Odfoťte si túto stránku alebo si údaje zapíšte na papierik vedľa kiosku. Potom stlačte OK.',luggageHelp:'Ak potrebujete pomoc s batožinou, požiadajte prosím personál reštaurácie.',count:'Návrat na hlavnú obrazovku o',fill:'Prosím, zadajte meno uvedené na rezervácii a oba dátumy pobytu.'},
@@ -12296,6 +12392,10 @@ function namesMatch(left, right) {
 
             document.getElementById('sci-result-direction').innerText = sci.direction;
             document.getElementById('sci-result-note').innerText = sci.note;
+            const sciBreakfastTitle = document.getElementById('sci-breakfast-title');
+            const sciBreakfastText = document.getElementById('sci-breakfast-text');
+            if (sciBreakfastTitle) sciBreakfastTitle.innerText = dict.ciBfTitle || '';
+            if (sciBreakfastText) sciBreakfastText.innerText = dict.ciBfText || '';
             const returnToMainText = returnToMainI18n[lang] || returnToMainI18n.en;
             document.getElementById('sci-countdown-label').innerText = returnToMainText;
             document.getElementById('thanks-countdown-label').innerText = returnToMainText;
