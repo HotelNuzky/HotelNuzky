@@ -7185,7 +7185,7 @@
 #screen-checkin-result .checkin-access-guide {width:min(100%,680px) !important;}
 #screen-checkin-result .result-ok-row {margin-top:12px !important;}
 #screen-checkin-result #btn-sci-ok {min-height:48px !important;padding:10px 24px !important;font-size:23px !important;max-width:420px;}
-@media(min-width:901px) and (max-height:850px){#screen-checkin-result .checkin-access-guide {width:min(100%,calc((100dvh - 295px)*1.45),650px) !important;} }
+
 @media(max-width:900px){#screen-checkin-result .checkin-top-columns{grid-template-columns:minmax(0,1fr);} }
 @media(max-width:600px){#screen-checkin-result .checkin-top-columns .guest-room-entry{grid-template-columns:minmax(75px,.6fr) minmax(170px,1.4fr) !important;} }
 </style><style>
@@ -7222,6 +7222,11 @@
 #screen-checkin-result .checkin-guide-label {left:46.68435% !important;animation:guide-border-breathe 4s ease-in-out infinite;}
 #screen-checkin-result.hidden .checkin-guide-label {animation-play-state:paused;}
 @media(prefers-reduced-motion:reduce){#screen-checkin-result .checkin-guide-label{animation:none !important;}}
+</style><style>
+/* Fixed width: Safari toolbar changes must not resize the animated guide. */
+#screen-checkin-result .checkin-access-guide {width:640px !important;max-width:100% !important;box-sizing:border-box;flex:none !important;}
+#screen-checkin-result .checkin-guide-media {display:block;width:100%;overflow:hidden;border-radius:11px;isolation:isolate;transform:translateZ(0);-webkit-mask-image:linear-gradient(#fff,#fff);background:#15191b;line-height:0;}
+#screen-checkin-result .checkin-guide-media img {display:block;width:100% !important;height:auto !important;max-width:100%;border-radius:0 !important;transform:none !important;}
 </style></head>
 <body>
 <div class="container">
@@ -7536,7 +7541,7 @@
 <div class="checkin-result-lower-grid">
 <figure class="checkin-access-guide">
 <div id="sci-guide-label" class="checkin-guide-label">VCHOD + HOTEL</div>
-<img id="sci-access-guide" data-guide-src="assets/pruvodce-8483c2525a57.gif" width="754" height="520" alt="Example: main entrance, stairs and room access" decoding="async">
+<div class="checkin-guide-media"><img id="sci-access-guide" data-guide-src="assets/pruvodce-8483c2525a57.gif" width="754" height="520" alt="Example: main entrance, stairs and room access" decoding="async"></div>
 </figure>
 </div>
 </div>
